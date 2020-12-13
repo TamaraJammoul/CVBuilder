@@ -1,0 +1,31 @@
+:root {
+    --lightBlue: #b6666f;
+    --mainWhite: #f3f3f3;
+    --mainDark: #eeebeb;
+}
+
+
+body {
+    font-family: "El Messiri", sans-serif;
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+   .textField{
+      width: 200px !important;
+   }
+  .signupImage{
+      width: 350px !important;
+  }
+    
+}
+
+@media only screen and (min-width: 600px) {
+    
+}
