@@ -8,7 +8,7 @@ export default function Education() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddExperience" ? (
-    <AddExperience />
+    <AddExperience setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

@@ -23,7 +23,7 @@ export default function OtherTraining(props) {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddOtherTraining" ? (
-    <AddOtherTraining />
+    <AddOtherTraining setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

@@ -24,7 +24,7 @@ export default function Membership() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddMembership" ? (
-    <AddMembership />
+    <AddMembership setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

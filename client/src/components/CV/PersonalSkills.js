@@ -15,7 +15,7 @@ export default function PersonalSkills() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddPersonalSkill" ? (
-    <AddPersonalSkill />
+    <AddPersonalSkill setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

@@ -1,6 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-export default function AddCertificate() {
+export default function AddCertificate(props) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState(new Date());
+  const handelSubmit = () => {
+    console.log(name, description, date);
+  };
+  const handelCancel = () => {
+    setName("");
+    setDate(new Date());
+    setDescription("");
+    props.setComponentName("");
+  };
   return (
     <Container>
       <Paper>
@@ -13,7 +25,7 @@ export default function AddCertificate() {
             spacing={4}
           >
             <Grid item xs={12} sm={6}>
-              <h2>Certificate</h2>
+              <h2>Add Certificate</h2>
             </Grid>
             <Grid item xs={12} sm={6}>
               {" "}
@@ -22,6 +34,7 @@ export default function AddCertificate() {
                 label="Name"
                 variant="filled"
                 style={{width: "100%"}}
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -31,6 +44,7 @@ export default function AddCertificate() {
                 label="Description"
                 variant="filled"
                 style={{width: "100%"}}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -43,6 +57,7 @@ export default function AddCertificate() {
                   shrink: true,
                 }}
                 style={{width: "100%"}}
+                onChange={(e) => setDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -50,6 +65,7 @@ export default function AddCertificate() {
                 variant="contained"
                 color="secondary"
                 style={{marginLeft: "10px", float: "right"}}
+                onClick={handelCancel}
               >
                 cancel
               </Button>
@@ -57,6 +73,7 @@ export default function AddCertificate() {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
+                onClick={handelSubmit}
               >
                 save
               </Button>

@@ -24,7 +24,7 @@ export default function Languages() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddLanguage" ? (
-    <AddLanguage />
+    <AddLanguage setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

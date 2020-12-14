@@ -1,21 +1,15 @@
-import React from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Avatar,
-  TextField,
-  Container,
-  ButtonGroup,
-} from "@material-ui/core";
-export default function AddOtherTraining() {
+import React, {useState} from "react";
+import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
+export default function AddOtherTraining(props) {
+  const [otherTraining, setOtherTraining] = useState("");
+
+  const handelSubmit = () => {
+    console.log(otherTraining);
+  };
+  const handelCancel = () => {
+    setOtherTraining("");
+    props.setComponentName("");
+  };
   return (
     <Container>
       <Paper>
@@ -37,6 +31,7 @@ export default function AddOtherTraining() {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              onChange={(e) => e.setOtherTraining(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -44,6 +39,7 @@ export default function AddOtherTraining() {
               variant="contained"
               color="secondary"
               style={{marginLeft: "10px", float: "right"}}
+              onClick={handelCancel}
             >
               cancel
             </Button>
@@ -51,6 +47,7 @@ export default function AddOtherTraining() {
               variant="contained"
               color="primary"
               style={{float: "right"}}
+              onClick={handelSubmit}
             >
               save
             </Button>

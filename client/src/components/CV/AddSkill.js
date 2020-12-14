@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   Box,
@@ -15,7 +15,16 @@ import {
   Container,
 } from "@material-ui/core";
 import icon from "./../../img/icon.jpg";
-export default function AddSkill() {
+export default function AddSkill(props) {
+  const [skills, setSkills] = useState([]);
+
+  const handelSubmit = () => {
+    console.log(skills);
+  };
+  const handelCancel = () => {
+    setSkills([]);
+    props.setComponentName("");
+  };
   return (
     <Container>
       <Paper>
@@ -37,6 +46,7 @@ export default function AddSkill() {
               color="primary"
               aria-label="upload picture"
               component="span"
+              onClick={(e) => setSkills(...skills, "ProblemSolving")}
             >
               <img src={icon} />{" "}
             </IconButton>
@@ -137,6 +147,7 @@ export default function AddSkill() {
               variant="contained"
               color="secondary"
               style={{marginLeft: "10px", float: "right"}}
+              onClick={handelCancel}
             >
               cancel
             </Button>
@@ -144,6 +155,7 @@ export default function AddSkill() {
               variant="contained"
               color="primary"
               style={{float: "right"}}
+              onClick={handelSubmit}
             >
               save
             </Button>

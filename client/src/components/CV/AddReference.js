@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   Box,
@@ -15,7 +15,16 @@ import {
   Container,
   ButtonGroup,
 } from "@material-ui/core";
-export default function Membership() {
+export default function Reference(props) {
+  const [reference, setReference] = useState(2);
+
+  const handelSubmit = () => {
+    console.log(reference);
+  };
+  const handelCancel = () => {
+    setReference("");
+    props.setComponentName("");
+  };
   return (
     <Container>
       <Paper>
@@ -37,6 +46,7 @@ export default function Membership() {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              onChane={(e) => setReference(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -44,6 +54,7 @@ export default function Membership() {
               variant="contained"
               color="secondary"
               style={{marginLeft: "10px", float: "right"}}
+              onClick={handelCancel}
             >
               cancel
             </Button>
@@ -51,6 +62,7 @@ export default function Membership() {
               variant="contained"
               color="primary"
               style={{float: "right"}}
+              onClick={handelSubmit}
             >
               save
             </Button>

@@ -23,7 +23,7 @@ export default function Certificates() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddCertificate" ? (
-    <AddCertificate />
+    <AddCertificate setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

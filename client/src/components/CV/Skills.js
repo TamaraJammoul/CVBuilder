@@ -8,7 +8,7 @@ export default function Skills() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddSkill" ? (
-    <AddSkill />
+    <AddSkill setComponentName={setComponentName} />
   ) : (
     <Container>
       <Paper>

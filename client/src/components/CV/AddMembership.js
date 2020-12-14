@@ -1,6 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-export default function AddMembership() {
+export default function AddMembership(props) {
+  const [membershipName, setMembershipName] = useState("");
+
+  const handelSubmit = () => {
+    console.log(membershipName);
+  };
+  const handelCancel = () => {
+    setMembershipName("");
+    props.setComponentName("");
+  };
   return (
     <Container>
       <Paper>
@@ -22,6 +31,7 @@ export default function AddMembership() {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              onChange={(e) => setMembershipName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -29,6 +39,7 @@ export default function AddMembership() {
               variant="contained"
               color="secondary"
               style={{marginLeft: "10px", float: "right"}}
+              onClick={handelCancel}
             >
               cancel
             </Button>
@@ -36,6 +47,7 @@ export default function AddMembership() {
               variant="contained"
               color="primary"
               style={{float: "right"}}
+              onClick={handelSubmit}
             >
               save
             </Button>

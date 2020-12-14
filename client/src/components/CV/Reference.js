@@ -14,7 +14,7 @@ export default function Refernce() {
   const [ComponentName, setComponentName] = useState("");
 
   return ComponentName == "AddReference" ? (
-    <AddReference />
+    <AddReference setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>

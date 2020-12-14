@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   Box,
@@ -17,9 +17,27 @@ import {
 } from "@material-ui/core";
 import {Editor} from "@tinymce/tinymce-react";
 
-export default function AddWorkExperience() {
+export default function AddWorkExperience(props) {
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
+    setDescription(content);
+  };
+  const [companyName, setCompanyName] = useState("");
+  const [city, setCity] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [description, setDescription] = useState("");
+
+  const handelSubmit = () => {
+    console.log(companyName, city, startDate, endDate, description);
+  };
+  const handelCancel = () => {
+    setCompanyName("");
+    setCity("");
+    setStartDate(new Date());
+    setEndDate(new Date());
+    setDescription("");
+    props.setComponentName("");
   };
   return (
     <Container>
@@ -44,6 +62,7 @@ export default function AddWorkExperience() {
                 variant="filled"
                 placeholder="enter your company name"
                 style={{width: "100%"}}
+                onChange={(e) => setCompanyName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -54,6 +73,7 @@ export default function AddWorkExperience() {
                 variant="filled"
                 placeholder="enter your city"
                 style={{width: "100%"}}
+                onChange={(e) => setCity(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -66,6 +86,7 @@ export default function AddWorkExperience() {
                   shrink: true,
                 }}
                 style={{width: "100%"}}
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -78,6 +99,7 @@ export default function AddWorkExperience() {
                   shrink: true,
                 }}
                 style={{width: "100%"}}
+                onChange={(e) => setEndDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -110,6 +132,7 @@ export default function AddWorkExperience() {
                 variant="contained"
                 color="secondary"
                 style={{marginLeft: "10px", float: "right"}}
+                onClick={handelCancel}
               >
                 cancel
               </Button>
@@ -117,6 +140,7 @@ export default function AddWorkExperience() {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
+                onClick={handelSubmit}
               >
                 save
               </Button>

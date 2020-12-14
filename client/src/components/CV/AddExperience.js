@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   Box,
@@ -16,7 +16,24 @@ import junior from "./../../img/student.svg";
 import senior from "./../../img/worker.svg";
 import manager from "./../../img/manager.svg";
 
-export default function Experience() {
+export default function Experience(props) {
+  const [experienceName, setExperienceName] = useState("");
+  const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [project, setProject] = useState("");
+
+  const handelSubmit = () => {
+    console.log(experienceName, description, startDate, endDate, project);
+  };
+  const handelCancel = () => {
+    setExperienceName("");
+    setStartDate(new Date());
+    setDescription("");
+    setEndDate(new Date());
+    setProject("");
+    props.setComponentName("");
+  };
   return (
     <Container>
       <Paper elevation={3}>
@@ -38,6 +55,7 @@ export default function Experience() {
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
+                onChange={(e) => e.setExperienceName(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -47,6 +65,7 @@ export default function Experience() {
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
+                onChange={(e) => e.setDescription(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -59,6 +78,7 @@ export default function Experience() {
                   shrink: true,
                 }}
                 style={{width: "100%"}}
+                onChange={(e) => e.setStartDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -71,6 +91,7 @@ export default function Experience() {
                   shrink: true,
                 }}
                 style={{width: "100%"}}
+                onChange={(e) => e.setEndDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -80,6 +101,7 @@ export default function Experience() {
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
+                onChange={(e) => e.setProject(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -87,6 +109,7 @@ export default function Experience() {
                 variant="contained"
                 color="secondary"
                 style={{marginLeft: "10px", float: "right"}}
+                onClick={handelCancel}
               >
                 cancel
               </Button>
@@ -94,6 +117,7 @@ export default function Experience() {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
+                onClick={handelSubmit}
               >
                 save
               </Button>
