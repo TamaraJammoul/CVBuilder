@@ -15,12 +15,12 @@ import {
   Container,
 } from "@material-ui/core";
 import icon from "./../../img/icon.jpg";
+import {AddSkillAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function AddSkill(props) {
   const [skills, setSkills] = useState([]);
+  const dispatch = useDispatch();
 
-  const handelSubmit = () => {
-    console.log(skills);
-  };
   const handelCancel = () => {
     setSkills([]);
     props.setComponentName("");
@@ -155,7 +155,7 @@ export default function AddSkill(props) {
               variant="contained"
               color="primary"
               style={{float: "right"}}
-              onClick={handelSubmit}
+              onClick={() => dispatch(AddSkillAction(skills))}
             >
               save
             </Button>

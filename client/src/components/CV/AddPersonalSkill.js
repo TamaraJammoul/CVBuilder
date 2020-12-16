@@ -8,14 +8,14 @@ import {
   Container,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-
+import {AddPersonalSkillsAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function AddPersonalSkill(props) {
   const [skill, setSkill] = useState("");
   const [rate, setRate] = useState(2);
+  const dispatch = useDispatch();
 
-  const handelSubmit = () => {
-    console.log(skill, rate);
-  };
+  const data = {rate, skill};
   const handelCancel = () => {
     setSkill("");
     setRate(2);
@@ -68,7 +68,7 @@ export default function AddPersonalSkill(props) {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={handelSubmit}
+                onClick={() => dispatch(AddPersonalSkillsAction(data))}
               >
                 save
               </Button>

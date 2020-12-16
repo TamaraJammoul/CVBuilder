@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
+import {AddOtherTrainingAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
+
 export default function AddOtherTraining(props) {
   const [otherTraining, setOtherTraining] = useState("");
-
-  const handelSubmit = () => {
-    console.log(otherTraining);
-  };
+  const dispatch = useDispatch();
   const handelCancel = () => {
     setOtherTraining("");
     props.setComponentName("");
@@ -47,7 +47,7 @@ export default function AddOtherTraining(props) {
               variant="contained"
               color="primary"
               style={{float: "right"}}
-              onClick={handelSubmit}
+              onClick={() => dispatch(AddOtherTrainingAction(otherTraining))}
             >
               save
             </Button>

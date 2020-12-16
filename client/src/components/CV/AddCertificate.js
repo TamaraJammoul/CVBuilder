@@ -1,12 +1,16 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
+import {AddCertificateAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
+
 export default function AddCertificate(props) {
+  //const state = useSelector((state) => state.template[0]);
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
-  const handelSubmit = () => {
-    console.log(name, description, date);
-  };
+  const data = {name, description, date};
+
   const handelCancel = () => {
     setName("");
     setDate(new Date());
@@ -73,7 +77,7 @@ export default function AddCertificate(props) {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={handelSubmit}
+                onClick={() => dispatch(AddCertificateAction(data))}
               >
                 save
               </Button>

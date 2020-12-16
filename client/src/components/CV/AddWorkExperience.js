@@ -16,7 +16,8 @@ import {
   ButtonGroup,
 } from "@material-ui/core";
 import {Editor} from "@tinymce/tinymce-react";
-
+import {AddWorkExperienceAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function AddWorkExperience(props) {
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
@@ -27,10 +28,8 @@ export default function AddWorkExperience(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [description, setDescription] = useState("");
-
-  const handelSubmit = () => {
-    console.log(companyName, city, startDate, endDate, description);
-  };
+  const data = {companyName, city, startDate, endDate, description};
+  const dispatch = useDispatch();
   const handelCancel = () => {
     setCompanyName("");
     setCity("");
@@ -140,7 +139,7 @@ export default function AddWorkExperience(props) {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={handelSubmit}
+                onClick={() => dispatch(AddWorkExperienceAction(data))}
               >
                 save
               </Button>

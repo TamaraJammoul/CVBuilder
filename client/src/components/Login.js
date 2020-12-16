@@ -1,17 +1,7 @@
 import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {Formik, Form, Field} from "formik";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-} from "@material-ui/core";
+import {Button, Box, Paper, Grid} from "@material-ui/core";
 import {TextField} from "formik-material-ui";
 import {VisibilityOff, Visibility} from "@material-ui/icons";
 import {LoginAction} from "./../store/action/action";
@@ -19,12 +9,11 @@ import {useSelector, useDispatch} from "react-redux";
 
 function LoginForm(props) {
   const [showPassword, setShowPassword] = useState(false);
-  const state = useSelector((state) => state.template[0]);
+  //const state = useSelector((state) => state.template[0]);
   const dispatch = useDispatch();
   return (
     <Grid container justify="center" style={{minHeight: "100vh"}}>
       <Grid item xs={12} sm={6}>
-        <h1>{state}</h1>
         <Box p={10} style={{width: "100%"}}>
           <Paper elevation={3}>
             <Formik
@@ -50,10 +39,7 @@ function LoginForm(props) {
               }}
               onSubmit={(values, {setSubmitting}) => {
                 console.log("values");
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                }, 500);
-                dispatch(LoginAction(",jlkj"));
+                dispatch(LoginAction(values));
               }}
             >
               {({submitForm, isSubmitting}) => (
@@ -63,7 +49,7 @@ function LoginForm(props) {
                     alignItems="center"
                     justify="space-between"
                     direction="column"
-                    spacing={8}
+                    spacing={4}
                   >
                     <Grid item>
                       <h1 style={{marginTop: "30px"}}>Login</h1>

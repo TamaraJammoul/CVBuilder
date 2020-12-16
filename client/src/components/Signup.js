@@ -1,18 +1,7 @@
 import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {Formik, Form, Field} from "formik";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-} from "@material-ui/core";
+import {Button, Box, Paper, Grid} from "@material-ui/core";
 import {TextField} from "formik-material-ui";
 import {
   VisibilityOff,
@@ -22,8 +11,11 @@ import {
   Backup,
 } from "@material-ui/icons";
 import image from "./../img/login-img-eng.png";
+import {SignupAction} from "./../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 function Signup() {
-  const [showPassword, setShowPassword] = useState(false);
+  //const state = useSelector((state) => state.template[0]);
+  const dispatch = useDispatch();
   return (
     <Grid container justify="center" xs={12} style={{minHeight: "100vh"}}>
       <Grid item xs={12} sm={6}>
@@ -93,11 +85,8 @@ function Signup() {
               }}
               onSubmit={(values, {setSubmitting}) => {
                 console.log("values");
-                setTimeout(() => {
-                  setSubmitting(false);
-
-                  alert(JSON.stringify(values, null, 2));
-                }, 500);
+                console.log("values");
+                dispatch(SignupAction(values));
               }}
             >
               {({submitForm, isSubmitting}) => (
@@ -108,7 +97,7 @@ function Signup() {
                     alignItems="center"
                     justify="space-between"
                     direction="column"
-                    spacing={8}
+                    spacing={4}
                   >
                     <Grid item xs={12}>
                       <h1 style={{marginTop: "30px"}}>Signup for free now</h1>

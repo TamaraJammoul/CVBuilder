@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { ButtonContainer } from "./Layout/Button";
-import { Link, NavLink } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {ButtonContainer} from "./Layout/Button";
+import {Link, NavLink} from "react-router-dom";
 import logo from "./../img/logo.png";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import {ContactusAction} from "./../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function Getintouch() {
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [message, setmessage] = useState("");
   const [number, setnumber] = useState("");
-  const data = { name, email, number, message };
-  let history = useHistory();
+  const data = {name, email, number, message};
+  //const state = useSelector((state) => state.template[0]);
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -21,15 +23,7 @@ export default function Getintouch() {
     if (name == "" || email == "" || message == "" || number == "")
       alert("تأكد من ملأ جميع الحقول قبل الإرسال");
     else {
-      axios
-        .post("https://irtake.com/api/files/send_email", data)
-        .then((res) => {
-          console.log(data);
-          history.push("/");
-        })
-        .catch((err) => {
-          alert("حدث خطأ أعد المحاولة ثانية");
-        });
+      dispatch(ContactusAction(data));
     }
   };
   return (

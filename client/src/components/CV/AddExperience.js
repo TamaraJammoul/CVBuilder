@@ -15,17 +15,17 @@ import {
 import junior from "./../../img/student.svg";
 import senior from "./../../img/worker.svg";
 import manager from "./../../img/manager.svg";
-
+import {AddExperienceAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function Experience(props) {
   const [experienceName, setExperienceName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [project, setProject] = useState("");
+  const data = {description, experienceName, startDate, endDate, project};
+  const dispatch = useDispatch();
 
-  const handelSubmit = () => {
-    console.log(experienceName, description, startDate, endDate, project);
-  };
   const handelCancel = () => {
     setExperienceName("");
     setStartDate(new Date());
@@ -117,7 +117,7 @@ export default function Experience(props) {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={handelSubmit}
+                onClick={() => dispatch(AddExperienceAction(data))}
               >
                 save
               </Button>

@@ -1,26 +1,10 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Avatar,
-  TextField,
-  Container,
-  ButtonGroup,
-} from "@material-ui/core";
+import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
+import {AddReferenceAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function Reference(props) {
   const [reference, setReference] = useState(2);
-
-  const handelSubmit = () => {
-    console.log(reference);
-  };
+  const dispatch = useDispatch();
   const handelCancel = () => {
     setReference("");
     props.setComponentName("");
@@ -62,7 +46,7 @@ export default function Reference(props) {
               variant="contained"
               color="primary"
               style={{float: "right"}}
-              onClick={handelSubmit}
+              onClick={() => dispatch(AddReferenceAction(reference))}
             >
               save
             </Button>

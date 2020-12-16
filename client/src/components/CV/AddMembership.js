@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
+import {AddMembershipAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
+
 export default function AddMembership(props) {
+  const dispatch = useDispatch();
+
   const [membershipName, setMembershipName] = useState("");
 
-  const handelSubmit = () => {
-    console.log(membershipName);
-  };
   const handelCancel = () => {
     setMembershipName("");
     props.setComponentName("");
@@ -47,7 +49,7 @@ export default function AddMembership(props) {
               variant="contained"
               color="primary"
               style={{float: "right"}}
-              onClick={handelSubmit}
+              onClick={() => dispatch(AddMembershipAction(membershipName))}
             >
               save
             </Button>

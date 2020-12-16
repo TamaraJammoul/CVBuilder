@@ -8,14 +8,14 @@ import {
   Container,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-
+import {AddLanguageAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
   const [rate, setRate] = useState(2);
+  const dispatch = useDispatch();
+  const data = {language, rate};
 
-  const handelSubmit = () => {
-    console.log(language, rate);
-  };
   const handelCancel = () => {
     setLanguage("");
     setRate(2);
@@ -68,7 +68,7 @@ export default function AddLanguage(props) {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={handelSubmit}
+                onClick={() => dispatch(AddLanguageAction(data))}
               >
                 save
               </Button>

@@ -15,12 +15,11 @@ import {
   Container,
   ButtonGroup,
 } from "@material-ui/core";
-import {Editor} from "@tinymce/tinymce-react";
-
+import {AddEducationAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function AddEducation(props) {
-  const handleEditorChange = (content, editor) => {
-    console.log("Content was updated:", content);
-  };
+  const dispatch = useDispatch();
+
   const [field, setField] = useState("");
   const [universityName, setUniversityName] = useState("");
   const [city, setCity] = useState("");
@@ -29,18 +28,17 @@ export default function AddEducation(props) {
   const [rate100, setRate100] = useState(0);
   const [rate5, setRate5] = useState(0);
   const [estimate, setEstimate] = useState("");
-
-  const handelSubmit = () => {
-    console.log(
-      field,
-      universityName,
-      startDate,
-      endDate,
-      rate100,
-      rate5,
-      estimate
-    );
+  const data = {
+    field,
+    universityName,
+    city,
+    startDate,
+    endDate,
+    rate100,
+    rate5,
+    estimate,
   };
+
   const handelCancel = () => {
     setField("");
     setStartDate(new Date());
@@ -166,7 +164,7 @@ export default function AddEducation(props) {
               variant="contained"
               color="primary"
               style={{float: "right"}}
-              onClick={handelSubmit}
+              onClick={() => dispatch(AddEducationAction(data))}
             >
               save
             </Button>
