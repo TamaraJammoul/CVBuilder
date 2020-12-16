@@ -14,12 +14,17 @@ import {
 } from "@material-ui/core";
 import {TextField} from "formik-material-ui";
 import {VisibilityOff, Visibility} from "@material-ui/icons";
+import {LoginAction} from "./../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 
-function LoginForm() {
+function LoginForm(props) {
   const [showPassword, setShowPassword] = useState(false);
+  const state = useSelector((state) => state.template[0]);
+  const dispatch = useDispatch();
   return (
     <Grid container justify="center" style={{minHeight: "100vh"}}>
       <Grid item xs={12} sm={6}>
+        <h1>{state}</h1>
         <Box p={10} style={{width: "100%"}}>
           <Paper elevation={3}>
             <Formik
@@ -48,6 +53,7 @@ function LoginForm() {
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
                 }, 500);
+                dispatch(LoginAction(",jlkj"));
               }}
             >
               {({submitForm, isSubmitting}) => (

@@ -45,7 +45,8 @@ import Skills from "./components/CV/Skills";
 import Certificates from "./components/CV/Certificates";
 import Membership from "./components/CV/Membership";
 import AddReference from "./components/CV/AddReference";
-
+import store from "./store/store";
+import {Provider} from "react-redux";
 function App(props) {
   const [loading, setLoading] = useState(true);
 
@@ -55,84 +56,95 @@ function App(props) {
     }, 2000);
   }, []);
   return (
-    <div className="wow">
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <Switch>
-            <Route exact path="/" render={(props) => <Home />} />
-            <Route path="/login" render={(props) => <Login />} />
-            <Route path="/signup" render={(props) => <Signup />} />
-            <Route path="/contactus" render={(props) => <Contactus />} />
-            <Route
-              path="/forgetpassword"
-              render={(props) => <ForgetPassword />}
-            />
-            <Route path="/cvtemplates" render={(props) => <CVTemplates />} />
-            <Route
-              path="/addexperience"
-              render={(props) => <AddExperience />}
-            />
-            <Route
-              path="/jobfunctionality"
-              render={(props) => <JobFunctionality />}
-            />
-            <Route path="/cvname" render={(props) => <CVName />} />
-            <Route path="/cvlanguage" render={(props) => <CVLanguage />} />
-            <Route path="/personalinfo" render={(props) => <PersonalInfo />} />
-            <Route
-              path="/careerobjectives"
-              render={(props) => <CareerObjectives />}
-            />
-            <Route
-              path="/workexperience"
-              render={(props) => <WorkExperience />}
-            />
-            <Route
-              path="/addworkexperience"
-              render={(props) => <AddWorkExperience />}
-            />
-            <Route path="/addeducation" render={(props) => <AddEducation />} />
-            <Route
-              path="/addpersonalskill"
-              render={(props) => <AddPersonalSkill />}
-            />
-            <Route
-              path="/personalskills"
-              render={(props) => <PersonalSkills />}
-            />
-            <Route
-              path="/addcertificate"
-              render={(props) => <AddCertificate />}
-            />
-            <Route path="/certificates" render={(props) => <Certificates />} />
-            <Route path="/addskill" render={(props) => <AddSkill />} />
-            <Route path="/skills" render={(props) => <Skills />} />
+    <Provider store={store}>
+      <div className="wow">
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Switch>
+              <Route exact path="/" render={(props) => <Home />} />
+              <Route path="/login" render={(props) => <Login />} />
+              <Route path="/signup" render={(props) => <Signup />} />
+              <Route path="/contactus" render={(props) => <Contactus />} />
+              <Route
+                path="/forgetpassword"
+                render={(props) => <ForgetPassword />}
+              />
+              <Route path="/cvtemplates" render={(props) => <CVTemplates />} />
+              <Route
+                path="/addexperience"
+                render={(props) => <AddExperience />}
+              />
+              <Route
+                path="/jobfunctionality"
+                render={(props) => <JobFunctionality />}
+              />
+              <Route path="/cvname" render={(props) => <CVName />} />
+              <Route path="/cvlanguage" render={(props) => <CVLanguage />} />
+              <Route
+                path="/personalinfo"
+                render={(props) => <PersonalInfo />}
+              />
+              <Route
+                path="/careerobjectives"
+                render={(props) => <CareerObjectives />}
+              />
+              <Route
+                path="/workexperience"
+                render={(props) => <WorkExperience />}
+              />
+              <Route
+                path="/addworkexperience"
+                render={(props) => <AddWorkExperience />}
+              />
+              <Route
+                path="/addeducation"
+                render={(props) => <AddEducation />}
+              />
+              <Route
+                path="/addpersonalskill"
+                render={(props) => <AddPersonalSkill />}
+              />
+              <Route
+                path="/personalskills"
+                render={(props) => <PersonalSkills />}
+              />
+              <Route
+                path="/addcertificate"
+                render={(props) => <AddCertificate />}
+              />
+              <Route
+                path="/certificates"
+                render={(props) => <Certificates />}
+              />
+              <Route path="/addskill" render={(props) => <AddSkill />} />
+              <Route path="/skills" render={(props) => <Skills />} />
 
-            <Route
-              path="/othertraining"
-              render={(props) => <OtherTraining />}
-            />
-            <Route
-              path="/addmembership"
-              render={(props) => <AddMembership />}
-            />
-            <Route path="/reference" render={(props) => <Reference />} />
-            <Route path="/buildcv" render={(props) => <BuildCV />} />
-            <Route path="/template" render={(props) => <Template />} />
-            <Route path="/addlanguage" render={(props) => <AddLanguage />} />
-            <Route path="/languages" render={(props) => <Languages />} />
-            <Route path="/education" render={(props) => <Education />} />
-            <Route path="/experience" render={(props) => <Experience />} />
-            <Route path="/membership" render={(props) => <Membership />} />
-            <Route render={(props) => <Default />} />
-          </Switch>
+              <Route
+                path="/othertraining"
+                render={(props) => <OtherTraining />}
+              />
+              <Route
+                path="/addmembership"
+                render={(props) => <AddMembership />}
+              />
+              <Route path="/reference" render={(props) => <Reference />} />
+              <Route path="/buildcv" render={(props) => <BuildCV />} />
+              <Route path="/template" render={(props) => <Template />} />
+              <Route path="/addlanguage" render={(props) => <AddLanguage />} />
+              <Route path="/languages" render={(props) => <Languages />} />
+              <Route path="/education" render={(props) => <Education />} />
+              <Route path="/experience" render={(props) => <Experience />} />
+              <Route path="/membership" render={(props) => <Membership />} />
+              <Route render={(props) => <Default />} />
+            </Switch>
 
-          <ScrollUpButton />
-        </>
-      )}
-    </div>
+            <ScrollUpButton />
+          </>
+        )}
+      </div>
+    </Provider>
   );
 }
 
