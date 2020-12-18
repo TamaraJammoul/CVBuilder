@@ -15,6 +15,7 @@ const initialState = {
     skills: [],
     workexperience: [],
   },
+  MyTemplates: [],
 };
 
 const store = createStore(
