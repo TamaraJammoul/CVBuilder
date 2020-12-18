@@ -12,6 +12,7 @@ import {
   ADDREFERENCE,
   ADDSKILL,
   ADDWORKEXPERIENCE,
+  CHANGELANGUAGE,
 } from "./types";
 import axios from "axios";
 
@@ -115,6 +116,14 @@ export function AddWorkExperienceAction(payload) {
   return (dispatch) => {
     dispatch({
       type: ADDWORKEXPERIENCE,
+      payload,
+    });
+  };
+}
+export function ChangeLanguge(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: CHANGELANGUAGE,
       payload,
     });
   };

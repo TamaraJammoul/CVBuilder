@@ -15,8 +15,9 @@ const initialState = {
     skills: [],
     workexperience: [],
   },
+  MyTemplates: [],
 };
-
+//lk;lkl;klkllll;k
 const store = createStore(
   reducer,
   initialState,
