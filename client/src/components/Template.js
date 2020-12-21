@@ -141,7 +141,7 @@ const Template = () => {
         </div>
       </div>
       <Pdf targetRef={ref} filename="post.pdf" x={0.5} y={0.5}>
-        {({toPdf}) => <button onClick={toPdf}>Export As JPEG</button>}
+        {({toPdf}) => <button onClick={toPdf}>Export As pdf</button>}
       </Pdf>
       <button onClick={() => exportComponentAsJPEG(ref)}>Export As JPEG</button>
       <button onClick={() => exportComponentAsPNG(ref)}>Export As PNG</button>

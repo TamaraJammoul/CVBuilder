@@ -6,6 +6,14 @@ import {TextField} from "formik-material-ui";
 import {VisibilityOff, Visibility} from "@material-ui/icons";
 import {LoginAction} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
+import Signup from "./Signup";
 
 function LoginForm(props) {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,6 +47,7 @@ function LoginForm(props) {
               }}
               onSubmit={(values, {setSubmitting}) => {
                 console.log("values");
+
                 dispatch(LoginAction(values));
               }}
             >
@@ -53,6 +62,11 @@ function LoginForm(props) {
                   >
                     <Grid item>
                       <h1 style={{marginTop: "30px"}}>Login</h1>
+                      {/*<Route
+                        path="/signup"
+                        exact
+                        render={(props) => <Signup />}
+                      />*/}
                     </Grid>
                     <Grid item>
                       <Field
