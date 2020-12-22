@@ -61,7 +61,7 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          references: [...state.template.references, action.payload],
+          references: [...state.template.references, {name: action.payload}],
         },
       };
     case "ADDSKILL":
@@ -78,6 +78,32 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           workexperience: [...state.template.workexperience, action.payload],
+        },
+      };
+    case "DELETEREFERENCE":
+      var temp = state.template.references;
+      temp = temp.filter((e) => e != action.payload);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          references: temp,
+        },
+      };
+    case "EDITREFERENCE":
+      var temp = state.template.references;
+      temp.map((e, i) => {
+        if (e.name == action.payload.oldName) {
+          e.name = action.payload.newName;
+        }
+      });
+
+      console.log(temp, action.payload);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          references: temp,
         },
       };
     default:

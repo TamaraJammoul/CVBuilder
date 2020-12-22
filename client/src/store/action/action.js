@@ -13,6 +13,8 @@ import {
   ADDSKILL,
   ADDWORKEXPERIENCE,
   CHANGELANGUAGE,
+  DELETEREFERENCE,
+  EDITREFERENCE,
 } from "./types";
 import axios from "axios";
 
@@ -124,6 +126,24 @@ export function ChangeLanguge(payload) {
   return (dispatch) => {
     dispatch({
       type: CHANGELANGUAGE,
+      payload,
+    });
+  };
+}
+export function DeleteReferenceAction(payload) {
+  console.log(payload);
+  return (dispatch) => {
+    dispatch({
+      type: DELETEREFERENCE,
+      payload,
+    });
+  };
+}
+export function EditReferenceAction(payload) {
+  console.log(payload);
+  return (dispatch) => {
+    dispatch({
+      type: EDITREFERENCE,
       payload,
     });
   };

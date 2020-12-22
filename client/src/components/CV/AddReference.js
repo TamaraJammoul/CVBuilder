@@ -3,7 +3,7 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddReferenceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 export default function Reference(props) {
-  const [reference, setReference] = useState(2);
+  const [reference, setReference] = useState("");
   const dispatch = useDispatch();
   const handelCancel = () => {
     setReference("");
@@ -30,7 +30,7 @@ export default function Reference(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
-              onChane={(e) => setReference(e.target.value)}
+              onChange={(e) => setReference(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -46,7 +46,9 @@ export default function Reference(props) {
               variant="contained"
               color="primary"
               style={{float: "right"}}
-              onClick={() => dispatch(AddReferenceAction(reference))}
+              onClick={() => {
+                dispatch(AddReferenceAction(reference));
+              }}
             >
               save
             </Button>

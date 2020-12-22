@@ -10,8 +10,15 @@ import {
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddReference from "./AddReference";
+import {useSelector, useDispatch} from "react-redux";
+import {
+  DeleteReferenceAction,
+  EditReferenceAction,
+} from "./../../store/action/action";
+
 export default function Refernce() {
   const [ComponentName, setComponentName] = useState("");
+  const dispatch = useDispatch();
 
   return ComponentName == "AddReference" ? (
     <AddReference setComponentName={setComponentName} />
@@ -47,7 +54,17 @@ export default function Refernce() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Edit />
+                      <Edit
+                        onClick={() => {
+                          console.log("kljklj");
+                          dispatch(
+                            EditReferenceAction({
+                              newName: "tam",
+                              oldName: "tamara",
+                            })
+                          );
+                        }}
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -57,7 +74,12 @@ export default function Refernce() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Delete />
+                      <Delete
+                        onClick={() => {
+                          console.log("kljklj");
+                          dispatch(DeleteReferenceAction("tamara"));
+                        }}
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
