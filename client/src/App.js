@@ -19,12 +19,9 @@ import Contactus from "./components/Contactus";
 import ForgetPassword from "./components/ForgetPassword";
 import CVTemplates from "./components/CV/CVTemplates";
 import AddExperience from "./components/CV/AddExperience";
-import JobFunctionality from "./components/CV/JobFunctionality";
 import CVName from "./components/CV/CVName";
 import CVLanguage from "./components/CV/CVLanguage";
 import PersonalInfo from "./components/CV/PersonalInfo";
-import WorkExperience from "./components/CV/WorkExperience";
-import AddWorkExperience from "./components/CV/AddWorkExperience";
 import AddEducation from "./components/CV/AddEducation";
 import AddPersonalSkill from "./components/CV/AddPersonalSkill";
 import PersonalSkills from "./components/CV/PersonalSkills";
@@ -76,10 +73,7 @@ function App(props) {
                 path="/addexperience"
                 render={(props) => <AddExperience />}
               />
-              <Route
-                path="/jobfunctionality"
-                render={(props) => <JobFunctionality />}
-              />
+
               <Route path="/cvname" render={(props) => <CVName />} />
               <Route path="/cvlanguage" render={(props) => <CVLanguage />} />
               <Route
@@ -90,14 +84,7 @@ function App(props) {
                 path="/careerobjectives"
                 render={(props) => <CareerObjectives />}
               />
-              <Route
-                path="/workexperience"
-                render={(props) => <WorkExperience />}
-              />
-              <Route
-                path="/addworkexperience"
-                render={(props) => <AddWorkExperience />}
-              />
+
               <Route
                 path="/addeducation"
                 render={(props) => <AddEducation />}

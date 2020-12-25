@@ -3,9 +3,14 @@ import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import AddEducation from "./AddEducation";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import {
+  EditEducationAction,
+  DeleteEducationAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function Education() {
   const [ComponentName, setComponentName] = useState("");
+  const dispatch = useDispatch();
 
   return ComponentName == "AddEducation" ? (
     <AddEducation setComponentName={setComponentName} />
@@ -60,7 +65,23 @@ export default function Education() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Edit />
+                      <Edit
+                        onClick={() =>
+                          dispatch(
+                            EditEducationAction({
+                              newField: "",
+                              oldField: "rr",
+                              newUniversityName: "",
+                              newCity: "",
+                              newStartDate: new Date(),
+                              newEndDate: new Date(),
+                              newRate100: 0,
+                              newRate5: 0,
+                              newEstimate: "",
+                            })
+                          )
+                        }
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -70,7 +91,9 @@ export default function Education() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Delete />
+                      <Delete
+                        onClick={() => dispatch(DeleteEducationAction("rr"))}
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -90,7 +113,7 @@ export default function Education() {
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddEducation")}
             >
-              Add Other Training
+              Add Education
             </Button>
           </Grid>
         </Grid>

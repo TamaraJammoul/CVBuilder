@@ -19,9 +19,15 @@ import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import AddLanguage from "./AddLanguage";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {
+  EditLanguageAction,
+  DeleteLanguageAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function Languages() {
   const [ComponentName, setComponentName] = useState("");
+  const dispatch = useDispatch();
 
   return ComponentName == "AddLanguage" ? (
     <AddLanguage setComponentName={setComponentName} />
@@ -84,7 +90,17 @@ export default function Languages() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Edit />
+                      <Edit
+                        onClick={() =>
+                          dispatch(
+                            EditLanguageAction({
+                              oldName: "rr",
+                              newName: "",
+                              newRate: 0,
+                            })
+                          )
+                        }
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -94,7 +110,9 @@ export default function Languages() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Delete />
+                      <Delete
+                        onClick={() => dispatch(DeleteLanguageAction("rr"))}
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -114,7 +132,7 @@ export default function Languages() {
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddLanguage")}
             >
-              Add Other Training
+              Add Language
             </Button>
           </Grid>
         </Grid>

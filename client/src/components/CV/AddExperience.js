@@ -55,7 +55,7 @@ export default function Experience(props) {
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
-                onChange={(e) => e.setExperienceName(e.target.value)}
+                onChange={(e) => setExperienceName(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>

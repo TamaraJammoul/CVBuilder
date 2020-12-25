@@ -19,9 +19,14 @@ import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddOtherTraining from "./AddOtherTraining";
+import {
+  EditOtherTrainingAction,
+  DeleteOtherTrainingAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function OtherTraining(props) {
   const [ComponentName, setComponentName] = useState("");
-
+  const dispatch = useDispatch();
   return ComponentName == "AddOtherTraining" ? (
     <AddOtherTraining setComponentName={setComponentName} />
   ) : (
@@ -56,7 +61,16 @@ export default function OtherTraining(props) {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Edit />
+                      <Edit
+                        onClick={() =>
+                          dispatch(
+                            EditOtherTrainingAction({
+                              newName: "",
+                              oldName: "rr",
+                            })
+                          )
+                        }
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -66,7 +80,11 @@ export default function OtherTraining(props) {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Delete />
+                      <Delete
+                        onClick={() =>
+                          dispatch(DeleteOtherTrainingAction("rr"))
+                        }
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>

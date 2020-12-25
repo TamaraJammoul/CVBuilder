@@ -11,8 +11,14 @@ import {
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddPersonalSkill from "./AddPersonalSkill";
+import {
+  EditPersonalSkillAction,
+  DeletePersonalSkillAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function PersonalSkills() {
   const [ComponentName, setComponentName] = useState("");
+  const dispatch = useDispatch();
 
   return ComponentName == "AddPersonalSkill" ? (
     <AddPersonalSkill setComponentName={setComponentName} />
@@ -110,7 +116,17 @@ export default function PersonalSkills() {
                         </Grid>
                         <Grid item xs={1}>
                           <IconButton aria-label="delete">
-                            <Edit />
+                            <Edit
+                              onClick={() =>
+                                dispatch(
+                                  EditPersonalSkillAction({
+                                    oldName: "rr",
+                                    newName: "",
+                                    newRate: 0,
+                                  })
+                                )
+                              }
+                            />
                           </IconButton>
                         </Grid>
                         <Grid item xs={1}>
@@ -120,7 +136,11 @@ export default function PersonalSkills() {
                         </Grid>
                         <Grid item xs={1}>
                           <IconButton aria-label="delete">
-                            <Delete />
+                            <Delete
+                              onClick={() =>
+                                dispatch(DeletePersonalSkillAction("rr"))
+                              }
+                            />
                           </IconButton>
                         </Grid>
                         <Grid item xs={1}>

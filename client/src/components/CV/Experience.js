@@ -3,9 +3,14 @@ import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import AddExperience from "./AddExperience";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import {
+  EditExperienceAction,
+  DeleteExperienceAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function Education() {
   const [ComponentName, setComponentName] = useState("");
+  const dispatch = useDispatch();
 
   return ComponentName == "AddExperience" ? (
     <AddExperience setComponentName={setComponentName} />
@@ -50,7 +55,21 @@ export default function Education() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Edit />
+                      <Edit
+                        onClick={() =>
+                          dispatch(
+                            EditExperienceAction({
+                              newName: "",
+                              oldName: "rr",
+                              newDescription: "",
+                              newExperienceName: "",
+                              newStartDate: new Date(),
+                              newEndDate: new Date(),
+                              newProject: "",
+                            })
+                          )
+                        }
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -60,7 +79,9 @@ export default function Education() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Delete />
+                      <Delete
+                        onClick={() => dispatch(DeleteExperienceAction("rr"))}
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>

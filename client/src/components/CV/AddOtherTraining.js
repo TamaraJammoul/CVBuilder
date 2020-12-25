@@ -31,7 +31,7 @@ export default function AddOtherTraining(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
-              onChange={(e) => e.setOtherTraining(e.target.value)}
+              onChange={(e) => setOtherTraining(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

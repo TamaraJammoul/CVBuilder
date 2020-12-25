@@ -13,7 +13,7 @@ const initialState = {
     personalskills: [],
     references: [],
     skills: [],
-    workexperience: [],
+    careerobjective: "",
   },
   MyTemplates: [],
 };

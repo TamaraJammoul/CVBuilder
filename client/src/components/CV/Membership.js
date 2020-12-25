@@ -19,9 +19,14 @@ import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import AddMembership from "./AddMembership";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import {
+  EditMembershipAction,
+  DeleteMembershipAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function Membership() {
   const [ComponentName, setComponentName] = useState("");
+  const dispatch = useDispatch();
 
   return ComponentName == "AddMembership" ? (
     <AddMembership setComponentName={setComponentName} />
@@ -57,7 +62,13 @@ export default function Membership() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Edit />
+                      <Edit
+                        onClick={() =>
+                          dispatch(
+                            EditMembershipAction({oldName: "rr", newName: ""})
+                          )
+                        }
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>
@@ -67,7 +78,9 @@ export default function Membership() {
                   </Grid>
                   <Grid item xs={1}>
                     <IconButton aria-label="delete">
-                      <Delete />
+                      <Delete
+                        onClick={() => dispatch(DeleteMembershipAction("rr"))}
+                      />
                     </IconButton>
                   </Grid>
                   <Grid item xs={1}>

@@ -23,17 +23,14 @@ import PersonalSkills from "./PersonalSkills";
 import Membership from "./Membership";
 import Reference from "./Reference";
 import Skills from "./Skills";
-import WorkExperience from "./WorkExperience";
 import Languages from "./Languages";
 import SaveIcon from "@material-ui/icons/Save";
 import Navbar from "./../Layout/Navbar";
 import Education from "./Education";
-import AddCertificate from "./AddCertificate";
 import Certificates from "./Certificates";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
 export default function BuildCV() {
   let {path, url} = useRouteMatch();
-
   return (
     <Grid container direction="row" spacing={2}>
       <Grid item xs={3}>
@@ -131,7 +128,7 @@ export default function BuildCV() {
               <span style={{marginRight: "10px"}}>
                 <SaveIcon />
               </span>
-              <Link to={`${url}/ membership`}> Memberships</Link>
+              <Link to={`${url}/membership`}> Memberships</Link>
             </h3>
           </Grid>
           <Grid item>
@@ -164,10 +161,6 @@ export default function BuildCV() {
               <Route
                 path={`${path}/careerobjectives`}
                 render={(props) => <CareerObjectives />}
-              />
-              <Route
-                path={`${path}/workexperience`}
-                render={(props) => <WorkExperience />}
               />
 
               <Route

@@ -59,7 +59,7 @@ export default function Refernce() {
                           console.log("kljklj");
                           dispatch(
                             EditReferenceAction({
-                              newName: "tam",
+                              newName: "",
                               oldName: "tamara",
                             })
                           );

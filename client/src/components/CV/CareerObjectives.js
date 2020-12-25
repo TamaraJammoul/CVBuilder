@@ -17,11 +17,20 @@ import {
 } from "@material-ui/core";
 import {Editor} from "@tinymce/tinymce-react";
 import {VisibilityOff, EditSharp} from "@material-ui/icons";
+import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
+import DeleteIcon from "@material-ui/icons/Delete";
+import {
+  EditCareerObjectiveAction,
+  DeleteCareerObjectiveAction,
+} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function CareerObjectives() {
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
   };
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <Paper elevation={3}>
@@ -56,6 +65,21 @@ export default function CareerObjectives() {
                 A resume summary is a short, snappy introduction highlighting
                 your career progress, achievements and skill set.
               </h5>
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton aria-label="delete">
+                <Edit
+                  onClick={() => dispatch(EditCareerObjectiveAction("rr"))}
+                />
+              </IconButton>
+            </Grid>
+
+            <Grid item xs={1}>
+              <IconButton aria-label="delete">
+                <Delete
+                  onClick={() => dispatch(DeleteCareerObjectiveAction())}
+                />
+              </IconButton>
             </Grid>
             <Grid item>
               {" "}
