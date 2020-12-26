@@ -20,19 +20,7 @@ function Navbar(props) {
   const [isst, setisst] = useState(false);
   let history = useHistory();
 
-  function logout() {
-    localStorage.clear();
-    authContext.setAuth("");
-    return (
-      <Redirect
-        to={{
-          pathname: `/login`,
-          state: {from: props.location},
-          key: "redirect-login",
-        }}
-      />
-    );
-  }
+  
   useEffect(() => {
     setisst(localStorage.getItem("state"));
   }, [history.location]);

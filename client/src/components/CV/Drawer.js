@@ -9,6 +9,19 @@ import {
   Help,
   AccountBox,
 } from "@material-ui/icons";
+import {Link, Redirect} from "react-router-dom";
+function logout() {
+  localStorage.clear();
+  return (
+    <Redirect
+      to={{
+        pathname: `/login`,
+        // state: {from: props.location},
+        key: "redirect-login",
+      }}
+    />
+  );
+}
 export default function Drawer() {
   return (
     <Container>
@@ -18,6 +31,7 @@ export default function Drawer() {
         direction="column"
         alignItems="center"
         justify="center"
+        style={{paddingTop: "20px", width: "300px"}}
       >
         <Grid item>
           <Avatar
@@ -36,32 +50,34 @@ export default function Drawer() {
         <Grid item>
           <h5>
             {" "}
-            <Dashboard /> <span>Dashboard </span>
+            <Dashboard />{" "}
+            <span>
+              <Link to="dashboard">Dashboard </Link>
+            </span>
           </h5>
         </Grid>
         <Grid item>
           <h5>
             {" "}
             <AccountBox />
-            <span>My Account</span>
+            <span>
+              <Link to="myaccount">My Account</Link>
+            </span>
           </h5>
         </Grid>
-        <Grid item>
-          <h5>
-            <Help />
-            <span>Help Center</span>
-          </h5>
-        </Grid>
+
         <Grid item>
           <h5>
             {" "}
             <Email />
-            <span>Contact Us</span>
+            <span>
+              <Link to="contactus">Contact Us</Link>
+            </span>
           </h5>
           <hr />
         </Grid>
         <Grid item>
-          <h5>
+          <h5 onClick={() => logout()}>
             <PowerSettingsNew />
             <span>Logout</span>
           </h5>
