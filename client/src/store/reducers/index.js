@@ -1,5 +1,20 @@
 export default function reducer(state, action) {
   switch (action.type) {
+    case "ADDCV":
+      return {
+        ...state,
+        MyTemplates: [...state.template.MyTemplates, action.payload],
+      };
+    case "DELETECV":
+      var temp = state.MyTemplates;
+      temp = temp.filter((e) => e != action.payload);
+      return {
+        ...state,
+        MyTemplates: {
+          ...state.MyTemplates,
+          temp,
+        },
+      };
     case "ADDCERTIFICATE":
       return {
         ...state,
