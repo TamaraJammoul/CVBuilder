@@ -37,12 +37,12 @@ function Navbar(props) {
     setisst(localStorage.getItem("state"));
   }, [history.location]);
   return (
-    <nav class="navbar navbar-expand-lg navbar-light ">
-      <a class="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-lg navbar-light ">
+      <a className="navbar-brand" href="#">
         Dashboard
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -50,31 +50,34 @@ function Navbar(props) {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="navbar-brand" href="#">
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <a className="navbar-brand" href="#">
               Content
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="navbar-brand" href="#">
+          <li className="nav-item active">
+            <a className="navbar-brand" href="#">
               ChangeTemplate
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="navbar-brand" href="#">
+          <li className="nav-item active">
+            <a className="navbar-brand" href="#">
               Preview & Download
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <img src={us} style={{width: "30px", marginLeft: "10px"}} />
           </li>
-          <li class="nav-item">
-            <AccountCircle style={{width: "90px", color: "#2E0E33"}} />{" "}
+          <li className="nav-item">
+            <AccountCircle
+              style={{width: "90px", color: "#2E0E33"}}
+              onClick={props.setDrawerState}
+            />{" "}
           </li>
         </ul>
       </div>
