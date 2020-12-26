@@ -30,12 +30,12 @@ export default function CareerObjectives() {
     console.log("Content was updated:", content);
   };
   const dispatch = useDispatch();
-
+  const text = useSelector((state) => state.template.careerobjective);
   return (
     <Container>
-      <Paper elevation={3}>
+      <Paper elevation={3} className="background">
         <Container>
-          <Grid container alignItems="center" direction="column" spacing={8}>
+          <Grid container alignItems="center" direction="column" spacing={5}>
             <Grid item style={{width: "100%"}}>
               <Grid
                 container
@@ -61,25 +61,7 @@ export default function CareerObjectives() {
               </Grid>{" "}
             </Grid>
             <Grid item xs={12}>
-              <h5>
-                A resume summary is a short, snappy introduction highlighting
-                your career progress, achievements and skill set.
-              </h5>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton aria-label="delete">
-                <Edit
-                  onClick={() => dispatch(EditCareerObjectiveAction("rr"))}
-                />
-              </IconButton>
-            </Grid>
-
-            <Grid item xs={1}>
-              <IconButton aria-label="delete">
-                <Delete
-                  onClick={() => dispatch(DeleteCareerObjectiveAction())}
-                />
-              </IconButton>
+              <h5>{text}</h5>
             </Grid>
             <Grid item>
               {" "}
@@ -99,6 +81,25 @@ export default function CareerObjectives() {
                 }}
                 onEditorChange={handleEditorChange}
               />
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container alignItems="center" direction="row" spacing={3}>
+                <Grid item xs={1}>
+                  <IconButton aria-label="delete">
+                    <Edit
+                      onClick={() => dispatch(EditCareerObjectiveAction("rr"))}
+                    />
+                  </IconButton>
+                </Grid>
+
+                <Grid item xs={1}>
+                  <IconButton aria-label="delete">
+                    <Delete
+                      onClick={() => dispatch(DeleteCareerObjectiveAction())}
+                    />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Container>{" "}

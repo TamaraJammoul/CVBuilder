@@ -24,7 +24,16 @@ import Membership from "./Membership";
 import Reference from "./Reference";
 import Skills from "./Skills";
 import Languages from "./Languages";
-import SaveIcon from "@material-ui/icons/Save";
+import {
+  Work,
+  School,
+  LocationCity,
+  Language,
+  Laptop,
+  EmojiPeople,
+  Group,
+  AccountBox,
+} from "@material-ui/icons";
 import Navbar from "./../Layout/Navbar";
 import Education from "./Education";
 import Certificates from "./Certificates";
@@ -32,8 +41,8 @@ import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
 export default function BuildCV() {
   let {path, url} = useRouteMatch();
   return (
-    <Grid container direction="row" spacing={2}>
-      <Grid item xs={3}>
+    <Grid container direction="row" spacing={2} className="backgroundimg">
+      <Grid item xs={3} className="background">
         <Grid
           container
           spacing={3}
@@ -43,7 +52,6 @@ export default function BuildCV() {
           style={{
             textAlign: "center",
             padding: "30px",
-            //position: "fixed",
           }}
         >
           <Grid item xs={12}>
@@ -54,7 +62,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <Work />
               </span>
               <Link to={`${url}/careerobjectives`}>Career Objectives</Link>
             </h3>
@@ -63,7 +71,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <School />
               </span>
               <Link to={`${url}/certificates`}>Certificates</Link>
             </h3>
@@ -72,7 +80,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <LocationCity />
               </span>
               <Link to={`${url}/skills`}>Skills</Link>
             </h3>
@@ -81,7 +89,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <Language />
               </span>
               <Link to={`${url}/languages`}>Language</Link>
             </h3>
@@ -90,7 +98,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <Laptop />
               </span>
               <Link to={`${url}/othertraining`}>Other Training</Link>
             </h3>
@@ -99,7 +107,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <EmojiPeople />
               </span>
               <Link to={`${url}/personalskills`}>Personal Skills</Link>
             </h3>
@@ -108,7 +116,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <School />
               </span>
               <Link to={`${url}/education`}>Education</Link>
             </h3>
@@ -117,7 +125,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <Work />
               </span>
               <Link to={`${url}/experience`}> Experience</Link>
             </h3>
@@ -126,7 +134,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <Group />
               </span>
               <Link to={`${url}/membership`}> Memberships</Link>
             </h3>
@@ -135,7 +143,7 @@ export default function BuildCV() {
             <h3>
               {" "}
               <span style={{marginRight: "10px"}}>
-                <SaveIcon />
+                <AccountBox />
               </span>
               <Link to={`${url}/reference`}>References</Link>
             </h3>

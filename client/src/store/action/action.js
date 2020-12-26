@@ -30,6 +30,14 @@ import {
   EDITEXPERIENCE,
   EDITPERSONALSKILL,
   DELETEPERSONALSKILL,
+  COPYEDUCATION,
+  COPYLANGUAGE,
+  COPYREFERENCE,
+  COPYOTHERTRAINING,
+  COPYCERTIFICATE,
+  COPYPERSONALSKILL,
+  COPYMEMBERSHIP,
+  COPYEXPERIENCE,
 } from "./types";
 import axios from "axios";
 
@@ -43,6 +51,15 @@ export function LoginAction(payload) {
 }
 export function SignupAction(payload) {
   return (dispatch) => {
+    console.log("uuuuuuuuuuuu");
+    axios
+      .post("/api/auth/signUp", {
+        Email: payload.Email,
+        FirstName: payload.firstName,
+        LastName: payload.lastName,
+        Password: payload.password,
+      })
+      .then((res) => console.log(res));
     dispatch({
       type: SIGNUP,
       payload,
@@ -65,10 +82,26 @@ export function AddCertificateAction(payload) {
     });
   };
 }
+export function CopyCertificateAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYCERTIFICATE,
+      payload,
+    });
+  };
+}
 export function AddEducationAction(payload) {
   return (dispatch) => {
     dispatch({
       type: ADDEDUCATION,
+      payload,
+    });
+  };
+}
+export function CopyEducationAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYEDUCATION,
       payload,
     });
   };
@@ -81,10 +114,26 @@ export function AddExperienceAction(payload) {
     });
   };
 }
+export function CopyExperienceAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYEXPERIENCE,
+      payload,
+    });
+  };
+}
 export function AddLanguageAction(payload) {
   return (dispatch) => {
     dispatch({
       type: ADDLANGUAGE,
+      payload,
+    });
+  };
+}
+export function CopyLanguageAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYLANGUAGE,
       payload,
     });
   };
@@ -97,10 +146,26 @@ export function AddMembershipAction(payload) {
     });
   };
 }
+export function CopyMembershipAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYMEMBERSHIP,
+      payload,
+    });
+  };
+}
 export function AddOtherTrainingAction(payload) {
   return (dispatch) => {
     dispatch({
       type: ADDOTHERTRAINING,
+      payload,
+    });
+  };
+}
+export function CopyOtherTrainingAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYOTHERTRAINING,
       payload,
     });
   };
@@ -113,10 +178,26 @@ export function AddPersonalSkillsAction(payload) {
     });
   };
 }
+export function CopyPersonalSkillsAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYPERSONALSKILL,
+      payload,
+    });
+  };
+}
 export function AddReferenceAction(payload) {
   return (dispatch) => {
     dispatch({
       type: ADDREFERENCE,
+      payload,
+    });
+  };
+}
+export function CopyReferenceAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: COPYREFERENCE,
       payload,
     });
   };

@@ -1,21 +1,43 @@
 :root {
-    --lightBlue: #b6666f;
-    --mainWhite: #f3f3f3;
-    --mainDark: #eeebeb;
+    --maincolor: #2E0E33;
+    --seccolor: #5B2338;
+    --thirdcolor:#543059;
+    --fourthcolor:#543059;
+    --fifthcolor:#441224;
+   --background: #f6f6f8
 }
 
 
 body {
-    font-family: "El Messiri", sans-serif;
+font-family: 'Rubik', sans-serif;
+
 }
 
 
+h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
 
 
+a:link {
+  color:var(--maincolor);
+}
 
+a:visited {
+  color:var(--maincolor);
+}
+a:hover {
+  color:var(--seccolor);
+}
 
+a:active {
+  color:var(--seccolor);
+}
 
-
+.background{
+    background-color: var(--background);
+}
+.backgroundimg{
+    background-image: url('./img/background.PNG');
+}
 @media only screen and (max-width: 600px) {
    .textField{
       width: 200px !important;

@@ -20,17 +20,17 @@ import {useSelector, useDispatch} from "react-redux";
 export default function Experience(props) {
   const [experienceName, setExperienceName] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [project, setProject] = useState("");
   const data = {description, experienceName, startDate, endDate, project};
   const dispatch = useDispatch();
 
   const handelCancel = () => {
     setExperienceName("");
-    setStartDate(new Date());
+    setStartDate("");
     setDescription("");
-    setEndDate(new Date());
+    setEndDate("");
     setProject("");
     props.setComponentName("");
   };
@@ -65,7 +65,7 @@ export default function Experience(props) {
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
-                onChange={(e) => e.setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -73,12 +73,12 @@ export default function Experience(props) {
               <TextField
                 id="date"
                 label="Start Date"
-                type="date"
+                type="text"
                 InputLabelProps={{
                   shrink: true,
                 }}
                 style={{width: "100%"}}
-                onChange={(e) => e.setStartDate(e.target.value)}
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -86,12 +86,12 @@ export default function Experience(props) {
               <TextField
                 id="date"
                 label="End Date"
-                type="date"
+                type="text"
                 InputLabelProps={{
                   shrink: true,
                 }}
                 style={{width: "100%"}}
-                onChange={(e) => e.setEndDate(e.target.value)}
+                onChange={(e) => setEndDate(e.target.value)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -101,7 +101,7 @@ export default function Experience(props) {
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
-                onChange={(e) => e.setProject(e.target.value)}
+                onChange={(e) => setProject(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

@@ -22,17 +22,20 @@ import AddOtherTraining from "./AddOtherTraining";
 import {
   EditOtherTrainingAction,
   DeleteOtherTrainingAction,
+  CopyOtherTrainingAction,
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 export default function OtherTraining(props) {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
+  const othertraining = useSelector((state) => state.template.othertraining);
+
   return ComponentName == "AddOtherTraining" ? (
     <AddOtherTraining setComponentName={setComponentName} />
   ) : (
     <Paper>
       <Container>
-        <Grid container alignItems="center" direction="Column" spacing={6}>
+        <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
             <h2>Your OtherTraining</h2>
           </Grid>
@@ -43,59 +46,70 @@ export default function OtherTraining(props) {
               technologies we recommend the Software section.
             </h5>
           </Grid>
-          <Grid item>
-            <Paper>
-              <Container>
-                <Grid
-                  container
-                  alignItems="center"
-                  justify="center"
-                  spacing={4}
-                  style={{width: "100%"}}
-                >
-                  <Grid item xs={1}>
-                    <h4>1</h4>
+          {othertraining.map((oth, i) => (
+            <Grid item>
+              <Paper>
+                <Container>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    spacing={4}
+                    style={{width: "100%"}}
+                  >
+                    <Grid item xs={1}>
+                      <h4>{i + 1}</h4>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <h6>{oth.name}</h6>{" "}
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton aria-label="delete">
+                        <Edit
+                          onClick={() =>
+                            dispatch(
+                              EditOtherTrainingAction({
+                                newName: "",
+                                oldName: "rr",
+                              })
+                            )
+                          }
+                        />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton aria-label="delete">
+                        <FileCopy
+                          onClick={() =>
+                            dispatch(
+                              CopyOtherTrainingAction({
+                                name: "rr",
+                              })
+                            )
+                          }
+                        />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton aria-label="delete">
+                        <Delete
+                          onClick={() =>
+                            dispatch(DeleteOtherTrainingAction("rr"))
+                          }
+                        />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton aria-label="delete">
+                        <OpenWith />
+                      </IconButton>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={7}>
-                    <h6>Web design</h6>{" "}
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton aria-label="delete">
-                      <Edit
-                        onClick={() =>
-                          dispatch(
-                            EditOtherTrainingAction({
-                              newName: "",
-                              oldName: "rr",
-                            })
-                          )
-                        }
-                      />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton aria-label="delete">
-                      <FileCopy />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton aria-label="delete">
-                      <Delete
-                        onClick={() =>
-                          dispatch(DeleteOtherTrainingAction("rr"))
-                        }
-                      />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton aria-label="delete">
-                      <OpenWith />
-                    </IconButton>
-                  </Grid>
-                </Grid>
-              </Container>{" "}
-            </Paper>
-          </Grid>
+                </Container>{" "}
+              </Paper>
+            </Grid>
+          ))}
+
           <Grid item xs={12}>
             {" "}
             <Button

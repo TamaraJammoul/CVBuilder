@@ -1,20 +1,5 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Avatar,
-  TextField,
-  Container,
-  ButtonGroup,
-} from "@material-ui/core";
+import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddEducationAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 export default function AddEducation(props) {
@@ -23,8 +8,8 @@ export default function AddEducation(props) {
   const [field, setField] = useState("");
   const [universityName, setUniversityName] = useState("");
   const [city, setCity] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [rate100, setRate100] = useState(0);
   const [rate5, setRate5] = useState(0);
   const [estimate, setEstimate] = useState("");
@@ -41,8 +26,8 @@ export default function AddEducation(props) {
 
   const handelCancel = () => {
     setField("");
-    setStartDate(new Date());
-    setEndDate(new Date());
+    setStartDate("");
+    setEndDate("");
     setRate5(0);
     setRate100(0);
     setEstimate("");
@@ -101,7 +86,7 @@ export default function AddEducation(props) {
             <TextField
               id="date"
               label="Start Date"
-              type="date"
+              type="text"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -114,7 +99,7 @@ export default function AddEducation(props) {
             <TextField
               id="date"
               label="End Date"
-              type="date"
+              type="text"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -145,7 +130,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label="تقدير"
+              label="estimate"
               variant="filled"
               style={{width: "50%"}}
               onChange={(e) => setEstimate(e.target.value)}

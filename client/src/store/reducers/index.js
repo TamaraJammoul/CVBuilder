@@ -104,6 +104,21 @@ export default function reducer(state, action) {
           references: temp,
         },
       };
+    case "COPYREFERENCE":
+      var temp;
+      state.template.references.map((e, i) => {
+        if (e.name == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          references: [...state.template.references, temp],
+        },
+      };
     case "DELETECERTIFICATE":
       var temp = state.template.certificates;
       temp = temp.filter((e) => e.name != action.payload);
@@ -129,6 +144,21 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           certificates: temp,
+        },
+      };
+    case "COPYCERTIFICATE":
+      var temp;
+      state.template.certificates.map((e, i) => {
+        if (e.name == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          certificates: [...state.template.certificates, temp],
         },
       };
     case "DELETEEDUCATION":
@@ -164,6 +194,22 @@ export default function reducer(state, action) {
           educations: temp,
         },
       };
+    case "COPYEDUCATION":
+      var temp;
+      state.template.educations.map((e, i) => {
+        if (e.field == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          educations: [...state.template.educations, temp],
+        },
+      };
+
     case "DELETEOTHERTRAINING":
       var temp = state.template.othertraining;
       temp = temp.filter((e) => e.name != action.payload);
@@ -187,6 +233,21 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           othertraining: temp,
+        },
+      };
+    case "COPYOTHERTRAINING":
+      var temp;
+      state.template.othertraining.map((e, i) => {
+        if (e.name == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          othertraining: [...state.template.othertraining, temp],
         },
       };
 
@@ -230,9 +291,25 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          othertraining: temp,
+          languages: [...state.template.languages, temp],
         },
       };
+    case "COPYLANGUAGE":
+      var temp;
+      state.template.languages.map((e, i) => {
+        if (e.name == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          languages: [...state.template.languages, temp],
+        },
+      };
+
     case "DELETEMEMBERSHIP":
       var temp = state.template.memberships;
       temp = temp.filter((e) => e.name != action.payload);
@@ -258,6 +335,22 @@ export default function reducer(state, action) {
           othertraining: temp,
         },
       };
+    case "COPYMEMBERSHIP":
+      var temp;
+      state.template.memberships.map((e, i) => {
+        if (e.name == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          memberships: [...state.template.memberships, temp],
+        },
+      };
+
     case "DELETEEXPERIENCE":
       var temp = state.template.experiences;
       temp = temp.filter((e) => e.experienceName != action.payload);
@@ -285,7 +378,22 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          othertraining: temp,
+          experiences: temp,
+        },
+      };
+    case "COPYEXPERIENCE":
+      var temp;
+      state.template.experiences.map((e, i) => {
+        if (e.experienceName == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          experiences: [...state.template.experiences, temp],
         },
       };
     case "DELETEPERSONALSKILL":
@@ -314,13 +422,22 @@ export default function reducer(state, action) {
           othertraining: temp,
         },
       };
+    case "COPYPERSONALSKILL":
+      var temp;
+      state.template.personalskills.map((e, i) => {
+        if (e.skill == action.payload.name) {
+          temp = e;
+        }
+      });
+      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          references: temp,
+          personalskills: [...state.template.personalskills, temp],
         },
       };
+
     default:
       return state;
   }

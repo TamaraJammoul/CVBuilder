@@ -1,8 +1,8 @@
 {
-    "name": "mycourse",
+    "name": "cvbuilder",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://irtake.com",
+    "proxy": "http://localhost:5000",
     "dependencies": {
         "@material-ui/core": "^4.11.2",
         "@material-ui/icons": "^4.11.2",
@@ -15,6 +15,7 @@
         "axios": "^0.19.2",
         "create-react-class": "^15.6.3",
         "formik": "^2.1.4",
+        "formik-material-fields": "0.0.6",
         "formik-material-ui": "^3.0.1",
         "history": "^5.0.0",
         "hover.css": "^2.3.2",

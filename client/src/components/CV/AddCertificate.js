@@ -4,16 +4,15 @@ import {AddCertificateAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 
 export default function AddCertificate(props) {
-  //const state = useSelector((state) => state.template[0]);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const data = {name, description, date};
 
   const handelCancel = () => {
     setName("");
-    setDate(new Date());
+    setDate("");
     setDescription("");
     props.setComponentName("");
   };
@@ -56,7 +55,7 @@ export default function AddCertificate(props) {
               <TextField
                 id="date"
                 label="Date"
-                type="date"
+                type="text"
                 InputLabelProps={{
                   shrink: true,
                 }}
