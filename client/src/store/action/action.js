@@ -347,7 +347,6 @@ export function AddSkillAction(payload) {
       });
   };
 }
-
 export function ChangeLanguge(payload) {
   return (dispatch) => {
     dispatch({
@@ -522,7 +521,6 @@ export function EditMembershipAction(payload) {
     });
   };
 }
-
 export function DeleteExperienceAction(payload) {
   console.log(payload);
   return (dispatch) => {
