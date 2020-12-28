@@ -125,9 +125,9 @@ export default function Education() {
             {" "}
             <Button
               variant="contained"
-              color="secondary"
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddEducation")}
+              style={{backgroundColor: "#5B2338"}}
             >
               Add Education
             </Button>

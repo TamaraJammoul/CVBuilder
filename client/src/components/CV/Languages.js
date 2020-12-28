@@ -133,9 +133,9 @@ export default function Languages() {
             {" "}
             <Button
               variant="contained"
-              color="secondary"
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddLanguage")}
+              style={{backgroundColor: "#5B2338"}}
             >
               Add Language
             </Button>

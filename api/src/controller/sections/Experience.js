@@ -71,3 +71,45 @@ exports.deleteExperience = (req, res) => {
             }
         })
 }
+
+exports.updateExperience = (req, res) => {
+    const { _id, Name, Description, Start, End, Project, Order } = req.body;
+    Experience.findById(_id).exec((error, experience) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong",
+                error: error
+            })
+        }
+        if (experience) {
+            Experience.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Description,
+                    Start,
+                    End,
+                    Project,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Experience updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Description,
+                        Start,
+                        End,
+                        Project,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No Experience found",
+            })
+        }
+    })
+}

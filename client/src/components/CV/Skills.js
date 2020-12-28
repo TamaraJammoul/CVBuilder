@@ -44,7 +44,7 @@ export default function Skills() {
             {" "}
             <Button
               variant="contained"
-              color="secondary"
+              style={{backgroundColor: "#5B2338"}}
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddSkill")}
             >

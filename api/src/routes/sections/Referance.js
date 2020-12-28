@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const { addRreferance } = require('../../controller/sections/Referance');
+const { addReferance, deleteReferance, updateReferance } = require('../../controller/sections/Referance');
 
-router.post('/addRreferance', addRreferance);
+router.post('/addReferance', addReferance);
+router.post('/deleteReferance', deleteReferance);
+router.post('/updateReferance', updateReferance);
 
 module.exports = router;

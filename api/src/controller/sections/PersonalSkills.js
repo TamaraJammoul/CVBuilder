@@ -22,7 +22,7 @@ exports.addPersonalSkills = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "PersonalSkills added successfuly",
-                                    data: tmpPersonalSkills
+                                    data: psk
                                 })
                             })
                     })
@@ -67,4 +67,38 @@ exports.deletePersonalSkills = (req, res) => {
                     })
             }
         })
+}
+
+exports.updatePersonalSkills = (req, res) => {
+    const { _id, Name, Order } = req.body;
+    PersonalSkills.findById(_id).exec((error, personalSkills) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings went Wrong",
+                error: error
+            })
+        }
+        if (personalSkills) {
+            PersonalSkills.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "PersonalSkills updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No PersonalSkills found",
+            })
+        }
+    })
 }

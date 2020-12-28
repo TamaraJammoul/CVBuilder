@@ -71,3 +71,37 @@ exports.deleteMembership = (req, res) => {
             }
         })
 }
+
+exports.updateMembership = (req, res) => {
+    const { _id, Name, Order } = req.body;
+    Memberships.findById(_id).exec((error, membership) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong",
+                error: error
+            })
+        }
+        if (membership) {
+            Memberships.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Membership updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No Membership found",
+            })
+        }
+    })
+}

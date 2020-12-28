@@ -1,43 +1,48 @@
 const CV = require('../../models/CV');
 const PersonalInformation = require('../../models/sections/PersonalInformation');
 
-exports.addPersonalInformation = (req, res) => {
-    CV.findOne({ _id: req.body._id })
-        .exec((error, cv) => {
-            if (error) {
-                return res.status(400).json({
-                    msg: "Somethings went Wrong",
-                    error: error
-                })
-            }
-            if (cv) {
-                const {
-                    Phone, Email, LinkedIn, City,
-                    Married, Birth, Nationality, Order
-                } = req.body;
-                const personalInformation = new PersonalInformation({
-                    Phone, Email, LinkedIn, City,
-                    Married, Birth, Nationality, Order
-                });
-                personalInformation.save()
-                    .then((savedInfo) => {
-
-                        CV.updateOne({ _id: cv._id }, {
-                            $set: {
-                                PersonalInformation: savedInfo._id
-                            }
-                        }).then(() => {
-                            return res.status(200).json({
-                                msg: "PersonalInformation added successfuly",
-                                data: savedInfo._id
-                            })
-                        })
-                    })
-            }
-            else {
+exports.updatePersonalInformation = (req, res) => {
+    const { _id, Phone, Email, LinkedIn, City, Married, Birth, Nationality, Order } = req.body;
+    PersonalInformation.findById(_id).exec((error, personalInformation) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong",
+                error: error
+            })
+        }
+        if (personalInformation) {
+            PersonalInformation.updateOne({ _id: _id }, {
+                $set: {
+                    Phone,
+                    Email,
+                    LinkedIn,
+                    City,
+                    Married,
+                    Birth,
+                    Nationality,
+                    Order
+                }
+            }).then(() => {
                 return res.status(200).json({
-                    msg: "No CV found"
+                    msg: "PersonalInformation updated successfully",
+                    data: {
+                        _id,
+                        Phone,
+                        Email,
+                        LinkedIn,
+                        City,
+                        Married,
+                        Birth,
+                        Nationality,
+                        Order
+                    }
                 })
-            }
-        })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No PersonalInformation found",
+            })
+        }
+    })
 }

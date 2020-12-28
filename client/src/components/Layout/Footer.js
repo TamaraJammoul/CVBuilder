@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./../../AuthContext";
-import { Link } from "react-router-dom";
-import { ButtonContainer } from "./Button";
+import React, {useContext} from "react";
+import {AuthContext} from "./../../AuthContext";
+import {Link} from "react-router-dom";
 
 export default function Footer() {
   const authContext = useContext(AuthContext);
@@ -37,17 +36,7 @@ export default function Footer() {
                 <i className="fas fa-phone mr-3"></i> + 963-0930737281
               </p>
             </div>
-            <div className="col-md-4 col-xl-3 mx-auto mt-3">
-              {authContext.auth ? (
-                ""
-              ) : (
-                <ButtonContainer>
-                  <Link to="/logininst" style={{ color: "#fff" }}>
-                    سجل دخول كمعهد
-                  </Link>
-                </ButtonContainer>
-              )}
-            </div>
+            <div className="col-md-4 col-xl-3 mx-auto mt-3"></div>
           </div>
 
           <hr />

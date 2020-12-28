@@ -15,18 +15,25 @@ const User = require('../models/User');
 
 exports.addCV = (req, res) => {
     User.findOne({ Email: req.body.Email })
-        .exec((err, user) => {
+        .exec(async (err, user) => {
+            const careerObjectives = new CareerObjectives({});
+            const personalInformation = new PersonalInformation({});
+            const referance = new Referance({});
+
+            const co = await careerObjectives.save();
+            const pi = await personalInformation.save();
+
             const cv = new CV({
-                CareerObjectives: new CareerObjectives({ Text: "dummy data" }),
+                CareerObjectives: careerObjectives,
                 Certificates: [],
                 Educations: [],
                 Experiences: [],
                 Languages: [],
                 Memberships: [],
                 OtherTrainings: [],
-                PersonalInformation: new PersonalInformation({}),
+                PersonalInformation: personalInformation,
                 PersonalSkills: [],
-                Referance: new Referance({}),
+                Referance: [],
                 Skill: [],
                 Order: 1
             })
@@ -40,7 +47,11 @@ exports.addCV = (req, res) => {
                         .then(() => {
                             return res.status(200).json({
                                 msg: "CV added successfuly",
-                                data: savedCV._id
+                                data: {
+                                    cv_id: savedCV._id,
+                                    careerObjectives_id: co._id,
+                                    personalInformation_id: pi._id,
+                                }
                             })
                         })
                 })

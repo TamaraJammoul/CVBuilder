@@ -71,3 +71,37 @@ exports.deleteOtherTraining = (req, res) => {
             }
         })
 }
+
+exports.updateOtherTraining = (req, res) => {
+    const { _id, Name, Order } = req.body;
+    OtherTraining.findById(_id).exec((error, otherTraining) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong",
+                error: error
+            })
+        }
+        if (otherTraining) {
+            OtherTraining.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "OtherTraining updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No OtherTraining found",
+            })
+        }
+    })
+}

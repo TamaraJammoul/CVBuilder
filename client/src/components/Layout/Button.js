@@ -1,22 +1,10 @@
-import styled from "styled-components";
-
-export const ButtonContainer = styled.button`
-  font-size: 1.4rem;
-  background: transparent;
-  border: 0.05rem solid var(--mainWhite);
-  background: var(--lightBlue);
-  color: var(--mainWhite) ;
-  border-radius: 0.5rem;
-  padding: 0.2rem 0.5rem;
-  cursor: pointer;
-  display: inline-block;
-  margin: 0.2rem 0.5rem 0.2rem 0;
-  transition: all 0.5s ease-in-out;
-  &:hover {
-    background: var(--mainWhite);
-    color: var(--lightBlue);
-  }
-  &:focus {
-    outline: none;
-  }
-`;
+import React from "react";
+import DeleteIcon from "@material-ui/icons/Delete";
+import {Button} from "@material-ui/core";
+export default function AddButton(props) {
+  return (
+    <Button variant="contained" color="secondary" startIcon={<DeleteIcon />}>
+      {props.children}
+    </Button>
+  );
+}

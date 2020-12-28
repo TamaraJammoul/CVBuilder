@@ -20,7 +20,6 @@ function Navbar(props) {
   const [isst, setisst] = useState(false);
   let history = useHistory();
 
-  
   useEffect(() => {
     setisst(localStorage.getItem("state"));
   }, [history.location]);

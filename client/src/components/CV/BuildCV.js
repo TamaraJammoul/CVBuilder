@@ -24,7 +24,10 @@ import Navbar from "./../Layout/Navbar";
 import Education from "./Education";
 import Certificates from "./Certificates";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+
 export default function BuildCV() {
+  const {t} = useTranslation();
   let {path, url} = useRouteMatch();
   const [drawerState, setDrawerState] = useState(false);
   return (
@@ -36,7 +39,6 @@ export default function BuildCV() {
       >
         <Drawertemp />
       </Drawer>
-
       <Grid container direction="row" spacing={2} className="backgroundimg">
         <Grid item xs={3} className="background">
           <Grid

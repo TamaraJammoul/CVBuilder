@@ -75,3 +75,49 @@ exports.deleteEducation = (req, res) => {
             }
         })
 }
+
+exports.updateEducation = (req, res) => {
+    const { _id, UniversityName, Faculty, YearStart, YearEnd, DegreeFrom5, DegreeFrom100, Degree, Order } = req.body;
+    Education.findById(_id).exec((error, education) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong",
+                error: error
+            })
+        }
+        if (education) {
+            Education.updateOne({ _id: _id }, {
+                $set: {
+                    UniversityName,
+                    Faculty,
+                    YearStart,
+                    YearEnd,
+                    DegreeFrom5,
+                    DegreeFrom100,
+                    Degree,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Education updated successfully",
+                    data: {
+                        _id,
+                        UniversityName,
+                        Faculty,
+                        YearStart,
+                        YearEnd,
+                        DegreeFrom5,
+                        DegreeFrom100,
+                        Degree,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No Education found",
+            })
+        }
+    })
+}

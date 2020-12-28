@@ -114,7 +114,7 @@ export default function OtherTraining(props) {
             {" "}
             <Button
               variant="contained"
-              color="secondary"
+              style={{backgroundColor: "#5B2338"}}
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddOtherTraining")}
             >

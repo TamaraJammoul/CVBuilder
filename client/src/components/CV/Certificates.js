@@ -1,9 +1,16 @@
 import React, {useState} from "react";
-import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
+import {
+  Button,
+  Paper,
+  Grid,
+  IconButton,
+  Container,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import Rating from "@material-ui/lab/Rating";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddCertificate from "./AddCertificate";
 import {
@@ -27,17 +34,11 @@ export default function Certificates() {
             <h2>Your Certificates</h2>
           </Grid>
           <Grid item>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <h5>
-                Make a list of all the relevant skills for the job that you have
-                and rate how good you are in them. For programming languages and
-                technologies we recommend the Software section.
-              </h5>{" "}
-            </AccordionSummary>
+            <h5>
+              Make a list of all the relevant skills for the job that you have
+              and rate how good you are in them. For programming languages and
+              technologies we recommend the Software section.
+            </h5>{" "}
           </Grid>
           {certificates.map((cer, i) => (
             <Grid item key={i}>
@@ -118,9 +119,9 @@ export default function Certificates() {
             {" "}
             <Button
               variant="contained"
-              color="secondary"
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddCertificate")}
+              style={{backgroundColor: "#5B2338"}}
             >
               Add Certificate
             </Button>

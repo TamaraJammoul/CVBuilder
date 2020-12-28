@@ -71,8 +71,9 @@ exports.deleteCertificate = (req, res) => {
 }
 
 exports.updateCertificate = (req, res) => {
-    id = req.body._id;
-    Certificate.findById(id).exec((error, certificate) => {
+    const { _id, Name, Description, Year, Order } = req.body;
+
+    Certificate.findById(_id).exec((error, certificate) => {
         if (error) {
             return res.status(400).json({
                 msg: "Somethings wen Wrong",
@@ -80,7 +81,25 @@ exports.updateCertificate = (req, res) => {
             })
         }
         if (certificate) {
-            Certificate.updateOne({ _id: id }, { $set: {} })
+            Certificate.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Description,
+                    Year,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Certificate updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Description,
+                        Year,
+                        Order
+                    }
+                })
+            })
         }
         else {
             return res.status(200).json({

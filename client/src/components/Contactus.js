@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {ButtonContainer} from "./Layout/Button";
 import {Link, NavLink} from "react-router-dom";
 import logo from "./../img/logo.png";
 import {useHistory} from "react-router-dom";
@@ -95,9 +94,7 @@ export default function Getintouch() {
                 </div>
 
                 <div className="form-row">
-                  <p onClick={onSubmit}>
-                    <ButtonContainer>أرسل</ButtonContainer>
-                  </p>
+                  <p onClick={onSubmit}></p>
                 </div>
               </form>
             </div>

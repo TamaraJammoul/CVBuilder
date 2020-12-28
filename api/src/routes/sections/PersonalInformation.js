@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { addPersonalInformation } = require('../../controller/sections/PersonalInformation');
+const { updatePersonalInformation } = require('../../controller/sections/PersonalInformation');
 
 
-router.post('/addPersonalInformation', addPersonalInformation);
+router.post('/updatePersonalInformation', updatePersonalInformation);
 
 module.exports = router;

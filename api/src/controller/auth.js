@@ -28,10 +28,16 @@ exports.signUp = (req, res) => {
                     error: error
                 });
             }
+            const token = jwt.sign(
+                { _id: data._id },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+            );
             if (data) {
                 return res.status(200).json({
                     msg: "User has registered",
-                    data: data
+                    data: data,
+                    token: token
                 });
             }
         });

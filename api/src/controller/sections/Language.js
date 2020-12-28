@@ -71,3 +71,39 @@ exports.deleteLanguage = (req, res) => {
             }
         })
 }
+
+exports.updateLanguage = (req, res) => {
+    const { _id, Name, Rate, Order } = req.body;
+    Language.findById(_id).exec((error, language) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong",
+                error: error
+            })
+        }
+        if (language) {
+            Language.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Rate,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Language updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Rate,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No Language found",
+            })
+        }
+    })
+}

@@ -71,3 +71,39 @@ exports.deleteSkill = (req, res) => {
             }
         })
 }
+
+exports.updateSkill = (req, res) => {
+    const { _id, Name, Logo, Order } = req.body;
+    Skill.findById(_id).exec((error, skill) => {
+        if (error) {
+            return res.status(400).json({
+                msg: "Somethings went Wrong",
+                error: error
+            })
+        }
+        if (skill) {
+            Skill.updateOne({ _id: _id }, {
+                $set: {
+                    Name,
+                    Logo,
+                    Order
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Skill updated successfully",
+                    data: {
+                        _id,
+                        Name,
+                        Logo,
+                        Order
+                    }
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No Skill found",
+            })
+        }
+    })
+}

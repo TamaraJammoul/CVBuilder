@@ -11,7 +11,7 @@ const CVSchema = new mongoose.Schema({
     OtherTrainings: [{ type: ObjectId, ref: "OtherTraining" }],
     PersonalInformation: { type: ObjectId, ref: "PersonalInformation" },
     PersonalSkills: [{ type: ObjectId, ref: "PersonalSkills" }],
-    Referance: { type: ObjectId, ref: "Referance" },
+    Referances: [{ type: ObjectId, ref: "Referance" }],
     Skill: [{ type: ObjectId, ref: "Skill" }],
     Order: { type: Number }
 })

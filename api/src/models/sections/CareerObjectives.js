@@ -3,10 +3,12 @@ const { String, Number } = mongoose.Schema.Types;
 
 const CareerObjectivesSchema = new mongoose.Schema({
     Text: {
-        type: String
+        type: String,
+        default: "Text ..."
     },
     Order: {
-        type: Number
+        type: Number,
+        default: 0
     }
 })
 

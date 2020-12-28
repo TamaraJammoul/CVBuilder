@@ -16,10 +16,22 @@ const personalInformationRouter = require('./src/routes/sections/PersonalInforma
 const personalSkillsRouter = require('./src/routes/sections/PersonalSkills');
 const referanceRouter = require('./src/routes/sections/Referance');
 const skillRouter = require('./src/routes/sections/Skill');
+const contactUsRouter = require('./src/routes/contactUs');
 const CVrouter = require('./src/routes/CV');
 
 const app = express();
-app.use(cors());
+//app.use(cors());
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin , X-Requested-With, Content-Type, Accept , Authorization ');
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        return res.status(200).json({})
+    }
+    next();
+});
+
 dotenv.config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -52,7 +64,7 @@ app.use('/api/PersonalInformation', personalInformationRouter);
 app.use('/api/personalSkills', personalSkillsRouter);
 app.use('/api/referance', referanceRouter);
 app.use('/api/skills', skillRouter);
-
+app.use('/api/contactUs', contactUsRouter);
 
 app.listen(process.env.PORT || 5000, () => {
     console.log(`server running on port ${process.env.PORT}`);
