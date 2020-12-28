@@ -1,4 +1,21 @@
 {
-        "welcome": "أهلا"
+        "welcome": "أهلا",
+        "Preview&Download":"مراجعة وتحميل",
+        "ChangeTemplate":"تغيير القالب",
+        "Content":"المحتوى",
+        "Dashboard":"لوحة التحكم",
+            "CVBuilder":"بناء السيفي",
+            "CareerObjectives":"الهدف الوظيفي",
+            "Personal Skills":"المهارات الشخصية",
+                "OtherTraining":"التدريبات الأخرى",
+"Language":"اللغات",
+"Skills":"المهارات",
+"Certificates":"الشهادات",
+"Education":"التعليم",
+"Experience":"الخبرات",
+        "Memberships":"العضويات",
+        "References":"المراجع"
+
+
 
 }

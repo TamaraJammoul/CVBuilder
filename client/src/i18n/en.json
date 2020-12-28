@@ -1,3 +1,19 @@
 {
-    "welcome": "Welcome to React"
+    "welcome": "Welcome to React",
+    "Preview&Download":"Preview & Download",
+    "ChangeTemplate":"Change Template",
+    "Content":"Content",
+    "Dashboard":"Dashboard",
+    "CVBuilder":"CVBuilder",
+    "CareerObjectives":"Career Objectives",
+    "PersonalSkills":"Personal Skills",
+        "OtherTraining":"Other Training",
+        "Language":"Language",
+        "Skills":"Skills",
+        "Certificates":"Certificates",
+        "Education":"Education",
+        "Experience":"Experience",
+        "Memberships":"Memberships",
+        "References":"References"
+
 }

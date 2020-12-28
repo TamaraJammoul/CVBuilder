@@ -26,10 +26,11 @@ import Certificates from "./Certificates";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
-export default function BuildCV() {
+export default function BuildCV(props) {
   const {t} = useTranslation();
   let {path, url} = useRouteMatch();
   const [drawerState, setDrawerState] = useState(false);
+
   return (
     <>
       <Drawer
@@ -53,7 +54,7 @@ export default function BuildCV() {
             }}
           >
             <Grid item xs={12}>
-              <h2>CV Builder</h2>
+              <h2>{t("CVBuilder")}</h2>
               <hr />
             </Grid>
             <Grid item>
@@ -62,88 +63,90 @@ export default function BuildCV() {
                 <span style={{marginRight: "10px"}}>
                   <Work />
                 </span>
-                <Link to={`${url}/careerobjectives`}>Career Objectives</Link>
+                <Link to={`${url}/careerobjectives`}>
+                  {t("CareerObjectives")}
+                </Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <School />
                 </span>
-                <Link to={`${url}/certificates`}>Certificates</Link>
+                <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <LocationCity />
                 </span>
-                <Link to={`${url}/skills`}>Skills</Link>
+                <Link to={`${url}/skills`}>{t("Skills")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Language />
                 </span>
-                <Link to={`${url}/languages`}>Language</Link>
+                <Link to={`${url}/languages`}>{t("Language")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Laptop />
                 </span>
-                <Link to={`${url}/othertraining`}>Other Training</Link>
+                <Link to={`${url}/othertraining`}>{t("OtherTraining")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <EmojiPeople />
                 </span>
-                <Link to={`${url}/personalskills`}>Personal Skills</Link>
+                <Link to={`${url}/personalskills`}>{t("PersonalSkills")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <School />
                 </span>
-                <Link to={`${url}/education`}>Education</Link>
+                <Link to={`${url}/education`}>{t("Education")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Work />
                 </span>
-                <Link to={`${url}/experience`}> Experience</Link>
+                <Link to={`${url}/experience`}>{t("Experience")} </Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Group />
                 </span>
-                <Link to={`${url}/membership`}> Memberships</Link>
+                <Link to={`${url}/membership`}>{t("Memberships")}</Link>
               </h3>
             </Grid>
             <Grid item>
               <h3>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <AccountBox />
                 </span>
-                <Link to={`${url}/reference`}>References</Link>
+                <Link to={`${url}/reference`}>{t("References")}</Link>
               </h3>
             </Grid>
           </Grid>

@@ -46,19 +46,9 @@ import store from "./store/store";
 import {Provider} from "react-redux";
 
 import withRoot from "./i18n/WithRoot";
-import {useTheme} from "@material-ui/core/styles";
-import {useTranslation} from "react-i18next";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
-  const theme = useTheme();
-  const {t, i18n} = useTranslation();
-  document.body.dir = i18n.dir();
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    document.body.dir = i18n.dir();
-    theme.direction = i18n.dir();
-  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -72,9 +62,6 @@ function App(props) {
           <Loading />
         ) : (
           <>
-            <div>{t("welcome")}</div>
-            <button onClick={() => changeLanguage("en")}>en</button>
-            <button onClick={() => changeLanguage("ar")}>ar</button>
             <Switch>
               <Route exact path="/" render={(props) => <Home />} />
               <Route path="/login" render={(props) => <Login />} />

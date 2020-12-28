@@ -8,25 +8,35 @@ import {
 } from "react-router-dom";
 import {ButtonContainer} from "./Button";
 import {CvContext} from "./../../CvContext";
-import logo from "./../../img/logo.png";
 import us from "./../../img/us.svg";
+import ar from "./../../img/sa.svg";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
-import {AuthContext} from "./../../AuthContext";
+import {useTheme} from "@material-ui/core/styles";
+import {useTranslation} from "react-i18next";
 function Navbar(props) {
-  const authContext = useContext(AuthContext);
   const courseContext = useContext(CvContext);
   const [isst, setisst] = useState(false);
-  let history = useHistory();
 
+  let history = useHistory();
+  const theme = useTheme();
+  const {t, i18n} = useTranslation();
+  document.body.dir = i18n.dir();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+
+    document.body.dir = i18n.dir();
+    theme.direction = i18n.dir();
+  };
   useEffect(() => {
     setisst(localStorage.getItem("state"));
   }, [history.location]);
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
       <a className="navbar-brand" href="#">
-        Dashboard
+        {t("Dashboard")}
       </a>
       <button
         className="navbar-toggler"
@@ -44,21 +54,58 @@ function Navbar(props) {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
-              Content
+              {t("Content")}
             </a>
           </li>
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
-              ChangeTemplate
+              {t("ChangeTemplate")}
             </a>
           </li>
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
-              Preview & Download
+              {t("Preview&Download")}
             </a>
           </li>
-          <li className="nav-item">
-            <img src={us} style={{width: "30px", marginLeft: "10px"}} />
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                src={i18n.language == "en" ? us : ar}
+                style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
+              />
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item">
+                <img
+                  src={us}
+                  style={{
+                    width: "30px",
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => changeLanguage("en")}
+                />
+              </a>
+              <a class="dropdown-item">
+                <img
+                  src={ar}
+                  style={{
+                    width: "30px",
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => changeLanguage("ar")}
+                />{" "}
+              </a>
+            </div>
           </li>
           <li className="nav-item">
             <AccountCircle
