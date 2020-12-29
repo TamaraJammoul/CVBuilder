@@ -4,10 +4,12 @@ import icon from "./../../img/icon.jpg";
 import AddSkill from "./AddSkill";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 export default function Skills() {
   const [ComponentName, setComponentName] = useState("");
   const skills = useSelector((state) => state.template.skills);
+  const {t} = useTranslation();
 
   return ComponentName == "AddSkill" ? (
     <AddSkill setComponentName={setComponentName} />
@@ -25,7 +27,7 @@ export default function Skills() {
           spacing={3}
         >
           <Grid item xs={12} style={{marginBottom: "10px"}}>
-            <h2>Your Skills</h2>
+            <h2>{t("YourSkills")}</h2>
           </Grid>
           {skills.map((skill, i) => (
             <Grid item xs={3} key={i}>
@@ -48,7 +50,7 @@ export default function Skills() {
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddSkill")}
             >
-              Add Skill
+              {t("AddSkill")}
             </Button>
           </Grid>
         </Grid>

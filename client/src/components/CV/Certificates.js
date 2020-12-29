@@ -19,10 +19,13 @@ import {
   CopyCertificateAction,
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function Certificates() {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const certificates = useSelector((state) => state.template.certificates);
+  const {t} = useTranslation();
 
   return ComponentName == "AddCertificate" ? (
     <AddCertificate setComponentName={setComponentName} />
@@ -31,14 +34,10 @@ export default function Certificates() {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>Your Certificates</h2>
+            <h2>{t("YourCertificates")}</h2>
           </Grid>
           <Grid item>
-            <h5>
-              Make a list of all the relevant skills for the job that you have
-              and rate how good you are in them. For programming languages and
-              technologies we recommend the Software section.
-            </h5>{" "}
+            <h5>{t("CertificatesText")}</h5>{" "}
           </Grid>
           {certificates.map((cer, i) => (
             <Grid item key={i}>
@@ -123,7 +122,7 @@ export default function Certificates() {
               onClick={(e) => setComponentName("AddCertificate")}
               style={{backgroundColor: "#5B2338"}}
             >
-              Add Certificate
+              {t("AddCertificate")}
             </Button>
           </Grid>
         </Grid>

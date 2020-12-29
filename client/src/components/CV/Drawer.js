@@ -10,6 +10,8 @@ import {
   AccountBox,
 } from "@material-ui/icons";
 import {Link, Redirect} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+
 function logout() {
   localStorage.clear();
   return (
@@ -23,6 +25,8 @@ function logout() {
   );
 }
 export default function Drawer() {
+  const {t, i18n} = useTranslation();
+
   return (
     <Container>
       <Grid
@@ -42,44 +46,52 @@ export default function Drawer() {
         </Grid>
         <Grid item>
           <h5>
-            <AccountBox /> <span>Tamara Jammoul</span>
+            {i18n.language == "en" ? <AccountBox /> : ""}
+
+            <span style={{margin: "10px"}}>{t("Name")}</span>
+            {i18n.language == "ar" ? <AccountBox /> : ""}
           </h5>
 
           <hr />
         </Grid>
         <Grid item>
           <h5>
-            {" "}
-            <Dashboard />{" "}
-            <span>
-              <Link to="dashboard">Dashboard </Link>
+            {i18n.language == "en" ? <Dashboard /> : ""}
+
+            <span style={{margin: "10px"}}>
+              <Link to="dashboard">{t("Dashboard")} </Link>
             </span>
+            {i18n.language == "ar" ? <Dashboard /> : ""}
           </h5>
         </Grid>
         <Grid item>
           <h5>
             {" "}
-            <AccountBox />
-            <span>
-              <Link to="myaccount">My Account</Link>
+            {i18n.language == "en" ? <AccountBox /> : ""}
+            <span style={{margin: "10px"}}>
+              <Link to="myaccount">{t("MyAccount")}</Link>
             </span>
+            {i18n.language == "ar" ? <AccountBox /> : ""}
           </h5>
         </Grid>
 
         <Grid item>
           <h5>
             {" "}
-            <Email />
-            <span>
-              <Link to="contactus">Contact Us</Link>
+            {i18n.language == "en" ? <Email /> : ""}
+            <span style={{margin: "10px"}}>
+              <Link to="contactus">{t("ContactUs")}</Link>
             </span>
+            {i18n.language == "ar" ? <Email /> : ""}
           </h5>
           <hr />
         </Grid>
         <Grid item>
           <h5 onClick={() => logout()}>
-            <PowerSettingsNew />
-            <span>Logout</span>
+            {i18n.language == "en" ? <PowerSettingsNew /> : ""}
+
+            <span style={{margin: "10px"}}>{t("Logout")}</span>
+            {i18n.language == "ar" ? <PowerSettingsNew /> : ""}
           </h5>
         </Grid>
       </Grid>

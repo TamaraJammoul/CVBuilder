@@ -9,11 +9,13 @@ import {
   CopyExperienceAction,
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function Education() {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const experiences = useSelector((state) => state.template.experiences);
-
+  const {t, i18n} = useTranslation();
   return ComponentName == "AddExperience" ? (
     <AddExperience setComponentName={setComponentName} />
   ) : (
@@ -21,14 +23,10 @@ export default function Education() {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>Experience</h2>
+            <h2>{t("Experience")}</h2>
           </Grid>
           <Grid item>
-            <h5>
-              Make a list of all the relevant skills for the job that you have
-              and rate how good you are in them. For programming languages and
-              technologies we recommend the Software section.
-            </h5>
+            <h5>{t("ExperienceText")}</h5>
           </Grid>
           {experiences.map((exp, i) => (
             <Grid item>
@@ -117,7 +115,7 @@ export default function Education() {
               onClick={(e) => setComponentName("AddExperience")}
               style={{backgroundColor: "#5B2338"}}
             >
-              Add Experience
+              {t("AddExperience")}
             </Button>
           </Grid>
         </Grid>

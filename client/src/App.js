@@ -127,6 +127,7 @@ function App(props) {
               <Route path="/education" render={(props) => <Education />} />
               <Route path="/experience" render={(props) => <Experience />} />
               <Route path="/membership" render={(props) => <Membership />} />
+
               <Route render={(props) => <Default />} />
             </Switch>
             <ScrollUpButton />

@@ -25,10 +25,13 @@ import {
   CopyOtherTrainingAction,
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function OtherTraining(props) {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const othertraining = useSelector((state) => state.template.othertraining);
+  const {t, i18n} = useTranslation();
 
   return ComponentName == "AddOtherTraining" ? (
     <AddOtherTraining setComponentName={setComponentName} />
@@ -37,14 +40,10 @@ export default function OtherTraining(props) {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>Your OtherTraining</h2>
+            <h2>{t("YourOtherTraining")}</h2>
           </Grid>
           <Grid item>
-            <h5>
-              Make a list of all the relevant skills for the job that you have
-              and rate how good you are in them. For programming languages and
-              technologies we recommend the Software section.
-            </h5>
+            <h5>{t("OtherTrainingText")}</h5>
           </Grid>
           {othertraining.map((oth, i) => (
             <Grid item>
@@ -118,7 +117,7 @@ export default function OtherTraining(props) {
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddOtherTraining")}
             >
-              Add Other Training
+              {t("AddOtherTraining")}
             </Button>
           </Grid>
         </Grid>

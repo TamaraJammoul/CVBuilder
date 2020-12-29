@@ -1,11 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {
-  Link,
-  NavLink,
-  Redirect,
-  useHistory,
-  withRouter,
-} from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
 import {ButtonContainer} from "./Button";
 import {CvContext} from "./../../CvContext";
 import us from "./../../img/us.svg";
@@ -68,9 +62,9 @@ function Navbar(props) {
             </a>
           </li>
 
-          <li class="nav-item dropdown">
+          <li className="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle"
               href="#"
               id="navbarDropdownMenuLink"
               data-toggle="dropdown"
@@ -82,8 +76,11 @@ function Navbar(props) {
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item">
+            <div
+              className="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <a className="dropdown-item">
                 <img
                   src={us}
                   style={{
@@ -94,7 +91,7 @@ function Navbar(props) {
                   onClick={() => changeLanguage("en")}
                 />
               </a>
-              <a class="dropdown-item">
+              <a className="dropdown-item">
                 <img
                   src={ar}
                   style={{

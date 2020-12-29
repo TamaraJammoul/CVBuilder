@@ -9,11 +9,13 @@ import {
   EditReferenceAction,
   CopyReferenceAction,
 } from "./../../store/action/action";
+import {useTranslation} from "react-i18next";
 
 export default function Refernce() {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const references = useSelector((state) => state.template.references);
+  const {t, i18n} = useTranslation();
 
   return ComponentName == "AddReference" ? (
     <AddReference setComponentName={setComponentName} />
@@ -22,14 +24,10 @@ export default function Refernce() {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>Your Refernces</h2>
+            <h2>{t("YourRefernces")}</h2>
           </Grid>
           <Grid item>
-            <h5>
-              Make a list of all the relevant skills for the job that you have
-              and rate how good you are in them. For programming languages and
-              technologies we recommend the Software section.
-            </h5>
+            <h5>{t("YourReferncesText")}</h5>
           </Grid>
           {references.map((ref, i) => (
             <Grid item>
@@ -106,7 +104,7 @@ export default function Refernce() {
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddReference")}
             >
-              Add Reference
+              {t("AddReference")}
             </Button>
           </Grid>
         </Grid>

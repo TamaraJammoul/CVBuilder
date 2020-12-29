@@ -17,11 +17,13 @@ import {
   CopyLanguageAction,
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 export default function Languages() {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.template.languages);
+  const {t} = useTranslation();
 
   return ComponentName == "AddLanguage" ? (
     <AddLanguage setComponentName={setComponentName} />
@@ -30,14 +32,10 @@ export default function Languages() {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>Languages</h2>
+            <h2>{t("Languages")}</h2>
           </Grid>
           <Grid item>
-            <h5>
-              Make a list of all the relevant skills for the job that you have
-              and rate how good you are in them. For programming languages and
-              technologies we recommend the Software section.
-            </h5>
+            <h5>{t("LanguagesText")}</h5>
           </Grid>
           {languages.map((lan, i) => (
             <Grid item>
@@ -137,7 +135,7 @@ export default function Languages() {
               onClick={(e) => setComponentName("AddLanguage")}
               style={{backgroundColor: "#5B2338"}}
             >
-              Add Language
+              {t("AddLanguage")}
             </Button>
           </Grid>
         </Grid>

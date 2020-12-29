@@ -1,24 +1,20 @@
 import React from "react";
 import {
   Button,
-  Box,
   Paper,
   Grid,
-  InputAdornment,
   IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
   Avatar,
   TextField,
-  Container,
 } from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {useTranslation} from "react-i18next";
 
 import defaultimg from "./../../img/stylingcv-default.jpg";
 export default function PersonalInfo() {
+  const {t, i18n} = useTranslation();
+
   return (
     <Paper elevation={3}>
       <Grid
@@ -29,7 +25,7 @@ export default function PersonalInfo() {
         spacing={8}
       >
         <Grid item xs={12}>
-          <h3>Personal Info</h3> <hr />
+          <h3>{t("PersonalInfo")}</h3> <hr />
         </Grid>
         <Grid item xs={12}>
           <Avatar
@@ -42,7 +38,7 @@ export default function PersonalInfo() {
             color="primary"
             startIcon={<CloudUploadIcon />}
           >
-            Upload
+            {t("Upload")}
           </Button>
           <IconButton aria-label="delete">
             <DeleteIcon fontSize="large" color="secondary" />
@@ -60,7 +56,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="First Name"
+              label={t("FirstName")}
               variant="filled"
               color="primary"
             />
@@ -68,7 +64,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Last Name"
+              label={t("LastName")}
               variant="filled"
               color="primary"
             />
@@ -76,7 +72,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="LinkedIn Account"
+              label={t("LinkedInAccount")}
               variant="filled"
               color="primary"
             />
@@ -84,7 +80,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Email"
+              label={t("Email")}
               variant="filled"
               color="primary"
             />
@@ -92,7 +88,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Phone Number"
+              label={t("PhoneNumber")}
               variant="filled"
               color="primary"
             />
@@ -100,7 +96,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Date Of Birth"
+              label={t("Date Of Birth")}
               variant="filled"
               color="primary"
             />
@@ -116,7 +112,7 @@ export default function PersonalInfo() {
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Nationality"
+              label={t("Nationality")}
               variant="filled"
               color="primary"
             />
@@ -136,14 +132,14 @@ export default function PersonalInfo() {
               color="secondary"
               style={{marginLeft: "10px", float: "right"}}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
               color="primary"
               style={{float: "right"}}
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

@@ -17,10 +17,13 @@ import {
   CopyPersonalSkillsAction,
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function PersonalSkills() {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const personalskills = useSelector((state) => state.template.personalskills);
+  const {t, i18n} = useTranslation();
 
   return ComponentName == "AddPersonalSkill" ? (
     <AddPersonalSkill setComponentName={setComponentName} />
@@ -29,14 +32,10 @@ export default function PersonalSkills() {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>Personal Skills</h2>
+            <h2>{t("PersonalSkills")}</h2>
           </Grid>
           <Grid item>
-            <h5>
-              Make a list of all the relevant skills for the job that you have
-              and rate how good you are in them. For programming languages and
-              technologies we recommend the Software section.
-            </h5>
+            <h5>{t("PersonalSkillsText")}</h5>
           </Grid>
           {personalskills.map((per, i) => (
             <Grid item>
@@ -44,20 +43,20 @@ export default function PersonalSkills() {
                 <Container>
                   <Grid container direction="column" spacing={4}>
                     <Grid item>
-                      <h3>Section Settings</h3>
+                      <h3>{t("SectionSettings")}</h3>
                     </Grid>
                     <Grid item>
                       <Grid container spacing={3}>
                         <Grid item>
-                          <h6>Percentage</h6>
+                          <h6>{t("Percentage")}</h6>
                           <ButtonGroup
                             size="small"
                             aria-label="small outlined button group"
                           >
                             <Box bgcolor="text.disabled">
-                              <Button>Hide</Button>
+                              <Button>{t("Hide")}</Button>
                             </Box>{" "}
-                            <Button>Show</Button>
+                            <Button>{t("Show")}</Button>
                           </ButtonGroup>
                         </Grid>
                         <Grid item>
@@ -176,7 +175,7 @@ export default function PersonalSkills() {
               startIcon={<DeleteIcon />}
               onClick={(e) => setComponentName("AddPersonalSkill")}
             >
-              Add Personal Skill
+              {t("AddPersonalSkill")}
             </Button>
           </Grid>
         </Grid>

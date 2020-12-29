@@ -6,7 +6,7 @@
     "Dashboard":"Dashboard",
     "CVBuilder":"CVBuilder",
     "CareerObjectives":"Career Objectives",
-    "PersonalSkills":"Personal Skills",
+ 
         "OtherTraining":"Other Training",
         "Language":"Language",
         "Skills":"Skills",
@@ -14,6 +14,52 @@
         "Education":"Education",
         "Experience":"Experience",
         "Memberships":"Memberships",
-        "References":"References"
+        "References":"References",
+        "YourCertificates":"Your Certificates",
+        "CertificatesText":"Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages antechnologies we recommend the Software section"
+,"AddCertificate":"Add Certificate",
+"Your Skills":"Your Skills",
+"AddSkill":"Add Skill",
+"Languages":"Languages",
+"LanguagesText":"Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages and technologies we recommend the Software section."
+,"AddLanguage":"Add Language",
+"Name":"Tamara Jammoul",
+"MyAccount":"My Account",
+"ContactUs":"Contact Us",
+"Logout":"Logout" ,
+"YourOtherTraining":"Your OtherTraining",
+"OtherTrainingText":"Make a list of all the relevant skills for the job that you haveand rate how good you are in them. For programming languages and technologies we recommend the Software section."
+,"AddOtherTraining":"Add Other Training",
+"PersonalInfo":"Personal Info",
+"Upload":"Upload",
+"cancel":"cancel",
+"save":"save",
+"Nationality":"Nationality",
+"DateOfBirth":"Date Of Birth",
+"PhoneNumber":"Phone Number",
+"Email":"Email",
+"LinkedInAccount":"LinkedIn Account",
+"LastName":"Last Name",
+"FirstName":"First Name",
+"PersonalSkills":"Personal Skills",
+"PersonalSkillsText":" Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages and technologies we recommend the Software section."
+,"SectionSettings":"Section Settings",
+"Hide":"Hide",
+"Show":"Show",
+"Percentage":"Percentage",
+"AddPersonalSkill":"Add Personal Skill",
+"YourRefernces":"Your Refernces",
+"YourReferncesText":"  Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages and technologies we recommend the Software section.",
+"AddReference":"Add Reference",
+"YourMemberships":"Your Memberships",
+"YourMembershipsText":"Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages and technologies we recommend the Software section.",
+"AddMembership":"Add Membership",
+"ExperienceText":"Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages and technologies we recommend the Software section.",
+"AddExperience":"Add Experience",
+"EducationText":"Make a list of all the relevant skills for the job that you have and rate how good you are in them. For programming languages and technologies we recommend the Software section.",
+"AddEducation":"Add Education",
+"Rename":"Rename",
+"HideSection":"Hide Section"
+
 
 }
