@@ -2,11 +2,13 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddMembershipAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 export default function AddMembership(props) {
   const dispatch = useDispatch();
 
   const [membershipName, setMembershipName] = useState("");
+  const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setMembershipName("");
@@ -23,13 +25,13 @@ export default function AddMembership(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Memberships</h2>
+            <h2>{t("Memberships")}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label="Add Membership"
+              label={t("AddMembership")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
@@ -38,20 +40,20 @@ export default function AddMembership(props) {
           </Grid>
           <Grid item xs={12}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
               onClick={() => dispatch(AddMembershipAction(membershipName))}
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddReferenceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function Reference(props) {
   const [reference, setReference] = useState("");
   const dispatch = useDispatch();
@@ -9,6 +11,8 @@ export default function Reference(props) {
     setReference("");
     props.setComponentName("");
   };
+  const {t, i18n} = useTranslation();
+
   return (
     <Container>
       <Paper>
@@ -20,13 +24,13 @@ export default function Reference(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Reference</h2>
+            <h2>{t("Reference")}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label="Add Reference"
+              label={t("AddReference")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
@@ -35,22 +39,22 @@ export default function Reference(props) {
           </Grid>
           <Grid item xs={12}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
               onClick={() => {
                 dispatch(AddReferenceAction(reference));
               }}
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

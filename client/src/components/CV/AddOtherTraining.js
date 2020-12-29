@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddOtherTrainingAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 export default function AddOtherTraining(props) {
   const [otherTraining, setOtherTraining] = useState("");
@@ -10,6 +11,8 @@ export default function AddOtherTraining(props) {
     setOtherTraining("");
     props.setComponentName("");
   };
+  const {t, i18n} = useTranslation();
+
   return (
     <Container>
       <Paper>
@@ -36,20 +39,20 @@ export default function AddOtherTraining(props) {
           </Grid>
           <Grid item xs={12}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
               onClick={() => dispatch(AddOtherTrainingAction(otherTraining))}
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

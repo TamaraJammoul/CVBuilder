@@ -1,9 +1,8 @@
 :root {
     --maincolor: #2E0E33;
-    --seccolor: #5B2338;
     --thirdcolor:#543059;
     --fourthcolor:#543059;
-    --fifthcolor:#441224;
+    --fifthcolor:#5B2338 ;
    --background: #f6f6f8
 }
 
@@ -16,6 +15,21 @@ font-family: 'Rubik', sans-serif;
 
 h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
 
+.save{
+  background-color: #5B2338 !important;
+}
+.save:hover{
+  background-color: white !important;
+  border-color: #5B2338  !important;
+}
+.cancel{
+  background-color: white !important;
+  border-color: #5B2338  !important;
+}
+.cancel:hover{
+  background-color: #5B2338  !important;
+  border-color: white !important;
+}
 
 a:link {
   color:var(--maincolor);
@@ -33,7 +47,7 @@ a:active {
 }
 
 .background{
-    background-color: var(--background);
+    background-color: rgba(91, 35, 56, 0.445);
 }
 .backgroundimg{
     background-image: url('./img/background.PNG');
@@ -48,6 +62,8 @@ a:active {
     
 }
 
-@media only screen and (min-width: 600px) {
-    
+@media only screen and (max-width: 700px) {
+    h1,h2,h3,h4,h5{
+      font-size: small;
+    }
 }

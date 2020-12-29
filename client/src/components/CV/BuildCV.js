@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Box, Paper, Grid, Drawer} from "@material-ui/core";
+import {Container, Grid, Drawer} from "@material-ui/core";
 import PersonalInfo from "./PersonalInfo";
 import CareerObjectives from "./CareerObjectives";
 import Experience from "./Experience";
@@ -41,7 +41,7 @@ export default function BuildCV(props) {
         <Drawertemp />
       </Drawer>
       <Grid container direction="row" spacing={2} className="backgroundimg">
-        <Grid item xs={3} className="background">
+        <Grid item xs={4} sm={3} className="background">
           <Grid
             container
             spacing={3}
@@ -151,7 +151,7 @@ export default function BuildCV(props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={9} style={{width: "100%", height: "100%"}}>
+        <Grid item xs={8} sm={9} style={{width: "100%", height: "100%"}}>
           <Grid
             container
             direction="column"
@@ -162,51 +162,56 @@ export default function BuildCV(props) {
               <Navbar setDrawerState={setDrawerState} />
             </Grid>
             <Grid item xs={10}>
-              <Switch>
-                <Route
-                  path={`${path}/peronalinfo`}
-                  render={(props) => <PersonalInfo />}
-                />
-                <Route
-                  path={`${path}/careerobjectives`}
-                  render={(props) => <CareerObjectives />}
-                />
+              <Container>
+                <Switch>
+                  <Route
+                    path={`${path}/peronalinfo`}
+                    render={(props) => <PersonalInfo />}
+                  />
+                  <Route
+                    path={`${path}/careerobjectives`}
+                    render={(props) => <CareerObjectives />}
+                  />
 
-                <Route
-                  path={`${path}/personalskills`}
-                  render={(props) => <PersonalSkills />}
-                />
-                <Route
-                  path={`${path}/othertraining`}
-                  render={(props) => <OtherTraining />}
-                />
-                <Route
-                  path={`${path}/certificates`}
-                  render={(props) => <Certificates />}
-                />
+                  <Route
+                    path={`${path}/personalskills`}
+                    render={(props) => <PersonalSkills />}
+                  />
+                  <Route
+                    path={`${path}/othertraining`}
+                    render={(props) => <OtherTraining />}
+                  />
+                  <Route
+                    path={`${path}/certificates`}
+                    render={(props) => <Certificates />}
+                  />
 
-                <Route
-                  path={`${path}/reference`}
-                  render={(props) => <Reference />}
-                />
-                <Route
-                  path={`${path}/languages`}
-                  render={(props) => <Languages />}
-                />
-                <Route
-                  path={`${path}/education`}
-                  render={(props) => <Education />}
-                />
-                <Route path={`${path}/skills`} render={(props) => <Skills />} />
-                <Route
-                  path={`${path}/experience`}
-                  render={(props) => <Experience />}
-                />
-                <Route
-                  path={`${path}/membership`}
-                  render={(props) => <Membership />}
-                />
-              </Switch>
+                  <Route
+                    path={`${path}/reference`}
+                    render={(props) => <Reference />}
+                  />
+                  <Route
+                    path={`${path}/languages`}
+                    render={(props) => <Languages />}
+                  />
+                  <Route
+                    path={`${path}/education`}
+                    render={(props) => <Education />}
+                  />
+                  <Route
+                    path={`${path}/skills`}
+                    render={(props) => <Skills />}
+                  />
+                  <Route
+                    path={`${path}/experience`}
+                    render={(props) => <Experience />}
+                  />
+                  <Route
+                    path={`${path}/membership`}
+                    render={(props) => <Membership />}
+                  />
+                </Switch>
+              </Container>{" "}
             </Grid>
           </Grid>
         </Grid>

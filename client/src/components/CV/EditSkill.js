@@ -15,7 +15,7 @@ import {
   Container,
 } from "@material-ui/core";
 import icon from "./../../img/icon.jpg";
-import {AddSkillAction} from "./../../store/action/action";
+import {AddSkillAction} from "../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 export default function AddSkill(props) {
   const [skills, setSkills] = useState([]);

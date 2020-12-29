@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddCertificateAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 export default function AddCertificate(props) {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ export default function AddCertificate(props) {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const data = {name, description, date};
+  const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setName("");
@@ -28,13 +30,13 @@ export default function AddCertificate(props) {
             spacing={4}
           >
             <Grid item xs={12} sm={6}>
-              <h2>Add Certificate</h2>
+              <h2>{t("AddCertificate")}</h2>
             </Grid>
             <Grid item xs={12} sm={6}>
               {" "}
               <TextField
                 id="filled-basic"
-                label="Name"
+                label={t("Name")}
                 variant="filled"
                 style={{width: "100%"}}
                 onChange={(e) => setName(e.target.value)}
@@ -44,7 +46,7 @@ export default function AddCertificate(props) {
               {" "}
               <TextField
                 id="filled-basic"
-                label="Description"
+                label={t("Description")}
                 variant="filled"
                 style={{width: "100%"}}
                 onChange={(e) => setDescription(e.target.value)}
@@ -54,7 +56,7 @@ export default function AddCertificate(props) {
               {" "}
               <TextField
                 id="date"
-                label="Date"
+                label={t("Date")}
                 type="text"
                 InputLabelProps={{
                   shrink: true,
@@ -65,20 +67,20 @@ export default function AddCertificate(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Button
-                variant="contained"
-                color="secondary"
+                variant="outlined"
+                className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
-                cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                className="save"
                 style={{float: "right"}}
                 onClick={() => dispatch(AddCertificateAction(data))}
               >
-                save
+                {t("save")}
               </Button>
             </Grid>
           </Grid>{" "}

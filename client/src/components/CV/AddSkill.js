@@ -17,10 +17,12 @@ import {
 import icon from "./../../img/icon.jpg";
 import {AddSkillAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function AddSkill(props) {
   const [skills, setSkills] = useState([]);
   const dispatch = useDispatch();
-
+  const {t, i18n} = useTranslation();
   const handelCancel = () => {
     setSkills([]);
     props.setComponentName("");
@@ -39,7 +41,7 @@ export default function AddSkill(props) {
           spacing={3}
         >
           <Grid item xs={12} style={{marginBottom: "10px"}}>
-            <h2>Skills</h2>
+            <h2>{t("Skills")}</h2>
           </Grid>
           <Grid item xs={3}>
             <IconButton
@@ -144,20 +146,20 @@ export default function AddSkill(props) {
           </Grid>
           <Grid item xs={12}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {typeof "cancel"}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
               onClick={() => dispatch(AddSkillAction(skills))}
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

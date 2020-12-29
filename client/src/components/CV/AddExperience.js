@@ -17,6 +17,8 @@ import senior from "./../../img/worker.svg";
 import manager from "./../../img/manager.svg";
 import {AddExperienceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function Experience(props) {
   const [experienceName, setExperienceName] = useState("");
   const [description, setDescription] = useState("");
@@ -25,6 +27,7 @@ export default function Experience(props) {
   const [project, setProject] = useState("");
   const data = {description, experienceName, startDate, endDate, project};
   const dispatch = useDispatch();
+  const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setExperienceName("");
@@ -46,12 +49,12 @@ export default function Experience(props) {
             style={{textAlign: "center"}}
           >
             <Grid item xs={12}>
-              <h3>Experience</h3> <hr />
+              <h3>{t("Experience")}</h3> <hr />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 id="filled-primary"
-                label="Experience Name"
+                label={t("ExperienceName")}
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
@@ -61,7 +64,7 @@ export default function Experience(props) {
             <Grid item xs={6}>
               <TextField
                 id="filled-primary"
-                label="Description"
+                label={t("Description")}
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
@@ -72,7 +75,7 @@ export default function Experience(props) {
               {" "}
               <TextField
                 id="date"
-                label="Start Date"
+                label={t("StartDate")}
                 type="text"
                 InputLabelProps={{
                   shrink: true,
@@ -85,7 +88,7 @@ export default function Experience(props) {
               {" "}
               <TextField
                 id="date"
-                label="End Date"
+                label={t("EndDate")}
                 type="text"
                 InputLabelProps={{
                   shrink: true,
@@ -97,7 +100,7 @@ export default function Experience(props) {
             <Grid item xs={6}>
               <TextField
                 id="filled-primary"
-                label="Project"
+                label={t("Project")}
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
@@ -106,20 +109,20 @@ export default function Experience(props) {
             </Grid>
             <Grid item xs={12}>
               <Button
-                variant="contained"
-                color="secondary"
+                variant="outlined"
+                className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
-                cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                className="save"
                 style={{float: "right"}}
                 onClick={() => dispatch(AddExperienceAction(data))}
               >
-                save
+                {t("save")}
               </Button>
             </Grid>
           </Grid>{" "}

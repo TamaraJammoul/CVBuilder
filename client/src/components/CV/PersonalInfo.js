@@ -128,15 +128,15 @@ export default function PersonalInfo() {
           <Grid item xs={6}></Grid>
           <Grid item xs={12}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
             >
               {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
             >
               {t("save")}

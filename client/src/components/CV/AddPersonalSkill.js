@@ -10,10 +10,13 @@ import {
 import Rating from "@material-ui/lab/Rating";
 import {AddPersonalSkillsAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export default function AddPersonalSkill(props) {
   const [skill, setSkill] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
+  const {t, i18n} = useTranslation();
 
   const data = {rate, skill};
   const handelCancel = () => {
@@ -33,12 +36,12 @@ export default function AddPersonalSkill(props) {
             style={{textAlign: "center"}}
           >
             <Grid item xs={12}>
-              <h2>Add Personal Skill</h2>
+              <h2>{t("AddPersonalSkill")}</h2>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 id="filled-basic"
-                label="Skill"
+                label={t("Skill")}
                 variant="filled"
                 placeholder="eg.Microsoft Word"
                 style={{width: "100%"}}
@@ -57,20 +60,20 @@ export default function AddPersonalSkill(props) {
             </Grid>
             <Grid item xs={12}>
               <Button
-                variant="contained"
-                color="secondary"
+                variant="outlined"
+                className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
-                cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                className="save"
                 style={{float: "right"}}
                 onClick={() => dispatch(AddPersonalSkillsAction(data))}
               >
-                save
+                {t("save")}
               </Button>
             </Grid>
           </Grid>

@@ -48,17 +48,17 @@ function Navbar(props) {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
-              {t("Content")}
+              <h5> {t("Content")}</h5>
             </a>
           </li>
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
-              {t("ChangeTemplate")}
+              <h5>{t("ChangeTemplate")}</h5>
             </a>
           </li>
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
-              {t("Preview&Download")}
+              <h5>{t("Preview&Download")}</h5>
             </a>
           </li>
 
@@ -105,10 +105,12 @@ function Navbar(props) {
             </div>
           </li>
           <li className="nav-item">
-            <AccountCircle
-              style={{width: "90px", color: "#2E0E33"}}
-              onClick={props.setDrawerState}
-            />{" "}
+            <h5>
+              <AccountCircle
+                style={{width: "90px", color: "#2E0E33"}}
+                onClick={props.setDrawerState}
+              />{" "}
+            </h5>
           </li>
         </ul>
       </div>
