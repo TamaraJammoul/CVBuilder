@@ -8,7 +8,6 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
-import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Default from "./components/Layout/Default";
 import Home from "./components/Home";
@@ -21,27 +20,10 @@ import CVTemplates from "./components/CV/CVTemplates";
 import AddExperience from "./components/CV/AddExperience";
 import CVName from "./components/CV/CVName";
 import CVLanguage from "./components/CV/CVLanguage";
-import PersonalInfo from "./components/CV/PersonalInfo";
-import AddEducation from "./components/CV/AddEducation";
-import AddPersonalSkill from "./components/CV/AddPersonalSkill";
-import PersonalSkills from "./components/CV/PersonalSkills";
-import CareerObjectives from "./components/CV/CareerObjectives";
-import AddCertificate from "./components/CV/AddCertificate";
-import AddSkill from "./components/CV/AddSkill";
-import AddOtherTraining from "./components/CV/AddOtherTraining";
-import OtherTraining from "./components/CV/OtherTraining";
-import AddMembership from "./components/CV/AddMembership";
-import Reference from "./components/CV/Reference";
 import BuildCV from "./components/CV/BuildCV";
 import Template from "./components/Template";
-import AddLanguage from "./components/CV/AddLanguage";
-import Languages from "./components/CV/Languages";
-import Education from "./components/CV/Education";
-import Experience from "./components/CV/Experience";
-import Skills from "./components/CV/Skills";
-import Certificates from "./components/CV/Certificates";
-import Membership from "./components/CV/Membership";
-import AddReference from "./components/CV/AddReference";
+import Dashboard from "./components/Dashboard";
+
 import store from "./store/store";
 import {Provider} from "react-redux";
 
@@ -72,61 +54,11 @@ function App(props) {
                 render={(props) => <ForgetPassword />}
               />
               <Route path="/cvtemplates" render={(props) => <CVTemplates />} />
-              <Route
-                path="/addexperience"
-                render={(props) => <AddExperience />}
-              />
-
+              <Route path="/dashboard" render={(props) => <Dashboard />} />
               <Route path="/cvname" render={(props) => <CVName />} />
               <Route path="/cvlanguage" render={(props) => <CVLanguage />} />
-              <Route
-                path="/personalinfo"
-                render={(props) => <PersonalInfo />}
-              />
-              <Route
-                path="/careerobjectives"
-                render={(props) => <CareerObjectives />}
-              />
-
-              <Route
-                path="/addeducation"
-                render={(props) => <AddEducation />}
-              />
-              <Route
-                path="/addpersonalskill"
-                render={(props) => <AddPersonalSkill />}
-              />
-              <Route
-                path="/personalskills"
-                render={(props) => <PersonalSkills />}
-              />
-              <Route
-                path="/addcertificate"
-                render={(props) => <AddCertificate />}
-              />
-              <Route
-                path="/certificates"
-                render={(props) => <Certificates />}
-              />
-              <Route path="/addskill" render={(props) => <AddSkill />} />
-              <Route path="/skills" render={(props) => <Skills />} />
-
-              <Route
-                path="/othertraining"
-                render={(props) => <OtherTraining />}
-              />
-              <Route
-                path="/addmembership"
-                render={(props) => <AddMembership />}
-              />
-              <Route path="/reference" render={(props) => <Reference />} />
               <Route path="/buildcv" render={(props) => <BuildCV />} />
               <Route path="/template" render={(props) => <Template />} />
-              <Route path="/addlanguage" render={(props) => <AddLanguage />} />
-              <Route path="/languages" render={(props) => <Languages />} />
-              <Route path="/education" render={(props) => <Education />} />
-              <Route path="/experience" render={(props) => <Experience />} />
-              <Route path="/membership" render={(props) => <Membership />} />
 
               <Route render={(props) => <Default />} />
             </Switch>

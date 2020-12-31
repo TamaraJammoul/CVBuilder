@@ -94,5 +94,9 @@
         "Edit Language":"تعديل اللغة",
         "eg.English":"مثال:الانكليزية",
         "Edit Memberships":"تعديل العضوية",
-        "Membership Name":"اسم العضوية"
+        "Membership Name":"اسم العضوية",
+        "EditOtherTraining":"تعديل التدريبات الأخرى",
+        "Edit Personal Skill":"تعديل المهارات الشخصية",
+        "eg.Microsoft Word":"مثال:وورد",
+        "Create New CV":"إنشاء سيرة ذاتية"
 }

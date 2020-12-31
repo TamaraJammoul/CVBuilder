@@ -93,5 +93,9 @@
     "Edit Language":"Edit Language",
     "eg.English":"eg.English",
     "Edit Memberships":"Edit Memberships",
-    "Membership Name":"Membership Name"
+    "Membership Name":"Membership Name",
+    "EditOtherTraining":"Edit Other Training",
+    "Edit Personal Skill":"Edit Personal Skill",
+    "eg.Microsoft Word":"eg.Microsoft Word",
+    "Create New CV":"Create New CV"
 }

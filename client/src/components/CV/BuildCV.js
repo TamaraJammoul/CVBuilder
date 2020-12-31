@@ -6,7 +6,11 @@ import Experience from "./Experience";
 import AddExperience from "./AddExperience";
 import EditExperience from "./EditExperience";
 import OtherTraining from "./OtherTraining";
+import AddOtherTraining from "./AddOtherTraining";
+import EditOtherTraining from "./EditOtherTraining";
 import PersonalSkills from "./PersonalSkills";
+import AddPersonalSkills from "./AddPersonalSkill";
+import EditPersonalSkills from "./EditPersonalSkill";
 import Membership from "./Membership";
 import AddMembership from "./AddMembership";
 import EditMembership from "./EditMembership";
@@ -190,8 +194,24 @@ export default function BuildCV(props) {
                     render={(props) => <PersonalSkills />}
                   />
                   <Route
+                    path={`${path}/addpersonalskills`}
+                    render={(props) => <AddPersonalSkills />}
+                  />
+                  <Route
+                    path={`${path}/editpersonalskills`}
+                    render={(props) => <EditPersonalSkills />}
+                  />
+                  <Route
                     path={`${path}/othertraining`}
                     render={(props) => <OtherTraining />}
+                  />
+                  <Route
+                    path={`${path}/addothertraining`}
+                    render={(props) => <AddOtherTraining />}
+                  />
+                  <Route
+                    path={`${path}/editothertraining`}
+                    render={(props) => <EditOtherTraining />}
                   />
                   <Route
                     path={`${path}/certificates`}

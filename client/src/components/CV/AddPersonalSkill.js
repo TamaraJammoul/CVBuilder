@@ -11,18 +11,20 @@ import Rating from "@material-ui/lab/Rating";
 import {AddPersonalSkillsAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddPersonalSkill(props) {
   const [skill, setSkill] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
+  let history = useHistory();
 
   const data = {rate, skill};
   const handelCancel = () => {
     setSkill("");
     setRate(2);
-    props.setComponentName("");
+    history.push("/buildcv/personalskill");
   };
   return (
     <Container>

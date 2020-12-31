@@ -26,16 +26,13 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function OtherTraining(props) {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const othertraining = useSelector((state) => state.template.othertraining);
   const {t, i18n} = useTranslation();
 
-  return ComponentName == "AddOtherTraining" ? (
-    <AddOtherTraining setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -63,18 +60,11 @@ export default function OtherTraining(props) {
                       <h6>{oth.name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Edit
-                          onClick={() =>
-                            dispatch(
-                              EditOtherTrainingAction({
-                                newName: "",
-                                oldName: "rr",
-                              })
-                            )
-                          }
-                        />
-                      </IconButton>
+                      <Link to="editothertraining">
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
@@ -111,14 +101,16 @@ export default function OtherTraining(props) {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              style={{backgroundColor: "#5B2338"}}
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddOtherTraining")}
-            >
-              {t("AddOtherTraining")}
-            </Button>
+            <Link to="addothertraining">
+              {" "}
+              <Button
+                variant="contained"
+                style={{backgroundColor: "#5B2338"}}
+                startIcon={<DeleteIcon />}
+              >
+                {t("AddOtherTraining")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

@@ -18,16 +18,13 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function PersonalSkills() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const personalskills = useSelector((state) => state.template.personalskills);
   const {t, i18n} = useTranslation();
 
-  return ComponentName == "AddPersonalSkill" ? (
-    <AddPersonalSkill setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -118,17 +115,10 @@ export default function PersonalSkills() {
                           </Grid>
                           <Grid item xs={1}>
                             <IconButton aria-label="delete">
-                              <Edit
-                                onClick={() =>
-                                  dispatch(
-                                    EditPersonalSkillAction({
-                                      oldName: "rr",
-                                      newName: "",
-                                      newRate: 0,
-                                    })
-                                  )
-                                }
-                              />
+                              <Link to="/editothertraining">
+                                {" "}
+                                <Edit />
+                              </Link>
                             </IconButton>
                           </Grid>
                           <Grid item xs={1}>
@@ -169,14 +159,16 @@ export default function PersonalSkills() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              style={{backgroundColor: "#5B2338"}}
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddPersonalSkill")}
-            >
-              {t("AddPersonalSkill")}
-            </Button>
+            <Link to="/addothertraining">
+              {" "}
+              <Button
+                variant="contained"
+                style={{backgroundColor: "#5B2338"}}
+                startIcon={<DeleteIcon />}
+              >
+                {t("AddPersonalSkill")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

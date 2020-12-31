@@ -8,18 +8,23 @@ import {
   Container,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import {AddPersonalSkillsAction} from "./../../store/action/action";
+import {EditPersonalSkillAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
+
 export default function AddPersonalSkill(props) {
   const [skill, setSkill] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
-
+  const {t, i18n} = useTranslation();
+  let history = useHistory();
   const data = {rate, skill};
+
   const handelCancel = () => {
     setSkill("");
     setRate(2);
-    props.setComponentName("");
+    history.push("/buildcv/personalskill");
   };
   return (
     <Container>
@@ -33,14 +38,14 @@ export default function AddPersonalSkill(props) {
             style={{textAlign: "center"}}
           >
             <Grid item xs={12}>
-              <h2>Add Personal Skill</h2>
+              <h2>{t("Edit Personal Skill")}</h2>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 id="filled-basic"
                 label="Skill"
-                variant="filled"
-                placeholder="eg.Microsoft Word"
+                variant={t("filled")}
+                placeholder={t("eg.Microsoft Word")}
                 style={{width: "100%"}}
                 onChange={(e) => setSkill(e.target.value)}
               />
@@ -58,19 +63,27 @@ export default function AddPersonalSkill(props) {
             <Grid item xs={12}>
               <Button
                 variant="contained"
-                color="secondary"
+                className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
-                cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddPersonalSkillsAction(data))}
+                onClick={() =>
+                  dispatch(
+                    EditPersonalSkillAction({
+                      oldName: "rr",
+                      newName: "",
+                      newRate: 0,
+                    })
+                  )
+                }
               >
-                save
+                {t("save")}
               </Button>
             </Grid>
           </Grid>

@@ -3,15 +3,18 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddOtherTrainingAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddOtherTraining(props) {
   const [otherTraining, setOtherTraining] = useState("");
   const dispatch = useDispatch();
+  let history = useHistory();
+  const {t, i18n} = useTranslation();
+
   const handelCancel = () => {
     setOtherTraining("");
-    props.setComponentName("");
+    history.push("/buildcv/othertraining");
   };
-  const {t, i18n} = useTranslation();
 
   return (
     <Container>
@@ -24,13 +27,13 @@ export default function AddOtherTraining(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Other Training</h2>
+            <h2>{t("OtherTraining")}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label="Other Training"
+              label={t("OtherTraining")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}

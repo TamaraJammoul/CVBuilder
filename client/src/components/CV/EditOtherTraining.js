@@ -1,14 +1,19 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddOtherTrainingAction} from "./../../store/action/action";
+import {EditOtherTrainingAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddOtherTraining(props) {
   const [otherTraining, setOtherTraining] = useState("");
   const dispatch = useDispatch();
+  let history = useHistory();
+  const {t, i18n} = useTranslation();
+
   const handelCancel = () => {
     setOtherTraining("");
-    props.setComponentName("");
+    history.push("/buildcv/othertraining");
   };
   return (
     <Container>
@@ -21,13 +26,13 @@ export default function AddOtherTraining(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Other Training</h2>
+            <h2>{t("EditOtherTraining")}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label="Other Training"
+              label={t("OtherTraining")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
@@ -37,19 +42,26 @@ export default function AddOtherTraining(props) {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              color="secondary"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(AddOtherTrainingAction(otherTraining))}
+              onClick={() =>
+                dispatch(
+                  EditOtherTrainingAction({
+                    newName: "",
+                    oldName: "rr",
+                  })
+                )
+              }
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>
