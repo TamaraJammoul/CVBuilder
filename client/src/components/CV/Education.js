@@ -10,16 +10,13 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 export default function Education() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const educations = useSelector((state) => state.template.educations);
   const {t, i18n} = useTranslation();
-
-  return ComponentName == "AddEducation" ? (
-    <AddEducation setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -69,25 +66,12 @@ export default function Education() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Edit
-                          onClick={() =>
-                            dispatch(
-                              EditEducationAction({
-                                newField: "",
-                                oldField: "rr",
-                                newUniversityName: "",
-                                newCity: "",
-                                newStartDate: new Date(),
-                                newEndDate: new Date(),
-                                newRate100: 0,
-                                newRate5: 0,
-                                newEstimate: "",
-                              })
-                            )
-                          }
-                        />
-                      </IconButton>
+                      <Link to="/buildcv/editeducation">
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
@@ -122,14 +106,16 @@ export default function Education() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddEducation")}
-              style={{backgroundColor: "#5B2338"}}
-            >
-              {t("AddEducation")}
-            </Button>
+            <Link to="/buildcv/addeducation">
+              {" "}
+              <Button
+                variant="contained"
+                startIcon={<DeleteIcon />}
+                style={{backgroundColor: "#5B2338"}}
+              >
+                {t("AddEducation")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

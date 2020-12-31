@@ -69,14 +69,14 @@ export default function CareerObjectives() {
             <Grid item>
               {" "}
               <Editor
-                initialValue="<p>To bring my strong sense of dedication, motivation, and responsibility to [specific company], and to utilize my [skill] qualifications obtained through [name of college or university].</p>"
+                initialValue="<p></p>"
                 init={{
                   height: 200,
-                  directionality: "rtl",
+                  directionality: i18n.language == "en" ? "ltr" : "rtl",
                   plugins:
-                    "powerpaste advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen  insertdatetime media table paste code help wordcount",
+                    " autolink listsanchorfullscreen  insertdatetime  paste  help ",
                   toolbar:
-                    "code  pageembed permanentpen table undo redo | formatselect | bold italic backcolor | \
+                    "pageembed permanentpen  undo redo |bold italic | \
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help",
                   toolbar_mode: "floating",

@@ -11,6 +11,7 @@ import Rating from "@material-ui/lab/Rating";
 import {AddLanguageAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
@@ -18,11 +19,12 @@ export default function AddLanguage(props) {
   const dispatch = useDispatch();
   const data = {language, rate};
   const {t, i18n} = useTranslation();
+  let history = useHistory();
 
   const handelCancel = () => {
     setLanguage("");
     setRate(2);
-    props.setComponentName("");
+    history.push("/buildcv/languages");
   };
   return (
     <Container>

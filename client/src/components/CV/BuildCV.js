@@ -3,12 +3,20 @@ import {Container, Grid, Drawer} from "@material-ui/core";
 import PersonalInfo from "./PersonalInfo";
 import CareerObjectives from "./CareerObjectives";
 import Experience from "./Experience";
+import AddExperience from "./AddExperience";
+import EditExperience from "./EditExperience";
 import OtherTraining from "./OtherTraining";
 import PersonalSkills from "./PersonalSkills";
 import Membership from "./Membership";
+import AddMembership from "./AddMembership";
+import EditMembership from "./EditMembership";
 import Reference from "./Reference";
+import EditReference from "./EditReference";
+import AddReference from "./AddReference";
 import Skills from "./Skills";
 import Languages from "./Languages";
+import AddLanguage from "./AddLanguage";
+import EditLanguage from "./EditLanguage";
 import Drawertemp from "./Drawer";
 import {
   Work,
@@ -22,7 +30,11 @@ import {
 } from "@material-ui/icons";
 import Navbar from "./../Layout/Navbar";
 import Education from "./Education";
+import AddEducation from "./AddEducation";
+import EditEducation from "./EditEducation";
 import Certificates from "./Certificates";
+import AddCertificates from "./AddCertificate";
+import EditCertificates from "./EditCertificate";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
@@ -185,18 +197,49 @@ export default function BuildCV(props) {
                     path={`${path}/certificates`}
                     render={(props) => <Certificates />}
                   />
-
+                  <Route
+                    path={`${path}/addcertificate`}
+                    render={(props) => <AddCertificates />}
+                  />
+                  <Route
+                    path={`${path}/editcertificate`}
+                    render={(props) => <EditCertificates />}
+                  />
                   <Route
                     path={`${path}/reference`}
                     render={(props) => <Reference />}
+                  />
+                  <Route
+                    path={`${path}/editreference`}
+                    render={(props) => <EditReference />}
+                  />
+                  <Route
+                    path={`${path}/addreference`}
+                    render={(props) => <AddReference />}
                   />
                   <Route
                     path={`${path}/languages`}
                     render={(props) => <Languages />}
                   />
                   <Route
+                    path={`${path}/addlanguage`}
+                    render={(props) => <AddLanguage />}
+                  />
+                  <Route
+                    path={`${path}/editlanguage`}
+                    render={(props) => <EditLanguage />}
+                  />
+                  <Route
                     path={`${path}/education`}
                     render={(props) => <Education />}
+                  />
+                  <Route
+                    path={`${path}/editeducation`}
+                    render={(props) => <EditEducation />}
+                  />
+                  <Route
+                    path={`${path}/addeducation`}
+                    render={(props) => <AddEducation />}
                   />
                   <Route
                     path={`${path}/skills`}
@@ -207,8 +250,24 @@ export default function BuildCV(props) {
                     render={(props) => <Experience />}
                   />
                   <Route
+                    path={`${path}/addexperience`}
+                    render={(props) => <AddExperience />}
+                  />
+                  <Route
+                    path={`${path}/editexperience`}
+                    render={(props) => <EditExperience />}
+                  />
+                  <Route
                     path={`${path}/membership`}
                     render={(props) => <Membership />}
+                  />
+                  <Route
+                    path={`${path}/addmembership`}
+                    render={(props) => <AddMembership />}
+                  />
+                  <Route
+                    path={`${path}/editmembership`}
+                    render={(props) => <EditMembership />}
                   />
                 </Switch>
               </Container>{" "}

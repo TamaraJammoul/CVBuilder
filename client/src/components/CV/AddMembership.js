@@ -3,16 +3,18 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddMembershipAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddMembership(props) {
   const dispatch = useDispatch();
 
   const [membershipName, setMembershipName] = useState("");
+  let history = useHistory();
   const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setMembershipName("");
-    props.setComponentName("");
+    history.push("/buildcv/membership");
   };
   return (
     <Container>

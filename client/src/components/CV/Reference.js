@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
-import AddReference from "./AddReference";
 import {useSelector, useDispatch} from "react-redux";
 import {
   DeleteReferenceAction,
@@ -10,16 +9,13 @@ import {
   CopyReferenceAction,
 } from "./../../store/action/action";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function Refernce() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const references = useSelector((state) => state.template.references);
   const {t, i18n} = useTranslation();
 
-  return ComponentName == "AddReference" ? (
-    <AddReference setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -47,19 +43,12 @@ export default function Refernce() {
                       <h6>{ref.name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Edit
-                          onClick={() => {
-                            console.log("kljklj");
-                            dispatch(
-                              EditReferenceAction({
-                                newName: "",
-                                oldName: "tamara",
-                              })
-                            );
-                          }}
-                        />
-                      </IconButton>
+                      <Link to="/buildcv/editreference">
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
@@ -76,13 +65,14 @@ export default function Refernce() {
                       </IconButton>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Delete
-                          onClick={() => {
-                            console.log("kljklj");
-                            dispatch(DeleteReferenceAction("tamara"));
-                          }}
-                        />
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          console.log("kljklj");
+                          dispatch(DeleteReferenceAction({name: ref.name}));
+                        }}
+                      >
+                        <Delete />
                       </IconButton>
                     </Grid>
                     <Grid item xs={1}>
@@ -98,14 +88,16 @@ export default function Refernce() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              style={{backgroundColor: "#5B2338"}}
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddReference")}
-            >
-              {t("AddReference")}
-            </Button>
+            <Link to="buildcv/addreference">
+              {" "}
+              <Button
+                variant="contained"
+                style={{backgroundColor: "#5B2338"}}
+                startIcon={<DeleteIcon />}
+              >
+                {t("AddReference")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

@@ -1,20 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Formik, Form, Field} from "formik";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Container,
-} from "@material-ui/core";
+import {Button, Paper, Grid, Container} from "@material-ui/core";
+import {useTranslation} from "react-i18next";
+
 export default function Card({CardImage}) {
+  const {t, i18n} = useTranslation();
+
   return (
     <Paper elevation={3}>
       <Container>
@@ -31,16 +22,14 @@ export default function Card({CardImage}) {
               style={{width: "300px", height: "400px", marginTop: "20px"}}
             />
           </Grid>
-          <Grid item>
-            <h3>Elegant</h3>
-          </Grid>
+
           <Grid item>
             <Button
               variant="contained"
-              color="primary "
               style={{marginBottom: "20px"}}
+              className="save"
             >
-              Select
+              {t("Select")}
             </Button>
           </Grid>
         </Grid>

@@ -20,16 +20,13 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function Certificates() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const certificates = useSelector((state) => state.template.certificates);
   const {t} = useTranslation();
 
-  return ComponentName == "AddCertificate" ? (
-    <AddCertificate setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -66,23 +63,15 @@ export default function Certificates() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() =>
-                          dispatch(
-                            EditCertificateAction({
-                              oldName: "vsd",
-                              newName: "",
-                              newDescription: "",
-                              newDate: new Date(),
-                            })
-                          )
-                        }
-                      >
-                        <Edit />
-                      </IconButton>
+                      <Link to="/buildcv/editcertificate">
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
+                      {" "}
                       <IconButton aria-label="delete">
                         <FileCopy
                           onClick={() =>
@@ -116,14 +105,15 @@ export default function Certificates() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddCertificate")}
-              style={{backgroundColor: "#5B2338"}}
-            >
-              {t("AddCertificate")}
-            </Button>
+            <Link to="/buildcv/addcertificate">
+              <Button
+                variant="contained"
+                startIcon={<DeleteIcon />}
+                style={{backgroundColor: "#5B2338"}}
+              >
+                {t("AddCertificate")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

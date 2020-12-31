@@ -3,19 +3,22 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddReferenceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function Reference(props) {
   const [reference, setReference] = useState("");
   const dispatch = useDispatch();
+  let history = useHistory();
+
   const handelCancel = () => {
     setReference("");
-    props.setComponentName("");
+    history.push("/buildcv/reference");
   };
   const {t, i18n} = useTranslation();
 
   return (
-    <Container>
-      <Paper>
+    <Paper>
+      <Container>
         <Grid
           container
           spacing={10}
@@ -58,7 +61,7 @@ export default function Reference(props) {
             </Button>
           </Grid>
         </Grid>
-      </Paper>
-    </Container>
+      </Container>
+    </Paper>
   );
 }

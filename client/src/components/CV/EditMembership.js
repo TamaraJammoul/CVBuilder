@@ -1,16 +1,19 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddMembershipAction} from "./../../store/action/action";
+import {EditMembershipAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddMembership(props) {
   const dispatch = useDispatch();
-
+  let history = useHistory();
+  const {t, i18n} = useTranslation();
   const [membershipName, setMembershipName] = useState("");
 
   const handelCancel = () => {
     setMembershipName("");
-    props.setComponentName("");
+    history.push("/buildcv/membership");
   };
   return (
     <Container>
@@ -23,13 +26,13 @@ export default function AddMembership(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Memberships</h2>
+            <h2>{"Edit Memberships"}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label="Add Membership"
+              label={t("Membership Name")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
@@ -39,19 +42,21 @@ export default function AddMembership(props) {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              color="secondary"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(AddMembershipAction(membershipName))}
+              onClick={() =>
+                dispatch(EditMembershipAction({oldName: "rr", newName: ""}))
+              }
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

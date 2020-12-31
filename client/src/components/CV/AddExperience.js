@@ -18,6 +18,7 @@ import manager from "./../../img/manager.svg";
 import {AddExperienceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function Experience(props) {
   const [experienceName, setExperienceName] = useState("");
@@ -28,6 +29,7 @@ export default function Experience(props) {
   const data = {description, experienceName, startDate, endDate, project};
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
+  let history = useHistory();
 
   const handelCancel = () => {
     setExperienceName("");
@@ -35,7 +37,7 @@ export default function Experience(props) {
     setDescription("");
     setEndDate("");
     setProject("");
-    props.setComponentName("");
+    history.push("/buildcv/experience");
   };
   return (
     <Container>

@@ -1,13 +1,16 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddReferenceAction} from "./../../store/action/action";
+import {EditReferenceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
-export default function Reference(props) {
+import {useHistory} from "react-router-dom";
+export default function EditReference(props) {
   const [reference, setReference] = useState("");
   const dispatch = useDispatch();
+  let history = useHistory();
+
   const handelCancel = () => {
     setReference("");
-    props.setComponentName("");
+    history.push("/buildcv/reference");
   };
   return (
     <Container>
@@ -20,7 +23,7 @@ export default function Reference(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Reference</h2>
+            <h2>Edit Reference</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
@@ -36,7 +39,7 @@ export default function Reference(props) {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              color="secondary"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
@@ -44,10 +47,16 @@ export default function Reference(props) {
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
               onClick={() => {
-                dispatch(AddReferenceAction(reference));
+                console.log("kljklj");
+                dispatch(
+                  EditReferenceAction({
+                    newName: "",
+                    oldName: "tamara",
+                  })
+                );
               }}
             >
               save

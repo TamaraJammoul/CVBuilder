@@ -1,22 +1,11 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  Container,
-  TextField,
-} from "@material-ui/core";
-import junior from "./../../img/student.svg";
-import senior from "./../../img/worker.svg";
-import manager from "./../../img/manager.svg";
-import {AddExperienceAction} from "./../../store/action/action";
+import {Button, Paper, Grid, Container, TextField} from "@material-ui/core";
+
+import {EditExperienceAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+
 export default function Experience(props) {
   const [experienceName, setExperienceName] = useState("");
   const [description, setDescription] = useState("");
@@ -25,6 +14,8 @@ export default function Experience(props) {
   const [project, setProject] = useState("");
   const data = {description, experienceName, startDate, endDate, project};
   const dispatch = useDispatch();
+  let history = useHistory();
+  const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setExperienceName("");
@@ -32,7 +23,7 @@ export default function Experience(props) {
     setDescription("");
     setEndDate("");
     setProject("");
-    props.setComponentName("");
+    history.push("/buildcv/experience");
   };
   return (
     <Container>
@@ -46,12 +37,12 @@ export default function Experience(props) {
             style={{textAlign: "center"}}
           >
             <Grid item xs={12}>
-              <h3>Experience</h3> <hr />
+              <h3>{t("Edit Experience")}</h3> <hr />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 id="filled-primary"
-                label="Experience Name"
+                label={t("Experience Name")}
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
@@ -61,7 +52,7 @@ export default function Experience(props) {
             <Grid item xs={6}>
               <TextField
                 id="filled-primary"
-                label="Description"
+                label={t("Description")}
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
@@ -72,7 +63,7 @@ export default function Experience(props) {
               {" "}
               <TextField
                 id="date"
-                label="Start Date"
+                label={t("StartDate")}
                 type="text"
                 InputLabelProps={{
                   shrink: true,
@@ -85,7 +76,7 @@ export default function Experience(props) {
               {" "}
               <TextField
                 id="date"
-                label="End Date"
+                label={t("EndDate")}
                 type="text"
                 InputLabelProps={{
                   shrink: true,
@@ -97,7 +88,7 @@ export default function Experience(props) {
             <Grid item xs={6}>
               <TextField
                 id="filled-primary"
-                label="Project"
+                label={t("Project")}
                 variant="filled"
                 color="primary"
                 style={{width: "100%"}}
@@ -111,15 +102,26 @@ export default function Experience(props) {
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
-                cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddExperienceAction(data))}
+                onClick={() =>
+                  dispatch(
+                    EditExperienceAction({
+                      oldName: "rr",
+                      newDescription: description,
+                      newExperienceName: experienceName,
+                      newStartDate: startDate,
+                      newEndDate: endDate,
+                      newProject: project,
+                    })
+                  )
+                }
               >
-                save
+                {t("save")}
               </Button>
             </Grid>
           </Grid>{" "}

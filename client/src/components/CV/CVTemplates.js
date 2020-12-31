@@ -8,8 +8,11 @@ import cv4 from "./../../img/cv4.jpg";
 import cv5 from "./../../img/cv5.jpg";
 import cv6 from "./../../img/cv6.jpg";
 import cv7 from "./../../img/cv7.jpg";
+import {useTranslation} from "react-i18next";
 
 export default function CVTemplates() {
+  const {t, i18n} = useTranslation();
+
   return (
     <>
       <Grid
@@ -21,14 +24,7 @@ export default function CVTemplates() {
       >
         <Grid item>
           {" "}
-          <h2>Select Design</h2>
-        </Grid>
-        <Grid item>
-          {" "}
-          <Box bgcolor="text.secondary" color="text.primary" p={2}>
-            You can change the template at any time without having to rewrite
-            the content
-          </Box>
+          <h1 style={{color: "#5B2338 "}}>{t("Select Design")}</h1>
         </Grid>
         <Grid item>
           <Grid container spacing={8} justify="center">

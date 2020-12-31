@@ -52,18 +52,37 @@ a:active {
 .backgroundimg{
     background-image: url('./img/background.PNG');
 }
+ .textField{
+      width:270px !important
+    }
+    .login{
+      width:100%;
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
 @media only screen and (max-width: 600px) {
    .textField{
       width: 200px !important;
-   }
+   }  
   .signupImage{
       width: 350px !important;
   }
-    
+    .login{
+      margin:10px !important;
+    height: 500px;
+
+    }
+    .login h1,.signup h1{
+      font-size: large;
+    }
+    .signup{
+     margin:10px !important;
+    }
 }
 
 @media only screen and (max-width: 700px) {
     h1,h2,h3,h4,h5{
       font-size: small;
     }
+   
 }

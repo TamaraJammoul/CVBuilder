@@ -1,10 +1,13 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddEducationAction} from "./../../store/action/action";
+import {EditEducationAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+
 export default function AddEducation(props) {
   const dispatch = useDispatch();
-
+  let history = useHistory();
   const [field, setField] = useState("");
   const [universityName, setUniversityName] = useState("");
   const [city, setCity] = useState("");
@@ -13,6 +16,8 @@ export default function AddEducation(props) {
   const [rate100, setRate100] = useState(0);
   const [rate5, setRate5] = useState(0);
   const [estimate, setEstimate] = useState("");
+  const {t, i18n} = useTranslation();
+
   const data = {
     field,
     universityName,
@@ -32,7 +37,7 @@ export default function AddEducation(props) {
     setRate100(0);
     setEstimate("");
     setUniversityName("");
-    props.setComponentName("");
+    history.push("/buildcv/education");
   };
   return (
     <Paper>
@@ -46,16 +51,15 @@ export default function AddEducation(props) {
         >
           <Grid item xs={12} sm={12}>
             {" "}
-            <h2>Add Education</h2>
+            <h2>{t("Edit Education")}</h2>
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
               id="filled-basic"
-              label="Field of study
-"
+              label={t("Fieldofstudy")}
               variant="filled"
-              placeholder="eg.Engineering"
+              placeholder={t("eg.Engineering")}
               style={{width: "100%"}}
               onChange={(e) => setField(e.target.value)}
             />
@@ -64,8 +68,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label="School Name or University
-"
+              label={t("SchoolNameorUniversity")}
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setUniversityName(e.target.value)}
@@ -75,7 +78,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label="City,Country"
+              label={t("City,Country")}
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setCity(e.target.value)}
@@ -85,7 +88,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="date"
-              label="Start Date"
+              label={t("StartDate")}
               type="text"
               InputLabelProps={{
                 shrink: true,
@@ -98,7 +101,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="date"
-              label="End Date"
+              label={t("EndDate")}
               type="text"
               InputLabelProps={{
                 shrink: true,
@@ -110,7 +113,7 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6}>
             <TextField
               id="filled-basic"
-              label="Rate from 100"
+              label={t("Ratefrom100")}
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setRate5(e.target.value)}
@@ -120,7 +123,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label="Rate from 5"
+              label={t("Ratefrom5")}
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setRate100(e.target.value)}
@@ -130,7 +133,7 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label="estimate"
+              label={t("estimate")}
               variant="filled"
               style={{width: "50%"}}
               onChange={(e) => setEstimate(e.target.value)}
@@ -139,19 +142,33 @@ export default function AddEducation(props) {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              color="secondary"
+              className="cancel"
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(AddEducationAction(data))}
+              onClick={() =>
+                dispatch(
+                  EditEducationAction({
+                    newField: field,
+                    oldField: "rr",
+                    newUniversityName: universityName,
+                    newCity: city,
+                    newStartDate: startDate,
+                    newEndDate: endDate,
+                    newRate100: rate100,
+                    newRate5: rate5,
+                    newEstimate: estimate,
+                  })
+                )
+              }
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

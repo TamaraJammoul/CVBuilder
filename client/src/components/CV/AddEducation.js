@@ -3,6 +3,7 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddEducationAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddEducation(props) {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function AddEducation(props) {
   const [rate5, setRate5] = useState(0);
   const [estimate, setEstimate] = useState("");
   const {t, i18n} = useTranslation();
-
+  let history = useHistory();
   const data = {
     field,
     universityName,
@@ -36,7 +37,7 @@ export default function AddEducation(props) {
     setRate100(0);
     setEstimate("");
     setUniversityName("");
-    props.setComponentName("");
+    history.push("/buildcv/education");
   };
   return (
     <Paper>

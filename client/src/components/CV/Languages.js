@@ -18,16 +18,13 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function Languages() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.template.languages);
   const {t} = useTranslation();
 
-  return ComponentName == "AddLanguage" ? (
-    <AddLanguage setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -82,19 +79,12 @@ export default function Languages() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Edit
-                          onClick={() =>
-                            dispatch(
-                              EditLanguageAction({
-                                oldName: "rr",
-                                newName: "",
-                                newRate: 0,
-                              })
-                            )
-                          }
-                        />
-                      </IconButton>
+                      <Link to="/editlanguage">
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
@@ -129,14 +119,16 @@ export default function Languages() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddLanguage")}
-              style={{backgroundColor: "#5B2338"}}
-            >
-              {t("AddLanguage")}
-            </Button>
+            <Link to="addlanguage">
+              {" "}
+              <Button
+                variant="contained"
+                startIcon={<DeleteIcon />}
+                style={{backgroundColor: "#5B2338"}}
+              >
+                {t("AddLanguage")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

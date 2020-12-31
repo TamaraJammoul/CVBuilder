@@ -8,18 +8,22 @@ import {
   Container,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import {AddLanguageAction} from "./../../store/action/action";
+import {EditLanguageAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const data = {language, rate};
+  let history = useHistory();
+  const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setLanguage("");
     setRate(2);
-    props.setComponentName("");
+    history.push("/buildcv/languages");
   };
   return (
     <Container>
@@ -33,14 +37,14 @@ export default function AddLanguage(props) {
             style={{textAlign: "center"}}
           >
             <Grid item xs={12}>
-              <h2>Add Language</h2>
+              <h2>{t("Edit Language")}</h2>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 id="filled-basic"
-                label="Language"
+                label={t("Language")}
                 variant="filled"
-                placeholder="eg.English"
+                placeholder={t("eg.English")}
                 style={{width: "100%"}}
                 onChange={(e) => setLanguage(e.target.value)}
               />
@@ -58,19 +62,27 @@ export default function AddLanguage(props) {
             <Grid item xs={12}>
               <Button
                 variant="contained"
-                color="secondary"
+                className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
-                cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddLanguageAction(data))}
+                onClick={() =>
+                  dispatch(
+                    EditLanguageAction({
+                      oldName: "rr",
+                      newName: "",
+                      newRate: 0,
+                    })
+                  )
+                }
               >
-                save
+                {t("save")}
               </Button>
             </Grid>
           </Grid>

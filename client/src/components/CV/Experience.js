@@ -10,15 +10,12 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function Education() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const experiences = useSelector((state) => state.template.experiences);
   const {t, i18n} = useTranslation();
-  return ComponentName == "AddExperience" ? (
-    <AddExperience setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -58,23 +55,12 @@ export default function Education() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Edit
-                          onClick={() =>
-                            dispatch(
-                              EditExperienceAction({
-                                newName: "",
-                                oldName: "rr",
-                                newDescription: "",
-                                newExperienceName: "",
-                                newStartDate: "",
-                                newEndDate: "",
-                                newProject: "",
-                              })
-                            )
-                          }
-                        />
-                      </IconButton>
+                      <Link to="/buildcv/editexperience">
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
@@ -109,14 +95,16 @@ export default function Education() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddExperience")}
-              style={{backgroundColor: "#5B2338"}}
-            >
-              {t("AddExperience")}
-            </Button>
+            <Link to="/buildcv/addexperience">
+              {" "}
+              <Button
+                variant="contained"
+                startIcon={<DeleteIcon />}
+                style={{backgroundColor: "#5B2338"}}
+              >
+                {t("AddExperience")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

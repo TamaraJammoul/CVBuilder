@@ -10,16 +10,14 @@ import {
 } from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import {Link} from "react-router-dom";
 export default function Membership() {
   const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
   const memberships = useSelector((state) => state.template.memberships);
   const {t, i18n} = useTranslation();
 
-  return ComponentName == "AddMembership" ? (
-    <AddMembership setComponentName={setComponentName} />
-  ) : (
+  return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -47,15 +45,12 @@ export default function Membership() {
                       <h6>{mem.name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Edit
-                          onClick={() =>
-                            dispatch(
-                              EditMembershipAction({oldName: "rr", newName: ""})
-                            )
-                          }
-                        />
-                      </IconButton>
+                      <Link to="/editmembership">
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
                     </Grid>
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
@@ -86,14 +81,16 @@ export default function Membership() {
 
           <Grid item xs={12}>
             {" "}
-            <Button
-              variant="contained"
-              style={{backgroundColor: "#5B2338"}}
-              startIcon={<DeleteIcon />}
-              onClick={(e) => setComponentName("AddMembership")}
-            >
-              {t("AddMembership")}
-            </Button>
+            <Link to="/addmembership">
+              {" "}
+              <Button
+                variant="contained"
+                style={{backgroundColor: "#5B2338"}}
+                startIcon={<DeleteIcon />}
+              >
+                {t("AddMembership")}
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

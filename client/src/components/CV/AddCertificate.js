@@ -3,6 +3,7 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {AddCertificateAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function AddCertificate(props) {
   const dispatch = useDispatch();
@@ -11,12 +12,13 @@ export default function AddCertificate(props) {
   const [date, setDate] = useState("");
   const data = {name, description, date};
   const {t, i18n} = useTranslation();
+  let history = useHistory();
 
   const handelCancel = () => {
     setName("");
     setDate("");
     setDescription("");
-    props.setComponentName("");
+    history.push("/buildcv/certificates");
   };
   return (
     <Container>
