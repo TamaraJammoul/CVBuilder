@@ -7,7 +7,7 @@ exports.addPersonalSkills = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -40,7 +40,7 @@ exports.deletePersonalSkills = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -74,7 +74,7 @@ exports.updatePersonalSkills = (req, res) => {
     PersonalSkills.findById(_id).exec((error, personalSkills) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings went Wrong",
+                msg: "Somethings went Wrong, can't get any thing from DB",
                 error: error
             })
         }

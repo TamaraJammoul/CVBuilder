@@ -6,7 +6,7 @@ exports.addCertificate = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -22,7 +22,7 @@ exports.addCertificate = (req, res) => {
                         .then(() => {
                             return res.status(200).json({
                                 msg: "Certificates added successfuly",
-                                data: cv.Certificates
+                                data: cert
                             })
                         })
                 })
@@ -40,7 +40,7 @@ exports.deleteCertificate = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -76,7 +76,7 @@ exports.updateCertificate = (req, res) => {
     Certificate.findById(_id).exec((error, certificate) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wrong",
+                msg: "Somethings wen Wrong, can't get any thing from DB",
                 error: error
             })
         }

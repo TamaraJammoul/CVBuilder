@@ -6,7 +6,7 @@ exports.addReferance = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -39,7 +39,7 @@ exports.deleteReferance = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -73,7 +73,7 @@ exports.updateReferance = (req, res) => {
     Referance.findById(_id).exec((error, referance) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings went Wrong",
+                msg: "Somethings went Wrong, can't get any thing from DB",
                 error: error
             })
         }

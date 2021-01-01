@@ -15,7 +15,7 @@ import {
   Container,
 } from "@material-ui/core";
 import icon from "./../../img/icon.jpg";
-import {AddSkillAction} from "./../../store/action/action";
+import {AddSkillAction} from "./../../store/action/skill";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 

@@ -12,7 +12,7 @@ import {
   Backup,
 } from "@material-ui/icons";
 import image from "./../img/login-img-eng.png";
-import {SignupAction} from "./../store/action/action";
+import {SignupAction} from "./../store/action/auth";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 
@@ -24,13 +24,13 @@ function Signup() {
   return (
     <Grid
       container
-      justify="center"
+      justify="space-evenly"
       alignItems="center"
       xs={12}
       style={{minHeight: "100vh", backgroundColor: "#f6f6f8"}}
     >
-      <Hidden smUp smDown>
-        <Grid item sm={6}>
+      <Grid item sm={6}>
+        <Hidden smDown>
           <Box p={10} style={{width: "100%"}}>
             <Grid container spacing={8} justify="center">
               <Grid item>
@@ -61,14 +61,10 @@ function Signup() {
               </Grid>
             </Grid>
           </Box>{" "}
-        </Grid>
-      </Hidden>
+        </Hidden>
+      </Grid>
       <Grid item xs={10} sm={6}>
-        <Paper
-          elevation={3}
-          style={{margin: "50px", marginTop: "80px", width: "100%"}}
-          className="signup"
-        >
+        <Paper elevation={3} style={{width: "90%"}}>
           <Container>
             <Formik
               initialValues={{
@@ -102,7 +98,7 @@ function Signup() {
               }}
             >
               {({submitForm, isSubmitting}) => (
-                <Form>
+                <Form className="signup">
                   {" "}
                   <Grid
                     container

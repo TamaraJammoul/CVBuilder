@@ -6,7 +6,7 @@ exports.updateCareer = (req, res) => {
     CareerObjectives.findById(_id).exec((error, careerObjectives) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wrong",
+                msg: "Somethings went Wrong, can't get any thing from DB",
                 error: error
             })
         }

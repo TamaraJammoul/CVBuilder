@@ -3,7 +3,6 @@ const { String, Number } = mongoose.Schema.Types;
 
 const SkillSchema = new mongoose.Schema({
     Name: String,
-    Logo: String,
     Order: Number
 });
 

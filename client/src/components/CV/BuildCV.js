@@ -1,27 +1,36 @@
 import React, {useState} from "react";
 import {Container, Grid, Drawer} from "@material-ui/core";
 import PersonalInfo from "./PersonalInfo";
-import CareerObjectives from "./CareerObjectives";
-import Experience from "./Experience";
-import AddExperience from "./AddExperience";
-import EditExperience from "./EditExperience";
-import OtherTraining from "./OtherTraining";
-import AddOtherTraining from "./AddOtherTraining";
-import EditOtherTraining from "./EditOtherTraining";
-import PersonalSkills from "./PersonalSkills";
-import AddPersonalSkills from "./AddPersonalSkill";
-import EditPersonalSkills from "./EditPersonalSkill";
-import Membership from "./Membership";
-import AddMembership from "./AddMembership";
-import EditMembership from "./EditMembership";
-import Reference from "./Reference";
-import EditReference from "./EditReference";
-import AddReference from "./AddReference";
+import CareerObjectives from "./careerobjective/CareerObjectives";
+import Experience from "./experience/Experience";
+import AddExperience from "./experience/AddExperience";
+import EditExperience from "./experience/EditExperience";
+import OtherTraining from "./othertraining/OtherTraining";
+import AddOtherTraining from "./othertraining/AddOtherTraining";
+import EditOtherTraining from "./othertraining/EditOtherTraining";
+import PersonalSkills from "./personalskill/PersonalSkills";
+import AddPersonalSkills from "./personalskill/AddPersonalSkill";
+import EditPersonalSkills from "./personalskill/EditPersonalSkill";
+import Membership from "./membership/Membership";
+import AddMembership from "./membership/AddMembership";
+import EditMembership from "./membership/EditMembership";
+import Reference from "./reference/Reference";
+import EditReference from "./reference/EditReference";
+import AddReference from "./reference/AddReference";
 import Skills from "./Skills";
-import Languages from "./Languages";
-import AddLanguage from "./AddLanguage";
-import EditLanguage from "./EditLanguage";
+import Languages from "./language/Languages";
+import AddLanguage from "./language/AddLanguage";
+import EditLanguage from "./language/EditLanguage";
 import Drawertemp from "./Drawer";
+import Navbar from "./../Layout/Navbar";
+import Education from "./education/Education";
+import AddEducation from "./education/AddEducation";
+import EditEducation from "./education/EditEducation";
+import Certificates from "./certificate/Certificates";
+import AddCertificates from "./certificate/AddCertificate";
+import EditCertificates from "./certificate/EditCertificate";
+import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 import {
   Work,
   School,
@@ -32,15 +41,6 @@ import {
   Group,
   AccountBox,
 } from "@material-ui/icons";
-import Navbar from "./../Layout/Navbar";
-import Education from "./Education";
-import AddEducation from "./AddEducation";
-import EditEducation from "./EditEducation";
-import Certificates from "./Certificates";
-import AddCertificates from "./AddCertificate";
-import EditCertificates from "./EditCertificate";
-import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
-import {useTranslation} from "react-i18next";
 
 export default function BuildCV(props) {
   const {t} = useTranslation();

@@ -6,7 +6,7 @@ exports.addExperience = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -43,7 +43,7 @@ exports.deleteExperience = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -77,7 +77,7 @@ exports.updateExperience = (req, res) => {
     Experience.findById(_id).exec((error, experience) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wrong",
+                msg: "Somethings wen Wrong, can't get any thing from DB",
                 error: error
             })
         }

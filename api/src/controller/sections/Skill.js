@@ -6,16 +6,16 @@ exports.addSkill = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
             if (cv) {
                 const {
-                    Name, Logo, Order
+                    Name, Order
                 } = req.body;
                 let skill = new Skill({
-                    Name, Logo, Order
+                    Name, Order
                 });
                 skill.save()
                     .then((skl) => {
@@ -43,7 +43,7 @@ exports.deleteSkill = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -73,11 +73,11 @@ exports.deleteSkill = (req, res) => {
 }
 
 exports.updateSkill = (req, res) => {
-    const { _id, Name, Logo, Order } = req.body;
+    const { _id, Name, Order } = req.body;
     Skill.findById(_id).exec((error, skill) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings went Wrong",
+                msg: "Somethings went Wrong, can't get any thing from DB",
                 error: error
             })
         }
@@ -85,7 +85,6 @@ exports.updateSkill = (req, res) => {
             Skill.updateOne({ _id: _id }, {
                 $set: {
                     Name,
-                    Logo,
                     Order
                 }
             }).then(() => {
@@ -94,7 +93,6 @@ exports.updateSkill = (req, res) => {
                     data: {
                         _id,
                         Name,
-                        Logo,
                         Order
                     }
                 })

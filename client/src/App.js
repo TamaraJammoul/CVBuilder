@@ -1,13 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
 import "./App.css";
-import {
-  Route,
-  Switch,
-  Redirect,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
 import Footer from "./components/Layout/Footer";
 import Default from "./components/Layout/Default";
 import Home from "./components/Home";
@@ -17,7 +11,6 @@ import Signup from "./components/Signup";
 import Contactus from "./components/Contactus";
 import ForgetPassword from "./components/ForgetPassword";
 import CVTemplates from "./components/CV/CVTemplates";
-import AddExperience from "./components/CV/AddExperience";
 import CVName from "./components/CV/CVName";
 import CVLanguage from "./components/CV/CVLanguage";
 import BuildCV from "./components/CV/BuildCV";
@@ -26,7 +19,6 @@ import Dashboard from "./components/Dashboard";
 
 import store from "./store/store";
 import {Provider} from "react-redux";
-
 import withRoot from "./i18n/WithRoot";
 
 function App(props) {
@@ -59,7 +51,6 @@ function App(props) {
               <Route path="/cvlanguage" render={(props) => <CVLanguage />} />
               <Route path="/buildcv" render={(props) => <BuildCV />} />
               <Route path="/template" render={(props) => <Template />} />
-
               <Route render={(props) => <Default />} />
             </Switch>
             <ScrollUpButton />

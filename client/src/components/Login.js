@@ -4,7 +4,7 @@ import {Formik, Form, Field} from "formik";
 import {Button, Box, Paper, Grid, Container} from "@material-ui/core";
 import {TextField} from "formik-material-ui";
 import {VisibilityOff, Visibility} from "@material-ui/icons";
-import {LoginAction} from "./../store/action/action";
+import {LoginAction} from "./../store/action/auth";
 import {useSelector, useDispatch} from "react-redux";
 import {
   Route,
@@ -25,7 +25,7 @@ function LoginForm(props) {
   return (
     <Grid
       container
-      justify="center"
+      justify="space-around"
       alignItems="center"
       style={{minHeight: "100vh", width: "100%"}}
     >

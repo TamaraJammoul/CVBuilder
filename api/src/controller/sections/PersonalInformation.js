@@ -6,7 +6,7 @@ exports.updatePersonalInformation = (req, res) => {
     PersonalInformation.findById(_id).exec((error, personalInformation) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wrong",
+                msg: "Somethings wen Wrong, can't get any thing from DB",
                 error: error
             })
         }

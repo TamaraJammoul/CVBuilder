@@ -6,7 +6,7 @@ exports.addMembership = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -43,7 +43,7 @@ exports.deleteMembership = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -77,7 +77,7 @@ exports.updateMembership = (req, res) => {
     Memberships.findById(_id).exec((error, membership) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wrong",
+                msg: "Somethings wen Wrong, can't get any thing from DB",
                 error: error
             })
         }

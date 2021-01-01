@@ -6,7 +6,7 @@ exports.addOtherTraining = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -43,7 +43,7 @@ exports.deleteOtherTraining = (req, res) => {
         .exec((error, cv) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Somethings went Wrong",
+                    msg: "Somethings went Wrong, can't get any thing from DB",
                     error: error
                 })
             }
@@ -77,7 +77,7 @@ exports.updateOtherTraining = (req, res) => {
     OtherTraining.findById(_id).exec((error, otherTraining) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wrong",
+                msg: "Somethings wen Wron, can't get any thing from DBg",
                 error: error
             })
         }

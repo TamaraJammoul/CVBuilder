@@ -68,16 +68,13 @@ a:active {
       width: 350px !important;
   }
     .login{
-      margin:10px !important;
     height: 500px;
 
     }
     .login h1,.signup h1{
       font-size: large;
     }
-    .signup{
-     margin:10px !important;
-    }
+   
 }
 
 @media only screen and (max-width: 700px) {

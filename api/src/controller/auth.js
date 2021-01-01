@@ -24,7 +24,7 @@ exports.signUp = (req, res) => {
         _user.save((error, data) => {
             if (error) {
                 return res.status(400).json({
-                    msg: "Something went wrong",
+                    msg: "Something went wrong, can't get any thing from DB",
                     error: error
                 });
             }
@@ -78,7 +78,7 @@ exports.logIn = (req, res) => {
             }
             else {
                 return res.status(400).json({
-                    msg: "Something went Wrong"
+                    msg: "Something went Wrong, can't get any thing from DB"
                 });
             }
         });

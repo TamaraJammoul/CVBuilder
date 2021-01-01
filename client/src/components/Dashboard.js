@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Grid, Button} from "@material-ui/core";
 import Template from "./CV/Template";
-import {AddCVAction} from "./../store/action/action";
+import {AddCVAction, DeleteCVAction} from "./../store/action/cv";
 import {useTranslation} from "react-i18next";
 import {useSelector, useDispatch} from "react-redux";
 
