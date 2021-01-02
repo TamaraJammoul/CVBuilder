@@ -1,14 +1,14 @@
 import {
-  ADDPERSONALSKILL,
-  EDITPERSONALSKILL,
-  DELETEPERSONALSKILL,
-  COPYPERSONALSKILL,
+  ADDTECHNICALSKILL,
+  EDITTECHNICALSKILL,
+  DELETETECHNICALSKILL,
+  COPYTECHNICALSKILL,
 } from "./types";
 import axios from "axios";
-export function AddPersonalSkillsAction(payload) {
+export function AddTechnicalSkillsAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/personalSkills/addPersonalSkills`, {
+      .post(`http://localhost:5000/api/technicalSkills/addTechnicalSkills`, {
         Name: payload.skill,
         Order: payload.order,
         _id: payload.cvID,
@@ -17,51 +17,51 @@ export function AddPersonalSkillsAction(payload) {
       .then((res) => {
         console.log(res.data);
         dispatch({
-          type: ADDPERSONALSKILL,
+          type: ADDTECHNICALSKILL,
           payload: res.data,
         });
       });
   };
 }
-export function CopyPersonalSkillsAction(payload) {
+export function CopyTechnicalSkillsAction(payload) {
   return (dispatch) => {
     dispatch({
-      type: COPYPERSONALSKILL,
+      type: COPYTECHNICALSKILL,
       payload,
     });
   };
 }
-export function DeletePersonalSkillAction(payload) {
+export function DeleteTechnicalSkillAction(payload) {
   console.log(payload);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/personalSkills/deletePersonalSkills`, {
-        personalSkill_id: payload.personalSkill_id,
+      .post(`http://localhost:5000/api/technicalSkills/deleteTechnicalSkills`, {
+        technicalSkill_id: payload.technicalSkill_id,
         Order: 1,
         _id: payload.cvID,
       })
       .then((res) => {
         console.log(res);
         dispatch({
-          type: DELETEPERSONALSKILL,
+          type: DELETETECHNICALSKILL,
           payload,
         });
       });
   };
 }
-export function EditPersonalSkillAction(payload) {
+export function EditTechnicalSkillAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/personalSkills/addPersonalSkills`, {
+      .post(`http://localhost:5000/api/technicalSkills/editTechnicalSkills`, {
         Name: payload.skill,
         Order: payload.order,
-        _id: payload.cvID,
+        _id: payload.id,
         Rate: payload.rate,
       })
       .then((res) => {
         console.log(res.data);
         dispatch({
-          type: EDITPERSONALSKILL,
+          type: EDITTECHNICALSKILL,
           payload: res.data,
         });
       });

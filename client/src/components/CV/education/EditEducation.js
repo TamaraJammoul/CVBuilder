@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {EditEducationAction} from "./../../../store/action/education";
 import {useSelector, useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 export default function AddEducation(props) {
@@ -18,6 +18,9 @@ export default function AddEducation(props) {
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
 
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("educationID");
   const data = {
     faculty,
     universityName,
@@ -26,7 +29,7 @@ export default function AddEducation(props) {
     endDate,
     rate5,
     grade,
-    cvID,
+    id,
   };
 
   const handelCancel = () => {

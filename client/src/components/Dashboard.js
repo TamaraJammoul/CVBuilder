@@ -10,6 +10,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const email = useSelector((state) => state.email);
+  const myTemplate = useSelector((state) => state.MyTemplates);
 
   useEffect(() => {
     dispatch(GetAllCVAction(email));
@@ -35,9 +36,11 @@ export default function Dashboard() {
           justify="center"
           alignItems="center"
         >
-          <Grid item xs={12} sm={4}>
-            <Template />
-          </Grid>
+          {myTemplate.map((template) => (
+            <Grid item xs={12} sm={4}>
+              <Template template />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Grid>

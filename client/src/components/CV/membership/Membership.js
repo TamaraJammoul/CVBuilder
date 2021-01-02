@@ -46,7 +46,7 @@ export default function Membership() {
                       <h6>{mem.name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to="/editmembership">
+                      <Link to={`/editmembership?membershipID=${mem._id}`}>
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -67,7 +67,10 @@ export default function Membership() {
                         <Delete
                           onClick={() =>
                             dispatch(
-                              DeleteMembershipAction({cvID, membership_id: "1"})
+                              DeleteMembershipAction({
+                                cvID,
+                                membership_id: mem._id,
+                              })
                             )
                           }
                         />

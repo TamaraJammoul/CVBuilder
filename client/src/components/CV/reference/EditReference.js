@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {EditReferenceAction} from "./../../../store/action/reference";
 import {useSelector, useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 export default function EditReference(props) {
@@ -12,7 +12,10 @@ export default function EditReference(props) {
   let history = useHistory();
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
-  const data = {cvID, reference, phone, order: "1"};
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("referenceID");
+  const data = {id, reference, phone, order: "1"};
   const handelCancel = () => {
     setReference("");
     setPhone("");

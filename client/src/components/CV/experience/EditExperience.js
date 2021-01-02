@@ -3,7 +3,7 @@ import {Button, Paper, Grid, Container, TextField} from "@material-ui/core";
 
 import {EditExperienceAction} from "./../../../store/action/experience";
 import {useSelector, useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 export default function Experience(props) {
@@ -13,8 +13,10 @@ export default function Experience(props) {
   const [endDate, setEndDate] = useState("");
   const [project, setProject] = useState("");
   const cvID = useSelector((state) => state.cvID);
-
-  const data = {description, experienceName, startDate, endDate, project, cvID};
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("experienceID");
+  const data = {description, experienceName, startDate, endDate, project, id};
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();

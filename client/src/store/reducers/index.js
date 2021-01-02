@@ -3,7 +3,11 @@ export default function reducer(state, action) {
     case "ADDCV":
       return {
         ...state,
-        MyTemplates: [...state.template.MyTemplates, action.payload],
+        cvID: action.payload.cv_id,
+        template: {
+          ...state.template,
+          careerObjectives_id: action.payload.careerObjectives_id,
+        },
       };
     case "DELETECV":
       var temp = state.MyTemplates;
@@ -69,13 +73,13 @@ export default function reducer(state, action) {
           ],
         },
       };
-    case "ADDPERSONALSKILL":
+    case "ADDTECHNICALSKILL":
       console.log(action.payload);
       return {
         ...state,
         template: {
           ...state.template,
-          personalskills: [...state.template.personalskills, action.payload],
+          technicalskills: [...state.template.technicalskills, action.payload],
         },
       };
     case "ADDREFERENCE":
@@ -94,7 +98,6 @@ export default function reducer(state, action) {
           skills: [...state.template.skills, action.payload],
         },
       };
-
     case "DELETEREFERENCE":
       var temp = state.template.references;
       temp = temp.filter((e) => e != action.payload);
@@ -411,19 +414,19 @@ export default function reducer(state, action) {
           experiences: [...state.template.experiences, temp],
         },
       };
-    case "DELETEPERSONALSKILL":
-      var temp = state.template.personalskills;
+    case "DELETETECHNICALSKILL":
+      var temp = state.template.technicalskills;
       temp = temp.filter((e) => e.skill != action.payload);
       console.log("iiiiiiiiii", temp);
       return {
         ...state,
         template: {
           ...state.template,
-          personalskills: temp,
+          technicalskills: temp,
         },
       };
-    case "EDITPERSONALSKILL":
-      var temp = state.template.personalskills;
+    case "EDITTECHNICALSKILL":
+      var temp = state.template.technicalskills;
       temp.map((e, i) => {
         if (e.skill == action.payload.oldName) {
           e.skill = action.payload.newName;
@@ -437,9 +440,9 @@ export default function reducer(state, action) {
           othertraining: temp,
         },
       };
-    case "COPYPERSONALSKILL":
+    case "COPYTECHNICALSKILL":
       var temp;
-      state.template.personalskills.map((e, i) => {
+      state.template.technicalskills.map((e, i) => {
         if (e.skill == action.payload.name) {
           temp = e;
         }
@@ -449,7 +452,7 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          personalskills: [...state.template.personalskills, temp],
+          technicalskills: [...state.template.technicalskills, temp],
         },
       };
     case "LOGIN":

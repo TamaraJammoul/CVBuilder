@@ -21,7 +21,7 @@ export function DeleteCVAction(payload) {
     axios
       .post(`http://localhost:5000/api/CV/deleteCV`, {
         Email: payload.email,
-        id: payload.id,
+        id: payload.cvID,
       })
       .then((res) => {
         console.log(res);

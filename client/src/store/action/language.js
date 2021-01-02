@@ -51,7 +51,7 @@ export function EditLanguageAction(payload) {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
-        _id: payload.cvID,
+        _id: payload.id,
       })
       .then((res) => {
         console.log(res.data);

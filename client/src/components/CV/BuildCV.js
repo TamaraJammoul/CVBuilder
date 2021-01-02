@@ -8,9 +8,9 @@ import EditExperience from "./experience/EditExperience";
 import OtherTraining from "./othertraining/OtherTraining";
 import AddOtherTraining from "./othertraining/AddOtherTraining";
 import EditOtherTraining from "./othertraining/EditOtherTraining";
-import PersonalSkills from "./personalskill/PersonalSkills";
-import AddPersonalSkills from "./personalskill/AddPersonalSkill";
-import EditPersonalSkills from "./personalskill/EditPersonalSkill";
+import TechnicalSkills from "./technicalskill/TechnicalSkills";
+import AddTechnicalSkills from "./technicalskill/AddTechnicalSkill";
+import EditTechnicalSkills from "./technicalskill/EditTechnicalSkill";
 import Membership from "./membership/Membership";
 import AddMembership from "./membership/AddMembership";
 import EditMembership from "./membership/EditMembership";
@@ -126,7 +126,9 @@ export default function BuildCV(props) {
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <EmojiPeople />
                 </span>
-                <Link to={`${url}/personalskills`}>{t("PersonalSkills")}</Link>
+                <Link to={`${url}/technicalskills`}>
+                  {t("TechnicalSkills")}
+                </Link>
               </h3>
             </Grid>
             <Grid item>
@@ -190,16 +192,16 @@ export default function BuildCV(props) {
                   />
 
                   <Route
-                    path={`${path}/personalskills`}
-                    render={(props) => <PersonalSkills />}
+                    path={`${path}/technicalskills`}
+                    render={(props) => <TechnicalSkills />}
                   />
                   <Route
-                    path={`${path}/addpersonalskills`}
-                    render={(props) => <AddPersonalSkills />}
+                    path={`${path}/addtechnicalskills`}
+                    render={(props) => <AddTechnicalSkills />}
                   />
                   <Route
-                    path={`${path}/editpersonalskills`}
-                    render={(props) => <EditPersonalSkills />}
+                    path={`${path}/edittechnicalskills`}
+                    render={(props) => <EditTechnicalSkills />}
                   />
                   <Route
                     path={`${path}/othertraining`}

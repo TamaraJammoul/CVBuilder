@@ -68,7 +68,9 @@ export default function Education() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to="/buildcv/editeducation">
+                      <Link
+                        to={`/buildcv/editeducation?educationID=${edu._id}`}
+                      >
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -93,7 +95,10 @@ export default function Education() {
                         <Delete
                           onClick={() =>
                             dispatch(
-                              DeleteEducationAction({cvID, education_id: "1"})
+                              DeleteEducationAction({
+                                cvID,
+                                education_id: edu._id,
+                              })
                             )
                           }
                         />

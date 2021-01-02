@@ -61,7 +61,7 @@ export function EditExperienceAction(payload) {
         Project: payload.project,
         Description: payload.description,
         Order: 1,
-        _id: payload.cvID,
+        _id: payload.id,
       })
       .then((res) => {
         console.log(res.data);

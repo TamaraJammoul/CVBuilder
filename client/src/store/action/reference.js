@@ -55,7 +55,7 @@ export function EditReferenceAction(payload) {
       .post(`http://localhost:5000/api/referance/updateReferance`, {
         Name: payload.reference,
         Order: payload.order,
-        _id: payload.cvID,
+        _id: payload.id,
         Number: payload.phone,
       })
       .then((res) => {

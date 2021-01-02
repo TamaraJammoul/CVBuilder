@@ -44,7 +44,7 @@ export default function Refernce() {
                       <h6>{ref.name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to="/buildcv/editreference">
+                      <Link to={`/editreference?referenceID=${ref._id}`}>
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -71,7 +71,7 @@ export default function Refernce() {
                         onClick={() => {
                           console.log("kljklj");
                           dispatch(
-                            DeleteReferenceAction({cvID, reference_id: "1"})
+                            DeleteReferenceAction({cvID, reference_id: ref._id})
                           );
                         }}
                       >

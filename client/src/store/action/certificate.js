@@ -56,7 +56,7 @@ export function EditCertificateAction(payload) {
         year: payload.date,
         Description: payload.description,
         Order: payload.order,
-        _id: payload.cvID,
+        _id: payload.id,
       })
       .then((res) => {
         console.log(res.data);

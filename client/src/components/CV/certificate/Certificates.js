@@ -64,7 +64,7 @@ export default function Certificates() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to="/buildcv/editcertificate">
+                      <Link to={`/editcertificate?certificateID=${cer._id}`}>
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -90,7 +90,10 @@ export default function Certificates() {
                         aria-label="delete"
                         onClick={() =>
                           dispatch(
-                            DeleteCertificateAction({cvID, certificate_id: "1"})
+                            DeleteCertificateAction({
+                              cvID,
+                              certificate_id: cer._id,
+                            })
                           )
                         }
                       >

@@ -17,6 +17,9 @@ export default function CareerObjectives() {
   const careerobjective = useSelector(
     (state) => state.template.careerobjective
   );
+  const careerObjectives_id = useSelector(
+    (state) => state.template.careerObjectives_id
+  );
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
 
@@ -79,7 +82,9 @@ export default function CareerObjectives() {
                     className="save"
                     style={{float: "right"}}
                     onClick={() =>
-                      dispatch(EditCareerObjectiveAction({text, cvID}))
+                      dispatch(
+                        EditCareerObjectiveAction({text, careerObjectives_id})
+                      )
                     }
                   >
                     {t("save")}

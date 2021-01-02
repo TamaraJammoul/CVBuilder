@@ -10,17 +10,18 @@ import {
 } from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
-import AddPersonalSkill from "./AddPersonalSkill";
 import {
-  DeletePersonalSkillAction,
-  CopyPersonalSkillsAction,
-} from "./../../../store/action/personalskill";
+  DeleteTechnicalSkillAction,
+  CopyTechnicalSkillsAction,
+} from "../../../store/action/technicalskill";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
-export default function PersonalSkills() {
+export default function TechnicalSkills() {
   const dispatch = useDispatch();
-  const personalskills = useSelector((state) => state.template.personalskills);
+  const technicalskills = useSelector(
+    (state) => state.template.technicalskills
+  );
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
 
@@ -29,12 +30,12 @@ export default function PersonalSkills() {
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>{t("PersonalSkills")}</h2>
+            <h2>{t("TechnicalSkills")}</h2>
           </Grid>
           <Grid item>
-            <h5>{t("PersonalSkillsText")}</h5>
+            <h5>{t("TechnicalSkillsText")}</h5>
           </Grid>
-          {personalskills.map((per, i) => (
+          {technicalskills.map((per, i) => (
             <Grid item>
               <Paper>
                 <Container>
@@ -115,7 +116,9 @@ export default function PersonalSkills() {
                           </Grid>
                           <Grid item xs={1}>
                             <IconButton aria-label="delete">
-                              <Link to="/editothertraining">
+                              <Link
+                                to={`/editothertraining?technicalskillIDID=${per._id}`}
+                              >
                                 {" "}
                                 <Edit />
                               </Link>
@@ -126,7 +129,7 @@ export default function PersonalSkills() {
                               <FileCopy
                                 onClick={() =>
                                   dispatch(
-                                    CopyPersonalSkillsAction({
+                                    CopyTechnicalSkillsAction({
                                       name: "rr",
                                     })
                                   )
@@ -139,9 +142,9 @@ export default function PersonalSkills() {
                               <Delete
                                 onClick={() =>
                                   dispatch(
-                                    DeletePersonalSkillAction({
+                                    DeleteTechnicalSkillAction({
                                       cvID,
-                                      personalSkill_id: "1",
+                                      technicalSkill_id: per._id,
                                     })
                                   )
                                 }
@@ -164,14 +167,14 @@ export default function PersonalSkills() {
 
           <Grid item xs={12}>
             {" "}
-            <Link to="/addothertraining">
+            <Link to="/addtechnicalskills">
               {" "}
               <Button
                 variant="contained"
                 style={{backgroundColor: "#5B2338"}}
                 startIcon={<DeleteIcon />}
               >
-                {t("AddPersonalSkill")}
+                {t("AddTechnicalSkill")}
               </Button>
             </Link>
           </Grid>

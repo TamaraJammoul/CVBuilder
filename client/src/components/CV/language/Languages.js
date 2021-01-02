@@ -79,7 +79,7 @@ export default function Languages() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to="/editlanguage">
+                      <Link to={`/editlanguage?language_id=${lan._id}`}>
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -104,7 +104,7 @@ export default function Languages() {
                         <Delete
                           onClick={() =>
                             dispatch(
-                              DeleteLanguageAction({cvID, language_id: "1"})
+                              DeleteLanguageAction({cvID, language_id: lan._id})
                             )
                           }
                         />

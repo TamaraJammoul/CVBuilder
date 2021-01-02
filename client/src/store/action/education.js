@@ -63,7 +63,7 @@ export function EditEducationAction(payload) {
         DegreeFrom5: payload.rate5,
         Order: 1,
         Grade: payload.grade,
-        _id: payload.cvID,
+        _id: payload.id,
       })
       .then((res) => {
         console.log(res.data);

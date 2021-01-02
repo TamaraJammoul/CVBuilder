@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {EditCertificateAction} from "./../../../store/action/certificate";
 import {useSelector, useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 export default function EditCertificate(props) {
@@ -13,7 +13,10 @@ export default function EditCertificate(props) {
   const cvID = useSelector((state) => state.cvID);
   let history = useHistory();
   const {t, i18n} = useTranslation();
-  const data = {name, description, date, cvID, order: "1"};
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("certificateID");
+  const data = {name, description, date, id, order: "1"};
   const handelCancel = () => {
     setName("");
     setDate("");

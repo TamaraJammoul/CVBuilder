@@ -11,14 +11,16 @@ import Rating from "@material-ui/lab/Rating";
 import {EditLanguageAction} from "./../../../store/action/language";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
-
-  const data = {language, rate, cvID, order: "1"};
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("languageID");
+  const data = {language, rate, id, order: "1"};
   let history = useHistory();
   const {t, i18n} = useTranslation();
 

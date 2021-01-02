@@ -7,7 +7,7 @@ export function EditCareerObjectiveAction(payload) {
     axios
       .post(`http://localhost:5000/api/career/updateCareer`, {
         Text: payload.text,
-        _id: payload.cvID,
+        _id: payload.careerObjectives_id,
       })
       .then((res) => {
         console.log(res.data);

@@ -1,24 +1,20 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {EditOtherTrainingAction} from "./../../../store/action/othertraining";
+import {EditCoursesAction} from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-export default function AddOtherTraining(props) {
-  const [otherTraining, setOtherTraining] = useState("");
+export default function EditCourse(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
+  const [coursesName, setCoursesName] = useState("");
   const cvID = useSelector((state) => state.cvID);
-  const useQuery = () => new URLSearchParams(useLocation().search);
-  let query = useQuery();
-  const id = query.get("othertrainingID");
-  const data = {id, otherTraining, order: "1"};
 
   const handelCancel = () => {
-    setOtherTraining("");
-    history.push("/buildcv/othertraining");
+    setCoursesName("");
+    history.push("/buildcv/courses");
   };
   return (
     <Container>
@@ -31,17 +27,17 @@ export default function AddOtherTraining(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>{t("EditOtherTraining")}</h2>
+            <h2>{"EditCourses"}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label={t("OtherTraining")}
+              label={t("CoursesName")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
-              onChange={(e) => setOtherTraining(e.target.value)}
+              onChange={(e) => setCoursesName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -57,7 +53,9 @@ export default function AddOtherTraining(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(EditOtherTrainingAction(data))}
+              onClick={() =>
+                dispatch(EditCoursesAction({coursesName, cvID, order: "1"}))
+              }
             >
               {t("save")}
             </Button>

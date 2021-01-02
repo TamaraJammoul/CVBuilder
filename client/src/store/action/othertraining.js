@@ -53,7 +53,7 @@ export function EditOtherTrainingAction(payload) {
       .post(`http://localhost:5000/api/otherTraining/updateOtherTraining`, {
         Name: payload.otherTraining,
         Order: payload.order,
-        _id: payload.cvID,
+        _id: payload.id,
       })
       .then((res) => {
         console.log(res.data);

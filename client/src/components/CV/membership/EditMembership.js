@@ -3,7 +3,7 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {EditMembershipAction} from "./../../../store/action/membership";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 
 export default function AddMembership(props) {
   const dispatch = useDispatch();
@@ -11,7 +11,9 @@ export default function AddMembership(props) {
   const {t, i18n} = useTranslation();
   const [membershipName, setMembershipName] = useState("");
   const cvID = useSelector((state) => state.cvID);
-
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("membershipID");
   const handelCancel = () => {
     setMembershipName("");
     history.push("/buildcv/membership");
@@ -54,9 +56,7 @@ export default function AddMembership(props) {
               className="save"
               style={{float: "right"}}
               onClick={() =>
-                dispatch(
-                  EditMembershipAction({membershipName, cvID, order: "1"})
-                )
+                dispatch(EditMembershipAction({membershipName, id, order: "1"}))
               }
             >
               {t("save")}

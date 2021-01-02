@@ -3,31 +3,29 @@ import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
-  DeleteOtherTrainingAction,
-  CopyOtherTrainingAction,
-} from "./../../../store/action/othertraining";
+  EditCoursesAction,
+  DeleteCoursesAction,
+  CopyCoursesAction,
+} from "../../../store/action/membership";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Link, useLocation} from "react-router-dom";
-export default function OtherTraining(props) {
+import {Link} from "react-router-dom";
+export default function Courses() {
+  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
-  const othertraining = useSelector((state) => state.template.othertraining);
+  const courses = useSelector((state) => state.template.courses);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
-  const useQuery = () => new URLSearchParams(useLocation().search);
-  let query = useQuery();
-  const id = query.get("othertrainingID");
+
   return (
     <Paper>
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item>
-            <h2>{t("YourOtherTraining")}</h2>
+            <h2>{t("YourCourses")}</h2>
           </Grid>
-          <Grid item>
-            <h5>{t("OtherTrainingText")}</h5>
-          </Grid>
-          {othertraining.map((oth, i) => (
+
+          {memberships.map((mem, i) => (
             <Grid item>
               <Paper>
                 <Container>
@@ -42,12 +40,11 @@ export default function OtherTraining(props) {
                       <h4>{i + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
-                      <h6>{oth.name}</h6>{" "}
+                      <h6>{mem.name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <Link
-                        to={`/editothertraining?othertrainingID=${oth._id}`}
-                      >
+                      <Link to="/editcourses">
+                        {" "}
                         <IconButton aria-label="delete">
                           <Edit />
                         </IconButton>
@@ -57,11 +54,7 @@ export default function OtherTraining(props) {
                       <IconButton aria-label="delete">
                         <FileCopy
                           onClick={() =>
-                            dispatch(
-                              CopyOtherTrainingAction({
-                                name: "rr",
-                              })
-                            )
+                            dispatch(CopyCoursesAction({name: "rr"}))
                           }
                         />
                       </IconButton>
@@ -71,10 +64,7 @@ export default function OtherTraining(props) {
                         <Delete
                           onClick={() =>
                             dispatch(
-                              DeleteOtherTrainingAction({
-                                otherTraining_id: oth._id,
-                                cvID,
-                              })
+                              DeleteCoursesAction({cvID, courses_id: "1"})
                             )
                           }
                         />
@@ -93,14 +83,14 @@ export default function OtherTraining(props) {
 
           <Grid item xs={12}>
             {" "}
-            <Link to="addothertraining">
+            <Link to="/addcourses">
               {" "}
               <Button
                 variant="contained"
                 style={{backgroundColor: "#5B2338"}}
                 startIcon={<DeleteIcon />}
               >
-                {t("AddOtherTraining")}
+                {t("AddCourse")}
               </Button>
             </Link>
           </Grid>

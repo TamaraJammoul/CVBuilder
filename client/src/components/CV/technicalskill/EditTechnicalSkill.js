@@ -8,24 +8,27 @@ import {
   Container,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import {AddPersonalSkillsAction} from "./../../../store/action/personalskill";
+import {EditTechnicalSkillAction} from "../../../store/action/technicalskill";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 
-export default function AddPersonalSkill(props) {
+export default function EditTechnicalSkill(props) {
   const [skill, setSkill] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("technicalskillID");
+  const data = {rate, skill, order: "1", id};
 
-  const data = {rate, skill, cvID};
   const handelCancel = () => {
     setSkill("");
     setRate(2);
-    history.push("/buildcv/personalskill");
+    history.push("/buildcv/tchnicalskill");
   };
   return (
     <Container>
@@ -39,14 +42,14 @@ export default function AddPersonalSkill(props) {
             style={{textAlign: "center"}}
           >
             <Grid item xs={12}>
-              <h2>{t("AddPersonalSkill")}</h2>
+              <h2>{t("Edit Technical Skill")}</h2>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 id="filled-basic"
                 label={t("Skill")}
                 variant="filled"
-                placeholder="eg.Microsoft Word"
+                placeholder={t("eg.Microsoft Word")}
                 style={{width: "100%"}}
                 onChange={(e) => setSkill(e.target.value)}
               />
@@ -63,7 +66,7 @@ export default function AddPersonalSkill(props) {
             </Grid>
             <Grid item xs={12}>
               <Button
-                variant="outlined"
+                variant="contained"
                 className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
@@ -74,7 +77,7 @@ export default function AddPersonalSkill(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddPersonalSkillsAction(data))}
+                onClick={() => dispatch(EditTechnicalSkillAction(data))}
               >
                 {t("save")}
               </Button>
