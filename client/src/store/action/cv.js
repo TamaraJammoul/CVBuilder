@@ -5,13 +5,13 @@ export function AddCVAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/CV/addCV`, {
-        Email: payload.email,
+        Email: payload,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: ADDCV,
-          payload,
+          payload: res.data,
         });
       });
   };

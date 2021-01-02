@@ -12,14 +12,18 @@ exports.addEducation = (req, res) => {
             }
             if (cv) {
                 const {
-                    UniversityName, Faculty, YearStart,
-                    YearEnd, DegreeFrom5, DegreeFrom100,
+                    UniversityName, Faculty, Field, YearStart,
+                    YearEnd, DegreeFrom5, Grade,
                     Degree, Order
                 } = req.body;
+
+                const DegreeFrom10 = DegreeFrom5 * 2;
+                const DegreeFrom100 = DegreeFrom5 * 20;
+
                 let education = new Education({
-                    UniversityName, Faculty, YearStart,
-                    YearEnd, DegreeFrom5, DegreeFrom100,
-                    Degree, Order
+                    UniversityName, Faculty, Field, YearStart,
+                    YearEnd, Grade, DegreeFrom5, DegreeFrom10,
+                    DegreeFrom100, Degree, Order
                 });
                 education.save()
                     .then((edu) => {
@@ -77,7 +81,7 @@ exports.deleteEducation = (req, res) => {
 }
 
 exports.updateEducation = (req, res) => {
-    const { _id, UniversityName, Faculty, YearStart, YearEnd, DegreeFrom5, DegreeFrom100, Degree, Order } = req.body;
+    const { _id, UniversityName, Faculty, Field, YearStart, YearEnd, Grade, DegreeFrom5, Degree, Order } = req.body;
     Education.findById(_id).exec((error, education) => {
         if (error) {
             return res.status(400).json({
@@ -85,14 +89,19 @@ exports.updateEducation = (req, res) => {
                 error: error
             })
         }
+        const DegreeFrom10 = DegreeFrom5 * 2;
+        const DegreeFrom100 = DegreeFrom5 * 20;
         if (education) {
             Education.updateOne({ _id: _id }, {
                 $set: {
                     UniversityName,
                     Faculty,
+                    Field,
                     YearStart,
                     YearEnd,
+                    Grade,
                     DegreeFrom5,
+                    DegreeFrom10,
                     DegreeFrom100,
                     Degree,
                     Order
@@ -104,9 +113,12 @@ exports.updateEducation = (req, res) => {
                         _id,
                         UniversityName,
                         Faculty,
+                        Field,
                         YearStart,
                         YearEnd,
+                        Grade,
                         DegreeFrom5,
+                        DegreeFrom10,
                         DegreeFrom100,
                         Degree,
                         Order

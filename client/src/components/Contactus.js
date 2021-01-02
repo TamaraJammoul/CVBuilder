@@ -4,7 +4,8 @@ import logo from "./../img/logo.png";
 import {useHistory} from "react-router-dom";
 import {ContactusAction} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
-
+import {useTranslation} from "react-i18next";
+import {Button} from "@material-ui/core";
 export default function Getintouch() {
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
@@ -12,6 +13,8 @@ export default function Getintouch() {
   const [number, setnumber] = useState("");
   const data = {name, email, number, message};
   //const state = useSelector((state) => state.template[0]);
+  const {t} = useTranslation();
+
   const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,7 +38,7 @@ export default function Getintouch() {
         </div>
         <div className="div col-md-10">
           {" "}
-          <h3 className="text-right ">تواصل معنا</h3>
+          <h3 className="text-right ">{t("Contact US")}</h3>
         </div>
       </div>
       <hr />
@@ -49,7 +52,7 @@ export default function Getintouch() {
                     <input
                       id="Full Name"
                       name="Full Name"
-                      placeholder="اسمك الكامل"
+                      placeholder={t("FullName")}
                       className="form-control text-right"
                       type="text"
                       value={name}
@@ -61,7 +64,7 @@ export default function Getintouch() {
                       type="email"
                       className="form-control text-right"
                       id="inputEmail4"
-                      placeholder="البريد الإلكتروني"
+                      placeholder={t("Email")}
                       value={email}
                       onChange={(event) => setemail(event.target.value)}
                     />
@@ -70,7 +73,7 @@ export default function Getintouch() {
                     <input
                       id="Mobile No."
                       name="Mobile No."
-                      placeholder="رقم الموبايل"
+                      placeholder={t("Phone")}
                       className="form-control text-right"
                       required="required"
                       type="text"
@@ -85,7 +88,7 @@ export default function Getintouch() {
                       name="comment"
                       cols="40"
                       rows="5"
-                      placeholder="رسالتك"
+                      placeholder={t("Message")}
                       className="form-control text-right"
                       value={message}
                       onChange={(event) => setmessage(event.target.value)}
@@ -94,7 +97,14 @@ export default function Getintouch() {
                 </div>
 
                 <div className="form-row">
-                  <p onClick={onSubmit}></p>
+                  <Button
+                    variant="contained"
+                    className="save"
+                    style={{float: "right"}}
+                    onClick={onSubmit()}
+                  >
+                    {t("Send")}
+                  </Button>
                 </div>
               </form>
             </div>
@@ -102,15 +112,15 @@ export default function Getintouch() {
         </div>
         <div className="col-md-6">
           <div className="text-right mb-5">
-            <h5 className="mt-3">:العنوان</h5>
+            <h5 className="mt-3">{"Address"}</h5>
             <p> دمشق -النبك</p>
           </div>
           <div className="text-right mb-2">
-            <h5>الإيميل</h5>
+            <h5>{"Email"}</h5>
             <p> info@irtaki.com</p>
           </div>
           <div className="text-right mb-5">
-            <h5>رقم الهاتف</h5>
+            <h5>{"Phone"}</h5>
             <p> +963-0930737281</p>
           </div>
           <hr />

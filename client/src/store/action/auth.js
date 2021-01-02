@@ -9,10 +9,10 @@ export function LoginAction(payload) {
         Password: payload.password,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: LOGIN,
-          payload,
+          payload: res.data,
         });
       });
   };
@@ -27,10 +27,10 @@ export function SignupAction(payload) {
         Password: payload.password,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: SIGNUP,
-          payload,
+          payload: res.data,
         });
       });
   };

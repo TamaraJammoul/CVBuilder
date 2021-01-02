@@ -8,16 +8,16 @@ import axios from "axios";
 export function AddMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membershop/addMembership`, {
-        Name: payload.name,
-        Order: 1,
-        _id: payload.id,
+      .post(`http://localhost:5000/api/membership/addMembership`, {
+        Name: payload.membershipName,
+        Order: payload.order,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: ADDMEMBERSHIP,
-          payload,
+          payload: res.data,
         });
       });
   };
@@ -36,23 +36,31 @@ export function DeleteMembershipAction(payload) {
     axios
       .post(`http://localhost:5000/api/membershop/deleteMembership`, {
         membership_id: payload.membership_id,
-        _id: payload.id,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: DELETEMEMBERSHIP,
-          payload,
+          payload: res.data,
         });
       });
   };
 }
 export function EditMembershipAction(payload) {
-  console.log(payload);
   return (dispatch) => {
-    dispatch({
-      type: EDITMEMBERSHIP,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/membership/updateMembership`, {
+        Name: payload.membershipName,
+        Order: payload.order,
+        _id: payload.cvID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: EDITMEMBERSHIP,
+          payload: res.data,
+        });
+      });
   };
 }

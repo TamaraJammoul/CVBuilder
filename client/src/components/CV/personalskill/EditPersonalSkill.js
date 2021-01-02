@@ -19,7 +19,9 @@ export default function AddPersonalSkill(props) {
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   let history = useHistory();
-  const data = {rate, skill};
+  const cvID = useSelector((state) => state.cvID);
+
+  const data = {rate, skill, order: "1", cvID};
 
   const handelCancel = () => {
     setSkill("");
@@ -73,15 +75,7 @@ export default function AddPersonalSkill(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() =>
-                  dispatch(
-                    EditPersonalSkillAction({
-                      oldName: "rr",
-                      newName: "",
-                      newRate: 0,
-                    })
-                  )
-                }
+                onClick={() => dispatch(EditPersonalSkillAction(data))}
               >
                 {t("save")}
               </Button>

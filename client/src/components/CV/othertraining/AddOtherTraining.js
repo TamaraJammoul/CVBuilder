@@ -10,6 +10,7 @@ export default function AddOtherTraining(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   const handelCancel = () => {
     setOtherTraining("");
@@ -53,7 +54,11 @@ export default function AddOtherTraining(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(AddOtherTrainingAction(otherTraining))}
+              onClick={() =>
+                dispatch(
+                  AddOtherTrainingAction({otherTraining, cvID, order: "1"})
+                )
+              }
             >
               {t("save")}
             </Button>

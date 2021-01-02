@@ -1,7 +1,7 @@
 const CV = require('../../models/CV');
-const Referance = require('../../models/sections/Referance');
+const Reference = require('../../models/sections/Reference');
 
-exports.addReferance = (req, res) => {
+exports.addReference = (req, res) => {
     CV.findOne({ _id: req.body._id })
         .exec((error, cv) => {
             if (error) {
@@ -11,16 +11,16 @@ exports.addReferance = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, Order } = req.body;
-                let referance = new Referance({ Name, Order });
-                referance.save()
+                const { Name, Number, Order } = req.body;
+                let reference = new Reference({ Name, Number, Order });
+                reference.save()
                     .then((ref) => {
-                        let tmpReferance = cv.Referances;
-                        tmpReferance.push(ref._id);
-                        cv.updateOne({ Referances: tmpReferance })
+                        let tmpReference = cv.References;
+                        tmpReference.push(ref._id);
+                        cv.updateOne({ References: tmpReference })
                             .then(() => {
                                 return res.status(200).json({
-                                    msg: "Referance added successfuly",
+                                    msg: "Reference added successfuly",
                                     data: ref
                                 })
                             })
@@ -34,7 +34,7 @@ exports.addReferance = (req, res) => {
         })
 }
 
-exports.deleteReferance = (req, res) => {
+exports.deleteReference = (req, res) => {
     CV.findOne({ _id: req.body._id })
         .exec((error, cv) => {
             if (error) {
@@ -44,23 +44,23 @@ exports.deleteReferance = (req, res) => {
                 })
             }
             if (cv) {
-                let tmpReferance = cv.Referances;
+                let tmpReference = cv.References;
                 let index = -1;
-                for (let i = 0; i < tmpReferance.length; i++) {
-                    if (tmpReferance[i].toString() === req.body.referance_id) {
+                for (let i = 0; i < tmpReference.length; i++) {
+                    if (tmpReference[i].toString() === req.body.reference_id) {
                         index = i;
                         break;
                     }
                 }
                 if (index > -1) {
-                    tmpReferance.splice(index, 1);
+                    tmpReference.splice(index, 1);
                 }
-                CV.updateOne({ _id: req.body._id }, { $set: { Referances: tmpReferance } })
+                CV.updateOne({ _id: req.body._id }, { $set: { References: tmpReference } })
                     .then(() => {
-                        Referance.deleteOne({ _id: req.body.referance_id }).then(() => {
+                        Reference.deleteOne({ _id: req.body.reference_id }).then(() => {
                             return res.status(200).json({
-                                msg: "Referance deleted",
-                                data: tmpReferance
+                                msg: "Reference deleted",
+                                data: tmpReference
                             })
                         })
                     })
@@ -68,27 +68,29 @@ exports.deleteReferance = (req, res) => {
         })
 }
 
-exports.updateReferance = (req, res) => {
-    const { _id, Name, Order } = req.body;
-    Referance.findById(_id).exec((error, referance) => {
+exports.updateReference = (req, res) => {
+    const { _id, Name, Number, Order } = req.body;
+    Reference.findById(_id).exec((error, reference) => {
         if (error) {
             return res.status(400).json({
                 msg: "Somethings went Wrong, can't get any thing from DB",
                 error: error
             })
         }
-        if (referance) {
-            Referance.updateOne({ _id: _id }, {
+        if (reference) {
+            Reference.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    Number,
                     Order
                 }
             }).then(() => {
                 return res.status(200).json({
-                    msg: "Referance updated successfully",
+                    msg: "Reference updated successfully",
                     data: {
                         _id,
                         Name,
+                        Number,
                         Order
                     }
                 })
@@ -96,7 +98,7 @@ exports.updateReferance = (req, res) => {
         }
         else {
             return res.status(200).json({
-                msg: "No Referance found",
+                msg: "No Reference found",
             })
         }
     })

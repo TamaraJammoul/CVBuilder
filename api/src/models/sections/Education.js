@@ -4,9 +4,12 @@ const { String, Number } = mongoose.Schema.Types;
 const EducationSchema = new mongoose.Schema({
     UniversityName: String,
     Faculty: String,
+    Field: String,
     YearStart: Number,
     YearEnd: Number,
+    Grade: String,
     DegreeFrom5: Number,
+    DegreeFrom10: Number,
     DegreeFrom100: Number,
     Degree: String,
     Order: Number

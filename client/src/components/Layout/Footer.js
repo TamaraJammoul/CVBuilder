@@ -1,10 +1,7 @@
 import React, {useContext} from "react";
-import {AuthContext} from "./../../AuthContext";
 import {Link} from "react-router-dom";
 
 export default function Footer() {
-  const authContext = useContext(AuthContext);
-
   return (
     <>
       <footer className="page-footer font-small footer pt-4 ">

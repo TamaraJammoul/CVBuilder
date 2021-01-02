@@ -2,7 +2,7 @@ const CV = require('../../models/CV');
 const PersonalInformation = require('../../models/sections/PersonalInformation');
 
 exports.updatePersonalInformation = (req, res) => {
-    const { _id, Phone, Email, LinkedIn, City, Married, Birth, Nationality, Order } = req.body;
+    const { _id, Phone, Email, LinkedIn, City, MaritalStatus, Birth, Nationality, Order } = req.body;
     PersonalInformation.findById(_id).exec((error, personalInformation) => {
         if (error) {
             return res.status(400).json({
@@ -17,7 +17,7 @@ exports.updatePersonalInformation = (req, res) => {
                     Email,
                     LinkedIn,
                     City,
-                    Married,
+                    MaritalStatus,
                     Birth,
                     Nationality,
                     Order
@@ -31,7 +31,7 @@ exports.updatePersonalInformation = (req, res) => {
                         Email,
                         LinkedIn,
                         City,
-                        Married,
+                        MaritalStatus,
                         Birth,
                         Nationality,
                         Order

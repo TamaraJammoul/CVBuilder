@@ -2,7 +2,6 @@ import {createStore, compose, applyMiddleware} from "redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
 const initialState = {
-  language: "en",
   template: {
     certificates: [],
     educations: [],
@@ -16,6 +15,12 @@ const initialState = {
     careerobjective: "",
   },
   MyTemplates: [],
+  firstName: "",
+  lastName: "",
+  email: "",
+  id: "",
+  token: "",
+  cvID: "",
 };
 
 const store = createStore(

@@ -1,19 +1,5 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Avatar,
-  TextField,
-  Container,
-} from "@material-ui/core";
+import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import icon from "./../../img/icon.jpg";
 import {AddSkillAction} from "../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";

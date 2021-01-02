@@ -1,20 +1,20 @@
-import {DELETECAREEROBJECTIVE, EDITCAREEROBJECTIVE} from "./types";
+import {EDITCAREEROBJECTIVE} from "./types";
 import axios from "axios";
-export function DeleteCareerObjectiveAction(payload) {
-  console.log(payload);
-  return (dispatch) => {
-    dispatch({
-      type: DELETECAREEROBJECTIVE,
-      payload,
-    });
-  };
-}
+
 export function EditCareerObjectiveAction(payload) {
   console.log(payload);
   return (dispatch) => {
-    dispatch({
-      type: EDITCAREEROBJECTIVE,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/career/updateCareer`, {
+        Text: payload.text,
+        _id: payload.cvID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: EDITCAREEROBJECTIVE,
+          payload: res.data,
+        });
+      });
   };
 }

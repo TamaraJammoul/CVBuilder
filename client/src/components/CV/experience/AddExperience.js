@@ -1,17 +1,5 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  Container,
-  TextField,
-} from "@material-ui/core";
+import {Button, Paper, Grid, Container, TextField} from "@material-ui/core";
 
 import {AddExperienceAction} from "./../../../store/action/experience";
 import {useSelector, useDispatch} from "react-redux";
@@ -24,7 +12,8 @@ export default function Experience(props) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [project, setProject] = useState("");
-  const data = {description, experienceName, startDate, endDate, project};
+  const cvID = useSelector((state) => state.cvID);
+  const data = {description, experienceName, startDate, endDate, project, cvID};
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   let history = useHistory();
@@ -131,66 +120,3 @@ export default function Experience(props) {
     </Container>
   );
 }
-
-/*
-<Grid item xs={12} sm={12}>
-          <h1>Select your Experience Level</h1>
-        </Grid>
-        <Grid item xs={12} sm={12} style={{width: "100%"}}>
-          <Grid container spacing={6}>
-            <Grid item xs={4}>
-              <Paper elevation={3}>
-                <Grid container alignItems="center" direction="column">
-                  <Grid item>
-                    <img
-                      src={junior}
-                      style={{width: "100px", paddingTop: "10px"}}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <h4 style={{marginTop: "30px"}}>Junior / Student</h4>
-                  </Grid>
-                  <Grid item>
-                    <h6 style={{marginTop: "20px"}}>1-2 Years</h6>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper elevation={3}>
-                <Grid container alignItems="center" direction="column">
-                  <Grid item>
-                    <img
-                      src={senior}
-                      style={{width: "100px", paddingTop: "10px"}}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <h4 style={{marginTop: "30px"}}>Senior</h4>
-                  </Grid>
-                  <Grid item>
-                    <h6 style={{marginTop: "20px"}}>2-6 Years</h6>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper elevation={3}>
-                <Grid container alignItems="center" direction="column">
-                  <Grid item>
-                    <img
-                      src={manager}
-                      style={{width: "100px", paddingTop: "10px"}}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <h4 style={{marginTop: "30px"}}>Executive</h4>
-                  </Grid>
-                  <Grid item>
-                    <h6 style={{marginTop: "20px"}}>+6 Years</h6>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Grid> */

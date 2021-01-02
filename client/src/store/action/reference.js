@@ -8,17 +8,18 @@ import axios from "axios";
 export function AddReferenceAction(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/referance/addReferance`, {
-        Name: payload,
-        Order: 1,
-        _id: "5feb8f0d76236c09f83b7221",
+      .post(`http://localhost:5000/api/reference/addReference`, {
+        Name: payload.name,
+        Number: payload.number,
+        Order: payload.order,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         if (res.status == 200)
           dispatch({
             type: ADDREFERENCE,
-            payload,
+            payload: res.data,
           });
       });
   };
@@ -36,8 +37,8 @@ export function DeleteReferenceAction(payload) {
     console.log(payload);
     await axios
       .post(`http://localhost:5000/api/referance/deleteReferance`, {
-        referance_id: payload.name,
-        _id: "5feb8f0d76236c09f83b7221",
+        referance_id: payload.reference_id,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res);
@@ -49,20 +50,19 @@ export function DeleteReferenceAction(payload) {
   };
 }
 export function EditReferenceAction(payload) {
-  console.log(payload);
   return async (dispatch) => {
-    console.log(payload);
     await axios
       .post(`http://localhost:5000/api/referance/updateReferance`, {
-        Name: payload.newName,
-        Order: 1,
-        _id: "5feb8f0d76236c09f83b7221",
+        Name: payload.reference,
+        Order: payload.order,
+        _id: payload.cvID,
+        Number: payload.phone,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: EDITREFERENCE,
-          payload,
+          payload: res.data,
         });
       });
   };

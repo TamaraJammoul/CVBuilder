@@ -25,6 +25,7 @@ export default function Certificates() {
   const dispatch = useDispatch();
   const certificates = useSelector((state) => state.template.certificates);
   const {t} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -87,7 +88,11 @@ export default function Certificates() {
                     <Grid item xs={1}>
                       <IconButton
                         aria-label="delete"
-                        onClick={() => dispatch(DeleteCertificateAction("tam"))}
+                        onClick={() =>
+                          dispatch(
+                            DeleteCertificateAction({cvID, certificate_id: "1"})
+                          )
+                        }
                       >
                         <Delete />
                       </IconButton>

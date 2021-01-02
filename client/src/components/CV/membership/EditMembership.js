@@ -10,6 +10,7 @@ export default function AddMembership(props) {
   let history = useHistory();
   const {t, i18n} = useTranslation();
   const [membershipName, setMembershipName] = useState("");
+  const cvID = useSelector((state) => state.cvID);
 
   const handelCancel = () => {
     setMembershipName("");
@@ -53,7 +54,9 @@ export default function AddMembership(props) {
               className="save"
               style={{float: "right"}}
               onClick={() =>
-                dispatch(EditMembershipAction({oldName: "rr", newName: ""}))
+                dispatch(
+                  EditMembershipAction({membershipName, cvID, order: "1"})
+                )
               }
             >
               {t("save")}

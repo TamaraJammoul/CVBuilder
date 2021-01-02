@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 
 export default function AddMembership(props) {
   const dispatch = useDispatch();
-
+  const cvID = useSelector((state) => state.cvID);
   const [membershipName, setMembershipName] = useState("");
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -53,7 +53,11 @@ export default function AddMembership(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(AddMembershipAction(membershipName))}
+              onClick={() =>
+                dispatch(
+                  AddMembershipAction({membershipName, cvID, order: "1"})
+                )
+              }
             >
               {t("save")}
             </Button>

@@ -1,38 +1,24 @@
-import React from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Avatar,
-  TextField,
-  Container,
-  ButtonGroup,
-} from "@material-ui/core";
+import React, {useState} from "react";
+import {Button, Paper, Grid, Container, ButtonGroup} from "@material-ui/core";
 import {Editor} from "@tinymce/tinymce-react";
 import {VisibilityOff, EditSharp} from "@material-ui/icons";
-import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
-import DeleteIcon from "@material-ui/icons/Delete";
-import {
-  EditCareerObjectiveAction,
-  DeleteCareerObjectiveAction,
-} from "./../../../store/action/careerobjective";
+
+import {EditCareerObjectiveAction} from "./../../../store/action/careerobjective";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 
 export default function CareerObjectives() {
+  const [text, setText] = useState("");
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
+    setText(content);
   };
   const dispatch = useDispatch();
-  const text = useSelector((state) => state.template.careerobjective);
+  const careerobjective = useSelector(
+    (state) => state.template.careerobjective
+  );
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Container>
@@ -88,19 +74,16 @@ export default function CareerObjectives() {
             <Grid item xs={12}>
               <Grid container alignItems="center" direction="row" spacing={3}>
                 <Grid item xs={1}>
-                  <IconButton aria-label="delete">
-                    <Edit
-                      onClick={() => dispatch(EditCareerObjectiveAction("rr"))}
-                    />
-                  </IconButton>
-                </Grid>
-
-                <Grid item xs={1}>
-                  <IconButton aria-label="delete">
-                    <Delete
-                      onClick={() => dispatch(DeleteCareerObjectiveAction())}
-                    />
-                  </IconButton>
+                  <Button
+                    variant="contained"
+                    className="save"
+                    style={{float: "right"}}
+                    onClick={() =>
+                      dispatch(EditCareerObjectiveAction({text, cvID}))
+                    }
+                  >
+                    {t("save")}
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>

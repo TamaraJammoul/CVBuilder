@@ -1,19 +1,20 @@
 import {ADDLANGUAGE, DELETELANGUAGE, EDITLANGUAGE, COPYLANGUAGE} from "./types";
 import axios from "axios";
+
 export function AddLanguageAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/language/addLanguage`, {
-        Name: payload.name,
-        Order: 1,
-        Rate: 7,
-        _id: payload.id,
+        Name: payload.language,
+        Order: payload.order,
+        Rate: payload.rate,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: ADDLANGUAGE,
-          payload,
+          payload: res.data,
         });
       });
   };
@@ -32,23 +33,32 @@ export function DeleteLanguageAction(payload) {
     axios
       .post(`http://localhost:5000/api/language/deleteLanguage`, {
         language_id: payload.language_id,
-        _id: payload.id,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: DELETELANGUAGE,
-          payload,
+          payload: res.data,
         });
       });
   };
 }
 export function EditLanguageAction(payload) {
-  console.log(payload);
   return (dispatch) => {
-    dispatch({
-      type: EDITLANGUAGE,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/language/updateLanguage`, {
+        Name: payload.language,
+        Order: payload.order,
+        Rate: payload.rate,
+        _id: payload.cvID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: EDITLANGUAGE,
+          payload,
+        });
+      });
   };
 }

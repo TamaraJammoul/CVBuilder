@@ -16,7 +16,6 @@ import CVLanguage from "./components/CV/CVLanguage";
 import BuildCV from "./components/CV/BuildCV";
 import Template from "./components/Template";
 import Dashboard from "./components/Dashboard";
-
 import store from "./store/store";
 import {Provider} from "react-redux";
 import withRoot from "./i18n/WithRoot";
@@ -28,7 +27,7 @@ function App(props) {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  }, []);
+  });
   return (
     <Provider store={store}>
       <div className="wow">

@@ -31,6 +31,7 @@ export default function OtherTraining(props) {
   const dispatch = useDispatch();
   const othertraining = useSelector((state) => state.template.othertraining);
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -83,7 +84,12 @@ export default function OtherTraining(props) {
                       <IconButton aria-label="delete">
                         <Delete
                           onClick={() =>
-                            dispatch(DeleteOtherTrainingAction("rr"))
+                            dispatch(
+                              DeleteOtherTrainingAction({
+                                otherTraining_id: "1",
+                                cvID,
+                              })
+                            )
                           }
                         />
                       </IconButton>

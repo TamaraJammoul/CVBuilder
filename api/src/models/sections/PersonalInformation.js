@@ -18,7 +18,7 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String,
         default: "City"
     },
-    Married: {
+    MaritalStatus: {
         type: String,
         default: "Married"
     },

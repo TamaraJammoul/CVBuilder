@@ -9,19 +9,19 @@ export function AddExperienceAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/experience/addExperience`, {
-        Start: payload.startYear,
-        End: payload.endYear,
+        Start: payload.startDate,
+        End: payload.endDate,
         Name: payload.experienceName,
         Project: payload.project,
         Description: payload.description,
         Order: 1,
-        _id: payload.cvId,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: ADDEXPERIENCE,
-          payload,
+          payload: res.data,
         });
       });
   };
@@ -40,7 +40,7 @@ export function DeleteExperienceAction(payload) {
     axios
       .post(`http://localhost:5000/api/experience/deleteExperience`, {
         experience_id: payload.experience_id,
-        _id: payload.id,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res);
@@ -52,11 +52,23 @@ export function DeleteExperienceAction(payload) {
   };
 }
 export function EditExperienceAction(payload) {
-  console.log(payload);
   return (dispatch) => {
-    dispatch({
-      type: EDITEXPERIENCE,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/experience/updateExperience`, {
+        Start: payload.startDate,
+        End: payload.endDate,
+        Name: payload.experienceName,
+        Project: payload.project,
+        Description: payload.description,
+        Order: 1,
+        _id: payload.cvID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: EDITEXPERIENCE,
+          payload: res.data,
+        });
+      });
   };
 }

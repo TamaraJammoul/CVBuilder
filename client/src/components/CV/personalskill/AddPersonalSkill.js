@@ -19,8 +19,9 @@ export default function AddPersonalSkill(props) {
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   let history = useHistory();
+  const cvID = useSelector((state) => state.cvID);
 
-  const data = {rate, skill};
+  const data = {rate, skill, cvID};
   const handelCancel = () => {
     setSkill("");
     setRate(2);

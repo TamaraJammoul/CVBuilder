@@ -10,7 +10,8 @@ export default function AddCertificate(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const data = {name, description, date};
+  const cvID = useSelector((state) => state.cvID);
+  const data = {name, description, date, cvID, order: "1"};
   const {t, i18n} = useTranslation();
   let history = useHistory();
 

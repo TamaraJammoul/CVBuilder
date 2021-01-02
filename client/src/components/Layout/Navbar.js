@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useHistory, withRouter} from "react-router-dom";
 import {ButtonContainer} from "./Button";
-import {CvContext} from "./../../CvContext";
 import us from "./../../img/us.svg";
 import ar from "./../../img/sa.svg";
 
@@ -10,7 +9,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import {useTheme} from "@material-ui/core/styles";
 import {useTranslation} from "react-i18next";
 function Navbar(props) {
-  const courseContext = useContext(CvContext);
   const [isst, setisst] = useState(false);
 
   let history = useHistory();

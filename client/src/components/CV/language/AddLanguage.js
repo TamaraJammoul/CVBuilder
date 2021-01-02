@@ -17,7 +17,8 @@ export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
-  const data = {language, rate};
+  const cvID = useSelector((state) => state.cvID);
+  const data = {language, rate, order: 1, cvID};
   const {t, i18n} = useTranslation();
   let history = useHistory();
 

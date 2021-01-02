@@ -22,6 +22,7 @@ export default function PersonalSkills() {
   const dispatch = useDispatch();
   const personalskills = useSelector((state) => state.template.personalskills);
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -137,7 +138,12 @@ export default function PersonalSkills() {
                             <IconButton aria-label="delete">
                               <Delete
                                 onClick={() =>
-                                  dispatch(DeletePersonalSkillAction("rr"))
+                                  dispatch(
+                                    DeletePersonalSkillAction({
+                                      cvID,
+                                      personalSkill_id: "1",
+                                    })
+                                  )
                                 }
                               />
                             </IconButton>

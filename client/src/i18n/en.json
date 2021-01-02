@@ -64,12 +64,12 @@
     "HideSection": "Hide Section",
     "Description": "Description",
     "Date": "Date",
-    "Fieldofstudy": "Field of study",
+    "faculty": "Faculty",
     "SchoolNameorUniversity": "School Name or University",
     "City,Country": "City,Country",
     "StartDate": "Start Date",
     "EndDate": "End Date",
-    "estimate": "estimate",
+    "grade": "grade",
     "Ratefrom100": "Rate from 100",
     "Ratefrom5": "Rate from 5",
     "ExperienceName": "Experience Name",
@@ -97,5 +97,12 @@
     "EditOtherTraining":"Edit Other Training",
     "Edit Personal Skill":"Edit Personal Skill",
     "eg.Microsoft Word":"eg.Microsoft Word",
-    "Create New CV":"Create New CV"
+    "Create New CV":"Create New CV",
+    "Edit Reference":"Edit Reference",
+    "Reference Name":"Reference Name",
+    "Contact US":"Contact US",
+    "FullName":"FullName",
+    "Message":"Message",
+    "Address":"Address",
+    "Send":"Send"
 }

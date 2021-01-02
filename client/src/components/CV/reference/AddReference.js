@@ -7,14 +7,17 @@ import {useHistory} from "react-router-dom";
 
 export default function Reference(props) {
   const [reference, setReference] = useState("");
+  const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
 
   const handelCancel = () => {
     setReference("");
+    setPhone("");
     history.push("/buildcv/reference");
   };
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -41,6 +44,17 @@ export default function Reference(props) {
             />
           </Grid>
           <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("Phone")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Button
               variant="outlined"
               className="cancel"
@@ -54,7 +68,9 @@ export default function Reference(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
-                dispatch(AddReferenceAction(reference));
+                dispatch(
+                  AddReferenceAction({reference, phone, cvID, order: "1"})
+                );
               }}
             >
               {t("save")}

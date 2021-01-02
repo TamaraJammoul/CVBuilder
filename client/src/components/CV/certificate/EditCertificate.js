@@ -10,10 +10,10 @@ export default function EditCertificate(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-
+  const cvID = useSelector((state) => state.cvID);
   let history = useHistory();
   const {t, i18n} = useTranslation();
-
+  const data = {name, description, date, cvID, order: "1"};
   const handelCancel = () => {
     setName("");
     setDate("");
@@ -80,16 +80,7 @@ export default function EditCertificate(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() =>
-                  dispatch(
-                    EditCertificateAction({
-                      oldName: "vsd",
-                      newName: name,
-                      newDescription: description,
-                      newDate: date,
-                    })
-                  )
-                }
+                onClick={() => dispatch(EditCertificateAction(data))}
               >
                 {t("save")}
               </Button>

@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Container, Grid, Button} from "@material-ui/core";
 import Template from "./CV/Template";
 import {AddCVAction, DeleteCVAction} from "./../store/action/cv";
 import {useTranslation} from "react-i18next";
+import {GetAllCVAction} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
+  const email = useSelector((state) => state.email);
 
+  useEffect(() => {
+    dispatch(GetAllCVAction(email));
+  }, []);
   return (
     <Grid
       container
@@ -18,7 +23,7 @@ export default function Dashboard() {
       alignItems="center"
     >
       <Grid item xs={12}>
-        <Button className="save" onClick={() => dispatch(AddCVAction())}>
+        <Button className="save" onClick={() => dispatch(AddCVAction(email))}>
           {t("Create New CV")}
         </Button>
       </Grid>

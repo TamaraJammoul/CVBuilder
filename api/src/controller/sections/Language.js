@@ -14,8 +14,12 @@ exports.addLanguage = (req, res) => {
                 const {
                     Name, Rate, Order
                 } = req.body;
+
+                const RateFrom10 = Rate * 2;
+                const RateFrom100 = Rate * 20;
+
                 let language = new Language({
-                    Name, Rate, Order
+                    Name, Rate, RateFrom10, RateFrom100, Order
                 });
                 language.save()
                     .then((lan) => {
@@ -82,10 +86,14 @@ exports.updateLanguage = (req, res) => {
             })
         }
         if (language) {
+            const RateFrom10 = Rate * 2;
+            const RateFrom100 = Rate * 20;
             Language.updateOne({ _id: _id }, {
                 $set: {
                     Name,
                     Rate,
+                    RateFrom10,
+                    RateFrom100,
                     Order
                 }
             }).then(() => {
@@ -95,6 +103,8 @@ exports.updateLanguage = (req, res) => {
                         _id,
                         Name,
                         Rate,
+                        RateFrom10,
+                        RateFrom100,
                         Order
                     }
                 })

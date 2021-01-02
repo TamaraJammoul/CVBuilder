@@ -8,7 +8,7 @@ const Memberships = require('../models/sections/Memberships');
 const OtherTraining = require('../models/sections/OtherTraining');
 const PersonalInformation = require('../models/sections/PersonalInformation');
 const PersonalSkills = require('../models/sections/PersonalSkills');
-const Referance = require('../models/sections/Referance');
+const Reference = require('../models/sections/Reference');
 const Skill = require('../models/sections/Skill');
 const User = require('../models/User');
 
@@ -18,7 +18,7 @@ exports.addCV = (req, res) => {
         .exec(async (err, user) => {
             const careerObjectives = new CareerObjectives({});
             const personalInformation = new PersonalInformation({});
-            const referance = new Referance({});
+            const reference = new Reference({});
 
             const co = await careerObjectives.save();
             const pi = await personalInformation.save();
@@ -33,7 +33,7 @@ exports.addCV = (req, res) => {
                 OtherTrainings: [],
                 PersonalInformation: personalInformation,
                 PersonalSkills: [],
-                Referance: [],
+                Reference: [],
                 Skill: [],
                 Order: 1
             })
@@ -114,7 +114,7 @@ exports.deleteCV = (req, res) => {
                                                     err
                                                 })
                                             }
-                                            Referance.deleteOne({ _id: cv.Referance._id }, (err) => {
+                                            Reference.deleteOne({ _id: cv.Reference._id }, (err) => {
                                                 if (err) {
                                                     return res.status(400).json({
                                                         err

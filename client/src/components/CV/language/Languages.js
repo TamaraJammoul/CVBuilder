@@ -22,6 +22,7 @@ export default function Languages() {
   const dispatch = useDispatch();
   const languages = useSelector((state) => state.template.languages);
   const {t} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -101,7 +102,11 @@ export default function Languages() {
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
                         <Delete
-                          onClick={() => dispatch(DeleteLanguageAction("rr"))}
+                          onClick={() =>
+                            dispatch(
+                              DeleteLanguageAction({cvID, language_id: "1"})
+                            )
+                          }
                         />
                       </IconButton>
                     </Grid>

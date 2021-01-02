@@ -14,11 +14,11 @@ const membershipRouter = require("./src/routes/sections/Memberships");
 const otherTrainingRouter = require("./src/routes/sections/OtherTraining");
 const personalInformationRouter = require("./src/routes/sections/PersonalInformation");
 const personalSkillsRouter = require("./src/routes/sections/PersonalSkills");
-const referanceRouter = require("./src/routes/sections/Referance");
+const referenceRouter = require("./src/routes/sections/Reference");
 const skillRouter = require("./src/routes/sections/Skill");
 const contactUsRouter = require("./src/routes/contactUs");
+const checkOutRouter = require("./src/routes/checkOut");
 const CVrouter = require("./src/routes/CV");
-
 const app = express();
 //app.use(cors());
 
@@ -68,9 +68,10 @@ app.use("/api/membership", membershipRouter);
 app.use("/api/otherTraining", otherTrainingRouter);
 app.use("/api/PersonalInformation", personalInformationRouter);
 app.use("/api/personalSkills", personalSkillsRouter);
-app.use("/api/referance", referanceRouter);
+app.use("/api/reference", referenceRouter);
 app.use("/api/skills", skillRouter);
 app.use("/api/contactUs", contactUsRouter);
+app.use("/api/checkOut", checkOutRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`server running on port ${process.env.PORT}`);

@@ -15,6 +15,8 @@ import {Link} from "react-router-dom";
 export default function Education() {
   const dispatch = useDispatch();
   const educations = useSelector((state) => state.template.educations);
+  const cvID = useSelector((state) => state.cvID);
+
   const {t, i18n} = useTranslation();
   return (
     <Paper>
@@ -89,7 +91,11 @@ export default function Education() {
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
                         <Delete
-                          onClick={() => dispatch(DeleteEducationAction("rr"))}
+                          onClick={() =>
+                            dispatch(
+                              DeleteEducationAction({cvID, education_id: "1"})
+                            )
+                          }
                         />
                       </IconButton>
                     </Grid>

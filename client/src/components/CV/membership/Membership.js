@@ -16,6 +16,7 @@ export default function Membership() {
   const dispatch = useDispatch();
   const memberships = useSelector((state) => state.template.memberships);
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -64,7 +65,11 @@ export default function Membership() {
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
                         <Delete
-                          onClick={() => dispatch(DeleteMembershipAction("rr"))}
+                          onClick={() =>
+                            dispatch(
+                              DeleteMembershipAction({cvID, membership_id: "1"})
+                            )
+                          }
                         />
                       </IconButton>
                     </Grid>

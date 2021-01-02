@@ -16,7 +16,9 @@ export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
-  const data = {language, rate};
+  const cvID = useSelector((state) => state.cvID);
+
+  const data = {language, rate, cvID, order: "1"};
   let history = useHistory();
   const {t, i18n} = useTranslation();
 
@@ -72,15 +74,7 @@ export default function AddLanguage(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() =>
-                  dispatch(
-                    EditLanguageAction({
-                      oldName: "rr",
-                      newName: "",
-                      newRate: 0,
-                    })
-                  )
-                }
+                onClick={() => dispatch(EditLanguageAction(data))}
               >
                 {t("save")}
               </Button>

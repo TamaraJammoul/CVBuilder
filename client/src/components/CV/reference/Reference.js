@@ -14,6 +14,7 @@ export default function Refernce() {
   const dispatch = useDispatch();
   const references = useSelector((state) => state.template.references);
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <Paper>
@@ -69,7 +70,9 @@ export default function Refernce() {
                         aria-label="delete"
                         onClick={() => {
                           console.log("kljklj");
-                          dispatch(DeleteReferenceAction({name: ref.name}));
+                          dispatch(
+                            DeleteReferenceAction({cvID, reference_id: "1"})
+                          );
                         }}
                       >
                         <Delete />

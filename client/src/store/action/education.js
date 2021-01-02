@@ -13,17 +13,16 @@ export function AddEducationAction(payload) {
         Faculty: payload.faculty,
         YearStart: payload.startYear,
         YearEnd: payload.endYear,
-        DegreeFrom100: payload.rate100,
         DegreeFrom5: payload.rate5,
         Order: 1,
-        Degree: payload.estimate,
-        _id: payload.id,
+        Grade: payload.grade,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: ADDEDUCATION,
-          payload,
+          payload: res.data,
         });
       });
   };
@@ -41,24 +40,37 @@ export function DeleteEducationAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/education/deleteEducation`, {
-        education_id: payload.id,
-        _id: payload.cvId,
+        education_id: payload.education_id,
+        _id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: DELETEEDUCATION,
-          payload,
+          payload: res.data,
         });
       });
   };
 }
 export function EditEducationAction(payload) {
-  console.log(payload);
   return (dispatch) => {
-    dispatch({
-      type: EDITEDUCATION,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/education/updateEducation`, {
+        UniversityName: payload.universityName,
+        Faculty: payload.faculty,
+        YearStart: payload.startDate,
+        YearEnd: payload.endDate,
+        DegreeFrom5: payload.rate5,
+        Order: 1,
+        Grade: payload.grade,
+        _id: payload.cvID,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: EDITEDUCATION,
+          payload: res.data,
+        });
+      });
   };
 }

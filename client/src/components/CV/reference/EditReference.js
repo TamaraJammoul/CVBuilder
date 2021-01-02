@@ -3,13 +3,19 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {EditReferenceAction} from "./../../../store/action/reference";
 import {useSelector, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+
 export default function EditReference(props) {
   const [reference, setReference] = useState("");
+  const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
-
+  const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
+  const data = {cvID, reference, phone, order: "1"};
   const handelCancel = () => {
     setReference("");
+    setPhone("");
     history.push("/buildcv/reference");
   };
   return (
@@ -23,17 +29,28 @@ export default function EditReference(props) {
           alignItems="center"
         >
           <Grid item xs={12}>
-            <h2>Edit Reference</h2>
+            <h2>{t("Edit Reference")}</h2>
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
               id="filled-primary"
-              label="Add Reference"
+              label={t("Reference Name")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
               onChange={(e) => setReference(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("Phone")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -43,7 +60,7 @@ export default function EditReference(props) {
               style={{marginLeft: "10px", float: "right"}}
               onClick={handelCancel}
             >
-              cancel
+              {t("cancel")}
             </Button>
             <Button
               variant="contained"
@@ -51,15 +68,10 @@ export default function EditReference(props) {
               style={{float: "right"}}
               onClick={() => {
                 console.log("kljklj");
-                dispatch(
-                  EditReferenceAction({
-                    newName: "",
-                    oldName: "tamara",
-                  })
-                );
+                dispatch(EditReferenceAction(data));
               }}
             >
-              save
+              {t("save")}
             </Button>
           </Grid>
         </Grid>

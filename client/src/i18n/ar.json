@@ -65,12 +65,12 @@
         "YourReferncesText": "يمكنك إضافة مراجغك هنا مع إمكانية تعديل هذه البيانات لاحقاً",
         "Description": "الوصف",
         "Date": "التاريخ",
-        "Fieldofstudy": "مجال الدراسة",
+        "faculty": "الكلية",
         "SchoolNameorUniversity": "اسم المدرسة أو الجامعة",
         "City,Country": "المدينة,البلدة",
         "StartDate": "تاريخ البدء",
         "EndDate": "تاريخ الانتهاء",
-        "estimate": "التقدير",
+        "grade": "التقدير",
         "Ratefrom100": "المستوى من 100",
         "Ratefrom5": "المستوى من 5",
         "ExperienceName": "اسم الخبرة",
@@ -98,5 +98,12 @@
         "EditOtherTraining":"تعديل التدريبات الأخرى",
         "Edit Personal Skill":"تعديل المهارات الشخصية",
         "eg.Microsoft Word":"مثال:وورد",
-        "Create New CV":"إنشاء سيرة ذاتية"
+        "Create New CV":"إنشاء سيرة ذاتية",
+        "Edit Reference":"تعديل المرجع",
+        "Reference Name":"اسم المرجع",
+        "Contact US":"تواصل معنا",
+        "FullName":"اسمك الكامل",
+        "Message":"رسالتك",
+        "Address":"العنوان",
+        "Send":"أرسل"
 }

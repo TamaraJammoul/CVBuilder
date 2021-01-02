@@ -1,10 +1,8 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
-import AddExperience from "./AddExperience";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
-  EditExperienceAction,
   DeleteExperienceAction,
   CopyExperienceAction,
 } from "./../../../store/action/experience";
@@ -15,6 +13,8 @@ export default function Education() {
   const dispatch = useDispatch();
   const experiences = useSelector((state) => state.template.experiences);
   const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
+
   return (
     <Paper>
       <Container>
@@ -78,7 +78,11 @@ export default function Education() {
                     <Grid item xs={1}>
                       <IconButton aria-label="delete">
                         <Delete
-                          onClick={() => dispatch(DeleteExperienceAction("rr"))}
+                          onClick={() =>
+                            dispatch(
+                              DeleteExperienceAction({cvID, experience_id: "1"})
+                            )
+                          }
                         />
                       </IconButton>
                     </Grid>

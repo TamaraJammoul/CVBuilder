@@ -9,15 +9,16 @@ export function AddPersonalSkillsAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/personalSkills/addPersonalSkills`, {
-        Name: payload.name,
-        Order: 1,
-        _id: payload.id,
+        Name: payload.skill,
+        Order: payload.order,
+        _id: payload.cvID,
+        Rate: payload.rate,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({
           type: ADDPERSONALSKILL,
-          payload,
+          payload: res.data,
         });
       });
   };
@@ -35,9 +36,9 @@ export function DeletePersonalSkillAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/personalSkills/deletePersonalSkills`, {
-        Name: payload.name,
+        personalSkill_id: payload.personalSkill_id,
         Order: 1,
-        _id: payload.id,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res);
@@ -49,11 +50,20 @@ export function DeletePersonalSkillAction(payload) {
   };
 }
 export function EditPersonalSkillAction(payload) {
-  console.log(payload);
   return (dispatch) => {
-    dispatch({
-      type: EDITPERSONALSKILL,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/personalSkills/addPersonalSkills`, {
+        Name: payload.skill,
+        Order: payload.order,
+        _id: payload.cvID,
+        Rate: payload.rate,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: EDITPERSONALSKILL,
+          payload: res.data,
+        });
+      });
   };
 }
