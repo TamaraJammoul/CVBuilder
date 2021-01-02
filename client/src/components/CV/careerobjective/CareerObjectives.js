@@ -24,77 +24,83 @@ export default function CareerObjectives() {
   const cvID = useSelector((state) => state.cvID);
 
   return (
-    <Container>
-      <Paper elevation={3} className="background">
-        <Container>
-          <Grid container alignItems="center" direction="column" spacing={5}>
-            <Grid item style={{width: "100%"}}>
-              <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="center"
-                style={{textAlign: "center"}}
-              >
-                <Grid item sm={6} xs={12}>
-                  <h2>{t("CareerObjectives")}</h2>
-                </Grid>
-                <Grid item sm={6} xs={12}>
-                  {" "}
-                  <ButtonGroup disableElevation variant="outlined">
-                    <Button color="primary" startIcon={<EditSharp />}>
-                      {t("Rename")}
-                    </Button>
-                    <Button color="secondary" startIcon={<VisibilityOff />}>
-                      {t("HideSection")}
-                    </Button>{" "}
-                  </ButtonGroup>
-                </Grid>
-              </Grid>{" "}
-            </Grid>
-            <Grid item xs={12}>
-              <h5>{text}</h5>
-            </Grid>
-            <Grid item>
-              {" "}
-              <Editor
-                initialValue="<p></p>"
-                init={{
-                  height: 200,
-                  directionality: i18n.language == "en" ? "ltr" : "rtl",
-                  plugins:
-                    " autolink listsanchorfullscreen  insertdatetime  paste  help ",
-                  toolbar:
-                    "pageembed permanentpen  undo redo |bold italic | \
+    <Paper elevation={3} className="background" style={{width: "100%"}}>
+      <Container>
+        <Grid container alignItems="center" direction="column" spacing={5}>
+          <Grid item style={{width: "100%"}} xs={12}>
+            <Grid
+              container
+              direction="row"
+              justify="flex-end"
+              alignItems="center"
+              style={{textAlign: "center"}}
+            >
+              <Grid item sm={6} xs={12}>
+                <h2>{t("CareerObjectives")}</h2>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                {" "}
+                <ButtonGroup disableElevation variant="outlined">
+                  <Button
+                    color="primary"
+                    startIcon={<EditSharp />}
+                    className="button"
+                  >
+                    {t("Rename")}
+                  </Button>
+                  <Button
+                    color="secondary"
+                    startIcon={<VisibilityOff />}
+                    className="button"
+                  >
+                    {t("HideSection")}
+                  </Button>{" "}
+                </ButtonGroup>
+              </Grid>
+            </Grid>{" "}
+          </Grid>
+          <Grid item xs={12}>
+            <h5>{text}</h5>
+          </Grid>
+          <Grid item xs={12}>
+            {" "}
+            <Editor
+              initialValue="<p></p>"
+              init={{
+                height: 200,
+                directionality: i18n.language == "en" ? "ltr" : "rtl",
+                plugins:
+                  " autolink listsanchorfullscreen  insertdatetime  paste  help ",
+                toolbar:
+                  "pageembed permanentpen  undo redo |bold italic | \
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help",
-                  toolbar_mode: "floating",
-                  tinycomments_mode: "embedded",
-                }}
-                onEditorChange={handleEditorChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container alignItems="center" direction="row" spacing={3}>
-                <Grid item xs={1}>
-                  <Button
-                    variant="contained"
-                    className="save"
-                    style={{float: "right"}}
-                    onClick={() =>
-                      dispatch(
-                        EditCareerObjectiveAction({text, careerObjectives_id})
-                      )
-                    }
-                  >
-                    {t("save")}
-                  </Button>
-                </Grid>
+                toolbar_mode: "floating",
+                tinycomments_mode: "embedded",
+              }}
+              onEditorChange={handleEditorChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container alignItems="center" direction="row" spacing={3}>
+              <Grid item xs={1}>
+                <Button
+                  variant="contained"
+                  className="save"
+                  style={{float: "right"}}
+                  onClick={() =>
+                    dispatch(
+                      EditCareerObjectiveAction({text, careerObjectives_id})
+                    )
+                  }
+                >
+                  {t("save")}
+                </Button>
               </Grid>
             </Grid>
           </Grid>
-        </Container>{" "}
-      </Paper>
-    </Container>
+        </Grid>
+      </Container>{" "}
+    </Paper>
   );
 }

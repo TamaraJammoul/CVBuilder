@@ -105,3 +105,44 @@ exports.updateSkill = (req, res) => {
         }
     })
 }
+
+exports.getSkills = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Skill.find({ _id: { $in: cv.Skill } })
+                    .exec((err, skill) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (skill) {
+                            return res.status(200).json({
+                                msg: "Skills returned successfully",
+                                data: skill
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

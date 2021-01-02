@@ -3,6 +3,8 @@ const { String, Number } = mongoose.Schema.Types;
 
 const PersonalSkillsSchema = new mongoose.Schema({
     Name: String,
+    RateFrom5: Number,
+    RateFrom100: Number,
     Order: Number
 });
 

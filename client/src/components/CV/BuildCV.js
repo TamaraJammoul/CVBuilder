@@ -180,7 +180,7 @@ export default function BuildCV(props) {
               <Navbar setDrawerState={setDrawerState} />
             </Grid>
             <Grid item xs={10}>
-              <Container>
+              <Container style={{width: "100%"}}>
                 <Switch>
                   <Route
                     path={`${path}/peronalinfo`}

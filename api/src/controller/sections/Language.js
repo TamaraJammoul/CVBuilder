@@ -117,3 +117,44 @@ exports.updateLanguage = (req, res) => {
         }
     })
 }
+
+exports.getLanguages = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Language.find({ _id: { $in: cv.Languages } })
+                    .exec((err, lan) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (lan) {
+                            return res.status(200).json({
+                                msg: "Langueges returned successfully",
+                                data: lan
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

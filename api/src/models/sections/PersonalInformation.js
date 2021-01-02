@@ -30,10 +30,6 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String,
         default: "Nationality"
     },
-    Order: {
-        type: Number,
-        default: 0
-    },
 });
 
 const PersonalInformation = mongoose.model("PersonalInformation", PersonalInformationSchema);

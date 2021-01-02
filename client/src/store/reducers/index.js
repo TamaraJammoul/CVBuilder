@@ -19,6 +19,14 @@ export default function reducer(state, action) {
           temp,
         },
       };
+    case "AUTH":
+      return {
+        ...state,
+        email: localStorage.getItem("Email"),
+        token: localStorage.getItem("token"),
+        LastName: localStorage.getItem("LastName"),
+        FirstName: localStorage.getItem("FirstName"),
+      };
     case "ADDCERTIFICATE":
       return {
         ...state,

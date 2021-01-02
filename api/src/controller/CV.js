@@ -190,3 +190,48 @@ exports.getAllCV = (req, res) => {
             }
         })
 }
+
+exports.getCV = (req, res) => {
+    CV.findById(req.body._id).exec(async (err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "DB Error occured",
+                err
+            })
+        }
+        if (cv) {
+            co = await CareerObjectives.findById(cv.CareerObjectives);
+            pi = await PersonalInformation.findById(cv.PersonalInformation);
+            cert = await Certificate.find({ _id: { $in: cv.Certificates } });
+            edu = await Education.find({ _id: { $in: cv.Educations } });
+            exp = await Experience.find({ _id: { $in: cv.Experiences } });
+            lan = await Language.find({ _id: { $in: cv.Languages } });
+            mem = await Memberships.find({ _id: { $in: cv.Memberships } });
+            oth = await OtherTraining.find({ _id: { $in: cv.OtherTrainings } });
+            psk = await PersonalSkills.find({ _id: { $in: cv.PersonalSkills } });
+            ref = await Reference.find({ _id: { $in: cv.References } });
+            skill = await Skill.find({ _id: { $in: cv.Skills } });
+            return res.status(200).json({
+                msg: "CV Data Returned Successfully",
+                data: {
+                    CareerObjectives: co,
+                    Certificates: cert,
+                    Educations: edu,
+                    Experiences: exp,
+                    Languages: lan,
+                    Memberships: mem,
+                    OtherTrainings: oth,
+                    PersonalInformation: pi,
+                    PersonalSkills: psk,
+                    References: ref,
+                    Skills: skill
+                }
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No CV Found"
+            })
+        }
+    })
+}

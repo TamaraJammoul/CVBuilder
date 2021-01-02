@@ -2,8 +2,8 @@ import {ADDCV, DELETECV} from "./types";
 import axios from "axios";
 
 export function AddCVAction(payload) {
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .post(`http://localhost:5000/api/CV/addCV`, {
         Email: payload,
       })
@@ -11,23 +11,23 @@ export function AddCVAction(payload) {
         console.log(res.data);
         dispatch({
           type: ADDCV,
-          payload: res.data,
+          payload: res.data.data,
         });
       });
   };
 }
 export function DeleteCVAction(payload) {
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .post(`http://localhost:5000/api/CV/deleteCV`, {
         Email: payload.email,
         id: payload.cvID,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data.data);
         dispatch({
           type: DELETECV,
-          payload,
+          payload: res.data.data,
         });
       });
   };

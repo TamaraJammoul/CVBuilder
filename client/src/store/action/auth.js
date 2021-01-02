@@ -10,10 +10,17 @@ export function LoginAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: LOGIN,
-          payload: res.data,
-        });
+        if (res.status == 200) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("FirstName", res.data.user.FirstName);
+          localStorage.setItem("LastName", res.data.user.LastName);
+          localStorage.setItem("Email", res.data.user.Email);
+
+          dispatch({
+            type: LOGIN,
+            payload: res.data,
+          });
+        }
       });
   };
 }
@@ -28,10 +35,16 @@ export function SignupAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: SIGNUP,
-          payload: res.data,
-        });
+        if (res.status == 200) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("FirstName", res.data.user.FirstName);
+          localStorage.setItem("LastName", res.data.user.LastName);
+          localStorage.setItem("Email", res.data.user.Email);
+          dispatch({
+            type: SIGNUP,
+            payload: res.data,
+          });
+        }
       });
   };
 }

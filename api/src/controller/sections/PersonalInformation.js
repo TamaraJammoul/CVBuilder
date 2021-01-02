@@ -2,7 +2,7 @@ const CV = require('../../models/CV');
 const PersonalInformation = require('../../models/sections/PersonalInformation');
 
 exports.updatePersonalInformation = (req, res) => {
-    const { _id, Phone, Email, LinkedIn, City, MaritalStatus, Birth, Nationality, Order } = req.body;
+    const { _id, Phone, Email, LinkedIn, City, MaritalStatus, Birth, Nationality } = req.body;
     PersonalInformation.findById(_id).exec((error, personalInformation) => {
         if (error) {
             return res.status(400).json({
@@ -20,7 +20,6 @@ exports.updatePersonalInformation = (req, res) => {
                     MaritalStatus,
                     Birth,
                     Nationality,
-                    Order
                 }
             }).then(() => {
                 return res.status(200).json({
@@ -34,7 +33,6 @@ exports.updatePersonalInformation = (req, res) => {
                         MaritalStatus,
                         Birth,
                         Nationality,
-                        Order
                     }
                 })
             })
@@ -45,4 +43,27 @@ exports.updatePersonalInformation = (req, res) => {
             })
         }
     })
+}
+
+exports.getPersonalInformation = (req, res) => {
+    PersonalInformation.findById(req.body._id)
+        .exec((err, perInfo) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (perInfo) {
+                return res.status(200).json({
+                    msg: "Personal Information returned successfuly",
+                    data: perInfo
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No Personal Information Found",
+                })
+            }
+        })
 }

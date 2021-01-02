@@ -105,3 +105,44 @@ exports.updateOtherTraining = (req, res) => {
         }
     })
 }
+
+exports.getOtherTrainings = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                OtherTraining.find({ _id: { $in: cv.OtherTrainings } })
+                    .exec((err, otr) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (otr) {
+                            return res.status(200).json({
+                                msg: "Other Trainings returned successfully",
+                                data: otr
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

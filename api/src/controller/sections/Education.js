@@ -12,18 +12,17 @@ exports.addEducation = (req, res) => {
             }
             if (cv) {
                 const {
-                    UniversityName, Faculty, Field, YearStart,
-                    YearEnd, DegreeFrom5, Grade,
-                    Degree, Order
+                    UniversityName, Faculty, YearStart,
+                    YearEnd, DegreeFrom5, Grade, Order
                 } = req.body;
 
                 const DegreeFrom10 = DegreeFrom5 * 2;
                 const DegreeFrom100 = DegreeFrom5 * 20;
 
                 let education = new Education({
-                    UniversityName, Faculty, Field, YearStart,
+                    UniversityName, Faculty, YearStart,
                     YearEnd, Grade, DegreeFrom5, DegreeFrom10,
-                    DegreeFrom100, Degree, Order
+                    DegreeFrom100, Order
                 });
                 education.save()
                     .then((edu) => {
@@ -81,7 +80,7 @@ exports.deleteEducation = (req, res) => {
 }
 
 exports.updateEducation = (req, res) => {
-    const { _id, UniversityName, Faculty, Field, YearStart, YearEnd, Grade, DegreeFrom5, Degree, Order } = req.body;
+    const { _id, UniversityName, Faculty, YearStart, YearEnd, Grade, DegreeFrom5, Order } = req.body;
     Education.findById(_id).exec((error, education) => {
         if (error) {
             return res.status(400).json({
@@ -96,14 +95,12 @@ exports.updateEducation = (req, res) => {
                 $set: {
                     UniversityName,
                     Faculty,
-                    Field,
                     YearStart,
                     YearEnd,
                     Grade,
                     DegreeFrom5,
                     DegreeFrom10,
                     DegreeFrom100,
-                    Degree,
                     Order
                 }
             }).then(() => {
@@ -113,14 +110,12 @@ exports.updateEducation = (req, res) => {
                         _id,
                         UniversityName,
                         Faculty,
-                        Field,
                         YearStart,
                         YearEnd,
                         Grade,
                         DegreeFrom5,
                         DegreeFrom10,
                         DegreeFrom100,
-                        Degree,
                         Order
                     }
                 })
@@ -132,4 +127,45 @@ exports.updateEducation = (req, res) => {
             })
         }
     })
+}
+
+exports.getEducations = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Education.find({ _id: { $in: cv.Educations } })
+                    .exec((err, edu) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (edu) {
+                            return res.status(200).json({
+                                msg: "Educations returned successfully",
+                                data: edu
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
 }

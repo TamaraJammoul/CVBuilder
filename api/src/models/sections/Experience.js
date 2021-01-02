@@ -4,8 +4,8 @@ const { String, Date, Number } = mongoose.Schema.Types;
 const ExperienceSchema = new mongoose.Schema({
     Name: String,
     Description: String,
-    Start: Date,
-    End: Date,
+    Start: Number,
+    End: Number,
     Project: String,
     Order: Number
 });

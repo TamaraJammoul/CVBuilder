@@ -43,3 +43,4 @@ export const EDITCOURSES = "EDITCOURSES";
 export const ADDCOURSES = "ADDCOURSES";
 export const DELETECOURSES = "DELETECOURSES";
 export const GETALLCOURSES = "GETALLCOURSES";
+export const AUTH = "AUTH";

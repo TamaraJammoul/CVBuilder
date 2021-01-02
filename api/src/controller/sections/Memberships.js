@@ -105,3 +105,44 @@ exports.updateMembership = (req, res) => {
         }
     })
 }
+
+exports.getMemberships = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Memberships.find({ _id: { $in: cv.Memberships } })
+                    .exec((err, mem) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (mem) {
+                            return res.status(200).json({
+                                msg: "Memberships returned successfully",
+                                data: mem
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

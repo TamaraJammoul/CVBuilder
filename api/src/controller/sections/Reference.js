@@ -103,3 +103,44 @@ exports.updateReference = (req, res) => {
         }
     })
 }
+
+exports.getReferences = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Reference.find({ _id: { $in: cv.References } })
+                    .exec((err, ref) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (ref) {
+                            return res.status(200).json({
+                                msg: "References returned successfully",
+                                data: ref
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

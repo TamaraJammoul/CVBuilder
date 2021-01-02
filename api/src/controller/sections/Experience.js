@@ -113,3 +113,44 @@ exports.updateExperience = (req, res) => {
         }
     })
 }
+
+exports.getExperiences = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Experience.find({ _id: { $in: cv.Experiences } })
+                    .exec((err, exp) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (exp) {
+                            return res.status(200).json({
+                                msg: "Experiences returned successfully",
+                                data: exp
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

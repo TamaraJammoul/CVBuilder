@@ -108,3 +108,44 @@ exports.updateCertificate = (req, res) => {
         }
     })
 }
+
+exports.getCertificates = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                Certificate.find({ _id: { $in: cv.Certificates } })
+                    .exec((err, cert) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (cert) {
+                            return res.status(200).json({
+                                msg: "Certificates returned successfully",
+                                data: cert
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
+}

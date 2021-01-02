@@ -3,7 +3,7 @@ import {Container, Grid, Button} from "@material-ui/core";
 import Template from "./CV/Template";
 import {AddCVAction, DeleteCVAction} from "./../store/action/cv";
 import {useTranslation} from "react-i18next";
-import {GetAllCVAction} from "./../store/action/action";
+import {GetAllCVAction, Auth} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 
 export default function Dashboard() {
@@ -14,6 +14,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(GetAllCVAction(email));
+    if (localStorage.getItem("token")) {
+      dispatch(Auth());
+    }
   }, []);
   return (
     <Grid

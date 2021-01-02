@@ -12,8 +12,9 @@ exports.addPersonalSkills = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, Order } = req.body;
-                let personalSkills = new PersonalSkills({ Name, Order });
+                const { Name, RateFrom5, Order } = req.body;
+                const RateFrom100 = RateFrom5 * 20;
+                let personalSkills = new PersonalSkills({ Name, RateFrom5, RateFrom100, Order });
                 personalSkills.save()
                     .then((psk) => {
                         let tmpPersonalSkills = cv.PersonalSkills;
@@ -70,7 +71,7 @@ exports.deletePersonalSkills = (req, res) => {
 }
 
 exports.updatePersonalSkills = (req, res) => {
-    const { _id, Name, Order } = req.body;
+    const { _id, Name, RateFrom5, Order } = req.body;
     PersonalSkills.findById(_id).exec((error, personalSkills) => {
         if (error) {
             return res.status(400).json({
@@ -79,9 +80,12 @@ exports.updatePersonalSkills = (req, res) => {
             })
         }
         if (personalSkills) {
+            const RateFrom100 = RateFrom5 * 20;
             PersonalSkills.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    RateFrom5,
+                    RateFrom100,
                     Order
                 }
             }).then(() => {
@@ -90,6 +94,8 @@ exports.updatePersonalSkills = (req, res) => {
                     data: {
                         _id,
                         Name,
+                        RateFrom5,
+                        RateFrom100,
                         Order
                     }
                 })
@@ -101,4 +107,45 @@ exports.updatePersonalSkills = (req, res) => {
             })
         }
     })
+}
+
+exports.getPersonalSkills = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occured",
+                    err
+                })
+            }
+            if (cv) {
+                PersonalSkills.find({ _id: { $in: cv.PersonalSkills } })
+                    .exec((err, psk) => {
+                        if (err) {
+                            return res.status(400).json({
+                                msg: "DB Error Occured",
+                                err
+                            })
+                        }
+                        if (psk) {
+                            return res.status(200).json({
+                                msg: "Personal Skills returned successfully",
+                                data: psk
+                            })
+                        }
+                        else {
+                            return res.status(200).json({
+                                msg: "No CV Found",
+                                err
+                            })
+                        }
+                    })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "No CV Found",
+                    err
+                })
+            }
+        })
 }

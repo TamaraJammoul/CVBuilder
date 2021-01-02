@@ -1,4 +1,4 @@
-import {CONTACTUS, CHANGELANGUAGE, GETALLCV} from "./types";
+import {CONTACTUS, CHANGELANGUAGE, GETALLCV, AUTH} from "./types";
 import axios from "axios";
 
 export function ContactusAction(payload) {
@@ -38,5 +38,12 @@ export function GetAllCVAction(payload) {
           payload: res,
         });
       });
+  };
+}
+export function Auth(payload) {
+  return async (dispatch) => {
+    dispatch({
+      type: AUTH,
+    });
   };
 }
