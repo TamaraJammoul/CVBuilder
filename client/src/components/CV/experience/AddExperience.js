@@ -109,7 +109,10 @@ export default function Experience(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddExperienceAction(data))}
+                onClick={() => {
+                  dispatch(AddExperienceAction(data));
+                  history.push("/buildcv/experience");
+                }}
               >
                 {t("save")}
               </Button>

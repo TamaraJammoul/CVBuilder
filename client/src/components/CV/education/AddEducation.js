@@ -144,7 +144,10 @@ export default function AddEducation(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() => dispatch(AddEducationAction(data))}
+              onClick={() => {
+                dispatch(AddEducationAction(data));
+                history.push("/buildcv/education");
+              }}
             >
               {t("save")}
             </Button>

@@ -81,7 +81,10 @@ export default function AddCertificate(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddCertificateAction(data))}
+                onClick={() => {
+                  dispatch(AddCertificateAction(data));
+                  history.push("/buildcv/certificates");
+                }}
               >
                 {t("save")}
               </Button>

@@ -68,9 +68,12 @@ export default function Reference(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
-                dispatch(
-                  AddReferenceAction({reference, phone, cvID, order: "1"})
-                );
+                {
+                  dispatch(
+                    AddReferenceAction({reference, phone, cvID, order: "1"})
+                  );
+                  history.push("/buildcv/reference");
+                }
               }}
             >
               {t("save")}

@@ -53,11 +53,12 @@ export default function AddMembership(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() =>
+              onClick={() => {
                 dispatch(
                   AddMembershipAction({membershipName, cvID, order: "1"})
-                )
-              }
+                );
+                history.push("/buildcv/membership");
+              }}
             >
               {t("save")}
             </Button>

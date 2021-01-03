@@ -70,8 +70,8 @@ export default function EditReference(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
-                console.log("kljklj");
                 dispatch(EditReferenceAction(data));
+                history.push("/buildcv/reference");
               }}
             >
               {t("save")}

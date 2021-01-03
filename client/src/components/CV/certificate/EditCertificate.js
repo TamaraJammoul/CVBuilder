@@ -83,7 +83,10 @@ export default function EditCertificate(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(EditCertificateAction(data))}
+                onClick={() => {
+                  dispatch(EditCertificateAction(data));
+                  history.push("/buildcv/certificates");
+                }}
               >
                 {t("save")}
               </Button>

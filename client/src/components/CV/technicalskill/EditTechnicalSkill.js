@@ -77,7 +77,10 @@ export default function EditTechnicalSkill(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(EditTechnicalSkillAction(data))}
+                onClick={() => {
+                  dispatch(EditTechnicalSkillAction(data));
+                  history.push("/buildcv/technicalskills");
+                }}
               >
                 {t("save")}
               </Button>

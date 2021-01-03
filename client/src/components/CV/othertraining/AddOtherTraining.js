@@ -54,11 +54,12 @@ export default function AddOtherTraining(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() =>
+              onClick={() => {
                 dispatch(
                   AddOtherTrainingAction({otherTraining, cvID, order: "1"})
-                )
-              }
+                );
+                history.push("/buildcv/othertraining");
+              }}
             >
               {t("save")}
             </Button>

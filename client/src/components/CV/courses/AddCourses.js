@@ -53,9 +53,10 @@ export default function AddCourses(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() =>
-                dispatch(AddCoursesAction({courses, cvID, order: "1"}))
-              }
+              onClick={() => {
+                dispatch(AddCoursesAction({courses, cvID, order: "1"}));
+                history.push("/buildcv/courses");
+              }}
             >
               {t("save")}
             </Button>

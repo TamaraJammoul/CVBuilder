@@ -24,6 +24,9 @@ const initialState = {
   id: "",
   token: "",
   cvID: "",
+  toast: false,
+  toastMessage: "",
+  toastType: "success",
 };
 
 const store = createStore(

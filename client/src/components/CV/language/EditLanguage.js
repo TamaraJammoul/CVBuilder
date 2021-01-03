@@ -76,7 +76,10 @@ export default function AddLanguage(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(EditLanguageAction(data))}
+                onClick={() => {
+                  dispatch(EditLanguageAction(data));
+                  history.push("/buildcv/languages");
+                }}
               >
                 {t("save")}
               </Button>

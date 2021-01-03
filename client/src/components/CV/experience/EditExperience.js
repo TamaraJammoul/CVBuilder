@@ -112,7 +112,10 @@ export default function Experience(props) {
                 variant="contained"
                 color="primary"
                 style={{float: "right"}}
-                onClick={() => dispatch(EditExperienceAction(data))}
+                onClick={() => {
+                  dispatch(EditExperienceAction(data));
+                  history.push("/buildcv/education");
+                }}
               >
                 {t("save")}
               </Button>

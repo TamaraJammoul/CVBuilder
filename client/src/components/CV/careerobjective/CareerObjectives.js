@@ -6,7 +6,7 @@ import {VisibilityOff, EditSharp} from "@material-ui/icons";
 import {EditCareerObjectiveAction} from "./../../../store/action/careerobjective";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-
+import ReactHtmlParser from "react-html-parser";
 export default function CareerObjectives() {
   const [text, setText] = useState("");
   const handleEditorChange = (content, editor) => {
@@ -60,7 +60,7 @@ export default function CareerObjectives() {
             </Grid>{" "}
           </Grid>
           <Grid item xs={12}>
-            <h5>{text}</h5>
+            <h5>{ReactHtmlParser(text)}</h5>
           </Grid>
           <Grid item xs={12}>
             {" "}

@@ -74,7 +74,10 @@ export default function AddTechnicalSkill(props) {
                 variant="contained"
                 className="save"
                 style={{float: "right"}}
-                onClick={() => dispatch(AddTechnicalSkillsAction(data))}
+                onClick={() => {
+                  dispatch(AddTechnicalSkillsAction(data));
+                  history.push("/buildcv/technicalskills");
+                }}
               >
                 {t("save")}
               </Button>

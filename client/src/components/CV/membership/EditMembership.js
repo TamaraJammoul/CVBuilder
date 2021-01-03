@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory, useLocation} from "react-router-dom";
 
-export default function AddMembership(props) {
+export default function EditMembership(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -55,9 +55,12 @@ export default function AddMembership(props) {
               variant="contained"
               className="save"
               style={{float: "right"}}
-              onClick={() =>
-                dispatch(EditMembershipAction({membershipName, id, order: "1"}))
-              }
+              onClick={() => {
+                dispatch(
+                  EditMembershipAction({membershipName, id, order: "1"})
+                );
+                history.push("/buildcv/membership");
+              }}
             >
               {t("save")}
             </Button>
