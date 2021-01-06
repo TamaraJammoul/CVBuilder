@@ -3,6 +3,7 @@ import {
   DELETEREFERENCE,
   EDITREFERENCE,
   COPYREFERENCE,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddReferenceAction(payload) {
@@ -20,6 +21,10 @@ export function AddReferenceAction(payload) {
           dispatch({
             type: ADDREFERENCE,
             payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
           });
       });
   };
@@ -42,10 +47,15 @@ export function DeleteReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        dispatch({
-          type: DELETEREFERENCE,
-          payload,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETEREFERENCE,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -60,10 +70,15 @@ export function EditReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITREFERENCE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITREFERENCE,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

@@ -3,6 +3,7 @@ import {
   EDITMEMBERSHIP,
   DELETEMEMBERSHIP,
   COPYMEMBERSHIP,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddMembershipAction(payload) {
@@ -15,10 +16,15 @@ export function AddMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDMEMBERSHIP,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDMEMBERSHIP,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -40,10 +46,15 @@ export function DeleteMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: DELETEMEMBERSHIP,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETEMEMBERSHIP,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -57,10 +68,15 @@ export function EditMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITMEMBERSHIP,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITMEMBERSHIP,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

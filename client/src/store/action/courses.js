@@ -1,4 +1,10 @@
-import {ADDCOURSES, EDITCOURSES, DELETECOURSES, COPYCOURSES} from "./types";
+import {
+  ADDCOURSES,
+  EDITCOURSES,
+  DELETECOURSES,
+  COPYCOURSES,
+  ERROR,
+} from "./types";
 import axios from "axios";
 export function AddCoursesAction(payload) {
   return (dispatch) => {
@@ -10,10 +16,15 @@ export function AddCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDCOURSES,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDCOURSES,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -35,10 +46,15 @@ export function DeleteCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: DELETECOURSES,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETECOURSES,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -52,10 +68,15 @@ export function EditCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITCOURSES,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITCOURSES,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

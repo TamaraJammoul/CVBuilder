@@ -1,4 +1,4 @@
-import {CONTACTUS, CHANGELANGUAGE, GETALLCV, AUTH} from "./types";
+import {CONTACTUS, CHANGELANGUAGE, GETALLCV, AUTH,ERROR} from "./types";
 import axios from "axios";
 
 export function ContactusAction(payload) {
@@ -12,9 +12,14 @@ export function ContactusAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
+        if(res.status==200)
         dispatch({
           type: CONTACTUS,
           payload: res.data,
+        });
+        else
+         dispatch({
+          type: ERROR,
         });
       });
   };
@@ -33,9 +38,14 @@ export function GetAllCVAction(payload) {
       .post(`http://localhost:5000/api/CV/getAllCV`, {Email: payload})
       .then((res) => {
         console.log(res);
+        if(res.status==200)
         dispatch({
           type: GETALLCV,
           payload: res,
+        });
+        else
+         dispatch({
+          type: ERROR,
         });
       });
   };

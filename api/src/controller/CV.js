@@ -7,8 +7,9 @@ const Language = require('../models/sections/Language');
 const Memberships = require('../models/sections/Memberships');
 const OtherTraining = require('../models/sections/OtherTraining');
 const PersonalInformation = require('../models/sections/PersonalInformation');
-const PersonalSkills = require('../models/sections/PersonalSkills');
+const TechnicalSkills = require('../models/sections/TechnicalSkills');
 const Reference = require('../models/sections/Reference');
+const Course = require('../models/sections/Course');
 const Skill = require('../models/sections/Skill');
 const User = require('../models/User');
 
@@ -32,9 +33,14 @@ exports.addCV = (req, res) => {
                 Memberships: [],
                 OtherTrainings: [],
                 PersonalInformation: personalInformation,
-                PersonalSkills: [],
+                TechnicalSkills: [],
                 Reference: [],
                 Skill: [],
+                Courses: [],
+                Name: "",
+                Template: "",
+                Language: "",
+                CreatedDate: "",
                 Order: 1
             })
 
@@ -108,7 +114,7 @@ exports.deleteCV = (req, res) => {
                                                 err
                                             })
                                         }
-                                        PersonalSkills.deleteMany({ "_id": { $in: cv.PersonalSkills } }, (err) => {
+                                        TechnicalSkills.deleteMany({ "_id": { $in: cv.TechnicalSkills } }, (err) => {
                                             if (err) {
                                                 return res.status(400).json({
                                                     err
@@ -120,43 +126,50 @@ exports.deleteCV = (req, res) => {
                                                         err
                                                     })
                                                 }
-                                                Skill.deleteMany({ "_id": { $in: cv.Skill } }, (err) => {
+                                                Course.deleteMany({ "_id": { $in: cv.Courses } }, (err) => {
                                                     if (err) {
                                                         return res.status(400).json({
                                                             err
                                                         })
                                                     }
-                                                    CV.deleteOne({ _id: req.body.id }, (err) => {
+                                                    Skill.deleteMany({ "_id": { $in: cv.Skill } }, (err) => {
                                                         if (err) {
-                                                            console.error(err);
-                                                        }
-                                                        User.findOne({ Email: req.body.Email })
-                                                            .exec((err, user) => {
-                                                                if (err) {
-                                                                    return res.status(400).json({
-                                                                        msg: "Somethings went Wrong"
-                                                                    });
-                                                                }
-                                                                if (user) {
-                                                                    let tmpCV = user.CV;
-                                                                    let index = -1;
-                                                                    for (let i = 0; i < tmpCV.length; i++) {
-                                                                        if (tmpCV[i].toString() === req.body.id) {
-                                                                            index = i;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                    if (index > -1) {
-                                                                        tmpCV.splice(index, 1);
-                                                                    }
-                                                                    User.updateOne({ Email: req.body.Email }, { $set: { CV: tmpCV } })
-                                                                        .then(() => {
-                                                                            return res.status(200).json({
-                                                                                msg: "delete process completed successfuly"
-                                                                            })
-                                                                        })
-                                                                }
+                                                            return res.status(400).json({
+                                                                err
                                                             })
+                                                        }
+                                                        CV.deleteOne({ _id: req.body.id }, (err) => {
+                                                            if (err) {
+                                                                console.error(err);
+                                                            }
+                                                            User.findOne({ Email: req.body.Email })
+                                                                .exec((err, user) => {
+                                                                    if (err) {
+                                                                        return res.status(400).json({
+                                                                            msg: "Somethings went Wrong"
+                                                                        });
+                                                                    }
+                                                                    if (user) {
+                                                                        let tmpCV = user.CV;
+                                                                        let index = -1;
+                                                                        for (let i = 0; i < tmpCV.length; i++) {
+                                                                            if (tmpCV[i].toString() === req.body.id) {
+                                                                                index = i;
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                        if (index > -1) {
+                                                                            tmpCV.splice(index, 1);
+                                                                        }
+                                                                        User.updateOne({ Email: req.body.Email }, { $set: { CV: tmpCV } })
+                                                                            .then(() => {
+                                                                                return res.status(200).json({
+                                                                                    msg: "delete process completed successfuly"
+                                                                                })
+                                                                            })
+                                                                    }
+                                                                })
+                                                        })
                                                     })
                                                 })
                                             })
@@ -208,8 +221,9 @@ exports.getCV = (req, res) => {
             lan = await Language.find({ _id: { $in: cv.Languages } });
             mem = await Memberships.find({ _id: { $in: cv.Memberships } });
             oth = await OtherTraining.find({ _id: { $in: cv.OtherTrainings } });
-            psk = await PersonalSkills.find({ _id: { $in: cv.PersonalSkills } });
+            tsk = await TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } });
             ref = await Reference.find({ _id: { $in: cv.References } });
+            cor = await Course.find({ _id: { $in: cv.Courses } });
             skill = await Skill.find({ _id: { $in: cv.Skills } });
             return res.status(200).json({
                 msg: "CV Data Returned Successfully",
@@ -222,15 +236,132 @@ exports.getCV = (req, res) => {
                     Memberships: mem,
                     OtherTrainings: oth,
                     PersonalInformation: pi,
-                    PersonalSkills: psk,
+                    TechnicalSkills: tsk,
                     References: ref,
-                    Skills: skill
+                    Courses: cor,
+                    Skills: skill,
+                    Name: cv.Name,
+                    Template: cv.Template,
+                    Language: cv.Language,
+                    CreatedDate: cv.CreatedDate
                 }
             })
         }
         else {
             return res.status(200).json({
                 msg: "No CV Found"
+            })
+        }
+    })
+}
+
+exports.updateName = (req, res) => {
+    const { _id, Name } = req.body;
+    CV.findById(_id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong, can't get any thing from DB",
+                error: error
+            })
+        }
+        if (cv) {
+            CV.updateOne({ _id: _id }, {
+                $set: {
+                    Name: Name
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Name property updated successfully"
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No CV found",
+            })
+        }
+    })
+}
+
+exports.updateTemplate = (req, res) => {
+    const { _id, Template } = req.body;
+    CV.findById(_id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong, can't get any thing from DB",
+                error: error
+            })
+        }
+        if (cv) {
+            CV.updateOne({ _id: _id }, {
+                $set: {
+                    Template: Template
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Template property updated successfully"
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No CV found",
+            })
+        }
+    })
+}
+
+exports.updateLanguage = (req, res) => {
+    const { _id, Language } = req.body;
+    CV.findById(_id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong, can't get any thing from DB",
+                error: error
+            })
+        }
+        if (cv) {
+            CV.updateOne({ _id: _id }, {
+                $set: {
+                    Language: Language
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "Language property updated successfully"
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No CV found",
+            })
+        }
+    })
+}
+
+exports.updateCreatedDate = (req, res) => {
+    const { _id, CreatedDate } = req.body;
+    CV.findById(_id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Somethings wen Wrong, can't get any thing from DB",
+                error: error
+            })
+        }
+        if (cv) {
+            CV.updateOne({ _id: _id }, {
+                $set: {
+                    CreatedDate: CreatedDate
+                }
+            }).then(() => {
+                return res.status(200).json({
+                    msg: "CreatedDate property updated successfully"
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "No CV found",
             })
         }
     })

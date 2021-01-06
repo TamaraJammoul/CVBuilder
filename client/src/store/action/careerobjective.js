@@ -1,4 +1,4 @@
-import {EDITCAREEROBJECTIVE} from "./types";
+import {EDITCAREEROBJECTIVE, ERROR} from "./types";
 import axios from "axios";
 
 export function EditCareerObjectiveAction(payload) {
@@ -11,10 +11,15 @@ export function EditCareerObjectiveAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITCAREEROBJECTIVE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITCAREEROBJECTIVE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

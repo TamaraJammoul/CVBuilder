@@ -40,22 +40,13 @@ export default function CareerObjectives() {
               </Grid>
               <Grid item sm={6} xs={12}>
                 {" "}
-                <ButtonGroup disableElevation variant="outlined">
-                  <Button
-                    color="primary"
-                    startIcon={<EditSharp />}
-                    className="button"
-                  >
-                    {t("Rename")}
-                  </Button>
-                  <Button
-                    color="secondary"
-                    startIcon={<VisibilityOff />}
-                    className="button"
-                  >
-                    {t("HideSection")}
-                  </Button>{" "}
-                </ButtonGroup>
+                <Button
+                  color="secondary"
+                  startIcon={<VisibilityOff />}
+                  className="button"
+                >
+                  {t("HideSection")}
+                </Button>{" "}
               </Grid>
             </Grid>{" "}
           </Grid>
@@ -70,7 +61,7 @@ export default function CareerObjectives() {
                 height: 200,
                 directionality: i18n.language == "en" ? "ltr" : "rtl",
                 plugins:
-                  " autolink listsanchorfullscreen  insertdatetime  paste  help ",
+                  " autolink listsanchorfullscreen insertdatetime  paste  help ",
                 toolbar:
                   "pageembed permanentpen  undo redo |bold italic | \
              alignleft aligncenter alignright alignjustify | \

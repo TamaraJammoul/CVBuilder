@@ -3,6 +3,7 @@ import {
   DELETEEXPERIENCE,
   EDITEXPERIENCE,
   COPYEXPERIENCE,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddExperienceAction(payload) {
@@ -19,10 +20,15 @@ export function AddExperienceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDEXPERIENCE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDEXPERIENCE,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -44,10 +50,15 @@ export function DeleteExperienceAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        dispatch({
-          type: DELETEEXPERIENCE,
-          payload,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETEEXPERIENCE,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -65,10 +76,15 @@ export function EditExperienceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITEXPERIENCE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITEXPERIENCE,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

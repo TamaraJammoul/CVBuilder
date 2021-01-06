@@ -147,7 +147,7 @@ export default function reducer(state, action) {
       };
     case "DELETECERTIFICATE":
       var temp = state.template.certificates;
-      temp = temp.filter((e) => e.name != action.payload);
+      temp = temp.filter((e) => e._id != action.payload.certificate_id);
       console.log("lj", temp);
       return {
         ...state,
@@ -480,6 +480,14 @@ export default function reducer(state, action) {
         lastName: action.payload.data.LastName,
         email: action.payload.data.Email,
         id: action.payload.data._id,
+      };
+    case "ERROR":
+      return {
+        ...state,
+        toast: true,
+        toastMessageEN: "sorry something went wrong",
+        toastMessageAR: "عذراً حدث خطأ ما أعد المحاولة",
+        toastType: "error",
       };
     default:
       return state;

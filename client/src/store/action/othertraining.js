@@ -3,6 +3,7 @@ import {
   DELETEOTHERTRAINING,
   EDITOTHERTRAINING,
   COPYOTHERTRAINING,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddOtherTrainingAction(payload) {
@@ -15,10 +16,15 @@ export function AddOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDOTHERTRAINING,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDOTHERTRAINING,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -40,10 +46,15 @@ export function DeleteOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: DELETEOTHERTRAINING,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETEOTHERTRAINING,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -57,10 +68,15 @@ export function EditOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITOTHERTRAINING,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITOTHERTRAINING,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

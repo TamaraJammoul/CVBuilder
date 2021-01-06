@@ -3,6 +3,7 @@ import {
   EDITCERTIFICATE,
   DELETECERTIFICATE,
   COPYCERTIFICATE,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddCertificateAction(payload) {
@@ -17,10 +18,15 @@ export function AddCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDCERTIFICATE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDCERTIFICATE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -41,10 +47,15 @@ export function DeleteCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: DELETECERTIFICATE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETECERTIFICATE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -60,10 +71,15 @@ export function EditCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITCERTIFICATE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITCERTIFICATE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

@@ -1,8 +1,8 @@
 const CV = require('../../models/CV');
-const PersonalSkills = require('../../models/sections/PersonalSkills');
+const TechnicalSkills = require('../../models/sections/TechnicalSkills');
 
 
-exports.addPersonalSkills = (req, res) => {
+exports.addTechnicalSkills = (req, res) => {
     CV.findOne({ _id: req.body._id })
         .exec((error, cv) => {
             if (error) {
@@ -14,15 +14,15 @@ exports.addPersonalSkills = (req, res) => {
             if (cv) {
                 const { Name, RateFrom5, Order } = req.body;
                 const RateFrom100 = RateFrom5 * 20;
-                let personalSkills = new PersonalSkills({ Name, RateFrom5, RateFrom100, Order });
-                personalSkills.save()
+                let technicalSkills = new TechnicalSkills({ Name, RateFrom5, RateFrom100, Order });
+                technicalSkills.save()
                     .then((psk) => {
-                        let tmpPersonalSkills = cv.PersonalSkills;
-                        tmpPersonalSkills.push(psk._id);
-                        cv.updateOne({ PersonalSkills: tmpPersonalSkills })
+                        let tmpTechnicalSkills = cv.TechnicalSkills;
+                        tmpTechnicalSkills.push(psk._id);
+                        cv.updateOne({ TechnicalSkills: tmpTechnicalSkills })
                             .then(() => {
                                 return res.status(200).json({
-                                    msg: "PersonalSkills added successfuly",
+                                    msg: "TechnicalSkills added successfuly",
                                     data: psk
                                 })
                             })
@@ -36,7 +36,7 @@ exports.addPersonalSkills = (req, res) => {
         })
 }
 
-exports.deletePersonalSkills = (req, res) => {
+exports.deleteTechnicalSkills = (req, res) => {
     CV.findOne({ _id: req.body._id })
         .exec((error, cv) => {
             if (error) {
@@ -46,23 +46,23 @@ exports.deletePersonalSkills = (req, res) => {
                 })
             }
             if (cv) {
-                let tmpPersonalSkills = cv.PersonalSkills;
+                let tmpTechnicalSkills = cv.TechnicalSkills;
                 let index = -1;
-                for (let i = 0; i < tmpPersonalSkills.length; i++) {
-                    if (tmpPersonalSkills[i].toString() === req.body.personalSkill_id) {
+                for (let i = 0; i < tmpTechnicalSkills.length; i++) {
+                    if (tmpTechnicalSkills[i].toString() === req.body.technicalSkill_id) {
                         index = i;
                         break;
                     }
                 }
                 if (index > -1) {
-                    tmpPersonalSkills.splice(index, 1);
+                    tmpTechnicalSkills.splice(index, 1);
                 }
-                CV.updateOne({ _id: req.body._id }, { $set: { PersonalSkills: tmpPersonalSkills } })
+                CV.updateOne({ _id: req.body._id }, { $set: { TechnicalSkills: tmpTechnicalSkills } })
                     .then(() => {
-                        PersonalSkills.deleteOne({ _id: req.body.personalSkill_id }).then(() => {
+                        TechnicalSkills.deleteOne({ _id: req.body.technicalSkill_id }).then(() => {
                             return res.status(200).json({
-                                msg: "PersonalSlills deleted",
-                                data: tmpPersonalSkills
+                                msg: "TechnicalSlills deleted",
+                                data: tmpTechnicalSkills
                             })
                         })
                     })
@@ -70,18 +70,18 @@ exports.deletePersonalSkills = (req, res) => {
         })
 }
 
-exports.updatePersonalSkills = (req, res) => {
+exports.updateTechnicalSkills = (req, res) => {
     const { _id, Name, RateFrom5, Order } = req.body;
-    PersonalSkills.findById(_id).exec((error, personalSkills) => {
+    TechnicalSkills.findById(_id).exec((error, technicalSkills) => {
         if (error) {
             return res.status(400).json({
                 msg: "Somethings went Wrong, can't get any thing from DB",
                 error: error
             })
         }
-        if (personalSkills) {
+        if (technicalSkills) {
             const RateFrom100 = RateFrom5 * 20;
-            PersonalSkills.updateOne({ _id: _id }, {
+            TechnicalSkills.updateOne({ _id: _id }, {
                 $set: {
                     Name,
                     RateFrom5,
@@ -90,7 +90,7 @@ exports.updatePersonalSkills = (req, res) => {
                 }
             }).then(() => {
                 return res.status(200).json({
-                    msg: "PersonalSkills updated successfully",
+                    msg: "TechnicalSkills updated successfully",
                     data: {
                         _id,
                         Name,
@@ -103,13 +103,13 @@ exports.updatePersonalSkills = (req, res) => {
         }
         else {
             return res.status(200).json({
-                msg: "No PersonalSkills found",
+                msg: "No TechnicalSkills found",
             })
         }
     })
 }
 
-exports.getPersonalSkills = (req, res) => {
+exports.getTechnicalSkills = (req, res) => {
     CV.findById(req.body._id)
         .exec((err, cv) => {
             if (err) {
@@ -119,7 +119,7 @@ exports.getPersonalSkills = (req, res) => {
                 })
             }
             if (cv) {
-                PersonalSkills.find({ _id: { $in: cv.PersonalSkills } })
+                TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } })
                     .exec((err, psk) => {
                         if (err) {
                             return res.status(400).json({
@@ -129,7 +129,7 @@ exports.getPersonalSkills = (req, res) => {
                         }
                         if (psk) {
                             return res.status(200).json({
-                                msg: "Personal Skills returned successfully",
+                                msg: "Technical Skills returned successfully",
                                 data: psk
                             })
                         }

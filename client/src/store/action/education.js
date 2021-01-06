@@ -3,6 +3,7 @@ import {
   EDITEDUCATION,
   DELETEEDUCATION,
   COPYEDUCATION,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddEducationAction(payload) {
@@ -20,10 +21,15 @@ export function AddEducationAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDEDUCATION,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDEDUCATION,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -45,10 +51,15 @@ export function DeleteEducationAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: DELETEEDUCATION,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETEEDUCATION,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -67,10 +78,15 @@ export function EditEducationAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITEDUCATION,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITEDUCATION,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

@@ -19,40 +19,23 @@ import Dashboard from "./components/Dashboard";
 import store from "./store/store";
 import {Provider} from "react-redux";
 import withRoot from "./i18n/WithRoot";
-import Alert from "@material-ui/lab/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
-import {useSelector, useDispatch} from "react-redux";
 
+import {useSelector, useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
+import Toast from "./components/Toast";
 function App(props) {
   const [loading, setLoading] = useState(true);
-
-  const [tyrtyr, setToast] = useState(true);
-  //handel me
-  const toast = useSelector((state) => this.state.toast);
-  const toastMessage = useSelector((state) => state.toastMessage);
-  const toastType = useSelector((state) => state.toastType);
+  const {t, i18n} = useTranslation();
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   });
+
   return (
     <Provider store={store}>
-      <Snackbar
-        open={toast}
-        autoHideDuration={3000}
-        onClose={() => setToast(false)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        TransitionComponent="SlideTransition"
-      >
-        <Alert onClose={() => setToast(false)} severity={toastType}>
-          {toastMessage}
-        </Alert>
-      </Snackbar>
+      <Toast />
       <div className="wow">
         {loading ? (
           <Loading />

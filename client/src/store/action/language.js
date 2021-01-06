@@ -1,4 +1,10 @@
-import {ADDLANGUAGE, DELETELANGUAGE, EDITLANGUAGE, COPYLANGUAGE} from "./types";
+import {
+  ADDLANGUAGE,
+  DELETELANGUAGE,
+  EDITLANGUAGE,
+  COPYLANGUAGE,
+  ERROR,
+} from "./types";
 import axios from "axios";
 
 export function AddLanguageAction(payload) {
@@ -12,10 +18,15 @@ export function AddLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDLANGUAGE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDLANGUAGE,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -37,10 +48,15 @@ export function DeleteLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: DELETELANGUAGE,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETELANGUAGE,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -55,10 +71,15 @@ export function EditLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITLANGUAGE,
-          payload,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITLANGUAGE,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

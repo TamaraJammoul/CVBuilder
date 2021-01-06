@@ -3,6 +3,7 @@ import {
   EDITTECHNICALSKILL,
   DELETETECHNICALSKILL,
   COPYTECHNICALSKILL,
+  ERROR,
 } from "./types";
 import axios from "axios";
 export function AddTechnicalSkillsAction(payload) {
@@ -16,10 +17,15 @@ export function AddTechnicalSkillsAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDTECHNICALSKILL,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDTECHNICALSKILL,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -42,10 +48,15 @@ export function DeleteTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        dispatch({
-          type: DELETETECHNICALSKILL,
-          payload,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETETECHNICALSKILL,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

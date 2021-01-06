@@ -25,7 +25,8 @@ const initialState = {
   token: "",
   cvID: "",
   toast: false,
-  toastMessage: "",
+  toastMessageEN: "",
+  toastMessageAR: "",
   toastType: "success",
 };
 

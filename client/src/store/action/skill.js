@@ -1,4 +1,4 @@
-import {ADDSKILL} from "./types";
+import {ADDSKILL, ERROR} from "./types";
 import axios from "axios";
 export function AddSkillAction(payload) {
   return (dispatch) => {
@@ -10,10 +10,15 @@ export function AddSkillAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        dispatch({
-          type: ADDSKILL,
-          payload,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDSKILL,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

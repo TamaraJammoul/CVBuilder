@@ -1,4 +1,4 @@
-import {ADDCV, DELETECV} from "./types";
+import {ADDCV, DELETECV, ERROR} from "./types";
 import axios from "axios";
 
 export function AddCVAction(payload) {
@@ -9,10 +9,15 @@ export function AddCVAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ADDCV,
-          payload: res.data.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ADDCV,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -25,10 +30,15 @@ export function DeleteCVAction(payload) {
       })
       .then((res) => {
         console.log(res.data.data);
-        dispatch({
-          type: DELETECV,
-          payload: res.data.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: DELETECV,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

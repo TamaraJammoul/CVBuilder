@@ -54,17 +54,19 @@ export default function Certificates() {
                     <Grid item xs={7}>
                       <Grid container direction="column">
                         <Grid item>
-                          <h6>{cer.name}</h6>{" "}
+                          <h6>{cer.Name}</h6>{" "}
                         </Grid>
                         <Grid item>
                           <h6>
-                            {cer.description} <span>({cer.date})</span>
+                            {cer.Description} <span>({cer.Date})</span>
                           </h6>
                         </Grid>
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to={`/editcertificate?certificateID=${cer._id}`}>
+                      <Link
+                        to={`/buildcv/editcertificate?certificateID=${cer._id}`}
+                      >
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />

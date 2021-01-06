@@ -1,4 +1,4 @@
-import {LOGIN, SIGNUP} from "./types";
+import {LOGIN, SIGNUP, ERROR} from "./types";
 import axios from "axios";
 
 export function LoginAction(payload) {
@@ -20,7 +20,10 @@ export function LoginAction(payload) {
             type: LOGIN,
             payload: res.data,
           });
-        }
+        } else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -44,7 +47,10 @@ export function SignupAction(payload) {
             type: SIGNUP,
             payload: res.data,
           });
-        }
+        } else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
