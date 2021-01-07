@@ -102,7 +102,7 @@ export default function Experience(props) {
             <Grid item xs={12}>
               <Button
                 variant="contained"
-                color="secondary"
+                className="cancel"
                 style={{marginLeft: "10px", float: "right"}}
                 onClick={handelCancel}
               >
@@ -110,11 +110,11 @@ export default function Experience(props) {
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                className="save"
                 style={{float: "right"}}
                 onClick={() => {
                   dispatch(EditExperienceAction(data));
-                  history.push("/buildcv/education");
+                  history.push("/buildcv/experience");
                 }}
               >
                 {t("save")}

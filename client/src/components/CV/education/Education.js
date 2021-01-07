@@ -46,20 +46,20 @@ export default function Education() {
                       <Grid container direction="column">
                         <Grid item>
                           <h6>
-                            {edu.field}
+                            {edu.Faculty}
                             <span
                               style={{
                                 backgroundColor: "yellow",
                                 marginLeft: "10px",
                               }}
                             >
-                              ({edu.rate100}%)
+                              ({edu.DegreeFrom100}%)
                             </span>
                           </h6>{" "}
                         </Grid>
                         <Grid item>
                           <h6>
-                            {edu.universityName}{" "}
+                            {edu.UniversityName}{" "}
                             <span>
                               ({edu.startDate}-{edu.endDate})
                             </span>

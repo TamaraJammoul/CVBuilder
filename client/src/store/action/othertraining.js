@@ -19,7 +19,7 @@ export function AddOtherTrainingAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDOTHERTRAINING,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -71,7 +71,7 @@ export function EditOtherTrainingAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITOTHERTRAINING,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

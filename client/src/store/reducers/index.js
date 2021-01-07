@@ -52,14 +52,12 @@ export default function reducer(state, action) {
         },
       };
     case "ADDLANGUAGE":
+      console.log(action.payload);
       return {
         ...state,
         template: {
           ...state.template,
-          languages: [
-            ...state.template.languages,
-            {name: action.payload.language, rate: action.payload.rate},
-          ],
+          languages: [...state.template.languages, action.payload],
         },
       };
     case "ADDMEMBERSHIP":
@@ -67,7 +65,7 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          memberships: [...state.template.memberships, {name: action.payload}],
+          memberships: [...state.template.memberships, action.payload],
         },
       };
     case "ADDOTHERTRAINING":
@@ -75,10 +73,7 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          othertraining: [
-            ...state.template.othertraining,
-            {name: action.payload},
-          ],
+          othertraining: [...state.template.othertraining, action.payload],
         },
       };
     case "ADDTECHNICALSKILL":
@@ -95,7 +90,7 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          references: [...state.template.references, {name: action.payload}],
+          references: [...state.template.references, action.payload],
         },
       };
     case "ADDSKILL":
@@ -108,7 +103,7 @@ export default function reducer(state, action) {
       };
     case "DELETEREFERENCE":
       var temp = state.template.references;
-      temp = temp.filter((e) => e != action.payload);
+      temp = temp.filter((e) => e._id != action.payload.eference_id);
       return {
         ...state,
         template: {
@@ -147,6 +142,7 @@ export default function reducer(state, action) {
       };
     case "DELETECERTIFICATE":
       var temp = state.template.certificates;
+      console.log(action.payload);
       temp = temp.filter((e) => e._id != action.payload.certificate_id);
       console.log("lj", temp);
       return {
@@ -189,7 +185,7 @@ export default function reducer(state, action) {
       };
     case "DELETEEDUCATION":
       var temp = state.template.educations;
-      temp = temp.filter((e) => e.field != action.payload);
+      temp = temp.filter((e) => e._id != action.payload.education_id);
       console.log("iiiiiiiiii", temp);
       return {
         ...state,
@@ -200,19 +196,20 @@ export default function reducer(state, action) {
       };
     case "EDITEDUCATION":
       var temp = state.template.educations;
+      console.log(action.payload);
       temp.map((e, i) => {
-        if (e.field == action.payload.oldField) {
-          e.field = action.payload.newField;
-
-          e.universityName = action.payload.newUniversityName;
+        if (e._id == action.payload._id) {
+          e.Faculty = action.payload.Faculty;
+          e.UniversityName = action.payload.UniversityName;
           e.city = action.payload.newCity;
           e.startDate = action.payload.newStartDate;
           e.endDate = action.payload.newEndDate;
-          e.rate100 = action.payload.newRate100;
-          e.rate5 = action.payload.newRate5;
-          e.estimate = action.payload.newEstimate;
+          e.DegreeFrom100 = action.payload.DegreeFrom100;
+          e.DegreeFrom5 = action.payload.DegreeFrom5;
+          e.Grade = action.payload.Grade;
         }
       });
+      console.log(temp);
       return {
         ...state,
         template: {
@@ -250,8 +247,8 @@ export default function reducer(state, action) {
     case "EDITOTHERTRAINING":
       var temp = state.template.othertraining;
       temp.map((e, i) => {
-        if (e.name == action.payload.oldName) {
-          e.name = action.payload.newName;
+        if (e._id == action.payload._id) {
+          e.Name = action.Name;
         }
       });
       return {
@@ -296,7 +293,7 @@ export default function reducer(state, action) {
       };
     case "DELETELANGUAGE":
       var temp = state.template.languages;
-      temp = temp.filter((e) => e.name != action.payload);
+      temp = temp.filter((e) => e.language_id != action.payload.language_id);
       console.log("iiiiiiiiii", temp);
       return {
         ...state,
@@ -308,16 +305,16 @@ export default function reducer(state, action) {
     case "EDITLANGUAGE":
       var temp = state.template.languages;
       temp.map((e, i) => {
-        if (e.name == action.payload.oldName) {
-          e.name = action.payload.newName;
-          e.rate = action.payload.newRate;
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
+          e.Rate = action.payload.Rate;
         }
       });
       return {
         ...state,
         template: {
           ...state.template,
-          languages: [...state.template.languages, temp],
+          languages: temp,
         },
       };
     case "COPYLANGUAGE":
@@ -338,7 +335,7 @@ export default function reducer(state, action) {
 
     case "DELETEMEMBERSHIP":
       var temp = state.template.memberships;
-      temp = temp.filter((e) => e.name != action.payload);
+      temp = temp.filter((e) => e._id != action.payload.membership_id);
       console.log("iiiiiiiiii", temp);
       return {
         ...state,
@@ -348,17 +345,19 @@ export default function reducer(state, action) {
         },
       };
     case "EDITMEMBERSHIP":
+      console.log(action.payload);
       var temp = state.template.memberships;
       temp.map((e, i) => {
-        if (e.name == action.payload.oldName) {
-          e.name = action.payload.newName;
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
         }
       });
+      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          othertraining: temp,
+          memberships: temp,
         },
       };
     case "COPYMEMBERSHIP":
@@ -379,7 +378,7 @@ export default function reducer(state, action) {
 
     case "DELETEEXPERIENCE":
       var temp = state.template.experiences;
-      temp = temp.filter((e) => e.experienceName != action.payload);
+      temp = temp.filter((e) => e._id != action.payload.experience_id);
       console.log("iiiiiiiiii", temp);
       return {
         ...state,
@@ -390,16 +389,18 @@ export default function reducer(state, action) {
       };
     case "EDITEXPERIENCE":
       var temp = state.template.experiences;
+      console.log(action.payload, "ooooooo");
       temp.map((e, i) => {
-        if (e.experienceName == action.payload.oldName) {
-          e.experienceName = action.payload.newName;
-          e.description = action.payload.newDescription;
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
+          e.Description = action.payload.Description;
           e.experienceName = action.payload.newExperienceName;
-          e.startDate = action.payload.newStartDate;
-          e.endDate = action.payload.newEndDate;
-          e.project = action.payload.newProject;
+          e.Start = action.payload.Start;
+          e.End = action.payload.End;
+          e.Project = action.payload.Project;
         }
       });
+      console.log(temp);
       return {
         ...state,
         template: {
@@ -424,7 +425,7 @@ export default function reducer(state, action) {
       };
     case "DELETETECHNICALSKILL":
       var temp = state.template.technicalskills;
-      temp = temp.filter((e) => e.skill != action.payload);
+      temp = temp.filter((e) => e._id != action.payload.technicalSkill_id);
       console.log("iiiiiiiiii", temp);
       return {
         ...state,
@@ -436,16 +437,17 @@ export default function reducer(state, action) {
     case "EDITTECHNICALSKILL":
       var temp = state.template.technicalskills;
       temp.map((e, i) => {
-        if (e.skill == action.payload.oldName) {
-          e.skill = action.payload.newName;
-          e.rate = action.payload.newRate;
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
+          e.RateFrom5 = action.payload.Rate;
         }
       });
+      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          othertraining: temp,
+          technicalskills: temp,
         },
       };
     case "COPYTECHNICALSKILL":

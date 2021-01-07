@@ -9,6 +9,7 @@ import axios from "axios";
 
 export function AddLanguageAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/language/addLanguage`, {
         Name: payload.language,
@@ -21,7 +22,7 @@ export function AddLanguageAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDLANGUAGE,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -62,6 +63,7 @@ export function DeleteLanguageAction(payload) {
 }
 export function EditLanguageAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/language/updateLanguage`, {
         Name: payload.language,
@@ -74,7 +76,7 @@ export function EditLanguageAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITLANGUAGE,
-            payload,
+            payload: res.data.data,
           });
         else
           dispatch({

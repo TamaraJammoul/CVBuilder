@@ -87,14 +87,14 @@ export default function TechnicalSkills() {
                             <Grid container direction="column">
                               <Grid item>
                                 <h6>
-                                  {per.skill}
+                                  {per.Name}
                                   <span
                                     style={{
                                       backgroundColor: "yellow",
                                       marginLeft: "10px",
                                     }}
                                   >
-                                    {per.rate * 20}%
+                                    {per.RateFrom5 * 20}%
                                   </span>
                                 </h6>{" "}
                               </Grid>
@@ -103,12 +103,12 @@ export default function TechnicalSkills() {
                                   <div
                                     class="progress-bar"
                                     role="progressbar"
-                                    style={{width: `${per.rate * 20}%`}}
-                                    aria-valuenow={per.rate * 20}
+                                    style={{width: `${per.RateFrom5 * 20}%`}}
+                                    aria-valuenow={per.RateFrom5 * 20}
                                     aria-valuemin="0"
                                     aria-valuemax="100"
                                   >
-                                    {per.rate * 20}%
+                                    {per.RateFrom5 * 20}%
                                   </div>
                                 </div>{" "}
                               </Grid>
@@ -117,7 +117,7 @@ export default function TechnicalSkills() {
                           <Grid item xs={1}>
                             <IconButton aria-label="delete">
                               <Link
-                                to={`/editothertraining?technicalskillIDID=${per._id}`}
+                                to={`/buildcv/edittechnicalskills?technicalskillID=${per._id}`}
                               >
                                 {" "}
                                 <Edit />
@@ -167,7 +167,7 @@ export default function TechnicalSkills() {
 
           <Grid item xs={12}>
             {" "}
-            <Link to="/addtechnicalskills">
+            <Link to="/buildcv/addtechnicalskills">
               {" "}
               <Button
                 variant="contained"

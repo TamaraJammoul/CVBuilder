@@ -8,19 +8,20 @@ import {
 import axios from "axios";
 export function AddTechnicalSkillsAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
-      .post(`http://localhost:5000/api/technicalSkills/addTechnicalSkills`, {
+      .post(` http://localhost:5000/api/technicalSkills/addTechnicalSkills`, {
         Name: payload.skill,
         Order: payload.order,
         _id: payload.cvID,
-        Rate: payload.rate,
+        RateFrom5: payload.rate,
       })
       .then((res) => {
         console.log(res.data);
         if (res.status == 200)
           dispatch({
             type: ADDTECHNICALSKILL,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -62,18 +63,19 @@ export function DeleteTechnicalSkillAction(payload) {
 }
 export function EditTechnicalSkillAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/technicalSkills/editTechnicalSkills`, {
         Name: payload.skill,
         Order: payload.order,
         _id: payload.id,
-        Rate: payload.rate,
+        RateFrom5: payload.rate,
       })
       .then((res) => {
         console.log(res.data);
         dispatch({
           type: EDITTECHNICALSKILL,
-          payload: res.data,
+          payload: res.data.data,
         });
       });
   };

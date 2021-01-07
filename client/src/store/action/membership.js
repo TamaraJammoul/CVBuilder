@@ -19,7 +19,7 @@ export function AddMembershipAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDMEMBERSHIP,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -39,6 +39,7 @@ export function CopyMembershipAction(payload) {
 export function DeleteMembershipAction(payload) {
   console.log(payload);
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/membershop/deleteMembership`, {
         membership_id: payload.membership_id,
@@ -49,7 +50,7 @@ export function DeleteMembershipAction(payload) {
         if (res.status == 200)
           dispatch({
             type: DELETEMEMBERSHIP,
-            payload: res.data,
+            payload,
           });
         else
           dispatch({
@@ -71,7 +72,7 @@ export function EditMembershipAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITMEMBERSHIP,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

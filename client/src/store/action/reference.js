@@ -20,7 +20,7 @@ export function AddReferenceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDREFERENCE,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -61,6 +61,7 @@ export function DeleteReferenceAction(payload) {
 }
 export function EditReferenceAction(payload) {
   return async (dispatch) => {
+    console.log(payload);
     await axios
       .post(`http://localhost:5000/api/referance/updateReferance`, {
         Name: payload.reference,
@@ -73,7 +74,7 @@ export function EditReferenceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITREFERENCE,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

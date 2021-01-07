@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 export function AddEducationAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/education/addEducation`, {
         UniversityName: payload.universityName,
@@ -24,7 +25,7 @@ export function AddEducationAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDEDUCATION,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -54,7 +55,7 @@ export function DeleteEducationAction(payload) {
         if (res.status == 200)
           dispatch({
             type: DELETEEDUCATION,
-            payload: res.data,
+            payload,
           });
         else
           dispatch({
@@ -65,6 +66,7 @@ export function DeleteEducationAction(payload) {
 }
 export function EditEducationAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/education/updateEducation`, {
         UniversityName: payload.universityName,
@@ -81,7 +83,7 @@ export function EditEducationAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITEDUCATION,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

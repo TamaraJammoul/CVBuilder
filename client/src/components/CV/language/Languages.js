@@ -52,14 +52,14 @@ export default function Languages() {
                       <Grid container direction="column">
                         <Grid item>
                           <h6>
-                            {lan.name}
+                            {lan.Name}
                             <span
                               style={{
                                 backgroundColor: "yellow",
                                 marginLeft: "10px",
                               }}
                             >
-                              {lan.rate}/5
+                              {lan.Rate}/5
                             </span>
                           </h6>{" "}
                         </Grid>
@@ -71,7 +71,7 @@ export default function Languages() {
                           >
                             <Rating
                               name="customized-10"
-                              defaultValue={lan.rate}
+                              defaultValue={lan.Rate}
                               max={5}
                             />
                           </Box>
@@ -79,7 +79,7 @@ export default function Languages() {
                       </Grid>
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to={`/editlanguage?language_id=${lan._id}`}>
+                      <Link to={`/buildcv/editlanguage?language_id=${lan._id}`}>
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />

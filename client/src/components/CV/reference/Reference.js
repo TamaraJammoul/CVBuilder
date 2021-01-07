@@ -41,10 +41,15 @@ export default function Refernce() {
                       <h4>{i + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
-                      <h6>{ref.name}</h6>{" "}
+                      <h6>{ref.Name}</h6>{" "}
+                    </Grid>
+                    <Grid item xs={7}>
+                      <h6>{ref.Phone}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to={`/editreference?referenceID=${ref._id}`}>
+                      <Link
+                        to={`/buildcv/editreference?referenceID=${ref._id}`}
+                      >
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -91,7 +96,7 @@ export default function Refernce() {
 
           <Grid item xs={12}>
             {" "}
-            <Link to="buildcv/addreference">
+            <Link to="/buildcv/addreference">
               {" "}
               <Button
                 variant="contained"

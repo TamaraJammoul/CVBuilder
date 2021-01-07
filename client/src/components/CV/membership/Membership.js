@@ -43,10 +43,12 @@ export default function Membership() {
                       <h4>{i + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
-                      <h6>{mem.name}</h6>{" "}
+                      <h6>{mem.Name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to={`/editmembership?membershipID=${mem._id}`}>
+                      <Link
+                        to={`/buildcv/editmembership?membershipID=${mem._id}`}
+                      >
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -89,7 +91,7 @@ export default function Membership() {
 
           <Grid item xs={12}>
             {" "}
-            <Link to="/addmembership">
+            <Link to="/buildcv/addmembership">
               {" "}
               <Button
                 variant="contained"

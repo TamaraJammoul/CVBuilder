@@ -89,7 +89,7 @@ export default function AddEducation(props) {
             <TextField
               id="date"
               label={t("StartDate")}
-              type="text"
+              type="number"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -102,7 +102,7 @@ export default function AddEducation(props) {
             <TextField
               id="date"
               label={t("EndDate")}
-              type="text"
+              type="number"
               InputLabelProps={{
                 shrink: true,
               }}

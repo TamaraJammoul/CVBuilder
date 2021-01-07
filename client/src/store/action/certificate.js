@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 export function AddCertificateAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/certificate/addCertificate`, {
         Name: payload.name,
@@ -50,7 +51,10 @@ export function DeleteCertificateAction(payload) {
         if (res.status == 200)
           dispatch({
             type: DELETECERTIFICATE,
-            payload: res.data.data,
+            payload: {
+              certificate_id: payload.certificate_id,
+              cvID: payload.cvID,
+            },
           });
         else
           dispatch({
@@ -61,6 +65,7 @@ export function DeleteCertificateAction(payload) {
 }
 export function EditCertificateAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://locahost:5000/api/certificate/updateCertificate`, {
         Name: payload.name,

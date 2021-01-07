@@ -42,13 +42,13 @@ export default function Education() {
                     <Grid item xs={7}>
                       <Grid container direction="column">
                         <Grid item>
-                          <h6>{exp.experienceName}</h6>{" "}
+                          <h6>{exp.Name}</h6>{" "}
                         </Grid>
                         <Grid item>
                           <h6>
-                            {exp.description}
+                            {exp.Description}
                             <span>
-                              ({exp.startDate}-{exp.endDate})
+                              ({exp.Start}-{exp.End})
                             </span>
                           </h6>
                         </Grid>

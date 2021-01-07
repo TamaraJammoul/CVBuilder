@@ -115,7 +115,7 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6}>
             <TextField
               id="filled-basic"
-              label={t("Ratefrom100")}
+              label={t("Ratefrom5")}
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setRate5(e.target.value)}

@@ -60,7 +60,7 @@ export default function AddCertificate(props) {
               <TextField
                 id="date"
                 label={t("Date")}
-                type="text"
+                type="number"
                 InputLabelProps={{
                   shrink: true,
                 }}

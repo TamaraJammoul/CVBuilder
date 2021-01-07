@@ -19,7 +19,7 @@ export default function AddLanguage(props) {
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
-  const id = query.get("languageID");
+  const id = query.get("language_id");
   const data = {language, rate, id, order: "1"};
   let history = useHistory();
   const {t, i18n} = useTranslation();

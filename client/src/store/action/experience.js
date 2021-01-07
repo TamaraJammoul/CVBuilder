@@ -23,7 +23,7 @@ export function AddExperienceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDEXPERIENCE,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -79,7 +79,7 @@ export function EditExperienceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITEXPERIENCE,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

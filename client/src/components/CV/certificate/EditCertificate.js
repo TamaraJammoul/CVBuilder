@@ -9,7 +9,7 @@ export default function EditCertificate(props) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(0);
   const cvID = useSelector((state) => state.cvID);
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -62,7 +62,7 @@ export default function EditCertificate(props) {
               <TextField
                 id="date"
                 label={t("Date")}
-                type="text"
+                type="number"
                 InputLabelProps={{
                   shrink: true,
                 }}

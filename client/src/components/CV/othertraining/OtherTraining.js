@@ -42,11 +42,11 @@ export default function OtherTraining(props) {
                       <h4>{i + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
-                      <h6>{oth.name}</h6>{" "}
+                      <h6>{oth.Name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
                       <Link
-                        to={`/editothertraining?othertrainingID=${oth._id}`}
+                        to={`/buildcv/editothertraining?othertrainingID=${oth._id}`}
                       >
                         <IconButton aria-label="delete">
                           <Edit />

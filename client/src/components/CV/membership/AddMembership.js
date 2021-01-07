@@ -17,8 +17,8 @@ export default function AddMembership(props) {
     history.push("/buildcv/membership");
   };
   return (
-    <Container>
-      <Paper>
+    <Paper>
+      <Container>
         <Grid
           container
           spacing={10}
@@ -64,7 +64,7 @@ export default function AddMembership(props) {
             </Button>
           </Grid>
         </Grid>
-      </Paper>
-    </Container>
+      </Container>
+    </Paper>
   );
 }
