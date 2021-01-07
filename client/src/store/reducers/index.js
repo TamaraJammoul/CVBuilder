@@ -51,6 +51,14 @@ export default function reducer(state, action) {
           experiences: [...state.template.experiences, action.payload],
         },
       };
+    case "ADDCOURSES":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          courses: [...state.template.courses, action.payload],
+        },
+      };
     case "ADDLANGUAGE":
       console.log(action.payload);
       return {
@@ -111,11 +119,21 @@ export default function reducer(state, action) {
           references: temp,
         },
       };
+    case "DELETECOURSES":
+      var temp = state.template.courses;
+      temp = temp.filter((e) => e._id != action.payload.courses_id);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          courses: temp,
+        },
+      };
     case "EDITREFERENCE":
       var temp = state.template.references;
       temp.map((e, i) => {
-        if (e.name == action.payload.oldName) {
-          e.name = action.payload.newName;
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
         }
       });
       return {
@@ -125,19 +143,34 @@ export default function reducer(state, action) {
           references: temp,
         },
       };
-    case "COPYREFERENCE":
-      var temp;
-      state.template.references.map((e, i) => {
-        if (e.name == action.payload.name) {
-          temp = e;
+    case "EDITCOURSES":
+      var temp = state.template.courses;
+      temp.map((e, i) => {
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
         }
       });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          references: [...state.template.references, temp],
+          courses: temp,
+        },
+      };
+    case "COPYREFERENCE":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          references: [...state.template.references, action.payload],
+        },
+      };
+    case "COPYCOURSES":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          coursess: [...state.template.courses, action.payload],
         },
       };
     case "DELETECERTIFICATE":
@@ -169,18 +202,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYCERTIFICATE":
-      var temp;
-      state.template.certificates.map((e, i) => {
-        if (e.name == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          certificates: [...state.template.certificates, temp],
+          certificates: [...state.template.certificates, action.payload],
         },
       };
     case "DELETEEDUCATION":
@@ -218,18 +244,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYEDUCATION":
-      var temp;
-      state.template.educations.map((e, i) => {
-        if (e.field == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          educations: [...state.template.educations, temp],
+          educations: [...state.template.educations, action.payload],
         },
       };
 
@@ -259,18 +278,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYOTHERTRAINING":
-      var temp;
-      state.template.othertraining.map((e, i) => {
-        if (e.name == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          othertraining: [...state.template.othertraining, temp],
+          othertraining: [...state.template.othertraining, action.payload],
         },
       };
 
@@ -318,18 +330,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYLANGUAGE":
-      var temp;
-      state.template.languages.map((e, i) => {
-        if (e.name == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          languages: [...state.template.languages, temp],
+          languages: [...state.template.languages, action.payload],
         },
       };
 
@@ -361,18 +366,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYMEMBERSHIP":
-      var temp;
-      state.template.memberships.map((e, i) => {
-        if (e.name == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          memberships: [...state.template.memberships, temp],
+          memberships: [...state.template.memberships, action.payload],
         },
       };
 
@@ -409,18 +407,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYEXPERIENCE":
-      var temp;
-      state.template.experiences.map((e, i) => {
-        if (e.experienceName == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          experiences: [...state.template.experiences, temp],
+          experiences: [...state.template.experiences, action.payload],
         },
       };
     case "DELETETECHNICALSKILL":
@@ -451,18 +442,11 @@ export default function reducer(state, action) {
         },
       };
     case "COPYTECHNICALSKILL":
-      var temp;
-      state.template.technicalskills.map((e, i) => {
-        if (e.skill == action.payload.name) {
-          temp = e;
-        }
-      });
-      console.log(temp);
       return {
         ...state,
         template: {
           ...state.template,
-          technicalskills: [...state.template.technicalskills, temp],
+          technicalskills: [...state.template.technicalskills, action.payload],
         },
       };
     case "LOGIN":

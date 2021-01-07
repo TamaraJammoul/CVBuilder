@@ -36,10 +36,23 @@ export function AddEducationAction(payload) {
 }
 export function CopyEducationAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYEDUCATION,
-      payload,
-    });
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/education/copyEducation`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYEDUCATION,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteEducationAction(payload) {

@@ -30,10 +30,22 @@ export function AddOtherTrainingAction(payload) {
 }
 export function CopyOtherTrainingAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYOTHERTRAINING,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/otherTrining/copyOtherTraining`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYOTHERTRAINING,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteOtherTrainingAction(payload) {

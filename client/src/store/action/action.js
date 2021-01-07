@@ -1,4 +1,11 @@
-import {CONTACTUS, CHANGELANGUAGE, GETALLCV, AUTH,ERROR} from "./types";
+import {
+  CONTACTUS,
+  CHANGELANGUAGE,
+  GETALLCV,
+  AUTH,
+  ERROR,
+  PERSONALINFO,
+} from "./types";
 import axios from "axios";
 
 export function ContactusAction(payload) {
@@ -12,15 +19,15 @@ export function ContactusAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if(res.status==200)
-        dispatch({
-          type: CONTACTUS,
-          payload: res.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: CONTACTUS,
+            payload: res.data,
+          });
         else
-         dispatch({
-          type: ERROR,
-        });
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -38,15 +45,15 @@ export function GetAllCVAction(payload) {
       .post(`http://localhost:5000/api/CV/getAllCV`, {Email: payload})
       .then((res) => {
         console.log(res);
-        if(res.status==200)
-        dispatch({
-          type: GETALLCV,
-          payload: res,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: GETALLCV,
+            payload: res,
+          });
         else
-         dispatch({
-          type: ERROR,
-        });
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -55,5 +62,26 @@ export function Auth(payload) {
     dispatch({
       type: AUTH,
     });
+  };
+}
+export function PeraonalInfoAction(payload) {
+  return async (dispatch) => {
+    await axios
+      .post(
+        `http://localhost:5000/api/PersonalInformation/updatePersonalInformation`,
+        payload
+      )
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: PERSONALINFO,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }

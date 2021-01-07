@@ -33,10 +33,23 @@ export function AddLanguageAction(payload) {
 }
 export function CopyLanguageAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYLANGUAGE,
-      payload,
-    });
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/language/copyLanguage`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYLANGUAGE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteLanguageAction(payload) {

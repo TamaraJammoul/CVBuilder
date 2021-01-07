@@ -83,22 +83,21 @@ function Navbar(props) {
                   src={us}
                   style={{
                     width: "30px",
-                    marginLeft: "10px",
-                    marginRight: "10px",
                   }}
                   onClick={() => changeLanguage("en")}
                 />
+                <h6>English</h6>
               </a>
               <a className="dropdown-item">
+                {" "}
                 <img
                   src={ar}
                   style={{
                     width: "30px",
-                    marginLeft: "10px",
-                    marginRight: "10px",
                   }}
                   onClick={() => changeLanguage("ar")}
                 />{" "}
+                <h6>عربي</h6>
               </a>
             </div>
           </li>

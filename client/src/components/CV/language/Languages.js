@@ -92,7 +92,7 @@ export default function Languages() {
                           onClick={() =>
                             dispatch(
                               CopyLanguageAction({
-                                name: "rr",
+                                id: lan._id,
                               })
                             )
                           }

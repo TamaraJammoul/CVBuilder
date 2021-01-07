@@ -19,7 +19,7 @@ export function AddCoursesAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ADDCOURSES,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -30,10 +30,22 @@ export function AddCoursesAction(payload) {
 }
 export function CopyCoursesAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYCOURSES,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/courses/copyCourses`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYCOURSES,
+            payload: res.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteCoursesAction(payload) {
@@ -41,7 +53,7 @@ export function DeleteCoursesAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/courses/deleteCourses`, {
-        membership_id: payload.courses_id,
+        course_id: payload.courses_id,
         _id: payload.cvID,
       })
       .then((res) => {
@@ -49,7 +61,7 @@ export function DeleteCoursesAction(payload) {
         if (res.status == 200)
           dispatch({
             type: DELETECOURSES,
-            payload: res.data,
+            payload,
           });
         else
           dispatch({
@@ -71,7 +83,7 @@ export function EditCoursesAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITCOURSES,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

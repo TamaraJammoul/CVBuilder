@@ -59,7 +59,7 @@ export default function Membership() {
                       <IconButton aria-label="delete">
                         <FileCopy
                           onClick={() =>
-                            dispatch(CopyMembershipAction({name: "rr"}))
+                            dispatch(CopyMembershipAction({id: mem._id}))
                           }
                         />
                       </IconButton>

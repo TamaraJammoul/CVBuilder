@@ -83,7 +83,7 @@ export default function Education() {
                           onClick={() =>
                             dispatch(
                               CopyEducationAction({
-                                name: "rr",
+                                id: edu._id,
                               })
                             )
                           }

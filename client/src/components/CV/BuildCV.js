@@ -29,6 +29,9 @@ import EditEducation from "./education/EditEducation";
 import Certificates from "./certificate/Certificates";
 import AddCertificates from "./certificate/AddCertificate";
 import EditCertificates from "./certificate/EditCertificate";
+import Courses from "./courses/Courses";
+import AddCourses from "./courses/AddCourses";
+import EditCourses from "./courses/EditCourses";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {
@@ -74,7 +77,7 @@ export default function BuildCV(props) {
               <hr />
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px"}}>
                   <Work />
@@ -82,46 +85,66 @@ export default function BuildCV(props) {
                 <Link to={`${url}/careerobjectives`}>
                   {t("CareerObjectives")}
                 </Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
+                {" "}
+                <span style={{marginRight: "10px"}}>
+                  <Work />
+                </span>
+                <Link to={`${url}/peronalinfo`}>
+                  {t("PersonalInformation")}
+                </Link>
+              </h4>
+            </Grid>
+            <Grid item>
+              <h4>
+                {" "}
+                <span style={{marginRight: "10px"}}>
+                  <Work />
+                </span>
+                <Link to={`${url}/courses`}>{t("Courses")}</Link>
+              </h4>
+            </Grid>
+            <Grid item>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <School />
                 </span>
                 <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <LocationCity />
                 </span>
                 <Link to={`${url}/skills`}>{t("Skills")}</Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Language />
                 </span>
                 <Link to={`${url}/languages`}>{t("Language")}</Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Laptop />
                 </span>
                 <Link to={`${url}/othertraining`}>{t("OtherTraining")}</Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <EmojiPeople />
@@ -129,43 +152,43 @@ export default function BuildCV(props) {
                 <Link to={`${url}/technicalskills`}>
                   {t("TechnicalSkills")}
                 </Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <School />
                 </span>
                 <Link to={`${url}/education`}>{t("Education")}</Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Work />
                 </span>
                 <Link to={`${url}/experience`}>{t("Experience")} </Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <Group />
                 </span>
                 <Link to={`${url}/membership`}>{t("Memberships")}</Link>
-              </h3>
+              </h4>
             </Grid>
             <Grid item>
-              <h3>
+              <h4>
                 {" "}
                 <span style={{marginRight: "10px", marginLeft: "10px"}}>
                   <AccountBox />
                 </span>
                 <Link to={`${url}/reference`}>{t("References")}</Link>
-              </h3>
+              </h4>
             </Grid>
           </Grid>
         </Grid>
@@ -202,6 +225,14 @@ export default function BuildCV(props) {
                   <Route
                     path={`${path}/edittechnicalskills`}
                     render={(props) => <EditTechnicalSkills />}
+                  />
+                  <Route
+                    path={`${path}/addcourses`}
+                    render={(props) => <AddCourses />}
+                  />
+                  <Route
+                    path={`${path}/editcourses`}
+                    render={(props) => <EditCourses />}
                   />
                   <Route
                     path={`${path}/othertraining`}

@@ -63,7 +63,7 @@ export default function Refernce() {
                             console.log("kljklj");
                             dispatch(
                               CopyReferenceAction({
-                                name: "rr",
+                                id: ref._id,
                               })
                             );
                           }}

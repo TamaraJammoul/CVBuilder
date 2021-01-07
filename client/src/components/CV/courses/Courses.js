@@ -6,7 +6,7 @@ import {
   EditCoursesAction,
   DeleteCoursesAction,
   CopyCoursesAction,
-} from "../../../store/action/membership";
+} from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
@@ -25,7 +25,7 @@ export default function Courses() {
             <h2>{t("YourCourses")}</h2>
           </Grid>
 
-          {memberships.map((mem, i) => (
+          {courses.map((cou, i) => (
             <Grid item>
               <Paper>
                 <Container>
@@ -40,10 +40,10 @@ export default function Courses() {
                       <h4>{i + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
-                      <h6>{mem.name}</h6>{" "}
+                      <h6>{cou.Name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
-                      <Link to="/editcourses">
+                      <Link to={`/buildcv/editcourses?course_id=${cou._id}`}>
                         {" "}
                         <IconButton aria-label="delete">
                           <Edit />
@@ -54,7 +54,7 @@ export default function Courses() {
                       <IconButton aria-label="delete">
                         <FileCopy
                           onClick={() =>
-                            dispatch(CopyCoursesAction({name: "rr"}))
+                            dispatch(CopyCoursesAction({id: cou._id}))
                           }
                         />
                       </IconButton>
@@ -64,7 +64,7 @@ export default function Courses() {
                         <Delete
                           onClick={() =>
                             dispatch(
-                              DeleteCoursesAction({cvID, courses_id: "1"})
+                              DeleteCoursesAction({cvID, courses_id: cou._id})
                             )
                           }
                         />

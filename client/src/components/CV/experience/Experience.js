@@ -70,7 +70,7 @@ export default function Education() {
                           onClick={() =>
                             dispatch(
                               CopyExperienceAction({
-                                name: "rr",
+                                id: exp._id,
                               })
                             )
                           }

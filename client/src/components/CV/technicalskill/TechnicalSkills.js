@@ -130,7 +130,7 @@ export default function TechnicalSkills() {
                                 onClick={() =>
                                   dispatch(
                                     CopyTechnicalSkillsAction({
-                                      name: "rr",
+                                      id: per._id,
                                     })
                                   )
                                 }

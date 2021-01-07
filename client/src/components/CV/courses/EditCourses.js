@@ -3,7 +3,7 @@ import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
 import {EditCoursesAction} from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 
 export default function EditCourse(props) {
   const dispatch = useDispatch();
@@ -11,7 +11,9 @@ export default function EditCourse(props) {
   const {t, i18n} = useTranslation();
   const [coursesName, setCoursesName] = useState("");
   const cvID = useSelector((state) => state.cvID);
-
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  let query = useQuery();
+  const id = query.get("course_id");
   const handelCancel = () => {
     setCoursesName("");
     history.push("/buildcv/courses");
@@ -54,7 +56,7 @@ export default function EditCourse(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
-                dispatch(EditCoursesAction({coursesName, cvID, order: "1"}));
+                dispatch(EditCoursesAction({coursesName, id, order: "1"}));
                 history.push("/buildcv/courses");
               }}
             >

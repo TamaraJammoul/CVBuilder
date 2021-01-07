@@ -12,8 +12,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {useTranslation} from "react-i18next";
 
 import defaultimg from "./../../img/stylingcv-default.jpg";
+import {PeraonalInfoAction} from "./../../store/action/action";
+import {useSelector, useDispatch} from "react-redux";
 export default function PersonalInfo() {
   const {t, i18n} = useTranslation();
+  let formData = new FormData();
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.personalInformation_id);
+  formData.append("_id", id);
 
   return (
     <Paper elevation={3}>
@@ -38,11 +44,18 @@ export default function PersonalInfo() {
             color="primary"
             startIcon={<CloudUploadIcon />}
           >
-            {t("Upload")}
+            <input
+              type="file"
+              name="file"
+              placeholder={t("Upload")}
+              className="input1"
+              onChange={(e) => {
+                const files = e.target.files;
+                console.log(files);
+                formData.append("file", files[0]);
+              }}
+            />
           </Button>
-          <IconButton aria-label="delete">
-            <DeleteIcon fontSize="large" color="secondary" />
-          </IconButton>
         </Grid>
         <Grid
           item
@@ -59,6 +72,7 @@ export default function PersonalInfo() {
               label={t("FirstName")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("FirstName", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -67,6 +81,7 @@ export default function PersonalInfo() {
               label={t("LastName")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("LastName", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -75,6 +90,7 @@ export default function PersonalInfo() {
               label={t("LinkedInAccount")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("LinkedIn", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -83,6 +99,7 @@ export default function PersonalInfo() {
               label={t("Email")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("Email", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -91,6 +108,7 @@ export default function PersonalInfo() {
               label={t("PhoneNumber")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("Phone", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -99,14 +117,25 @@ export default function PersonalInfo() {
               label={t("Date Of Birth")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("Birth", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Address"
+              label={t("City")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("City", e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="filled-primary"
+              label={t("Country")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => formData.append("Country", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -115,14 +144,16 @@ export default function PersonalInfo() {
               label={t("Nationality")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("Nationality", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               id="filled-primary"
-              label="Marital Status "
+              label={t("Marital Status")}
               variant="filled"
               color="primary"
+              onChange={(e) => formData.append("MaritalStatus", e.target.value)}
             />
           </Grid>
           <Grid item xs={6}></Grid>
@@ -138,6 +169,7 @@ export default function PersonalInfo() {
               variant="contained"
               className="save"
               style={{float: "right"}}
+              onClick={dispatch(PeraonalInfoAction(formData))}
             >
               {t("save")}
             </Button>

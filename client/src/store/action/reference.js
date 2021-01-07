@@ -30,11 +30,24 @@ export function AddReferenceAction(payload) {
   };
 }
 export function CopyReferenceAction(payload) {
-  return (dispatch) => {
-    dispatch({
-      type: COPYREFERENCE,
-      payload,
-    });
+  return async (dispatch) => {
+    console.log(payload);
+    await axios
+      .post(`http://localhost:5000/api/referance/copyReferance`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status == 200)
+          dispatch({
+            type: COPYREFERENCE,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteReferenceAction(payload) {
@@ -63,7 +76,7 @@ export function EditReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/referance/updateReferance`, {
+      .post(`http://localhost:5000/api/reference/updateReference`, {
         Name: payload.reference,
         Order: payload.order,
         _id: payload.id,

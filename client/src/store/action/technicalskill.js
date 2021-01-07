@@ -32,10 +32,18 @@ export function AddTechnicalSkillsAction(payload) {
 }
 export function CopyTechnicalSkillsAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYTECHNICALSKILL,
-      payload,
-    });
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/technicalSkills/copyTechnicalSkills`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: COPYTECHNICALSKILL,
+          payload: res.data.data,
+        });
+      });
   };
 }
 export function DeleteTechnicalSkillAction(payload) {

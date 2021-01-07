@@ -80,7 +80,7 @@ export default function Certificates() {
                           onClick={() =>
                             dispatch(
                               CopyCertificateAction({
-                                name: "rr",
+                                id: cer._id,
                               })
                             )
                           }

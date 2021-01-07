@@ -59,7 +59,7 @@ export default function OtherTraining(props) {
                           onClick={() =>
                             dispatch(
                               CopyOtherTrainingAction({
-                                name: "rr",
+                                id: oth._id,
                               })
                             )
                           }

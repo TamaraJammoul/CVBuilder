@@ -34,10 +34,22 @@ export function AddExperienceAction(payload) {
 }
 export function CopyExperienceAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYEXPERIENCE,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/experience/copyExperience`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYEXPERIENCE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteExperienceAction(payload) {

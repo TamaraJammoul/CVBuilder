@@ -33,10 +33,24 @@ export function AddCertificateAction(payload) {
 }
 export function CopyCertificateAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYCERTIFICATE,
-      payload,
-    });
+    console.log(payload);
+    axios
+      .post(`http://locahost:5000/api/certificate/copyCertificate`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYCERTIFICATE,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+            payload,
+          });
+      });
   };
 }
 export function DeleteCertificateAction(payload) {

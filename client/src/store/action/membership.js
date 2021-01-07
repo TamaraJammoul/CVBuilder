@@ -30,10 +30,22 @@ export function AddMembershipAction(payload) {
 }
 export function CopyMembershipAction(payload) {
   return (dispatch) => {
-    dispatch({
-      type: COPYMEMBERSHIP,
-      payload,
-    });
+    axios
+      .post(`http://localhost:5000/api/membership/copyMembership`, {
+        _id: payload.id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: COPYMEMBERSHIP,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
   };
 }
 export function DeleteMembershipAction(payload) {

@@ -68,8 +68,11 @@
         "faculty": "الكلية",
         "SchoolNameorUniversity": "اسم المدرسة أو الجامعة",
         "City,Country": "المدينة,البلدة",
+        "City":"المدينة",
+        "Country":"البلدة",
         "StartDate": "تاريخ البدء",
         "EndDate": "تاريخ الانتهاء",
+        "Marital Status":"الحالة الاجتماعية",
         "grade": "التقدير",
         "Ratefrom100": "المستوى من 100",
         "Ratefrom5": "المستوى من 5",
@@ -120,6 +123,7 @@
         "leadership and organaization":"القيادة والتنظيم",
         "using computer":"إجادة استخدام الحاسوب",
         "punctuality":"الالتزام بالوقت",
+        "PersonalInformation":"المعلومات الشخصية",
         "solve probleme":"حل المشاكل"
 
 }
