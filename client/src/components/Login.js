@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 import Signup from "./Signup";
 import {useTranslation} from "react-i18next";
-
+import InputAdornment from "@material-ui/core/InputAdornment";
 function LoginForm(props) {
   const [showPassword, setShowPassword] = useState(false);
   //const state = useSelector((state) => state.template[0]);
@@ -86,13 +86,27 @@ function LoginForm(props) {
                     </Grid>
                     <Grid item>
                       <Field
-                        component={TextField}
                         name="password"
-                        type="text"
+                        type={showPassword ? "text" : "password"}
                         label={t("Password")}
                         variant="outlined"
                         className="textField"
-                      />
+                        component={TextField}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment
+                              position="start"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />{" "}
                     </Grid>
                     <Grid item>
                       <Button

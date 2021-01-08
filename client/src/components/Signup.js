@@ -15,11 +15,13 @@ import image from "./../img/login-img-eng.png";
 import {SignupAction} from "./../store/action/auth";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Signup() {
   //const state = useSelector((state) => state.template[0]);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Grid
@@ -149,13 +151,27 @@ function Signup() {
                     </Grid>
                     <Grid item xs={12}>
                       <Field
-                        component={TextField}
                         name="password"
-                        type="text"
+                        type={showPassword ? "text" : "password"}
                         label={t("Password")}
                         variant="outlined"
                         className="textField"
-                      />
+                        component={TextField}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment
+                              position="start"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />{" "}
                     </Grid>
                     <Grid item xs={12}>
                       <Button

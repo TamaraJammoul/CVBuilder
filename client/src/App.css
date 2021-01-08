@@ -58,9 +58,14 @@ a:hover {
 a:active {
   color:var(--seccolor);
 }
-
+.nav1{
+  float: right !important;
+}
+.icon{
+  color: var(--fifthcolor);
+}
 .background{
-    background-color: rgba(91, 35, 56, 0.445);
+    background-color: rgba(91, 35, 56, 0.7);
 }
 .backgroundimg{
     background-image: url('./img/background.PNG');

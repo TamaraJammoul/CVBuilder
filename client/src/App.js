@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
+import {VerticleButton as ScrollUpButton} from "react-scroll-up-button";
 import "./App.css";
 import {Route, Switch, Redirect} from "react-router-dom";
 import Footer from "./components/Layout/Footer";
@@ -23,11 +23,17 @@ import withRoot from "./i18n/WithRoot";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Toast from "./components/Toast";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 function App(props) {
   const [loading, setLoading] = useState(true);
   const {t, i18n} = useTranslation();
 
   useEffect(() => {
+    AOS.init();
+
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -58,7 +64,11 @@ function App(props) {
               <Route path="/template" render={(props) => <Template />} />
               <Route render={(props) => <Default />} />
             </Switch>
-            <ScrollUpButton />
+            <ScrollUpButton
+              AnimationDuration={500}
+              EasingType="easeOutCubic"
+              style={{backgroundColor: "#5B2338"}}
+            />
           </>
         )}
       </div>

@@ -42,14 +42,21 @@ function HomeNav(props) {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse " id="navbarSupportedContent">
+      <div
+        className="collapse navbar-collapse nav1"
+        id="navbarSupportedContent"
+      >
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
               <h5>{t("Dashboard")}</h5>
             </a>
           </li>
-
+          <li className="nav-item">
+            <a className="navbar-brand" href="#">
+              <h5>{t("AboutUS")}</h5>
+            </a>
+          </li>
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
@@ -91,20 +98,16 @@ function HomeNav(props) {
               </a>
             </div>
           </li>
-          <li className="nav-item">
-            <h5>
-              <AccountCircle
-                style={{width: "90px", color: "#2E0E33"}}
-                onClick={props.setDrawerState}
-              />{" "}
-            </h5>
-          </li>
-          <li className="nav-item active">
-            <a className="navbar-brand" href="#">
-              <h5>Logout</h5>
-            </a>
-          </li>
         </ul>
+        <h5>
+          <AccountCircle
+            style={{width: "90px", color: "#2E0E33"}}
+            onClick={props.setDrawerState}
+          />{" "}
+        </h5>
+        <a className="navbar-brand" href="#">
+          <h5>Logout</h5>
+        </a>
       </div>
     </nav>
   );

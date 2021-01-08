@@ -1,17 +1,23 @@
 import React, {Component} from "react";
 import Nav from "./Layout/HomeNav";
 import section2img from "./../img/homepage.png";
-import {Payment} from "@material-ui/icons";
+import {Payment, EventNote} from "@material-ui/icons";
 import Footer from "./Layout/Footer";
 export default class Home extends Component {
   render() {
     return (
       <div className="" style={{backgroundColor: "#f6f6f8"}}>
         <section className="background">
-          <Nav />
           <div class="container">
+            <Nav />
             <div className="row section1">
-              <div className="col-sm-6">
+              <div
+                className="col-sm-6"
+                data-aos="fade-right"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+              >
                 {" "}
                 <h1>Build your CV with us in less than 10min</h1>
               </div>
@@ -19,7 +25,12 @@ export default class Home extends Component {
             </div>{" "}
           </div>
         </section>
-        <section className="section2">
+        <section
+          className="section2 mt-5"
+          data-aos="fade-in"
+          data-aos-delay="50"
+          data-aos-duration="1000"
+        >
           <div class="container">
             <div className="row ">
               <div className="col-sm-6">
@@ -38,10 +49,16 @@ export default class Home extends Component {
         <section className="section3">
           <div class="container" style={{textAlign: "center"}}>
             <div className="row">
-              <div className="col-sm-4">
+              <div
+                className="col-sm-4"
+                data-aos="flip-right"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+              >
                 <div className="card shadow">
                   <div className="card-body">
-                    <Payment />
+                    <Payment className="icon" />
                     <h5 className="card-title mt-3">Pay using MasterCard</h5>
                     <p className="card-text">
                       you can pay for building your cv using MasterCard
@@ -49,21 +66,34 @@ export default class Home extends Component {
                   </div>
                 </div>{" "}
               </div>
-              <div className="col-sm-4">
+              <div
+                className="col-sm-4"
+                data-aos="flip-up"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+              >
                 <div className="card shadow">
                   <div className="card-body">
-                    <Payment />
-                    <h5 className="card-title mt-3">Pay using MasterCard</h5>
+                    <EventNote className="icon" />
+                    <h5 className="card-title mt-3">Over 30 Templates</h5>
                     <p className="card-text">
-                      you can pay for building your cv using MasterCard
+                      you can choose template from over 30
                     </p>
                   </div>
                 </div>{" "}
               </div>
-              <div className="col-sm-4">
+              <div
+                className="col-sm-4"
+                data-aos="flip-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+              >
                 <div className="card shadow">
                   <div className="card-body">
-                    <Payment />
+                    <Payment className="icon" />
+
                     <h5 className="card-title mt-3">Pay using MasterCard</h5>
                     <p className="card-text">
                       you can pay for building your cv using MasterCard
