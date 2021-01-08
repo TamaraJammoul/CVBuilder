@@ -66,7 +66,7 @@ export default function CareerObjectives() {
           <Grid item xs={12}>
             <h5>{ReactHtmlParser(text)}</h5>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{width: "100%"}}>
             {" "}
             <Editor
               initialValue="<p></p>"

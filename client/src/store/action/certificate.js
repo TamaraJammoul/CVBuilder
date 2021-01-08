@@ -82,7 +82,7 @@ export function EditCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificates/hideCertificates `, {
+      .post(`http://locahost:5000/api/certificate/updateCertificate`, {
         Name: payload.name,
         year: payload.date,
         Description: payload.description,

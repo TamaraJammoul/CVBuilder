@@ -19,7 +19,7 @@ export default function EditCertificate(props) {
   const data = {name, description, date, id, order: "1"};
   const handelCancel = () => {
     setName("");
-    setDate("");
+    setDate(0);
     setDescription("");
     history.push("/buildcv/certificates");
   };

@@ -1,9 +1,8 @@
 import React, {useContext, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Formik, Form, Field} from "formik";
 import {Button, Box, Paper, Grid, Container, Hidden} from "@material-ui/core";
 import {TextField} from "formik-material-ui";
-
 import {
   VisibilityOff,
   Visibility,
@@ -22,6 +21,7 @@ function Signup() {
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+  const history = useHistory();
 
   return (
     <Grid
@@ -102,6 +102,7 @@ function Signup() {
               }}
               onSubmit={(values, {setSubmitting}) => {
                 dispatch(SignupAction(values));
+                history.push("/dashboard");
               }}
             >
               {({submitForm, isSubmitting}) => (

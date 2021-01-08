@@ -6,7 +6,7 @@ export default function Footer() {
     <>
       <footer
         className="page-footer font-small footer pt-4"
-        style={{backgroundColor: "#282129", marginTop: "30px", color: "#fff"}}
+        style={{backgroundColor: "#292929", marginTop: "30px", color: "#fff"}}
       >
         <div className="container text-center text-md-left">
           <div className="row text-center text-md-left mt-3 pb-3">

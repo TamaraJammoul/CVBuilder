@@ -7,7 +7,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="" style={{backgroundColor: "#f6f6f8"}}>
-        <section className="background">
+        <section className="background pt-4">
           <div class="container">
             <Nav />
             <div className="row section1">
@@ -78,7 +78,8 @@ export default class Home extends Component {
                     <EventNote className="icon" />
                     <h5 className="card-title mt-3">Over 30 Templates</h5>
                     <p className="card-text">
-                      you can choose template from over 30
+                      you can choose template from over 30 and download it
+                      (pdf,png,jpeg)
                     </p>
                   </div>
                 </div>{" "}

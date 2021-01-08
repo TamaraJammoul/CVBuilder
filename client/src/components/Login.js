@@ -21,7 +21,7 @@ function LoginForm(props) {
   //const state = useSelector((state) => state.template[0]);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
-
+  const history = useHistory();
   return (
     <Grid
       container
@@ -60,6 +60,7 @@ function LoginForm(props) {
                 console.log("values");
 
                 dispatch(LoginAction(values));
+                history.push("/dashboard");
               }}
             >
               {({submitForm, isSubmitting}) => (

@@ -5,7 +5,7 @@ import {AddCVAction, DeleteCVAction} from "./../store/action/cv";
 import {useTranslation} from "react-i18next";
 import {GetAllCVAction, Auth} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
-
+import Nav from "./Layout/HomeNav";
 export default function Dashboard() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
@@ -19,33 +19,50 @@ export default function Dashboard() {
     }
   }, []);
   return (
-    <Grid
-      container
-      direction="row"
-      spacing={4}
-      justify="center"
-      alignItems="center"
-    >
-      <Grid item xs={12}>
-        <Button className="save" onClick={() => dispatch(AddCVAction(email))}>
-          {t("Create New CV")}
-        </Button>
-      </Grid>
-      <Grid item xs={12}>
+    <div className="backgroundimg" style={{minHeight: "100vh"}}>
+      <Container>
         <Grid
           container
-          direction="column"
-          spacing={2}
+          direction="row"
+          spacing={4}
           justify="center"
           alignItems="center"
         >
-          {myTemplate.map((template) => (
-            <Grid item xs={12} sm={4}>
-              <Template template />
+          <Grid item xs={12}>
+            <Nav />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container justify="center" direction="row" spacing={10}>
+              <Grid item xs={12} sm={6}>
+                <h1>Hey, Tamara</h1>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  className="save"
+                  onClick={() => dispatch(AddCVAction(email))}
+                >
+                  {t("Create New CV")}
+                </Button>
+              </Grid>
             </Grid>
-          ))}
+          </Grid>
+          <Grid item xs={12}>
+            <Grid
+              container
+              direction="column"
+              spacing={2}
+              justify="center"
+              alignItems="center"
+            >
+              {myTemplate.map((template) => (
+                <Grid item xs={12} sm={4}>
+                  <Template template />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-    </Grid>
+      </Container>
+    </div>
   );
 }

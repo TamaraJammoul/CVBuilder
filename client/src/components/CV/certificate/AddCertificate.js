@@ -9,7 +9,7 @@ export default function AddCertificate(props) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(0);
   const cvID = useSelector((state) => state.cvID);
   const data = {name, description, date, cvID, order: "1"};
   const {t, i18n} = useTranslation();
@@ -17,7 +17,7 @@ export default function AddCertificate(props) {
 
   const handelCancel = () => {
     setName("");
-    setDate("");
+    setDate(0);
     setDescription("");
     history.push("/buildcv/certificates");
   };
@@ -38,7 +38,7 @@ export default function AddCertificate(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label={t("Name")}
+              label={t("Certificate Name")}
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setName(e.target.value)}
