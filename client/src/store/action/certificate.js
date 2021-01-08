@@ -3,6 +3,7 @@ import {
   EDITCERTIFICATE,
   DELETECERTIFICATE,
   COPYCERTIFICATE,
+  HIDECERTIFICATE,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -81,7 +82,7 @@ export function EditCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://locahost:5000/api/certificate/updateCertificate`, {
+      .post(`http://localhost:5000/api/certificates/hideCertificates `, {
         Name: payload.name,
         year: payload.date,
         Description: payload.description,
@@ -93,6 +94,29 @@ export function EditCertificateAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITCERTIFICATE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+
+export function HideCertificateAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://locahost:5000/api/certificate/hideCertificate`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: HIDECERTIFICATE,
             payload: res.data.data,
           });
         else

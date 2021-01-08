@@ -149,3 +149,89 @@ exports.getCertificates = (req, res) => {
             }
         })
 }
+
+exports.hideCertificates = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB ERROR Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                hidden = cv.Hidden;
+                hidden.HideCertificates = req.body.hide;
+                CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
+                    var msg = "";
+                    if (req.body.hide) msg = "Certificates hide successfully";
+                    else msg = "Certificates show successfully";
+                    return res.status(200).json({
+                        msg,
+                        data: {
+                            cv_id: req.body._id,
+                            hidden: hidden.HideCertificates
+                        }
+                    })
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV Not Found"
+                })
+            }
+        })
+}
+
+exports.copyCertificate = (req, res) => {
+    const _id = req.body.cvID;
+    const certificate_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                certificates = cv.Certificates;
+                Certificate.findById(certificate_id).exec((err, certificate) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (certificate) {
+                        const newCertificate = new Certificate({
+                            Name: certificate.Name, Description: certificate.Description, Year: certificate.Year, Order: certificate.Order
+                        })
+                        certificates.push(newCertificate);
+                        console.log(certificates);
+                        newCertificate.save().then(() => {
+                            CV.updateOne({ _id: _id }, { $set: { Certificates: certificates } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Certificate Copied successfully",
+                                    data: {
+                                        newCertificate: certificate
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Certificate not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

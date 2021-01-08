@@ -154,3 +154,36 @@ exports.getExperiences = (req, res) => {
             }
         })
 }
+
+exports.hideExperiences = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB ERROR Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                hidden = cv.Hidden;
+                hidden.HideExperiences = req.body.hide;
+                CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
+                    var msg = "";
+                    if (req.body.hide) msg = "Experiences hide successfully";
+                    else msg = "Experiences show successfully";
+                    return res.status(200).json({
+                        msg,
+                        data: {
+                            cv_id: req.body._id,
+                            hidden: hidden.HideExperiences
+                        }
+                    })
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV Not Found"
+                })
+            }
+        })
+}

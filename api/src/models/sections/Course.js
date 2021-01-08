@@ -3,6 +3,8 @@ const { String, Number } = mongoose.Schema.Types;
 
 const CourseSchema = new mongoose.Schema({
     Name: String,
+    Description: String,
+    Year: Number,
     Order: Number
 });
 

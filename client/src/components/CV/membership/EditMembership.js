@@ -19,7 +19,7 @@ export default function EditMembership(props) {
     history.push("/buildcv/membership");
   };
   return (
-    <Paper>
+    <Paper className="buildcvbar">
       <Container>
         <Grid
           container

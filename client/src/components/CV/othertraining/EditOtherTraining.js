@@ -21,8 +21,8 @@ export default function AddOtherTraining(props) {
     history.push("/buildcv/othertraining");
   };
   return (
-    <Container>
-      <Paper>
+    <Paper className="buildcvbar">
+      <Container>
         <Grid
           container
           spacing={10}
@@ -66,7 +66,7 @@ export default function AddOtherTraining(props) {
             </Button>
           </Grid>
         </Grid>
-      </Paper>
-    </Container>
+      </Container>
+    </Paper>
   );
 }

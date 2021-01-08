@@ -19,11 +19,23 @@ exports.addCV = (req, res) => {
         .exec(async (err, user) => {
             const careerObjectives = new CareerObjectives({});
             const personalInformation = new PersonalInformation({});
-            const reference = new Reference({});
 
             const co = await careerObjectives.save();
             const pi = await personalInformation.save();
-
+            const hidden = {
+                HideCareerObjectives: false,
+                HideCertificates: false,
+                HideEducations: false,
+                HideExperiences: false,
+                HideLanguages: false,
+                HideMemberships: false,
+                HideOtherTrainings: false,
+                HidePersonalInformation: false,
+                HideTechnicalSkills: false,
+                HideReferences: false,
+                HideSkill: false,
+                HideCourses: false
+            }
             const cv = new CV({
                 CareerObjectives: careerObjectives,
                 Certificates: [],
@@ -41,7 +53,8 @@ exports.addCV = (req, res) => {
                 Template: "",
                 Language: "",
                 CreatedDate: "",
-                Order: 1
+                Order: 1,
+                Hidden: hidden
             })
 
             cv.save()
@@ -243,7 +256,8 @@ exports.getCV = (req, res) => {
                     Name: cv.Name,
                     Template: cv.Template,
                     Language: cv.Language,
-                    CreatedDate: cv.CreatedDate
+                    CreatedDate: cv.CreatedDate,
+                    Hidden: cv.Hidden
                 }
             })
         }

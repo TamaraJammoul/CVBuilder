@@ -22,7 +22,7 @@ export default function PersonalInfo() {
   formData.append("_id", id);
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} className="buildcvbar">
       <Grid
         container
         alignItems="center"

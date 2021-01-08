@@ -77,7 +77,7 @@ exports.updateOtherTraining = (req, res) => {
     OtherTraining.findById(_id).exec((error, otherTraining) => {
         if (error) {
             return res.status(400).json({
-                msg: "Somethings wen Wron, can't get any thing from DBg",
+                msg: "Somethings wen Wron, can't get any thing from DB",
                 error: error
             })
         }
@@ -142,6 +142,39 @@ exports.getOtherTrainings = (req, res) => {
                 return res.status(200).json({
                     msg: "No CV Found",
                     err
+                })
+            }
+        })
+}
+
+exports.hideOtherTrainings = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB ERROR Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                hidden = cv.Hidden;
+                hidden.HideOtherTrainings = req.body.hide;
+                CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
+                    var msg = "";
+                    if (req.body.hide) msg = "OtherTrainings hide successfully";
+                    else msg = "OtherTrainings show successfully";
+                    return res.status(200).json({
+                        msg,
+                        data: {
+                            cv_id: req.body._id,
+                            hidden: hidden.HideOtherTrainings
+                        }
+                    })
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV Not Found"
                 })
             }
         })

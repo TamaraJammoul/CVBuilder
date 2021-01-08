@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const { String, Date, Number } = mongoose.Schema.Types;
 
 const PersonalInformationSchema = new mongoose.Schema({
+    FirstName: {
+        type: String
+    },
+    LastName: {
+        type: String
+    },
     Phone: {
         type: String,
         default: "Phone Number"
@@ -18,6 +24,9 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String,
         default: "City"
     },
+    Country: {
+        type: String
+    },
     MaritalStatus: {
         type: String,
         default: "Married"
@@ -30,6 +39,9 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String,
         default: "Nationality"
     },
+    Image: {
+        type: String,
+    }
 });
 
 const PersonalInformation = mongoose.model("PersonalInformation", PersonalInformationSchema);

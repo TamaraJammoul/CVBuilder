@@ -17,7 +17,7 @@ export default function AddMembership(props) {
     history.push("/buildcv/membership");
   };
   return (
-    <Paper>
+    <Paper className="buildcvbar">
       <Container>
         <Grid
           container

@@ -17,7 +17,7 @@ import EditMembership from "./membership/EditMembership";
 import Reference from "./reference/Reference";
 import EditReference from "./reference/EditReference";
 import AddReference from "./reference/AddReference";
-import Skills from "./Skills";
+import Skills from "./AddSkill";
 import Languages from "./language/Languages";
 import AddLanguage from "./language/AddLanguage";
 import EditLanguage from "./language/EditLanguage";
@@ -51,7 +51,7 @@ export default function BuildCV(props) {
   const [drawerState, setDrawerState] = useState(false);
 
   return (
-    <>
+    <div className="buildcv">
       <Drawer
         anchor={"right"}
         open={drawerState}
@@ -60,7 +60,7 @@ export default function BuildCV(props) {
         <Drawertemp />
       </Drawer>
       <Grid container direction="row" spacing={2} className="backgroundimg">
-        <Grid item xs={4} sm={3} className="background">
+        <Grid item xs={4} sm={3} className="background buildcvNav">
           <Grid
             container
             spacing={3}
@@ -196,138 +196,144 @@ export default function BuildCV(props) {
           <Grid
             container
             direction="column"
-            spacing={10}
+            spacing={4}
             style={{width: "100%", height: "100%"}}
           >
             <Grid item xs={2} style={{width: "100%", height: "100%"}}>
               <Navbar setDrawerState={setDrawerState} />
             </Grid>
             <Grid item xs={10}>
-              <Container style={{width: "100%"}}>
-                <Switch>
-                  <Route
-                    path={`${path}/peronalinfo`}
-                    render={(props) => <PersonalInfo />}
-                  />
-                  <Route
-                    path={`${path}/careerobjectives`}
-                    render={(props) => <CareerObjectives />}
-                  />
+              <div style={{width: "100%"}}>
+                <Container>
+                  <Switch>
+                    <Route
+                      path={`${path}/peronalinfo`}
+                      render={(props) => <PersonalInfo />}
+                    />
+                    <Route
+                      path={`${path}/careerobjectives`}
+                      render={(props) => <CareerObjectives />}
+                    />
 
-                  <Route
-                    path={`${path}/technicalskills`}
-                    render={(props) => <TechnicalSkills />}
-                  />
-                  <Route
-                    path={`${path}/addtechnicalskills`}
-                    render={(props) => <AddTechnicalSkills />}
-                  />
-                  <Route
-                    path={`${path}/edittechnicalskills`}
-                    render={(props) => <EditTechnicalSkills />}
-                  />
-                  <Route
-                    path={`${path}/addcourses`}
-                    render={(props) => <AddCourses />}
-                  />
-                  <Route
-                    path={`${path}/editcourses`}
-                    render={(props) => <EditCourses />}
-                  />
-                  <Route
-                    path={`${path}/othertraining`}
-                    render={(props) => <OtherTraining />}
-                  />
-                  <Route
-                    path={`${path}/addothertraining`}
-                    render={(props) => <AddOtherTraining />}
-                  />
-                  <Route
-                    path={`${path}/editothertraining`}
-                    render={(props) => <EditOtherTraining />}
-                  />
-                  <Route
-                    path={`${path}/certificates`}
-                    render={(props) => <Certificates />}
-                  />
-                  <Route
-                    path={`${path}/addcertificate`}
-                    render={(props) => <AddCertificates />}
-                  />
-                  <Route
-                    path={`${path}/editcertificate`}
-                    render={(props) => <EditCertificates />}
-                  />
-                  <Route
-                    path={`${path}/reference`}
-                    render={(props) => <Reference />}
-                  />
-                  <Route
-                    path={`${path}/editreference`}
-                    render={(props) => <EditReference />}
-                  />
-                  <Route
-                    path={`${path}/addreference`}
-                    render={(props) => <AddReference />}
-                  />
-                  <Route
-                    path={`${path}/languages`}
-                    render={(props) => <Languages />}
-                  />
-                  <Route
-                    path={`${path}/addlanguage`}
-                    render={(props) => <AddLanguage />}
-                  />
-                  <Route
-                    path={`${path}/editlanguage`}
-                    render={(props) => <EditLanguage />}
-                  />
-                  <Route
-                    path={`${path}/education`}
-                    render={(props) => <Education />}
-                  />
-                  <Route
-                    path={`${path}/editeducation`}
-                    render={(props) => <EditEducation />}
-                  />
-                  <Route
-                    path={`${path}/addeducation`}
-                    render={(props) => <AddEducation />}
-                  />
-                  <Route
-                    path={`${path}/skills`}
-                    render={(props) => <Skills />}
-                  />
-                  <Route
-                    path={`${path}/experience`}
-                    render={(props) => <Experience />}
-                  />
-                  <Route
-                    path={`${path}/addexperience`}
-                    render={(props) => <AddExperience />}
-                  />
-                  <Route
-                    path={`${path}/editexperience`}
-                    render={(props) => <EditExperience />}
-                  />
-                  <Route
-                    path={`${path}/membership`}
-                    render={(props) => <Membership />}
-                  />
-                  <Route
-                    path={`${path}/addmembership`}
-                    render={(props) => <AddMembership />}
-                  />
-                  <Route
-                    path={`${path}/editmembership`}
-                    render={(props) => <EditMembership />}
-                  />
-                </Switch>
-              </Container>{" "}
+                    <Route
+                      path={`${path}/technicalskills`}
+                      render={(props) => <TechnicalSkills />}
+                    />
+                    <Route
+                      path={`${path}/addtechnicalskills`}
+                      render={(props) => <AddTechnicalSkills />}
+                    />
+                    <Route
+                      path={`${path}/edittechnicalskills`}
+                      render={(props) => <EditTechnicalSkills />}
+                    />
+                    <Route
+                      path={`${path}/addcourses`}
+                      render={(props) => <AddCourses />}
+                    />
+                    <Route
+                      path={`${path}/courses`}
+                      render={(props) => <Courses />}
+                    />
+                    <Route
+                      path={`${path}/editcourses`}
+                      render={(props) => <EditCourses />}
+                    />
+                    <Route
+                      path={`${path}/othertraining`}
+                      render={(props) => <OtherTraining />}
+                    />
+                    <Route
+                      path={`${path}/addothertraining`}
+                      render={(props) => <AddOtherTraining />}
+                    />
+                    <Route
+                      path={`${path}/editothertraining`}
+                      render={(props) => <EditOtherTraining />}
+                    />
+                    <Route
+                      path={`${path}/certificates`}
+                      render={(props) => <Certificates />}
+                    />
+                    <Route
+                      path={`${path}/addcertificate`}
+                      render={(props) => <AddCertificates />}
+                    />
+                    <Route
+                      path={`${path}/editcertificate`}
+                      render={(props) => <EditCertificates />}
+                    />
+                    <Route
+                      path={`${path}/reference`}
+                      render={(props) => <Reference />}
+                    />
+                    <Route
+                      path={`${path}/editreference`}
+                      render={(props) => <EditReference />}
+                    />
+                    <Route
+                      path={`${path}/addreference`}
+                      render={(props) => <AddReference />}
+                    />
+                    <Route
+                      path={`${path}/languages`}
+                      render={(props) => <Languages />}
+                    />
+                    <Route
+                      path={`${path}/addlanguage`}
+                      render={(props) => <AddLanguage />}
+                    />
+                    <Route
+                      path={`${path}/editlanguage`}
+                      render={(props) => <EditLanguage />}
+                    />
+                    <Route
+                      path={`${path}/education`}
+                      render={(props) => <Education />}
+                    />
+                    <Route
+                      path={`${path}/editeducation`}
+                      render={(props) => <EditEducation />}
+                    />
+                    <Route
+                      path={`${path}/addeducation`}
+                      render={(props) => <AddEducation />}
+                    />
+                    <Route
+                      path={`${path}/skills`}
+                      render={(props) => <Skills />}
+                    />
+                    <Route
+                      path={`${path}/experience`}
+                      render={(props) => <Experience />}
+                    />
+                    <Route
+                      path={`${path}/addexperience`}
+                      render={(props) => <AddExperience />}
+                    />
+                    <Route
+                      path={`${path}/editexperience`}
+                      render={(props) => <EditExperience />}
+                    />
+                    <Route
+                      path={`${path}/membership`}
+                      render={(props) => <Membership />}
+                    />
+                    <Route
+                      path={`${path}/addmembership`}
+                      render={(props) => <AddMembership />}
+                    />
+                    <Route
+                      path={`${path}/editmembership`}
+                      render={(props) => <EditMembership />}
+                    />
+                  </Switch>
+                </Container>{" "}
+              </div>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }

@@ -4,30 +4,30 @@ import {Link} from "react-router-dom";
 export default function Footer() {
   return (
     <>
-      <footer className="page-footer font-small footer pt-4 ">
-        <div className="container text-center text-md-left ">
+      <footer
+        className="page-footer font-small footer pt-4"
+        style={{backgroundColor: "#282129", marginTop: "30px", color: "#fff"}}
+      >
+        <div className="container text-center text-md-left">
           <div className="row text-center text-md-left mt-3 pb-3">
             <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
               <h6 className="text-uppercase mb-4 font-weight-bold">
-                حول ارتقِ
+                About BuildCV{" "}
               </h6>
-              <p>
-                ارتقِ هو موقع الكتروني يمكنك من الحصول على شرح للمواد العلمية
-                وإجراء اخبارات فعالة لطلاب الثانوية في الجمهورية العربية السورية
-              </p>
+              <p>Build you CV with us in less then 10min </p>
             </div>
 
             <hr className="w-100 clearfix d-md-none" />
 
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
               <h6 className="text-uppercase mb-4 font-weight-bold">
-                تواصل معنا
+                ContactUS{" "}
               </h6>
               <p>
-                <i className="fas fa-home mr-3"></i>ارتقِ
+                <i className="fas fa-home mr-3"></i>BuildCV{" "}
               </p>
               <p>
-                <i className="fas fa-envelope mr-3"></i> info@irtake.com
+                <i className="fas fa-envelope mr-3"></i> info@buildcv.com
               </p>
               <p>
                 <i className="fas fa-phone mr-3"></i> + 963-0930737281
@@ -43,7 +43,7 @@ export default function Footer() {
               <p className="text-center text-md-left">
                 © 2020 Copyright:
                 <Link to="https://irtake.com/">
-                  <strong> irtake.com</strong>
+                  <strong> Buildcv.com</strong>
                 </Link>
               </p>
             </div>

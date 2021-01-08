@@ -22,76 +22,74 @@ export default function AddCertificate(props) {
     history.push("/buildcv/certificates");
   };
   return (
-    <Container>
-      <Paper>
-        <Container>
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            direction="column"
-            spacing={4}
-          >
-            <Grid item xs={12} sm={6}>
-              <h2>{t("AddCertificate")}</h2>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField
-                id="filled-basic"
-                label={t("Name")}
-                variant="filled"
-                style={{width: "100%"}}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField
-                id="filled-basic"
-                label={t("Description")}
-                variant="filled"
-                style={{width: "100%"}}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField
-                id="date"
-                label={t("Date")}
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                style={{width: "100%"}}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-                variant="outlined"
-                className="cancel"
-                style={{marginLeft: "10px", float: "right"}}
-                onClick={handelCancel}
-              >
-                {t("cancel")}
-              </Button>
-              <Button
-                variant="contained"
-                className="save"
-                style={{float: "right"}}
-                onClick={() => {
-                  dispatch(AddCertificateAction(data));
-                  history.push("/buildcv/certificates");
-                }}
-              >
-                {t("save")}
-              </Button>
-            </Grid>
-          </Grid>{" "}
-        </Container>
-      </Paper>
-    </Container>
+    <Paper className="buildcvbar">
+      <Container>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          direction="column"
+          spacing={4}
+        >
+          <Grid item xs={12} sm={6}>
+            <h2>{t("AddCertificate")}</h2>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("Name")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("Description")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {" "}
+            <TextField
+              id="date"
+              label={t("Date")}
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{width: "100%"}}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              variant="outlined"
+              className="cancel"
+              style={{marginLeft: "10px", float: "right"}}
+              onClick={handelCancel}
+            >
+              {t("cancel")}
+            </Button>
+            <Button
+              variant="contained"
+              className="save"
+              style={{float: "right"}}
+              onClick={() => {
+                dispatch(AddCertificateAction(data));
+                history.push("/buildcv/certificates");
+              }}
+            >
+              {t("save")}
+            </Button>
+          </Grid>
+        </Grid>{" "}
+      </Container>
+    </Paper>
   );
 }

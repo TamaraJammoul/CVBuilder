@@ -1,9 +1,16 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
-import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
+import {
+  Delete,
+  OpenWith,
+  Edit,
+  FileCopy,
+  VisibilityOff,
+  Visibility,
+} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
-  EditCoursesAction,
+  HideCoursesAction,
   DeleteCoursesAction,
   CopyCoursesAction,
 } from "../../../store/action/courses";
@@ -16,17 +23,35 @@ export default function Courses() {
   const courses = useSelector((state) => state.template.courses);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
+  const [hide, setHide] = useState(0);
 
   return (
-    <Paper>
+    <Paper className="buildcvbar">
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item>
-            <h2>{t("YourCourses")}</h2>
+          <Grid item xs={12} style={{width: "100%"}}>
+            <Grid container alignItems="center" direction="row" spacing={6}>
+              <Grid item sm={6} xs={12}>
+                <h2>{t("YourCourses")}</h2>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                {" "}
+                <Button
+                  color="secondary"
+                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  className="button"
+                  onClick={() => {
+                    setHide(!hide);
+                    dispatch(HideCoursesAction({cvID, hide}));
+                  }}
+                >
+                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                </Button>{" "}
+              </Grid>
+            </Grid>{" "}
           </Grid>
-
           {courses.map((cou, i) => (
-            <Grid item>
+            <Grid item xs={12}>
               <Paper>
                 <Container>
                   <Grid
@@ -80,10 +105,9 @@ export default function Courses() {
               </Paper>
             </Grid>
           ))}
-
           <Grid item xs={12}>
             {" "}
-            <Link to="/addcourses">
+            <Link to="/buildcv/addcourses">
               {" "}
               <Button
                 variant="contained"

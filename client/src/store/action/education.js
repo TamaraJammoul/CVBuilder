@@ -3,6 +3,7 @@ import {
   EDITEDUCATION,
   DELETEEDUCATION,
   COPYEDUCATION,
+  HIDEEDUCATION,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -96,6 +97,28 @@ export function EditEducationAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITEDUCATION,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function HideEducationAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/education/hideEducations `, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: HIDEEDUCATION,
             payload: res.data.data,
           });
         else

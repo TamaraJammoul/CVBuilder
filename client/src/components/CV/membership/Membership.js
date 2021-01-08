@@ -1,12 +1,20 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
-import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
+import {
+  Delete,
+  OpenWith,
+  Edit,
+  FileCopy,
+  VisibilityOff,
+  Visibility,
+} from "@material-ui/icons";
 import AddMembership from "./AddMembership";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
   EditMembershipAction,
   DeleteMembershipAction,
   CopyMembershipAction,
+  HideMembershipAction,
 } from "./../../../store/action/membership";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
@@ -17,15 +25,34 @@ export default function Membership() {
   const memberships = useSelector((state) => state.template.memberships);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
+  const [hide, setHide] = useState(0);
 
   return (
-    <Paper>
+    <Paper className="buildcvbar">
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item>
-            <h2>{t("YourMemberships")}</h2>
+          <Grid item style={{width: "100%"}} sx={12}>
+            <Grid container alignItems="center" direction="row" spacing={6}>
+              <Grid item sm={6} xs={12}>
+                <h2>{t("YourMemberships")}</h2>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                {" "}
+                <Button
+                  color="secondary"
+                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  className="button"
+                  onClick={() => {
+                    setHide(!hide);
+                    dispatch(HideMembershipAction({cvID, hide}));
+                  }}
+                >
+                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                </Button>{" "}
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <h5>{t("YourMembershipsText")}</h5>
           </Grid>
           {memberships.map((mem, i) => (

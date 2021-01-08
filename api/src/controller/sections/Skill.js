@@ -146,3 +146,36 @@ exports.getSkills = (req, res) => {
             }
         })
 }
+
+exports.hideSkills = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB ERROR Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                hidden = cv.Hidden;
+                hidden.HideSkill = req.body.hide;
+                CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
+                    var msg = "";
+                    if (req.body.hide) msg = "Skills hide successfully";
+                    else msg = "Skills show successfully";
+                    return res.status(200).json({
+                        msg,
+                        data: {
+                            cv_id: req.body._id,
+                            hidden: hidden.HideSkill
+                        }
+                    })
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV Not Found"
+                })
+            }
+        })
+}

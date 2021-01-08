@@ -12,10 +12,10 @@ exports.addCourse = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Order
+                    Name, Description, Year, Order
                 } = req.body;
                 let course = new Course({
-                    Name, Order
+                    Name, Description, Year, Order
                 });
                 course.save()
                     .then((mem) => {
@@ -73,7 +73,7 @@ exports.deleteCourse = (req, res) => {
 }
 
 exports.updateCourse = (req, res) => {
-    const { _id, Name, Order } = req.body;
+    const { _id, Name, Description, Year, Order } = req.body;
     Course.findById(_id).exec((error, course) => {
         if (error) {
             return res.status(400).json({
@@ -85,6 +85,8 @@ exports.updateCourse = (req, res) => {
             Course.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    Description,
+                    Year,
                     Order
                 }
             }).then(() => {
@@ -93,6 +95,8 @@ exports.updateCourse = (req, res) => {
                     data: {
                         _id,
                         Name,
+                        Description,
+                        Year,
                         Order
                     }
                 })
@@ -142,6 +146,39 @@ exports.getCourses = (req, res) => {
                 return res.status(200).json({
                     msg: "No CV Found",
                     err
+                })
+            }
+        })
+}
+
+exports.hideCourses = (req, res) => {
+    CV.findById(req.body._id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB ERROR Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                hidden = cv.Hidden;
+                hidden.HideCourses = req.body.hide;
+                CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
+                    var msg = "";
+                    if (req.body.hide) msg = "Courses hide successfully";
+                    else msg = "Courses show successfully";
+                    return res.status(200).json({
+                        msg,
+                        data: {
+                            cv_id: req.body._id,
+                            hidden: hidden.HideCourses
+                        }
+                    })
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV Not Found"
                 })
             }
         })

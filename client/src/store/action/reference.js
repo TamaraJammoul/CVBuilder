@@ -3,6 +3,7 @@ import {
   DELETEREFERENCE,
   EDITREFERENCE,
   COPYREFERENCE,
+  HIDEREFERENCE,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -87,6 +88,28 @@ export function EditReferenceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITREFERENCE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function HideReferenceAction(payload) {
+  return async (dispatch) => {
+    console.log(payload);
+    await axios
+      .post(`http://localhost:5000/api/reference/hideReferences`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: HIDEREFERENCE,
             payload: res.data.data,
           });
         else

@@ -3,6 +3,7 @@ import {
   DELETEEXPERIENCE,
   EDITEXPERIENCE,
   COPYEXPERIENCE,
+  HIDEEXPERIENCE,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -91,6 +92,27 @@ export function EditExperienceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITEXPERIENCE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function HideExperienceAction(payload) {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/api/experience/hideExperiences `, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: HIDEEXPERIENCE,
             payload: res.data.data,
           });
         else

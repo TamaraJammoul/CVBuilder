@@ -20,7 +20,7 @@ export default function Reference(props) {
   const cvID = useSelector((state) => state.cvID);
 
   return (
-    <Paper>
+    <Paper className="buildcvbar">
       <Container>
         <Grid
           container

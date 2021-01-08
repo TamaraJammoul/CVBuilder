@@ -1,21 +1,9 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Box,
-  Paper,
-  Grid,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  OutlinedInput,
-  InputLabel,
-  LinearProgress,
-  Avatar,
-  TextField,
-  Container,
-} from "@material-ui/core";
+import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
+import {VisibilityOff, EditSharp, Visibility} from "@material-ui/icons";
+
 import icon from "./../../img/icon.jpg";
-import {AddSkillAction} from "./../../store/action/skill";
+import {AddSkillAction, HideSkillAction} from "./../../store/action/skill";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 
@@ -23,13 +11,16 @@ export default function AddSkill(props) {
   const [skills, setSkills] = useState([]);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
+  const [hide, setHide] = useState(0);
+  const cvID = useSelector((state) => state.cvID);
+
   const handelCancel = () => {
     setSkills([]);
     props.setComponentName("");
   };
   return (
-    <Container>
-      <Paper>
+    <Paper className="buildcvbar">
+      <Container style={{width: "100%"}}>
         <Grid
           container
           direction="row"
@@ -40,8 +31,32 @@ export default function AddSkill(props) {
           }}
           spacing={3}
         >
-          <Grid item xs={12} style={{marginBottom: "10px"}}>
-            <h2>{t("Skills")}</h2>
+          <Grid item style={{width: "100%"}} xs={12}>
+            <Grid
+              container
+              direction="row"
+              justify="flex-end"
+              alignItems="center"
+              style={{textAlign: "center"}}
+            >
+              <Grid item sm={6} xs={12} style={{marginBottom: "10px"}}>
+                <h2>{t("Skills")}</h2>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                {" "}
+                <Button
+                  color="secondary"
+                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  className="button"
+                  onClick={() => {
+                    setHide(!hide);
+                    dispatch(HideSkillAction({cvID, hide}));
+                  }}
+                >
+                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                </Button>{" "}
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={3}>
             <IconButton
@@ -163,7 +178,7 @@ export default function AddSkill(props) {
             </Button>
           </Grid>
         </Grid>
-      </Paper>
-    </Container>
+      </Container>
+    </Paper>
   );
 }

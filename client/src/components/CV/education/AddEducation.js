@@ -40,7 +40,7 @@ export default function AddEducation(props) {
     history.push("/buildcv/education");
   };
   return (
-    <Paper>
+    <Paper className="buildcvbar">
       <Container>
         <Grid
           container

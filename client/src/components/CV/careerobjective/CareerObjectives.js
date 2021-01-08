@@ -1,14 +1,19 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, Container, ButtonGroup} from "@material-ui/core";
 import {Editor} from "@tinymce/tinymce-react";
-import {VisibilityOff, EditSharp} from "@material-ui/icons";
+import {VisibilityOff, EditSharp, Visibility} from "@material-ui/icons";
 
-import {EditCareerObjectiveAction} from "./../../../store/action/careerobjective";
+import {
+  EditCareerObjectiveAction,
+  HideCareerObjectiveAction,
+} from "./../../../store/action/careerobjective";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import ReactHtmlParser from "react-html-parser";
 export default function CareerObjectives() {
   const [text, setText] = useState("");
+  const [hide, setHide] = useState(0);
+
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
     setText(content);
@@ -24,7 +29,11 @@ export default function CareerObjectives() {
   const cvID = useSelector((state) => state.cvID);
 
   return (
-    <Paper elevation={3} className="background" style={{width: "100%"}}>
+    <Paper
+      elevation={3}
+      className="buildcvbar background mt-3"
+      style={{width: "100%"}}
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={5}>
           <Grid item style={{width: "100%"}} xs={12}>
@@ -42,10 +51,14 @@ export default function CareerObjectives() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={<VisibilityOff />}
+                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
+                  onClick={() => {
+                    setHide(!hide);
+                    dispatch(HideCareerObjectiveAction({cvID, hide}));
+                  }}
                 >
-                  {t("HideSection")}
+                  {hide == 1 ? t("HideSection") : t("ShowSection")}
                 </Button>{" "}
               </Grid>
             </Grid>{" "}

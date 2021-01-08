@@ -3,16 +3,29 @@
     --thirdcolor:#543059;
     --fourthcolor:#543059;
     --fifthcolor:#5B2338 ;
-   --background: #f6f6f8
+   --background: #f6f6f8;
 }
 
 
 body {
 font-family: 'Rubik', sans-serif;
-
+scroll-behavior: smooth;
 }
-
-
+.buildcv{
+  overflow: hidden;
+  height: 100vh;
+}
+.buildcvbar{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 75vh;
+  padding-top: 20px;
+}
+.buildcvNav{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+}
 h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
 
 .save{
@@ -60,6 +73,30 @@ a:active {
       margin-top: 60px;
       margin-bottom: 60px;
     }
+
+.section1{
+  height: 600px;
+  padding-top: 30px;
+}
+.section1 h1{
+  font-size: 80px;
+}
+.section2{
+  height: 400px;
+  padding-top: 30px;
+}
+.section1img{
+   background-image: url('./img/home1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+
+
+
+
+
 @media only screen and (max-width: 600px) {
    .textField{
       width: 200px !important;

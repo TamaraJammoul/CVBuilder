@@ -3,6 +3,7 @@ import {
   EDITMEMBERSHIP,
   DELETEMEMBERSHIP,
   COPYMEMBERSHIP,
+  HIDEMEMBERSHIP,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -84,6 +85,27 @@ export function EditMembershipAction(payload) {
         if (res.status == 200)
           dispatch({
             type: EDITMEMBERSHIP,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function HideMembershipAction(payload) {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/api/membership/hideMemberships`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: HIDEMEMBERSHIP,
             payload: res.data.data,
           });
         else
