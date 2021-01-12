@@ -66,6 +66,7 @@ export function Auth(payload) {
 }
 export function PeraonalInfoAction(payload) {
   return async (dispatch) => {
+    console.log(payload);
     await axios
       .post(
         `http://localhost:5000/api/PersonalInformation/updatePersonalInformation`,

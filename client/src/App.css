@@ -27,7 +27,13 @@ scroll-behavior: smooth;
   height: 100vh;
 }
 h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
-
+.gridwidth{
+  max-width: 100% !important;
+}
+.avatar{
+  width: 150px !important;
+  height: 150px !important;
+}
 .save{
   background-color: #5B2338 !important;
 }
@@ -119,11 +125,24 @@ a:active {
    .button{
      width:80px !important
    }
+   .avatar{
+  width: 75px !important;
+  height: 75px !important;
+  }
+  h3{
+      font-size: 30px !important;
+    }
 }
 
 @media only screen and (max-width: 700px) {
-    h1,h2,h3,h4,h5{
+    h1,h2,h4,h5{
       font-size: small;
     }
-   
+    h3{
+      font-size: 40px;
+    }
+    .avatar{
+  width: 100px !important;
+  height: 100px !important;
+  }
 }

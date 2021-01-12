@@ -179,3 +179,56 @@ exports.hideMemberships = (req, res) => {
             }
         })
 }
+
+exports.copyMembership = (req, res) => {
+    const _id = req.body.cvID;
+    const membership_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                memberships = cv.Memberships;
+                Memberships.findById(membership_id).exec((err, membership) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (membership) {
+                        const newMembership = new Memberships({
+                            Name: membership.Name,
+                            Order: membership.Order
+                        })
+                        memberships.push(newMembership);
+                        newMembership.save().then((newmembership) => {
+                            CV.updateOne({ _id: _id }, { $set: { Memberships: memberships } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Membership Copied successfully",
+                                    data: {
+                                        newMembership: newmembership
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Membership not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

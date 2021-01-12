@@ -179,3 +179,56 @@ exports.hideSkills = (req, res) => {
             }
         })
 }
+
+exports.copySkill = (req, res) => {
+    const _id = req.body.cvID;
+    const skill_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                skills = cv.Skill;
+                Skill.findById(skill_id).exec((err, skill) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (skill) {
+                        const newSkill = new Skill({
+                            Name: skill.Name,
+                            Order: skill.Order
+                        })
+                        skills.push(newSkill);
+                        newSkill.save().then((newskill) => {
+                            CV.updateOne({ _id: _id }, { $set: { Skill: skills } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Skill Copied successfully",
+                                    data: {
+                                        newSkill: newskill
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Skill not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

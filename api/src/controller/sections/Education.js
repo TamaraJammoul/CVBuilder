@@ -202,3 +202,63 @@ exports.hideEducations = (req, res) => {
             }
         })
 }
+
+exports.copyEducation = (req, res) => {
+    const _id = req.body.cvID;
+    const education_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                educations = cv.Educations;
+                Education.findById(education_id).exec((err, education) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (education) {
+                        const newEducation = new Education({
+                            UniversityName: education.UniversityName,
+                            Faculty: education.Faculty,
+                            YearStart: education.YearStart,
+                            YearEnd: education.YearEnd,
+                            DegreeFrom5: education.DegreeFrom5,
+                            DegreeFrom10: education.DegreeFrom10,
+                            DegreeFrom100: education.DegreeFrom100,
+                            Grade: education.Grade,
+                            Order: education.Order
+                        })
+                        educations.push(newEducation);
+                        newEducation.save().then((neweducation) => {
+                            CV.updateOne({ _id: _id }, { $set: { Educations: educations } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Education Copied successfully",
+                                    data: {
+                                        newEducation: neweducation
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Education not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

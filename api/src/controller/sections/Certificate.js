@@ -210,12 +210,12 @@ exports.copyCertificate = (req, res) => {
                         })
                         certificates.push(newCertificate);
                         console.log(certificates);
-                        newCertificate.save().then(() => {
+                        newCertificate.save().then((newcertificate) => {
                             CV.updateOne({ _id: _id }, { $set: { Certificates: certificates } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Certificate Copied successfully",
                                     data: {
-                                        newCertificate: certificate
+                                        newCertificate: newcertificate
                                     }
                                 })
                             })

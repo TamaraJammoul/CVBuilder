@@ -237,7 +237,7 @@ exports.getCV = (req, res) => {
             tsk = await TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } });
             ref = await Reference.find({ _id: { $in: cv.References } });
             cor = await Course.find({ _id: { $in: cv.Courses } });
-            skill = await Skill.find({ _id: { $in: cv.Skills } });
+            skill = await Skill.find({ _id: { $in: cv.Skill } });
             return res.status(200).json({
                 msg: "CV Data Returned Successfully",
                 data: {

@@ -187,3 +187,60 @@ exports.hideExperiences = (req, res) => {
             }
         })
 }
+
+exports.copyExperience = (req, res) => {
+    const _id = req.body.cvID;
+    const experience_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                experiences = cv.Experiences;
+                Experience.findById(experience_id).exec((err, experience) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (experience) {
+                        const newExperience = new Experience({
+                            Name: experience.Name,
+                            Description: experience.Description,
+                            Start: experience.Start,
+                            End: experience.End,
+                            Project: experience.Project,
+                            Orde: experience.Order
+                        })
+                        experiences.push(newExperience);
+                        newExperience.save().then((newexperience) => {
+                            CV.updateOne({ _id: _id }, { $set: { Experiences: experiences } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Experience Copied successfully",
+                                    data: {
+                                        newExperience: newexperience
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Expereince not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

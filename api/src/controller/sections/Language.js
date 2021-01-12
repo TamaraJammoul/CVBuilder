@@ -191,3 +191,59 @@ exports.hideLanguages = (req, res) => {
             }
         })
 }
+
+exports.copyLanguage = (req, res) => {
+    const _id = req.body.cvID;
+    const language_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                languages = cv.Languages;
+                Language.findById(language_id).exec((err, language) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (language) {
+                        const newLanguage = new Language({
+                            Name: language.Name,
+                            Rate: language.Rate,
+                            RateFrom10: language.RateFrom10,
+                            RateFrom100: language.RateFrom100,
+                            Order: language.Order
+                        })
+                        languages.push(newLanguage);
+                        newLanguage.save().then((newlanguage) => {
+                            CV.updateOne({ _id: _id }, { $set: { Languages: languages } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Language Copied successfully",
+                                    data: {
+                                        newLanguage: newlanguage
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Language not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

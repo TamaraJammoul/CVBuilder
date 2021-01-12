@@ -179,3 +179,56 @@ exports.hideOtherTrainings = (req, res) => {
             }
         })
 }
+
+exports.copyOtherTraining = (req, res) => {
+    const _id = req.body.cvID;
+    const otherTraining_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                otherTrainings = cv.OtherTrainings;
+                OtherTraining.findById(otherTraining_id).exec((err, otherTraining) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (otherTraining) {
+                        const newOtherTraining = new OtherTraining({
+                            Name: otherTraining.Name,
+                            Order: otherTraining.Order
+                        })
+                        otherTrainings.push(newOtherTraining);
+                        newOtherTraining.save().then((newotherTraining) => {
+                            CV.updateOne({ _id: _id }, { $set: { OtherTrainings: otherTrainings } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "OtherTraining Copied successfully",
+                                    data: {
+                                        newOtherTraining: newotherTraining
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "OtherTraining not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

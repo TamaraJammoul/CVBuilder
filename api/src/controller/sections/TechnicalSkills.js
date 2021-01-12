@@ -182,3 +182,58 @@ exports.hideTechnicalSkills = (req, res) => {
             }
         })
 }
+
+exports.copyTechnicalSkill = (req, res) => {
+    const _id = req.body.cvID;
+    const technicalSkill_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                technicalSkills = cv.TechnicalSkills;
+                TechnicalSkills.findById(technicalSkill_id).exec((err, technicalSkill) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (technicalSkill) {
+                        const newTechnicalSkill = new TechnicalSkills({
+                            Name: technicalSkill.Name,
+                            RateFrom5: technicalSkill.RateFrom5,
+                            RateFrom100: technicalSkill.RateFrom100,
+                            Order: technicalSkill.Order
+                        })
+                        technicalSkills.push(newTechnicalSkill);
+                        newTechnicalSkill.save().then((newtechnicalSkill) => {
+                            CV.updateOne({ _id: _id }, { $set: { TechnicalSkills: technicalSkills } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "TechnicalSkill Copied successfully",
+                                    data: {
+                                        newTechnicalSkill: newtechnicalSkill
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "TechnicalSkill not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

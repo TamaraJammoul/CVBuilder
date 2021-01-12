@@ -22,7 +22,7 @@ export default function PersonalInfo() {
   formData.append("_id", id);
 
   return (
-    <Paper elevation={3} className="buildcvbar">
+    <Paper elevation={3} className="buildcvbar" style={{width: "100%"}}>
       <Grid
         container
         alignItems="center"
@@ -34,28 +34,36 @@ export default function PersonalInfo() {
           <h3>{t("PersonalInfo")}</h3> <hr />
         </Grid>
         <Grid item xs={12}>
-          <Avatar
-            alt="Remy Sharp"
-            src={defaultimg}
-            style={{width: "150px", height: "150px"}}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<CloudUploadIcon />}
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            direction="column"
           >
-            <input
-              type="file"
-              name="file"
-              placeholder={t("Upload")}
-              className="input1"
-              onChange={(e) => {
-                const files = e.target.files;
-                console.log(files);
-                formData.append("file", files[0]);
-              }}
-            />
-          </Button>
+            <Grid item xs={12}>
+              <Avatar alt="Remy Sharp" src={defaultimg} className="avatar" />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<CloudUploadIcon />}
+                className="mt-3"
+              >
+                <input
+                  type="file"
+                  name="file"
+                  placeholder={t("Upload")}
+                  className="input1"
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    console.log(files);
+                    formData.append("file", files[0]);
+                  }}
+                />
+              </Button>
+            </Grid>{" "}
+          </Grid>{" "}
         </Grid>
         <Grid
           item
@@ -66,16 +74,19 @@ export default function PersonalInfo() {
           justify="center"
           style={{textAlign: "center"}}
         >
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("FirstName")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("FirstName", e.target.value)}
+              onChange={(e) => {
+                console.log(formData);
+                formData.append("FirstName", e.target.value);
+              }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("LastName")}
@@ -84,7 +95,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("LastName", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("LinkedInAccount")}
@@ -93,7 +104,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("LinkedIn", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("Email")}
@@ -102,7 +113,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("Email", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("PhoneNumber")}
@@ -111,7 +122,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("Phone", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("Date Of Birth")}
@@ -120,7 +131,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("Birth", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("City")}
@@ -129,7 +140,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("City", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("Country")}
@@ -138,7 +149,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("Country", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("Nationality")}
@@ -147,7 +158,7 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("Nationality", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               id="filled-primary"
               label={t("Marital Status")}
@@ -156,20 +167,23 @@ export default function PersonalInfo() {
               onChange={(e) => formData.append("MaritalStatus", e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}></Grid>
+          <Grid item xs={12} sm={6}></Grid>
           <Grid item xs={12}>
             <Button
               variant="outlined"
-              className="cancel"
+              className="cancel mt-3"
               style={{marginLeft: "10px", float: "right"}}
             >
               {t("cancel")}
             </Button>
             <Button
               variant="contained"
-              className="save"
+              className="save mt-3"
               style={{float: "right"}}
-              onClick={dispatch(PeraonalInfoAction(formData))}
+              onClick={() => {
+                console.log(formData);
+                dispatch(PeraonalInfoAction({data: formData}));
+              }}
             >
               {t("save")}
             </Button>

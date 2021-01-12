@@ -177,3 +177,57 @@ exports.hideReferences = (req, res) => {
             }
         })
 }
+
+exports.copyReference = (req, res) => {
+    const _id = req.body.cvID;
+    const reference_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                references = cv.References;
+                Reference.findById(reference_id).exec((err, reference) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (reference) {
+                        const newReference = new Reference({
+                            Name: reference.Name,
+                            Number: reference.Number,
+                            Order: reference.Order
+                        })
+                        references.push(newReference);
+                        newReference.save().then((newreference) => {
+                            CV.updateOne({ _id: _id }, { $set: { References: references } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "Reference Copied successfully",
+                                    data: {
+                                        newReference: newreference
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Reference not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}

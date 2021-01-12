@@ -183,3 +183,55 @@ exports.hideCourses = (req, res) => {
             }
         })
 }
+
+exports.copyCourse = (req, res) => {
+    const _id = req.body.cvID;
+    const course_id = req.body._id;
+
+    CV.findById(_id)
+        .exec((err, cv) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "DB Error Occurred",
+                    err
+                })
+            }
+            if (cv) {
+                courses = cv.Courses;
+                Course.findById(course_id).exec((err, course) => {
+                    if (err) {
+                        return res.status(400).json({
+                            msg: "DB Error Occurred",
+                            err
+                        })
+                    }
+                    if (course) {
+                        const newCourse = new Course({
+                            Name: course.Name, Description: course.Description, Year: course.Year, Order: course.Order
+                        })
+                        courses.push(newCourse);
+                        newCourse.save().then((newcourse) => {
+                            CV.updateOne({ _id: _id }, { $set: { Courses: courses } }).then(() => {
+                                return res.status(200).json({
+                                    msg: "course Copied successfully",
+                                    data: {
+                                        newCourse: newcourse
+                                    }
+                                })
+                            })
+                        })
+                    }
+                    else {
+                        return res.status(200).json({
+                            msg: "Course not found"
+                        })
+                    }
+                })
+            }
+            else {
+                return res.status(200).json({
+                    msg: "CV not found"
+                })
+            }
+        })
+}
