@@ -35,12 +35,28 @@ export default function reducer(state, action) {
           certificates: [...state.template.certificates, action.payload],
         },
       };
+    case "ORDERCERTIFICATE":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          certificates: action.payload.certificates,
+        },
+      };
     case "ADDEDUCATION":
       return {
         ...state,
         template: {
           ...state.template,
           educations: [...state.template.educations, action.payload],
+        },
+      };
+    case "ORDEREDUCATION":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          educations: action.payload.educations,
         },
       };
     case "ADDEXPERIENCE":
@@ -51,12 +67,28 @@ export default function reducer(state, action) {
           experiences: [...state.template.experiences, action.payload],
         },
       };
+    case "ORDEREXPERIENCE":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          experiences: action.payload.experiences,
+        },
+      };
     case "ADDCOURSES":
       return {
         ...state,
         template: {
           ...state.template,
           courses: [...state.template.courses, action.payload],
+        },
+      };
+    case "ORDERCOURSES":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          courses: action.payload.courses,
         },
       };
     case "ADDLANGUAGE":
@@ -68,6 +100,15 @@ export default function reducer(state, action) {
           languages: [...state.template.languages, action.payload],
         },
       };
+    case "ORDERLANGUAGE":
+      console.log(action.payload);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          languages: action.payload.languages,
+        },
+      };
     case "ADDMEMBERSHIP":
       return {
         ...state,
@@ -76,12 +117,28 @@ export default function reducer(state, action) {
           memberships: [...state.template.memberships, action.payload],
         },
       };
+    case "ORDERMEMBERSHIP":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          memberships: action.payload.memberships,
+        },
+      };
     case "ADDOTHERTRAINING":
       return {
         ...state,
         template: {
           ...state.template,
           othertraining: [...state.template.othertraining, action.payload],
+        },
+      };
+    case "ORDEROTHERTRAINING":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          othertraining: action.payload.othertraining,
         },
       };
     case "ADDTECHNICALSKILL":
@@ -93,12 +150,29 @@ export default function reducer(state, action) {
           technicalskills: [...state.template.technicalskills, action.payload],
         },
       };
+    case "ORDERTECHNICALSKILL":
+      console.log(action.payload);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          technicalskills: action.payload.technicalskills,
+        },
+      };
     case "ADDREFERENCE":
       return {
         ...state,
         template: {
           ...state.template,
           references: [...state.template.references, action.payload],
+        },
+      };
+    case "ORDERREFERENCE":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          references: action.payload.references,
         },
       };
     case "ADDSKILL":
