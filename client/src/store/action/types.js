@@ -61,7 +61,6 @@ export const ADDCOURSES = "ADDCOURSES";
 export const DELETECOURSES = "DELETECOURSES";
 export const ORDERCOURSES = "ORDERCOURSES";
 export const COPYCOURSES = "COPYCOURSES";
-export const ORDERCOURSES = "ORDERCOURSES";
 export const HIDECOURSES = "HIDECOURSES";
 export const GETALLCOURSES = "GETALLCOURSES";
 export const AUTH = "AUTH";

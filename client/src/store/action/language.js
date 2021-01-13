@@ -135,7 +135,7 @@ export function OrderLanguageAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDERLANGUAGE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

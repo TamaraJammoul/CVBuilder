@@ -135,7 +135,7 @@ export function OrderExperienceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDEREXPERIENCE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

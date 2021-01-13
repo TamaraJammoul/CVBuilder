@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -16,15 +16,15 @@ import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 export default function Certificates() {
   const dispatch = useDispatch();
-  // const certificates = useSelector((state) => state.template.certificates);
-  const certificates = [
-    {Name: "name", _id: 0},
-    {Name: "name1", _id: 1},
-    {Name: "name2", _id: 2},
-  ];
+  const temp = useSelector((state) => state.template.certificates);
+
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const [certificates, setCertificates] = useState([]);
+  useEffect(() => {
+    setCertificates(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -38,16 +38,17 @@ export default function Certificates() {
     ) {
       return;
     }
-    dispatch(OrderCertificateAction({source, destination, cvID}));
     const users = Object.assign([], certificates);
     const droppedUser = certificates[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setCertificates(users);
+    dispatch(OrderCertificateAction({source, destination, cvID, certificates}));
   };
   const renderUsers = (cer, index) => {
     return (
-      <Draggable key={index} draggableId={cer._id + " "} index={cer._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

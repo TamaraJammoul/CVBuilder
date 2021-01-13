@@ -140,7 +140,7 @@ export function OrderCertificateAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDERCERTIFICATE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

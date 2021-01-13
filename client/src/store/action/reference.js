@@ -133,7 +133,7 @@ export function OrderReferenceAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDERREFERENCE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

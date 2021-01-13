@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
@@ -22,12 +22,13 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function Courses() {
   const dispatch = useDispatch();
-  //const courses = useSelector((state) => state.template.courses);
-  const courses = [
-    {Name: "name", _id: 0},
-    {Name: "name1", _id: 1},
-    {Name: "name2", _id: 2},
-  ];
+  const [courses, setCourses] = useState([]);
+
+  const temp = useSelector((state) => state.template.courses);
+  useEffect(() => {
+    setCourses(temp);
+  }, [temp]);
+
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
@@ -44,16 +45,17 @@ export default function Courses() {
     ) {
       return;
     }
-    dispatch(OrderCoursesAction({source, destination, cvID}));
     const users = Object.assign([], courses);
     const droppedUser = courses[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setCourses(users);
+    dispatch(OrderCoursesAction({source, destination, cvID, courses}));
   };
   const renderUsers = (cou, index) => {
     return (
-      <Draggable key={index} draggableId={cou._id + " "} index={cou._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}
@@ -71,7 +73,7 @@ export default function Courses() {
                     style={{width: "100%"}}
                   >
                     <Grid item xs={1}>
-                      <h4>{cou._id + 1}</h4>
+                      <h4>{index + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
                       <h6>{cou.Name}</h6>{" "}

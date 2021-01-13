@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
   Button,
   Box,
@@ -30,12 +30,14 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function TechnicalSkills() {
   const dispatch = useDispatch();
-  const technicalskills = useSelector(
-    (state) => state.template.technicalskills
-  );
+  const temp = useSelector((state) => state.template.technicalskills);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const [technicalskills, setTechnicalskills] = useState([]);
+  useEffect(() => {
+    setTechnicalskills(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -49,16 +51,19 @@ export default function TechnicalSkills() {
     ) {
       return;
     }
-    dispatch(OrderTechnicalSkillAction({source, destination, cvID}));
     const users = Object.assign([], technicalskills);
     const droppedUser = technicalskills[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setTechnicalskills(users);
+    dispatch(
+      OrderTechnicalSkillAction({source, destination, cvID, technicalskills})
+    );
   };
   const renderUsers = (per, index) => {
     return (
-      <Draggable key={index} draggableId={per._id + " "} index={per._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
@@ -23,10 +23,14 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function Membership() {
   const dispatch = useDispatch();
-  const memberships = useSelector((state) => state.template.memberships);
+  const temp = useSelector((state) => state.template.memberships);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const [memberships, setmemberships] = useState([]);
+  useEffect(() => {
+    setmemberships(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -40,16 +44,17 @@ export default function Membership() {
     ) {
       return;
     }
-    dispatch(OrderMembershipAction({source, destination, cvID}));
     const users = Object.assign([], memberships);
     const droppedUser = memberships[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setmemberships(users);
+    dispatch(OrderMembershipAction({source, destination, cvID, memberships}));
   };
   const renderUsers = (mem, index) => {
     return (
-      <Draggable key={index} draggableId={mem._id + " "} index={mem._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

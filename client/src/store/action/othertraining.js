@@ -127,7 +127,7 @@ export function OrderOtherTrainingAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDEROTHERTRAINING,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

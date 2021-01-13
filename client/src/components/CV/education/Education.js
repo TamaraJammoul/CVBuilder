@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
@@ -24,11 +24,14 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function Education() {
   const dispatch = useDispatch();
-  const educations = useSelector((state) => state.template.educations);
+  const temp = useSelector((state) => state.template.educations);
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
-
+  const [educations, setEducations] = useState([]);
   const {t, i18n} = useTranslation();
+  useEffect(() => {
+    setEducations(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -42,16 +45,17 @@ export default function Education() {
     ) {
       return;
     }
-    dispatch(OrderEducationAction({source, destination, cvID}));
     const users = Object.assign([], educations);
     const droppedUser = educations[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setEducations(users);
+    dispatch(OrderEducationAction({source, destination, cvID, educations}));
   };
   const renderUsers = (edu, index) => {
     return (
-      <Draggable key={index} draggableId={edu._id + " "} index={edu._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

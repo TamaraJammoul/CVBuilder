@@ -119,7 +119,7 @@ export function OrderTechnicalSkillAction(payload) {
         console.log(res.data);
         dispatch({
           type: ORDERTECHNICALSKILL,
-          payload: res.data.data,
+          payload,
         });
       });
   };

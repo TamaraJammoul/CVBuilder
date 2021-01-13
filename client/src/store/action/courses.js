@@ -133,7 +133,7 @@ export function OrderCoursesAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDERCOURSES,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

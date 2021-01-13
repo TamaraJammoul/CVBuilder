@@ -128,7 +128,7 @@ export function OrderMembershipAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDERMEMBERSHIP,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

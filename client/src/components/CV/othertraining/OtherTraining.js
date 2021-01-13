@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
@@ -22,13 +22,17 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function OtherTraining(props) {
   const dispatch = useDispatch();
-  const othertraining = useSelector((state) => state.template.othertraining);
+  const temp = useSelector((state) => state.template.othertraining);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("othertrainingID");
   const [hide, setHide] = useState(0);
+  const [othertraining, setOthertraining] = useState([]);
+  useEffect(() => {
+    setOthertraining(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -42,16 +46,19 @@ export default function OtherTraining(props) {
     ) {
       return;
     }
-    dispatch(OrderOtherTrainingAction({source, destination, cvID}));
     const users = Object.assign([], othertraining);
     const droppedUser = othertraining[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setOthertraining(users);
+    dispatch(
+      OrderOtherTrainingAction({source, destination, cvID, othertraining})
+    );
   };
   const renderUsers = (oth, index) => {
     return (
-      <Draggable key={index} draggableId={oth._id + " "} index={oth._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

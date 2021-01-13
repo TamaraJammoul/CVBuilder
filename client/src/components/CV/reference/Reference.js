@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
@@ -22,10 +22,14 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function Refernce() {
   const dispatch = useDispatch();
-  const references = useSelector((state) => state.template.references);
+  const temp = useSelector((state) => state.template.references);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const [references, setReferences] = useState([]);
+  useEffect(() => {
+    setReferences(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -39,16 +43,17 @@ export default function Refernce() {
     ) {
       return;
     }
-    dispatch(OrderReferenceAction({source, destination, cvID}));
     const users = Object.assign([], references);
     const droppedUser = references[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setReferences(users);
+    dispatch(OrderReferenceAction({source, destination, cvID, references}));
   };
   const renderUsers = (ref, index) => {
     return (
-      <Draggable key={index} draggableId={ref._id + " "} index={ref._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}

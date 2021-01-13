@@ -142,7 +142,7 @@ export function OrderEducationAction(payload) {
         if (res.status == 200)
           dispatch({
             type: ORDEREDUCATION,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

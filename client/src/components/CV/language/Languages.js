@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
   Button,
   Box,
@@ -31,10 +31,14 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function Languages() {
   const dispatch = useDispatch();
-  const languages = useSelector((state) => state.template.languages);
+  const temp = useSelector((state) => state.template.languages);
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const [languages, setLanguages] = useState([]);
+  useEffect(() => {
+    setLanguages(temp);
+  }, [temp]);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
     console.log("kljj", source, destination, reason);
@@ -48,16 +52,17 @@ export default function Languages() {
     ) {
       return;
     }
-    dispatch(OrderLanguageAction({source, destination, cvID}));
     const users = Object.assign([], languages);
     const droppedUser = languages[source.index];
 
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
+    setLanguages(users);
+    dispatch(OrderLanguageAction({source, destination, cvID, languages}));
   };
   const renderUsers = (lan, index) => {
     return (
-      <Draggable key={index} draggableId={lan._id + " "} index={lan._id}>
+      <Draggable key={index} draggableId={index + " "} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}
