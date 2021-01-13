@@ -4,6 +4,7 @@ import {
   DELETECERTIFICATE,
   COPYCERTIFICATE,
   HIDECERTIFICATE,
+  ORDERCERTIFICATE,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -117,6 +118,28 @@ export function HideCertificateAction(payload) {
         if (res.status == 200)
           dispatch({
             type: HIDECERTIFICATE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function OrderCertificateAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://locahost:5000/api/certificate/hideCertificate`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: ORDERCERTIFICATE,
             payload: res.data.data,
           });
         else

@@ -4,6 +4,7 @@ import {
   DELETEEDUCATION,
   COPYEDUCATION,
   HIDEEDUCATION,
+  ORDEREDUCATION,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -119,6 +120,28 @@ export function HideEducationAction(payload) {
         if (res.status == 200)
           dispatch({
             type: HIDEEDUCATION,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function OrderEducationAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/education/hideEducations `, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: ORDEREDUCATION,
             payload: res.data.data,
           });
         else

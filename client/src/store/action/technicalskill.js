@@ -4,6 +4,7 @@ import {
   DELETETECHNICALSKILL,
   COPYTECHNICALSKILL,
   HIDETECHNICALSKILL,
+  ORDERTECHNICALSKILL,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -101,6 +102,23 @@ export function HideTechnicalSkillAction(payload) {
         console.log(res.data);
         dispatch({
           type: HIDETECHNICALSKILL,
+          payload: res.data.data,
+        });
+      });
+  };
+}
+export function OrderTechnicalSkillAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/technicalSkills/hideTechnicalSkills`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: ORDERTECHNICALSKILL,
           payload: res.data.data,
         });
       });

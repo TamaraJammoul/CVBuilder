@@ -13,18 +13,113 @@ import {
   HideCoursesAction,
   DeleteCoursesAction,
   CopyCoursesAction,
+  OrderCoursesAction,
 } from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+
 export default function Courses() {
-  const [ComponentName, setComponentName] = useState("");
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.template.courses);
+  //const courses = useSelector((state) => state.template.courses);
+  const courses = [
+    {Name: "name", _id: 0},
+    {Name: "name1", _id: 1},
+    {Name: "name2", _id: 2},
+  ];
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const onDragEnd = (result) => {
+    const {destination, source, reason} = result;
+    console.log("kljj", source, destination, reason);
+    if (!destination || reason === "CANCEL") {
+      return;
+    }
 
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    dispatch(OrderCoursesAction({source, destination, cvID}));
+    const users = Object.assign([], courses);
+    const droppedUser = courses[source.index];
+
+    users.splice(source.index, 1);
+    users.splice(destination.index, 0, droppedUser);
+  };
+  const renderUsers = (cou, index) => {
+    return (
+      <Draggable key={index} draggableId={cou._id + " "} index={cou._id}>
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <Grid item xs={12}>
+              <Paper>
+                <Container>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    spacing={4}
+                    style={{width: "100%"}}
+                  >
+                    <Grid item xs={1}>
+                      <h4>{cou._id + 1}</h4>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <h6>{cou.Name}</h6>{" "}
+                    </Grid>
+                    <Grid item xs={1}>
+                      <Link to={`/buildcv/editcourses?course_id=${cou._id}`}>
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() =>
+                          dispatch(CopyCoursesAction({id: cou._id}))
+                        }
+                      >
+                        <FileCopy />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() =>
+                          dispatch(
+                            DeleteCoursesAction({cvID, courses_id: cou._id})
+                          )
+                        }
+                      >
+                        <Delete />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton aria-label="delete">
+                        <OpenWith />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Container>{" "}
+              </Paper>
+            </Grid>
+          </div>
+        )}
+      </Draggable>
+    );
+  };
   return (
     <Paper className="buildcvbar">
       <Container>
@@ -50,61 +145,16 @@ export default function Courses() {
               </Grid>
             </Grid>{" "}
           </Grid>
-          {courses.map((cou, i) => (
-            <Grid item xs={12}>
-              <Paper>
-                <Container>
-                  <Grid
-                    container
-                    alignItems="center"
-                    justify="center"
-                    spacing={4}
-                    style={{width: "100%"}}
-                  >
-                    <Grid item xs={1}>
-                      <h4>{i + 1}</h4>
-                    </Grid>
-                    <Grid item xs={7}>
-                      <h6>{cou.Name}</h6>{" "}
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Link to={`/buildcv/editcourses?course_id=${cou._id}`}>
-                        {" "}
-                        <IconButton aria-label="delete">
-                          <Edit />
-                        </IconButton>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <FileCopy
-                          onClick={() =>
-                            dispatch(CopyCoursesAction({id: cou._id}))
-                          }
-                        />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Delete
-                          onClick={() =>
-                            dispatch(
-                              DeleteCoursesAction({cvID, courses_id: cou._id})
-                            )
-                          }
-                        />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </Container>{" "}
-              </Paper>
-            </Grid>
-          ))}
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="dp1">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {courses.map(renderUsers)}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
           <Grid item xs={12}>
             {" "}
             <Link to="/buildcv/addcourses">

@@ -4,6 +4,7 @@ import {
   DELETEMEMBERSHIP,
   COPYMEMBERSHIP,
   HIDEMEMBERSHIP,
+  ORDERMEMBERSHIP,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -106,6 +107,27 @@ export function HideMembershipAction(payload) {
         if (res.status == 200)
           dispatch({
             type: HIDEMEMBERSHIP,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function OrderMembershipAction(payload) {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/api/membership/hideMemberships`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: ORDERMEMBERSHIP,
             payload: res.data.data,
           });
         else

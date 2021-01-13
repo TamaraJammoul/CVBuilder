@@ -14,11 +14,13 @@ import {
   EditEducationAction,
   DeleteEducationAction,
   CopyEducationAction,
+  OrderEducationAction,
   HideEducationAction,
 } from "./../../../store/action/education";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export default function Education() {
   const dispatch = useDispatch();
@@ -27,36 +29,36 @@ export default function Education() {
   const [hide, setHide] = useState(0);
 
   const {t, i18n} = useTranslation();
-  return (
-    <Paper className="buildcvbar">
-      <Container>
-        <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item style={{width: "100%"}} sx={12}>
-            <Grid container alignItems="center" direction="row" spacing={6}>
-              <Grid item sm={6} xs={12}>
-                <h2>{t("Education")}</h2>
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                {" "}
-                <Button
-                  color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
-                  className="button"
-                  onClick={() => {
-                    setHide(!hide);
-                    dispatch(HideEducationAction({cvID, hide}));
-                  }}
-                >
-                  {hide == 1 ? t("HideSection") : t("ShowSection")}
-                </Button>{" "}
-              </Grid>
-            </Grid>
-          </Grid>{" "}
-          <Grid item xs={12}>
-            <h5>{t("EducationText")}</h5>
-          </Grid>
-          {educations.map((edu, i) => (
-            <Grid item key={i}>
+  const onDragEnd = (result) => {
+    const {destination, source, reason} = result;
+    console.log("kljj", source, destination, reason);
+    if (!destination || reason === "CANCEL") {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    dispatch(OrderEducationAction({source, destination, cvID}));
+    const users = Object.assign([], educations);
+    const droppedUser = educations[source.index];
+
+    users.splice(source.index, 1);
+    users.splice(destination.index, 0, droppedUser);
+  };
+  const renderUsers = (edu, index) => {
+    return (
+      <Draggable key={index} draggableId={edu._id + " "} index={edu._id}>
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <Grid item xs={12}>
               <Paper>
                 <Container>
                   <Grid
@@ -67,7 +69,7 @@ export default function Education() {
                     style={{width: "100%"}}
                   >
                     <Grid item xs={1}>
-                      <h4>{i + 1}</h4>
+                      <h4>{index + 1}</h4>
                     </Grid>
                     <Grid item xs={7}>
                       <Grid container direction="column">
@@ -105,30 +107,32 @@ export default function Education() {
                       </Link>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <FileCopy
-                          onClick={() =>
-                            dispatch(
-                              CopyEducationAction({
-                                id: edu._id,
-                              })
-                            )
-                          }
-                        />
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() =>
+                          dispatch(
+                            CopyEducationAction({
+                              id: edu._id,
+                            })
+                          )
+                        }
+                      >
+                        <FileCopy />
                       </IconButton>
                     </Grid>
                     <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <Delete
-                          onClick={() =>
-                            dispatch(
-                              DeleteEducationAction({
-                                cvID,
-                                education_id: edu._id,
-                              })
-                            )
-                          }
-                        />
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() =>
+                          dispatch(
+                            DeleteEducationAction({
+                              cvID,
+                              education_id: edu._id,
+                            })
+                          )
+                        }
+                      >
+                        <Delete />
                       </IconButton>
                     </Grid>
                     <Grid item xs={1}>
@@ -140,7 +144,49 @@ export default function Education() {
                 </Container>{" "}
               </Paper>
             </Grid>
-          ))}
+          </div>
+        )}
+      </Draggable>
+    );
+  };
+  return (
+    <Paper className="buildcvbar">
+      <Container>
+        <Grid container alignItems="center" direction="column" spacing={6}>
+          <Grid item style={{width: "100%"}} sx={12}>
+            <Grid container alignItems="center" direction="row" spacing={6}>
+              <Grid item sm={6} xs={12}>
+                <h2>{t("Education")}</h2>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                {" "}
+                <Button
+                  color="secondary"
+                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  className="button"
+                  onClick={() => {
+                    setHide(!hide);
+                    dispatch(HideEducationAction({cvID, hide}));
+                  }}
+                >
+                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                </Button>{" "}
+              </Grid>
+            </Grid>
+          </Grid>{" "}
+          <Grid item xs={12}>
+            <h5>{t("EducationText")}</h5>
+          </Grid>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="dp1">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {educations.map(renderUsers)}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
           <Grid item xs={12}>
             {" "}
             <Link to="/buildcv/addeducation">

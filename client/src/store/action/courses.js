@@ -4,6 +4,7 @@ import {
   DELETECOURSES,
   COPYCOURSES,
   HIDECOURSES,
+  ORDERCOURSES,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -110,6 +111,28 @@ export function HideCoursesAction(payload) {
         if (res.status == 200)
           dispatch({
             type: HIDECOURSES,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function OrderCoursesAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/course/hideCourses`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: ORDERCOURSES,
             payload: res.data.data,
           });
         else

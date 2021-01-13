@@ -4,6 +4,7 @@ import {
   EDITOTHERTRAINING,
   COPYOTHERTRAINING,
   HIDEOTHERTRAINING,
+  ORDEROTHERTRAINING,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -105,6 +106,27 @@ export function HideOtherTrainingAction(payload) {
         if (res.status == 200)
           dispatch({
             type: HIDEOTHERTRAINING,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function OrderOtherTrainingAction(payload) {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/api/otherTraining/hideOtherTrainings`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: ORDEROTHERTRAINING,
             payload: res.data.data,
           });
         else

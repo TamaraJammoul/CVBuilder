@@ -4,6 +4,7 @@ import {
   EDITLANGUAGE,
   COPYLANGUAGE,
   HIDELANGUAGE,
+  ORDERLANGUAGE,
   ERROR,
 } from "./types";
 import axios from "axios";
@@ -112,6 +113,28 @@ export function HideLanguageAction(payload) {
         if (res.status == 200)
           dispatch({
             type: HIDELANGUAGE,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
+      });
+  };
+}
+export function OrderLanguageAction(payload) {
+  return (dispatch) => {
+    console.log(payload);
+    axios
+      .post(`http://localhost:5000/api/Language/hideLanguages`, {
+        _id: payload.cvID,
+        hide: payload.hide,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status == 200)
+          dispatch({
+            type: ORDERLANGUAGE,
             payload: res.data.data,
           });
         else

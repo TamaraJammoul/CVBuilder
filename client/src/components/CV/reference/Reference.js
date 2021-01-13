@@ -12,19 +12,120 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {useSelector, useDispatch} from "react-redux";
 import {
   DeleteReferenceAction,
-  EditReferenceAction,
+  OrderReferenceAction,
   CopyReferenceAction,
   HideReferenceAction,
 } from "./../../../store/action/reference";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+
 export default function Refernce() {
   const dispatch = useDispatch();
   const references = useSelector((state) => state.template.references);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
+  const onDragEnd = (result) => {
+    const {destination, source, reason} = result;
+    console.log("kljj", source, destination, reason);
+    if (!destination || reason === "CANCEL") {
+      return;
+    }
 
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    dispatch(OrderReferenceAction({source, destination, cvID}));
+    const users = Object.assign([], references);
+    const droppedUser = references[source.index];
+
+    users.splice(source.index, 1);
+    users.splice(destination.index, 0, droppedUser);
+  };
+  const renderUsers = (ref, index) => {
+    return (
+      <Draggable key={index} draggableId={ref._id + " "} index={ref._id}>
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <Grid item xs={12}>
+              <Paper>
+                <Container>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    spacing={4}
+                    style={{width: "100%"}}
+                  >
+                    <Grid item xs={1}>
+                      <h4>{index + 1}</h4>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <h6>{ref.Name}</h6>{" "}
+                    </Grid>
+                    <Grid item xs={7}>
+                      <h6>{ref.Phone}</h6>{" "}
+                    </Grid>
+                    <Grid item xs={1}>
+                      <Link
+                        to={`/buildcv/editreference?referenceID=${ref._id}`}
+                      >
+                        {" "}
+                        <IconButton aria-label="delete">
+                          <Edit />
+                        </IconButton>
+                      </Link>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          console.log("kljklj");
+                          dispatch(
+                            CopyReferenceAction({
+                              id: ref._id,
+                            })
+                          );
+                        }}
+                      >
+                        <FileCopy />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          console.log("kljklj");
+                          dispatch(
+                            DeleteReferenceAction({cvID, reference_id: ref._id})
+                          );
+                        }}
+                      >
+                        <Delete />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton aria-label="delete">
+                        <OpenWith />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Container>{" "}
+              </Paper>
+            </Grid>
+          </div>
+        )}
+      </Draggable>
+    );
+  };
   return (
     <Paper className="buildcvbar">
       <Container>
@@ -53,73 +154,16 @@ export default function Refernce() {
           <Grid item xs={12}>
             <h5>{t("YourReferncesText")}</h5>
           </Grid>
-          {references.map((ref, i) => (
-            <Grid item>
-              <Paper>
-                <Container>
-                  <Grid
-                    container
-                    alignItems="center"
-                    justify="center"
-                    spacing={4}
-                    style={{width: "100%"}}
-                  >
-                    <Grid item xs={1}>
-                      <h4>{i + 1}</h4>
-                    </Grid>
-                    <Grid item xs={7}>
-                      <h6>{ref.Name}</h6>{" "}
-                    </Grid>
-                    <Grid item xs={7}>
-                      <h6>{ref.Phone}</h6>{" "}
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Link
-                        to={`/buildcv/editreference?referenceID=${ref._id}`}
-                      >
-                        {" "}
-                        <IconButton aria-label="delete">
-                          <Edit />
-                        </IconButton>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <FileCopy
-                          onClick={() => {
-                            console.log("kljklj");
-                            dispatch(
-                              CopyReferenceAction({
-                                id: ref._id,
-                              })
-                            );
-                          }}
-                        />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => {
-                          console.log("kljklj");
-                          dispatch(
-                            DeleteReferenceAction({cvID, reference_id: ref._id})
-                          );
-                        }}
-                      >
-                        <Delete />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </Container>{" "}
-              </Paper>
-            </Grid>
-          ))}
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="dp1">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {references.map(renderUsers)}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
           <Grid item xs={12}>
             {" "}
             <Link to="/buildcv/addreference">
