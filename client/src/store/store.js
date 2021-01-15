@@ -23,7 +23,7 @@ const initialState = {
   MyTemplates: [],
   firstName: "",
   lastName: "",
-  email: "",
+  email: "tamara.jamoul@gmail.com",
   id: "",
   token: "",
   cvID: "",
@@ -31,6 +31,9 @@ const initialState = {
   toastMessageEN: "",
   toastMessageAR: "",
   toastType: "success",
+  cvName: "",
+  cvTemplate: "",
+  cvLanguage: "",
 };
 
 const store = createStore(

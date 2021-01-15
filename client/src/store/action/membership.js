@@ -119,9 +119,10 @@ export function HideMembershipAction(payload) {
 export function OrderMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membership/hideMemberships`, {
+      .post(`http://localhost:5000/api/membership/orderMemberships`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

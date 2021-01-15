@@ -59,7 +59,12 @@ export default function BuildCV(props) {
       >
         <Drawertemp />
       </Drawer>
-      <Grid container direction="row" spacing={2} className="backgroundimg">
+      <Grid
+        container
+        direction="row"
+        spacing={2}
+        className="backgroundimg pr-3"
+      >
         <Grid item xs={4} sm={3} className="background buildcvNav">
           <Grid
             container
@@ -192,7 +197,7 @@ export default function BuildCV(props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={8} sm={9} style={{width: "100%", height: "100%"}}>
+        <Grid item xs={8} sm={9} className="bd">
           <Grid container direction="column" spacing={4}>
             <Grid item xs={2} style={{width: "100%", height: "100%"}}>
               <Navbar setDrawerState={setDrawerState} />

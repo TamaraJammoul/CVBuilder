@@ -92,17 +92,19 @@ exports.updateExperience = (req, res) => {
                     Order
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Experience updated successfully",
-                    data: {
-                        _id,
-                        Name,
-                        Description,
-                        Start,
-                        End,
-                        Project,
-                        Order
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Experience updated successfully",
+                        data: {
+                            _id,
+                            Name,
+                            Description,
+                            Start,
+                            End,
+                            Project,
+                            Order
+                        }
+                    })
                 })
             })
         }
@@ -168,15 +170,17 @@ exports.hideExperiences = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideExperiences = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "Experiences hide successfully";
-                    else msg = "Experiences show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideExperiences
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "Experiences hide successfully";
+                        else msg = "Experiences show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideExperiences
+                            }
+                        })
                     })
                 })
             }
@@ -243,4 +247,86 @@ exports.copyExperience = (req, res) => {
                 })
             }
         })
+}
+
+exports.orderExperiences = (req, res) => {   ////  cv_id, oldOrder,newOrder
+    CV.findById(req.body._id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Error in connection to MonogoDB",
+                err
+            })
+        }
+        if (cv) {
+            const oldID = req.body.oldID;
+            const newID = req.body.newID;
+            experiences = cv.Experiences;
+
+            if (oldID >= newID) {
+                Promise.all(experiences.map(item => {
+                    return anAsyncFunction(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Experience.find({ _id: { $in: cv.Experiences } }).sort({ Order: 1 }).then((exp) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: exp
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+
+            }
+            else {
+                Promise.all(experiences.map(item => {
+                    return anAsyncFunction2(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Experience.find({ _id: { $in: cv.Experiences } }).sort({ Order: 1 }).then((exp) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: exp
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+            }
+
+        }
+        else {
+            return res.status(200).json({
+                msg: "NO CV Found"
+            })
+        }
+    })
+}
+
+const anAsyncFunction = async (item, newID, oldID) => {
+    Experience.findById(item).exec().then(async (exp) => {
+        if (exp.Order === oldID) {
+            await Experience.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (exp.Order >= newID && exp.Order < oldID) {
+            var n = exp.Order + 1;
+            await Experience.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
+}
+
+const anAsyncFunction2 = async (item, newID, oldID) => {
+    Experience.findById(item).exec().then(async (exp) => {
+        if (exp.Order === oldID) {
+            await Experience.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (exp.Order > oldID && exp.Order <= newID) {
+            var n = exp.Order - 1;
+            await Experience.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
 }

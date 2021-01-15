@@ -19,6 +19,21 @@ export default function reducer(state, action) {
           temp,
         },
       };
+    case "CVNAME":
+      return {
+        ...state,
+        cvName: action.payload,
+      };
+    case "CVTEMPLATE":
+      return {
+        ...state,
+        cvTemplate: action.payload,
+      };
+    case "CVLANGIAGE":
+      return {
+        ...state,
+        cvLanguage: action.payload,
+      };
     case "AUTH":
       return {
         ...state,

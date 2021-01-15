@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Button,
   Paper,
@@ -19,8 +19,33 @@ export default function PersonalInfo() {
   let formData = new FormData();
   const dispatch = useDispatch();
   const id = useSelector((state) => state.personalInformation_id);
-  formData.append("_id", id);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
+  const [birth, setBirth] = useState(new Date());
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  const [phone, setPhone] = useState("");
 
+  const send = () => {
+    formData.append("_id", id);
+    formData.append("FirstName", firstName);
+    formData.append("LastName", lastName);
+    formData.append("LinkedIn", linkedIn);
+    formData.append("Email", email);
+    formData.append("Phone", phone);
+    formData.append("Birth", birth);
+    formData.append("City", city);
+    formData.append("Country", country);
+    formData.append("Nationality", nationality);
+    formData.append("MaritalStatus", maritalStatus);
+    console.log(formData, "kjklj");
+
+    dispatch(PeraonalInfoAction({data: formData}));
+  };
   return (
     <Paper elevation={3} className="buildcvbar" style={{width: "100%"}}>
       <Grid
@@ -57,8 +82,8 @@ export default function PersonalInfo() {
                   className="input1"
                   onChange={(e) => {
                     const files = e.target.files;
-                    console.log(files);
                     formData.append("file", files[0]);
+                    console.log(formData);
                   }}
                 />
               </Button>
@@ -81,8 +106,7 @@ export default function PersonalInfo() {
               variant="filled"
               color="primary"
               onChange={(e) => {
-                console.log(formData);
-                formData.append("FirstName", e.target.value);
+                setFirstName(e.target.value);
               }}
             />
           </Grid>
@@ -92,7 +116,7 @@ export default function PersonalInfo() {
               label={t("LastName")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("LastName", e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -101,7 +125,7 @@ export default function PersonalInfo() {
               label={t("LinkedInAccount")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("LinkedIn", e.target.value)}
+              onChange={(e) => setLinkedIn(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -110,7 +134,7 @@ export default function PersonalInfo() {
               label={t("Email")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("Email", e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -119,7 +143,7 @@ export default function PersonalInfo() {
               label={t("PhoneNumber")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("Phone", e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -128,7 +152,7 @@ export default function PersonalInfo() {
               label={t("Date Of Birth")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("Birth", e.target.value)}
+              onChange={(e) => setBirth(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -137,7 +161,7 @@ export default function PersonalInfo() {
               label={t("City")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("City", e.target.value)}
+              onChange={(e) => setCity(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -146,7 +170,7 @@ export default function PersonalInfo() {
               label={t("Country")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("Country", e.target.value)}
+              onChange={(e) => setCountry(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -155,7 +179,7 @@ export default function PersonalInfo() {
               label={t("Nationality")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("Nationality", e.target.value)}
+              onChange={(e) => setNationality(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -164,7 +188,7 @@ export default function PersonalInfo() {
               label={t("Marital Status")}
               variant="filled"
               color="primary"
-              onChange={(e) => formData.append("MaritalStatus", e.target.value)}
+              onChange={(e) => setMaritalStatus(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}></Grid>
@@ -180,10 +204,7 @@ export default function PersonalInfo() {
               variant="contained"
               className="save mt-3"
               style={{float: "right"}}
-              onClick={() => {
-                console.log(formData);
-                dispatch(PeraonalInfoAction({data: formData}));
-              }}
+              onClick={() => send()}
             >
               {t("save")}
             </Button>

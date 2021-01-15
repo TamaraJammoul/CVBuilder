@@ -88,13 +88,15 @@ exports.updateMembership = (req, res) => {
                     Order
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Membership updated successfully",
-                    data: {
-                        _id,
-                        Name,
-                        Order
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Membership updated successfully",
+                        data: {
+                            _id,
+                            Name,
+                            Order
+                        }
+                    })
                 })
             })
         }
@@ -160,15 +162,17 @@ exports.hideMemberships = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideMemberships = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "Memberships hide successfully";
-                    else msg = "Memberships show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideMemberships
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "Memberships hide successfully";
+                        else msg = "Memberships show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideMemberships
+                            }
+                        })
                     })
                 })
             }
@@ -231,4 +235,86 @@ exports.copyMembership = (req, res) => {
                 })
             }
         })
+}
+
+exports.orderMemberships = (req, res) => {   ////  cv_id, oldOrder,newOrder
+    CV.findById(req.body._id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Error in connection to MonogoDB",
+                err
+            })
+        }
+        if (cv) {
+            const oldID = req.body.oldID;
+            const newID = req.body.newID;
+            memberships = cv.Memberships;
+
+            if (oldID >= newID) {
+                Promise.all(memberships.map(item => {
+                    return anAsyncFunction(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Memberships.find({ _id: { $in: cv.Memberships } }).sort({ Order: 1 }).then((mem) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: mem
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+
+            }
+            else {
+                Promise.all(memberships.map(item => {
+                    return anAsyncFunction2(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Memberships.find({ _id: { $in: cv.Memberships } }).sort({ Order: 1 }).then((mem) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: mem
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+            }
+
+        }
+        else {
+            return res.status(200).json({
+                msg: "NO CV Found"
+            })
+        }
+    })
+}
+
+const anAsyncFunction = async (item, newID, oldID) => {
+    Memberships.findById(item).exec().then(async (mem) => {
+        if (mem.Order === oldID) {
+            await Memberships.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (mem.Order >= newID && mem.Order < oldID) {
+            var n = mem.Order + 1;
+            await Memberships.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
+}
+
+const anAsyncFunction2 = async (item, newID, oldID) => {
+    Memberships.findById(item).exec().then(async (mem) => {
+        if (mem.Order === oldID) {
+            await Memberships.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (mem.Order > oldID && mem.Order <= newID) {
+            var n = mem.Order - 1;
+            await Memberships.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
 }

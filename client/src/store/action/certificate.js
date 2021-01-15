@@ -131,9 +131,10 @@ export function OrderCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://locahost:5000/api/certificate/hideCertificate`, {
+      .post(`http://localhost:5000/api/certificate/orderCertificates`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

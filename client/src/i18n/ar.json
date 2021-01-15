@@ -126,6 +126,10 @@
         "PersonalInformation":"المعلومات الشخصية",
         "solve probleme":"حل المشاكل",
         "ShowSection":"إظهار القسم",
-        "AboutUS":"حولنا"
+        "AboutUS":"حولنا",
+        "Resume language":"لغة السيرة الذاتية",
+        "Resume Name":"اسم السيرة الذاتية",
+        "cvnametext":"سيرة ذاتية جيدة يمكنها أن تغير حياتك",
+        "Lets Start":"هيا نبدأ"
 
 }

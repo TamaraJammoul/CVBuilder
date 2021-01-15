@@ -67,3 +67,6 @@ export const AUTH = "AUTH";
 export const ERROR = "ERROR";
 export const PERSONALINFO = "PERSONALINFO";
 export const ORDERMEMBERSHIP = "ORDERMEMBERSHIP";
+export const CVLANGIAGE = "CVLANGIAGE";
+export const CVTEMPLATE = "CVTEMPLATE";
+export const CVNAME = "CVNAME";

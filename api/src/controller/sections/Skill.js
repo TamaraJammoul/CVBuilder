@@ -88,13 +88,15 @@ exports.updateSkill = (req, res) => {
                     Order
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Skill updated successfully",
-                    data: {
-                        _id,
-                        Name,
-                        Order
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Skill updated successfully",
+                        data: {
+                            _id,
+                            Name,
+                            Order
+                        }
+                    })
                 })
             })
         }
@@ -160,15 +162,17 @@ exports.hideSkills = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideSkill = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "Skills hide successfully";
-                    else msg = "Skills show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideSkill
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "Skills hide successfully";
+                        else msg = "Skills show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideSkill
+                            }
+                        })
                     })
                 })
             }
@@ -231,4 +235,86 @@ exports.copySkill = (req, res) => {
                 })
             }
         })
+}
+
+exports.orderSkills = (req, res) => {   ////  cv_id, oldOrder,newOrder
+    CV.findById(req.body._id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Error in connection to MonogoDB",
+                err
+            })
+        }
+        if (cv) {
+            const oldID = req.body.oldID;
+            const newID = req.body.newID;
+            skills = cv.Skill;
+
+            if (oldID >= newID) {
+                Promise.all(skills.map(item => {
+                    return anAsyncFunction(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Skill.find({ _id: { $in: cv.Skill } }).sort({ Order: 1 }).then((skl) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: skl
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+
+            }
+            else {
+                Promise.all(skills.map(item => {
+                    return anAsyncFunction2(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Skill.find({ _id: { $in: cv.Skill } }).sort({ Order: 1 }).then((skl) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: skl
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+            }
+
+        }
+        else {
+            return res.status(200).json({
+                msg: "NO CV Found"
+            })
+        }
+    })
+}
+
+const anAsyncFunction = async (item, newID, oldID) => {
+    Skill.findById(item).exec().then(async (skl) => {
+        if (skl.Order === oldID) {
+            await Skill.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (skl.Order >= newID && skl.Order < oldID) {
+            var n = skl.Order + 1;
+            await Skill.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
+}
+
+const anAsyncFunction2 = async (item, newID, oldID) => {
+    Skill.findById(item).exec().then(async (skl) => {
+        if (skl.Order === oldID) {
+            await Skill.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (skl.Order > oldID && skl.Order <= newID) {
+            var n = skl.Order - 1;
+            await Skill.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
 }

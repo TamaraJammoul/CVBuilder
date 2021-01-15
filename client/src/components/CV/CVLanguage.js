@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Grid, Paper, Container} from "@material-ui/core";
 import us from "./../../img/us.svg";
 import ar from "./../../img/sa.svg";
+import {useSelector, useDispatch} from "react-redux";
+import {CVLanguage1} from "./../../store/action/cv";
+import {useTranslation} from "react-i18next";
 
 export default function CVLanguage() {
+  const dispatch = useDispatch();
+  const {t} = useTranslation();
+
   return (
     <Paper>
       <Container>
@@ -15,12 +21,15 @@ export default function CVLanguage() {
           spacing={4}
         >
           <Grid item>
-            <h2>Resume language</h2>
+            <h2>{t("Resume language")}</h2>
           </Grid>
           <Grid item style={{width: "600px"}}>
             <Grid container alignItems="Center" spacing={8}>
               <Grid item xs={6}>
-                <Paper elevation={3}>
+                <Paper
+                  elevation={3}
+                  onClick={dispatch(CVLanguage1({lan: "en"}))}
+                >
                   <Grid
                     container
                     alignItems="center"
@@ -38,7 +47,10 @@ export default function CVLanguage() {
                 </Paper>
               </Grid>
               <Grid item xs={6}>
-                <Paper elevation={3}>
+                <Paper
+                  elevation={3}
+                  onClick={dispatch(CVLanguage1({lan: "ar"}))}
+                >
                   <Grid
                     container
                     alignItems="center"

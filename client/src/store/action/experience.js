@@ -126,9 +126,10 @@ export function HideExperienceAction(payload) {
 export function OrderExperienceAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/experience/hideExperiences `, {
+      .post(`http://localhost:5000/api/experiences/orderExperiences`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

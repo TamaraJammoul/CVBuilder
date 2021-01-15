@@ -33,6 +33,7 @@ const CVSchema = new mongoose.Schema({
     Template: String,
     Language: String,
     CreatedDate: Date,
+    EditedDate: Date,
     Order: { type: Number },
     Hidden: hiddenSchema
 })

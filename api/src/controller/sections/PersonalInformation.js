@@ -26,22 +26,24 @@ exports.updatePersonalInformation = (req, res) => {
                     Image
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "PersonalInformation updated successfully",
-                    data: {
-                        _id,
-                        FirstName,
-                        LastName,
-                        Phone,
-                        Email,
-                        LinkedIn,
-                        City,
-                        Country,
-                        MaritalStatus,
-                        Birth,
-                        Nationality,
-                        Image
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "PersonalInformation updated successfully",
+                        data: {
+                            _id,
+                            FirstName,
+                            LastName,
+                            Phone,
+                            Email,
+                            LinkedIn,
+                            City,
+                            Country,
+                            MaritalStatus,
+                            Birth,
+                            Nationality,
+                            Image
+                        }
+                    })
                 })
             })
         }

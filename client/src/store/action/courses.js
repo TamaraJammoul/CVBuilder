@@ -124,9 +124,10 @@ export function OrderCoursesAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/course/hideCourses`, {
+      .post(`http://localhost:5000/api/course/orderCourses`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

@@ -124,9 +124,10 @@ export function OrderReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/reference/hideReferences`, {
+      .post(`http://localhost:5000/api/references/orderReferences`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

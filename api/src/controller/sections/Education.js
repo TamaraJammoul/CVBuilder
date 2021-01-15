@@ -104,20 +104,22 @@ exports.updateEducation = (req, res) => {
                     Order
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Education updated successfully",
-                    data: {
-                        _id,
-                        UniversityName,
-                        Faculty,
-                        YearStart,
-                        YearEnd,
-                        Grade,
-                        DegreeFrom5,
-                        DegreeFrom10,
-                        DegreeFrom100,
-                        Order
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Education updated successfully",
+                        data: {
+                            _id,
+                            UniversityName,
+                            Faculty,
+                            YearStart,
+                            YearEnd,
+                            Grade,
+                            DegreeFrom5,
+                            DegreeFrom10,
+                            DegreeFrom100,
+                            Order
+                        }
+                    })
                 })
             })
         }
@@ -183,15 +185,17 @@ exports.hideEducations = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideEducations = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "Educations hide successfully";
-                    else msg = "Educations show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideEducations
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "Educations hide successfully";
+                        else msg = "Educations show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideEducations
+                            }
+                        })
                     })
                 })
             }
@@ -261,4 +265,86 @@ exports.copyEducation = (req, res) => {
                 })
             }
         })
+}
+
+exports.orderEducations = (req, res) => {   ////  cv_id, oldOrder,newOrder
+    CV.findById(req.body._id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Error in connection to MonogoDB",
+                err
+            })
+        }
+        if (cv) {
+            const oldID = req.body.oldID;
+            const newID = req.body.newID;
+            educations = cv.Educations;
+
+            if (oldID >= newID) {
+                Promise.all(educations.map(item => {
+                    return anAsyncFunction(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Education.find({ _id: { $in: cv.Educations } }).sort({ Order: 1 }).then((edu) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: edu
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+
+            }
+            else {
+                Promise.all(educations.map(item => {
+                    return anAsyncFunction2(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Education.find({ _id: { $in: cv.Educations } }).sort({ Order: 1 }).then((edu) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: edu
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+            }
+
+        }
+        else {
+            return res.status(200).json({
+                msg: "NO CV Found"
+            })
+        }
+    })
+}
+
+const anAsyncFunction = async (item, newID, oldID) => {
+    Education.findById(item).exec().then(async (edu) => {
+        if (edu.Order === oldID) {
+            await Education.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (edu.Order >= newID && edu.Order < oldID) {
+            var n = edu.Order + 1;
+            await Education.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
+}
+
+const anAsyncFunction2 = async (item, newID, oldID) => {
+    Education.findById(item).exec().then(async (edu) => {
+        if (edu.Order === oldID) {
+            await Education.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (edu.Order > oldID && edu.Order <= newID) {
+            var n = edu.Order - 1;
+            await Education.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
 }

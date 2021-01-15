@@ -16,12 +16,14 @@ exports.updateCareer = (req, res) => {
                     Text,
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Career Objectives updated successfully",
-                    data: {
-                        _id,
-                        Text,
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Career Objectives updated successfully",
+                        data: {
+                            _id,
+                            Text,
+                        }
+                    })
                 })
             })
         }
@@ -69,15 +71,17 @@ exports.hideCareer = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideCareerObjectives = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "Career hide successfully";
-                    else msg = "Career show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideCareerObjectives
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "Career hide successfully";
+                        else msg = "Career show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideCareerObjectives
+                            }
+                        })
                     })
                 })
             }

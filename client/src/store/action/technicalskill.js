@@ -111,9 +111,10 @@ export function OrderTechnicalSkillAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/technicalSkills/hideTechnicalSkills`, {
+      .post(`http://localhost:5000/api/technicalSkills/orderTechnicalSkills`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

@@ -126,9 +126,10 @@ export function OrderLanguageAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/Language/hideLanguages`, {
+      .post(`http://localhost:5000/api/languages/orderLanguages`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

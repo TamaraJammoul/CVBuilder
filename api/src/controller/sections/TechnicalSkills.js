@@ -89,15 +89,17 @@ exports.updateTechnicalSkills = (req, res) => {
                     Order
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "TechnicalSkills updated successfully",
-                    data: {
-                        _id,
-                        Name,
-                        RateFrom5,
-                        RateFrom100,
-                        Order
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "TechnicalSkills updated successfully",
+                        data: {
+                            _id,
+                            Name,
+                            RateFrom5,
+                            RateFrom100,
+                            Order
+                        }
+                    })
                 })
             })
         }
@@ -163,15 +165,17 @@ exports.hideTechnicalSkills = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideTechnicalSkills = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "TechnicalSkills hide successfully";
-                    else msg = "TechnicalSkills show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideTechnicalSkills
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "TechnicalSkills hide successfully";
+                        else msg = "TechnicalSkills show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideTechnicalSkills
+                            }
+                        })
                     })
                 })
             }
@@ -236,4 +240,86 @@ exports.copyTechnicalSkill = (req, res) => {
                 })
             }
         })
+}
+
+exports.orderTechnicalSkills = (req, res) => {   ////  cv_id, oldOrder,newOrder
+    CV.findById(req.body._id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Error in connection to MonogoDB",
+                err
+            })
+        }
+        if (cv) {
+            const oldID = req.body.oldID;
+            const newID = req.body.newID;
+            technicalskills = cv.TechnicalSkills;
+
+            if (oldID >= newID) {
+                Promise.all(technicalskills.map(item => {
+                    return anAsyncFunction(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } }).sort({ Order: 1 }).then((tsk) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: tsk
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+
+            }
+            else {
+                Promise.all(technicalskills.map(item => {
+                    return anAsyncFunction2(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } }).sort({ Order: 1 }).then((tsk) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: tsk
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+            }
+
+        }
+        else {
+            return res.status(200).json({
+                msg: "NO CV Found"
+            })
+        }
+    })
+}
+
+const anAsyncFunction = async (item, newID, oldID) => {
+    TechnicalSkills.findById(item).exec().then(async (tsk) => {
+        if (tsk.Order === oldID) {
+            await TechnicalSkills.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (tsk.Order >= newID && tsk.Order < oldID) {
+            var n = tsk.Order + 1;
+            await TechnicalSkills.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
+}
+
+const anAsyncFunction2 = async (item, newID, oldID) => {
+    TechnicalSkills.findById(item).exec().then(async (tsk) => {
+        if (tsk.Order === oldID) {
+            await TechnicalSkills.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (tsk.Order > oldID && tsk.Order <= newID) {
+            var n = tsk.Order - 1;
+            await TechnicalSkills.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
 }

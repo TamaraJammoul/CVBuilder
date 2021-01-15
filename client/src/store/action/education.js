@@ -111,7 +111,7 @@ export function HideEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/hideEducations `, {
+      .post(`http://localhost:5000/api/education/hideEducations`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -133,9 +133,10 @@ export function OrderEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/hideEducations `, {
+      .post(`http://localhost:5000/api/education/orderEducations`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

@@ -89,15 +89,17 @@ exports.updateCertificate = (req, res) => {
                     Order
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Certificate updated successfully",
-                    data: {
-                        _id,
-                        Name,
-                        Description,
-                        Year,
-                        Order
-                    }
+                CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Certificate updated successfully",
+                        data: {
+                            _id,
+                            Name,
+                            Description,
+                            Year,
+                            Order
+                        }
+                    })
                 })
             })
         }
@@ -163,15 +165,17 @@ exports.hideCertificates = (req, res) => {
                 hidden = cv.Hidden;
                 hidden.HideCertificates = req.body.hide;
                 CV.updateOne({ _id: req.body._id }, { $set: { Hidden: hidden } }).then(() => {
-                    var msg = "";
-                    if (req.body.hide) msg = "Certificates hide successfully";
-                    else msg = "Certificates show successfully";
-                    return res.status(200).json({
-                        msg,
-                        data: {
-                            cv_id: req.body._id,
-                            hidden: hidden.HideCertificates
-                        }
+                    CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                        var msg = "";
+                        if (req.body.hide) msg = "Certificates hide successfully";
+                        else msg = "Certificates show successfully";
+                        return res.status(200).json({
+                            msg,
+                            data: {
+                                cv_id: req.body._id,
+                                hidden: hidden.HideCertificates
+                            }
+                        })
                     })
                 })
             }
@@ -234,4 +238,86 @@ exports.copyCertificate = (req, res) => {
                 })
             }
         })
+}
+
+exports.orderCertifcates = (req, res) => {   ////  cv_id, oldOrder,newOrder
+    CV.findById(req.body._id).exec((err, cv) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Error in connection to MonogoDB",
+                err
+            })
+        }
+        if (cv) {
+            const oldID = req.body.oldID;
+            const newID = req.body.newID;
+            certificates = cv.Certificates;
+
+            if (oldID >= newID) {
+                Promise.all(certificates.map(item => {
+                    return anAsyncFunction(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Certificate.find({ _id: { $in: cv.Certificates } }).sort({ Order: 1 }).then((cert) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: cert
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+
+            }
+            else {
+                Promise.all(certificates.map(item => {
+                    return anAsyncFunction2(item, newID, oldID);
+                })).then(() => {
+                    var timeout = setTimeout(() => {
+                        Certificate.find({ _id: { $in: cv.Certificates } }).sort({ Order: 1 }).then((cert) => {
+                            CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                                return res.status(200).json({
+                                    data: cert
+                                })
+                            })
+                        })
+                    }, 2000)
+                });
+            }
+
+        }
+        else {
+            return res.status(200).json({
+                msg: "NO CV Found"
+            })
+        }
+    })
+}
+
+const anAsyncFunction = async (item, newID, oldID) => {
+    Certificate.findById(item).exec().then(async (cert) => {
+        if (cert.Order === oldID) {
+            await Certificate.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (cert.Order >= newID && cert.Order < oldID) {
+            var n = cert.Order + 1;
+            await Certificate.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
+}
+
+const anAsyncFunction2 = async (item, newID, oldID) => {
+    Certificate.findById(item).exec().then(async (cert) => {
+        if (cert.Order === oldID) {
+            await Certificate.updateOne({ _id: item }, { $set: { Order: newID } });
+            return Promise.resolve('ok');
+        }
+        else if (cert.Order > oldID && cert.Order <= newID) {
+            var n = cert.Order - 1;
+            await Certificate.updateOne({ _id: item }, { $set: { Order: n } });
+            return Promise.resolve('ok');
+        }
+    })
 }

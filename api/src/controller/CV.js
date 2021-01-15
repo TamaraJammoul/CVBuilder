@@ -53,6 +53,7 @@ exports.addCV = (req, res) => {
                 Template: "",
                 Language: "",
                 CreatedDate: "",
+                EditedDate: "",
                 Order: 1,
                 Hidden: hidden
             })
@@ -257,6 +258,7 @@ exports.getCV = (req, res) => {
                     Template: cv.Template,
                     Language: cv.Language,
                     CreatedDate: cv.CreatedDate,
+                    EditedDate: cv.EditedDate,
                     Hidden: cv.Hidden
                 }
             })
@@ -284,8 +286,10 @@ exports.updateName = (req, res) => {
                     Name: Name
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Name property updated successfully"
+                CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Name property updated successfully"
+                    })
                 })
             })
         }
@@ -312,8 +316,10 @@ exports.updateTemplate = (req, res) => {
                     Template: Template
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Template property updated successfully"
+                CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Template property updated successfully"
+                    })
                 })
             })
         }
@@ -340,8 +346,10 @@ exports.updateLanguage = (req, res) => {
                     Language: Language
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "Language property updated successfully"
+                CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "Language property updated successfully"
+                    })
                 })
             })
         }
@@ -368,14 +376,49 @@ exports.updateCreatedDate = (req, res) => {
                     CreatedDate: CreatedDate
                 }
             }).then(() => {
-                return res.status(200).json({
-                    msg: "CreatedDate property updated successfully"
+                CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
+                    return res.status(200).json({
+                        msg: "CreatedDate property updated successfully"
+                    })
                 })
             })
         }
         else {
             return res.status(200).json({
                 msg: "No CV found",
+            })
+        }
+    })
+}
+
+exports.getCVData = (req, res) => {
+    User.findOne({ Email: req.body.Email }).sort({ CreatedDate: 1 }).exec((err, user) => {
+        if (err) {
+            return res.status(400).json({
+                msg: "Can't connect to MongoDB",
+                err
+            })
+        }
+        if (user) {
+            cvIds = user.CV;
+            CV.find({ _id: { $in: cvIds } }).then((cvs) => {
+                var cv = cvs.map(function (ele) {
+                    return {
+                        Name: ele.Name,
+                        Template: ele.Template,
+                        Language: ele.Language,
+                        CreatedDate: ele.CreatedDate,
+                        EditedDate: ele.EditedDate
+                    }
+                })
+                return res.status(200).json({
+                    cv
+                })
+            })
+        }
+        else {
+            return res.status(200).json({
+                msg: "USER NOT FOUND"
             })
         }
     })

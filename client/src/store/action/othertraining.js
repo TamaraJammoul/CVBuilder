@@ -118,9 +118,10 @@ export function HideOtherTrainingAction(payload) {
 export function OrderOtherTrainingAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/otherTraining/hideOtherTrainings`, {
+      .post(`http://localhost:5000/api/OtherTraining/orderOtherTrainings`, {
         _id: payload.cvID,
-        hide: payload.hide,
+        oldID: payload.source.index,
+        newID: payload.destination.index,
       })
       .then((res) => {
         console.log(res.data);

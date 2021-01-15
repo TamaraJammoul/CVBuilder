@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Admin = require('../models/Admin');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -20,7 +21,6 @@ exports.signUp = (req, res) => {
             FirstName, LastName, Email, Password: Hash_Password
         })
 
-        console.log(_user);
         _user.save((error, data) => {
             if (error) {
                 return res.status(400).json({
@@ -54,7 +54,6 @@ exports.logIn = (req, res) => {
                 });
             }
             if (user) {
-                console.log(req.body)
                 let auth = bcrypt.compareSync(req.body.Password, user.Password);
                 if (auth) {
                     const token = jwt.sign(
@@ -82,6 +81,78 @@ exports.logIn = (req, res) => {
                 });
             }
         });
+}
+
+exports.logInAdmin = (req, res) => {
+    Admin.findOne({ Email: req.body.Email })
+        .exec((err, admin) => {
+            if (err) {
+                return res.status(400).json({
+                    msg: "error in connecting to MONGODB",
+                    err
+                })
+            }
+            if (admin) {
+                let password = req.body.Password;
+                let auth = bcrypt.compareSync(password, admin.Password);
+                if (auth) {
+                    const token = jwt.sign(
+                        { _id: admin._id },
+                        process.env.JWT_SECRET,
+                        { expiresIn: '1h' })
+                    return res.status(200).json({
+                        token
+                    })
+                }
+                else {
+                    return res.status(200).json({
+                        msg: "Wroge Password"
+                    })
+                }
+            }
+            else {
+                res.status(200).json({
+                    msg: "NO Admin Found"
+                })
+            }
+        })
+}
+
+exports.addAdmin = (req, res) => {
+    const { Email, Password } = req.body;
+    const pass = bcrypt.hashSync(Password, 10);
+    const admin = new Admin({
+        Email,
+        pass
+    });
+    admin.save().then(() => {
+        return res.status(200).json({
+            Email,
+            Password: pass
+        })
+    })
+}
+
+exports.changePasswordAdmin = (req, res) => {
+    const newPass = req.body.Password;
+    const Email = req.body.Email;
+    const pass = bcrypt.hashSync(newPass, 10);
+    Admin.findOneAndUpdate({ Email: Email }, { Password: pass }, { new: true, useFindAndModify: false }).then((newAdmin) => {
+        return res.status(200).json({
+            newAdmin
+        })
+    })
+}
+
+exports.changePasswordUser = (req, res) => {
+    const newPass = req.body.Password;
+    const Email = req.body.Email;
+    const pass = bcrypt.hashSync(newPass, 10);
+    User.findOneAndUpdate({ Email: Email }, { Password: pass }, { new: true, useFindAndModify: false }).then((newUser) => {
+        return res.status(200).json({
+            newUser
+        })
+    })
 }
 
 exports.requireSignIn = (req, res, next) => {
