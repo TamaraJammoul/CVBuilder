@@ -316,9 +316,9 @@ export default function reducer(state, action) {
         if (e._id == action.payload._id) {
           e.Faculty = action.payload.Faculty;
           e.UniversityName = action.payload.UniversityName;
-          e.city = action.payload.newCity;
-          e.startDate = action.payload.newStartDate;
-          e.endDate = action.payload.newEndDate;
+          e.City = action.payload.City;
+          e.YearStart = action.payload.YearStart;
+          e.YearEnd = action.payload.YearEnd;
           e.DegreeFrom100 = action.payload.DegreeFrom100;
           e.DegreeFrom5 = action.payload.DegreeFrom5;
           e.Grade = action.payload.Grade;
@@ -340,11 +340,10 @@ export default function reducer(state, action) {
           educations: [...state.template.educations, action.payload],
         },
       };
-
     case "DELETEOTHERTRAINING":
       var temp = state.template.othertraining;
       temp = temp.filter((e) => e.Name != action.payload.Name);
-      console.log("iiiiiiiiii", temp,action.payload);
+      console.log("iiiiiiiiii", temp, action.payload);
       return {
         ...state,
         template: {
@@ -374,7 +373,6 @@ export default function reducer(state, action) {
           othertraining: [...state.template.othertraining, action.payload],
         },
       };
-
     case "EDITCAREEROBJECTIVE":
       return {
         ...state,
@@ -383,7 +381,6 @@ export default function reducer(state, action) {
           careerobjective: action.payload,
         },
       };
-
     case "DELETECAREEROBJECTIVE":
       return {
         ...state,
@@ -426,7 +423,6 @@ export default function reducer(state, action) {
           languages: [...state.template.languages, action.payload],
         },
       };
-
     case "DELETEMEMBERSHIP":
       var temp = state.template.memberships;
       temp = temp.filter((e) => e._id != action.payload.membership_id);
@@ -462,7 +458,7 @@ export default function reducer(state, action) {
           memberships: [...state.template.memberships, action.payload],
         },
       };
-
+      console.log(state);
     case "DELETEEXPERIENCE":
       var temp = state.template.experiences;
       temp = temp.filter((e) => e._id != action.payload.experience_id);
@@ -481,7 +477,6 @@ export default function reducer(state, action) {
         if (e._id == action.payload._id) {
           e.Name = action.payload.Name;
           e.Description = action.payload.Description;
-          e.experienceName = action.payload.newExperienceName;
           e.Start = action.payload.Start;
           e.End = action.payload.End;
           e.Project = action.payload.Project;
@@ -519,10 +514,10 @@ export default function reducer(state, action) {
       temp.map((e, i) => {
         if (e._id == action.payload._id) {
           e.Name = action.payload.Name;
-          e.RateFrom5 = action.payload.Rate;
+          e.RateFrom5 = action.payload.RateFrom5;
         }
       });
-      console.log(temp);
+      console.log(temp, "kjjk");
       return {
         ...state,
         template: {

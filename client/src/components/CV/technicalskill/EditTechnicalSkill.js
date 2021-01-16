@@ -23,7 +23,7 @@ export default function EditTechnicalSkill(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("technicalskillID");
-  const data = {rate, skill, order: "1", id};
+  const data = {rate, skill, order: "1", id, cvID};
 
   const handelCancel = () => {
     setSkill("");

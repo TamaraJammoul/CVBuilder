@@ -37,6 +37,7 @@ export function CopyCoursesAction(payload) {
     axios
       .post(`http://localhost:5000/api/courses/copyCourses`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);

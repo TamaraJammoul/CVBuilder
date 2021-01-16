@@ -90,7 +90,7 @@ export default function Courses() {
                       <IconButton
                         aria-label="delete"
                         onClick={() =>
-                          dispatch(CopyCoursesAction({id: cou._id}))
+                          dispatch(CopyCoursesAction({id: cou._id, cvID}))
                         }
                       >
                         <FileCopy />
@@ -106,11 +106,6 @@ export default function Courses() {
                         }
                       >
                         <Delete />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
                       </IconButton>
                     </Grid>
                   </Grid>

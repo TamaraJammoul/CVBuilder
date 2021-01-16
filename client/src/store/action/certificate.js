@@ -39,6 +39,7 @@ export function CopyCertificateAction(payload) {
     axios
       .post(`http://locahost:5000/api/certificate/copyCertificate`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);

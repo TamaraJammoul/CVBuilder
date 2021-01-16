@@ -13,7 +13,7 @@ export function AddReferenceAction(payload) {
     await axios
       .post(`http://localhost:5000/api/reference/addReference`, {
         Name: payload.name,
-        Number: payload.number,
+        Number: payload.phone,
         Order: payload.order,
         _id: payload.cvID,
       })
@@ -37,6 +37,7 @@ export function CopyReferenceAction(payload) {
     await axios
       .post(`http://localhost:5000/api/referance/copyReferance`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res);
@@ -56,8 +57,8 @@ export function DeleteReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/referance/deleteReferance`, {
-        referance_id: payload.reference_id,
+      .post(`http://localhost:5000/api/reference/deleteReference`, {
+        reference_id: payload.reference_id,
         _id: payload.cvID,
       })
       .then((res) => {

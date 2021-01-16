@@ -39,6 +39,7 @@ export function CopyLanguageAction(payload) {
     axios
       .post(`http://localhost:5000/api/language/copyLanguage`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);

@@ -38,6 +38,7 @@ export function CopyTechnicalSkillsAction(payload) {
     axios
       .post(`http://localhost:5000/api/technicalSkills/copyTechnicalSkills`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
@@ -75,18 +76,24 @@ export function EditTechnicalSkillAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/technicalSkills/editTechnicalSkills`, {
+      .post(`http://localhost:5000/api/technicalSkills/updateTechnicalSkills`, {
         Name: payload.skill,
         Order: payload.order,
         _id: payload.id,
         RateFrom5: payload.rate,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: EDITTECHNICALSKILL,
-          payload: res.data.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: EDITTECHNICALSKILL,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -100,10 +107,15 @@ export function HideTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: HIDETECHNICALSKILL,
-          payload: res.data.data,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: HIDETECHNICALSKILL,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -118,10 +130,15 @@ export function OrderTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: ORDERTECHNICALSKILL,
-          payload,
-        });
+        if (res.status == 200)
+          dispatch({
+            type: ORDERTECHNICALSKILL,
+            payload,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }

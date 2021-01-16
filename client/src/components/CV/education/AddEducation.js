@@ -121,13 +121,13 @@ export default function AddEducation(props) {
               onChange={(e) => setRate5(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             {" "}
             <TextField
               id="filled-basic"
               label={t("grade")}
               variant="filled"
-              style={{width: "50%"}}
+              style={{width: "100%"}}
               onChange={(e) => setGrade(e.target.value)}
             />
           </Grid>

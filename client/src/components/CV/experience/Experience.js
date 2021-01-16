@@ -105,6 +105,7 @@ export default function Education() {
                           dispatch(
                             CopyExperienceAction({
                               id: exp._id,
+                              cvID,
                             })
                           )
                         }
@@ -125,11 +126,6 @@ export default function Education() {
                         }
                       >
                         <Delete />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
                       </IconButton>
                     </Grid>
                   </Grid>

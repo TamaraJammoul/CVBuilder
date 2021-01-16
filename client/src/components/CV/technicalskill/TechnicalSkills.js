@@ -75,37 +75,6 @@ export default function TechnicalSkills() {
                 <Container>
                   <Grid container direction="column" spacing={4}>
                     <Grid item>
-                      <h3>{t("SectionSettings")}</h3>
-                    </Grid>
-                    <Grid item>
-                      <Grid container spacing={3}>
-                        <Grid item>
-                          <h6>{t("Percentage")}</h6>
-                          <ButtonGroup
-                            size="small"
-                            aria-label="small outlined button group"
-                          >
-                            <Box bgcolor="text.disabled">
-                              <Button>{t("Hide")}</Button>
-                            </Box>{" "}
-                            <Button>{t("Show")}</Button>
-                          </ButtonGroup>
-                        </Grid>
-                        <Grid item>
-                          <h6>Progress Bar</h6>
-                          <ButtonGroup
-                            size="small"
-                            aria-label="small outlined button group"
-                          >
-                            <Box bgcolor="text.disabled">
-                              <Button>Hide</Button>
-                            </Box>
-                            <Button>Show</Button>
-                          </ButtonGroup>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                    <Grid item>
                       <Container>
                         <Grid
                           container
@@ -165,6 +134,7 @@ export default function TechnicalSkills() {
                                 dispatch(
                                   CopyTechnicalSkillsAction({
                                     id: per._id,
+                                    cvID,
                                   })
                                 )
                               }
@@ -185,11 +155,6 @@ export default function TechnicalSkills() {
                               }
                             >
                               <Delete />
-                            </IconButton>
-                          </Grid>
-                          <Grid item xs={1}>
-                            <IconButton aria-label="delete">
-                              <OpenWith />
                             </IconButton>
                           </Grid>
                         </Grid>

@@ -127,6 +127,7 @@ export default function Languages() {
                           dispatch(
                             CopyLanguageAction({
                               id: lan._id,
+                              cvID,
                             })
                           )
                         }
@@ -144,11 +145,6 @@ export default function Languages() {
                         }
                       >
                         <Delete />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
                       </IconButton>
                     </Grid>
                   </Grid>

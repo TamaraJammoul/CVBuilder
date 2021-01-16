@@ -35,6 +35,7 @@ export function CopyMembershipAction(payload) {
     axios
       .post(`http://localhost:5000/api/membership/copyMembership`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
@@ -55,7 +56,7 @@ export function DeleteMembershipAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/membershop/deleteMembership`, {
+      .post(`http://localhost:5000/api/membership/deleteMembership`, {
         membership_id: payload.membership_id,
         _id: payload.cvID,
       })

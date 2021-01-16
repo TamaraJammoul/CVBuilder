@@ -39,6 +39,7 @@ export function CopyExperienceAction(payload) {
     axios
       .post(`http://localhost:5000/api/experience/copyExperience`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
@@ -125,6 +126,7 @@ export function HideExperienceAction(payload) {
 }
 export function OrderExperienceAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/experiences/orderExperiences`, {
         _id: payload.cvID,

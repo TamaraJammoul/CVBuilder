@@ -35,6 +35,7 @@ export function CopyOtherTrainingAction(payload) {
     axios
       .post(`http://localhost:5000/api/otherTrining/copyOtherTraining`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);

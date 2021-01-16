@@ -94,7 +94,7 @@ export default function Education() {
                           <h6>
                             {edu.UniversityName}{" "}
                             <span>
-                              ({edu.startDate}-{edu.endDate})
+                              ({edu.YearStart}-{edu.YearEnd})
                             </span>
                           </h6>
                         </Grid>
@@ -117,6 +117,7 @@ export default function Education() {
                           dispatch(
                             CopyEducationAction({
                               id: edu._id,
+                              cvID,
                             })
                           )
                         }
@@ -137,11 +138,6 @@ export default function Education() {
                         }
                       >
                         <Delete />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
                       </IconButton>
                     </Grid>
                   </Grid>

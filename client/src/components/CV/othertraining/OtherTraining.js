@@ -96,7 +96,7 @@ export default function OtherTraining(props) {
                         onClick={() =>
                           dispatch(
                             CopyOtherTrainingAction({
-                              id: oth._id,
+                              id: oth._id,cvID
                             })
                           )
                         }
@@ -119,11 +119,7 @@ export default function OtherTraining(props) {
                         <Delete />
                       </IconButton>
                     </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
-                      </IconButton>
-                    </Grid>
+                  
                   </Grid>
                 </Container>{" "}
               </Paper>

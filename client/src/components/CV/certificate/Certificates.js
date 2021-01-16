@@ -98,6 +98,7 @@ export default function Certificates() {
                           dispatch(
                             CopyCertificateAction({
                               id: cer._id,
+                              cvID,
                             })
                           )
                         }
@@ -118,11 +119,6 @@ export default function Certificates() {
                         }
                       >
                         <Delete />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
                       </IconButton>
                     </Grid>
                   </Grid>

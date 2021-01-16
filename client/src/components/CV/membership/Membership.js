@@ -91,7 +91,9 @@ export default function Membership() {
                       <IconButton
                         aria-label="delete"
                         onClick={() =>
-                          dispatch(CopyMembershipAction({id: mem._id}))
+
+                          
+                          dispatch(CopyMembershipAction({id: mem._id, cvID}))
                         }
                       >
                         <FileCopy />
@@ -112,11 +114,7 @@ export default function Membership() {
                         <Delete />
                       </IconButton>
                     </Grid>
-                    <Grid item xs={1}>
-                      <IconButton aria-label="delete">
-                        <OpenWith />
-                      </IconButton>
-                    </Grid>
+                 
                   </Grid>
                 </Container>{" "}
               </Paper>

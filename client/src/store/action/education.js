@@ -15,8 +15,8 @@ export function AddEducationAction(payload) {
       .post(`http://localhost:5000/api/education/addEducation`, {
         UniversityName: payload.universityName,
         Faculty: payload.faculty,
-        YearStart: payload.startYear,
-        YearEnd: payload.endYear,
+        YearStart: payload.startDate,
+        YearEnd: payload.endDate,
         DegreeFrom5: payload.rate5,
         Order: 1,
         Grade: payload.grade,
@@ -42,6 +42,7 @@ export function CopyEducationAction(payload) {
     axios
       .post(`http://localhost:5000/api/education/copyEducation`, {
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
