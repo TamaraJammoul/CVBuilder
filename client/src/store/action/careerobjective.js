@@ -2,7 +2,7 @@ import {EDITCAREEROBJECTIVE, HIDECAREEROBJECTIVE, ERROR} from "./types";
 import axios from "axios";
 
 export function EditCareerObjectiveAction(payload) {
-  console.log(payload);
+  console.log(payload, "kjl");
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/career/updateCareer`, {

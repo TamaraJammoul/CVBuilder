@@ -14,7 +14,7 @@ export function AddCertificateAction(payload) {
     axios
       .post(`http://localhost:5000/api/certificate/addCertificate`, {
         Name: payload.name,
-        year: payload.date,
+        Year: payload.date,
         Description: payload.description,
         Order: payload.order,
         _id: payload.cvID,
@@ -85,10 +85,11 @@ export function EditCertificateAction(payload) {
     axios
       .post(`http://locahost:5000/api/certificate/updateCertificate`, {
         Name: payload.name,
-        year: payload.date,
+        Year: payload.date,
         Description: payload.description,
         Order: payload.order,
         _id: payload.id,
+        cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
@@ -109,7 +110,7 @@ export function HideCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://locahost:5000/api/certificate/hideCertificate`, {
+      .post(`http://localhost:5000/api/certificates/hideCertificates`, {
         _id: payload.cvID,
         hide: payload.hide,
       })

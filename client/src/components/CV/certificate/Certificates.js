@@ -75,7 +75,7 @@ export default function Certificates() {
                         </Grid>
                         <Grid item>
                           <h6>
-                            {cer.Description} <span>({cer.Date})</span>
+                            {cer.Description} <span>({cer.Year})</span>
                           </h6>
                         </Grid>
                       </Grid>

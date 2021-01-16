@@ -343,8 +343,8 @@ export default function reducer(state, action) {
 
     case "DELETEOTHERTRAINING":
       var temp = state.template.othertraining;
-      temp = temp.filter((e) => e.name != action.payload);
-      console.log("iiiiiiiiii", temp);
+      temp = temp.filter((e) => e.Name != action.payload.Name);
+      console.log("iiiiiiiiii", temp,action.payload);
       return {
         ...state,
         template: {
@@ -356,7 +356,7 @@ export default function reducer(state, action) {
       var temp = state.template.othertraining;
       temp.map((e, i) => {
         if (e._id == action.payload._id) {
-          e.Name = action.Name;
+          e.Name = action.payload.Name;
         }
       });
       return {

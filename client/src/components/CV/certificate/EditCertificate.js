@@ -16,7 +16,7 @@ export default function EditCertificate(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("certificateID");
-  const data = {name, description, date, id, order: "1"};
+  const data = {name, description, date, id, order: "1", cvID};
   const handelCancel = () => {
     setName("");
     setDate(0);
