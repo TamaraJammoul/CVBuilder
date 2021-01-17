@@ -1,45 +1,68 @@
 import React, {useState} from "react";
-import {Grid, TextField, Button} from "@material-ui/core";
+import {Grid, TextField, Button, Container} from "@material-ui/core";
 import {ArrowForward} from "@material-ui/icons";
 import {useSelector, useDispatch} from "react-redux";
 import {CVName1} from "./../../store/action/cv";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function CVName() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const [name, setName] = useState("");
+  const history = useHistory();
+  const cvID = useSelector((state) => state.cvID);
+
   return (
-    <Grid
-      container
-      alignItems="center"
-      justify="center"
-      direction="column"
-      spacing={4}
-    >
-      <Grid item>
-        <h2>{t("Resume Name")}</h2>
+    <div className="backgroundimg" style={{minHeight: "100vh"}}>
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        direction="column"
+        spacing={4}
+      >
+        <Grid item>
+          <h2 className="mt-4">{t("Resume Name")}</h2>
+        </Grid>
+        <Grid item xs={12}>
+          <h5>{t("cvnametext")}</h5>
+        </Grid>
+        <Grid item xs={12}>
+          {" "}
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            direction="row"
+            spacing={2}
+          >
+            <Grid item xs={6}>
+              {" "}
+              <TextField
+                id="standard-basic"
+                label="Resume Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              {" "}
+              <Button
+                variant="contained"
+                color="primary"
+                size="medium"
+                startIcon={<ArrowForward />}
+                onClick={() => {
+                  dispatch(CVName1({name, cvID}));
+                  history.push("/cvtemplates");
+                }}
+              >
+                {t("Lets Start")}
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-      <Grid item>
-        <h5>{t("cvnametext")}</h5>
-      </Grid>
-      <Grid item>
-        {" "}
-        <TextField
-          id="standard-basic"
-          label="Resume Name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          size="medium"
-          startIcon={<ArrowForward />}
-          onClick={() => dispatch(CVName1({name}))}
-        >
-          {t("Lets Start")}
-        </Button>
-      </Grid>
-    </Grid>
+    </div>
   );
 }

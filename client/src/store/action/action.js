@@ -48,7 +48,7 @@ export function GetAllCVAction(payload) {
         if (res.status == 200)
           dispatch({
             type: GETALLCV,
-            payload: res,
+            payload: res.data.data,
           });
         else
           dispatch({

@@ -6,12 +6,14 @@ import {useTranslation} from "react-i18next";
 import {GetAllCVAction, Auth} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import Nav from "./Layout/HomeNav";
+import {useHistory} from "react-router-dom";
 export default function Dashboard() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const email = useSelector((state) => state.email);
+  const name = useSelector((state) => state.name);
   const myTemplate = useSelector((state) => state.MyTemplates);
-
+  const history = useHistory();
   useEffect(() => {
     dispatch(GetAllCVAction(email));
     if (localStorage.getItem("token")) {
@@ -34,12 +36,15 @@ export default function Dashboard() {
           <Grid item xs={12}>
             <Grid container justify="center" direction="row" spacing={10}>
               <Grid item xs={12} sm={6}>
-                <h1>Hey, Tamara</h1>
+                <h1>Hey, {name}</h1>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Button
                   className="save"
-                  onClick={() => dispatch(AddCVAction(email))}
+                  onClick={() => {
+                    dispatch(AddCVAction(email));
+                    history.push("/cvname");
+                  }}
                 >
                   {t("Create New CV")}
                 </Button>

@@ -87,8 +87,8 @@ export default function BuildCV(props) {
                 <span style={{marginRight: "10px"}}>
                   <Work />
                 </span>
-                <Link to={`${url}/careerobjectives`}>
-                  {t("CareerObjectives")}
+                <Link to={`${url}/peronalinfo`}>
+                  {t("PersonalInformation")}
                 </Link>
               </h4>
             </Grid>
@@ -98,11 +98,12 @@ export default function BuildCV(props) {
                 <span style={{marginRight: "10px"}}>
                   <Work />
                 </span>
-                <Link to={`${url}/peronalinfo`}>
-                  {t("PersonalInformation")}
+                <Link to={`${url}/careerobjectives`}>
+                  {t("CareerObjectives")}
                 </Link>
               </h4>
             </Grid>
+
             <Grid item>
               <h4>
                 {" "}

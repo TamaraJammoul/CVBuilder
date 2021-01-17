@@ -2,10 +2,18 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Button, Paper, Grid, Container} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
-
+import {useHistory} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import {CVTemplate1} from "./../../store/action/cv";
 export default function Card({CardImage}) {
   const {t, i18n} = useTranslation();
-
+  const history = useHistory();
+  const cvID = useSelector((state) => state.cvID);
+  const dispatch = useDispatch();
+  const submit = (t) => {
+    dispatch(CVTemplate1({template: t, cvID}));
+    history.push("/buildcv/personalinfo");
+  };
   return (
     <Paper elevation={3}>
       <Container>
@@ -28,6 +36,7 @@ export default function Card({CardImage}) {
               variant="contained"
               style={{marginBottom: "20px"}}
               className="save"
+              onClick={() => submit("oi")}
             >
               {t("Select")}
             </Button>

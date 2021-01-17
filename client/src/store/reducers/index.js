@@ -22,17 +22,22 @@ export default function reducer(state, action) {
     case "CVNAME":
       return {
         ...state,
-        cvName: action.payload,
+        cvName: action.payload.name,
       };
     case "CVTEMPLATE":
       return {
         ...state,
-        cvTemplate: action.payload,
+        cvTemplate: action.payload.template,
       };
     case "CVLANGIAGE":
       return {
         ...state,
         cvLanguage: action.payload,
+      };
+    case "GETALLCV":
+      return {
+        ...state,
+        MyTemplates: action.payload,
       };
     case "AUTH":
       return {
@@ -299,7 +304,7 @@ export default function reducer(state, action) {
           certificates: [...state.template.certificates, action.payload],
         },
       };
-      console.log(state)
+      console.log(state);
     case "DELETEEDUCATION":
       var temp = state.template.educations;
       temp = temp.filter((e) => e._id != action.payload.education_id);

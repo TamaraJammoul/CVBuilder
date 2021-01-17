@@ -66,16 +66,16 @@ export function CVLanguage1(payload) {
 export function CVName1(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/CV/deleteCV`, {
+      .post(`http://localhost:5000/api/cv/updateName`, {
         Email: payload.email,
         id: payload.cvID,
       })
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res.data, payload);
         if (res.status == 200)
           dispatch({
             type: CVNAME,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({
@@ -88,16 +88,16 @@ export function CVName1(payload) {
 export function CVTemplate1(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/CV/deleteCV`, {
-        Email: payload.email,
+      .post(`http://localhost:5000/api/cv/updateTemplate`, {
+        Template: payload.template,
         id: payload.cvID,
       })
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res.data, payload);
         if (res.status == 200)
           dispatch({
             type: CVTEMPLATE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({
