@@ -32,8 +32,9 @@ export function AddOtherTrainingAction(payload) {
 }
 export function CopyOtherTrainingAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
-      .post(`http://localhost:5000/api/otherTrining/copyOtherTraining`, {
+      .post(`http://localhost:5000/api/otherTraining/copyOtherTraining`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -42,7 +43,7 @@ export function CopyOtherTrainingAction(payload) {
         if (res.status == 200)
           dispatch({
             type: COPYOTHERTRAINING,
-            payload: res.data,
+            payload: res.data.data,
           });
         else
           dispatch({

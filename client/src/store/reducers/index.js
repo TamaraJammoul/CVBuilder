@@ -259,9 +259,10 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          coursess: [...state.template.courses, action.payload],
+          courses: [...state.template.courses, action.payload],
         },
       };
+      console.log(action.payload, "iiiiiii", state);
     case "DELETECERTIFICATE":
       var temp = state.template.certificates;
       console.log(action.payload);
@@ -298,6 +299,7 @@ export default function reducer(state, action) {
           certificates: [...state.template.certificates, action.payload],
         },
       };
+      console.log(state)
     case "DELETEEDUCATION":
       var temp = state.template.educations;
       temp = temp.filter((e) => e._id != action.payload.education_id);

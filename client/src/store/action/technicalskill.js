@@ -36,7 +36,7 @@ export function CopyTechnicalSkillsAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/technicalSkills/copyTechnicalSkills`, {
+      .post(`http://localhost:5000/api/technicalSkills/copyTechnicalSkill`, {
         _id: payload.id,
         cvID: payload.cvID,
       })

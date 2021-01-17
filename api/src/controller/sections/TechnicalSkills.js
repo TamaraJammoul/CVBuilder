@@ -220,9 +220,7 @@ exports.copyTechnicalSkill = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { TechnicalSkills: technicalSkills } }).then(() => {
                                 return res.status(200).json({
                                     msg: "TechnicalSkill Copied successfully",
-                                    data: {
-                                        newTechnicalSkill: newtechnicalSkill
-                                    }
+                                    data: newtechnicalSkill
                                 })
                             })
                         })

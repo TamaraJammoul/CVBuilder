@@ -230,9 +230,7 @@ exports.copyLanguage = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Languages: languages } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Language Copied successfully",
-                                    data: {
-                                        newLanguage: newlanguage
-                                    }
+                                    data: newlanguage
                                 })
                             })
                         })

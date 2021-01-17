@@ -215,9 +215,7 @@ exports.copyMembership = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Memberships: memberships } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Membership Copied successfully",
-                                    data: {
-                                        newMembership: newmembership
-                                    }
+                                    data: newmembership
                                 })
                             })
                         })

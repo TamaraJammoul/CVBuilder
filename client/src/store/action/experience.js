@@ -128,7 +128,7 @@ export function OrderExperienceAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/experiences/orderExperiences`, {
+      .post(`http://localhost:5000/api/experience/orderExperiences`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

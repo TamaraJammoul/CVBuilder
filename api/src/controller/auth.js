@@ -101,7 +101,8 @@ exports.logInAdmin = (req, res) => {
                         process.env.JWT_SECRET,
                         { expiresIn: '1h' })
                     return res.status(200).json({
-                        token
+                        	success : 1,
+		token
                     })
                 }
                 else {

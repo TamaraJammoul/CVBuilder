@@ -37,7 +37,7 @@ export function CopyCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://locahost:5000/api/certificate/copyCertificate`, {
+      .post(`http://localhost:5000/api/certificates/copyCertificate`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -111,7 +111,7 @@ export function HideCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificates/hideCertificates`, {
+      .post(`http://localhost:5000/api/certificate/hideCertificates`, {
         _id: payload.cvID,
         hide: payload.hide,
       })

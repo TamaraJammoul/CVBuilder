@@ -214,9 +214,7 @@ exports.copyReference = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { References: references } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Reference Copied successfully",
-                                    data: {
-                                        newReference: newreference
-                                    }
+                                    data: newreference
                                 })
                             })
                         })

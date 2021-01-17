@@ -34,19 +34,21 @@ export function AddCoursesAction(payload) {
 }
 export function CopyCoursesAction(payload) {
   return (dispatch) => {
+    console.log(payload, "oo");
     axios
-      .post(`http://localhost:5000/api/courses/copyCourses`, {
+      .post(`http://localhost:5000/api/course/copyCourse`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200) {
+          console.log("tamara");
           dispatch({
             type: COPYCOURSES,
-            payload: res.data,
+            payload: res.data.data,
           });
-        else
+        } else
           dispatch({
             type: ERROR,
           });

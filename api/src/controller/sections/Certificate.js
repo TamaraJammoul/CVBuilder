@@ -218,9 +218,7 @@ exports.copyCertificate = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Certificates: certificates } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Certificate Copied successfully",
-                                    data: {
-                                        newCertificate: newcertificate
-                                    }
+                                    data: newcertificate
                                 })
                             })
                         })
