@@ -1,0 +1,593 @@
+@font-face {
+  font-family: "beIN Normal";
+  src: url("../../assets/fonts/beINNormal.eot");
+  src: url("../../assets/fonts/beINNormal.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/beINNormal.woff2") format("woff2"),
+    url("../../assets/fonts/beINNormal.woff") format("woff"),
+    url("../../assets/fonts/beINNormal.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "beIN";
+  src: url("../../assets/fonts/beINBlack.eot");
+  src: url("../../assets/fonts/beINBlack.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/beINBlack.woff2") format("woff2"),
+    url("../../assets/fonts/beINBlack.woff") format("woff"),
+    url("../../assets/fonts/beINBlack.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ara Assaf";
+  src: url("../../assets/fonts/AraAssaf-Regular.eot");
+  src: url("../../assets/fonts/AraAssaf-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/AraAssaf-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/AraAssaf-Regular.woff") format("woff"),
+    url("../../assets/fonts/AraAssaf-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GE SS TV";
+  src: url("../../assets/fonts/GESSTVBold-Bold.eot");
+  src: url("../../assets/fonts/GESSTVBold-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/GESSTVBold-Bold.woff2") format("woff2"),
+    url("../../assets/fonts/GESSTVBold-Bold.woff") format("woff"),
+    url("../../assets/fonts/GESSTVBold-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-color: #fefefe;
+  --name-color: #376363;
+  --photo-border-color: #356767;
+
+  --tag-color: #669696;
+  --tag-text-color: #fefcfc;
+
+  --title-color: #386464;
+
+  --info-p1-bg-color: #7d9d97;
+  --info-p2-bg-color: #7d929d;
+  --info-p3-bg-color: #518699;
+
+  --scale-rate: 0.3;
+  --p-scale-rate: 3 * var(--scale-rate);
+
+  --lang-bg-img: url(../../assets/imgs/template_03/10.png);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.template03-page {
+  display: flex;
+  justify-content: center;
+  background-color: #cfcfcf;
+  padding: calc(40px * var(--scale-rate));
+}
+.template03-body {
+  background-color: var(--bg-color);
+  width: calc(2480px * var(--scale-rate));
+  height: calc(3508px * var(--scale-rate));
+  padding: calc(198px * var(--scale-rate)) calc(170px * var(--scale-rate))
+    calc(164px * var(--scale-rate)) calc(170px * var(--scale-rate));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  direction: ltr;
+}
+.template03-body.ar {
+  direction: rtl;
+}
+/* CV Tag */
+.template03-body .cv-tag {
+  background-color: var(--tag-color);
+  border-bottom-left-radius: 3%;
+  border-bottom-right-radius: 3%;
+  font-family: "GE SS TV";
+  color: var(--tag-text-color);
+  position: absolute;
+  right: calc(160px * var(--scale-rate));
+  top: 0;
+  width: calc(312px * var(--scale-rate));
+  height: calc(402px * var(--scale-rate));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.template03-body .cv-tag.ar {
+  right: calc(2000px * var(--scale-rate));
+}
+
+/* Photo */
+.template03-body .photo {
+  border: calc(8px * var(--scale-rate)) solid var(--photo-border-color);
+  width: fit-content;
+  height: fit-content;
+  padding: calc(10px * var(--scale-rate));
+  position: absolute;
+  top: calc(230px * var(--scale-rate));
+  right: 0;
+  left: calc(130px * var(--scale-rate));
+  transform: rotate(45deg);
+}
+.template03-body .photo.ar {
+  left: 0;
+  right: calc(130px * var(--scale-rate));
+}
+.template03-body .photo img {
+  transform: rotate(-45deg);
+  width: calc(308px * var(--scale-rate));
+  height: calc(308px * var(--scale-rate));
+}
+
+/* Name Section */
+.template03-body .name-sec {
+  color: var(--name-color);
+  margin-bottom: calc(180px * var(--scale-rate));
+  font-size: calc(22px * var(--p-scale-rate));
+  line-height: calc(22px * var(--p-scale-rate));
+  font-family: "Ara Assaf";
+}
+
+/* Info Section */
+.template03-body .info-sec {
+  width: 100%;
+  margin-bottom: calc(150px * var(--scale-rate));
+  display: flex;
+  justify-content: space-around;
+}
+.template03-body .info-sec .info-details {
+  width: 45%;
+  font-family: "beIN Normal";
+  font-size: calc(14px * var(--p-scale-rate));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+.template03-body .info-sec .detail {
+  position: relative;
+}
+.template03-body .info-sec .detail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(204px * var(--scale-rate));
+  height: calc(128px * var(--scale-rate));
+}
+.template03-body .info-sec .detail img.ar {
+  right: 0;
+}
+.template03-body .info-sec .detail-img-1 {
+  transform: translate(-32%, -48%);
+}
+.template03-body .info-sec .detail-img-1.ar {
+  transform: translate(32%, -48%) scaleX(-1);
+}
+.template03-body .info-sec .detail-img-2 {
+  transform: translate(-44%, -48%);
+}
+.template03-body .info-sec .detail-img-2.ar {
+  transform: translate(44%, -48%) scaleX(-1);
+}
+.template03-body .info-sec .detail-img-3 {
+  transform: translate(-53%, -48%);
+}
+.template03-body .info-sec .detail-img-3.ar {
+  transform: translate(53%, -48%) scaleX(-1);
+}
+.template03-body .info-sec .detail-img-4 {
+  transform: translate(-62%, -48%);
+}
+.template03-body .info-sec .detail-img-4.ar {
+  transform: translate(62%, -48%) scaleX(-1);
+}
+
+.template03-body .info-sec .detail > div {
+  color: #fff;
+  margin-bottom: calc(26px * var(--scale-rate));
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+}
+
+.template03-body .info-sec .detail-p-1 {
+  background-color: var(--info-p1-bg-color);
+  width: calc(570px * var(--scale-rate));
+  height: calc(66px * var(--scale-rate));
+}
+.template03-body .info-sec .detail-p-2 {
+  background-color: var(--info-p2-bg-color);
+  width: calc(640px * var(--scale-rate));
+  height: calc(66px * var(--scale-rate));
+}
+.template03-body .info-sec .detail-p-3 {
+  background-color: var(--info-p3-bg-color);
+  width: calc(720px * var(--scale-rate));
+  height: calc(66px * var(--scale-rate));
+}
+.template03-body .info-sec .detail-p-4 {
+  background-color: var(--info-p1-bg-color);
+  width: calc(800px * var(--scale-rate));
+  height: calc(66px * var(--scale-rate));
+}
+/* ************ */
+.template03-body .info-sec .info-desc {
+  width: 45%;
+}
+.template03-body .info-sec .info-desc-title {
+  color: var(--name-color);
+  font-family: "beIN";
+  font-size: calc(22px * var(--p-scale-rate));
+  line-height: 1.2;
+}
+.template03-body .info-sec .info-desc-text {
+  font-family: "beIN Normal";
+  font-size: calc(14px * var(--p-scale-rate));
+  line-height: 2.2;
+}
+/* ************ */
+
+/* Main Section */
+/* Left - Right */
+.template03-body .main-sec {
+  width: 100%;
+  height: calc(2200px * var(--scale-rate));
+  display: grid;
+  grid-template-columns: repeat(2, calc(1042px * var(--scale-rate)));
+  column-gap: calc(90px * var(--scale-rate));
+  grid-template-areas: "left right";
+}
+
+/* General Styles for several sections */
+.template03-body .sec {
+  display: grid;
+  grid-template-columns: calc(300px * var(--scale-rate)) calc(
+      730px * var(--scale-rate)
+    );
+  grid-template-areas: "sec-logo sec-content";
+  margin-bottom: calc(150px * var(--scale-rate));
+}
+.template03-body .sec img {
+  grid-area: sec-logo;
+  transform: translateY(calc(-56px * var(--scale-rate)));
+}
+.template03-body .sec .sec-content {
+  grid-area: sec-content;
+  border-top: calc(5px * var(--scale-rate)) solid #000;
+  border-left: none;
+  border-right: calc(5px * var(--scale-rate)) solid #000;
+  border-bottom: calc(5px * var(--scale-rate)) solid #000;
+  border-top-left-radius: 0;
+  border-top-right-radius: calc(16px * var(--scale-rate));
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: calc(16px * var(--scale-rate));
+  position: relative;
+  padding: calc(70px * var(--scale-rate)) 0 calc(20px * var(--scale-rate));
+  font-family: "beIN Normal";
+}
+.template03-body .sec .sec-content.ar {
+  border-right: none;
+  border-left: calc(5px * var(--scale-rate)) solid #000;
+  border-top-right-radius: 0;
+  border-top-left-radius: calc(16px * var(--scale-rate));
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: calc(16px * var(--scale-rate));
+}
+.template03-body .sec .sec-title {
+  position: absolute;
+  top: calc(-50px * var(--scale-rate));
+  left: 0;
+  width: calc(400px * var(--scale-rate));
+  background-color: var(--bg-color);
+  font-family: "beIN";
+  line-height: 1.6;
+  font-size: calc(22px * var(--p-scale-rate));
+  color: var(--title-color);
+}
+.template03-body .sec .sec-title.ar {
+  right: 0;
+}
+.template03-body .sec .circle {
+  background-color: var(--title-color);
+  border-radius: 50%;
+  width: calc(28px * var(--scale-rate));
+  height: calc(28px * var(--scale-rate));
+}
+
+/* Left */
+.template03-body .main-sec .left {
+  grid-area: left;
+}
+
+/* Education Section */
+.template03-body .edu-sec img {
+  width: calc(252px * var(--scale-rate));
+  height: calc(172px * var(--scale-rate));
+}
+.template03-body .edu {
+  position: relative;
+  margin-bottom: calc(30px * var(--scale-rate));
+}
+.template03-body .edu .circle {
+  position: absolute;
+  top: calc(30px * var(--scale-rate));
+  right: 0;
+  left: calc(-50px * var(--scale-rate));
+}
+.template03-body .edu .circle.ar {
+  left: 0;
+  right: calc(-50px * var(--scale-rate));
+}
+.template03-body .edu .edu-title {
+  color: var(--title-color);
+  font-weight: bold;
+  font-size: calc(14px * var(--p-scale-rate));
+}
+.template03-body .edu .edu-text p {
+  line-height: 2;
+  font-size: calc(14px * var(--p-scale-rate));
+}
+
+/* Work Section */
+.template03-body .work-sec img {
+  width: calc(174px * var(--scale-rate));
+  height: calc(174px * var(--scale-rate));
+}
+.template03-body .work-sec .sec-title {
+  width: calc(555px * var(--scale-rate));
+}
+.template03-body .work {
+  position: relative;
+  margin-bottom: calc(30px * var(--scale-rate));
+}
+.template03-body .work .circle {
+  position: absolute;
+  top: calc(30px * var(--scale-rate));
+  right: 0;
+  left: calc(-50px * var(--scale-rate));
+}
+.template03-body .work .circle.ar {
+  left: 0;
+  right: calc(-50px * var(--scale-rate));
+}
+.template03-body .work .work-title,
+.template03-body .work .work-text {
+  line-height: 2;
+  font-size: calc(14px * var(--p-scale-rate));
+}
+
+/* Courses Section */
+.template03-body .courses-sec .sec-content {
+  margin-bottom: 0;
+  padding-top: calc(75px * var(--scale-rate));
+}
+.template03-body .courses-sec img {
+  width: calc(340px * var(--scale-rate));
+  height: calc(500px * var(--scale-rate));
+  transform: translate(
+    calc(-100px * var(--scale-rate)),
+    calc(-104px * var(--scale-rate))
+  );
+}
+.template03-body .courses-sec img.ar {
+  transform: translate(
+    calc(100px * var(--scale-rate)),
+    calc(-104px * var(--scale-rate))
+  );
+}
+.template03-body .courses-sec .sec-title {
+  width: calc(540px * var(--scale-rate));
+}
+.template03-body .course {
+  display: grid;
+  grid-template-columns: calc(60px * var(--scale-rate)) 1fr;
+  grid-template-areas: "circle course-name";
+  margin-bottom: calc(20px * var(--scale-rate));
+  transform: translateX(calc(-50px * var(--scale-rate)));
+}
+.template03-body .course.ar {
+  transform: translateX(calc(50px * var(--scale-rate)));
+}
+.template03-body .course .circle-container {
+  grid-area: circle;
+  display: flex;
+  align-items: center;
+}
+.template03-body .course .circle-container {
+  transform: translateY(calc(-6px * var(--scale-rate)));
+}
+.template03-body .course .course-text {
+  grid-area: course-name;
+  line-height: 3;
+  display: flex;
+  align-items: center;
+  font-size: calc(14px * var(--p-scale-rate));
+  line-height: 1.5;
+}
+
+/* Right  */
+.template03-body .main-sec .right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.template03-body .main-sec .right .sec {
+  grid-template-columns: calc(260px * var(--scale-rate)) calc(
+      704px * var(--scale-rate)
+    );
+}
+
+/* Personal Skills Section */
+.template03-body .personal-skills-sec img {
+  width: calc(176px * var(--scale-rate));
+  height: calc(190px * var(--scale-rate));
+}
+.template03-body .personal-skills-sec .sec-title {
+  width: calc(500px * var(--scale-rate));
+}
+.template03-body .p-skill {
+  display: grid;
+  grid-template-columns: calc(60px * var(--scale-rate)) 1fr;
+  grid-template-areas: "circle course-name";
+  margin-bottom: calc(20px * var(--scale-rate));
+  transform: translateX(calc(-50px * var(--scale-rate)));
+  font-size: calc(14px * var(--p-scale-rate));
+}
+.template03-body .p-skill.ar {
+  transform: translateX(calc(50px * var(--scale-rate)));
+}
+.template03-body .p-skill .circle-container {
+  grid-area: circle;
+  display: flex;
+  align-items: center;
+}
+.template03-body .p-skill .p-skill-text p {
+  line-height: 2;
+}
+
+/* Technical Skills Section */
+.template03-body .tech-skills-sec img {
+  width: calc(174px * var(--scale-rate));
+  height: calc(174px * var(--scale-rate));
+}
+.template03-body .tech-skills-sec .sec-content {
+  padding-bottom: calc(40px * var(--scale-rate));
+}
+.template03-body .tech-skills-sec .sec-title {
+  width: calc(500px * var(--scale-rate));
+}
+.template03-body .t-skill {
+  display: grid;
+  grid-template-columns: calc(386px * var(--scale-rate)) calc(
+      100px * var(--scale-rate)
+    );
+  grid-template-rows: calc(100px * var(--scale-rate)) calc(
+      20px * var(--scale-rate)
+    );
+  grid-template-areas:
+    "name value"
+    "bar bar";
+
+  font-size: calc(14px * var(--p-scale-rate));
+}
+.template03-body .t-skill .t-skill-name {
+  grid-area: name;
+  display: flex;
+  align-items: center;
+}
+.template03-body .t-skill .t-skill-value {
+  grid-area: value;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template03-body .t-skill .t-skill-bar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+}
+.bar-container {
+  background-color: #c3c3c3;
+  width: 100%;
+  height: 100%;
+}
+.bar {
+  background-color: var(--title-color);
+  height: 100%;
+}
+
+/* Languages Section */
+.template03-body .languages-sec {
+  font-family: "beIN Normal";
+  margin: calc(20px * var(--scale-rate));
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+.template03-body .languages-sec .languages-title {
+  text-align: center;
+  color: var(--title-color);
+  font-size: calc(18px * var(--p-scale-rate));
+  font-weight: bold;
+  margin-bottom: calc(100px * var(--scale-rate));
+}
+.template03-body .languages-sec .langs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.template03-body .languages-sec .lang {
+  background-image: var(--lang-bg-img);
+  background-size: cover;
+  width: calc(332px * var(--scale-rate));
+  height: calc(330px * var(--scale-rate));
+  margin: 0 calc(30px * var(--scale-rate));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.template03-body .lang p {
+  color: #fff;
+  font-size: calc(14px * var(--p-scale-rate));
+  position: absolute;
+  width: calc(200px * var(--scale-rate));
+  bottom: 23%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  text-align: center;
+}
+.template03-body .lang p.ar {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.template03-body .lang p.lang-rate {
+  color: #000;
+  font-size: calc(14px * var(--p-scale-rate));
+  top: calc(-70px * var(--scale-rate));
+  text-align: center;
+  width: calc(100px * var(--scale-rate));
+}
+
+.template03-body .lang .lang-circle-wrapper {
+  width: 86%;
+  height: 86%;
+  border-radius: 50%;
+  border: calc(4px * var(--scale-rate)) solid var(--green);
+  overflow: hidden;
+  transform: rotate(90deg);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.template03-body .lang .lang-circle-wrapper.ar {
+  transform: rotate(-90deg);
+}
+.template03-body .lang [class^="full-lang-"] {
+  background-color: var(--tag-color);
+  height: 100%;
+}

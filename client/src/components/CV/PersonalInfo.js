@@ -152,6 +152,7 @@ export default function PersonalInfo() {
               label={t("Date Of Birth")}
               variant="filled"
               color="primary"
+              type="date"
               onChange={(e) => setBirth(e.target.value)}
             />
           </Grid>

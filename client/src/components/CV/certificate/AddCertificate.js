@@ -4,12 +4,13 @@ import {AddCertificateAction} from "./../../../store/action/certificate";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
+import {DatePicker} from "@material-ui/pickers";
 
 export default function AddCertificate(props) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState(0);
+  const [date, setDate] = useState(new Date());
   const cvID = useSelector((state) => state.cvID);
   const data = {name, description, date, cvID, order: "1"};
   const {t, i18n} = useTranslation();
@@ -19,6 +20,7 @@ export default function AddCertificate(props) {
     setName("");
     setDate(0);
     setDescription("");
+    console.log(data, "kj");
     history.push("/buildcv/certificates");
   };
   return (
