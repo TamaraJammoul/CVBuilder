@@ -12,16 +12,16 @@ exports.addEducation = (req, res) => {
             }
             if (cv) {
                 const {
-                    UniversityName, Faculty, YearStart,
-                    YearEnd, DegreeFrom5, Grade, Order
+                    UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart,
+                    YearEnd, DegreeFrom5, Grade, GradeAr, Order
                 } = req.body;
 
                 const DegreeFrom10 = DegreeFrom5 * 2;
                 const DegreeFrom100 = DegreeFrom5 * 20;
 
                 let education = new Education({
-                    UniversityName, Faculty, YearStart,
-                    YearEnd, Grade, DegreeFrom5, DegreeFrom10,
+                    UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart,
+                    YearEnd, Grade, GradeAr, DegreeFrom5, DegreeFrom10,
                     DegreeFrom100, Order
                 });
                 education.save()
@@ -80,7 +80,7 @@ exports.deleteEducation = (req, res) => {
 }
 
 exports.updateEducation = (req, res) => {
-    const { _id, UniversityName, Faculty, YearStart, YearEnd, Grade, DegreeFrom5, Order } = req.body;
+    const { _id, UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart, YearEnd, Grade, GradeAr, DegreeFrom5, Order } = req.body;
     Education.findById(_id).exec((error, education) => {
         if (error) {
             return res.status(400).json({
@@ -94,10 +94,13 @@ exports.updateEducation = (req, res) => {
             Education.updateOne({ _id: _id }, {
                 $set: {
                     UniversityName,
+                    UniversityNameAr,
                     Faculty,
+                    FacultyAr,
                     YearStart,
                     YearEnd,
                     Grade,
+                    GradeAr,
                     DegreeFrom5,
                     DegreeFrom10,
                     DegreeFrom100,
@@ -110,10 +113,13 @@ exports.updateEducation = (req, res) => {
                         data: {
                             _id,
                             UniversityName,
+                            UniversityNameAr,
                             Faculty,
+                            FacultyAr,
                             YearStart,
                             YearEnd,
                             Grade,
+                            GradeAr,
                             DegreeFrom5,
                             DegreeFrom10,
                             DegreeFrom100,
@@ -231,13 +237,16 @@ exports.copyEducation = (req, res) => {
                     if (education) {
                         const newEducation = new Education({
                             UniversityName: education.UniversityName,
+                            UniversityNameAr: education.UniversityNameAr,
                             Faculty: education.Faculty,
+                            FacultyAr: education.FacultyAr,
                             YearStart: education.YearStart,
                             YearEnd: education.YearEnd,
                             DegreeFrom5: education.DegreeFrom5,
                             DegreeFrom10: education.DegreeFrom10,
                             DegreeFrom100: education.DegreeFrom100,
                             Grade: education.Grade,
+                            GradeAr: education.GradeAr,
                             Order: education.Order
                         })
                         educations.push(newEducation);

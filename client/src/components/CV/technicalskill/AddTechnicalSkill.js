@@ -15,16 +15,19 @@ import {useHistory} from "react-router-dom";
 
 export default function AddTechnicalSkill(props) {
   const [skill, setSkill] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
 
-  const data = {rate, skill, cvID, order: "1"};
+  const data = {rate, skill, cvID, nameAr, order: "1"};
   const handelCancel = () => {
     setSkill("");
     setRate(2);
+    setNameAr("");
     history.push("/buildcv/technicalskill");
   };
   return (
@@ -48,6 +51,16 @@ export default function AddTechnicalSkill(props) {
               placeholder="eg.Microsoft Word"
               style={{width: "100%"}}
               onChange={(e) => setSkill(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="filled-basic"
+              label={t("Skill")}
+              variant="filled"
+              placeholder="eg.Microsoft Word"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

@@ -12,11 +12,17 @@ import {useTranslation} from "react-i18next";
 import ReactHtmlParser from "react-html-parser";
 export default function CareerObjectives() {
   const [text, setText] = useState("");
+  const [textAr, setTextAr] = useState("");
+
   const [hide, setHide] = useState(0);
 
   const handleEditorChange = (content, editor) => {
     console.log("Content was updated:", content);
     setText(content);
+  };
+  const handleEditorChangeAr = (content, editor) => {
+    console.log("Content was updated:", content);
+    setTextAr(content);
   };
   const dispatch = useDispatch();
   const careerobjective = useSelector(
@@ -85,6 +91,25 @@ export default function CareerObjectives() {
               onEditorChange={handleEditorChange}
             />
           </Grid>
+          <Grid item xs={12} style={{width: "100%"}}>
+            {" "}
+            <Editor
+              initialValue="<p></p>"
+              init={{
+                height: 200,
+                directionality: i18n.language == "en" ? "ltr" : "rtl",
+                plugins:
+                  " autolink listsanchorfullscreen insertdatetime  paste  help ",
+                toolbar:
+                  "pageembed permanentpen  undo redo |bold italic | \
+             alignleft aligncenter alignright alignjustify | \
+             bullist numlist outdent indent | removeformat | help",
+                toolbar_mode: "floating",
+                tinycomments_mode: "embedded",
+              }}
+              onEditorChange={handleEditorChangeAr}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Grid container alignItems="center" direction="row" spacing={3}>
               <Grid item xs={1}>
@@ -94,7 +119,11 @@ export default function CareerObjectives() {
                   style={{float: "right"}}
                   onClick={() =>
                     dispatch(
-                      EditCareerObjectiveAction({text, careerObjectives_id})
+                      EditCareerObjectiveAction({
+                        text,
+                        textAr,
+                        careerObjectives_id,
+                      })
                     )
                   }
                 >

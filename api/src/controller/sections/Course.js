@@ -12,10 +12,10 @@ exports.addCourse = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Description, Year, Order
+                    Name, NameAr, Description, DescriptionAr, Year, Order
                 } = req.body;
                 let course = new Course({
-                    Name, Description, Year, Order
+                    Name, NameAr, Description, DescriptionAr, Year, Order
                 });
                 course.save()
                     .then((mem) => {
@@ -73,7 +73,7 @@ exports.deleteCourse = (req, res) => {
 }
 
 exports.updateCourse = (req, res) => {
-    const { _id, Name, Description, Year, Order } = req.body;
+    const { _id, Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
     Course.findById(_id).exec((error, course) => {
         if (error) {
             return res.status(400).json({
@@ -85,7 +85,9 @@ exports.updateCourse = (req, res) => {
             Course.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Description,
+                    DescriptionAr,
                     Year,
                     Order
                 }
@@ -96,7 +98,9 @@ exports.updateCourse = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Description,
+                            DescriptionAr,
                             Year,
                             Order
                         }
@@ -211,7 +215,7 @@ exports.copyCourse = (req, res) => {
                     }
                     if (course) {
                         const newCourse = new Course({
-                            Name: course.Name, Description: course.Description, Year: course.Year, Order: course.Order
+                            Name: course.Name, NameAr: course.NameAr, Description: course.Description, DescriptionAr: course.DescriptionAr, Year: course.Year, Order: course.Order
                         })
                         courses.push(newCourse);
                         newCourse.save().then((newcourse) => {

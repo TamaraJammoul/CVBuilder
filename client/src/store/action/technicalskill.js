@@ -17,6 +17,7 @@ export function AddTechnicalSkillsAction(payload) {
         Order: payload.order,
         _id: payload.cvID,
         RateFrom5: payload.rate,
+        NameAr: payload.nameAr,
       })
       .then((res) => {
         console.log(res.data);
@@ -82,6 +83,7 @@ export function EditTechnicalSkillAction(payload) {
         _id: payload.id,
         RateFrom5: payload.rate,
         cvID: payload.cvID,
+        NameAr: payload.nameAr,
       })
       .then((res) => {
         console.log(res.data);

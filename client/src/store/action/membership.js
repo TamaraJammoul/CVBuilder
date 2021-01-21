@@ -15,6 +15,7 @@ export function AddMembershipAction(payload) {
         Name: payload.membershipName,
         Order: payload.order,
         _id: payload.cvID,
+        NameAr: payload.nameAr,
       })
       .then((res) => {
         console.log(res.data);
@@ -81,6 +82,7 @@ export function EditMembershipAction(payload) {
         Name: payload.membershipName,
         Order: payload.order,
         _id: payload.id,
+        NameAr: payload.nameAr,
       })
       .then((res) => {
         console.log(res.data);

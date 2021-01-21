@@ -7,6 +7,8 @@ import {useHistory, useLocation} from "react-router-dom";
 
 export default function AddOtherTraining(props) {
   const [otherTraining, setOtherTraining] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -14,10 +16,11 @@ export default function AddOtherTraining(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("othertrainingID");
-  const data = {id, otherTraining, order: "1"};
+  const data = {id, otherTraining, nameAr, order: "1"};
 
   const handelCancel = () => {
     setOtherTraining("");
+    setNameAr("");
     history.push("/buildcv/othertraining");
   };
   return (
@@ -42,6 +45,17 @@ export default function AddOtherTraining(props) {
               color="primary"
               style={{width: "100%"}}
               onChange={(e) => setOtherTraining(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("OtherTraining")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

@@ -8,6 +8,12 @@ const PersonalInformationSchema = new mongoose.Schema({
     LastName: {
         type: String
     },
+    FirstNameAr: {
+        type: String
+    },
+    LastNameAr: {
+        type: String
+    },
     Phone: {
         type: String,
         default: "Phone Number"
@@ -31,11 +37,26 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String,
         default: "Married"
     },
+    CityAr: {
+        type: String,
+        default: "City"
+    },
+    CountryAr: {
+        type: String
+    },
+    MaritalStatusAr: {
+        type: String,
+        default: "Married"
+    },
     Birth: {
         type: Date,
         default: "2000-1-1"
     },
     Nationality: {
+        type: String,
+        default: "Nationality"
+    },
+    NationalityAr: {
         type: String,
         default: "Nationality"
     },

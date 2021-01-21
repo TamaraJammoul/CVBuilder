@@ -12,14 +12,14 @@ exports.addLanguage = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Rate, Order
+                    Name, NameAr, Rate, Order
                 } = req.body;
 
                 const RateFrom10 = Rate * 2;
                 const RateFrom100 = Rate * 20;
 
                 let language = new Language({
-                    Name, Rate, RateFrom10, RateFrom100, Order
+                    Name, NameAr, Rate, RateFrom10, RateFrom100, Order
                 });
                 language.save()
                     .then((lan) => {
@@ -77,7 +77,7 @@ exports.deleteLanguage = (req, res) => {
 }
 
 exports.updateLanguage = (req, res) => {
-    const { _id, Name, Rate, Order } = req.body;
+    const { _id, Name, NameAr, Rate, Order } = req.body;
     Language.findById(_id).exec((error, language) => {
         if (error) {
             return res.status(400).json({
@@ -91,6 +91,7 @@ exports.updateLanguage = (req, res) => {
             Language.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Rate,
                     RateFrom10,
                     RateFrom100,
@@ -103,6 +104,7 @@ exports.updateLanguage = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Rate,
                             RateFrom10,
                             RateFrom100,
@@ -220,6 +222,7 @@ exports.copyLanguage = (req, res) => {
                     if (language) {
                         const newLanguage = new Language({
                             Name: language.Name,
+                            NameAr: language.NameAr,
                             Rate: language.Rate,
                             RateFrom10: language.RateFrom10,
                             RateFrom100: language.RateFrom100,

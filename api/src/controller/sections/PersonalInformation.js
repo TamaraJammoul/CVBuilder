@@ -2,7 +2,7 @@ const CV = require('../../models/CV');
 const PersonalInformation = require('../../models/sections/PersonalInformation');
 
 exports.updatePersonalInformation = (req, res) => {
-    const { _id, FirstName, LastName, Phone, Email, LinkedIn, City, Country, MaritalStatus, Birth, Nationality, Image } = req.body;
+    const { _id, FirstName, FirstNameAr, LastName, LastNameAr, Phone, Email, LinkedIn, City, CityAr, Country, CountryAr, MaritalStatus, MaritalStatusAr, Birth, Nationality, NationalityAr, Image } = req.body;
     PersonalInformation.findById(_id).exec((error, personalInformation) => {
         if (error) {
             return res.status(400).json({
@@ -14,15 +14,21 @@ exports.updatePersonalInformation = (req, res) => {
             PersonalInformation.updateOne({ _id: _id }, {
                 $set: {
                     FirstName,
+                    FirstNameAr,
                     LastName,
+                    LastNameAr,
                     Phone,
                     Email,
                     LinkedIn,
                     City,
+                    CityAr,
                     Country,
+                    CountryAr,
                     MaritalStatus,
+                    MaritalStatusAr,
                     Birth,
                     Nationality,
+                    NationalityAr,
                     Image
                 }
             }).then(() => {
@@ -32,15 +38,21 @@ exports.updatePersonalInformation = (req, res) => {
                         data: {
                             _id,
                             FirstName,
+                            FirstNameAr,
                             LastName,
+                            LastNameAr,
                             Phone,
                             Email,
                             LinkedIn,
                             City,
+                            CityAr,
                             Country,
+                            CountryAr,
                             MaritalStatus,
+                            MaritalStatusAr,
                             Birth,
                             Nationality,
+                            NationalityAr,
                             Image
                         }
                     })

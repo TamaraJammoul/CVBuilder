@@ -13,6 +13,7 @@ export function AddReferenceAction(payload) {
     await axios
       .post(`http://localhost:5000/api/reference/addReference`, {
         Name: payload.name,
+        NameAr: payload.nameAr,
         Number: payload.phone,
         Order: payload.order,
         _id: payload.cvID,
@@ -84,6 +85,7 @@ export function EditReferenceAction(payload) {
         Order: payload.order,
         _id: payload.id,
         Number: payload.phone,
+        NameAr: payload.nameAr,
       })
       .then((res) => {
         console.log(res.data);

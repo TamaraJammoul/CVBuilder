@@ -15,6 +15,8 @@ import {useHistory, useLocation} from "react-router-dom";
 
 export default function EditTechnicalSkill(props) {
   const [skill, setSkill] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
@@ -23,11 +25,12 @@ export default function EditTechnicalSkill(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("technicalskillID");
-  const data = {rate, skill, order: "1", id, cvID};
+  const data = {rate, skill, nameAr, order: "1", id, cvID};
 
   const handelCancel = () => {
     setSkill("");
     setRate(2);
+    setNameAr("");
     history.push("/buildcv/tchnicalskill");
   };
   return (
@@ -51,6 +54,16 @@ export default function EditTechnicalSkill(props) {
               placeholder={t("eg.Microsoft Word")}
               style={{width: "100%"}}
               onChange={(e) => setSkill(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="filled-basic"
+              label={t("Skill")}
+              variant="filled"
+              placeholder="eg.Microsoft Word"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

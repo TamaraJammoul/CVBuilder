@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Number, ObjectId } = mongoose.Schema.Types;
 
 const hiddenSchema = new mongoose.Schema({
+    HideAchievements: { type: Boolean, default: false },
     HideCareerObjectives: { type: Boolean, default: false },
     HideCertificates: { type: Boolean, default: false },
     HideEducations: { type: Boolean, default: false },
@@ -17,6 +18,8 @@ const hiddenSchema = new mongoose.Schema({
 })
 
 const CVSchema = new mongoose.Schema({
+    Email: String,
+    Achievements: [{ type: ObjectId, ref: "Achievement" }],
     CareerObjectives: { type: ObjectId, ref: "CareerObjectives" },
     Certificates: [{ type: ObjectId, ref: "Certificate" }],
     Educations: [{ type: ObjectId, ref: "Education" }],
@@ -30,8 +33,11 @@ const CVSchema = new mongoose.Schema({
     Skill: [{ type: ObjectId, ref: "Skill" }],
     Courses: [{ type: ObjectId, ref: "Course" }],
     Name: String,
+    NameAr: String,
     Template: String,
+    TemplateAr: String,
     Language: String,
+    LanguageAr: String,
     CreatedDate: Date,
     EditedDate: Date,
     Order: { type: Number },

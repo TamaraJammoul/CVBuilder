@@ -7,6 +7,8 @@ import {useHistory} from "react-router-dom";
 
 export default function Reference(props) {
   const [reference, setReference] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
@@ -14,6 +16,7 @@ export default function Reference(props) {
   const handelCancel = () => {
     setReference("");
     setPhone("");
+    setNameAr("");
     history.push("/buildcv/reference");
   };
   const {t, i18n} = useTranslation();
@@ -47,6 +50,17 @@ export default function Reference(props) {
             {" "}
             <TextField
               id="filled-primary"
+              label={t("AddReference")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
               label={t("Phone")}
               variant="filled"
               color="primary"
@@ -70,7 +84,13 @@ export default function Reference(props) {
               onClick={() => {
                 {
                   dispatch(
-                    AddReferenceAction({reference, phone, cvID, order: "1"})
+                    AddReferenceAction({
+                      reference,
+                      phone,
+                      nameAr,
+                      cvID,
+                      order: "1",
+                    })
                   );
                   history.push("/buildcv/reference");
                 }

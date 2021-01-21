@@ -9,11 +9,14 @@ export default function AddMembership(props) {
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
   const [membershipName, setMembershipName] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   let history = useHistory();
   const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setMembershipName("");
+    setNameAr("");
     history.push("/buildcv/membership");
   };
   return (
@@ -41,6 +44,17 @@ export default function AddMembership(props) {
             />
           </Grid>
           <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("AddMembership")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Button
               variant="outlined"
               className="cancel"
@@ -55,7 +69,12 @@ export default function AddMembership(props) {
               style={{float: "right"}}
               onClick={() => {
                 dispatch(
-                  AddMembershipAction({membershipName, cvID, order: "1"})
+                  AddMembershipAction({
+                    membershipName,
+                    nameAr,
+                    cvID,
+                    order: "1",
+                  })
                 );
                 history.push("/buildcv/membership");
               }}

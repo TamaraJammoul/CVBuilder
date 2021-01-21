@@ -12,10 +12,10 @@ exports.addMembership = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Order
+                    Name, NameAr, Order
                 } = req.body;
                 let membership = new Memberships({
-                    Name, Order
+                    Name, NameAr, Order
                 });
                 membership.save()
                     .then((mem) => {
@@ -73,7 +73,7 @@ exports.deleteMembership = (req, res) => {
 }
 
 exports.updateMembership = (req, res) => {
-    const { _id, Name, Order } = req.body;
+    const { _id, Name, NameAr, Order } = req.body;
     Memberships.findById(_id).exec((error, membership) => {
         if (error) {
             return res.status(400).json({
@@ -85,6 +85,7 @@ exports.updateMembership = (req, res) => {
             Memberships.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Order
                 }
             }).then(() => {
@@ -94,6 +95,7 @@ exports.updateMembership = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Order
                         }
                     })
@@ -208,6 +210,7 @@ exports.copyMembership = (req, res) => {
                     if (membership) {
                         const newMembership = new Memberships({
                             Name: membership.Name,
+                            NameAr: membership.NameAr,
                             Order: membership.Order
                         })
                         memberships.push(newMembership);

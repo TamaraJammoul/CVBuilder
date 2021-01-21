@@ -10,6 +10,10 @@ import {
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {useTranslation} from "react-i18next";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 import defaultimg from "./../../img/stylingcv-default.jpg";
 import {PeraonalInfoAction} from "./../../store/action/action";
@@ -27,7 +31,7 @@ export default function PersonalInfo() {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [nationality, setNationality] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState(1);
   const [phone, setPhone] = useState("");
 
   const send = () => {
@@ -42,7 +46,7 @@ export default function PersonalInfo() {
     formData.append("Country", country);
     formData.append("Nationality", nationality);
     formData.append("MaritalStatus", maritalStatus);
-    console.log(formData, "kjklj");
+    console.log(maritalStatus, "kjklj");
 
     dispatch(PeraonalInfoAction({data: formData}));
   };
@@ -184,13 +188,20 @@ export default function PersonalInfo() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              id="filled-primary"
-              label={t("Marital Status")}
-              variant="filled"
-              color="primary"
-              onChange={(e) => setMaritalStatus(e.target.value)}
-            />
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">
+                {t("Marital Status")}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={maritalStatus}
+                onChange={(e) => setMaritalStatus(e.target.value)}
+              >
+                <MenuItem value={1}>{t("Married")}</MenuItem>
+                <MenuItem value={2}>{t("Single")}</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}></Grid>
           <Grid item xs={12}>

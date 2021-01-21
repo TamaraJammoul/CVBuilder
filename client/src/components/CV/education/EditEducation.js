@@ -5,6 +5,11 @@ import {useSelector, useDispatch} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
 export default function AddEducation(props) {
   const dispatch = useDispatch();
   let history = useHistory();
@@ -14,7 +19,7 @@ export default function AddEducation(props) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [rate5, setRate5] = useState(0);
-  const [grade, setGrade] = useState("");
+  const [grade, setGrade] = useState(1);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
 
@@ -113,24 +118,42 @@ export default function AddEducation(props) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              id="filled-basic"
-              label={t("Ratefrom5")}
-              variant="filled"
-              style={{width: "100%"}}
-              onChange={(e) => setRate5(e.target.value)}
-            />
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">
+                {t("Ratefrom5")}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={rate5}
+                onChange={(e) => setRate5(e.target.value)}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={2}>3</MenuItem>
+                <MenuItem value={2}>4</MenuItem>
+                <MenuItem value={2}>5</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="filled-basic"
-              label={t("grade")}
-              variant="filled"
-              style={{width: "100%"}}
-              onChange={(e) => setGrade(e.target.value)}
-            />
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">
+                {t("grade")}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+              >
+                <MenuItem value={1}>good</MenuItem>
+                <MenuItem value={2}>very good</MenuItem>
+                <MenuItem value={3}>excellent</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             <Button

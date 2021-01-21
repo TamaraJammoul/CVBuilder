@@ -14,19 +14,21 @@ import {useTranslation} from "react-i18next";
 import {useHistory, useLocation} from "react-router-dom";
 export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
+  const [nameAr, setNameAr] = useState("");
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("language_id");
-  const data = {language, rate, id, order: "1"};
+  const data = {language, rate, id, nameAr, order: "1"};
   let history = useHistory();
   const {t, i18n} = useTranslation();
 
   const handelCancel = () => {
     setLanguage("");
     setRate(2);
+    setNameAr("");
     history.push("/buildcv/languages");
   };
   return (
@@ -50,6 +52,16 @@ export default function AddLanguage(props) {
               placeholder={t("eg.English")}
               style={{width: "100%"}}
               onChange={(e) => setLanguage(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="filled-basic"
+              label={t("Language")}
+              variant="filled"
+              placeholder="مثال:اللغة الانكليزية"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

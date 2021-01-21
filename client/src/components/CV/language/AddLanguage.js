@@ -15,16 +15,19 @@ import {useHistory} from "react-router-dom";
 
 export default function AddLanguage(props) {
   const [language, setLanguage] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
-  const data = {language, rate, order: 1, cvID};
+  const data = {language, rate, nameAr, order: 1, cvID};
   const {t, i18n} = useTranslation();
   let history = useHistory();
 
   const handelCancel = () => {
     setLanguage("");
     setRate(2);
+    setNameAr("");
     history.push("/buildcv/languages");
   };
   return (
@@ -48,6 +51,16 @@ export default function AddLanguage(props) {
               placeholder="eg.English"
               style={{width: "100%"}}
               onChange={(e) => setLanguage(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="filled-basic"
+              label={t("Language")}
+              variant="filled"
+              placeholder="مثال:اللغة الانكليزية"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

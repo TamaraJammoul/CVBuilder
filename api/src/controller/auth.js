@@ -13,12 +13,12 @@ exports.signUp = (req, res) => {
                 msg: "User already registered"
             })
         }
-        const { FirstName, LastName, Email, Password } = req.body;
+        const { FirstName, LastName, FirstNameAr, LastNameAr, Email, Password } = req.body;
 
         let Hash_Password = bcrypt.hashSync(Password, 10);
 
         const _user = new User({
-            FirstName, LastName, Email, Password: Hash_Password
+            FirstName, LastName, FirstNameAr, LastNameAr, Email, Password: Hash_Password
         })
 
         _user.save((error, data) => {
@@ -61,11 +61,11 @@ exports.logIn = (req, res) => {
                         process.env.JWT_SECRET,
                         { expiresIn: "1h" }
                     );
-                    const { _id, FirstName, LastName, Email } = user;
+                    const { _id, FirstName, LastName, FirstNameAr, LastNameAr, Email } = user;
                     res.status(200).json({
                         token: token,
                         user: {
-                            _id, FirstName, LastName, Email
+                            _id, FirstName, LastName, FirstNameAr, LastNameAr, Email
                         }
                     });
                 }
@@ -101,8 +101,8 @@ exports.logInAdmin = (req, res) => {
                         process.env.JWT_SECRET,
                         { expiresIn: '1h' })
                     return res.status(200).json({
-                        	success : 1,
-		token
+                        success: 1,
+                        token
                     })
                 }
                 else {

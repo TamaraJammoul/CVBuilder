@@ -2,7 +2,7 @@ const CV = require('../../models/CV');
 const CareerObjectives = require('../../models/sections/CareerObjectives');
 
 exports.updateCareer = (req, res) => {
-    const { _id, Text } = req.body;
+    const { _id, Text, TextAr } = req.body;
     CareerObjectives.findById(_id).exec((error, careerObjectives) => {
         if (error) {
             return res.status(400).json({
@@ -14,6 +14,7 @@ exports.updateCareer = (req, res) => {
             CareerObjectives.updateOne({ _id: _id }, {
                 $set: {
                     Text,
+                    TextAr
                 }
             }).then(() => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
@@ -22,6 +23,7 @@ exports.updateCareer = (req, res) => {
                         data: {
                             _id,
                             Text,
+                            TextAr
                         }
                     })
                 })

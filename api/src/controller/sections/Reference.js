@@ -11,8 +11,8 @@ exports.addReference = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, Number, Order } = req.body;
-                let reference = new Reference({ Name, Number, Order });
+                const { Name, NameAr, Number, Order } = req.body;
+                let reference = new Reference({ Name, NameAr, Number, Order });
                 reference.save()
                     .then((ref) => {
                         let tmpReference = cv.References;
@@ -69,7 +69,7 @@ exports.deleteReference = (req, res) => {
 }
 
 exports.updateReference = (req, res) => {
-    const { _id, Name, Number, Order } = req.body;
+    const { _id, Name, NameAr, Number, Order } = req.body;
     Reference.findById(_id).exec((error, reference) => {
         if (error) {
             return res.status(400).json({
@@ -81,6 +81,7 @@ exports.updateReference = (req, res) => {
             Reference.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Number,
                     Order
                 }
@@ -91,6 +92,7 @@ exports.updateReference = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Number,
                             Order
                         }
@@ -206,6 +208,7 @@ exports.copyReference = (req, res) => {
                     if (reference) {
                         const newReference = new Reference({
                             Name: reference.Name,
+                            NameAr: reference.NameAr,
                             Number: reference.Number,
                             Order: reference.Order
                         })

@@ -6,6 +6,10 @@ const ReferenceSchema = new mongoose.Schema({
         type: String,
         default: "Name"
     },
+    NameAr: {
+        type: String,
+        default: "Name"
+    },
     Number: {
         type: String,
     },

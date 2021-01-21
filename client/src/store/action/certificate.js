@@ -37,7 +37,7 @@ export function CopyCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificates/copyCertificate`, {
+      .post(`http://localhost:5000/api/certificate/copyCertificate`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -93,7 +93,7 @@ export function EditCertificateAction(payload) {
         cvID: payload.cvID,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         if (res.status == 200)
           dispatch({
             type: EDITCERTIFICATE,

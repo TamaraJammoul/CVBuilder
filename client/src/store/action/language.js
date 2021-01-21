@@ -17,6 +17,7 @@ export function AddLanguageAction(payload) {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
+        NameAr: payload.nameAr,
         _id: payload.cvID,
       })
       .then((res) => {
@@ -85,6 +86,7 @@ export function EditLanguageAction(payload) {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
+        NameAr: payload.nameAr,
         _id: payload.id,
       })
       .then((res) => {

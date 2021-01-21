@@ -7,6 +7,8 @@ import {useTranslation} from "react-i18next";
 
 export default function EditReference(props) {
   const [reference, setReference] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
@@ -15,10 +17,11 @@ export default function EditReference(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("referenceID");
-  const data = {id, reference, phone, order: "1"};
+  const data = {id, reference, phone, nameAr, order: "1"};
   const handelCancel = () => {
     setReference("");
     setPhone("");
+    setNameAr("");
     history.push("/buildcv/reference");
   };
   return (
@@ -43,6 +46,17 @@ export default function EditReference(props) {
               color="primary"
               style={{width: "100%"}}
               onChange={(e) => setReference(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("AddReference")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

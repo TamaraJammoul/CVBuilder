@@ -12,10 +12,10 @@ exports.addSkill = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Order
+                    Name, NameAr, Order
                 } = req.body;
                 let skill = new Skill({
-                    Name, Order
+                    Name, NameAr, Order
                 });
                 skill.save()
                     .then((skl) => {
@@ -73,7 +73,7 @@ exports.deleteSkill = (req, res) => {
 }
 
 exports.updateSkill = (req, res) => {
-    const { _id, Name, Order } = req.body;
+    const { _id, Name, NameAr, Order } = req.body;
     Skill.findById(_id).exec((error, skill) => {
         if (error) {
             return res.status(400).json({
@@ -85,6 +85,7 @@ exports.updateSkill = (req, res) => {
             Skill.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Order
                 }
             }).then(() => {
@@ -94,6 +95,7 @@ exports.updateSkill = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Order
                         }
                     })
@@ -208,6 +210,7 @@ exports.copySkill = (req, res) => {
                     if (skill) {
                         const newSkill = new Skill({
                             Name: skill.Name,
+                            NameAr: skill.NameAr,
                             Order: skill.Order
                         })
                         skills.push(newSkill);

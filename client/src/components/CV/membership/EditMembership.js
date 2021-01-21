@@ -10,12 +10,15 @@ export default function EditMembership(props) {
   let history = useHistory();
   const {t, i18n} = useTranslation();
   const [membershipName, setMembershipName] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("membershipID");
   const handelCancel = () => {
     setMembershipName("");
+    setNameAr("");
     history.push("/buildcv/membership");
   };
   return (
@@ -43,6 +46,17 @@ export default function EditMembership(props) {
             />
           </Grid>
           <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("AddMembership")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Button
               variant="contained"
               className="cancel"
@@ -57,7 +71,7 @@ export default function EditMembership(props) {
               style={{float: "right"}}
               onClick={() => {
                 dispatch(
-                  EditMembershipAction({membershipName, id, order: "1"})
+                  EditMembershipAction({membershipName, id, nameAr, order: "1"})
                 );
                 history.push("/buildcv/membership");
               }}

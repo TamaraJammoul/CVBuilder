@@ -3,6 +3,7 @@ const { String, Number } = mongoose.Schema.Types;
 
 const OtherTrainingSchema = new mongoose.Schema({
     Name: String,
+    NameAr: String,
     Order: Number
 });
 

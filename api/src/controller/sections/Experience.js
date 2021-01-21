@@ -12,10 +12,10 @@ exports.addExperience = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Description, Start, End, Project, Order
+                    Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order
                 } = req.body;
                 let experience = new Experience({
-                    Name, Description, Start, End, Project, Order
+                    Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order
                 });
                 experience.save()
                     .then((exp) => {
@@ -73,7 +73,7 @@ exports.deleteExperience = (req, res) => {
 }
 
 exports.updateExperience = (req, res) => {
-    const { _id, Name, Description, Start, End, Project, Order } = req.body;
+    const { _id, Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order } = req.body;
     Experience.findById(_id).exec((error, experience) => {
         if (error) {
             return res.status(400).json({
@@ -85,10 +85,13 @@ exports.updateExperience = (req, res) => {
             Experience.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Description,
+                    DescriptionAr,
                     Start,
                     End,
                     Project,
+                    ProjectAr,
                     Order
                 }
             }).then(() => {
@@ -98,10 +101,13 @@ exports.updateExperience = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Description,
+                            DescriptionAr,
                             Start,
                             End,
                             Project,
+                            ProjectAr,
                             Order
                         }
                     })
@@ -216,10 +222,13 @@ exports.copyExperience = (req, res) => {
                     if (experience) {
                         const newExperience = new Experience({
                             Name: experience.Name,
+                            NameAr: experience.NameAr,
                             Description: experience.Description,
+                            DescriptionAr: experience.DescriptionAr,
                             Start: experience.Start,
                             End: experience.End,
                             Project: experience.Project,
+                            ProjectAr: experience.ProjectAr,
                             Orde: experience.Order
                         })
                         experiences.push(newExperience);

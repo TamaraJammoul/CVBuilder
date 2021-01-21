@@ -3,7 +3,9 @@ const { String, Number } = mongoose.Schema.Types;
 
 const CourseSchema = new mongoose.Schema({
     Name: String,
+    NameAr: String,
     Description: String,
+    DescriptionAr: String,
     Year: Number,
     Order: Number
 });

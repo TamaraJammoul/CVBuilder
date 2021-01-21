@@ -12,9 +12,9 @@ exports.addTechnicalSkills = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, RateFrom5, Order } = req.body;
+                const { Name, NameAr, RateFrom5, Order } = req.body;
                 const RateFrom100 = RateFrom5 * 20;
-                let technicalSkills = new TechnicalSkills({ Name, RateFrom5, RateFrom100, Order });
+                let technicalSkills = new TechnicalSkills({ Name, NameAr, RateFrom5, RateFrom100, Order });
                 technicalSkills.save()
                     .then((psk) => {
                         let tmpTechnicalSkills = cv.TechnicalSkills;
@@ -71,7 +71,7 @@ exports.deleteTechnicalSkills = (req, res) => {
 }
 
 exports.updateTechnicalSkills = (req, res) => {
-    const { _id, Name, RateFrom5, Order } = req.body;
+    const { _id, Name, NameAr, RateFrom5, Order } = req.body;
     TechnicalSkills.findById(_id).exec((error, technicalSkills) => {
         if (error) {
             return res.status(400).json({
@@ -84,6 +84,7 @@ exports.updateTechnicalSkills = (req, res) => {
             TechnicalSkills.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     RateFrom5,
                     RateFrom100,
                     Order
@@ -95,6 +96,7 @@ exports.updateTechnicalSkills = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             RateFrom5,
                             RateFrom100,
                             Order
@@ -211,6 +213,7 @@ exports.copyTechnicalSkill = (req, res) => {
                     if (technicalSkill) {
                         const newTechnicalSkill = new TechnicalSkills({
                             Name: technicalSkill.Name,
+                            NameAr: technicalSkill.NameAr,
                             RateFrom5: technicalSkill.RateFrom5,
                             RateFrom100: technicalSkill.RateFrom100,
                             Order: technicalSkill.Order

@@ -12,10 +12,10 @@ exports.addOtherTraining = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, Order
+                    Name, NameAr, Order
                 } = req.body;
                 let otherTraining = new OtherTraining({
-                    Name, Order
+                    Name, NameAr, Order
                 });
                 otherTraining.save()
                     .then((otr) => {
@@ -73,7 +73,7 @@ exports.deleteOtherTraining = (req, res) => {
 }
 
 exports.updateOtherTraining = (req, res) => {
-    const { _id, Name, Order } = req.body;
+    const { _id, Name, NameAr, Order } = req.body;
     OtherTraining.findById(_id).exec((error, otherTraining) => {
         if (error) {
             return res.status(400).json({
@@ -85,6 +85,7 @@ exports.updateOtherTraining = (req, res) => {
             OtherTraining.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Order
                 }
             }).then(() => {
@@ -94,6 +95,7 @@ exports.updateOtherTraining = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Order
                         }
                     })
@@ -208,6 +210,7 @@ exports.copyOtherTraining = (req, res) => {
                     if (otherTraining) {
                         const newOtherTraining = new OtherTraining({
                             Name: otherTraining.Name,
+                            NameAr: otherTraining.NameAr,
                             Order: otherTraining.Order
                         })
                         otherTrainings.push(newOtherTraining);

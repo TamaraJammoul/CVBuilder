@@ -5,6 +5,10 @@ const CareerObjectivesSchema = new mongoose.Schema({
     Text: {
         type: String,
         default: "Text ..."
+    },
+    TextAr: {
+        type: String,
+        default: "Text ..."
     }
 })
 

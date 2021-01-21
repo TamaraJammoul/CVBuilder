@@ -7,6 +7,8 @@ import {useHistory} from "react-router-dom";
 
 export default function AddOtherTraining(props) {
   const [otherTraining, setOtherTraining] = useState("");
+  const [nameAr, setNameAr] = useState("");
+
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -14,6 +16,7 @@ export default function AddOtherTraining(props) {
 
   const handelCancel = () => {
     setOtherTraining("");
+    setNameAr("");
     history.push("/buildcv/othertraining");
   };
 
@@ -42,6 +45,17 @@ export default function AddOtherTraining(props) {
             />
           </Grid>
           <Grid item xs={12}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("OtherTraining")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Button
               variant="outlined"
               className="cancel"
@@ -56,7 +70,12 @@ export default function AddOtherTraining(props) {
               style={{float: "right"}}
               onClick={() => {
                 dispatch(
-                  AddOtherTrainingAction({otherTraining, cvID, order: "1"})
+                  AddOtherTrainingAction({
+                    otherTraining,
+                    nameAr,
+                    cvID,
+                    order: "1",
+                  })
                 );
                 history.push("/buildcv/othertraining");
               }}

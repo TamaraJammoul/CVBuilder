@@ -3,6 +3,7 @@ const { String, Number } = mongoose.Schema.Types;
 
 const MembershipsSchema = new mongoose.Schema({
     Name: String,
+    NameAr: String,
     Order: Number
 });
 

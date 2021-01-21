@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { addCV, deleteCV, getAllCV, getCV, updateCreatedDate, updateLanguage, updateName, updateTemplate, getCVData } = require('../controller/CV');
+const { addCV, deleteCV, getAllCV, getCV, updateCreatedDate, updateLanguage, updateName, updateTemplate, getCVData, getCVsData } = require('../controller/CV');
 const { body } = require('express-validator');
 const { validationRes } = require('../controller/validation');
 
@@ -12,5 +12,6 @@ router.post('/updateLanguage', body('_id').notEmpty(), updateLanguage);
 router.post('/updateName', body('_id').notEmpty(), updateName);
 router.post('/updateTemplate', body('_id').notEmpty(), updateTemplate);
 router.post('/getCVData', getCVData);
+router.get('/getCVsData', getCVsData);
 
 module.exports = router;

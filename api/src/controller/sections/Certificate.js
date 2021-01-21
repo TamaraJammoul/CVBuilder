@@ -11,9 +11,9 @@ exports.addCertificate = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, Description, Year, Order } = req.body;
+                const { Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
                 let certificate = new Certificate({
-                    Name, Description, Year, Order
+                    Name, NameAr, Description, DescriptionAr, Year, Order
                 });
                 certificate.save().then((cert) => {
                     let tmpCertificate = cv.Certificates;
@@ -71,7 +71,7 @@ exports.deleteCertificate = (req, res) => {
 }
 
 exports.updateCertificate = (req, res) => {
-    const { _id, Name, Description, Year, Order } = req.body;
+    const { _id, Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
 
     Certificate.findById(_id).exec((error, certificate) => {
         if (error) {
@@ -84,7 +84,9 @@ exports.updateCertificate = (req, res) => {
             Certificate.updateOne({ _id: _id }, {
                 $set: {
                     Name,
+                    NameAr,
                     Description,
+                    DescriptionAr,
                     Year,
                     Order
                 }
@@ -95,7 +97,9 @@ exports.updateCertificate = (req, res) => {
                         data: {
                             _id,
                             Name,
+                            NameAr,
                             Description,
+                            DescriptionAr,
                             Year,
                             Order
                         }
@@ -210,7 +214,7 @@ exports.copyCertificate = (req, res) => {
                     }
                     if (certificate) {
                         const newCertificate = new Certificate({
-                            Name: certificate.Name, Description: certificate.Description, Year: certificate.Year, Order: certificate.Order
+                            Name: certificate.Name, NameAr: certificate.NameAr, Description: certificate.Description, DescriptionAr: certificate.DescriptionAr, Year: certificate.Year, Order: certificate.Order
                         })
                         certificates.push(newCertificate);
                         console.log(certificates);
