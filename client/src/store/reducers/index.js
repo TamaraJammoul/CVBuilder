@@ -28,6 +28,7 @@ export default function reducer(state, action) {
       return {
         ...state,
         cvTemplate: action.payload.template,
+        sections: action.payload.sections,
       };
     case "CVLANGIAGE":
       return {

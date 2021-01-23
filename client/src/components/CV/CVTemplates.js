@@ -8,6 +8,11 @@ import cv4 from "./../../img/cv4.jpg";
 import cv5 from "./../../img/cv5.jpg";
 import cv6 from "./../../img/cv6.jpg";
 import cv7 from "./../../img/cv7.jpg";
+import cv8 from "./../../img/cv8.jpg";
+import cv9 from "./../../img/cv9.jpg";
+import cv10 from "./../../img/cv10.jpg";
+import cv11 from "./../../img/cv11.jpg";
+
 import {useTranslation} from "react-i18next";
 
 export default function CVTemplates() {
@@ -29,25 +34,37 @@ export default function CVTemplates() {
         <Grid item>
           <Grid container spacing={8} justify="center">
             <Grid item xm={4}>
-              <Card CardImage={cv1} />
+              <Card CardImage={cv1} template="cv1" />
             </Grid>
             <Grid item xm={4}>
-              <Card CardImage={cv2} />
+              <Card CardImage={cv2} template="cv2" />
             </Grid>
             <Grid item xm={4}>
-              <Card CardImage={cv3} />
+              <Card CardImage={cv3} template="cv3" />
             </Grid>
             <Grid item xm={4}>
-              <Card CardImage={cv4} />
+              <Card CardImage={cv4} template="cv4" />
             </Grid>
             <Grid item xm={4}>
-              <Card CardImage={cv5} />
+              <Card CardImage={cv5} template="cv5" />
             </Grid>
             <Grid item xm={4}>
-              <Card CardImage={cv6} />
+              <Card CardImage={cv6} template="cv6" />
             </Grid>
             <Grid item xm={4}>
-              <Card CardImage={cv7} />
+              <Card CardImage={cv7} template="cv7" />
+            </Grid>
+            <Grid item xm={4}>
+              <Card CardImage={cv8} template="cv8" />
+            </Grid>
+            <Grid item xm={4}>
+              <Card CardImage={cv9} template="cv9" />
+            </Grid>
+            <Grid item xm={4}>
+              <Card CardImage={cv10} template="cv10" />
+            </Grid>
+            <Grid item xm={4}>
+              <Card CardImage={cv11} template="cv11" />
             </Grid>
           </Grid>
         </Grid>{" "}

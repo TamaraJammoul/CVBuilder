@@ -5,6 +5,7 @@ import {combineReducers} from "redux";
 import thunk from "redux-thunk";
 
 const initialState = {
+  sections: {},
   template: {
     certificates: [],
     educations: [],

@@ -34,6 +34,8 @@ import AddCourses from "./courses/AddCourses";
 import EditCourses from "./courses/EditCourses";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {useSelector, useDispatch} from "react-redux";
+
 import {
   Work,
   School,
@@ -49,6 +51,7 @@ export default function BuildCV(props) {
   const {t} = useTranslation();
   let {path, url} = useRouteMatch();
   const [drawerState, setDrawerState] = useState(false);
+  const sections = useSelector((state) => state.sections);
 
   return (
     <div className="buildcv">
@@ -92,110 +95,154 @@ export default function BuildCV(props) {
                 </Link>
               </h4>
             </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px"}}>
-                  <Work />
-                </span>
-                <Link to={`${url}/careerobjectives`}>
-                  {t("CareerObjectives")}
-                </Link>
-              </h4>
-            </Grid>
+            {sections.careerobjective == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px"}}>
+                    <Work />
+                  </span>
+                  <Link to={`${url}/careerobjectives`}>
+                    {t("CareerObjectives")}
+                  </Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
 
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px"}}>
-                  <Work />
-                </span>
-                <Link to={`${url}/courses`}>{t("Courses")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <School />
-                </span>
-                <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <LocationCity />
-                </span>
-                <Link to={`${url}/skills`}>{t("Skills")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <Language />
-                </span>
-                <Link to={`${url}/languages`}>{t("Language")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <Laptop />
-                </span>
-                <Link to={`${url}/othertraining`}>{t("OtherTraining")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <EmojiPeople />
-                </span>
-                <Link to={`${url}/technicalskills`}>
-                  {t("TechnicalSkills")}
-                </Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <School />
-                </span>
-                <Link to={`${url}/education`}>{t("Education")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <Work />
-                </span>
-                <Link to={`${url}/experience`}>{t("Experience")} </Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <Group />
-                </span>
-                <Link to={`${url}/membership`}>{t("Memberships")}</Link>
-              </h4>
-            </Grid>
-            <Grid item>
-              <h4>
-                {" "}
-                <span style={{marginRight: "10px", marginLeft: "10px"}}>
-                  <AccountBox />
-                </span>
-                <Link to={`${url}/reference`}>{t("References")}</Link>
-              </h4>
-            </Grid>
+            {sections.courses == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px"}}>
+                    <Work />
+                  </span>
+                  <Link to={`${url}/courses`}>{t("Courses")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.certificares == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <School />
+                  </span>
+                  <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.skills == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <LocationCity />
+                  </span>
+                  <Link to={`${url}/skills`}>{t("Skills")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.language == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <Language />
+                  </span>
+                  <Link to={`${url}/languages`}>{t("Language")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.othertraining == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <Laptop />
+                  </span>
+                  <Link to={`${url}/othertraining`}>{t("OtherTraining")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.technicalskill == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <EmojiPeople />
+                  </span>
+                  <Link to={`${url}/technicalskills`}>
+                    {t("TechnicalSkills")}
+                  </Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.education == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <School />
+                  </span>
+                  <Link to={`${url}/education`}>{t("Education")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.experience == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <Work />
+                  </span>
+                  <Link to={`${url}/experience`}>{t("Experience")} </Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.membership == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <Group />
+                  </span>
+                  <Link to={`${url}/membership`}>{t("Memberships")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
+            {sections.referenc == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <AccountBox />
+                  </span>
+                  <Link to={`${url}/reference`}>{t("References")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         </Grid>
         <Grid item xs={8} sm={9} className="bd">
