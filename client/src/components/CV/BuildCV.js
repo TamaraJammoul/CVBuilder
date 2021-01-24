@@ -17,6 +17,9 @@ import EditMembership from "./membership/EditMembership";
 import Reference from "./reference/Reference";
 import EditReference from "./reference/EditReference";
 import AddReference from "./reference/AddReference";
+import Achievement from "./achievement/Achievement";
+import EditAchievement from "./achievement/EditAchievement";
+import AddAchievement from "./achievement/AddAchievement";
 import Skills from "./AddSkill";
 import Languages from "./language/Languages";
 import AddLanguage from "./language/AddLanguage";
@@ -204,6 +207,19 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
+            {sections.achievement == 1 ? (
+              <Grid item>
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                    <School />
+                  </span>
+                  <Link to={`${url}/achievement`}>{t("Achievement")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
             {sections.experience == 1 ? (
               <Grid item>
                 <h4>
@@ -274,6 +290,14 @@ export default function BuildCV(props) {
                     <Route
                       path={`${path}/edittechnicalskills`}
                       render={(props) => <EditTechnicalSkills />}
+                    />
+                    <Route
+                      path={`${path}/addachievement`}
+                      render={(props) => <AddAchievement />}
+                    />
+                    <Route
+                      path={`${path}/editachievement`}
+                      render={(props) => <EditAchievement />}
                     />
                     <Route
                       path={`${path}/addcourses`}

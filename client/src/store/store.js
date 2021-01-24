@@ -14,6 +14,7 @@ const initialState = {
     memberships: [],
     othertraining: [],
     technicalskills: [],
+    achievements: [],
     references: [],
     skills: [],
     courses: [],

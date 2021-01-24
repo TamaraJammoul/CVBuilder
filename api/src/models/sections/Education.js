@@ -8,7 +8,7 @@ const EducationSchema = new mongoose.Schema({
     FacultyAr: String,
     YearStart: Number,
     YearEnd: Number,
-    Grade: String,
+    Grade: Number, //1 good    2 very good     3 excellant
     GradeAr: String,
     DegreeFrom5: Number,
     DegreeFrom10: Number,

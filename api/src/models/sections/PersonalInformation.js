@@ -34,8 +34,8 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String
     },
     MaritalStatus: {
-        type: String,
-        default: "Married"
+        type: Number,
+        default: 2  // 1  single    2 married
     },
     CityAr: {
         type: String,
@@ -45,8 +45,8 @@ const PersonalInformationSchema = new mongoose.Schema({
         type: String
     },
     MaritalStatusAr: {
-        type: String,
-        default: "Married"
+        type: Number,
+        default: 2   // 1  single    2 married
     },
     Birth: {
         type: Date,
