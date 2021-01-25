@@ -18,6 +18,7 @@ const initialState = {
     references: [],
     skills: [],
     courses: [],
+    personalInformation: {},
     careerobjective: "",
     careerObjectives_id: "",
     personalInformation_id: "",

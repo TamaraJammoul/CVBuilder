@@ -131,5 +131,10 @@
     "cvnametext":"A well-composed resume can literally change your life",
     "Lets Start":"Lets Start",
         "Married":"Married",
-        "Single":"Single"
-}
+        "Single":"Single",
+        "YourAchievements":"Your Achievements",
+        "AddAchievement":"Add Achievement",
+        "Achievement Name":"Achievement Name",
+        "Achievement NameAR":"Achievement Name in Arabic",
+        "Edit Achievements":"Edit Achievement"
+} 

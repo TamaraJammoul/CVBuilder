@@ -49,7 +49,7 @@ export default function EditAchievement(props) {
             {" "}
             <TextField
               id="filled-primary"
-              label={t("Achievement Name")}
+              label={t("Achievement NameAR")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}

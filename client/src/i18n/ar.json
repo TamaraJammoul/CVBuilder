@@ -132,6 +132,11 @@
         "cvnametext":"سيرة ذاتية جيدة يمكنها أن تغير حياتك",
         "Lets Start":"هيا نبدأ",
         "Married":"متزوج",
-        "Single":"أعزب"
+        "Single":"أعزب",
+        "YourAchievements":"إنجازاتك",
+        "AddAchievement":"أضف إنجاز",
+        "Achievement Name":"الإنجاز",
+        "Achievement NameAR":"الإنجاز باللغة العربية",
+        "Edit Achievements":"تعديل الإنجاز"
 
-}
+} 
