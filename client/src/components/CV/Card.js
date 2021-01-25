@@ -30,6 +30,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 1,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv2")
       return {
@@ -45,6 +46,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv3")
       return {
@@ -60,6 +62,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv4")
       return {
@@ -75,6 +78,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 1,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv5")
       return {
@@ -90,6 +94,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv6")
       return {
@@ -105,6 +110,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv7")
       return {
@@ -120,6 +126,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 0,
+        achievement: 0,
       };
     else if (t == "cv8")
       return {
@@ -135,6 +142,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 1,
+        achievement: 0,
       };
     else if (t == "cv9")
       return {
@@ -150,6 +158,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 1,
+        achievement: 1,
       };
     else if (t == "cv10")
       return {
@@ -165,6 +174,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 1,
+        achievement: 0,
       };
     else if (t == "cv11")
       return {
@@ -180,6 +190,7 @@ export default function Card({CardImage, template}) {
         technicalskill: 0,
         skills: 1,
         twolan: 1,
+        achievement: 0,
       };
   };
   return (
