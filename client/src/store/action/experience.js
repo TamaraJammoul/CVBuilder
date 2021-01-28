@@ -19,6 +19,8 @@ export function AddExperienceAction(payload) {
         Description: payload.description,
         Order: 1,
         _id: payload.cvID,
+        NameAr: payload.experienceNameAr,
+        DescriptionAr: payload.descriptionAr,
       })
       .then((res) => {
         console.log(res.data);
@@ -88,6 +90,8 @@ export function EditExperienceAction(payload) {
         Description: payload.description,
         Order: 1,
         _id: payload.id,
+        DescriptionAr: payload.descriptionAr,
+        NameAr: payload.experienceNameAr,
       })
       .then((res) => {
         console.log(res.data);

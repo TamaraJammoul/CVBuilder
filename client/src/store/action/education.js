@@ -20,7 +20,10 @@ export function AddEducationAction(payload) {
         DegreeFrom5: payload.rate5,
         Order: 1,
         Grade: payload.grade,
+        Degree: payload.degree,
         _id: payload.cvID,
+        UniversityNameAr: payload.universityNameAr,
+        FacultyAr: payload.facultyAr,
       })
       .then((res) => {
         console.log(res.data);
@@ -93,6 +96,8 @@ export function EditEducationAction(payload) {
         Order: 1,
         Grade: payload.grade,
         _id: payload.id,
+        UniversityNameAr: payload.universityNameAr,
+        FacultyAr: payload.facultyAr,
       })
       .then((res) => {
         console.log(res.data);

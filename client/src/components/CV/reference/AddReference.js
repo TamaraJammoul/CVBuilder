@@ -12,6 +12,7 @@ export default function Reference(props) {
   const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setReference("");
@@ -46,7 +47,7 @@ export default function Reference(props) {
               onChange={(e) => setReference(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

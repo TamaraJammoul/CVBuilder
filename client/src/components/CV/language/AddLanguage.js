@@ -23,6 +23,7 @@ export default function AddLanguage(props) {
   const data = {language, rate, nameAr, order: 1, cvID};
   const {t, i18n} = useTranslation();
   let history = useHistory();
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setLanguage("");
@@ -53,7 +54,7 @@ export default function AddLanguage(props) {
               onChange={(e) => setLanguage(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             <TextField
               id="filled-basic"
               label={t("Language")}

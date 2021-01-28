@@ -11,13 +11,20 @@ export default function EditCourse(props) {
   const {t, i18n} = useTranslation();
   const [coursesName, setCoursesName] = useState("");
   const [description, setDescription] = useState("");
+  const [coursesNameAr, setCoursesNameAr] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
   const [year, setYear] = useState(0);
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("course_id");
+  const lan = useSelector((state) => state.sections.twolan);
+
   const handelCancel = () => {
     setCoursesName("");
+    setCoursesNameAr("");
+    setDescriptionAr("");
+    setDescription("");
     history.push("/buildcv/courses");
   };
   return (
@@ -53,6 +60,28 @@ export default function EditCourse(props) {
               color="primary"
               style={{width: "100%"}}
               onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("CoursesName")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setCoursesNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("Description")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

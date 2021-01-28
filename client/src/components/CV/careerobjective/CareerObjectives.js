@@ -13,6 +13,7 @@ import ReactHtmlParser from "react-html-parser";
 export default function CareerObjectives() {
   const [text, setText] = useState("");
   const [textAr, setTextAr] = useState("");
+  const lan = useSelector((state) => state.sections.twolan);
 
   const [hide, setHide] = useState(0);
 
@@ -91,7 +92,12 @@ export default function CareerObjectives() {
               onEditorChange={handleEditorChange}
             />
           </Grid>
-          <Grid item xs={12} style={{width: "100%"}}>
+          <Grid
+            item
+            xs={12}
+            style={{width: "100%"}}
+            className={lan == 1 ? "arhide" : ""}
+          >
             {" "}
             <Editor
               initialValue="<p></p>"

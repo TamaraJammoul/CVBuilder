@@ -13,6 +13,7 @@ export default function AddMembership(props) {
 
   let history = useHistory();
   const {t, i18n} = useTranslation();
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setMembershipName("");
@@ -43,7 +44,7 @@ export default function AddMembership(props) {
               onChange={(e) => setMembershipName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

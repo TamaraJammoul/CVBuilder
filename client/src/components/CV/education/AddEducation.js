@@ -19,9 +19,14 @@ export default function AddEducation(props) {
   const [endDate, setEndDate] = useState("");
   const [rate5, setRate5] = useState(0);
   const [grade, setGrade] = useState(1);
+  const [degree, setDegree] = useState(1);
+  const [facultyAr, setFacultyAr] = useState("");
+  const [universityNameAr, setUniversityNameAr] = useState("");
+  const [cityAr, setCityAr] = useState("");
   const {t, i18n} = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
+  const lan = useSelector((state) => state.sections.twolan);
 
   const data = {
     faculty,
@@ -32,6 +37,10 @@ export default function AddEducation(props) {
     rate5,
     grade,
     cvID,
+    degree,
+    universityNameAr,
+    cityAr,
+    facultyAr,
   };
 
   const handelCancel = () => {
@@ -41,6 +50,9 @@ export default function AddEducation(props) {
     setRate5(0);
     setGrade("");
     setUniversityName("");
+    setUniversityNameAr("");
+    setFacultyAr("");
+    setCityAr("");
     history.push("/buildcv/education");
   };
   return (
@@ -78,16 +90,28 @@ export default function AddEducation(props) {
               onChange={(e) => setUniversityName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"
-              label={t("City,Country")}
+              label={t("faculty")}
               variant="filled"
+              placeholder={t("eg.Engineering")}
               style={{width: "100%"}}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => setFacultyAr(e.target.value)}
             />
           </Grid>
+          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("SchoolNameorUniversity")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setUniversityNameAr(e.target.value)}
+            />
+          </Grid>
+
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
@@ -147,9 +171,28 @@ export default function AddEducation(props) {
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
               >
-                <MenuItem value={1}>good</MenuItem>
-                <MenuItem value={2}>very good</MenuItem>
-                <MenuItem value={3}>excellent</MenuItem>
+                <MenuItem value={1}>{"good"}</MenuItem>
+                <MenuItem value={2}>{"very good"}</MenuItem>
+                <MenuItem value={3}>{t("excellent")}</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {" "}
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">
+                {t("Degree")}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={degree}
+                onChange={(e) => setDegree(e.target.value)}
+              >
+                <MenuItem value={1}>{t("Bachelor")}</MenuItem>
+                <MenuItem value={2}>{t("Master")}</MenuItem>
+                <MenuItem value={2}>{t("PhD")}</MenuItem>
+                <MenuItem value={2}>{t("High school")}</MenuItem>
               </Select>
             </FormControl>
           </Grid>

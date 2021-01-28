@@ -18,6 +18,8 @@ export function AddCertificateAction(payload) {
         Description: payload.description,
         Order: payload.order,
         _id: payload.cvID,
+        NameAr: payload.nameAr,
+        DescriptionAr: payload.descriptionAr,
       })
       .then((res) => {
         console.log(res.data);
@@ -91,6 +93,8 @@ export function EditCertificateAction(payload) {
         Order: payload.order,
         _id: payload.id,
         cvID: payload.cvID,
+        NameAr: payload.nameAr,
+        DescriptionAr: payload.descriptionAr,
       })
       .then((res) => {
         console.log(res);

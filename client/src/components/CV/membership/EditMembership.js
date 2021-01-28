@@ -11,6 +11,7 @@ export default function EditMembership(props) {
   const {t, i18n} = useTranslation();
   const [membershipName, setMembershipName] = useState("");
   const [nameAr, setNameAr] = useState("");
+  const lan = useSelector((state) => state.sections.twolan);
 
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
@@ -45,7 +46,7 @@ export default function EditMembership(props) {
               onChange={(e) => setMembershipName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

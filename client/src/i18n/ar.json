@@ -137,6 +137,14 @@
         "AddAchievement":"أضف إنجاز",
         "Achievement Name":"الإنجاز",
         "Achievement NameAR":"الإنجاز باللغة العربية",
-        "Edit Achievements":"تعديل الإنجاز"
+        "Edit Achievements":"تعديل الإنجاز",
+        "good":"جيد",
+        "very good":"جيد جداً",
+        "excellent":"ممتاز",
+        "Degree":"التقدير",
+        "Bachelor":"بكالريوس",
+        "Master":"ماجستير",
+        "PhD":"دكتوراه",
+        "High school":"شهادة ثانوية"
 
 } 

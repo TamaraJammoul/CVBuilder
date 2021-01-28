@@ -27,6 +27,8 @@ export default function Membership() {
   const temp = useSelector((state) => state.template.achievements);
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
+  const lan = useSelector((state) => state.sections.twolan);
+
   const [hide, setHide] = useState(0);
   const [achievement, setachievement] = useState([]);
   useEffect(() => {

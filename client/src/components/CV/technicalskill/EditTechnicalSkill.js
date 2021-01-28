@@ -16,6 +16,7 @@ import {useHistory, useLocation} from "react-router-dom";
 export default function EditTechnicalSkill(props) {
   const [skill, setSkill] = useState("");
   const [nameAr, setNameAr] = useState("");
+  const lan = useSelector((state) => state.sections.twolan);
 
   const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ export default function EditTechnicalSkill(props) {
               onChange={(e) => setSkill(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             <TextField
               id="filled-basic"
               label={t("Skill")}

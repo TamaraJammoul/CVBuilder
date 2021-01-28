@@ -22,6 +22,7 @@ export default function AddTechnicalSkill(props) {
   const {t, i18n} = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
+  const lan = useSelector((state) => state.sections.twolan);
 
   const data = {rate, skill, cvID, nameAr, order: "1"};
   const handelCancel = () => {
@@ -53,7 +54,7 @@ export default function AddTechnicalSkill(props) {
               onChange={(e) => setSkill(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             <TextField
               id="filled-basic"
               label={t("Skill")}

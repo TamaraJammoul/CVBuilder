@@ -17,6 +17,7 @@ export default function AddOtherTraining(props) {
   let query = useQuery();
   const id = query.get("othertrainingID");
   const data = {id, otherTraining, nameAr, order: "1"};
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setOtherTraining("");
@@ -47,7 +48,7 @@ export default function AddOtherTraining(props) {
               onChange={(e) => setOtherTraining(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

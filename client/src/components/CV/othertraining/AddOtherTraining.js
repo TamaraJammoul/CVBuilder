@@ -13,6 +13,7 @@ export default function AddOtherTraining(props) {
   let history = useHistory();
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setOtherTraining("");
@@ -44,7 +45,7 @@ export default function AddOtherTraining(props) {
               onChange={(e) => setOtherTraining(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

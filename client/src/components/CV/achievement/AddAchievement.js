@@ -10,6 +10,7 @@ export default function AddAchievement(props) {
   const cvID = useSelector((state) => state.cvID);
   const [achievementName, setAchievementName] = useState("");
   const [nameAr, setNameAr] = useState("");
+  const lan = useSelector((state) => state.sections.twolan);
 
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -43,7 +44,7 @@ export default function AddAchievement(props) {
               onChange={(e) => setAchievementName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

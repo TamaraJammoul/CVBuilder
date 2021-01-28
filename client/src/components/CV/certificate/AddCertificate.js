@@ -10,9 +10,21 @@ export default function AddCertificate(props) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [nameAr, setNameAr] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
   const [date, setDate] = useState(new Date());
   const cvID = useSelector((state) => state.cvID);
-  const data = {name, description, date, cvID, order: "1"};
+  const lan = useSelector((state) => state.sections.twolan);
+
+  const data = {
+    name,
+    description,
+    nameAr,
+    descriptionAr,
+    date,
+    cvID,
+    order: "1",
+  };
   const {t, i18n} = useTranslation();
   let history = useHistory();
 
@@ -20,6 +32,10 @@ export default function AddCertificate(props) {
     setName("");
     setDate(0);
     setDescription("");
+    setName("");
+    setNameAr("");
+    setDescription("");
+    setDescriptionAr("");
     console.log(data, "kj");
     history.push("/buildcv/certificates");
   };
@@ -33,7 +49,7 @@ export default function AddCertificate(props) {
           direction="column"
           spacing={4}
         >
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <h2>{t("AddCertificate")}</h2>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -54,6 +70,26 @@ export default function AddCertificate(props) {
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("Certificate Name")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("Description")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

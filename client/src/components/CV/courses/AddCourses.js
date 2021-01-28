@@ -10,10 +10,14 @@ export default function AddCourses(props) {
   const cvID = useSelector((state) => state.cvID);
   const [courses, setCourses] = useState("");
   const [description, setDescription] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
+  const [coursesAr, setCoursesAr] = useState("");
+
   const [year, setYear] = useState(0);
 
   let history = useHistory();
   const {t, i18n} = useTranslation();
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setCourses("");
@@ -54,6 +58,28 @@ export default function AddCourses(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("CourseName")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setCoursesAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-primary"
+              label={t("Description")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setDescriptionAr(e.target.value)}
+            />
+          </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
@@ -86,6 +112,8 @@ export default function AddCourses(props) {
                     order: "1",
                     year,
                     description,
+                    coursesAr,
+                    descriptionAr,
                   })
                 );
                 history.push("/buildcv/courses");

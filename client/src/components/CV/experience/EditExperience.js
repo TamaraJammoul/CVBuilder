@@ -12,6 +12,8 @@ export default function Experience(props) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [project, setProject] = useState("");
+  const [experienceNameAr, setExperienceNameAr] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
@@ -20,6 +22,7 @@ export default function Experience(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
+  const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setExperienceName("");
@@ -27,6 +30,8 @@ export default function Experience(props) {
     setDescription("");
     setEndDate("");
     setProject("");
+    setExperienceNameAr("");
+    setDescriptionAr("");
     history.push("/buildcv/experience");
   };
   return (
@@ -60,6 +65,26 @@ export default function Experience(props) {
               color="primary"
               style={{width: "100%"}}
               onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="filled-primary"
+              label={t("ExperienceName")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setExperienceNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="filled-primary"
+              label={t("Description")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={6}>

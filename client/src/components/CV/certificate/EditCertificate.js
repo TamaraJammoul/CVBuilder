@@ -9,6 +9,8 @@ export default function EditCertificate(props) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [nameAr, setNameAr] = useState("");
+  const [descriptionAr, setDescriptionAr] = useState("");
   const [date, setDate] = useState(0);
   const cvID = useSelector((state) => state.cvID);
   let history = useHistory();
@@ -16,11 +18,24 @@ export default function EditCertificate(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("certificateID");
-  const data = {name, description, date, id, order: "1", cvID};
+  const lan = useSelector((state) => state.sections.twolan);
+
+  const data = {
+    name,
+    description,
+    date,
+    nameAr,
+    descriptionAr,
+    id,
+    order: "1",
+    cvID,
+  };
   const handelCancel = () => {
     setName("");
     setDate(0);
+    setNameAr("");
     setDescription("");
+    setDescriptionAr("");
     history.push("/buildcv/certificates");
   };
   return (
@@ -54,6 +69,26 @@ export default function EditCertificate(props) {
               variant="filled"
               style={{width: "100%"}}
               onChange={(e) => setDescription(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("Certificate Name")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+            {" "}
+            <TextField
+              id="filled-basic"
+              label={t("Description")}
+              variant="filled"
+              style={{width: "100%"}}
+              onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

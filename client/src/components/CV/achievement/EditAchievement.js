@@ -13,6 +13,8 @@ export default function EditAchievement(props) {
   const [nameAr, setNameAr] = useState("");
 
   const cvID = useSelector((state) => state.cvID);
+  const lan = useSelector((state) => state.sections.twolan);
+
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("achievementID");
@@ -45,7 +47,7 @@ export default function EditAchievement(props) {
               onChange={(e) => setAchievementName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

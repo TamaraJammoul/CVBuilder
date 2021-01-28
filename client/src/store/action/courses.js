@@ -17,6 +17,8 @@ export function AddCoursesAction(payload) {
         Description: payload.description,
         Year: payload.year,
         _id: payload.cvID,
+        DescriptionAr: payload.descriptionAr,
+        NameAr: payload.coursesAr,
       })
       .then((res) => {
         console.log(res.data);
@@ -86,6 +88,8 @@ export function EditCoursesAction(payload) {
         Description: payload.description,
         Year: payload.year,
         _id: payload.id,
+        NameAr: payload.coursesNameAr,
+        DescriptionAr: payload.descriptionAr,
       })
       .then((res) => {
         console.log(res.data);

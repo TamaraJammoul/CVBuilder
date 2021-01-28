@@ -136,5 +136,13 @@
         "AddAchievement":"Add Achievement",
         "Achievement Name":"Achievement Name",
         "Achievement NameAR":"Achievement Name in Arabic",
-        "Edit Achievements":"Edit Achievement"
+        "Edit Achievements":"Edit Achievement",
+           "good":"good",
+        "very good":"very good",
+        "excellent":"excellent",
+        "Degree":"Degree",
+        "Bachelor":"Bachelor",
+        "Master":"Master",
+        "PhD":"PhD",
+        "High school":"High school"
 } 
