@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {useHistory, withRouter} from "react-router-dom";
+import {useHistory, withRouter, Link} from "react-router-dom";
 import {ButtonContainer} from "./Button";
 import us from "./../../img/us.svg";
 import ar from "./../../img/sa.svg";
@@ -21,6 +21,9 @@ function HomeNav(props) {
 
     document.body.dir = i18n.dir();
     theme.direction = i18n.dir();
+  };
+  const logout = () => {
+    localStorage.clear();
   };
   useEffect(() => {
     setisst(localStorage.getItem("state"));
@@ -48,9 +51,9 @@ function HomeNav(props) {
       >
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to="/dashboard">
               <h5>{t("Dashboard")}</h5>
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="navbar-brand" href="#">
@@ -75,24 +78,22 @@ function HomeNav(props) {
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item">
+              <a className="dropdown-item" onClick={() => changeLanguage("en")}>
                 <img
                   src={us}
                   style={{
                     width: "30px",
                   }}
-                  onClick={() => changeLanguage("en")}
                 />
                 <h6>English</h6>
               </a>
-              <a className="dropdown-item">
+              <a className="dropdown-item" onClick={() => changeLanguage("ar")}>
                 {" "}
                 <img
                   src={ar}
                   style={{
                     width: "30px",
                   }}
-                  onClick={() => changeLanguage("ar")}
                 />{" "}
                 <h6>عربي</h6>
               </a>
@@ -105,8 +106,11 @@ function HomeNav(props) {
             onClick={props.setDrawerState}
           />{" "}
         </h5>
-        <a className="navbar-brand" href="#">
-          <h5>Logout</h5>
+        <a
+          className="navbar-brand"
+          onClick={localStorage.getItem("token") ? logout() : ""}
+        >
+          <h5>{localStorage.getItem("token") ? t("Logout") : t("LogIn")}</h5>
         </a>
       </div>
     </nav>

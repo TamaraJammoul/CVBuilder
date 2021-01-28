@@ -9,8 +9,6 @@ export default function EditAchievement(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
-  const [achievementName, setAchievementName] = useState("");
-  const [nameAr, setNameAr] = useState("");
 
   const cvID = useSelector((state) => state.cvID);
   const lan = useSelector((state) => state.sections.twolan);
@@ -18,6 +16,12 @@ export default function EditAchievement(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("achievementID");
+  const achievements = useSelector((state) => state.template.achievements);
+  const old = achievements.filter((e) => e.id == id);
+  console.log(old, "pppp");
+  const [achievementName, setAchievementName] = useState(old.Name);
+  const [nameAr, setNameAr] = useState(old.NameAr);
+
   const handelCancel = () => {
     setAchievementName("");
     setNameAr("");

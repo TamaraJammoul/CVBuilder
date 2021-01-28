@@ -59,10 +59,18 @@ exports.deleteCertificate = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Certificates: tmpCertificate } })
                     .then(() => {
-                        Certificate.deleteOne({ _id: req.body.certificate_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "certificate deleted",
-                                data: tmpCertificate
+                        Certificate.findById(req.body.certificate_id).then((ce) => {
+                            Certificate.deleteOne({ _id: req.body.certificate_id }).then(() => {
+                                Certificate.find({ _id: { $in: tmpCertificate } }).then((cerArray) => {
+                                    Promise.all(cerArray.map(item => {
+                                        return anAsyncFunction3(item, ce.Order);
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "certificate deleted",
+                                            data: tmpCertificate
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -214,7 +222,7 @@ exports.copyCertificate = (req, res) => {
                     }
                     if (certificate) {
                         const newCertificate = new Certificate({
-                            Name: certificate.Name, NameAr: certificate.NameAr, Description: certificate.Description, DescriptionAr: certificate.DescriptionAr, Year: certificate.Year, Order: certificate.Order
+                            Name: certificate.Name, NameAr: certificate.NameAr, Description: certificate.Description, DescriptionAr: certificate.DescriptionAr, Year: certificate.Year, Order: certificates.length + 1
                         })
                         certificates.push(newCertificate);
                         console.log(certificates);
@@ -322,4 +330,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Certificate.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

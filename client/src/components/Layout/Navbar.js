@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {useHistory, withRouter} from "react-router-dom";
+import {useHistory, withRouter, Link} from "react-router-dom";
 import {ButtonContainer} from "./Button";
 import us from "./../../img/us.svg";
 import ar from "./../../img/sa.svg";
@@ -27,9 +27,9 @@ function Navbar(props) {
   }, [history.location]);
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
-      <a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to="/dashboard">
         {t("Dashboard")}
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -50,9 +50,9 @@ function Navbar(props) {
             </a>
           </li>
           <li className="nav-item active">
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to="/cvtemplates">
               <h5>{t("ChangeTemplate")}</h5>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
             <a className="navbar-brand" href="#">
@@ -78,24 +78,22 @@ function Navbar(props) {
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item">
+              <a className="dropdown-item" onClick={() => changeLanguage("en")}>
                 <img
                   src={us}
                   style={{
                     width: "30px",
                   }}
-                  onClick={() => changeLanguage("en")}
                 />
                 <h6>English</h6>
               </a>
-              <a className="dropdown-item">
+              <a className="dropdown-item" onClick={() => changeLanguage("ar")}>
                 {" "}
                 <img
                   src={ar}
                   style={{
                     width: "30px",
                   }}
-                  onClick={() => changeLanguage("ar")}
                 />{" "}
                 <h6>عربي</h6>
               </a>

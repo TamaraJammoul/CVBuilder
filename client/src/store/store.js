@@ -5,7 +5,21 @@ import {combineReducers} from "redux";
 import thunk from "redux-thunk";
 
 const initialState = {
-  sections: {},
+  sections: {
+    careerobjective: 1,
+    certificates: 1,
+    courses: 1,
+    education: 1,
+    experience: 1,
+    language: 1,
+    membership: 1,
+    othertraining: 1,
+    referenc: 1,
+    technicalskill: 1,
+    skills: 1,
+    twolan: 1,
+    achievement: 1,
+  },
   template: {
     certificates: [],
     educations: [],

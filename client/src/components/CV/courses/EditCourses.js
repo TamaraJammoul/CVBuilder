@@ -4,20 +4,24 @@ import {EditCoursesAction} from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory, useLocation} from "react-router-dom";
+import YearPicker from "react-year-picker";
 
 export default function EditCourse(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
-  const [coursesName, setCoursesName] = useState("");
-  const [description, setDescription] = useState("");
-  const [coursesNameAr, setCoursesNameAr] = useState("");
-  const [descriptionAr, setDescriptionAr] = useState("");
-  const [year, setYear] = useState(0);
+
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("course_id");
+  const courses = useSelector((state) => state.template.courses);
+  const old = courses.filter((e) => e.id == id);
+  const [coursesName, setCoursesName] = useState(old.Name);
+  const [description, setDescription] = useState(old.Description);
+  const [coursesNameAr, setCoursesNameAr] = useState(old.NameAr);
+  const [descriptionAr, setDescriptionAr] = useState(old.DescriptionAr);
+  const [year, setYear] = useState(old.Year);
   const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
@@ -25,6 +29,7 @@ export default function EditCourse(props) {
     setCoursesNameAr("");
     setDescriptionAr("");
     setDescription("");
+    setYear(0);
     history.push("/buildcv/courses");
   };
   return (
@@ -32,7 +37,7 @@ export default function EditCourse(props) {
       <Container>
         <Grid
           container
-          spacing={10}
+          spacing={4}
           direction="column"
           justify="center"
           alignItems="center"
@@ -86,14 +91,8 @@ export default function EditCourse(props) {
           </Grid>
           <Grid item xs={12}>
             {" "}
-            <TextField
-              id="filled-primary"
-              label={t("Year")}
-              variant="filled"
-              color="primary"
-              style={{width: "100%"}}
-              onChange={(e) => setYear(e.target.value)}
-            />
+            <h5>{t("Year")}</h5>
+            <YearPicker onChange={(e) => setYear(e)} />
           </Grid>
           <Grid item xs={12}>
             <Button

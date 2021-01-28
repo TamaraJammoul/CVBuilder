@@ -225,10 +225,7 @@ function App(props) {
                 path="/forgetpassword"
                 render={(props) => <ForgetPassword />}
               />
-              <Route
-                path="/cvtemplates/:id"
-                render={(props) => <CVTemplates />}
-              />
+              <Route path="/cvtemplates" render={(props) => <CVTemplates />} />
               <Route path="/dashboard" render={(props) => <Dashboard />} />
               <Route path="/cvname" render={(props) => <CVName />} />
               <Route path="/cvlanguage" render={(props) => <CVLanguage />} />

@@ -6,9 +6,6 @@ import {useTranslation} from "react-i18next";
 import {useHistory, useLocation} from "react-router-dom";
 
 export default function AddOtherTraining(props) {
-  const [otherTraining, setOtherTraining] = useState("");
-  const [nameAr, setNameAr] = useState("");
-
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -16,6 +13,10 @@ export default function AddOtherTraining(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("othertrainingID");
+  const othertraining = useSelector((state) => state.template.othertraining);
+  const old = othertraining.filter((e) => e.id == id);
+  const [otherTraining, setOtherTraining] = useState(old.Name);
+  const [nameAr, setNameAr] = useState(old.NameAr);
   const data = {id, otherTraining, nameAr, order: "1"};
   const lan = useSelector((state) => state.sections.twolan);
 

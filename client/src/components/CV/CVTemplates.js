@@ -19,56 +19,140 @@ export default function CVTemplates() {
   const {t, i18n} = useTranslation();
 
   return (
-    <>
-      <Grid
-        container
-        alignItems="center"
-        direction="column"
-        spacing={6}
-        style={{paddingTop: "30px"}}
-      >
-        <Grid item>
-          {" "}
-          <h1 style={{color: "#5B2338 "}}>{t("Select Design")}</h1>
-        </Grid>
-        <Grid item>
-          <Grid container spacing={8} justify="center">
-            <Grid item xm={4}>
-              <Card CardImage={cv1} template="cv1" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv2} template="cv2" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv3} template="cv3" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv4} template="cv4" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv5} template="cv5" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv6} template="cv6" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv7} template="cv7" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv8} template="cv8" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv9} template="cv9" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv10} template="cv10" />
-            </Grid>
-            <Grid item xm={4}>
-              <Card CardImage={cv11} template="cv11" />
-            </Grid>
+    <Grid
+      container
+      alignItems="center"
+      direction="column"
+      spacing={6}
+      style={{paddingTop: "30px"}}
+      className="backgroundimg"
+    >
+      <Grid item xs={12}>
+        {" "}
+        <h1
+          style={{color: "#5B2338 "}}
+          data-aos="fade-down"
+          data-aos-offset="200"
+          data-aos-delay="50"
+          data-aos-duration="1000"
+        >
+          {t("Select Design")}
+        </h1>
+      </Grid>
+      <Grid item xs={12}>
+        <Grid container spacing={8} justify="center">
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv1} template="cv1" />
           </Grid>
-        </Grid>{" "}
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv2} template="cv2" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv3} template="cv3" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv4} template="cv4" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv5} template="cv5" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv6} template="cv6" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv7} template="cv7" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv8} template="cv8" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv9} template="cv9" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv10} template="cv10" />
+          </Grid>
+          <Grid
+            item
+            xm={4}
+            data-aos="flip-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+          >
+            <Card CardImage={cv11} template="cv11" />
+          </Grid>
+        </Grid>
       </Grid>{" "}
-    </>
+    </Grid>
   );
 }

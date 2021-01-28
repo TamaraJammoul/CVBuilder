@@ -21,6 +21,10 @@ export default function CVName() {
         justify="center"
         direction="column"
         spacing={4}
+        data-aos="fade-up-left"
+        data-aos-offset="200"
+        data-aos-delay="50"
+        data-aos-duration="1000"
       >
         <Grid item>
           <h2 className="mt-4">{t("Resume Name")}</h2>

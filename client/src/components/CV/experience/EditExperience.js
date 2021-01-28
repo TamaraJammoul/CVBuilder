@@ -5,19 +5,23 @@ import {EditExperienceAction} from "./../../../store/action/experience";
 import {useSelector, useDispatch} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import YearPicker from "react-year-picker";
 
 export default function Experience(props) {
-  const [experienceName, setExperienceName] = useState("");
-  const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [project, setProject] = useState("");
-  const [experienceNameAr, setExperienceNameAr] = useState("");
-  const [descriptionAr, setDescriptionAr] = useState("");
-  const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("experienceID");
+  const experience = useSelector((state) => state.template.experience);
+  const old = experience.filter((e) => e.id == id);
+  const [experienceName, setExperienceName] = useState(old.Name);
+  const [description, setDescription] = useState(old.Description);
+  const [startDate, setStartDate] = useState(old.Start);
+  const [endDate, setEndDate] = useState(old.End);
+  const [project, setProject] = useState(old.Project);
+  const [experienceNameAr, setExperienceNameAr] = useState(old.NameAr);
+  const [descriptionAr, setDescriptionAr] = useState(old.DescriptionAr);
+  const cvID = useSelector((state) => state.cvID);
+
   const data = {description, experienceName, startDate, endDate, project, id};
   const dispatch = useDispatch();
   let history = useHistory();
@@ -26,9 +30,9 @@ export default function Experience(props) {
 
   const handelCancel = () => {
     setExperienceName("");
-    setStartDate("");
+    setStartDate(0);
     setDescription("");
-    setEndDate("");
+    setEndDate(0);
     setProject("");
     setExperienceNameAr("");
     setDescriptionAr("");
@@ -89,29 +93,12 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("StartDate")}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+            <h5>{t("StartDate")}</h5>
+            <YearPicker onChange={(e) => setStartDate(e)} />
           </Grid>
           <Grid item xs={6}>
-            {" "}
-            <TextField
-              id="date"
-              label={t("EndDate")}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+            <h5>{t("EndDate")}</h5>
+            <YearPicker onChange={(e) => setEndDate(e)} />
           </Grid>
           <Grid item xs={12}>
             <TextField

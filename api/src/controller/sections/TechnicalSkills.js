@@ -59,10 +59,18 @@ exports.deleteTechnicalSkills = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { TechnicalSkills: tmpTechnicalSkills } })
                     .then(() => {
-                        TechnicalSkills.deleteOne({ _id: req.body.technicalSkill_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "TechnicalSlills deleted",
-                                data: tmpTechnicalSkills
+                        TechnicalSkills.findById(req.body.technicalSkill_id).then((tec)=>{
+                            TechnicalSkills.deleteOne({ _id: req.body.technicalSkill_id }).then(() => {
+                                TechnicalSkills.find({_id : {$in : tmpTechnicalSkills}}).then((tecArray)=>{
+                                    Promise.all(tecArray.map(item => {
+                                        return anAsyncFunction3(item , tec.Order);
+                                    })).then(()=>{
+                                    return res.status(200).json({
+                                        msg: "TechnicalSlills deleted",
+                                        data: tmpTechnicalSkills
+                                    })
+                                    })
+                                })
                             })
                         })
                     })
@@ -216,7 +224,7 @@ exports.copyTechnicalSkill = (req, res) => {
                             NameAr: technicalSkill.NameAr,
                             RateFrom5: technicalSkill.RateFrom5,
                             RateFrom100: technicalSkill.RateFrom100,
-                            Order: technicalSkill.Order
+                            Order: technicalSkills.length + 1
                         })
                         technicalSkills.push(newTechnicalSkill);
                         newTechnicalSkill.save().then((newtechnicalSkill) => {
@@ -323,4 +331,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await TechnicalSkills.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

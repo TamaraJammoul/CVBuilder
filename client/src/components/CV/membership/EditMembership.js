@@ -9,14 +9,17 @@ export default function EditMembership(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const {t, i18n} = useTranslation();
-  const [membershipName, setMembershipName] = useState("");
-  const [nameAr, setNameAr] = useState("");
+
   const lan = useSelector((state) => state.sections.twolan);
 
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("membershipID");
+  const membership = useSelector((state) => state.template.membership);
+  const old = membership.filter((e) => e.id == id);
+  const [membershipName, setMembershipName] = useState(old.Name);
+  const [nameAr, setNameAr] = useState(old.NameAr);
   const handelCancel = () => {
     setMembershipName("");
     setNameAr("");

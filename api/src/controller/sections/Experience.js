@@ -61,10 +61,18 @@ exports.deleteExperience = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Experiences: tmpExperiences } })
                     .then(() => {
-                        Experience.deleteOne({ _id: req.body.experience_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "experience deleted",
-                                data: tmpExperiences
+                        Experience.findById(req.body.experience_id).then((ex) => {
+                            Experience.deleteOne({ _id: req.body.experience_id }).then(() => {
+                                Experience.find({ _id: { $in: tmpExperiences } }).then((exArray) => {
+                                    Promise.all(exArray.map(item => {
+                                        return anAsyncFunction3(item, ex.Order)
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "experience deleted",
+                                            data: tmpExperiences
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -229,7 +237,7 @@ exports.copyExperience = (req, res) => {
                             End: experience.End,
                             Project: experience.Project,
                             ProjectAr: experience.ProjectAr,
-                            Orde: experience.Order
+                            Orde: experiences.length + 1
                         })
                         experiences.push(newExperience);
                         newExperience.save().then((newexperience) => {
@@ -336,4 +344,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Experience.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

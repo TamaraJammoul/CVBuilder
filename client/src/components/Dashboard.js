@@ -42,8 +42,10 @@ export default function Dashboard() {
                 <Button
                   className="save"
                   onClick={() => {
-                    dispatch(AddCVAction(email));
-                    history.push("/cvname");
+                    dispatch(AddCVAction({email}));
+                    setTimeout(() => {
+                      history.push("/cvname");
+                    }, 3000);
                   }}
                 >
                   {t("Create New CV")}

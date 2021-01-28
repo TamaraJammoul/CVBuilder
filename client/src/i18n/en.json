@@ -144,5 +144,6 @@
         "Bachelor":"Bachelor",
         "Master":"Master",
         "PhD":"PhD",
-        "High school":"High school"
+        "High school":"High school",
+        "Logout":"Logout"
 } 

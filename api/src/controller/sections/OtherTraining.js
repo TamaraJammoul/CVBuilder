@@ -61,10 +61,18 @@ exports.deleteOtherTraining = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { OtherTrainings: tmpOtherTrainings } })
                     .then(() => {
-                        OtherTraining.deleteOne({ _id: req.body.otherTraining_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "otherTraining deleted",
-                                data: tmpOtherTrainings
+                        OtherTraining.findById(req.body.otherTraining_id).then((oth) => {
+                            OtherTraining.deleteOne({ _id: req.body.otherTraining_id }).then(() => {
+                                OtherTraining.find({ _id: { $in: tmpOtherTrainings } }).then((othArray) => {
+                                    Promise.all(othArray.map(item => {
+                                        return anAsyncFunction3(item, oth.Order);
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "otherTraining deleted",
+                                            data: tmpOtherTrainings
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -211,7 +219,7 @@ exports.copyOtherTraining = (req, res) => {
                         const newOtherTraining = new OtherTraining({
                             Name: otherTraining.Name,
                             NameAr: otherTraining.NameAr,
-                            Order: otherTraining.Order
+                            Order: otherTrainings.length + 1
                         })
                         otherTrainings.push(newOtherTraining);
                         newOtherTraining.save().then((newotherTraining) => {
@@ -318,4 +326,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await OtherTraining.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

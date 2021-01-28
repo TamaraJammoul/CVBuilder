@@ -5,12 +5,13 @@ import {AddExperienceAction} from "./../../../store/action/experience";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
+import YearPicker from "react-year-picker";
 
 export default function Experience(props) {
   const [experienceName, setExperienceName] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(0);
+  const [endDate, setEndDate] = useState(0);
   const [project, setProject] = useState("");
   const [experienceNameAr, setExperienceNameAr] = useState("");
   const [descriptionAr, setDescriptionAr] = useState("");
@@ -33,9 +34,9 @@ export default function Experience(props) {
 
   const handelCancel = () => {
     setExperienceName("");
-    setStartDate("");
+    setStartDate(0);
     setDescription("");
-    setEndDate("");
+    setEndDate(0);
     setProject("");
     setExperienceNameAr("");
     setDescriptionAr("");
@@ -95,30 +96,13 @@ export default function Experience(props) {
             />
           </Grid>
           <Grid item xs={6}>
-            {" "}
-            <TextField
-              id="date"
-              label={t("StartDate")}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+            <h5>{t("StartDate")}</h5>
+            <YearPicker onChange={(e) => setStartDate(e)} />
           </Grid>
           <Grid item xs={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("EndDate")}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+            <h5>{t("EndDate")}</h5>
+            <YearPicker onChange={(e) => setEndDate(e)} />
           </Grid>
           <Grid item xs={12}>
             <TextField

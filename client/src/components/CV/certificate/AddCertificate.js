@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
 import {DatePicker} from "@material-ui/pickers";
+import YearPicker from "react-year-picker";
 
 export default function AddCertificate(props) {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export default function AddCertificate(props) {
   const [description, setDescription] = useState("");
   const [nameAr, setNameAr] = useState("");
   const [descriptionAr, setDescriptionAr] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(0);
   const cvID = useSelector((state) => state.cvID);
   const lan = useSelector((state) => state.sections.twolan);
 
@@ -94,16 +95,8 @@ export default function AddCertificate(props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("Date")}
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setDate(e.target.value)}
-            />
+            <h5>{t("Date")}</h5>
+            <YearPicker onChange={(e) => setDate(e)} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button

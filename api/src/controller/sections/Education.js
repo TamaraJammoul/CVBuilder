@@ -13,7 +13,7 @@ exports.addEducation = (req, res) => {
             if (cv) {
                 const {
                     UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart,
-                    YearEnd, DegreeFrom5, Grade, GradeAr, Order
+                    YearEnd, DegreeFrom5, Grade, Degree, Order
                 } = req.body;
 
                 const DegreeFrom10 = DegreeFrom5 * 2;
@@ -21,7 +21,7 @@ exports.addEducation = (req, res) => {
 
                 let education = new Education({
                     UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart,
-                    YearEnd, Grade, GradeAr, DegreeFrom5, DegreeFrom10,
+                    YearEnd, Grade, Degree, DegreeFrom5, DegreeFrom10,
                     DegreeFrom100, Order
                 });
                 education.save()
@@ -68,10 +68,17 @@ exports.deleteEducation = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Educations: tmpEducations } })
                     .then(() => {
-                        Education.deleteOne({ _id: req.body.education_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "education deleted",
-                                data: tmpEducations
+                        Education.findById(req.body.education_id).then((ed) => {
+                            Education.deleteOne({ _id: req.body.education_id }).then(() => {
+                                Education.find({ _id: { $in: tmpEducations } }).then((eduArray) => {
+                                    Promise.all(eduArray.map(item => {
+                                        return anAsyncFunction3(item, ed.Order);
+                                    }))
+                                    return res.status(200).json({
+                                        msg: "education deleted",
+                                        data: tmpEducations
+                                    })
+                                })
                             })
                         })
                     })
@@ -80,7 +87,7 @@ exports.deleteEducation = (req, res) => {
 }
 
 exports.updateEducation = (req, res) => {
-    const { _id, UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart, YearEnd, Grade, GradeAr, DegreeFrom5, Order } = req.body;
+    const { _id, UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart, YearEnd, Grade, Degree, DegreeFrom5, Order } = req.body;
     Education.findById(_id).exec((error, education) => {
         if (error) {
             return res.status(400).json({
@@ -100,7 +107,7 @@ exports.updateEducation = (req, res) => {
                     YearStart,
                     YearEnd,
                     Grade,
-                    GradeAr,
+                    Degree,
                     DegreeFrom5,
                     DegreeFrom10,
                     DegreeFrom100,
@@ -119,7 +126,7 @@ exports.updateEducation = (req, res) => {
                             YearStart,
                             YearEnd,
                             Grade,
-                            GradeAr,
+                            Degree,
                             DegreeFrom5,
                             DegreeFrom10,
                             DegreeFrom100,
@@ -246,8 +253,8 @@ exports.copyEducation = (req, res) => {
                             DegreeFrom10: education.DegreeFrom10,
                             DegreeFrom100: education.DegreeFrom100,
                             Grade: education.Grade,
-                            GradeAr: education.GradeAr,
-                            Order: education.Order
+                            Degree: education.Degree,
+                            Order: educations.length + 1
                         })
                         educations.push(newEducation);
                         newEducation.save().then((neweducation) => {
@@ -354,4 +361,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Education.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

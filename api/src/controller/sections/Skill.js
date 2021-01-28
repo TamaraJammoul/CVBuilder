@@ -61,10 +61,18 @@ exports.deleteSkill = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Skill: tmpSkills } })
                     .then(() => {
-                        Skill.deleteOne({ _id: req.body.skill_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "skill deleted",
-                                data: tmpSkills
+                        Skill.findById(req.body.skill_id).then((sk) => {
+                            Skill.deleteOne({ _id: req.body.skill_id }).then(() => {
+                                Skill.find({ _id: { $in: tmpSkills } }).then((sklArray) => {
+                                    Promise.all(sklArray.map(item => {
+                                        return anAsyncFunction3(item, sk.Order);
+                                    }))
+                                }).then(() => {
+                                    return res.status(200).json({
+                                        msg: "skill deleted",
+                                        data: tmpSkills
+                                    })
+                                })
                             })
                         })
                     })
@@ -211,7 +219,7 @@ exports.copySkill = (req, res) => {
                         const newSkill = new Skill({
                             Name: skill.Name,
                             NameAr: skill.NameAr,
-                            Order: skill.Order
+                            Order: skills.length + 1
                         })
                         skills.push(newSkill);
                         newSkill.save().then((newskill) => {
@@ -318,4 +326,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Skill.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

@@ -9,14 +9,16 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import YearPicker from "react-year-picker";
+
 export default function AddEducation(props) {
   const dispatch = useDispatch();
 
   const [faculty, setFaculty] = useState("");
   const [universityName, setUniversityName] = useState("");
   const [city, setCity] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(0);
+  const [endDate, setEndDate] = useState(0);
   const [rate5, setRate5] = useState(0);
   const [grade, setGrade] = useState(1);
   const [degree, setDegree] = useState(1);
@@ -45,8 +47,8 @@ export default function AddEducation(props) {
 
   const handelCancel = () => {
     setFaculty("");
-    setStartDate("");
-    setEndDate("");
+    setStartDate(0);
+    setEndDate(0);
     setRate5(0);
     setGrade("");
     setUniversityName("");
@@ -114,29 +116,13 @@ export default function AddEducation(props) {
 
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("StartDate")}
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+            <h5>{t("StartDate")}</h5>
+            <YearPicker onChange={(e) => setStartDate(e)} />
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("EndDate")}
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+            <h5>{t("EndDate")}</h5>
+            <YearPicker onChange={(e) => setEndDate(e)} />
           </Grid>
 
           <Grid item xs={12} sm={6}>

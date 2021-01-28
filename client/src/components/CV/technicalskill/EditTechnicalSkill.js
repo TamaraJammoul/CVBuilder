@@ -14,11 +14,6 @@ import {useTranslation} from "react-i18next";
 import {useHistory, useLocation} from "react-router-dom";
 
 export default function EditTechnicalSkill(props) {
-  const [skill, setSkill] = useState("");
-  const [nameAr, setNameAr] = useState("");
-  const lan = useSelector((state) => state.sections.twolan);
-
-  const [rate, setRate] = useState(2);
   const dispatch = useDispatch();
   const {t, i18n} = useTranslation();
   let history = useHistory();
@@ -26,6 +21,13 @@ export default function EditTechnicalSkill(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("technicalskillID");
+  const technicalskill = useSelector((state) => state.template.technicalskill);
+  const old = technicalskill.filter((e) => e.id == id);
+  const [skill, setSkill] = useState(old.Name);
+  const [nameAr, setNameAr] = useState(old.NameAr);
+  const lan = useSelector((state) => state.sections.twolan);
+
+  const [rate, setRate] = useState(old.Rate);
   const data = {rate, skill, nameAr, order: "1", id, cvID};
 
   const handelCancel = () => {

@@ -65,10 +65,18 @@ exports.deleteLanguage = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Languages: tmpLanguages } })
                     .then(() => {
-                        Language.deleteOne({ _id: req.body.language_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "language deleted",
-                                data: tmpLanguages
+                        Language.findById(req.body.language_id).then((lan) => {
+                            Language.deleteOne({ _id: req.body.language_id }).then(() => {
+                                Language.find({ _id: { $in: tmpLanguages } }).then((lanArray) => {
+                                    Promise.all(lanArray.map(item => {
+                                        return anAsyncFunction3(item, lan.Order);
+                                    }))
+                                }).then(() => {
+                                    return res.status(200).json({
+                                        msg: "language deleted",
+                                        data: tmpLanguages
+                                    })
+                                })
                             })
                         })
                     })
@@ -226,7 +234,7 @@ exports.copyLanguage = (req, res) => {
                             Rate: language.Rate,
                             RateFrom10: language.RateFrom10,
                             RateFrom100: language.RateFrom100,
-                            Order: language.Order
+                            Order: languages.length + 1
                         })
                         languages.push(newLanguage);
                         newLanguage.save().then((newlanguage) => {
@@ -333,4 +341,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Language.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

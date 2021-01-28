@@ -9,31 +9,33 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import YearPicker from "react-year-picker";
 
 export default function AddEducation(props) {
   const dispatch = useDispatch();
   let history = useHistory();
-  const [faculty, setFaculty] = useState("");
-  const [universityName, setUniversityName] = useState("");
-  const [city, setCity] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [rate5, setRate5] = useState(0);
-  const [grade, setGrade] = useState(1);
-  const [degree, setDegree] = useState(1);
-  const [facultyAr, setFacultyAr] = useState("");
-  const [universityNameAr, setUniversityNameAr] = useState("");
-  const [cityAr, setCityAr] = useState("");
-  const {t, i18n} = useTranslation();
-  const cvID = useSelector((state) => state.cvID);
-
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("educationID");
+  const education = useSelector((state) => state.template.education);
+  const old = education.filter((e) => e.id == id);
+  const [faculty, setFaculty] = useState(old.Faculty);
+  const [universityName, setUniversityName] = useState(old.UniversityName);
+  const [startDate, setStartDate] = useState(old.YearStart);
+  const [endDate, setEndDate] = useState(old.YearEnd);
+  const [rate5, setRate5] = useState(old.DegreeFrom5);
+  const [grade, setGrade] = useState(old.Grade);
+  const [degree, setDegree] = useState(old.Degree);
+  const [facultyAr, setFacultyAr] = useState(old.FacultyAr);
+  const [universityNameAr, setUniversityNameAr] = useState(
+    old.UniversityNameAr
+  );
+  const {t, i18n} = useTranslation();
+  const cvID = useSelector((state) => state.cvID);
+
   const data = {
     faculty,
     universityName,
-    city,
     startDate,
     endDate,
     rate5,
@@ -41,22 +43,20 @@ export default function AddEducation(props) {
     id,
     degree,
     universityNameAr,
-    cityAr,
     facultyAr,
   };
   const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setFaculty("");
-    setStartDate("");
-    setEndDate("");
+    setStartDate(0);
+    setEndDate(0);
     setRate5(0);
     setGrade("");
     setUniversityName("");
     setDegree(0);
     setUniversityNameAr("");
     setFacultyAr("");
-    setCityAr("");
     history.push("/buildcv/education");
   };
   return (
@@ -118,29 +118,13 @@ export default function AddEducation(props) {
 
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("StartDate")}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+            <h5>{t("StartDate")}</h5>
+            <YearPicker onChange={(e) => setStartDate(e)} />
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("EndDate")}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+            <h5>{t("EndDate")}</h5>
+            <YearPicker onChange={(e) => setEndDate(e)} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl>

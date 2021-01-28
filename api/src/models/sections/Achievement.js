@@ -4,7 +4,6 @@ const { String, Date, Number } = mongoose.Schema.Types;
 const AchievementSchema = new mongoose.Schema({
     Name: String,
     NameAr: String,
-    Date: Date,
     Order: Number
 });
 

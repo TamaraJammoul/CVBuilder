@@ -4,20 +4,24 @@ import {EditCertificateAction} from "./../../../store/action/certificate";
 import {useSelector, useDispatch} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import YearPicker from "react-year-picker";
 
 export default function EditCertificate(props) {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [nameAr, setNameAr] = useState("");
-  const [descriptionAr, setDescriptionAr] = useState("");
-  const [date, setDate] = useState(0);
-  const cvID = useSelector((state) => state.cvID);
-  let history = useHistory();
-  const {t, i18n} = useTranslation();
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("certificateID");
+  const certificates = useSelector((state) => state.template.certificates);
+  const old = certificates.filter((e) => e.id == id);
+  const [name, setName] = useState(old.Name);
+  const [description, setDescription] = useState(old.Description);
+  const [nameAr, setNameAr] = useState(old.NameAr);
+  const [descriptionAr, setDescriptionAr] = useState(old.DescriptionAr);
+  const [date, setDate] = useState(old.Year);
+  const cvID = useSelector((state) => state.cvID);
+  let history = useHistory();
+  const {t, i18n} = useTranslation();
+
   const lan = useSelector((state) => state.sections.twolan);
 
   const data = {
@@ -93,16 +97,8 @@ export default function EditCertificate(props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <TextField
-              id="date"
-              label={t("Date")}
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{width: "100%"}}
-              onChange={(e) => setDate(e.target.value)}
-            />
+            <h5>{t("Date")}</h5>
+            <YearPicker onChange={(e) => setDate(e)} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button

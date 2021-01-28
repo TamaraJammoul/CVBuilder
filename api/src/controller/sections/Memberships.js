@@ -61,10 +61,18 @@ exports.deleteMembership = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Memberships: tmpMemberships } })
                     .then(() => {
-                        Memberships.deleteOne({ _id: req.body.membership_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "membership deleted",
-                                data: tmpMemberships
+                        Memberships.findById(req.body.membership_id).then((mem) => {
+                            Memberships.deleteOne({ _id: req.body.membership_id }).then(() => {
+                                Memberships.find({ _id: { $in: tmpMemberships } }).then((memArray) => {
+                                    Promise.all(memArray.map(item => {
+                                        return anAsyncFunction3(item, mem.Order);
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "membership deleted",
+                                            data: tmpMemberships
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -211,7 +219,7 @@ exports.copyMembership = (req, res) => {
                         const newMembership = new Memberships({
                             Name: membership.Name,
                             NameAr: membership.NameAr,
-                            Order: membership.Order
+                            Order: memberships.length + 1
                         })
                         memberships.push(newMembership);
                         newMembership.save().then((newmembership) => {
@@ -318,4 +326,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Memberships.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

@@ -4,6 +4,7 @@ import {AddCoursesAction} from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
+import YearPicker from "react-year-picker";
 
 export default function AddCourses(props) {
   const dispatch = useDispatch();
@@ -12,7 +13,6 @@ export default function AddCourses(props) {
   const [description, setDescription] = useState("");
   const [descriptionAr, setDescriptionAr] = useState("");
   const [coursesAr, setCoursesAr] = useState("");
-
   const [year, setYear] = useState(0);
 
   let history = useHistory();
@@ -21,6 +21,7 @@ export default function AddCourses(props) {
 
   const handelCancel = () => {
     setCourses("");
+    setYear(0);
     history.push("/buildcv/courses");
   };
   return (
@@ -28,7 +29,7 @@ export default function AddCourses(props) {
       <Container>
         <Grid
           container
-          spacing={10}
+          spacing={4}
           direction="column"
           justify="center"
           alignItems="center"
@@ -82,14 +83,8 @@ export default function AddCourses(props) {
           </Grid>
           <Grid item xs={12}>
             {" "}
-            <TextField
-              id="filled-primary"
-              label={t("Year")}
-              variant="filled"
-              color="primary"
-              style={{width: "100%"}}
-              onChange={(e) => setYear(e.target.value)}
-            />
+            <h5>{t("Year")}</h5>
+            <YearPicker onChange={(e) => setYear(e)} />
           </Grid>
           <Grid item xs={12}>
             <Button

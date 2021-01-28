@@ -6,9 +6,6 @@ import {useHistory, useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 export default function EditReference(props) {
-  const [reference, setReference] = useState("");
-  const [nameAr, setNameAr] = useState("");
-
   const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
@@ -17,6 +14,10 @@ export default function EditReference(props) {
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
   const id = query.get("referenceID");
+  const referenc = useSelector((state) => state.template.referenc);
+  const old = referenc.filter((e) => e.id == id);
+  const [reference, setReference] = useState(old.Name);
+  const [nameAr, setNameAr] = useState(old.NameAr);
   const data = {id, reference, phone, nameAr, order: "1"};
   const lan = useSelector((state) => state.sections.twolan);
 

@@ -13,7 +13,7 @@ export default function Card({CardImage, template}) {
   const submit = (t) => {
     const sections = fun(t);
     dispatch(CVTemplate1({template: t, cvID, sections}));
-    history.push("/buildcv/personalinfo");
+    history.push("/buildcv/peronalinfo");
   };
   const fun = (t) => {
     if (t == "cv1")

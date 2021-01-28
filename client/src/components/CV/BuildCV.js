@@ -261,7 +261,7 @@ export default function BuildCV(props) {
             )}
           </Grid>
         </Grid>
-        <Grid item xs={8} sm={9} className="bd">
+        <Grid item xs={8} sm={9} className="bd buildcvNav">
           <Grid container direction="column" spacing={4}>
             <Grid item xs={2} style={{width: "100%", height: "100%"}}>
               <Navbar setDrawerState={setDrawerState} />
@@ -290,6 +290,10 @@ export default function BuildCV(props) {
                     <Route
                       path={`${path}/edittechnicalskills`}
                       render={(props) => <EditTechnicalSkills />}
+                    />
+                    <Route
+                      path={`${path}/achievement`}
+                      render={(props) => <Achievement />}
                     />
                     <Route
                       path={`${path}/addachievement`}

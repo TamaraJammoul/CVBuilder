@@ -61,10 +61,17 @@ exports.deleteCourse = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Courses: tmpCourses } })
                     .then(() => {
-                        Course.deleteOne({ _id: req.body.course_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "Course deleted",
-                                data: tmpCourses
+                        Course.findById(req.body.course_id).then((co) => {
+                            Course.deleteOne({ _id: req.body.course_id }).then(() => {
+                                Course.find({ _id: { $in: tmpCourses } }).then((coArray) => {
+                                    Promise.all(coArray.map(item => {
+                                        return anAsyncFunction3(item, co.Order);
+                                    }))
+                                    return res.status(200).json({
+                                        msg: "Course deleted",
+                                        data: tmpCourses
+                                    })
+                                })
                             })
                         })
                     })
@@ -215,7 +222,7 @@ exports.copyCourse = (req, res) => {
                     }
                     if (course) {
                         const newCourse = new Course({
-                            Name: course.Name, NameAr: course.NameAr, Description: course.Description, DescriptionAr: course.DescriptionAr, Year: course.Year, Order: course.Order
+                            Name: course.Name, NameAr: course.NameAr, Description: course.Description, DescriptionAr: course.DescriptionAr, Year: course.Year, Order: courses.length + 1
                         })
                         courses.push(newCourse);
                         newCourse.save().then((newcourse) => {
@@ -322,4 +329,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Course.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

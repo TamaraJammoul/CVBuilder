@@ -12,10 +12,10 @@ exports.addAchievement = (req, res) => {
             }
             if (cv) {
                 const {
-                    Name, NameAr, Date, Order
+                    Name, NameAr, Order
                 } = req.body;
                 let achievement = new Achievement({
-                    Name, NameAr, Date, Order
+                    Name, NameAr, Order
                 });
                 achievement.save()
                     .then((ach) => {
@@ -61,10 +61,18 @@ exports.deleteAchievement = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { Achievements: tmpAchievements } })
                     .then(() => {
-                        Achievement.deleteOne({ _id: req.body.achievement_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "Achievement deleted",
-                                data: tmpAchievements
+                        Achievement.findById(req.body.achievement_id).then((ac) => {
+                            Achievement.deleteOne({ _id: req.body.achievement_id }).then(() => {
+                                Achievement.find({ _id: { $in: tmpAchievements } }).then((achArray) => {
+                                    Promise.all(achArray.map(item => {
+                                        return anAsyncFunction3(item, ac.Order);
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "Achievement deleted",
+                                            data: tmpAchievements
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -73,7 +81,7 @@ exports.deleteAchievement = (req, res) => {
 };
 
 exports.updateAchievement = (req, res) => {
-    const { _id, Name, NameAr, Year, Order } = req.body;
+    const { _id, Name, NameAr, Order } = req.body;
     Achievement.findById(_id).exec((error, achievement) => {
         if (error) {
             return res.status(400).json({
@@ -86,7 +94,6 @@ exports.updateAchievement = (req, res) => {
                 $set: {
                     Name,
                     NameAr,
-                    Date: Year,
                     Order
                 }
             }).then(() => {
@@ -97,7 +104,6 @@ exports.updateAchievement = (req, res) => {
                             _id,
                             Name,
                             NameAr,
-                            Year,
                             Order
                         }
                     })
@@ -213,8 +219,7 @@ exports.copyAchievement = (req, res) => {
                         const newAchievement = new Achievement({
                             Name: achievement.Name,
                             NameAr: achievement.NameAr,
-                            Date: achievement.Date,
-                            Order: achievement.Order
+                            Order: achievements.length + 1
                         })
                         achievements.push(newAchievement);
                         newAchievement.save().then((newachievement) => {
@@ -321,4 +326,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Achievement.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }

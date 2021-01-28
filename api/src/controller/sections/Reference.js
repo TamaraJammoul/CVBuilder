@@ -57,10 +57,18 @@ exports.deleteReference = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { References: tmpReference } })
                     .then(() => {
-                        Reference.deleteOne({ _id: req.body.reference_id }).then(() => {
-                            return res.status(200).json({
-                                msg: "Reference deleted",
-                                data: tmpReference
+                        Reference.findById(req.body.reference_id).then((ref) => {
+                            Reference.deleteOne({ _id: req.body.reference_id }).then(() => {
+                                Reference.find({ _id: { $in: tmpReference } }).then((refArray) => {
+                                    Promise.all(refArray.map(item => {
+                                        return anAsyncFunction3(item, ref.Order);
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "Reference deleted",
+                                            data: tmpReference
+                                        })
+                                    })
+                                })
                             })
                         })
                     })
@@ -210,7 +218,7 @@ exports.copyReference = (req, res) => {
                             Name: reference.Name,
                             NameAr: reference.NameAr,
                             Number: reference.Number,
-                            Order: reference.Order
+                            Order: references.length + 1
                         })
                         references.push(newReference);
                         newReference.save().then((newreference) => {
@@ -317,4 +325,12 @@ const anAsyncFunction2 = async (item, newID, oldID) => {
             return Promise.resolve('ok');
         }
     })
+}
+
+const anAsyncFunction3 = async (item, order) => {
+    console.log(item, order);
+    if (item.Order > order) {
+        await Reference.updateOne({ _id: item._id }, { $set: { Order: item.Order - 1 } });
+        return Promise.resolve('ok');
+    }
 }
