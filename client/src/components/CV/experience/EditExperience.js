@@ -71,7 +71,7 @@ export default function Experience(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
               id="filled-primary"
               label={t("ExperienceName")}
@@ -81,7 +81,7 @@ export default function Experience(props) {
               onChange={(e) => setExperienceNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
               id="filled-primary"
               label={t("Description")}
@@ -93,12 +93,28 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             {" "}
-            <h5>{t("StartDate")}</h5>
-            <YearPicker onChange={(e) => setStartDate(e)} />
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                {" "}
+                <h5>{t("StartDate")}</h5>
+              </Grid>
+              <Grid item xs={6}>
+                {" "}
+                <YearPicker onChange={(e) => setStartDate(e)} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={6}>
-            <h5>{t("EndDate")}</h5>
-            <YearPicker onChange={(e) => setEndDate(e)} />
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                {" "}
+                <h5>{t("EndDate")}</h5>
+              </Grid>
+              <Grid item xs={6}>
+                {" "}
+                <YearPicker onChange={(e) => setEndDate(e)} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <TextField

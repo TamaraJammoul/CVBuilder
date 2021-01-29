@@ -51,7 +51,7 @@ export default function EditAchievement(props) {
               onChange={(e) => setAchievementName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"

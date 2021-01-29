@@ -75,7 +75,7 @@ export default function Refernce() {
                       <h6>{ref.Name}</h6>{" "}
                     </Grid>
                     <Grid item xs={7}>
-                      <h6>{ref.Number}</h6>{" "}
+                      <h6 className="ml-2">Phone : {ref.Number}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
                       <Link

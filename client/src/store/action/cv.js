@@ -6,7 +6,7 @@ export function AddCVAction(payload) {
     console.log(payload);
     await axios
       .post(`http://localhost:5000/api/CV/addCV`, {
-        Email: payload,
+        Email: payload.email,
       })
       .then((res) => {
         console.log(res.data);
@@ -68,8 +68,8 @@ export function CVName1(payload) {
   return async (dispatch) => {
     await axios
       .post(`http://localhost:5000/api/cv/updateName`, {
-        Email: payload.email,
-        id: payload.cvID,
+        Name: payload.name,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res.data, payload);

@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 export function AddAchievementAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/achievement/addAchievement`, {
         Name: payload.achievementName,

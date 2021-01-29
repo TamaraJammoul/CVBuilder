@@ -67,7 +67,7 @@ export default function EditCourse(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"
@@ -78,7 +78,7 @@ export default function EditCourse(props) {
               onChange={(e) => setCoursesNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-primary"
@@ -90,9 +90,16 @@ export default function EditCourse(props) {
             />
           </Grid>
           <Grid item xs={12}>
-            {" "}
-            <h5>{t("Year")}</h5>
-            <YearPicker onChange={(e) => setYear(e)} />
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                {" "}
+                <h5>{t("Year")}</h5>
+              </Grid>
+              <Grid item xs={6}>
+                {" "}
+                <YearPicker onChange={(e) => setYear(e)} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <Button

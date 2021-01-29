@@ -94,7 +94,7 @@ export default function AddEducation(props) {
               onChange={(e) => setUniversityName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"
@@ -105,7 +105,7 @@ export default function AddEducation(props) {
               onChange={(e) => setFacultyAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"
@@ -118,16 +118,32 @@ export default function AddEducation(props) {
 
           <Grid item xs={12} sm={6}>
             {" "}
-            <h5>{t("StartDate")}</h5>
-            <YearPicker onChange={(e) => setStartDate(e)} />
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                {" "}
+                <h5>{t("StartDate")}</h5>
+              </Grid>
+              <Grid item xs={6}>
+                {" "}
+                <YearPicker onChange={(e) => setStartDate(e)} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <h5>{t("EndDate")}</h5>
-            <YearPicker onChange={(e) => setEndDate(e)} />
+            <Grid container direction="row">
+              <Grid item xs={6}>
+                {" "}
+                <h5>{t("EndDate")}</h5>
+              </Grid>
+              <Grid item xs={6}>
+                {" "}
+                <YearPicker onChange={(e) => setEndDate(e)} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl>
+            <FormControl style={{width: "100%"}}>
               <InputLabel id="demo-simple-select-label">
                 {t("Ratefrom5")}
               </InputLabel>
@@ -148,7 +164,7 @@ export default function AddEducation(props) {
 
           <Grid item xs={12} sm={6}>
             {" "}
-            <FormControl>
+            <FormControl style={{width: "100%"}}>
               <InputLabel id="demo-simple-select-label">
                 {t("grade")}
               </InputLabel>
@@ -166,7 +182,7 @@ export default function AddEducation(props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <FormControl>
+            <FormControl style={{width: "100%"}}>
               <InputLabel id="demo-simple-select-label">
                 {t("Degree")}
               </InputLabel>

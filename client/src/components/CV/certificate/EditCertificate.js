@@ -75,7 +75,7 @@ export default function EditCertificate(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"
@@ -85,7 +85,7 @@ export default function EditCertificate(props) {
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 1 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"

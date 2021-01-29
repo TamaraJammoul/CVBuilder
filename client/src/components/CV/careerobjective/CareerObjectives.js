@@ -96,7 +96,7 @@ export default function CareerObjectives() {
             item
             xs={12}
             style={{width: "100%"}}
-            className={lan == 1 ? "arhide" : ""}
+            className={lan == 0 ? "arhide" : ""}
           >
             {" "}
             <Editor
