@@ -16,12 +16,14 @@ export default function EditCourse(props) {
   let query = useQuery();
   const id = query.get("course_id");
   const courses = useSelector((state) => state.template.courses);
-  const old = courses.filter((e) => e.id == id);
-  const [coursesName, setCoursesName] = useState(old.Name);
-  const [description, setDescription] = useState(old.Description);
-  const [coursesNameAr, setCoursesNameAr] = useState(old.NameAr);
-  const [descriptionAr, setDescriptionAr] = useState(old.DescriptionAr);
-  const [year, setYear] = useState(old.Year);
+  const old = courses.find((e) => e._id == id);
+  const [coursesName, setCoursesName] = useState(old ? old.Name : "");
+  const [description, setDescription] = useState(old ? old.Description : "");
+  const [coursesNameAr, setCoursesNameAr] = useState(old ? old.NameAr : "");
+  const [descriptionAr, setDescriptionAr] = useState(
+    old ? old.DescriptionAr : ""
+  );
+  const [year, setYear] = useState(old ? old.Year : 0);
   const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
@@ -53,6 +55,7 @@ export default function EditCourse(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={coursesName}
               onChange={(e) => setCoursesName(e.target.value)}
             />
           </Grid>
@@ -64,6 +67,7 @@ export default function EditCourse(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
@@ -71,10 +75,11 @@ export default function EditCourse(props) {
             {" "}
             <TextField
               id="filled-primary"
-              label={t("CoursesName")}
+              label={t("CoursesNameAr")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={coursesNameAr}
               onChange={(e) => setCoursesNameAr(e.target.value)}
             />
           </Grid>
@@ -82,10 +87,11 @@ export default function EditCourse(props) {
             {" "}
             <TextField
               id="filled-primary"
-              label={t("Description")}
+              label={t("DescriptionAr")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={descriptionAr}
               onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>

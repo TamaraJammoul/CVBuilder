@@ -146,6 +146,26 @@
         "Master":"ماجستير",
         "PhD":"دكتوراه",
         "High school":"شهادة ثانوية",
-        "Logout":"تسجيل خروج"
-
+        "Certificate NameAr":"الشهادة باللغة العربية",
+        "CoursesNameAr":"اسم الدورة باللغة العربية",
+        "DescriptionAr":"الوصف باللغة العربية",
+        "facultyAr":"الكلية باللغة العربية",
+        "SchoolNameorUniversityAr":"المدرسة أو الجامعة باللغة العربية",
+        "ExperienceNameAr":"اسم الخبرة باللغة العربية",
+        "LanguageAr":"اسم اللغة بالعربية",
+        "MembershipAr":"العضوية باللغة العربية",
+        "Computer Proficiency":"إجادة العمل على الحاسوب",
+        "Leadership and Organisation":"القيادة والتنظيم",
+        "Team Work":"العمل ضمن فريق",
+        "Self Development":"تطوير الذات",
+        "Work under pressure":"العمل تحت الضغط",
+        "Time Managment":"إدارة الوقت",
+        "Office Programs":"برامج أوفيس",
+        "Courses":"الدورات التدريبية",
+        "Achievement":"الإنجازات",
+        "Login":"سجل دخول",
+        "homeheadtext":"أنشئ سيرتك الذاتية معنا في أقل من عشر دقائق",
+        "Date Of Birth":"تاريخ الميلاد",
+        "Year":"السنة"
+ 
 } 

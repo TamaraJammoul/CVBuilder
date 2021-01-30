@@ -73,7 +73,7 @@ function LoginForm(props) {
                     spacing={4}
                   >
                     <Grid item>
-                      <h1 style={{marginTop: "30px"}}>Login</h1>
+                      <h1 style={{marginTop: "30px"}}>{t("Login")}</h1>
                     </Grid>
                     <Grid item>
                       <Field
@@ -122,7 +122,7 @@ function LoginForm(props) {
                         {t("Signup")}
                       </Link>
                     </Grid>{" "}
-                    <Grid item>
+                    <Grid item className="mr-2 ml-2">
                       {" "}
                       <Link to="/forgetpassword">
                         {t("forget your password?")}

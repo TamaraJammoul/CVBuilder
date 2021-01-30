@@ -14,7 +14,7 @@ export default function CVName() {
   const cvID = useSelector((state) => state.cvID);
 
   return (
-    <div className="backgroundimg" style={{minHeight: "100vh"}}>
+    <div className="backgroundimg scrollnon" style={{minHeight: "100vh"}}>
       <Grid
         container
         alignItems="center"
@@ -45,7 +45,7 @@ export default function CVName() {
               {" "}
               <TextField
                 id="standard-basic"
-                label="Resume Name"
+                label={t("Resume Name")}
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -56,6 +56,7 @@ export default function CVName() {
                 color="primary"
                 size="medium"
                 startIcon={<ArrowForward />}
+                className="save"
                 onClick={() => {
                   dispatch(CVName1({name, cvID}));
                   history.push("/cvtemplates");

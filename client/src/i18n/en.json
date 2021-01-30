@@ -145,5 +145,26 @@
         "Master":"Master",
         "PhD":"PhD",
         "High school":"High school",
-        "Logout":"Logout"
+        "Certificate NameAr":"Certificate Name In Arabic",
+        "CoursesNameAr":"Course Name In Arabic",
+        "DescriptionAr":"Description In Arabic",
+        "facultyAr":"Faculty Name In Arabic",
+        "SchoolNameorUniversityAr":"School Or University In Arabic",
+        "ExperienceNameAr":"Experience Name In Arabic",
+        "LanguageAr":"Language Name In Arabic",
+        "MembershipAr":"Membership Name In Arabic",
+        "Computer Proficiency":"Computer Proficiency",
+        "Leadership and Organisation":"Leadership and Organisation",
+        "Team Work":"Team Work",
+        "Self Development":"Self Development",
+        "Work under pressure":"Work under pressure",
+        "Time Managment":"Time Managment",
+        "Office Programs":"Office Programs",
+        "Courses":"Courses",
+        "Achievement":"Achievement",
+        "Login":"Login",
+        "homeheadtext":"Build your CV with us in less than 10min",
+        "Date Of Birth":"Date Of Birth",
+        "Year":"Year"
+        
 } 

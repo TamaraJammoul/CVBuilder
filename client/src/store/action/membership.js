@@ -19,7 +19,7 @@ export function AddMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDMEMBERSHIP,
             payload: res.data.data,
@@ -40,7 +40,7 @@ export function CopyMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: COPYMEMBERSHIP,
             payload: res.data.data,
@@ -63,7 +63,7 @@ export function DeleteMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETEMEMBERSHIP,
             payload,
@@ -86,7 +86,7 @@ export function EditMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITMEMBERSHIP,
             payload: res.data.data,
@@ -107,7 +107,7 @@ export function HideMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDEMEMBERSHIP,
             payload: res.data.data,
@@ -129,7 +129,7 @@ export function OrderMembershipAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ORDERMEMBERSHIP,
             payload,

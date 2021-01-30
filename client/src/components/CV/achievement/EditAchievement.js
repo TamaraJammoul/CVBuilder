@@ -17,10 +17,10 @@ export default function EditAchievement(props) {
   let query = useQuery();
   const id = query.get("achievementID");
   const achievements = useSelector((state) => state.template.achievements);
-  const old = achievements.filter((e) => e.id == id);
+  const old = achievements.find((e) => e._id == id);
   console.log(old, "pppp");
-  const [achievementName, setAchievementName] = useState(old.Name);
-  const [nameAr, setNameAr] = useState(old.NameAr);
+  const [achievementName, setAchievementName] = useState(old ? old.Name : "");
+  const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
 
   const handelCancel = () => {
     setAchievementName("");
@@ -48,6 +48,7 @@ export default function EditAchievement(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={achievementName}
               onChange={(e) => setAchievementName(e.target.value)}
             />
           </Grid>
@@ -59,6 +60,7 @@ export default function EditAchievement(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={nameAr}
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>

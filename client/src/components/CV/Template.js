@@ -5,7 +5,7 @@ import {Delete, Edit} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {DeleteCVAction} from "./../../store/action/cv";
+import {DeleteCVAction, EditCVAction} from "./../../store/action/cv";
 export default function Template(props) {
   const dispatch = useDispatch();
   const {t} = useTranslation();
@@ -28,17 +28,17 @@ export default function Template(props) {
             />
           </Grid>
           <Grid item>
-            <h5>{props.template.name}</h5>
+            <h5>{props.template.Name}</h5>
           </Grid>
           <Grid item>
             <h6>
-              {t("Created")}:{props.template.date}
+              {t("Created")}:{props.template.CreatedDate}
             </h6>
           </Grid>
 
           <Grid item>
             <h6>
-              {t("Language")}: {props.template.language}
+              {t("Language")}: {props.template.Language}
             </h6>
           </Grid>
           <Grid item>
@@ -50,7 +50,12 @@ export default function Template(props) {
               spacing={4}
             >
               <Grid item xs={1}>
-                <Link to="/editmembership">
+                <Link
+                  to="/buildcv/peronalinfo"
+                  onClick={() =>
+                    dispatch(EditCVAction({cvID: props.template._id}))
+                  }
+                >
                   {" "}
                   <IconButton aria-label="delete">
                     <Edit style={{color: "blue"}} />
@@ -60,9 +65,9 @@ export default function Template(props) {
               <Grid item xs={1}>
                 <IconButton
                   aria-label="delete"
-                  onClick={dispatch(
-                    DeleteCVAction({cvID: props.template._id, email})
-                  )}
+                  onClick={() =>
+                    dispatch(DeleteCVAction({cvID: props.template._id, email}))
+                  }
                 >
                   <Delete style={{color: "red"}} />
                 </IconButton>

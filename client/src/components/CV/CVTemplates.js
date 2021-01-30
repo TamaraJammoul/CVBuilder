@@ -25,7 +25,7 @@ export default function CVTemplates() {
       direction="column"
       spacing={6}
       style={{paddingTop: "30px"}}
-      className="backgroundimg"
+      className="backgroundimg "
     >
       <Grid item xs={12}>
         {" "}

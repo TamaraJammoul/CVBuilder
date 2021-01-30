@@ -1,4 +1,12 @@
-import {ADDCV, DELETECV, ERROR, CVNAME, CVLANGIAGE, CVTEMPLATE} from "./types";
+import {
+  ADDCV,
+  DELETECV,
+  ERROR,
+  CVNAME,
+  CVLANGIAGE,
+  CVTEMPLATE,
+  EDITCV,
+} from "./types";
 import axios from "axios";
 
 export function AddCVAction(payload) {
@@ -10,7 +18,7 @@ export function AddCVAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDCV,
             payload: res.data.data,
@@ -31,7 +39,7 @@ export function DeleteCVAction(payload) {
       })
       .then((res) => {
         console.log(res.data.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETECV,
             payload: res.data.data,
@@ -43,6 +51,14 @@ export function DeleteCVAction(payload) {
       });
   };
 }
+export function EditCVAction(payload) {
+  return (dispatch) => {
+    dispatch({
+      type: EDITCV,
+      payload,
+    });
+  };
+}
 export function CVLanguage1(payload) {
   return async (dispatch) => {
     await axios
@@ -52,7 +68,7 @@ export function CVLanguage1(payload) {
       })
       .then((res) => {
         console.log(res.data.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: CVLANGIAGE,
             payload: res.data.data,
@@ -73,7 +89,7 @@ export function CVName1(payload) {
       })
       .then((res) => {
         console.log(res.data, payload);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: CVNAME,
             payload,
@@ -95,7 +111,7 @@ export function CVTemplate1(payload) {
       })
       .then((res) => {
         console.log(res.data, payload);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: CVTEMPLATE,
             payload,

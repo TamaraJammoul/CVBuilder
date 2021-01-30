@@ -56,13 +56,13 @@ export default function Dashboard() {
           <Grid item xs={12}>
             <Grid
               container
-              direction="column"
-              spacing={2}
+              direction="row"
+              spacing={4}
               justify="center"
               alignItems="center"
             >
-              {myTemplate.map((template) => (
-                <Grid item xs={12} sm={4}>
+              {myTemplate.map((template, i) => (
+                <Grid item xs={12} sm={4} key={i}>
                   <Template template />
                 </Grid>
               ))}

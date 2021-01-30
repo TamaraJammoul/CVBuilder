@@ -12,7 +12,7 @@ export function EditCareerObjectiveAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITCAREEROBJECTIVE,
             payload: res.data.data,
@@ -34,7 +34,7 @@ export function HideCareerObjectiveAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDECAREEROBJECTIVE,
             payload: res.data.data,

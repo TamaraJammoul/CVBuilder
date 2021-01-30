@@ -70,7 +70,7 @@ function HomeNav(props) {
               aria-expanded="false"
             >
               <img
-                src={i18n.language == "en" ? us : ar}
+                src={i18n.language == "en-US" ? us : ar}
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>
@@ -110,7 +110,7 @@ function HomeNav(props) {
           className="navbar-brand"
           onClick={localStorage.getItem("token") ? logout() : ""}
         >
-          <h5>{localStorage.getItem("token") ? t("Logout") : t("LogIn")}</h5>
+          <h5>{localStorage.getItem("token") ? t("Logout") : t("Login")}</h5>
         </a>
       </div>
     </nav>

@@ -3,6 +3,7 @@ import {useHistory, withRouter, Link} from "react-router-dom";
 import {ButtonContainer} from "./Button";
 import us from "./../../img/us.svg";
 import ar from "./../../img/sa.svg";
+import {useSelector, useDispatch} from "react-redux";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
@@ -15,7 +16,6 @@ function Navbar(props) {
   const theme = useTheme();
   const {t, i18n} = useTranslation();
   document.body.dir = i18n.dir();
-
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
 
@@ -25,6 +25,21 @@ function Navbar(props) {
   useEffect(() => {
     setisst(localStorage.getItem("state"));
   }, [history.location]);
+  const cvTemplate = useSelector((state) => state.cvTemplate);
+
+  const preview = () => {
+    if (cvTemplate == "cv1") history.push("/cv1");
+    if (cvTemplate == "cv2") history.push("/cv2");
+    if (cvTemplate == "cv3") history.push("/cv3");
+    if (cvTemplate == "cv4") history.push("/cv4");
+    if (cvTemplate == "cv5") history.push("/cv5");
+    if (cvTemplate == "cv6") history.push("/cv6");
+    if (cvTemplate == "cv7") history.push("/cv7");
+    if (cvTemplate == "cv8") history.push("/cv8");
+    if (cvTemplate == "cv9") history.push("/cv9");
+    if (cvTemplate == "cv10") history.push("/cv10");
+    if (cvTemplate == "cv11") history.push("/cv11");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
       <Link className="navbar-brand" to="/dashboard">
@@ -55,7 +70,7 @@ function Navbar(props) {
             </Link>
           </li>
           <li className="nav-item active">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" onClick={() => preview()}>
               <h5>{t("Preview&Download")}</h5>
             </a>
           </li>
@@ -70,7 +85,7 @@ function Navbar(props) {
               aria-expanded="false"
             >
               <img
-                src={i18n.language == "en" ? us : ar}
+                src={i18n.language == "en-US" ? us : ar}
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>

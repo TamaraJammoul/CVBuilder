@@ -188,7 +188,7 @@ export default function PersonalInfo() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl>
+            <FormControl style={{width: "50%"}}>
               <InputLabel id="demo-simple-select-label">
                 {t("Marital Status")}
               </InputLabel>

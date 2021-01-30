@@ -19,10 +19,10 @@ export default function AddLanguage(props) {
   let query = useQuery();
   const id = query.get("language_id");
   const languagetemp = useSelector((state) => state.template.languages);
-  const old = languagetemp.find((e) => e.id == id);
-  const [language, setLanguage] = useState(old?old.Name:"");
-  const [nameAr, setNameAr] = useState(old?old.NameAr:"");
-  const [rate, setRate] = useState(old?old.Rate:0);
+  const old = languagetemp.find((e) => e._id == id);
+  const [language, setLanguage] = useState(old ? old.Name : "");
+  const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
+  const [rate, setRate] = useState(old ? old.Rate : 0);
   const data = {language, rate, id, nameAr, order: "1"};
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -54,16 +54,18 @@ export default function AddLanguage(props) {
               variant="filled"
               placeholder={t("eg.English")}
               style={{width: "100%"}}
+              value={language}
               onChange={(e) => setLanguage(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             <TextField
               id="filled-basic"
-              label={t("Language")}
+              label={t("LanguageAr")}
               variant="filled"
               placeholder="مثال:اللغة الانكليزية"
               style={{width: "100%"}}
+              value={nameAr}
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>

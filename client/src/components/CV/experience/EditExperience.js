@@ -12,14 +12,18 @@ export default function Experience(props) {
   let query = useQuery();
   const id = query.get("experienceID");
   const experience = useSelector((state) => state.template.experience);
-  const old = experience.filter((e) => e.id == id);
-  const [experienceName, setExperienceName] = useState(old.Name);
-  const [description, setDescription] = useState(old.Description);
-  const [startDate, setStartDate] = useState(old.Start);
-  const [endDate, setEndDate] = useState(old.End);
-  const [project, setProject] = useState(old.Project);
-  const [experienceNameAr, setExperienceNameAr] = useState(old.NameAr);
-  const [descriptionAr, setDescriptionAr] = useState(old.DescriptionAr);
+  const old = experience.find((e) => e._id == id);
+  const [experienceName, setExperienceName] = useState(old ? old.Name : "");
+  const [description, setDescription] = useState(old ? old.Description : "");
+  const [startDate, setStartDate] = useState(old ? old.Start : 0);
+  const [endDate, setEndDate] = useState(old ? old.End : 0);
+  const [project, setProject] = useState(old ? old.Project : "");
+  const [experienceNameAr, setExperienceNameAr] = useState(
+    old ? old.NameAr : ""
+  );
+  const [descriptionAr, setDescriptionAr] = useState(
+    old ? old.DescriptionAr : ""
+  );
   const cvID = useSelector((state) => state.cvID);
 
   const data = {description, experienceName, startDate, endDate, project, id};
@@ -58,6 +62,7 @@ export default function Experience(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={experienceName}
               onChange={(e) => setExperienceName(e.target.value)}
             />
           </Grid>
@@ -68,26 +73,29 @@ export default function Experience(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
           <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
               id="filled-primary"
-              label={t("ExperienceName")}
+              label={t("ExperienceNameAr")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={experienceNameAr}
               onChange={(e) => setExperienceNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
               id="filled-primary"
-              label={t("Description")}
+              label={t("DescriptionAr")}
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={descriptionAr}
               onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
@@ -123,6 +131,7 @@ export default function Experience(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={project}
               onChange={(e) => setProject(e.target.value)}
             />
           </Grid>

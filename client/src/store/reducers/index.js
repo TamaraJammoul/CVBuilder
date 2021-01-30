@@ -24,6 +24,11 @@ export default function reducer(state, action) {
         ...state,
         cvName: action.payload.name,
       };
+    case "EDITCV":
+      return {
+        ...state,
+        cvName: action.payload.name,
+      };
     case "CVTEMPLATE":
       return {
         ...state,

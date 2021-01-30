@@ -5,9 +5,11 @@ import {Payment, EventNote} from "@material-ui/icons";
 import Footer from "./Layout/Footer";
 import Drawertemp from "./CV/Drawer";
 import {Drawer} from "@material-ui/core";
+import {useTranslation} from "react-i18next";
 
 export default function Home() {
   const [drawerState, setDrawerState] = useState(false);
+  const {t} = useTranslation();
 
   return (
     <div className="">
@@ -30,7 +32,7 @@ export default function Home() {
               data-aos-duration="1000"
             >
               {" "}
-              <h1>Build your CV with us in less than 10min</h1>
+              <h1>{t("homeheadtext")}</h1>
             </div>
             <div className="col-sm-6 section1img"></div>
           </div>{" "}

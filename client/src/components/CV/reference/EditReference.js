@@ -15,16 +15,14 @@ export default function EditReference(props) {
   let query = useQuery();
   const id = query.get("referenceID");
   const referenc = useSelector((state) => state.template.referenc);
-  const old = referenc.filter((e) => e.id == id);
-  const [reference, setReference] = useState(old.Name);
-  const [nameAr, setNameAr] = useState(old.NameAr);
-  const data = {id, reference, phone, nameAr, order: "1"};
+  const old = referenc.find((e) => e._id == id);
+  const [reference, setReference] = useState(old ? old.Name : "");
+  const data = {id, reference, phone, order: "1"};
   const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setReference("");
     setPhone("");
-    setNameAr("");
     history.push("/buildcv/reference");
   };
   return (
@@ -48,20 +46,11 @@ export default function EditReference(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={reference}
               onChange={(e) => setReference(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
-            {" "}
-            <TextField
-              id="filled-primary"
-              label={t("AddReference")}
-              variant="filled"
-              color="primary"
-              style={{width: "100%"}}
-              onChange={(e) => setNameAr(e.target.value)}
-            />
-          </Grid>
+
           <Grid item xs={12}>
             {" "}
             <TextField

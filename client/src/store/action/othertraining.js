@@ -19,7 +19,7 @@ export function AddOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDOTHERTRAINING,
             payload: res.data.data,
@@ -41,7 +41,7 @@ export function CopyOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: COPYOTHERTRAINING,
             payload: res.data.data,
@@ -63,7 +63,7 @@ export function DeleteOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETEOTHERTRAINING,
             payload: res.data.data,
@@ -86,7 +86,7 @@ export function EditOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITOTHERTRAINING,
             payload: res.data.data,
@@ -107,7 +107,7 @@ export function HideOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDEOTHERTRAINING,
             payload: res.data.data,
@@ -129,7 +129,7 @@ export function OrderOtherTrainingAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ORDEROTHERTRAINING,
             payload,

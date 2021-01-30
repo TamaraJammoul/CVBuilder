@@ -10,7 +10,7 @@ export function LoginAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200) {
+        if (res.status == 200 && res.data.status != 0) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("FirstName", res.data.user.FirstName);
           localStorage.setItem("LastName", res.data.user.LastName);
@@ -38,7 +38,7 @@ export function SignupAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200) {
+        if (res.status == 200 && res.data.status != 0) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("FirstName", res.data.user.FirstName);
           localStorage.setItem("LastName", res.data.user.LastName);

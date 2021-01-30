@@ -20,7 +20,7 @@ export function AddReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDREFERENCE,
             payload: res.data.data,
@@ -42,7 +42,7 @@ export function CopyReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: COPYREFERENCE,
             payload,
@@ -64,7 +64,7 @@ export function DeleteReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETEREFERENCE,
             payload,
@@ -89,7 +89,7 @@ export function EditReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITREFERENCE,
             payload: res.data.data,
@@ -111,7 +111,7 @@ export function HideReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDEREFERENCE,
             payload: res.data.data,
@@ -134,7 +134,7 @@ export function OrderReferenceAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ORDERREFERENCE,
             payload,

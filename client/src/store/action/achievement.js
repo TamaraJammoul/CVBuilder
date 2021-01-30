@@ -20,7 +20,7 @@ export function AddAchievementAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDACHIEVEMENT,
             payload: res.data.data,
@@ -41,7 +41,7 @@ export function CopyAchievementAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: COPYACHIEVEMENT,
             payload: res.data.data,
@@ -64,7 +64,7 @@ export function DeleteAchievementAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETEACHIEVEMENT,
             payload,
@@ -87,7 +87,7 @@ export function EditAchievementAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITACHIEVEMENT,
             payload: res.data.data,
@@ -108,7 +108,7 @@ export function HideAchievementAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDEACHIEVEMENT,
             payload: res.data.data,
@@ -129,7 +129,7 @@ export function OrderAchievementAction(payload) {
         newID: payload.destination.index,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data && res.data.status != 0);
         if (res.status == 200)
           dispatch({
             type: ORDERACHIEVEMENT,

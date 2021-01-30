@@ -22,7 +22,7 @@ export function AddCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDCOURSES,
             payload: res.data.data,
@@ -44,7 +44,7 @@ export function CopyCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200) {
+        if (res.status == 200 && res.data.status != 0) {
           console.log("tamara");
           dispatch({
             type: COPYCOURSES,
@@ -67,7 +67,7 @@ export function DeleteCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETECOURSES,
             payload,
@@ -93,7 +93,7 @@ export function EditCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITCOURSES,
             payload: res.data.data,
@@ -115,7 +115,7 @@ export function HideCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDECOURSES,
             payload: res.data.data,
@@ -138,7 +138,7 @@ export function OrderCoursesAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ORDERCOURSES,
             payload,

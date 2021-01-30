@@ -12,12 +12,14 @@ export default function EditCertificate(props) {
   let query = useQuery();
   const id = query.get("certificateID");
   const certificates = useSelector((state) => state.template.certificates);
-  const old = certificates.filter((e) => e.id == id);
-  const [name, setName] = useState(old.Name);
-  const [description, setDescription] = useState(old.Description);
-  const [nameAr, setNameAr] = useState(old.NameAr);
-  const [descriptionAr, setDescriptionAr] = useState(old.DescriptionAr);
-  const [date, setDate] = useState(old.Year);
+  const old = certificates.find((e) => e._id == id);
+  const [name, setName] = useState(old ? old.Name : "");
+  const [description, setDescription] = useState(old ? old.Description : "");
+  const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
+  const [descriptionAr, setDescriptionAr] = useState(
+    old ? old.DescriptionAr : ""
+  );
+  const [date, setDate] = useState(old ? old.Year : 0);
   const cvID = useSelector((state) => state.cvID);
   let history = useHistory();
   const {t, i18n} = useTranslation();
@@ -62,6 +64,7 @@ export default function EditCertificate(props) {
               label={t("Certificate Name")}
               variant="filled"
               style={{width: "100%"}}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Grid>
@@ -72,6 +75,7 @@ export default function EditCertificate(props) {
               label={t("Description")}
               variant="filled"
               style={{width: "100%"}}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
@@ -79,9 +83,10 @@ export default function EditCertificate(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label={t("Certificate Name")}
+              label={t("Certificate NameAr")}
               variant="filled"
               style={{width: "100%"}}
+              value={nameAr}
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
@@ -92,6 +97,7 @@ export default function EditCertificate(props) {
               label={t("Description")}
               variant="filled"
               style={{width: "100%"}}
+              value={descriptionAr}
               onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>

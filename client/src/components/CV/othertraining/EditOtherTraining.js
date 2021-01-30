@@ -14,15 +14,14 @@ export default function AddOtherTraining(props) {
   let query = useQuery();
   const id = query.get("othertrainingID");
   const othertraining = useSelector((state) => state.template.othertraining);
-  const old = othertraining.filter((e) => e.id == id);
-  const [otherTraining, setOtherTraining] = useState(old.Name);
-  const [nameAr, setNameAr] = useState(old.NameAr);
-  const data = {id, otherTraining, nameAr, order: "1"};
+  const old = othertraining.find((e) => e._id == id);
+  const [otherTraining, setOtherTraining] = useState(old ? old.Name : "");
+  const data = {id, otherTraining, order: "1"};
   const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
     setOtherTraining("");
-    setNameAr("");
+
     history.push("/buildcv/othertraining");
   };
   return (
@@ -46,20 +45,11 @@ export default function AddOtherTraining(props) {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
+              value={otherTraining}
               onChange={(e) => setOtherTraining(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
-            {" "}
-            <TextField
-              id="filled-primary"
-              label={t("OtherTraining")}
-              variant="filled"
-              color="primary"
-              style={{width: "100%"}}
-              onChange={(e) => setNameAr(e.target.value)}
-            />
-          </Grid>
+
           <Grid item xs={12}>
             <Button
               variant="contained"

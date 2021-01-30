@@ -10,7 +10,7 @@ export function AddSkillAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDSKILL,
             payload,
@@ -31,7 +31,7 @@ export function HideSkillAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDESKILL,
             payload,

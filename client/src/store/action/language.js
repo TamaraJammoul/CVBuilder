@@ -22,7 +22,7 @@ export function AddLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDLANGUAGE,
             payload: res.data.data,
@@ -44,7 +44,7 @@ export function CopyLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: COPYLANGUAGE,
             payload: res.data.data,
@@ -66,7 +66,7 @@ export function DeleteLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETELANGUAGE,
             payload: res.data,
@@ -91,7 +91,7 @@ export function EditLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITLANGUAGE,
             payload: res.data.data,
@@ -113,7 +113,7 @@ export function HideLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDELANGUAGE,
             payload: res.data.data,
@@ -136,7 +136,7 @@ export function OrderLanguageAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ORDERLANGUAGE,
             payload,

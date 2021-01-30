@@ -18,17 +18,19 @@ export default function AddEducation(props) {
   let query = useQuery();
   const id = query.get("educationID");
   const education = useSelector((state) => state.template.education);
-  const old = education.filter((e) => e.id == id);
-  const [faculty, setFaculty] = useState(old.Faculty);
-  const [universityName, setUniversityName] = useState(old.UniversityName);
-  const [startDate, setStartDate] = useState(old.YearStart);
-  const [endDate, setEndDate] = useState(old.YearEnd);
-  const [rate5, setRate5] = useState(old.DegreeFrom5);
-  const [grade, setGrade] = useState(old.Grade);
-  const [degree, setDegree] = useState(old.Degree);
-  const [facultyAr, setFacultyAr] = useState(old.FacultyAr);
+  const old = education.find((e) => e._id == id);
+  const [faculty, setFaculty] = useState(old ? old.Faculty : "");
+  const [universityName, setUniversityName] = useState(
+    old ? old.UniversityName : ""
+  );
+  const [startDate, setStartDate] = useState(old ? old.YearStart : 0);
+  const [endDate, setEndDate] = useState(old ? old.YearEnd : 0);
+  const [rate5, setRate5] = useState(old ? old.DegreeFrom5 : 0);
+  const [grade, setGrade] = useState(old ? old.Grade : 0);
+  const [degree, setDegree] = useState(old ? old.Degree : 0);
+  const [facultyAr, setFacultyAr] = useState(old ? old.FacultyAr : "");
   const [universityNameAr, setUniversityNameAr] = useState(
-    old.UniversityNameAr
+    old ? old.UniversityNameAr : ""
   );
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
@@ -81,6 +83,7 @@ export default function AddEducation(props) {
               variant="filled"
               placeholder={t("eg.Engineering")}
               style={{width: "100%"}}
+              value={faculty}
               onChange={(e) => setFaculty(e.target.value)}
             />
           </Grid>
@@ -91,6 +94,7 @@ export default function AddEducation(props) {
               label={t("SchoolNameorUniversity")}
               variant="filled"
               style={{width: "100%"}}
+              value={universityName}
               onChange={(e) => setUniversityName(e.target.value)}
             />
           </Grid>
@@ -98,10 +102,11 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label={t("faculty")}
+              label={t("facultyAr")}
               variant="filled"
               placeholder={t("eg.Engineering")}
               style={{width: "100%"}}
+              value={facultyAr}
               onChange={(e) => setFacultyAr(e.target.value)}
             />
           </Grid>
@@ -109,9 +114,10 @@ export default function AddEducation(props) {
             {" "}
             <TextField
               id="filled-basic"
-              label={t("SchoolNameorUniversity")}
+              label={t("SchoolNameorUniversityAr")}
               variant="filled"
               style={{width: "100%"}}
+              value={universityNameAr}
               onChange={(e) => setUniversityNameAr(e.target.value)}
             />
           </Grid>

@@ -20,7 +20,7 @@ import AddReference from "./reference/AddReference";
 import Achievement from "./achievement/Achievement";
 import EditAchievement from "./achievement/EditAchievement";
 import AddAchievement from "./achievement/AddAchievement";
-import Skills from "./AddSkill";
+import Skills from "./Skills";
 import Languages from "./language/Languages";
 import AddLanguage from "./language/AddLanguage";
 import EditLanguage from "./language/EditLanguage";

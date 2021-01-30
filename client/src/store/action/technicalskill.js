@@ -21,7 +21,7 @@ export function AddTechnicalSkillsAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ADDTECHNICALSKILL,
             payload: res.data.data,
@@ -43,10 +43,15 @@ export function CopyTechnicalSkillsAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch({
-          type: COPYTECHNICALSKILL,
-          payload: res.data.data,
-        });
+        if (res.status == 200 && res.data.status != 0)
+          dispatch({
+            type: COPYTECHNICALSKILL,
+            payload: res.data.data,
+          });
+        else
+          dispatch({
+            type: ERROR,
+          });
       });
   };
 }
@@ -61,7 +66,7 @@ export function DeleteTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETETECHNICALSKILL,
             payload,
@@ -87,7 +92,7 @@ export function EditTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITTECHNICALSKILL,
             payload: res.data.data,
@@ -109,7 +114,7 @@ export function HideTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: HIDETECHNICALSKILL,
             payload: res.data.data,
@@ -132,7 +137,7 @@ export function OrderTechnicalSkillAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: ORDERTECHNICALSKILL,
             payload,

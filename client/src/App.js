@@ -210,12 +210,12 @@ function App(props) {
 
   return (
     <Provider store={store}>
-      <Toast />
-      <div className="wow">
+      <div>
         {loading ? (
           <Loading />
         ) : (
           <>
+            <Toast />
             <Switch>
               <Route exact path="/" render={(props) => <Home />} />
               <Route path="/login" render={(props) => <Login />} />
@@ -235,7 +235,7 @@ function App(props) {
             <ScrollUpButton
               AnimationDuration={500}
               EasingType="easeOutCubic"
-              style={{backgroundColor: "#5B2338"}}
+              style={{backgroundColor: "rgba(69, 35, 73, 0.9)"}}
             />
           </>
         )}

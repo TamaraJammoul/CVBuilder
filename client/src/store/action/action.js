@@ -19,7 +19,7 @@ export function ContactusAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: CONTACTUS,
             payload: res.data,
@@ -45,7 +45,7 @@ export function GetAllCVAction(payload) {
       .post(`http://localhost:5000/api/CV/getAllCV`, {Email: payload})
       .then((res) => {
         console.log(res);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: GETALLCV,
             payload: res.data.data,
@@ -74,7 +74,7 @@ export function PeraonalInfoAction(payload) {
       )
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200)
+        if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: PERSONALINFO,
             payload: res.data,

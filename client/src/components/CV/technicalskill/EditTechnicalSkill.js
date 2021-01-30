@@ -22,18 +22,16 @@ export default function EditTechnicalSkill(props) {
   let query = useQuery();
   const id = query.get("technicalskillID");
   const technicalskill = useSelector((state) => state.template.technicalskill);
-  const old = technicalskill.filter((e) => e.id == id);
-  const [skill, setSkill] = useState(old.Name);
-  const [nameAr, setNameAr] = useState(old.NameAr);
+  const old = technicalskill.find((e) => e._id == id);
+  const [skill, setSkill] = useState(old ? old.Name : "");
   const lan = useSelector((state) => state.sections.twolan);
 
-  const [rate, setRate] = useState(old.Rate);
-  const data = {rate, skill, nameAr, order: "1", id, cvID};
+  const [rate, setRate] = useState(old ? old.Rate : 0);
+  const data = {rate, skill, order: "1", id, cvID};
 
   const handelCancel = () => {
     setSkill("");
     setRate(2);
-    setNameAr("");
     history.push("/buildcv/tchnicalskill");
   };
   return (
@@ -56,24 +54,16 @@ export default function EditTechnicalSkill(props) {
               variant="filled"
               placeholder={t("eg.Microsoft Word")}
               style={{width: "100%"}}
+              value={skill}
               onChange={(e) => setSkill(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
-            <TextField
-              id="filled-basic"
-              label={t("Skill")}
-              variant="filled"
-              placeholder="eg.Microsoft Word"
-              style={{width: "100%"}}
-              onChange={(e) => setNameAr(e.target.value)}
-            />
-          </Grid>
+
           <Grid item xs={12}>
             <Box component="fieldset" mb={3} borderColor="transparent">
               <Rating
                 name="customized-10"
-                defaultValue={2}
+                defaultValue={rate}
                 max={5}
                 onChange={(e) => setRate(e.target.value)}
               />
