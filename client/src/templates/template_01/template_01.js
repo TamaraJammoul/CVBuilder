@@ -20,8 +20,18 @@ import img_10 from "../../assets/imgs/template_01/10.png";
 
 function print() {
   const filename = "template-1.pdf";
+  const pdf = document.getElementById("toPDF");
+  const name = [...pdf.querySelectorAll("h1")][0];
+  const titles = [...pdf.querySelectorAll("h3")];
+  const texts = [...pdf.querySelectorAll("p")];
+  const spans = [...pdf.querySelectorAll("span")];
 
-  html2canvas(document.getElementById("toPDF"), {
+  name.style.transform = "translateY(-30%)";
+  titles.map((t) => (t.style.transform = "translateY(-30%)"));
+  texts.map((p) => (p.style.transform = "translateY(-50%)"));
+  spans.map((sp) => (sp.style.transform = "translateY(-15%)"));
+
+  html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
   })
@@ -32,40 +42,98 @@ function print() {
       doc.save(filename);
     })
     .catch((err) => console.log(err));
+
+  name.style.transform = "translateY(0%)";
+  titles.map((t) => (t.style.transform = "translateY(0%)"));
+  texts.map((p) => (p.style.transform = "translateY(0%)"));
+  spans.map((sp) => (sp.style.transform = "translateY(0%)"));
 }
 
 const ref = React.createRef();
 
 const Template01 = (props) => {
   const {
-    Educations,
-    Experiences,
-    Languages,
-    Courses,
-    CareerObjectives,
-    PersonalInformation,
-    Skill,
+    educations,
+    experiences,
+    languages,
+    courses,
+    careerobjective,
+    personalInformation,
+    skills,
   } = props.Data;
 
-  let educations = null;
-  if (Educations.length > 0) {
-    educations = Educations.map((edu) => {
+  let edus = null;
+  if (educations.length > 0) {
+    edus = educations.map((edu) => {
+      let degree = "";
+      if (edu.Degree === 1) {
+        degree = "Bachelor";
+      } else if (edu.Degree === 2) {
+        degree = "Master";
+      } else if (edu.Degree === 3) {
+        degree = "PhD";
+      } else if (edu.Degree === 4) {
+        degree = "High School Certificate";
+      }
+      let grade = "";
+      if (edu.Grade === 1) {
+        grade = "Good";
+      } else if (edu.Grade === 2) {
+        grade = "Very Good";
+      } else if (edu.Grade === 3) {
+        grade = "Excellent";
+      }
       return (
         <div className="edu" key={edu.id_}>
           <p>
-            {edu.Degree} in {edu.Field}
+            {degree} in {edu.Faculty}
           </p>
           <p>{edu.Universityname}</p>
-          <p>University Grade: {edu.Grade}</p>
+          <p>University Grade: {grade}</p>
           <p>Graduate year: {edu.YearEnd}</p>
         </div>
       );
     });
+    if (props.language === "Ar") {
+      edus = educations.map((edu) => {
+        let degreeAr = "";
+        if (edu.Degree === 1) {
+          degreeAr = "بكالوريوس";
+        } else if (edu.Degree === 2) {
+          degreeAr = "ماجستير";
+        } else if (edu.Degree === 3) {
+          degreeAr = "دكتوراه";
+        } else if (edu.Degree === 4) {
+          degreeAr = "شهادة الثانوية العامة";
+        }
+        let gradeAr = "";
+        if (edu.Grade === 1) {
+          gradeAr = "جيد";
+        } else if (edu.Grade === 2) {
+          gradeAr = "جيد جداً";
+        } else if (edu.Grade === 3) {
+          gradeAr = "ممتاز";
+        }
+        return (
+          <div
+            className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+            key={edu.id_}
+          >
+            <p>
+              {degreeAr} {edu.Faculty}
+            </p>
+            <p>{edu.Universityname}</p>
+            <p>التقدير: {gradeAr}</p>
+            <p>سنة التخرج: {edu.YearEnd}</p>
+          </div>
+        );
+      });
+    }
   }
 
   let jobs = null;
-  if (Experiences.length > 0) {
-    jobs = Experiences.map((job) => {
+  if (experiences.length > 0) {
+    jobs = experiences.map((job) => {
       return (
         <div className="work" key={job.id_}>
           <p>
@@ -79,19 +147,19 @@ const Template01 = (props) => {
     });
   }
 
-  let careerObjectives = null;
-  if (CareerObjectives) {
-    careerObjectives = CareerObjectives.Text;
+  let CO = null;
+  if (careerobjective) {
+    CO = careerobjective;
   }
 
   let PI = null;
-  if (PersonalInformation) {
-    PI = PersonalInformation;
+  if (personalInformation) {
+    PI = personalInformation;
   }
 
-  let courses = null;
-  if (Courses.length > 0) {
-    courses = Courses.map((crs) => {
+  let crses = null;
+  if (courses.length > 0) {
+    crses = courses.map((crs) => {
       return (
         <div className="course" key={crs.id_}>
           <p>{crs.Name}</p>
@@ -100,9 +168,9 @@ const Template01 = (props) => {
     });
   }
 
-  let languages = null;
-  if (Languages.length > 0) {
-    languages = Languages.map((lang, index) => {
+  let langs = null;
+  if (languages.length > 0) {
+    langs = languages.map((lang, index) => {
       let rate = [];
       for (let i = 0; i < lang.Rate; i++) {
         rate.push(<div className="circle" key={Math.random()}></div>);
@@ -119,9 +187,9 @@ const Template01 = (props) => {
     });
   }
 
-  let skills = null;
-  if (Skill.length > 0) {
-    skills = Skill.map((skill) => {
+  let skls = null;
+  if (skills.length > 0) {
+    skls = skills.map((skill) => {
       return <p key={skill.id_}>{skill.Name}</p>;
     });
   }
@@ -130,7 +198,7 @@ const Template01 = (props) => {
   //#region - Personal Info Section
   let personalInfoSection = (
     <div className="personal-info sec">
-      <h3 className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <h3 className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         {props.language === "Ar" ? "المعلومات الشخصية" : "Personal Information"}
       </h3>
       <div className="info-details">
@@ -147,7 +215,7 @@ const Template01 = (props) => {
             <img className="info-icon-2" src={img_02} alt="phone_icon" />
           </div>
         </div>
-        <span className="info-status bein">{PI.Phone}</span>
+        <span className="info-status bold">{PI.Phone}</span>
       </div>
       <div className="info-details">
         <div className="info-logo">
@@ -155,7 +223,7 @@ const Template01 = (props) => {
             <img className="info-icon-3" src={img_03} alt="envelope_icon" />
           </div>
         </div>
-        <span className="info-status almothnna">{PI.Email}</span>
+        <span className="info-status bold">{PI.Email}</span>
       </div>
       <div className="info-details">
         <div className="info-logo">
@@ -163,7 +231,7 @@ const Template01 = (props) => {
             <img className="info-icon-4" src={img_04} alt="date_icon" />
           </div>
         </div>
-        <span className="info-status bein">{PI.Birth}</span>
+        <span className="info-status bold">{PI.Birth}</span>
       </div>
       <div className="info-details">
         <div className="info-logo">
@@ -187,20 +255,20 @@ const Template01 = (props) => {
   //#region - Skills Section
   let skillSection = (
     <div className="skills sec">
-      <h3 className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <h3 className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         {props.language === "Ar" ? "المهارات" : "Skills"}
       </h3>
-      {skills}
+      {skls}
     </div>
   );
   //#endregion
   //#region - Languages Section
   let languageSection = (
     <div className="languages sec">
-      <h3 className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <h3 className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         {props.language === "Ar" ? "اللغات" : "Languages"}
       </h3>
-      {languages}
+      {langs}
     </div>
   );
   //#endregion
@@ -212,13 +280,13 @@ const Template01 = (props) => {
       <div className={`icon ${props.language === "Ar" ? "ar" : ""} `}>
         <img className="target" src={img_07} alt="hat_img" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         <h3>
           {props.language === "Ar" ? "الهدف الوظيفي" : "Career Objective"}
         </h3>
       </div>
       <div className="sec-body">
-        <p>{careerObjectives}</p>
+        <p>{CO.Text}</p>
       </div>
     </div>
   );
@@ -231,10 +299,10 @@ const Template01 = (props) => {
       <div className={`icon ${props.language === "Ar" ? "ar" : ""} `}>
         <img className="hat" src={img_08} alt="hat_img" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         <h3>{props.language === "Ar" ? "المؤهلات العلمية" : "Education"}</h3>
       </div>
-      <div className="sec-body">{educations}</div>
+      <div className="sec-body">{edus}</div>
     </div>
   );
   //#endregion
@@ -244,7 +312,7 @@ const Template01 = (props) => {
       <div className={`icon ${props.language === "Ar" ? "ar" : ""} `}>
         <img className="briefcase" src={img_09} alt="briefcase_img" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         <h3>
           {props.language === "Ar" ? "الخبرات العملية" : "Work Experience"}
         </h3>
@@ -259,12 +327,12 @@ const Template01 = (props) => {
       <div className={`icon ${props.language === "Ar" ? "ar" : ""} `}>
         <img className="cert" src={img_10} alt="certificate_img" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""} `}>
         <h3>
           {props.language === "Ar" ? "الدورات التدريبية" : "Training Courses"}
         </h3>
       </div>
-      <div className="sec-body">{courses}</div>
+      <div className="sec-body">{crses}</div>
     </div>
   );
   //#endregion
@@ -283,7 +351,9 @@ const Template01 = (props) => {
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
+    if (result.destination.index === result.source.index) return;
     // console.log(result);
+
     if (result.type === "Main") {
       const items = Array.from(mainSectionList);
       const [reorderedItem] = items.splice(result.source.index, 1);
@@ -302,7 +372,7 @@ const Template01 = (props) => {
       <button onClick={print}>Export As pdf</button>
       <div className="template01-page">
         <div
-          className={`template01_body ${props.language === "Ar" ? "ar" : ""} `}
+          className={`template01-body ${props.language === "Ar" ? "ar" : ""} `}
           ref={ref}
           id="toPDF"
         >
@@ -349,7 +419,7 @@ const Template01 = (props) => {
               {/* Header */}
               <div className="header">
                 <h1>
-                  {PersonalInformation.FirstName} {PersonalInformation.LastName}
+                  {PI.FirstName} {PI.LastName}
                 </h1>
               </div>
 

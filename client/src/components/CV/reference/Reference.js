@@ -21,6 +21,8 @@ import {Link} from "react-router-dom";
 export default function Refernce() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.references);
+  const referenclen = useSelector((state) => state.template.referenclen);
+
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
@@ -30,7 +32,13 @@ export default function Refernce() {
   }, [temp]);
 
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item style={{width: "100%"}} sx={12}>
@@ -106,19 +114,23 @@ export default function Refernce() {
               </Paper>
             </Grid>
           ))}
-          <Grid item xs={12}>
-            {" "}
-            <Link to="/buildcv/addreference">
+          {references < referenclen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                style={{backgroundColor: "#5B2338"}}
-                startIcon={<DeleteIcon />}
-              >
-                {t("AddReference")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="/buildcv/addreference">
+                {" "}
+                <Button
+                  variant="contained"
+                  className="save"
+                  startIcon={<DeleteIcon />}
+                >
+                  {t("AddReference")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>

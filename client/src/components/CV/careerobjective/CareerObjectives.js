@@ -40,6 +40,10 @@ export default function CareerObjectives() {
       elevation={3}
       className="buildcvbar background mt-3"
       style={{width: "100%"}}
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
     >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={5}>

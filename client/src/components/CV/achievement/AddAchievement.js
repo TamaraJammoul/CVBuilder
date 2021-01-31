@@ -21,7 +21,13 @@ export default function AddAchievement(props) {
     history.push("/buildcv/achievement");
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid
           container

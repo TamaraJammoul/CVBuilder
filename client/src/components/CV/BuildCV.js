@@ -87,7 +87,7 @@ export default function BuildCV(props) {
               <h2>{t("CVBuilder")}</h2>
               <hr />
             </Grid>
-            <Grid item>
+            <Grid item className="nav">
               <h4>
                 {" "}
                 <span style={{marginRight: "10px"}}>
@@ -99,7 +99,7 @@ export default function BuildCV(props) {
               </h4>
             </Grid>
             {sections.careerobjective == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px"}}>
@@ -115,7 +115,7 @@ export default function BuildCV(props) {
             )}
 
             {sections.courses == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px"}}>
@@ -128,7 +128,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.certificares == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -141,7 +141,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.skills == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -154,7 +154,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.language == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -167,7 +167,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.othertraining == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -180,7 +180,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.technicalskill == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -195,7 +195,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.education == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -208,7 +208,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.achievement == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -221,7 +221,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.experience == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -234,7 +234,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.membership == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>
@@ -247,7 +247,7 @@ export default function BuildCV(props) {
               ""
             )}
             {sections.referenc == 1 ? (
-              <Grid item>
+              <Grid item className="nav">
                 <h4>
                   {" "}
                   <span style={{marginRight: "10px", marginLeft: "10px"}}>

@@ -1,28 +1,4 @@
 @font-face {
-  font-family: "Hacen Tunisia Bd";
-  src: url("../../assets/fonts/HacenTunisiaBd.eot");
-  src: url("../../assets/fonts/HacenTunisiaBd.eot?#iefix")
-      format("embedded-opentype"),
-    url("../../assets/fonts/HacenTunisiaBd.woff2") format("woff2"),
-    url("../../assets/fonts/HacenTunisiaBd.woff") format("woff"),
-    url("../../assets/fonts/HacenTunisiaBd.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Ahlan World Arbfonts";
-  src: url("../../assets/fonts/AhlanworldArbfonts.eot");
-  src: url("../../assets/fonts/AhlanworldArbfonts.eot?#iefix")
-      format("embedded-opentype"),
-    url("../../assets/fonts/AhlanworldArbfonts.woff2") format("woff2"),
-    url("../../assets/fonts/AhlanworldArbfonts.woff") format("woff"),
-    url("../../assets/fonts/AhlanworldArbfonts.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "beIN Normal";
   src: url("../../assets/fonts/beINNormal.eot");
   src: url("../../assets/fonts/beINNormal.eot?#iefix")
@@ -32,7 +8,17 @@
     url("../../assets/fonts/beINNormal.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+}
+@font-face {
+  font-family: "beIN";
+  src: url("../../assets/fonts/beINBlack.eot");
+  src: url("../../assets/fonts/beINBlack.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/beINBlack.woff2") format("woff2"),
+    url("../../assets/fonts/beINBlack.woff") format("woff"),
+    url("../../assets/fonts/beINBlack.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
 }
 @font-face {
   font-family: "Ara Assaf";
@@ -44,7 +30,6 @@
     url("../../assets/fonts/AraAssaf-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 :root {
@@ -59,7 +44,7 @@
   --skill-icon-bg-color: #a1a1a1;
 
   --scale-rate: 0.3;
-  --p-scale-rate: 3 * var(--scale-rate);
+  --p-scale-rate: 0.9;
 }
 
 * {
@@ -69,7 +54,11 @@
 }
 
 .template02-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   background-color: #fff;
   padding: calc(40px * var(--scale-rate));
@@ -81,7 +70,12 @@
   padding: calc(100px * var(--scale-rate)) calc(166px * var(--scale-rate))
     calc(94px * var(--scale-rate)) calc(122px * var(--scale-rate));
   color: var(--text-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   direction: ltr;
 }
@@ -90,28 +84,54 @@
     calc(94px * var(--scale-rate)) calc(166px * var(--scale-rate));
   direction: rtl;
 }
+.template02-body p,
+.template02-body.ar p {
+  font-family: "beIN Normal";
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-wrap: break-word;
+}
+.template02-body .bold,
+.template02-body .bold p,
+.template02-body.ar .bold,
+.template02-body.ar .bold p {
+  font-family: "beIN";
+}
 
-/* Name Section */
+/* #region - Name Section */
 .template02-body .name-sec {
   font-family: "Ara Assaf";
   font-size: calc(24px * var(--p-scale-rate));
   line-height: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin-bottom: calc(58px * var(--scale-rate));
 }
+/* #endregion */
 
-/* Info Section */
+/* #region - Info Section */
 .template02-body .info-sec {
   margin-bottom: calc(50px * var(--scale-rate));
   width: calc(2160px * var(--scale-rate));
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: calc(400px * var(--scale-rate)) 1fr
+    calc(600px * var(--scale-rate));
   grid-template-columns: calc(400px * var(--scale-rate)) 1fr calc(
       600px * var(--scale-rate)
     );
   grid-template-areas: "photo details world";
 }
 .template02-body .info-sec .main-photo {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
   grid-area: photo;
   background-color: var(--photo-bg-color);
   border-radius: 50%;
@@ -125,16 +145,30 @@
   height: calc(310px * var(--scale-rate));
   position: absolute;
   bottom: 0;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 .template02-body .info-sec .main-photo .photo.ar {
+  -webkit-transform: translateX(50%);
+  -ms-transform: translateX(50%);
   transform: translateX(50%);
 }
 
 .template02-body .info-sec .world {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 3;
+  grid-column: 3;
   grid-area: world;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 .template02-body .info-sec .world img {
@@ -142,28 +176,56 @@
 }
 
 .template02-body .info-sec .info-details {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 2;
+  grid-column: 2;
   grid-area: details;
   font-family: "beIN Normal";
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .template02-body .info-details .info-content {
   font-size: calc(16px * var(--p-scale-rate));
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: calc(130px * var(--scale-rate))
+    calc(300px * var(--scale-rate));
   grid-template-columns: calc(130px * var(--scale-rate)) calc(
       300px * var(--scale-rate)
     );
   grid-template-areas: "info-img info-text";
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 .template02-body .info-content p {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 2;
+  grid-column: 2;
   grid-area: info-text;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .template02-body .info-content .content-img {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
   grid-area: info-img;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 .template02-body .info-content img.location-mark {
@@ -190,36 +252,60 @@
   width: calc(68px * var(--scale-rate));
   height: calc(70px * var(--scale-rate));
 }
+/* #endregion */
 
-/* Intro Section */
+/* #region - Intro Section */
 .template02-body .intro-sec {
   font-family: "Hacen Tunisia Bd";
   margin-bottom: calc(46px * var(--scale-rate));
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 .template02-body .intro-body {
   width: calc(1800px * var(--scale-rate));
   font-size: calc(16px * var(--p-scale-rate));
   font-weight: bold;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: calc(200px * var(--scale-rate)) 1fr;
   grid-template-columns: calc(200px * var(--scale-rate)) 1fr;
   grid-template-areas: "intro-img intro-content";
 }
 .template02-body .intro-sec img {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
   grid-area: intro-img;
   width: calc(150px * var(--scale-rate));
   height: calc(150px * var(--scale-rate));
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 .template02-body .intro-content {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 2;
+  grid-column: 2;
   grid-area: intro-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
+/* #endregion */
 
-/* General style for several sections */
+/* #region - General style for several sections */
 .template02-body .sec {
   position: relative;
   margin-bottom: calc(72px * var(--scale-rate));
@@ -228,6 +314,8 @@
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-transform: translate(-10%, -20%);
+  -ms-transform: translate(-10%, -20%);
   transform: translate(-10%, -20%);
   margin-right: 0;
   margin-left: calc(24px * var(--scale-rate));
@@ -235,12 +323,20 @@
   height: calc(148px * var(--scale-rate));
   background-color: var(--sec-icon-bg-color);
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 .template02-body .sec .sec-icon-bg.ar {
   right: 0;
+  -webkit-transform: translate(10%, -20%);
+  -ms-transform: translate(10%, -20%);
   transform: translate(10%, -20%);
   margin-left: 0;
   margin-right: calc(24px * var(--scale-rate));
@@ -265,12 +361,15 @@
 
 .template02-body .sec-title {
   background-color: var(--sec-title-bg-color);
-  font-family: "Ahlan World Arbfonts";
-  font-size: calc(24px * var(--p-scale-rate));
+  font-size: calc(20px * var(--p-scale-rate));
   color: var(--title-color);
   width: calc(664px * var(--scale-rate));
   height: calc(94px * var(--scale-rate));
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: calc(10px * var(--scale-rate)) 0 calc(10px * var(--scale-rate))
     calc(100px * var(--scale-rate));
@@ -283,10 +382,6 @@
   margin-left: 0;
   margin-right: calc(102px * var(--scale-rate));
 }
-.template02-body .sec-title p {
-  transform: translateY(-10%);
-}
-
 .template02-body .sec-body {
   background-color: #fff;
   font-family: "beIN Normal";
@@ -295,7 +390,9 @@
     calc(20px * var(--scale-rate)) calc(86px * var(--scale-rate));
   margin-right: 0;
   margin-left: calc(144px * var(--scale-rate));
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr calc(240px * var(--scale-rate));
   grid-template-columns: 1fr calc(240px * var(--scale-rate));
   grid-template-areas: "sec-content sec-img";
 }
@@ -307,22 +404,42 @@
 }
 
 .template02-body .sec-body-content {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
   grid-area: sec-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 .template02-body .sec-body-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 .template02-body .sec-body-img img {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 2;
+  grid-column: 2;
   grid-area: sec-img;
   width: calc(250px * var(--scale-rate));
   height: calc(212px * var(--scale-rate));
 }
+/* #endregion */
 
-/* Education Section */
+/* #region - Education Section */
 .template02-body .sec-body-content .edu {
   position: relative;
   border-right: none;
@@ -343,6 +460,8 @@
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
   transform: translate(-50%, 0%);
   background-color: #cc6666;
   border-radius: 50%;
@@ -351,17 +470,15 @@
 }
 .template02-body .edu .circle.ar {
   right: 0;
+  -webkit-transform: translate(50%, 0%);
+  -ms-transform: translate(50%, 0%);
   transform: translate(50%, 0%);
 }
 .template02-body .edu .edu-title {
-  font-weight: bold;
-  font-size: calc(18px * var(--p-scale-rate));
   position: absolute;
-  top: -20%;
-  transform: translateY(32%);
+  top: -7%;
 }
 .template02-body .edu p {
-  font-size: calc(16px * var(--p-scale-rate));
   margin-bottom: calc(16px * var(--scale-rate));
   line-height: 1.5;
 }
@@ -369,22 +486,38 @@
   background-color: var(--photo-bg-color);
   width: calc(778px * var(--scale-rate));
   height: calc(48px * var(--scale-rate));
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-transform: translateX(calc(-52px * var(--scale-rate)));
+  -ms-transform: translateX(calc(-52px * var(--scale-rate)));
   transform: translateX(calc(-52px * var(--scale-rate)));
 }
 .template02-body .edu .edu-year.ar {
+  -webkit-transform: translateX(calc(52px * var(--scale-rate)));
+  -ms-transform: translateX(calc(52px * var(--scale-rate)));
   transform: translateX(calc(52px * var(--scale-rate)));
 }
 .template02-body .edu .edu-year p {
   font-size: calc(14px * var(--p-scale-rate));
-  transform: translateY(calc(5px * var(--scale-rate)));
-  line-height: 0.5;
+  margin-bottom: 0;
+  line-height: 1.5;
 }
+/* #endregion */
 
-/* Work Section */
+/* #region - Work Section */
 .template02-body .sec-body-content .work {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin-bottom: calc(10px * var(--scale-rate));
 }
@@ -401,13 +534,20 @@
   margin-left: calc(22px * var(--scale-rate));
 }
 .template02-body .sec-body-content .work p {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   line-height: 1.5;
 }
+/* #endregion */
 
-/* Courses Section */
+/* #region - Courses Section */
 .template02-body .sec-body-content .course {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin-bottom: calc(10px * var(--scale-rate));
 }
@@ -424,11 +564,14 @@
   margin-left: calc(22px * var(--scale-rate));
 }
 .template02-body .sec-body-content .course p {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   line-height: 1.5;
 }
+/* #endregion */
 
-/* Skills Section */
+/* #region - Skills Section */
 .template02-body .skill-sec-body {
   background-color: #fff;
   font-family: "beIN Normal";
@@ -437,7 +580,6 @@
   margin-right: 0;
   margin-left: calc(144px * var(--scale-rate));
   width: calc(2050px * var(--scale-rate));
-  min-height: calc(746px * var(--scale-rate));
 }
 .template02-body .skill-sec-body.ar {
   padding: calc(38px * var(--scale-rate)) calc(90px * var(--scale-rate))
@@ -446,26 +588,42 @@
   margin-right: calc(144px * var(--scale-rate));
 }
 .template02-body .flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .template02-body .flex-content {
   margin-bottom: calc(40px * var(--scale-rate));
   font-size: calc(14px * var(--p-scale-rate));
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: calc(240px * var(--scale-rate))
+    calc(400px * var(--scale-rate));
   grid-template-columns: calc(240px * var(--scale-rate)) calc(
       400px * var(--scale-rate)
     );
   grid-template-areas: "skill-img skill-text";
 }
 .template02-body .flex-content .skill-icon-bg {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
   grid-area: skill-img;
   background-color: var(--skill-icon-bg-color);
   border-radius: 50%;
   width: calc(198px * var(--scale-rate));
   height: calc(198px * var(--scale-rate));
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 .template02-body .flex-content img[class^="skill-icon-"] {
@@ -476,8 +634,20 @@
   width: calc(130px * var(--scale-rate));
   height: calc(150px * var(--scale-rate));
 }
-.template02-body .flex-content p {
+.template02-body .flex-content .skill-text {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 2;
+  grid-column: 2;
   grid-area: skill-text;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
+.template02-body .flex-content .skill-text p {
+  line-height: 1.5;
+}
+/* #endregion */

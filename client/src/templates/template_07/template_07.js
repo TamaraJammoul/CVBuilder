@@ -1,5 +1,7 @@
-import React from "react";
-import Pdf from "react-to-pdf";
+import React, { useState } from "react";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_07.css";
 
 //#region Import Images
@@ -38,25 +40,100 @@ import img_31 from "../../assets/imgs/template_07/31.png";
 import img_32 from "../../assets/imgs/template_07/32.png";
 import img_33 from "../../assets/imgs/template_07/33.png";
 import img_35 from "../../assets/imgs/template_07/35.png";
+import img_36 from "../../assets/imgs/template_07/36.png";
+import img_37 from "../../assets/imgs/template_07/37.png";
+import img_38 from "../../assets/imgs/template_07/38.png";
+import img_39 from "../../assets/imgs/template_07/39.png";
 //#endregion
+
+function print() {
+  const pdf = document.getElementById("toPDF");
+  const text = [...pdf.querySelectorAll("p")];
+
+  text.map(
+    (p) =>
+      !p.classList.contains("objective-text") &&
+      !p.classList.contains("info-text") &&
+      (p.style.transform = "translateY(-30%)")
+  );
+  text.map(
+    (p) =>
+      p.classList.contains("year-text") &&
+      (p.style.transform = "translateY(-50%)")
+  );
+
+  const filename = "template-7.pdf";
+  html2canvas(pdf, {
+    dpi: 300, // Set to 300 DPI
+    scale: 2, // Adjusts your resolution
+  })
+    .then((canvas) => {
+      var img = canvas.toDataURL("image/jpeg", 1);
+      var doc = new jsPDF("p", "mm", "a4");
+      doc.addImage(img, "JPEG", -2, 0, 212, 298);
+      doc.save(filename);
+    })
+    .catch((err) => console.log(err));
+
+  text.map(
+    (p) =>
+      !p.classList.contains("objective-text") &&
+      (p.style.transform = "translateY(0%)")
+  );
+}
+
+function chunkArray(myArray, chunk_size) {
+  var index = 0;
+  var arrayLength = myArray.length;
+  var tempArray = [];
+
+  for (index = 0; index < arrayLength; index += chunk_size) {
+    let myChunk = myArray.slice(index, index + chunk_size);
+    tempArray.push(myChunk);
+  }
+
+  return tempArray;
+}
 
 const ref = React.createRef();
 const Template07 = (props) => {
   const {
-    Educations,
-    Experiences,
-    Languages,
-    Courses,
-    CareerObjectives,
-    PersonalInformation,
-    Skill,
+    educations,
+    experiences,
+    languages,
+    courses,
+    careerobjective,
+    personalInformation,
+    skills,
   } = props.Data;
 
-  let educations = null;
-  if (Educations.length > 0) {
-    educations = Educations.map((edu) => {
+  let edus = null;
+  if (educations.length > 0) {
+    edus = educations.map((edu) => {
+      let degree = "";
+      if (edu.Degree === 1) {
+        degree = "Bachelor";
+      } else if (edu.Degree === 2) {
+        degree = "Master";
+      } else if (edu.Degree === 3) {
+        degree = "PhD";
+      } else if (edu.Degree === 4) {
+        degree = "High School Certificate";
+      }
+      let grade = "";
+      if (edu.Grade === 1) {
+        grade = "Good";
+      } else if (edu.Grade === 2) {
+        grade = "Very Good";
+      } else if (edu.Grade === 3) {
+        grade = "Excellent";
+      }
+
       return (
-        <div className="edu" key={edu.id_}>
+        <div
+          className={`edu ${props.language === "Ar" ? "ar" : ""} `}
+          key={edu.id_}
+        >
           <div className="edu-img">
             <img src={img_17} alt="" />
           </div>
@@ -65,35 +142,115 @@ const Template07 = (props) => {
           </div>
           <div className="edu-degree">
             <p>
-              {edu.Degree} in {edu.Field}
+              {degree} in {edu.Faculty}
             </p>
           </div>
           <div className="edu-school">
             <p>{edu.UniversityName}</p>
           </div>
           <div className="edu-grade">
-            <p>Grade: {edu.Grade}</p>
+            <p>Grade: {grade}</p>
           </div>
         </div>
       );
     });
+    if (props.language === "Ar") {
+      edus = educations.map((edu) => {
+        let degreeAr = "";
+        if (edu.Degree === 1) {
+          degreeAr = "بكالوريوس";
+        } else if (edu.Degree === 2) {
+          degreeAr = "ماجستير";
+        } else if (edu.Degree === 3) {
+          degreeAr = "دكتوراه";
+        } else if (edu.Degree === 4) {
+          degreeAr = "شهادة الثانوية العامة";
+        }
+        let gradeAr = "";
+        if (edu.Grade === 1) {
+          gradeAr = "جيد";
+        } else if (edu.Grade === 2) {
+          gradeAr = "جيد جداً";
+        } else if (edu.Grade === 3) {
+          gradeAr = "ممتاز";
+        }
+
+        return (
+          <div
+            className={`edu ${props.language === "Ar" ? "ar" : ""} `}
+            key={edu.id_}
+          >
+            <div className="edu-img">
+              <img src={img_17} alt="" />
+            </div>
+            <div className="edu-circle">
+              <div className="circle"></div>
+            </div>
+            <div className="edu-degree">
+              <p>
+                {degreeAr} {edu.Faculty}
+              </p>
+            </div>
+            <div className="edu-school">
+              <p>{edu.UniversityName}</p>
+            </div>
+            <div className="edu-grade">
+              <p>التقدير: {gradeAr}</p>
+            </div>
+          </div>
+        );
+      });
+    }
   }
 
-  let careerObjectives = null;
-  if (CareerObjectives) {
-    careerObjectives = CareerObjectives.Text;
+  let workRows = null;
+  if (experiences.length > 0) {
+    let groupedArray = chunkArray(experiences, 3);
+
+    workRows = groupedArray.map((row, index) => {
+      let works = row.map((job) => {
+        return (
+          <div className="work" key={job.id_}>
+            <div className="work-year">
+              <p className="year-text">{`${job.Start} - ${job.End}`}</p>
+            </div>
+            <div className="work-co">
+              <p>{job.Description}</p>
+            </div>
+            <div className="work-pos">
+              <p>{job.Name}</p>
+            </div>
+          </div>
+        );
+      });
+      // console.log("[works] ", works);
+      return (
+        <div className="work-row" key={index}>
+          {works}
+        </div>
+      );
+    });
+    // console.log("[workRows] ", workRows);
+  }
+
+  let CO = null;
+  if (careerobjective) {
+    CO = careerobjective;
   }
 
   let PI = null;
-  if (PersonalInformation) {
-    PI = PersonalInformation;
+  if (personalInformation) {
+    PI = personalInformation;
   }
 
-  let courses = null;
-  if (Courses.length > 0) {
-    courses = Courses.map((crs) => {
+  let crses = null;
+  if (courses.length > 0) {
+    crses = courses.map((crs) => {
       return (
-        <div className="course" key={crs.id_}>
+        <div
+          className={`course ${props.language === "Ar" ? "ar" : ""} `}
+          key={crs.id_}
+        >
           <div className="course-bullet">
             <div className="bullet">
               <div className="dash"></div>
@@ -111,21 +268,21 @@ const Template07 = (props) => {
     });
   }
 
-  let languages = null;
-  if (Languages.length > 0) {
-    languages = Languages.map((lang) => {
+  let langs = null;
+  if (languages.length > 0) {
+    langs = languages.map((lang) => {
       let rate = [];
       for (let i = 0; i < lang.Rate; i++) {
-        rate.push(<img src={img_30} alt="" />);
+        rate.push(<img src={img_30} alt="" key={Math.random()} />);
       }
       for (let i = 0; i < 5 - lang.Rate; i++) {
-        rate.push(<img src={img_31} alt="" />);
+        rate.push(<img src={img_31} alt="" key={Math.random()} />);
       }
 
       return (
         <div className="lang" key={lang.id_}>
           <div className="lang-name">
-            <p>{lang.Name}</p>
+            <p className="lang-text">{lang.Name}</p>
           </div>
           <div className="lang-rate">{rate}</div>
         </div>
@@ -144,9 +301,9 @@ const Template07 = (props) => {
     MS8: img_28,
     MS9: img_29,
   };
-  let skills = null;
-  if (Skill.length > 0) {
-    skills = Skill.map((skill) => {
+  let skls = null;
+  if (skills.length > 0) {
+    skls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
         <div className="skill" key={skill.id_}>
@@ -163,15 +320,183 @@ const Template07 = (props) => {
     });
   }
 
+  //#region - Education + Work Section
+  let expSection = (
+    <div className={`sec exp-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="sec-logo edu-sec-logo">
+        <img src={img_09} alt="" />
+      </div>
+      <div
+        className={`sec-title edu-sec-title ${
+          props.language === "Ar" ? "ar" : ""
+        } `}
+      >
+        <div className="title">
+          <p>{props.language === "Ar" ? "المؤهلات العلمية" : "Education"}</p>
+        </div>
+        <div className="sec-arrow">
+          <img src={img_14} alt="arrow-down" />
+        </div>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className={`edu-body ${props.language === "Ar" ? "ar" : ""} `}>
+          <img className="edu-sec-img" src={img_16} alt="" />
+          {edus}
+        </div>
+        <div className="sec-half">
+          <div className="grey"></div>
+          <div className="dark-grey"></div>
+          <div className="grey"></div>
+          <div className="dark-grey"></div>
+          <div className="grey"></div>
+          <div className="dark-grey"></div>
+          <div className="grey"></div>
+        </div>
+        <div
+          className={`work-body ${props.language === "Ar" ? "ar" : ""} `}
+          id="workBody"
+        >
+          {experiences.length === 0 ? null : experiences.length === 1 ? (
+            <img className="work-sec-bg-img" src={img_35} alt="" />
+          ) : experiences.length === 2 ? (
+            <img className="work-sec-bg-img" src={img_36} alt="" />
+          ) : experiences.length === 3 ? (
+            <img className="work-sec-bg-img" src={img_37} alt="" />
+          ) : experiences.length === 4 ? (
+            <img className="work-sec-bg-img" src={img_38} alt="" />
+          ) : (
+            <img className="work-sec-bg-img" src={img_39} alt="" />
+          )}
+          <img className="work-sec-img" src={img_19} alt="" />
+          {workRows}
+        </div>
+      </div>
+      <div className="sec-logo work-sec-logo">
+        <img src={img_10} alt="" />
+      </div>
+      <div
+        className={`sec-title work-sec-title ${
+          props.language === "Ar" ? "ar" : ""
+        } `}
+      >
+        <div className="title">
+          <p>{props.language === "Ar" ? "الخبرات العملية" : "Experience"}</p>
+        </div>
+        <div className="sec-arrow">
+          <img src={img_15} alt="arrow-up" />
+        </div>
+      </div>
+    </div>
+  );
+  //#endregion
+  //#region - Languages Section
+  let languagesSection = (
+    <div className={`sec lang-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="sec-logo">
+        <img src={img_13} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="title">
+          <p>{props.language === "Ar" ? "اللغات" : "Languages"}</p>
+        </div>
+        <div className="sec-arrow">
+          <img src={img_14} alt="arrow-down" />
+        </div>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+        {langs}
+      </div>
+    </div>
+  );
+  //#endregion
+  //#region - Courses Section
+  let coursesSection = (
+    <div className={`sec course-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="sec-logo">
+        <img src={img_11} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="title">
+          <p>{props.language === "Ar" ? "الدورات التدريبية" : "Courses"}</p>
+        </div>
+        <div className="sec-arrow">
+          <img src={img_14} alt="arrow-down" />
+        </div>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="sec-img">
+          <img src={img_20} alt="" />
+        </div>
+        <div className="sec-content">
+          {courses.length <= 5 ? (
+            <img
+              className="course-sec-bg"
+              src={img_33}
+              alt=""
+              style={{ width: "50%" }}
+            />
+          ) : (
+            <img className="course-sec-bg" src={img_32} alt="" />
+          )}
+
+          {crses}
+        </div>
+      </div>
+    </div>
+  );
+  //#endregion
+  //#region - Skills Section
+  let skillsSection = (
+    <div className={`sec skills-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="sec-logo">
+        <img src={img_12} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="title">
+          <p>{props.language === "Ar" ? "المهارات" : "Skills"}</p>
+        </div>
+        <div className="sec-arrow">
+          <img src={img_14} alt="arrow-down" />
+        </div>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+        {skls}
+      </div>
+    </div>
+  );
+  //#endregion
+
+  const [mainSectionList, setMainSectionList] = useState([
+    expSection,
+    coursesSection,
+    skillsSection,
+    languagesSection,
+  ]);
+
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+    if (result.destination.index === result.source.index) return;
+    // console.log(result);
+
+    if (result.type === "Main") {
+      const items = Array.from(mainSectionList);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      setMainSectionList(items);
+    }
+  }
+
   return (
     <>
-      <Pdf targetRef={ref} filename="post.pdf" x={5} y={-1}>
-        {({ toPdf }) => <button onClick={toPdf}>Export As pdf</button>}
-      </Pdf>
+      <button onClick={print}>Export As pdf</button>
       <div className="template07-page">
-        <div className="template07-body" ref={ref} id="toPDF">
+        <div
+          className={`template07-body ${props.language === "Ar" ? "ar" : ""} `}
+          ref={ref}
+          id="toPDF"
+        >
           {/* Header Section */}
-          <div className="header-sec">
+          <div className={`header-sec ${props.language === "Ar" ? "ar" : ""} `}>
             {/* Photo */}
             <div className="photo">
               <div className="photo-bg">
@@ -182,50 +507,50 @@ const Template07 = (props) => {
             {/* Name */}
             <div className="name">
               <p>
-                {PersonalInformation.FirstName} {PersonalInformation.LastName}
+                {PI.FirstName} {PI.LastName}
               </p>
             </div>
 
             {/* Details */}
             <div className="details">
-              <div className="detail">
+              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
                 <div className="detail-logo">
                   <img className="detail-logo-1" src={img_01} alt="" />
                 </div>
                 <div className="detail-text">
-                  <p>{PI.Email}</p>
+                  <p className="info-text">{PI.Email}</p>
                 </div>
               </div>
-              <div className="detail">
+              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
                 <div className="detail-logo">
                   <img className="detail-logo-2" src={img_02} alt="" />
                 </div>
                 <div className="detail-text">
-                  <p>{PI.Birth}</p>
+                  <p className="info-text">{PI.Birth}</p>
                 </div>
               </div>
-              <div className="detail">
+              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
                 <div className="detail-logo">
                   <img className="detail-logo-3" src={img_03} alt="" />
                 </div>
                 <div className="detail-text">
-                  <p>{PI.Phone}</p>
+                  <p className="info-text">{PI.Phone}</p>
                 </div>
               </div>
-              <div className="detail">
+              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
                 <div className="detail-logo">
                   <img className="detail-logo-4" src={img_04} alt="" />
                 </div>
                 <div className="detail-text">
-                  <p>{PI.City}</p>
+                  <p className="info-text">{PI.City}</p>
                 </div>
               </div>
-              <div className="detail">
+              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
                 <div className="detail-logo">
                   <img className="detail-logo-5" src={img_05} alt="" />
                 </div>
                 <div className="detail-text">
-                  <p>{PI.MaritalStatus}</p>
+                  <p className="info-text">{PI.MaritalStatus}</p>
                 </div>
               </div>
             </div>
@@ -233,12 +558,12 @@ const Template07 = (props) => {
             {/* Location */}
             <div className="location">
               <div className="loc-data">
-                <div className="loc">
+                <div className={`loc ${props.language === "Ar" ? "ar" : ""} `}>
                   <div className="loc-icon">
                     <img className="flag" src={img_06} alt="" />
                   </div>
                   <div className="loc-text">
-                    <p>{PI.Nationality}</p>
+                    <p className="info-text">{PI.Nationality}</p>
                   </div>
                 </div>
               </div>
@@ -252,174 +577,48 @@ const Template07 = (props) => {
               <img src={img_08} alt="" />
             </div>
             <div className="sec-name">
-              <p>Career Objective</p>
+              <p className="bold">
+                {props.language === "Ar" ? "الهدف الوظيفي" : "Career Objective"}
+              </p>
             </div>
             <div className="sec-text">
-              <p>{careerObjectives}</p>
+              <p className="objective-text bold">{CO.Text}</p>
             </div>
           </div>
 
-          {/* Education + Work Sections */}
-          <div className="sec exp-sec">
-            <div className="sec-logo edu-sec-logo">
-              <img src={img_09} alt="" />
-            </div>
-            <div className="sec-title edu-sec-title">
-              <div className="title">
-                <p>Education</p>
-              </div>
-              <div className="sec-arrow">
-                <img src={img_14} alt="arrow-down" />
-              </div>
-            </div>
-            <div className="sec-body">
-              <div className="edu-body">
-                <img className="edu-sec-img" src={img_16} alt="" />
-                {educations}
-              </div>
-              <div className="sec-half">
-                <div className="grey"></div>
-                <div className="dark-grey"></div>
-                <div className="grey"></div>
-                <div className="dark-grey"></div>
-                <div className="grey"></div>
-                <div className="dark-grey"></div>
-                <div className="grey"></div>
-              </div>
-              <div className="work-body" id="workBody">
-                <img className="work-sec-bg-img" src={img_35} alt="" />
-                <img className="work-sec-img" src={img_19} alt="" />
-                <div className="work-row">
-                  <div className="work">
-                    <div className="work-year">
-                      <p>2002 - 2003</p>
-                    </div>
-                    <div className="work-co">
-                      <p>Company Name</p>
-                    </div>
-                    <div className="work-pos">
-                      <p>Postition</p>
-                    </div>
-                  </div>
-                  <div className="work">
-                    <div className="work-year">
-                      <p>2002 - 2003</p>
-                    </div>
-                    <div className="work-co">
-                      <p>Company Name</p>
-                    </div>
-                    <div className="work-pos">
-                      <p>Postition</p>
-                    </div>
-                  </div>
-                  <div className="work">
-                    <div className="work-year">
-                      <p>2002 - 2003</p>
-                    </div>
-                    <div className="work-co">
-                      <p>Company Name</p>
-                    </div>
-                    <div className="work-pos">
-                      <p>Postition</p>
-                    </div>
-                  </div>
+          {/* Main Sections */}
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="droppable-main" type="Main">
+              {(provided) => (
+                <div
+                  className="main-sec"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {mainSectionList.map((sec, index) => {
+                    return (
+                      <Draggable
+                        key={index}
+                        draggableId={`draggable-main-${index}`}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {sec}
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
                 </div>
-                <div className="work-row">
-                  <div className="work">
-                    <div className="work-year">
-                      <p>2002 - 2003</p>
-                    </div>
-                    <div className="work-co">
-                      <p>Company Name</p>
-                    </div>
-                    <div className="work-pos">
-                      <p>Postition</p>
-                    </div>
-                  </div>
-                  <div className="work">
-                    <div className="work-year">
-                      <p>2002 - 2003</p>
-                    </div>
-                    <div className="work-co">
-                      <p>Company Name</p>
-                    </div>
-                    <div className="work-pos">
-                      <p>Postition</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="sec-logo work-sec-logo">
-              <img src={img_10} alt="" />
-            </div>
-            <div className="sec-title work-sec-title">
-              <div className="title">
-                <p>Work Experience</p>
-              </div>
-              <div className="sec-arrow">
-                <img src={img_15} alt="arrow-up" />
-              </div>
-            </div>
-          </div>
-
-          {/* Courses Section */}
-          <div className="sec course-sec">
-            <div className="sec-logo">
-              <img src={img_11} alt="" />
-            </div>
-            <div className="sec-title">
-              <div className="title">
-                <p>Courses</p>
-              </div>
-              <div className="sec-arrow">
-                <img src={img_14} alt="arrow-down" />
-              </div>
-            </div>
-            <div className="sec-body">
-              <div className="sec-img">
-                <img src={img_20} alt="" />
-              </div>
-              <div className="sec-content">
-                {/* this img will be changed to img_33 if the number 
-                of jobs is less than or equal to 5 */}
-                <img className="course-sec-bg" src={img_32} alt="" />
-                {courses}
-              </div>
-            </div>
-          </div>
-
-          {/* Skills Section */}
-          <div className="sec skills-sec">
-            <div className="sec-logo">
-              <img src={img_12} alt="" />
-            </div>
-            <div className="sec-title">
-              <div className="title">
-                <p>Skills</p>
-              </div>
-              <div className="sec-arrow">
-                <img src={img_14} alt="arrow-down" />
-              </div>
-            </div>
-            <div className="sec-body">{skills}</div>
-          </div>
-
-          {/* Languages Section */}
-          <div className="sec lang-sec">
-            <div className="sec-logo">
-              <img src={img_13} alt="" />
-            </div>
-            <div className="sec-title">
-              <div className="title">
-                <p>Languages</p>
-              </div>
-              <div className="sec-arrow">
-                <img src={img_14} alt="arrow-down" />
-              </div>
-            </div>
-            <div className="sec-body">{languages}</div>
-          </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       </div>
     </>

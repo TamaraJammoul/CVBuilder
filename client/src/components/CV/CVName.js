@@ -59,7 +59,7 @@ export default function CVName() {
                 className="save"
                 onClick={() => {
                   dispatch(CVName1({name, cvID}));
-                  history.push("/cvtemplates");
+                  history.push("/cvlanguage");
                 }}
               >
                 {t("Lets Start")}

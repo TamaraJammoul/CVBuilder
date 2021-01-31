@@ -42,7 +42,13 @@ export default function Getintouch() {
         </div>
       </div>
       <hr />
-      <div className="row mt-3">
+      <div
+        className="row mt-3"
+        data-aos="fade-up-left"
+        data-aos-offset="200"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+      >
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
@@ -101,7 +107,7 @@ export default function Getintouch() {
                     variant="contained"
                     className="save"
                     style={{float: "right"}}
-                    onClick={onSubmit()}
+                    onClick={() => onSubmit()}
                   >
                     {t("Send")}
                   </Button>

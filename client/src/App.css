@@ -5,7 +5,10 @@
     --fifthcolor:#5B2338 ;
    --background: #f6f6f8;
 }
-
+.scrolltemplates{
+  overflow: hidden !important;
+  width: 100% !important;
+}
 .arhide{
 display: none !important;
 }
@@ -41,6 +44,8 @@ h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
 .save:hover{
   background-color: white !important;
   border-color:  rgba(69, 35, 73, 0.9)  !important;
+  transform: scale(1.2, 1.2)!important;
+
 }
 .cancel{
   background-color: white !important;
@@ -49,6 +54,11 @@ h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
 .cancel:hover{
   background-color: rgba(69, 35, 73, 0.9)  !important;
   border-color: white !important;
+   transform: scale(1.2, 1.2)!important;
+}
+
+.nav:hover{
+   transform: scale(1.2, 1.2)!important;
 }
 .scrollnon{
   overflow-x: hidden !important;
@@ -153,6 +163,9 @@ a:active {
   }
   .imgskill{
       width:40px!important
+    }
+    .fontlan{
+      font-size: large;
     }
 }
 @media only screen and (max-width: 370px) {

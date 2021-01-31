@@ -31,6 +31,10 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 export default function TechnicalSkills() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.technicalskills);
+  const technicalskilllen = useSelector(
+    (state) => state.template.technicalskilllen
+  );
+
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
@@ -170,7 +174,13 @@ export default function TechnicalSkills() {
     );
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item style={{width: "100%"}} sx={12}>
@@ -207,19 +217,23 @@ export default function TechnicalSkills() {
               )}
             </Droppable>
           </DragDropContext>
-          <Grid item xs={12}>
-            {" "}
-            <Link to="/buildcv/addtechnicalskills">
+          {technicalskills < technicalskilllen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                style={{backgroundColor: "#5B2338"}}
-                startIcon={<DeleteIcon />}
-              >
-                {t("AddTechnicalSkill")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="/buildcv/addtechnicalskills">
+                {" "}
+                <Button
+                  variant="contained"
+                  className="save"
+                  startIcon={<DeleteIcon />}
+                >
+                  {t("AddTechnicalSkill")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>

@@ -32,6 +32,14 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 0,
         achievement: 0,
+
+        certificareslen: 2,
+        courseslen: 6,
+        educationlen: 2,
+        experiencelen: 3,
+        languagelen: 3,
+        othertraininglen: 5,
+        technicalskilllen: 2,
       };
     else if (t == "cv2")
       return {
@@ -48,6 +56,13 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 0,
         achievement: 0,
+
+        courseslen: 10,
+        educationlen: 3,
+        experiencelen: 3,
+        languagelen: 2,
+        membershiplen: 3,
+        referenclen: 1,
       };
     else if (t == "cv3")
       return {
@@ -57,13 +72,18 @@ export default function Card({CardImage, template}) {
         education: 1,
         experience: 1,
         language: 1,
-        membership: 1,
+        membership: 0,
         othertraining: 0,
         referenc: 0,
         technicalskill: 0,
         skills: 1,
         twolan: 0,
         achievement: 0,
+
+        courseslen: 6,
+        educationlen: 1,
+        experiencelen: 2,
+        languagelen: 3,
       };
     else if (t == "cv4")
       return {
@@ -79,7 +99,13 @@ export default function Card({CardImage, template}) {
         technicalskill: 1,
         skills: 1,
         twolan: 0,
-        achievement: 0,
+
+        courseslen: 8,
+        educationlen: 1,
+        experiencelen: 1,
+        languagelen: 2,
+
+        technicalskilllen: 4,
       };
     else if (t == "cv5")
       return {
@@ -96,6 +122,10 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 0,
         achievement: 0,
+
+        courseslen: 7,
+        educationlen: 1,
+        experiencelen: 2,
       };
     else if (t == "cv6")
       return {
@@ -112,6 +142,11 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 0,
         achievement: 0,
+
+        courseslen: 10,
+        educationlen: 2,
+        experiencelen: 5,
+        languagelen: 2,
       };
     else if (t == "cv7")
       return {
@@ -121,13 +156,19 @@ export default function Card({CardImage, template}) {
         education: 1,
         experience: 1,
         language: 1,
-        membership: 0,
+        membership: 1,
         othertraining: 0,
         referenc: 0,
         technicalskill: 0,
         skills: 1,
         twolan: 0,
         achievement: 0,
+
+        courseslen: 6,
+        educationlen: 3,
+        experiencelen: 3,
+        languagelen: 2,
+        membershiplen: 5,
       };
     else if (t == "cv8")
       return {
@@ -144,6 +185,11 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 1,
         achievement: 0,
+
+        courseslen: 5,
+        educationlen: 1,
+        experiencelen: 2,
+        languagelen: 1,
       };
     else if (t == "cv9")
       return {
@@ -160,6 +206,13 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 1,
         achievement: 1,
+
+        certificareslen: 1,
+        courseslen: 9,
+        educationlen: 1,
+        experiencelen: 1,
+        languagelen: 2,
+        achievementlen: 1,
       };
     else if (t == "cv10")
       return {
@@ -176,6 +229,12 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 1,
         achievement: 0,
+
+        certificareslen: 1,
+        courseslen: 1,
+        educationlen: 1,
+        experiencelen: 2,
+        languagelen: 2,
       };
     else if (t == "cv11")
       return {
@@ -192,6 +251,11 @@ export default function Card({CardImage, template}) {
         skills: 1,
         twolan: 1,
         achievement: 0,
+
+        courseslen: 6,
+        educationlen: 1,
+        experiencelen: 1,
+        languagelen: 2,
       };
   };
   return (

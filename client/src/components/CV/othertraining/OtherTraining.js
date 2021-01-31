@@ -23,6 +23,10 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 export default function OtherTraining(props) {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.othertraining);
+  const othertraininglen = useSelector(
+    (state) => state.template.othertraininglen
+  );
+
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
@@ -130,7 +134,13 @@ export default function OtherTraining(props) {
     );
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item style={{width: "100%"}} sx={12}>
@@ -167,19 +177,23 @@ export default function OtherTraining(props) {
               )}
             </Droppable>
           </DragDropContext>
-          <Grid item xs={12}>
-            {" "}
-            <Link to="addothertraining">
+          {othertraining < othertraininglen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                style={{backgroundColor: "#5B2338"}}
-                startIcon={<DeleteIcon />}
-              >
-                {t("AddOtherTraining")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="addothertraining">
+                {" "}
+                <Button
+                  variant="contained"
+                  className="save"
+                  startIcon={<DeleteIcon />}
+                >
+                  {t("AddOtherTraining")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>

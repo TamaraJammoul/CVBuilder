@@ -64,16 +64,6 @@ export default function Drawer() {
             {i18n.language == "ar" ? <Dashboard /> : ""}
           </h5>
         </Grid>
-        <Grid item>
-          <h5>
-            {" "}
-            {i18n.language == "en" ? <AccountBox /> : ""}
-            <span style={{margin: "10px"}}>
-              <Link to="myaccount">{t("MyAccount")}</Link>
-            </span>
-            {i18n.language == "ar" ? <AccountBox /> : ""}
-          </h5>
-        </Grid>
 
         <Grid item>
           <h5>

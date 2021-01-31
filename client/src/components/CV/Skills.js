@@ -4,6 +4,7 @@ import icon from "./../../img/icon.jpg";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {AddSkillAction} from "./../../store/action/skill";
 
 import ic1 from "./../../img/ic1.png";
 import ic2 from "./../../img/ic2.png";
@@ -16,8 +17,11 @@ import ic8 from "./../../img/ic8.png";
 import ic9 from "./../../img/ic9.png";
 
 export default function Skills() {
-  const skills = useSelector((state) => state.template.skills);
+  var skills = useSelector((state) => state.template.skills);
   const {t} = useTranslation();
+  const dispatch = useDispatch();
+  const cvID = useSelector((state) => state.cvID);
+
   const [OfficePrograms, setOfficePrograms] = useState(false);
   const [TimeManagment, setTimeManagment] = useState(false);
   const [Workunderpressure, setWorkunderpressure] = useState(false);
@@ -28,13 +32,15 @@ export default function Skills() {
     false
   );
   const [ComputerProficiency, setComputerProficiency] = useState(false);
-
+  useEffect(() => {
+    skills.map((e) => setname(e));
+  }, []);
   const addSkill = (t) => {
     var b = true;
     skills.map((e) => (e == t ? (b = false) : ""));
     if (b == true) {
       skills.push(t);
-    }
+    } else skills = skills.filter((e) => e != t);
     setname(t);
     console.log(skills);
   };
@@ -194,8 +200,9 @@ export default function Skills() {
             {" "}
             <Button
               variant="contained"
-              style={{backgroundColor: "#5B2338"}}
+              className="save"
               startIcon={<DeleteIcon />}
+              onClick={() => dispatch({skills, cvID})}
             >
               {t("AddSkill")}
             </Button>

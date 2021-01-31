@@ -44,7 +44,15 @@ export default function PersonalInfo() {
     dispatch(PeraonalInfoAction({formData}));
   };
   return (
-    <Paper elevation={3} className="buildcvbar" style={{width: "100%"}}>
+    <Paper
+      elevation={3}
+      className="buildcvbar"
+      style={{width: "100%"}}
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Grid
         container
         alignItems="center"

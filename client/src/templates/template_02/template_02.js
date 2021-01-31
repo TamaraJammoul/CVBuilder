@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_02.css";
 
 //#region Import Images
@@ -32,9 +33,24 @@ import img_24 from "../../assets/imgs/template_02/24.png";
 //#endregion
 
 function print() {
-  const filename = "template-2.pdf";
+  const pdf = document.getElementById("toPDF");
+  const text = [...pdf.querySelectorAll("p")];
+  text.map(
+    (p) =>
+      !p.classList.contains("objective-text") &&
+      (p.style.transform = "translateY(-30%)")
+  );
+  text.map(
+    (p) =>
+      p.classList.contains("title") && (p.style.transform = "translateY(-20%)")
+  );
+  text.map(
+    (p) =>
+      p.classList.contains("year") && (p.style.transform = "translateY(-35%)")
+  );
 
-  html2canvas(document.getElementById("toPDF"), {
+  const filename = "template-2.pdf";
+  html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
   })
@@ -45,22 +61,33 @@ function print() {
       doc.save(filename);
     })
     .catch((err) => console.log(err));
+  text.map((p) => (p.style.transform = "translateY(0%)"));
 }
 
 const ref = React.createRef();
 const Template02 = (props) => {
   const {
-    Educations,
-    Experiences,
-    Courses,
-    CareerObjectives,
-    PersonalInformation,
-    Skill,
+    educations,
+    experiences,
+    courses,
+    careerobjective,
+    personalInformation,
+    skills,
   } = props.Data;
 
-  let educations = null;
-  if (Educations.length > 0) {
-    educations = Educations.map((edu) => {
+  let edus = null;
+  if (educations.length > 0) {
+    edus = educations.map((edu) => {
+      let degree = "";
+      if (edu.Degree === 1) {
+        degree = "Bachelor";
+      } else if (edu.Degree === 2) {
+        degree = "Master";
+      } else if (edu.Degree === 3) {
+        degree = "PhD";
+      } else if (edu.Degree === 4) {
+        degree = "High School Certificate";
+      }
       return (
         <div
           className={`edu ${props.language === "Ar" ? "ar" : ""}`}
@@ -69,25 +96,55 @@ const Template02 = (props) => {
           <div
             className={`circle ${props.language === "Ar" ? "ar" : ""}`}
           ></div>
-          <p className="edu-title">{edu.Degree}</p>
+          <p className="edu-title bold">{degree}</p>
           <p>{edu.UniversityName}</p>
-          <p>Grade: {edu.DegreeFrom5} out of 5</p>
+          <p>GPA: {edu.DegreeFrom5} out of 5</p>
           <div className={`edu-year ${props.language === "Ar" ? "ar" : ""}`}>
-            <p>{edu.YearEnd}</p>
+            <p className="year">{edu.YearEnd}</p>
           </div>
         </div>
       );
     });
+    if (props.language === "Ar") {
+      edus = educations.map((edu) => {
+        let degreeAr = "";
+        if (edu.Degree === 1) {
+          degreeAr = "بكالوريوس";
+        } else if (edu.Degree === 2) {
+          degreeAr = "ماجستير";
+        } else if (edu.Degree === 3) {
+          degreeAr = "دكتوراه";
+        } else if (edu.Degree === 4) {
+          degreeAr = "شهادة الثانوية العامة";
+        }
+        return (
+          <div
+            className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+            key={edu.id_}
+          >
+            <div
+              className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            ></div>
+            <p className="edu-title bold">{degreeAr}</p>
+            <p>{edu.UniversityName}</p>
+            <p>المعدل: {edu.DegreeFrom5} من 5</p>
+            <div className={`edu-year ${props.language === "Ar" ? "ar" : ""}`}>
+              <p className="year">{edu.YearEnd}</p>
+            </div>
+          </div>
+        );
+      });
+    }
   }
 
-  let careerObjectives = null;
-  if (CareerObjectives) {
-    careerObjectives = CareerObjectives.Text;
+  let CO = null;
+  if (careerobjective) {
+    CO = careerobjective;
   }
 
   let jobs = null;
-  if (Experiences.length > 0) {
-    jobs = Experiences.map((job) => {
+  if (experiences.length > 0) {
+    jobs = experiences.map((job) => {
       return (
         <div className="work" key={job.id_}>
           <div
@@ -100,13 +157,13 @@ const Template02 = (props) => {
   }
 
   let PI = null;
-  if (PersonalInformation) {
-    PI = PersonalInformation;
+  if (personalInformation) {
+    PI = personalInformation;
   }
 
-  let courses = null;
-  if (Courses.length > 0) {
-    courses = Courses.map((crs) => {
+  let crses = null;
+  if (courses.length > 0) {
+    crses = courses.map((crs) => {
       return (
         <div className="course" key={crs.id_}>
           <div
@@ -129,19 +186,119 @@ const Template02 = (props) => {
     MS8: img_23,
     MS9: img_24,
   };
-  let skills = null;
-  if (Skill.length > 0) {
-    skills = Skill.map((skill) => {
+  let skls = null;
+  if (skills.length > 0) {
+    skls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
         <div className="flex-content" key={skill.id_}>
           <div className="skill-icon-bg">
             <img className="skill-icon-1" src={skillLogo} alt="" />
           </div>
-          <p>{skill.Name}</p>
+          <div className="skill-text">
+            <p>{skill.Name}</p>
+          </div>
         </div>
       );
     });
+  }
+
+  //#region - Education Section
+  let eduSection = (
+    <div className="sec edu-sec">
+      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+        <img className="sec-icon-1" src={img_09} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <p className="title bold">
+          {props.language === "Ar" ? "المؤهلات العلمية" : "Education"}
+        </p>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className="sec-body-content">{edus}</div>
+        <div className="sec-body-img">
+          <img src={img_13} alt="" />
+        </div>
+      </div>
+    </div>
+  );
+  //#endregion
+  //#region - Work Section
+  let workSection = (
+    <div className="sec work-sec">
+      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+        <img className="sec-icon-2" src={img_10} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <p className="title bold">
+          {props.language === "Ar" ? "الخبرات العملية" : "Work Experience"}
+        </p>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className="sec-body-content">{jobs}</div>
+        <div className="sec-body-img">
+          <img src={img_14} alt="" />
+        </div>
+      </div>
+    </div>
+  );
+  //#endregion
+  //#region - Courses Section
+  let coursesSection = (
+    <div className="sec course-sec">
+      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+        <img className="sec-icon-3" src={img_11} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <p className="title bold">
+          {props.language === "Ar" ? "الدورات التدريبية" : "Training Courses"}
+        </p>
+      </div>
+      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className="sec-body-content">{crses}</div>
+        <div className="sec-body-img">
+          <img src={img_15} alt="" />
+        </div>
+      </div>
+    </div>
+  );
+  //#endregion
+  //#region - Skills Section
+  let skillsSection = (
+    <div className="sec skills-sec">
+      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+        <img className="sec-icon-4" src={img_12} alt="" />
+      </div>
+      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <p className="title bold">
+          {props.language === "Ar" ? "المهارات" : "Skills"}
+        </p>
+      </div>
+      <div className={`skill-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className="flex-container">{skls}</div>
+      </div>
+    </div>
+  );
+  //#endregion
+
+  const [mainSectionList, setMainSectionList] = useState([
+    eduSection,
+    workSection,
+    coursesSection,
+    skillsSection,
+  ]);
+
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+    if (result.destination.index === result.source.index) return;
+    // console.log(result);
+
+    if (result.type === "Main") {
+      const items = Array.from(mainSectionList);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      setMainSectionList(items);
+    }
   }
 
   return (
@@ -156,7 +313,7 @@ const Template02 = (props) => {
           {/* Name Section */}
           <div className="name-sec">
             <h1>
-              {PersonalInformation.FirstName} {PersonalInformation.LastName}
+              {PI.FirstName} {PI.LastName}
             </h1>
           </div>
 
@@ -229,94 +386,39 @@ const Template02 = (props) => {
             <div className="intro-body">
               <img src={img_08} alt="" />
               <div className="intro-content">
-                <p>{careerObjectives}</p>
+                <p className="objective-text bold">{CO.Text}</p>
               </div>
             </div>
           </div>
 
-          {/* Education Section */}
-          <div className="sec edu-sec">
-            <div
-              className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}
-            >
-              <img className="sec-icon-1" src={img_09} alt="" />
-            </div>
-            <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
-              <p>
-                {props.language === "Ar" ? "المؤهلات العلمية" : "Education"}
-              </p>
-            </div>
-            <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
-              <div className="sec-body-content">{educations}</div>
-              <div className="sec-body-img">
-                <img src={img_13} alt="" />
-              </div>
-            </div>
-          </div>
-
-          {/* Work Section */}
-          <div className="sec work-sec">
-            <div
-              className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}
-            >
-              <img className="sec-icon-2" src={img_10} alt="" />
-            </div>
-            <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
-              <p>
-                {" "}
-                {props.language === "Ar"
-                  ? "الخبرات العملية"
-                  : "Work Experience"}
-              </p>
-            </div>
-            <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
-              <div className="sec-body-content">{jobs}</div>
-              <div className="sec-body-img">
-                <img src={img_14} alt="" />
-              </div>
-            </div>
-          </div>
-
-          {/* Courses Section */}
-          <div className="sec course-sec">
-            <div
-              className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}
-            >
-              <img className="sec-icon-3" src={img_11} alt="" />
-            </div>
-            <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
-              <p>
-                {props.language === "Ar"
-                  ? "الدورات التدريبية"
-                  : "Training Courses"}
-              </p>
-            </div>
-            <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
-              <div className="sec-body-content">{courses}</div>
-              <div className="sec-body-img">
-                <img src={img_15} alt="" />
-              </div>
-            </div>
-          </div>
-
-          {/* Skills Section */}
-          <div className="sec skills-sec">
-            <div
-              className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}
-            >
-              <img className="sec-icon-4" src={img_12} alt="" />
-            </div>
-            <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
-              <p>{props.language === "Ar" ? "المهارات" : "Skills"}</p>
-            </div>
-            <div
-              className={`skill-sec-body ${
-                props.language === "Ar" ? "ar" : ""
-              }`}
-            >
-              <div className="flex-container">{skills}</div>
-            </div>
-          </div>
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="droppable-main" type="Main">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {mainSectionList.map((sec, index) => {
+                    return (
+                      <Draggable
+                        key={index}
+                        draggableId={`draggable-main-${index}`}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {sec}
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       </div>
     </>

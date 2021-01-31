@@ -28,6 +28,7 @@ export default function Membership() {
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const lan = useSelector((state) => state.sections.twolan);
+  const achievementlen = useSelector((state) => state.sections.achievementlen);
 
   const [hide, setHide] = useState(0);
   const [achievement, setachievement] = useState([]);
@@ -125,7 +126,13 @@ export default function Membership() {
     );
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item style={{width: "100%"}} sx={12}>
@@ -160,19 +167,23 @@ export default function Membership() {
               )}
             </Droppable>
           </DragDropContext>
-          <Grid item xs={12}>
-            {" "}
-            <Link to="/buildcv/addachievement">
+          {achievement.length < achievementlen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                style={{backgroundColor: "#5B2338"}}
-                startIcon={<DeleteIcon />}
-              >
-                {t("AddAchievement")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="/buildcv/addachievement">
+                {" "}
+                <Button
+                  variant="contained"
+                  startIcon={<DeleteIcon />}
+                  className="save"
+                >
+                  {t("AddAchievement")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>

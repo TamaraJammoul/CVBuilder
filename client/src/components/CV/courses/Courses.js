@@ -25,6 +25,8 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
 
   const temp = useSelector((state) => state.template.courses);
+  const courseslen = useSelector((state) => state.template.courseslen);
+
   useEffect(() => {
     setCourses(temp);
   }, [temp]);
@@ -118,7 +120,13 @@ export default function Courses() {
     );
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item xs={12} style={{width: "100%"}}>
@@ -152,19 +160,23 @@ export default function Courses() {
               )}
             </Droppable>
           </DragDropContext>
-          <Grid item xs={12}>
-            {" "}
-            <Link to="/buildcv/addcourses">
+          {courses.length < courseslen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                style={{backgroundColor: "#5B2338"}}
-                startIcon={<DeleteIcon />}
-              >
-                {t("AddCourse")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="/buildcv/addcourses">
+                {" "}
+                <Button
+                  variant="contained"
+                  className="save"
+                  startIcon={<DeleteIcon />}
+                >
+                  {t("AddCourse")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>

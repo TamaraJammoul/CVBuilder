@@ -19,6 +19,18 @@ const initialState = {
     skills: 1,
     twolan: 1,
     achievement: 1,
+
+    certificateslen: 1,
+    courseslen: 1,
+    educationlen: 1,
+    experiencelen: 1,
+    languagelen: 1,
+    membershiplen: 1,
+    othertraininglen: 1,
+    referenclen: 1,
+    technicalskilllen: 1,
+
+    achievementlen: 1,
   },
   template: {
     certificates: [],

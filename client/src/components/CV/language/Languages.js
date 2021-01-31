@@ -32,6 +32,8 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 export default function Languages() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.languages);
+  const languagelen = useSelector((state) => state.template.languagelen);
+
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
@@ -157,7 +159,13 @@ export default function Languages() {
     );
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item style={{width: "100%"}} sx={12}>
@@ -194,20 +202,23 @@ export default function Languages() {
               )}
             </Droppable>
           </DragDropContext>
-
-          <Grid item xs={12}>
-            {" "}
-            <Link to="addlanguage">
+          {languages < languagelen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                startIcon={<DeleteIcon />}
-                style={{backgroundColor: "#5B2338"}}
-              >
-                {t("AddLanguage")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="addlanguage">
+                {" "}
+                <Button
+                  variant="contained"
+                  startIcon={<DeleteIcon />}
+                  className="save"
+                >
+                  {t("AddLanguage")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>

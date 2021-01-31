@@ -43,7 +43,14 @@ export default function Experience(props) {
     history.push("/buildcv/experience");
   };
   return (
-    <Paper elevation={3} className="buildcvbar">
+    <Paper
+      elevation={3}
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid
           container

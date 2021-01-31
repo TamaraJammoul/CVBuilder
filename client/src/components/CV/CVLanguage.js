@@ -5,13 +5,15 @@ import ar from "./../../img/sa.svg";
 import {useSelector, useDispatch} from "react-redux";
 import {CVLanguage1} from "./../../store/action/cv";
 import {useTranslation} from "react-i18next";
+import {useHistory} from "react-router-dom";
 
 export default function CVLanguage() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
+  const history = useHistory();
 
   return (
-    <Paper>
+    <div className="backgroundimg" style={{minHeight: "100vh"}}>
       <Container>
         <Grid
           container
@@ -19,16 +21,24 @@ export default function CVLanguage() {
           justify="center"
           direction="column"
           spacing={4}
+          style={{paddingTop: "50px"}}
+          data-aos="fade-up-left"
+          data-aos-offset="200"
+          data-aos-delay="50"
+          data-aos-duration="1000"
         >
           <Grid item>
-            <h2>{t("Resume language")}</h2>
+            <h2 className="fontlan">{t("Resume language")}</h2>
           </Grid>
           <Grid item style={{width: "600px"}}>
             <Grid container alignItems="Center" spacing={8}>
               <Grid item xs={6}>
                 <Paper
                   elevation={3}
-                  onClick={dispatch(CVLanguage1({lan: "en"}))}
+                  onClick={() => {
+                    dispatch(CVLanguage1({lan: "en"}));
+                    history.push("/cvtemplates");
+                  }}
                 >
                   <Grid
                     container
@@ -49,7 +59,10 @@ export default function CVLanguage() {
               <Grid item xs={6}>
                 <Paper
                   elevation={3}
-                  onClick={dispatch(CVLanguage1({lan: "ar"}))}
+                  onClick={() => {
+                    dispatch(CVLanguage1({lan: "ar"}));
+                    history.push("/cvtemplates");
+                  }}
                 >
                   <Grid
                     container
@@ -71,6 +84,6 @@ export default function CVLanguage() {
           </Grid>
         </Grid>
       </Container>
-    </Paper>
+    </div>
   );
 }

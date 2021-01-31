@@ -25,6 +25,8 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 export default function Education() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.educations);
+  const educationlen = useSelector((state) => state.template.educationlen);
+
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [educations, setEducations] = useState([]);
@@ -150,7 +152,13 @@ export default function Education() {
     );
   };
   return (
-    <Paper className="buildcvbar">
+    <Paper
+      className="buildcvbar"
+      data-aos="fade-up-left"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+    >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
           <Grid item style={{width: "100%"}} sx={12}>
@@ -187,19 +195,23 @@ export default function Education() {
               )}
             </Droppable>
           </DragDropContext>
-          <Grid item xs={12}>
-            {" "}
-            <Link to="/buildcv/addeducation">
+          {educations.length < educationlen ? (
+            <Grid item xs={12}>
               {" "}
-              <Button
-                variant="contained"
-                startIcon={<DeleteIcon />}
-                style={{backgroundColor: "#5B2338"}}
-              >
-                {t("AddEducation")}
-              </Button>
-            </Link>
-          </Grid>
+              <Link to="/buildcv/addeducation">
+                {" "}
+                <Button
+                  variant="contained"
+                  startIcon={<DeleteIcon />}
+                  className="save"
+                >
+                  {t("AddEducation")}
+                </Button>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </Container>
     </Paper>
