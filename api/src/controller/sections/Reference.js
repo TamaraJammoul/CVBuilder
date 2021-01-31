@@ -27,7 +27,7 @@ exports.addReference = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV found"
                 })
             }
@@ -109,7 +109,7 @@ exports.updateReference = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No Reference found",
             })
         }
@@ -141,7 +141,7 @@ exports.getReferences = (req, res) => {
                             })
                         }
                         else {
-                            return res.status(200).json({
+                            return res.status(0).json({
                                 msg: "No CV Found",
                                 err
                             })
@@ -149,7 +149,7 @@ exports.getReferences = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV Found",
                     err
                 })
@@ -185,7 +185,7 @@ exports.hideReferences = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV Not Found"
                 })
             }
@@ -231,14 +231,14 @@ exports.copyReference = (req, res) => {
                         })
                     }
                     else {
-                        return res.status(200).json({
+                        return res.status(0).json({
                             msg: "Reference not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV not found"
                 })
             }
@@ -292,7 +292,7 @@ exports.orderReferences = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "NO CV Found"
             })
         }

@@ -30,7 +30,7 @@ exports.updateCareer = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No Career Objectives found",
             })
         }
@@ -48,12 +48,12 @@ exports.getCareer = (req, res) => {
             }
             if (career) {
                 return res.status(200).json({
-                    msg: "Career Obkectives returned successfully",
+                    msg: "Career Objectives returned successfully",
                     career
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No Career Objectives Found",
                 })
             }
@@ -88,7 +88,7 @@ exports.hideCareer = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV Not Found"
                 })
             }

@@ -29,7 +29,7 @@ exports.addTechnicalSkills = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV found"
                 })
             }
@@ -59,16 +59,16 @@ exports.deleteTechnicalSkills = (req, res) => {
                 }
                 CV.updateOne({ _id: req.body._id }, { $set: { TechnicalSkills: tmpTechnicalSkills } })
                     .then(() => {
-                        TechnicalSkills.findById(req.body.technicalSkill_id).then((tec)=>{
+                        TechnicalSkills.findById(req.body.technicalSkill_id).then((tec) => {
                             TechnicalSkills.deleteOne({ _id: req.body.technicalSkill_id }).then(() => {
-                                TechnicalSkills.find({_id : {$in : tmpTechnicalSkills}}).then((tecArray)=>{
+                                TechnicalSkills.find({ _id: { $in: tmpTechnicalSkills } }).then((tecArray) => {
                                     Promise.all(tecArray.map(item => {
-                                        return anAsyncFunction3(item , tec.Order);
-                                    })).then(()=>{
-                                    return res.status(200).json({
-                                        msg: "TechnicalSlills deleted",
-                                        data: tmpTechnicalSkills
-                                    })
+                                        return anAsyncFunction3(item, tec.Order);
+                                    })).then(() => {
+                                        return res.status(200).json({
+                                            msg: "TechnicalSlills deleted",
+                                            data: tmpTechnicalSkills
+                                        })
                                     })
                                 })
                             })
@@ -114,7 +114,7 @@ exports.updateTechnicalSkills = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No TechnicalSkills found",
             })
         }
@@ -146,7 +146,7 @@ exports.getTechnicalSkills = (req, res) => {
                             })
                         }
                         else {
-                            return res.status(200).json({
+                            return res.status(0).json({
                                 msg: "No CV Found",
                                 err
                             })
@@ -154,7 +154,7 @@ exports.getTechnicalSkills = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV Found",
                     err
                 })
@@ -190,7 +190,7 @@ exports.hideTechnicalSkills = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV Not Found"
                 })
             }
@@ -237,14 +237,14 @@ exports.copyTechnicalSkill = (req, res) => {
                         })
                     }
                     else {
-                        return res.status(200).json({
+                        return res.status(0).json({
                             msg: "TechnicalSkill not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV not found"
                 })
             }
@@ -298,7 +298,7 @@ exports.orderTechnicalSkills = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "NO CV Found"
             })
         }

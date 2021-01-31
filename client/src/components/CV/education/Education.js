@@ -62,7 +62,7 @@ export default function Education() {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Grid item xs={12}>
+            <Grid item xs={12} className="mt-3">
               <Paper>
                 <Container>
                   <Grid
@@ -75,7 +75,7 @@ export default function Education() {
                     <Grid item xs={1}>
                       <h4>{index + 1}</h4>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                       <Grid container direction="column">
                         <Grid item>
                           <h6>

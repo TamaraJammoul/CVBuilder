@@ -31,7 +31,7 @@ exports.addOtherTraining = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV found"
                 })
             }
@@ -111,7 +111,7 @@ exports.updateOtherTraining = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No OtherTraining found",
             })
         }
@@ -143,7 +143,7 @@ exports.getOtherTrainings = (req, res) => {
                             })
                         }
                         else {
-                            return res.status(200).json({
+                            return res.status(0).json({
                                 msg: "No CV Found",
                                 err
                             })
@@ -151,7 +151,7 @@ exports.getOtherTrainings = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV Found",
                     err
                 })
@@ -187,7 +187,7 @@ exports.hideOtherTrainings = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV Not Found"
                 })
             }
@@ -232,14 +232,14 @@ exports.copyOtherTraining = (req, res) => {
                         })
                     }
                     else {
-                        return res.status(200).json({
+                        return res.status(0).json({
                             msg: "OtherTraining not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV not found"
                 })
             }
@@ -293,7 +293,7 @@ exports.orderOtherTrainings = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "NO CV Found"
             })
         }

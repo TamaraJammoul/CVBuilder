@@ -180,8 +180,8 @@ export default function AddEducation(props) {
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
               >
-                <MenuItem value={1}>{"good"}</MenuItem>
-                <MenuItem value={2}>{"very good"}</MenuItem>
+                <MenuItem value={1}>{t("good")}</MenuItem>
+                <MenuItem value={2}>{t("very good")}</MenuItem>
                 <MenuItem value={3}>{t("excellent")}</MenuItem>
               </Select>
             </FormControl>

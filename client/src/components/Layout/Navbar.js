@@ -15,6 +15,7 @@ function Navbar(props) {
   let history = useHistory();
   const theme = useTheme();
   const {t, i18n} = useTranslation();
+  console.log(i18n.language);
   document.body.dir = i18n.dir();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -85,7 +86,7 @@ function Navbar(props) {
               aria-expanded="false"
             >
               <img
-                src={i18n.language == "en-US" ? us : ar}
+                src={i18n.language == "en" ? us : ar}
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>

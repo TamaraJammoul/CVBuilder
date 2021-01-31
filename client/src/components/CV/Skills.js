@@ -1,19 +1,58 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Paper, Grid, IconButton, Container, Button} from "@material-ui/core";
 import icon from "./../../img/icon.jpg";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 
+import ic1 from "./../../img/ic1.png";
+import ic2 from "./../../img/ic2.png";
+import ic3 from "./../../img/ic3.png";
+import ic4 from "./../../img/ic4.png";
+import ic5 from "./../../img/ic5.png";
+import ic6 from "./../../img/ic6.png";
+import ic7 from "./../../img/ic7.png";
+import ic8 from "./../../img/ic8.png";
+import ic9 from "./../../img/ic9.png";
+
 export default function Skills() {
   const skills = useSelector((state) => state.template.skills);
   const {t} = useTranslation();
+  const [OfficePrograms, setOfficePrograms] = useState(false);
+  const [TimeManagment, setTimeManagment] = useState(false);
+  const [Workunderpressure, setWorkunderpressure] = useState(false);
+  const [Problemsolving, setProblemsolving1] = useState(false);
+  const [SelfDevelopment, setSelfDevelopment] = useState(false);
+  const [TeamWork, setTeamWork] = useState(false);
+  const [LeadershipandOrganisation, setLeadershipandOrganisation] = useState(
+    false
+  );
+  const [ComputerProficiency, setComputerProficiency] = useState(false);
+
   const addSkill = (t) => {
-    if (skills.find(t) != -1) skills.push(t);
+    var b = true;
+    skills.map((e) => (e == t ? (b = false) : ""));
+    if (b == true) {
+      skills.push(t);
+    }
+    setname(t);
+    console.log(skills);
+  };
+  const setname = (t) => {
+    if (t == "ComputerProficiency")
+      setComputerProficiency(!ComputerProficiency);
+    if (t == "LeadershipandOrganisation")
+      setLeadershipandOrganisation(!LeadershipandOrganisation);
+    if (t == "TeamWork") setTeamWork(!TeamWork);
+    if (t == "SelfDevelopment") setSelfDevelopment(!SelfDevelopment);
+    if (t == "Problemsolving") setProblemsolving1(!Problemsolving);
+    if (t == "Workunderpressure") setWorkunderpressure(!Workunderpressure);
+    if (t == "TimeManagment") setTimeManagment(!TimeManagment);
+    if (t == "OfficePrograms") setOfficePrograms(!OfficePrograms);
   };
   return (
-    <Container>
-      <Paper>
+    <Paper>
+      <Container>
         <Grid
           container
           direction="row"
@@ -30,127 +69,124 @@ export default function Skills() {
 
           <Grid
             item
-            xs={3}
-            className={skills.find("Office Programs") != -1 ? "bg-light" : ""}
+            xs={6}
+            sm={3}
+            className={OfficePrograms == true ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Computer Proficiency")}
+              onClick={() => addSkill("OfficePrograms")}
             >
-              <img src={icon} />{" "}
+              <img src={ic6} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Office Programs")}</h6>
           </Grid>
           <Grid
             item
-            xs={3}
-            className={skills.find("Time Managment") != -1 ? "bg-light" : ""}
+            xs={6}
+            sm={3}
+            className={TimeManagment == 1 ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Time Managment")}
+              onClick={() => addSkill("TimeManagment")}
             >
-              <img src={icon} />{" "}
+              <img src={ic1} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Time Managment")}</h6>
           </Grid>
           <Grid
             item
-            xs={3}
-            className={
-              skills.find("Work under pressure") != -1 ? "bg-light" : ""
-            }
+            xs={6}
+            sm={3}
+            className={Workunderpressure == 1 ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Work under pressure")}
+              onClick={() => addSkill("Workunderpressure")}
             >
-              <img src={icon} />{" "}
+              <img src={icon} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Work under pressure")}</h6>
           </Grid>
           <Grid
             item
-            xs={3}
-            className={skills.find("Problem solving") != -1 ? "bg-light" : ""}
+            xs={6}
+            sm={3}
+            className={Problemsolving == 1 ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Problem solving")}
+              onClick={() => addSkill("Problemsolving")}
             >
-              <img src={icon} />{" "}
+              <img src={ic7} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Problem solving")}</h6>
           </Grid>
           <Grid
             item
-            xs={3}
-            className={skills.find("Self Development") != -1 ? "bg-light" : ""}
+            xs={6}
+            sm={3}
+            className={SelfDevelopment == 1 ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Self Development")}
+              onClick={() => addSkill("SelfDevelopment")}
             >
-              <img src={icon} />{" "}
+              <img src={ic4} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Self Development")}</h6>
           </Grid>
-          <Grid
-            item
-            xs={3}
-            className={skills.find("Team Work") != -1 ? "bg-light" : ""}
-          >
+          <Grid item xs={6} sm={3} className={TeamWork == 1 ? "bg-light" : ""}>
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Team Work")}
+              onClick={() => addSkill("TeamWork")}
             >
-              <img src={icon} />{" "}
+              <img src={ic2} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Team Work")}</h6>
           </Grid>
           <Grid
             item
-            xs={3}
-            className={
-              skills.find("Leadership and Organisation") != -1 ? "bg-light" : ""
-            }
+            xs={6}
+            sm={3}
+            className={LeadershipandOrganisation == 1 ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Leadership and Organisation")}
+              onClick={() => addSkill("LeadershipandOrganisation")}
             >
-              <img src={icon} />{" "}
+              <img src={ic3} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Leadership and Organisation")}</h6>
           </Grid>
           <Grid
             item
-            xs={3}
-            className={
-              skills.find("Computer Proficiency") != -1 ? "bg-light" : ""
-            }
+            xs={6}
+            sm={3}
+            className={ComputerProficiency == 1 ? "bg-light" : ""}
           >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Computer Proficiency")}
+              onClick={() => addSkill("ComputerProficiency")}
             >
-              <img src={icon} />{" "}
+              <img src={ic8} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
             <h6>{t("Computer Proficiency")}</h6>
           </Grid>
@@ -165,7 +201,7 @@ export default function Skills() {
             </Button>
           </Grid>
         </Grid>
-      </Paper>
-    </Container>
+      </Container>
+    </Paper>
   );
 }

@@ -33,11 +33,20 @@ const CVSchema = new mongoose.Schema({
     Skill: [{ type: ObjectId, ref: "Skill" }],
     Courses: [{ type: ObjectId, ref: "Course" }],
     Name: String,
-    NameAr: String,
+    NameAr: {
+        type: String,
+        default: ""
+    },
     Template: String,
-    TemplateAr: String,
+    TemplateAr: {
+        type: String,
+        default: ""
+    },
     Language: String,
-    LanguageAr: String,
+    LanguageAr: {
+        type: String,
+        default: ""
+    },
     CreatedDate: Date,
     EditedDate: Date,
     Order: { type: Number },

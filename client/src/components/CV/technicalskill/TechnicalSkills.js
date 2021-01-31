@@ -70,7 +70,7 @@ export default function TechnicalSkills() {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Grid item>
+            <Grid item className="mt-3" xs={12}>
               <Paper>
                 <Container>
                   <Grid container direction="column" spacing={4}>

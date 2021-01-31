@@ -16,7 +16,7 @@ export function AddCertificateAction(payload) {
         Name: payload.name,
         Year: payload.date,
         Description: payload.description,
-        Order: payload.order,
+        Order: 1,
         _id: payload.cvID,
         NameAr: payload.nameAr,
         DescriptionAr: payload.descriptionAr,
@@ -48,7 +48,7 @@ export function CopyCertificateAction(payload) {
         if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: COPYCERTIFICATE,
-            payload,
+            payload: res.data.data,
           });
         else
           dispatch({
@@ -86,11 +86,11 @@ export function EditCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://locahost:5000/api/certificate/updateCertificate`, {
+      .post(`http://localhost:5000/api/certificate/updateCertificate`, {
         Name: payload.name,
         Year: payload.date,
         Description: payload.description,
-        Order: payload.order,
+        Order: 1,
         _id: payload.id,
         cvID: payload.cvID,
         NameAr: payload.nameAr,
@@ -137,7 +137,7 @@ export function OrderCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificate/orderCertificates`, {
+      .post(`http://localhost:5000/api/certificate/orderCertifcates`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

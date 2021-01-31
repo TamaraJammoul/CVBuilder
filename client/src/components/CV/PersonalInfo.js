@@ -1,14 +1,6 @@
 import React, {useState} from "react";
-import {
-  Button,
-  Paper,
-  Grid,
-  IconButton,
-  Avatar,
-  TextField,
-} from "@material-ui/core";
+import {Button, Paper, Grid, Avatar, TextField} from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {useTranslation} from "react-i18next";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -23,6 +15,7 @@ export default function PersonalInfo() {
   let formData = new FormData();
   const dispatch = useDispatch();
   const id = useSelector((state) => state.personalInformation_id);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,10 +25,11 @@ export default function PersonalInfo() {
   const [country, setCountry] = useState("");
   const [nationality, setNationality] = useState("");
   const [maritalStatus, setMaritalStatus] = useState(1);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(0);
 
   const send = () => {
     formData.append("_id", id);
+
     formData.append("FirstName", firstName);
     formData.append("LastName", lastName);
     formData.append("LinkedIn", linkedIn);
@@ -46,9 +40,8 @@ export default function PersonalInfo() {
     formData.append("Country", country);
     formData.append("Nationality", nationality);
     formData.append("MaritalStatus", maritalStatus);
-    console.log(maritalStatus, "kjklj");
 
-    dispatch(PeraonalInfoAction({data: formData}));
+    dispatch(PeraonalInfoAction({formData}));
   };
   return (
     <Paper elevation={3} className="buildcvbar" style={{width: "100%"}}>
@@ -86,7 +79,7 @@ export default function PersonalInfo() {
                   className="input1"
                   onChange={(e) => {
                     const files = e.target.files;
-                    formData.append("file", files[0]);
+                    formData.append("profile", files[0]);
                     console.log(formData);
                   }}
                 />
@@ -138,6 +131,7 @@ export default function PersonalInfo() {
               label={t("Email")}
               variant="filled"
               color="primary"
+              type="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
@@ -147,6 +141,7 @@ export default function PersonalInfo() {
               label={t("PhoneNumber")}
               variant="filled"
               color="primary"
+              type="number"
               onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>

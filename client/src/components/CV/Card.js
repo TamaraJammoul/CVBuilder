@@ -12,6 +12,7 @@ export default function Card({CardImage, template}) {
   const dispatch = useDispatch();
   const submit = (t) => {
     const sections = fun(t);
+
     dispatch(CVTemplate1({template: t, cvID, sections}));
     history.push("/buildcv/peronalinfo");
   };

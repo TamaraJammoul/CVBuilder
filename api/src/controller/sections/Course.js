@@ -31,7 +31,7 @@ exports.addCourse = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV found"
                 })
             }
@@ -116,7 +116,7 @@ exports.updateCourse = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No Course found",
             })
         }
@@ -148,7 +148,7 @@ exports.getCourses = (req, res) => {
                             })
                         }
                         else {
-                            return res.status(200).json({
+                            return res.status(0).json({
                                 msg: "No CV Found",
                                 err
                             })
@@ -156,7 +156,7 @@ exports.getCourses = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV Found",
                     err
                 })
@@ -192,7 +192,7 @@ exports.hideCourses = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV Not Found"
                 })
             }
@@ -235,14 +235,14 @@ exports.copyCourse = (req, res) => {
                         })
                     }
                     else {
-                        return res.status(200).json({
+                        return res.status(0).json({
                             msg: "Course not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV not found"
                 })
             }
@@ -296,7 +296,7 @@ exports.orderCourses = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "NO CV Found"
             })
         }

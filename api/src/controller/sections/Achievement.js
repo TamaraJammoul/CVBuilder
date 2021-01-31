@@ -31,7 +31,7 @@ exports.addAchievement = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV found"
                 })
             }
@@ -77,6 +77,11 @@ exports.deleteAchievement = (req, res) => {
                         })
                     })
             }
+            else {
+                return res.status(0).json({
+                    msg: "No CV found"
+                })
+            }
         })
 };
 
@@ -111,7 +116,7 @@ exports.updateAchievement = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No Achievement found",
             })
         }
@@ -143,7 +148,7 @@ exports.getAchievements = (req, res) => {
                             })
                         }
                         else {
-                            return res.status(200).json({
+                            return res.status(0).json({
                                 msg: "No CV Found",
                                 err
                             })
@@ -151,7 +156,7 @@ exports.getAchievements = (req, res) => {
                     })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No CV Found",
                     err
                 })
@@ -187,7 +192,7 @@ exports.hideAchievements = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV Not Found"
                 })
             }
@@ -232,14 +237,14 @@ exports.copyAchievement = (req, res) => {
                         })
                     }
                     else {
-                        return res.status(200).json({
+                        return res.status(0).json({
                             msg: "Achievement not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "CV not found"
                 })
             }
@@ -293,7 +298,7 @@ exports.orderAchievements = (req, res) => {
 
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "NO CV Found"
             })
         }

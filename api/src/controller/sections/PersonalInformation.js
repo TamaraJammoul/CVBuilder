@@ -60,7 +60,7 @@ exports.updatePersonalInformation = (req, res) => {
             })
         }
         else {
-            return res.status(200).json({
+            return res.status(0).json({
                 msg: "No PersonalInformation found",
             })
         }
@@ -83,7 +83,7 @@ exports.getPersonalInformation = (req, res) => {
                 })
             }
             else {
-                return res.status(200).json({
+                return res.status(0).json({
                     msg: "No Personal Information Found",
                 })
             }

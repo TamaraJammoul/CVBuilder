@@ -104,10 +104,11 @@ export function CVName1(payload) {
 
 export function CVTemplate1(payload) {
   return async (dispatch) => {
+    console.log(payload);
     await axios
       .post(`http://localhost:5000/api/cv/updateTemplate`, {
         Template: payload.template,
-        id: payload.cvID,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res.data, payload);

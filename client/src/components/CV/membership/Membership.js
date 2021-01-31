@@ -61,7 +61,7 @@ export default function Membership() {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Grid item xs={12}>
+            <Grid item xs={12} className="mt-3">
               <Paper>
                 <Container>
                   <Grid
@@ -74,7 +74,7 @@ export default function Membership() {
                     <Grid item xs={1}>
                       <h4>{index + 1}</h4>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                       <h6>{mem.Name}</h6>{" "}
                     </Grid>
                     <Grid item xs={1}>
@@ -91,8 +91,6 @@ export default function Membership() {
                       <IconButton
                         aria-label="delete"
                         onClick={() =>
-
-                          
                           dispatch(CopyMembershipAction({id: mem._id, cvID}))
                         }
                       >
@@ -114,7 +112,6 @@ export default function Membership() {
                         <Delete />
                       </IconButton>
                     </Grid>
-                 
                   </Grid>
                 </Container>{" "}
               </Paper>

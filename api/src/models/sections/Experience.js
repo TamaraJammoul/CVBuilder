@@ -3,13 +3,22 @@ const { String, Date, Number } = mongoose.Schema.Types;
 
 const ExperienceSchema = new mongoose.Schema({
     Name: String,
-    NameAr: String,
+    NameAr: {
+        type: String,
+        deafult: ""
+    },
     Description: String,
-    DescriptionAr: String,
+    DescriptionAr: {
+        type: String,
+        deafult: ""
+    },
     Start: Number,
     End: Number,
     Project: String,
-    ProjectAr: String,
+    ProjectAr: {
+        type: String,
+        deafult: ""
+    },
     Order: Number
 });
 

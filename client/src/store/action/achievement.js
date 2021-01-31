@@ -101,6 +101,7 @@ export function EditAchievementAction(payload) {
 }
 export function HideAchievementAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
       .post(`http://localhost:5000/api/achievement/hideAchievements`, {
         _id: payload.cvID,
@@ -122,8 +123,9 @@ export function HideAchievementAction(payload) {
 }
 export function OrderAchievementAction(payload) {
   return (dispatch) => {
+    console.log(payload);
     axios
-      .post(`http://localhost:5000/api/achievents/orderAchievements`, {
+      .post(`http://localhost:5000/api/achievement/orderAchievements`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

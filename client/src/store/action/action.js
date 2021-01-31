@@ -69,7 +69,7 @@ export function PeraonalInfoAction(payload) {
     console.log(payload);
     await axios
       .post(
-        `http://localhost:5000/api/PersonalInformation/updatePersonalInformation`,
+        `http://localhost:5000/api/personalInformation/updatePersonalInformation`,
         payload
       )
       .then((res) => {

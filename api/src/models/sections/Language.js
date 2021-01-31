@@ -3,7 +3,10 @@ const { Number, String } = mongoose.Schema.Types;
 
 const LanguageSchema = new mongoose.Schema({
     Name: String,
-    NameAr: String,
+    NameAr: {
+        type: String,
+        deafult: ""
+    },
     Rate: Number,
     RateFrom10: Number,
     RateFrom100: Number,

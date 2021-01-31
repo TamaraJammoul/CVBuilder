@@ -3,9 +3,15 @@ const { String, Number } = mongoose.Schema.Types;
 
 const EducationSchema = new mongoose.Schema({
     UniversityName: String,
-    UniversityNameAr: String,
+    UniversityNameAr: {
+        type: String,
+        deafult: ""
+    },
     Faculty: String,
-    FacultyAr: String,
+    FacultyAr: {
+        type: String,
+        deafult: ""
+    },
     YearStart: Number,
     YearEnd: Number,
     Grade: Number, //1 good    2 very good     3 excellant

@@ -70,7 +70,7 @@ function HomeNav(props) {
               aria-expanded="false"
             >
               <img
-                src={i18n.language == "en-US" ? us : ar}
+                src={i18n.language == "en" ? us : ar}
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>
@@ -100,15 +100,12 @@ function HomeNav(props) {
             </div>
           </li>
         </ul>
-        <h5>
-          <AccountCircle
-            style={{width: "90px", color: "#2E0E33"}}
-            onClick={props.setDrawerState}
-          />{" "}
+        <h5 onClick={props.setDrawerState}>
+          <AccountCircle style={{width: "90px", color: "#2E0E33"}} />{" "}
         </h5>
         <a
           className="navbar-brand"
-          onClick={localStorage.getItem("token") ? logout() : ""}
+          onClick={() => (localStorage.getItem("token") ? logout() : "")}
         >
           <h5>{localStorage.getItem("token") ? t("Logout") : t("Login")}</h5>
         </a>

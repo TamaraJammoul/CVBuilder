@@ -66,7 +66,7 @@ export function DeleteOtherTrainingAction(payload) {
         if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: DELETEOTHERTRAINING,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

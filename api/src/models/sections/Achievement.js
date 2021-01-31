@@ -3,7 +3,10 @@ const { String, Date, Number } = mongoose.Schema.Types;
 
 const AchievementSchema = new mongoose.Schema({
     Name: String,
-    NameAr: String,
+    NameAr: {
+        type: String,
+        default: ""
+    },
     Order: Number
 });
 

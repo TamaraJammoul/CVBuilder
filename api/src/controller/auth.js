@@ -70,13 +70,13 @@ exports.logIn = (req, res) => {
                     });
                 }
                 else {
-                    res.status(400).json({
+                    res.status(100).json({
                         msg: "Wrong Password"
                     });
                 }
             }
             else {
-                return res.status(400).json({
+                return res.status(0).json({
                     msg: "Something went Wrong, can't get any thing from DB"
                 });
             }
@@ -106,13 +106,13 @@ exports.logInAdmin = (req, res) => {
                     })
                 }
                 else {
-                    return res.status(200).json({
+                    return res.status(100).json({
                         msg: "Wroge Password"
                     })
                 }
             }
             else {
-                res.status(200).json({
+                res.status(0).json({
                     msg: "NO Admin Found"
                 })
             }

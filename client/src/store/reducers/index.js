@@ -289,10 +289,12 @@ export default function reducer(state, action) {
     case "EDITCERTIFICATE":
       var temp = state.template.certificates;
       temp.map((e, i) => {
-        if (e.name == action.payload.oldName) {
-          e.name = action.payload.newName;
-          e.description = action.payload.newDescription;
-          e.date = action.payload.newDate;
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
+          e.Description = action.payload.Description;
+          e.Year = action.payload.Year;
+          e.NameAr = action.payload.NameAr;
+          e.DescriptionAr = action.payload.DescriptionAr;
         }
       });
       return {
@@ -355,7 +357,7 @@ export default function reducer(state, action) {
       };
     case "DELETEOTHERTRAINING":
       var temp = state.template.othertraining;
-      temp = temp.filter((e) => e.Name != action.payload.Name);
+      temp = temp.filter((e) => e._id != action.payload.otherTraining_id);
       console.log("iiiiiiiiii", temp, action.payload);
       return {
         ...state,
@@ -544,6 +546,57 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           technicalskills: [...state.template.technicalskills, action.payload],
+        },
+      };
+    case "ADDACHIEVEMENT":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          achievements: [...state.template.achievements, action.payload],
+        },
+      };
+    case "COPYACHIEVEMENT":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          achievements: [...state.template.achievements, action.payload],
+        },
+      };
+    case "EDITACHIEVEMENT":
+      var temp = state.template.achievements;
+      temp.map((e, i) => {
+        if (e._id == action.payload._id) {
+          e.Name = action.payload.Name;
+          e.NameAr = action.payload.NameAr;
+        }
+      });
+      console.log(temp, "kjjk");
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          achievements: temp,
+        },
+      };
+    case "DELETEACHIEVEMENT":
+      var temp = state.template.achievements;
+      temp = temp.filter((e) => e._id != action.payload.achievement_id);
+      console.log("iiiiiiiiii", temp, action.payload.achievement_id);
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          achievements: temp,
+        },
+      };
+    case "ORDERACHIEVEMENT":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          achievements: action.payload.achievement,
         },
       };
     case "LOGIN":
