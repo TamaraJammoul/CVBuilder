@@ -102,7 +102,7 @@ export default function CareerObjectives() {
             style={{width: "100%"}}
             className={lan == 0 ? "arhide" : ""}
           >
-            {" "}
+            <h2>{t("Enter CareerObjective")}</h2>{" "}
             <Editor
               initialValue="<p></p>"
               init={{
@@ -122,6 +122,7 @@ export default function CareerObjectives() {
           </Grid>
           <Grid item xs={12}>
             <Grid container alignItems="center" direction="row" spacing={3}>
+              <h2>{t("Enter CareerObjective in Arabic")}</h2>
               <Grid item xs={1}>
                 <Button
                   variant="contained"

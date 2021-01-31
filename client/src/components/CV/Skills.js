@@ -202,7 +202,7 @@ export default function Skills() {
               variant="contained"
               className="save"
               startIcon={<DeleteIcon />}
-              onClick={() => dispatch({skills, cvID})}
+              onClick={() => dispatch(AddSkillAction({skills, cvID}))}
             >
               {t("AddSkill")}
             </Button>

@@ -4,9 +4,8 @@ export function AddSkillAction(payload) {
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/skills/addSkill`, {
-        Name: payload.name,
-        Order: 1,
-        _id: payload.id,
+        skills: payload.skills,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res);

@@ -62,16 +62,16 @@ export function EditCVAction(payload) {
 export function CVLanguage1(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/CV/deleteCV`, {
-        Email: payload.email,
-        id: payload.cvID,
+      .post(`http://localhost:5000/api/CV/updateLanguage`, {
+        Language: payload.Language,
+        _id: payload.cvID,
       })
       .then((res) => {
         console.log(res.data.data);
         if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: CVLANGIAGE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

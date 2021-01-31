@@ -38,7 +38,7 @@ export default function reducer(state, action) {
     case "CVLANGIAGE":
       return {
         ...state,
-        cvLanguage: action.payload,
+        cvLanguage: action.payload.Language,
       };
     case "GETALLCV":
       return {
@@ -206,7 +206,7 @@ export default function reducer(state, action) {
         ...state,
         template: {
           ...state.template,
-          skills: [...state.template.skills, action.payload],
+          skills: [...state.template.skills, action.payload.skills],
         },
       };
     case "DELETEREFERENCE":

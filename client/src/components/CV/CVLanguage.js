@@ -11,6 +11,7 @@ export default function CVLanguage() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const history = useHistory();
+  const cvID = useSelector((state) => state.cvID);
 
   return (
     <div className="backgroundimg" style={{minHeight: "100vh"}}>
@@ -36,7 +37,7 @@ export default function CVLanguage() {
                 <Paper
                   elevation={3}
                   onClick={() => {
-                    dispatch(CVLanguage1({lan: "en"}));
+                    dispatch(CVLanguage1({Language: "En", cvID}));
                     history.push("/cvtemplates");
                   }}
                 >
@@ -60,7 +61,7 @@ export default function CVLanguage() {
                 <Paper
                   elevation={3}
                   onClick={() => {
-                    dispatch(CVLanguage1({lan: "ar"}));
+                    dispatch(CVLanguage1({Language: "Ar", cvID}));
                     history.push("/cvtemplates");
                   }}
                 >
