@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {Button, Paper, Grid, Container, ButtonGroup} from "@material-ui/core";
-import {Editor} from "@tinymce/tinymce-react";
 import {VisibilityOff, EditSharp, Visibility} from "@material-ui/icons";
 
 import {
@@ -17,14 +16,6 @@ export default function CareerObjectives() {
 
   const [hide, setHide] = useState(0);
 
-  const handleEditorChange = (content, editor) => {
-    console.log("Content was updated:", content);
-    setText(content);
-  };
-  const handleEditorChangeAr = (content, editor) => {
-    console.log("Content was updated:", content);
-    setTextAr(content);
-  };
   const dispatch = useDispatch();
   const careerobjective = useSelector(
     (state) => state.template.careerobjective
@@ -79,21 +70,13 @@ export default function CareerObjectives() {
           </Grid>
           <Grid item xs={12} style={{width: "100%"}}>
             {" "}
-            <Editor
-              initialValue="<p></p>"
-              init={{
-                height: 200,
-                directionality: i18n.language == "en" ? "ltr" : "rtl",
-                plugins:
-                  " autolink listsanchorfullscreen insertdatetime  paste  help ",
-                toolbar:
-                  "pageembed permanentpen  undo redo |bold italic | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help",
-                toolbar_mode: "floating",
-                tinycomments_mode: "embedded",
-              }}
-              onEditorChange={handleEditorChange}
+            <TextField
+              id="filled-primary"
+              label={t("Enter CareerObjective")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setTextAr(e.target.value)}
             />
           </Grid>
           <Grid
@@ -102,27 +85,17 @@ export default function CareerObjectives() {
             style={{width: "100%"}}
             className={lan == 0 ? "arhide" : ""}
           >
-            <h2>{t("Enter CareerObjective")}</h2>{" "}
-            <Editor
-              initialValue="<p></p>"
-              init={{
-                height: 200,
-                directionality: i18n.language == "en" ? "ltr" : "rtl",
-                plugins:
-                  " autolink listsanchorfullscreen insertdatetime  paste  help ",
-                toolbar:
-                  "pageembed permanentpen  undo redo |bold italic | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help",
-                toolbar_mode: "floating",
-                tinycomments_mode: "embedded",
-              }}
-              onEditorChange={handleEditorChangeAr}
+            <TextField
+              id="filled-primary"
+              label={t("Enter CareerObjective in Arabic")}
+              variant="filled"
+              color="primary"
+              style={{width: "100%"}}
+              onChange={(e) => setText(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
             <Grid container alignItems="center" direction="row" spacing={3}>
-              <h2>{t("Enter CareerObjective in Arabic")}</h2>
               <Grid item xs={1}>
                 <Button
                   variant="contained"
