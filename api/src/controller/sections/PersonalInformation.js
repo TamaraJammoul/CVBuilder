@@ -1,8 +1,16 @@
 const CV = require('../../models/CV');
 const PersonalInformation = require('../../models/sections/PersonalInformation');
+const func = require("../func");
 
 exports.updatePersonalInformation = (req, res) => {
-    const { _id, FirstName, FirstNameAr, LastName, LastNameAr, Phone, Email, LinkedIn, City, CityAr, Country, CountryAr, MaritalStatus, MaritalStatusAr, Birth, Nationality, NationalityAr, Image } = req.body;
+    var { _id, FirstName, FirstNameAr, LastName, LastNameAr, Phone, Email,
+        LinkedIn, City, CityAr, Country, CountryAr, MaritalStatus,
+        Birth, Nationality, NationalityAr, Image } = req.body;
+    FirstNameAr = func(FirstNameAr);
+    LastNameAr = func(LastNameAr);
+    CityAr = func(CityAr);
+    CountryAr = func(CountryAr);
+    NationalityAr = func(NationalityAr);
     PersonalInformation.findById(_id).exec((error, personalInformation) => {
         if (error) {
             return res.status(400).json({
@@ -25,7 +33,6 @@ exports.updatePersonalInformation = (req, res) => {
                     Country,
                     CountryAr,
                     MaritalStatus,
-                    MaritalStatusAr,
                     Birth,
                     Nationality,
                     NationalityAr,
@@ -35,33 +42,32 @@ exports.updatePersonalInformation = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "PersonalInformation updated successfully",
-                        data: {
-                            _id,
-                            FirstName,
-                            FirstNameAr,
-                            LastName,
-                            LastNameAr,
-                            Phone,
-                            Email,
-                            LinkedIn,
-                            City,
-                            CityAr,
-                            Country,
-                            CountryAr,
-                            MaritalStatus,
-                            MaritalStatusAr,
-                            Birth,
-                            Nationality,
-                            NationalityAr,
-                            Image
-                        }
+                        status: 1,
+                        _id,
+                        FirstName,
+                        FirstNameAr,
+                        LastName,
+                        LastNameAr,
+                        Phone,
+                        Email,
+                        LinkedIn,
+                        City,
+                        CityAr,
+                        Country,
+                        CountryAr,
+                        MaritalStatus,
+                        Birth,
+                        Nationality,
+                        NationalityAr,
+                        Image
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
                 msg: "No PersonalInformation found",
+                status: 1,
             })
         }
     })
@@ -83,7 +89,7 @@ exports.getPersonalInformation = (req, res) => {
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No Personal Information Found",
                 })
             }

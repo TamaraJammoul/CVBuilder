@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { useSelector } from "react-redux";
-import { jsPDF } from "jspdf";
+import { useSelector } from "react-redux";
+import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_10.css";
@@ -25,20 +25,50 @@ import img_15 from "../../assets/imgs/template_10/15.png";
 import img_16 from "../../assets/imgs/template_10/16.png";
 //#endregion
 
-function print() {
-  const filename = "template-10.pdf";
+function downloadImage(data, filename = 'untitled.jpeg') {
+  var a = document.createElement('a');
+  a.href = data;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+}
 
-  html2canvas(document.getElementById("toPDF"), {
+function saveAs(type) {
+  const pdf = document.getElementById("toPDF");
+  const text = [...pdf.querySelectorAll("p")];
+  
+  text.forEach(
+    (p) =>
+      (p.style.transform = "translateY(-30%)")
+  );
+
+  html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
   })
     .then((canvas) => {
-      var img = canvas.toDataURL("image/PNG", 1);
-      var doc = new jsPDF("p", "mm", "a4");
-      doc.addImage(img, "PNG", -2, 0, 212, 298);
-      doc.save(filename);
+      const filename = "template_10";
+      if(type==='PDF'){
+        var img = canvas.toDataURL("image/PNG", 1);
+        var doc = new jsPDF("p", "mm", "a4");
+        doc.addImage(img, "PNG", -2, 0, 212, 298);
+        doc.save(filename);
+      }
+      else if(type==='PNG'){
+        let imageURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        downloadImage(imageURL, filename+'.png');
+      }
+      else {
+        let imageURL = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+        downloadImage(imageURL, filename+'.jpeg');
+      }
     })
     .catch((err) => console.log(err));
+
+    text.forEach(
+      (p) =>
+        (p.style.transform = "translateY(0%)")
+    );
 }
 
 const ref = React.createRef();
@@ -50,7 +80,7 @@ const Template10 = (props) => {
     courses,
     personalInformation,
     skills,
-  } = props.Data;
+  } = useSelector((state) => state.template);
 
   let PI = null;
   if (personalInformation) {
@@ -73,30 +103,30 @@ const Template10 = (props) => {
         degree = "High School Certificate";
       }
       return (
-        <div className="edu" key={edu.id_}>
-          <div className="edu-box">
-            <div className="edu-title">
+        <div className="t10-edu" key={edu.id_}>
+          <div className="t10-edu-box">
+            <div className="t10-edu-title">
               <p className="bold">{edu.UniversityName}</p>
             </div>
-            <div className="edu-content">
+            <div className="t10-edu-content">
               <p>
-                <span className="content-name">Degree: </span>
+                <span className="t10-content-name">Degree: </span>
                 <span>{degree}</span>
               </p>
               <p>
-                <span className="content-name">Specialization: </span>
+                <span className="t10-content-name">Specialization: </span>
                 <span>{edu.Faculty}</span>
               </p>
               <p>
-                <span className="content-name">GPA:</span>
+                <span className="t10-content-name">GPA:</span>
                 <span>{edu.DegreeFrom5} out of 5</span>
               </p>
             </div>
           </div>
-          <div className="edu-date">
-            <div className="circle"></div>
-            <span className="start-date">{edu.YearStart}</span> -
-            <span className="end-date">{edu.YearEnd}</span>
+          <div className="t10-edu-date">
+            <div className="t10-circle"></div>
+            <span className="t10-start-date">{edu.YearStart}</span> -
+            <span className="t10-end-date">{edu.YearEnd}</span>
           </div>
         </div>
       );
@@ -109,33 +139,33 @@ const Template10 = (props) => {
       } else if (edu.Degree === 3) {
         degreeAr = "دكتوراه";
       } else if (edu.Degree === 4) {
-        degreeAr = "شهادة الثانوية العامة";
+        degreeAr = "شهادة\xa0الثانوية\xa0العامة";
       }
       return (
-        <div className="edu ar" key={edu.id_}>
-          <div className="edu-box ar">
-            <div className="edu-title ar">
+        <div className="t10-edu ar" key={edu.id_}>
+          <div className="t10-edu-box ar">
+            <div className="t10-edu-title ar">
               <p className="bold">{edu.UniversityNameAr}</p>
             </div>
-            <div className="edu-content ar">
+            <div className="t10-edu-content ar">
               <p>
-                <span className="content-name">الدرجة: </span>
+                <span className="t10-content-name">{`الدرجة\xa0:\xa0`}</span>
                 <span>{degreeAr}</span>
               </p>
               <p>
-                <span className="content-name">التخصص: </span>
+                <span className="t10-content-name">{`التخصص\xa0:\xa0`}</span>
                 <span>{edu.FacultyAr}</span>
               </p>
               <p>
-                <span className="content-name">المعدل: </span>
-                <span>{`${edu.DegreeFrom5} من 5`}</span>
+                <span className="t10-content-name">{`المعدل\xa0:\xa0`}</span>
+                <span>{`\xa0${edu.DegreeFrom5}\xa0من\xa05`}</span>
               </p>
             </div>
           </div>
-          <div className="edu-date ar">
-            <div className="circle ar"></div>
-            <span className="start-date">{edu.YearStart}</span> -
-            <span className="end-date">{edu.YearEnd}</span>
+          <div className="t10-edu-date ar">
+            <div className="t10-circle ar"></div>
+            <span className="t10-start-date">{`${edu.YearStart}\xa0`}</span> -
+            <span className="t10-end-date">{`\xa0${edu.YearEnd}`}</span>
           </div>
         </div>
       );
@@ -147,44 +177,44 @@ const Template10 = (props) => {
   if (experiences.length > 0) {
     jobs = experiences.map((job) => {
       return (
-        <div className="work" key={job.id_}>
-          <div className="work-box">
-            <div className="work-title">
+        <div className="t10-work" key={job.id_}>
+          <div className="t10-work-box">
+            <div className="t10-work-title">
               <p className="bold">{job.Name}</p>
             </div>
-            <div className="work-content">
+            <div className="t10-work-content">
               <p>
-                <span className="job-name">Job: </span>
-                <span className="job-value">{job.Description}</span>
+                <span className="t10-job-name">Job: </span>
+                <span className="t10-job-value">{job.Description}</span>
               </p>
             </div>
           </div>
-          <div className="work-date">
-            <div className="circle"></div>
-            <span className="start-date">{job.Start}</span> -
-            <span className="end-date">{job.End}</span>
+          <div className="t10-work-date">
+            <div className="t10-circle"></div>
+            <span className="t10-start-date">{job.Start}</span> -
+            <span className="t10-end-date">{job.End}</span>
           </div>
         </div>
       );
     });
     arJobs = experiences.map((job) => {
       return (
-        <div className="work ar" key={job.id_}>
-          <div className="work-box ar">
-            <div className="work-title ar">
+        <div className="t10-work ar" key={job.id_}>
+          <div className="t10-work-box ar">
+            <div className="t10-work-title ar">
               <p className="bold">{job.NameAr}</p>
             </div>
-            <div className="work-content ar">
+            <div className="t10-work-content ar">
               <p>
-                <span className="job-name">الوظيفة: </span>
-                <span className="job-value">{job.DescriptionAr}</span>
+                <span className="t10-job-name">{`الوظيفة\xa0:\xa0`}</span>
+                <span className="t10-job-value">{job.DescriptionAr}</span>
               </p>
             </div>
           </div>
-          <div className="work-date ar">
-            <div className="circle ar"></div>
-            <span className="start-date">{job.Start}</span> -
-            <span className="end-date">{job.End}</span>
+          <div className="t10-work-date ar">
+            <div className="t10-circle ar"></div>
+            <span className="t10-start-date">{`${job.Start}\xa0`}</span> -
+            <span className="t10-end-date">{`\xa0${job.End}`}</span>
           </div>
         </div>
       );
@@ -196,11 +226,11 @@ const Template10 = (props) => {
   if (courses.length > 0) {
     crses = courses.map((crs) => {
       return (
-        <div className="course" key={crs.id_}>
-          <div className="course-circle">
-            <div className="circle"></div>
+        <div className="t10-course" key={crs.id_}>
+          <div className="t10-course-circle">
+            <div className="t10-circle"></div>
           </div>
-          <div className="course-name">
+          <div className="t10-course-name">
             <p>{crs.Name}</p>
           </div>
         </div>
@@ -209,11 +239,11 @@ const Template10 = (props) => {
 
     arCrses = courses.map((crs) => {
       return (
-        <div className="course ar" key={crs.id_}>
-          <div className="course-circle ar">
-            <div className="circle"></div>
+        <div className="t10-course ar" key={crs.id_}>
+          <div className="t10-course-circle ar">
+            <div className="t10-circle"></div>
           </div>
-          <div className="course-name">
+          <div className="t10-course-name">
             <p>{crs.NameAr}</p>
           </div>
         </div>
@@ -234,13 +264,13 @@ const Template10 = (props) => {
     skls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
-        <div className="skill" key={skill.id_}>
-          <div className="skill-logo">
-            <div className="skill-logo-bg">
+        <div className="t10-skill" key={skill.id_}>
+          <div className="t10-skill-logo">
+            <div className="t10-skill-logo-bg">
               <img src={skillLogo} alt="" />
             </div>
           </div>
-          <div className="skill-name">
+          <div className="t10-skill-name">
             <p>{skill.Name}</p>
           </div>
         </div>
@@ -249,13 +279,13 @@ const Template10 = (props) => {
     arSkls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
-        <div className="skill" key={skill.id_}>
-          <div className="skill-logo">
-            <div className="skill-logo-bg">
+        <div className="t10-skill" key={skill.id_}>
+          <div className="t10-skill-logo">
+            <div className="t10-skill-logo-bg">
               <img src={skillLogo} alt="" />
             </div>
           </div>
-          <div className="skill-name">
+          <div className="t10-skill-name">
             <p>{skill.NameAr}</p>
           </div>
         </div>
@@ -269,36 +299,36 @@ const Template10 = (props) => {
     langs = languages.map((lang) => {
       let rate = [];
       for (let i = 0; i < lang.RateFrom10; i++) {
-        rate.push(<div className="lang-deg" key={Math.random()}></div>);
+        rate.push(<div className="t10-lang-deg" key={Math.random()}></div>);
       }
       for (let i = 0; i < 10 - lang.RateFrom10; i++) {
-        rate.push(<div className="lang-deg empty" key={Math.random()}></div>);
+        rate.push(<div className="t10-lang-deg empty" key={Math.random()}></div>);
       }
 
       return (
-        <div className="lang" key={lang.id_}>
-          <div className="lang-name">
+        <div className="t10-lang" key={lang.id_}>
+          <div className="t10-lang-name">
             <p>{lang.Name}</p>
           </div>
-          <div className="lang-rate">{rate}</div>
+          <div className="t10-lang-rate">{rate}</div>
         </div>
       );
     });
     arLangs = languages.map((lang) => {
       let rate = [];
       for (let i = 0; i < lang.RateFrom10; i++) {
-        rate.push(<div className="lang-deg" key={Math.random()}></div>);
+        rate.push(<div className="t10-lang-deg" key={Math.random()}></div>);
       }
       for (let i = 0; i < 10 - lang.RateFrom10; i++) {
-        rate.push(<div className="lang-deg empty" key={Math.random()}></div>);
+        rate.push(<div className="t10-lang-deg empty" key={Math.random()}></div>);
       }
 
       return (
-        <div className="lang" key={lang.id_}>
-          <div className="lang-name">
+        <div className="t10-lang" key={lang.id_}>
+          <div className="t10-lang-name">
             <p>{lang.NameAr}</p>
           </div>
-          <div className="lang-rate">{rate}</div>
+          <div className="t10-lang-rate">{rate}</div>
         </div>
       );
     });
@@ -306,26 +336,26 @@ const Template10 = (props) => {
 
   //#region - Education Section
   let eduSection = (
-    <div className="row-section">
+    <div className="t10-row-section">
       {/* English */}
-      <div className="sec edu-sec">
-        <div className="sec-logo">
+      <div className="t10-sec t10-edu-sec">
+        <div className="t10-sec-logo">
           <img src={img_07} alt="" />
         </div>
-        <div className="sec-title">
+        <div className="t10-sec-title">
           <p className="bold">Education</p>
         </div>
-        <div className="sec-body">{edus}</div>
+        <div className="t10-sec-body">{edus}</div>
       </div>
       {/* Arabic */}
-      <div className="sec edu-sec ar">
-        <div className="sec-logo ar">
+      <div className="t10-sec t10-edu-sec ar">
+        <div className="t10-sec-logo ar">
           <img src={img_07} alt="" />
         </div>
-        <div className="sec-title ar">
-          <p className="bold">المؤهل التعليمي</p>
+        <div className="t10-sec-title ar">
+          <p className="bold">{`المؤهل\xa0التعليمي`}</p>
         </div>
-        <div className="sec-body ar">{arEdus}</div>
+        <div className="t10-sec-body ar">{arEdus}</div>
       </div>
     </div>
   );
@@ -333,26 +363,26 @@ const Template10 = (props) => {
   //#endregion
   //#region - Work Section
   let workSection = (
-    <div className="row-section">
+    <div className="t10-row-section">
       {/* English */}
-      <div className="sec work-sec">
-        <div className="sec-logo">
+      <div className="t10-sec t10-work-sec">
+        <div className="t10-sec-logo">
           <img src={img_08} alt="" />
         </div>
-        <div className="sec-title">
+        <div className="t10-sec-title">
           <p className="bold">Experience</p>
         </div>
-        <div className="sec-body">{jobs}</div>
+        <div className="t10-sec-body">{jobs}</div>
       </div>
       {/* Arabic */}
-      <div className="sec work-sec ar">
-        <div className="sec-logo ar">
+      <div className="t10-sec t10-work-sec ar">
+        <div className="t10-sec-logo ar">
           <img src={img_08} alt="" />
         </div>
-        <div className="sec-title ar">
-          <p className="bold">الخبرات العملية</p>
+        <div className="t10-sec-title ar">
+          <p className="bold">{`الخبرات\xa0العملية`}</p>
         </div>
-        <div className="sec-body ar">{arJobs}</div>
+        <div className="t10-sec-body ar">{arJobs}</div>
       </div>
     </div>
   );
@@ -360,29 +390,29 @@ const Template10 = (props) => {
   //#endregion
   //#region - Courses Section
   let coursesSection = (
-    <div className="row-section">
+    <div className="t10-row-section">
       {/* English */}
-      <div className="sec courses-sec">
-        <div className="sec-logo">
+      <div className="t10-sec t10-courses-sec">
+        <div className="t10-sec-logo">
           <img src={img_09} alt="" />
         </div>
-        <div className="sec-title">
+        <div className="t10-sec-title">
           <p className="bold">Courses</p>
         </div>
-        <div className="sec-body">
-          <div className="sec-content">{crses}</div>
+        <div className="t10-sec-body">
+          <div className="t10-sec-content">{crses}</div>
         </div>
       </div>
       {/* Arabic */}
-      <div className="sec courses-sec ar">
-        <div className="sec-logo ar">
+      <div className="t10-sec t10-courses-sec ar">
+        <div className="t10-sec-logo ar">
           <img src={img_09} alt="" />
         </div>
-        <div className="sec-title ar">
-          <p className="bold">الدورات التدريبية</p>
+        <div className="t10-sec-title ar">
+          <p className="bold">{`الدورات\xa0التدريبية`}</p>
         </div>
-        <div className="sec-body ar">
-          <div className="sec-content">{arCrses}</div>
+        <div className="t10-sec-body ar">
+          <div className="t10-sec-content">{arCrses}</div>
         </div>
       </div>
     </div>
@@ -390,52 +420,52 @@ const Template10 = (props) => {
   //#endregion
   //#region - Skills Section
   let skillsSection = (
-    <div className="row-section">
+    <div className="t10-row-section">
       {/* English */}
-      <div className="sec skills-sec">
-        <div className="sec-logo">
+      <div className="t10-sec t10-skills-sec">
+        <div className="t10-sec-logo">
           <img src={img_10} alt="" />
         </div>
-        <div className="sec-title">
+        <div className="t10-sec-title">
           <p className="bold">Skills</p>
         </div>
-        <div className="sec-body">{skls}</div>
+        <div className="t10-sec-body">{skls}</div>
       </div>
       {/* Arabic */}
-      <div className="sec skills-sec ar">
-        <div className="sec-logo ar">
+      <div className="t10-sec t10-skills-sec ar">
+        <div className="t10-sec-logo ar">
           <img src={img_10} alt="" />
         </div>
-        <div className="sec-title ar">
+        <div className="t10-sec-title ar">
           <p className="bold">المهارات</p>
         </div>
-        <div className="sec-body ar">{arSkls}</div>
+        <div className="t10-sec-body ar">{arSkls}</div>
       </div>
     </div>
   );
   //#endregion
   //#region - Languages Section
   let languagesSection = (
-    <div className="row-section">
+    <div className="t10-row-section">
       {/* English */}
-      <div className="sec lang-sec">
-        <div className="sec-logo">
+      <div className="t10-sec t10-lang-sec">
+        <div className="t10-sec-logo">
           <img src={img_11} alt="" />
         </div>
-        <div className="sec-title">
+        <div className="t10-sec-title">
           <p className="bold">Languages</p>
         </div>
-        <div className="sec-body">{langs}</div>
+        <div className="t10-sec-body">{langs}</div>
       </div>
       {/* Arabic */}
-      <div className="sec lang-sec ar">
-        <div className="sec-logo ar">
+      <div className="t10-sec t10-lang-sec ar">
+        <div className="t10-sec-logo ar">
           <img src={img_11} alt="" />
         </div>
-        <div className="sec-title ar">
+        <div className="t10-sec-title ar">
           <p className="bold">اللغات</p>
         </div>
-        <div className="sec-body ar">{arLangs}</div>
+        <div className="t10-sec-body ar">{arLangs}</div>
       </div>
     </div>
   );
@@ -463,22 +493,26 @@ const Template10 = (props) => {
 
   return (
     <>
-      <button onClick={print}>Export As pdf</button>
-      <div className="template10-page">
+      <div className="backgroundimg">
+      <div className='dl-ctrls'>
+          <button onClick={() => saveAs('PDF')}>Download as PDF</button>
+          <button onClick={() => saveAs('PNG')}>Download as PNG</button>
+          <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
+        </div>
         <div className="template10-body" ref={ref} id="toPDF">
           {/* Header Section */}
-          <div className="header-sec">
+          <div className="t10-header-sec">
             {/* Photo */}
-            <div className="photo">
-              <div className="photo-bg">
+            <div className="t10-photo">
+              <div className="t10-photo-bg">
                 <img src={img_00} alt="" />
               </div>
             </div>
 
             {/* Name */}
-            <div className="name">
+            <div className="t10-name">
               <p>
-                {PI.FirstNameAr} {PI.LastNameAr}
+                {`${PI.FirstNameAr}\xa0${PI.LastNameAr}`}
               </p>
               <p>
                 {PI.FirstName} {PI.LastName}
@@ -486,54 +520,54 @@ const Template10 = (props) => {
             </div>
 
             {/* Details */}
-            <div className="details">
-              <div className="detail">
-                <div className="detail-logo-1">
+            <div className="t10-details">
+              <div className="t10-detail">
+                <div className="t10-detail-logo-1">
                   <img src={img_01} alt="" />
                 </div>
-                <div className="detail-text">
+                <div className="t10-detail-text">
                   <p>{PI.Birth}</p>
                 </div>
               </div>
-              <div className="detail">
-                <div className="detail-logo-2">
+              <div className="t10-detail">
+                <div className="t10-detail-logo-2">
                   <img src={img_02} alt="" />
                 </div>
-                <div className="detail-text">
+                <div className="t10-detail-text">
                   <p>{PI.Phone}</p>
                 </div>
               </div>
-              <div className="detail">
-                <div className="detail-logo-3">
+              <div className="t10-detail">
+                <div className="t10-detail-logo-3">
                   <img src={img_03} alt="" />
                 </div>
-                <div className="detail-text">
+                <div className="t10-detail-text">
                   <p>{PI.Email}</p>
                 </div>
               </div>
             </div>
 
             {/* Location */}
-            <div className="location">
-              <div className="loc-data-1">
-                <div className="loc-logo">
+            <div className="t10-location">
+              <div className="t10-loc-data-1">
+                <div className="t10-loc-logo">
                   <img src={img_04} alt="" />
                 </div>
-                <div className="loc-text">
+                <div className="t10-loc-text">
                   <p>{PI.CityAr}</p>
                   <p>{PI.City}</p>
                 </div>
               </div>
-              <div className="loc-data-2">
-                <div className="loc-logo">
+              <div className="t10-loc-data-2">
+                <div className="t10-loc-logo">
                   <img src={img_05} alt="" />
                 </div>
-                <div className="loc-text">
+                <div className="t10-loc-text">
                   <p>{PI.NationalityAr}</p>
                   <p>{PI.Nationality}</p>
                 </div>
               </div>
-              <img className="world" src={img_06} alt="" />
+              <img className="t10-world" src={img_06} alt="" />
             </div>
           </div>
 
@@ -542,7 +576,7 @@ const Template10 = (props) => {
             <Droppable droppableId="droppable-main" type="Main">
               {(provided) => (
                 <div
-                  className={`main ${props.language === "Ar" ? "ar" : ""} `}
+                  className={`t10-main ${props.language === "Ar" ? "ar" : ""} `}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >

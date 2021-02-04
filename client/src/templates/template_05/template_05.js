@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { jsPDF } from "jspdf";
+import { useSelector } from "react-redux";
+import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 import "./template_05.css";
 
 //#region Import Images
@@ -35,21 +35,49 @@ import img_25 from "../../assets/imgs/template_05/25.png";
 import img_26 from "../../assets/imgs/template_05/26.png";
 //#endregion
 
-function print() {
-  const pdf = document.getElementById("toPDF");
+function downloadImage(data, filename = 'untitled.jpeg') {
+  var a = document.createElement('a');
+  a.href = data;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+}
 
-  const filename = "template-5.pdf";
+function saveAs(type) {
+  const pdf = document.getElementById("toPDF");
+  const text = [...pdf.querySelectorAll("p")];
+  text.forEach(
+    (p) =>
+      (p.style.transform = "translateY(-30%)")
+  );
+
   html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
   })
     .then((canvas) => {
-      var img = canvas.toDataURL("image/jpeg", 1);
-      var doc = new jsPDF("p", "mm", "a4");
-      doc.addImage(img, "JPEG", -4, 0, 215, 298);
-      doc.save(filename);
+      const filename = "template_5";
+      if(type==='PDF'){
+        var img = canvas.toDataURL("image/jpeg", 1);
+        var doc = new jsPDF("p", "mm", "a4");
+        doc.addImage(img, "JPEG", -4, 0, 215, 298);
+        doc.save(filename);
+      }
+      else if(type==='PNG'){
+        let imageURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        downloadImage(imageURL, filename+'.png');
+      }
+      else {
+        let imageURL = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+        downloadImage(imageURL, filename+'.jpeg');
+      }
     })
     .catch((err) => console.log(err));
+
+    text.forEach(
+      (p) =>
+        (p.style.transform = "translateY(0%)")
+    );
 }
 
 const ref = React.createRef();
@@ -64,7 +92,7 @@ const Template05 = (props) => {
     memberships,
     references,
     skills,
-  } = props.Data;
+  } = useSelector((state) => state.template);
 
   let edus = null;
   if (educations.length > 0) {
@@ -81,41 +109,41 @@ const Template05 = (props) => {
       }
       return (
         <div
-          className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t05-edu ${props.language === "Ar" ? "ar" : ""}`}
           key={edu.id_}
         >
-          <div className={`edu-box ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t05-edu-box ${props.language === "Ar" ? "ar" : ""}`}>
             <div
-              className={`edu-title bold ${
+              className={`t05-edu-title bold ${
                 props.language === "Ar" ? "ar" : ""
               }`}
             >
               <p>{edu.UniversityName}</p>
             </div>
             <div
-              className={`edu-content ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t05-edu-content ${props.language === "Ar" ? "ar" : ""}`}
             >
               <p>
-                <span className="content-name">Degree: </span>
+                <span className="t05-content-name">Degree: </span>
                 <span>{degree}</span>
               </p>
               <p>
-                <span className="content-name">Field: </span>
+                <span className="t05-content-name">Field: </span>
                 <span>{edu.Faculty}</span>
               </p>
               <p>
-                <span className="content-name">Grade: </span>
-                <span>{edu.DegreeFrom50} out of 5</span>
+                <span className="t05-content-name">Grade: </span>
+                <span>{edu.DegreeFrom5} out of 5</span>
               </p>
             </div>
           </div>
-          <div className={`edu-date ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t05-edu-date ${props.language === "Ar" ? "ar" : ""}`}>
             <div
-              className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t05-circle ${props.language === "Ar" ? "ar" : ""}`}
             ></div>
             <p>
-              <span className="start-date">{edu.YearStart}</span> -
-              <span className="end-date">{edu.YearEnd}</span>
+              <span className="t05-start-date">{edu.YearStart}</span> -
+              <span className="t05-end-date">{edu.YearEnd}</span>
             </p>
           </div>
         </div>
@@ -131,45 +159,45 @@ const Template05 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة الثانوية العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
         }
         return (
           <div
-            className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t05-edu ${props.language === "Ar" ? "ar" : ""}`}
             key={edu.id_}
           >
-            <div className={`edu-box ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`t05-edu-box ${props.language === "Ar" ? "ar" : ""}`}>
               <div
-                className={`edu-title bold ${
+                className={`t05-edu-title bold ${
                   props.language === "Ar" ? "ar" : ""
                 }`}
               >
-                <p>{edu.UniversityName}</p>
+                <p>{edu.UniversityNameAr}</p>
               </div>
               <div
-                className={`edu-content ${props.language === "Ar" ? "ar" : ""}`}
+                className={`t05-edu-content ${props.language === "Ar" ? "ar" : ""}`}
               >
                 <p>
-                  <span className="content-name">الدرجة العلمية: </span>
+                  <span className="t05-content-name">{`الدرجة\xa0العلمية\xa0:\xa0`}</span>
                   <span>{degreeAr}</span>
                 </p>
                 <p>
-                  <span className="content-name">التخصص: </span>
-                  <span>{edu.Faculty}</span>
+                  <span className="t05-content-name">{`التخصص\xa0:\xa0`}</span>
+                  <span>{edu.FacultyAr}</span>
                 </p>
                 <p>
-                  <span className="content-name">المعدل: </span>
-                  <span>{edu.DegreeFrom50} من 5</span>
+                  <span className="t05-content-name">{`المعدل\xa0:\xa0`}</span>
+                  <span>{`${edu.DegreeFrom5}\xa0من\xa05`}</span>
                 </p>
               </div>
             </div>
-            <div className={`edu-date ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`t05-edu-date ${props.language === "Ar" ? "ar" : ""}`}>
               <div
-                className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+                className={`t05-circle ${props.language === "Ar" ? "ar" : ""}`}
               ></div>
               <p>
-                <span className="start-date">{edu.YearStart}</span> -
-                <span className="end-date">{edu.YearEnd}</span>
+                <span className="t05-start-date">{edu.YearStart}</span> -
+                <span className="t05-end-date">{edu.YearEnd}</span>
               </p>
             </div>
           </div>
@@ -183,37 +211,37 @@ const Template05 = (props) => {
     jobs = experiences.map((job) => {
       return (
         <div
-          className={`work ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t05-work ${props.language === "Ar" ? "ar" : ""}`}
           key={job.id_}
         >
-          <div className={`work-box ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t05-work-box ${props.language === "Ar" ? "ar" : ""}`}>
             <div
-              className={`work-title bold ${
+              className={`t05-work-title bold ${
                 props.language === "Ar" ? "ar" : ""
               }`}
             >
               <p>{job.Name}</p>
             </div>
             <div
-              className={`work-content ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t05-work-content ${props.language === "Ar" ? "ar" : ""}`}
             >
               <p>
-                <span className="project-name">Project: </span>
-                <span className="project-value">{job.Project}</span>
+                <span className="t05-project-name">Project: </span>
+                <span className="t05-project-value">{job.Project}</span>
               </p>
               <p>
-                <span className="job-name">Job: </span>
-                <span className="job-value">{job.Description}</span>
+                <span className="t05-job-name">Job: </span>
+                <span className="t05-job-value">{job.Description}</span>
               </p>
             </div>
           </div>
-          <div className={`work-date ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t05-work-date ${props.language === "Ar" ? "ar" : ""}`}>
             <div
-              className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t05-circle ${props.language === "Ar" ? "ar" : ""}`}
             ></div>
             <p>
-              <span className="start-date">{job.Start}</span> -
-              <span className="end-date">{job.End}</span>
+              <span className="t05-start-date">{job.Start}</span> -
+              <span className="t05-end-date">{job.End}</span>
             </p>
           </div>
         </div>
@@ -223,39 +251,39 @@ const Template05 = (props) => {
       jobs = experiences.map((job) => {
         return (
           <div
-            className={`work ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t05-work ${props.language === "Ar" ? "ar" : ""}`}
             key={job.id_}
           >
-            <div className={`work-box ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`t05-work-box ${props.language === "Ar" ? "ar" : ""}`}>
               <div
-                className={`work-title bold ${
+                className={`t05-work-title bold ${
                   props.language === "Ar" ? "ar" : ""
                 }`}
               >
                 <p>{job.Name}</p>
               </div>
               <div
-                className={`work-content ${
+                className={`t05-work-content ${
                   props.language === "Ar" ? "ar" : ""
                 }`}
               >
                 <p>
-                  <span className="project-name">ألمشروع: </span>
-                  <span className="project-value">{job.Project}</span>
+                  <span className="t05-project-name">{`المشروع\xa0:\xa0`}</span>
+                  <span className="t05-project-value">{job.Project}</span>
                 </p>
                 <p>
-                  <span className="job-name">الوظيفة: </span>
-                  <span className="job-value">{job.Description}</span>
+                  <span className="t05-job-name">{`الوظيفة\xa0:\xa0`}</span>
+                  <span className="t05-job-value">{job.Description}</span>
                 </p>
               </div>
             </div>
-            <div className={`work-date ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`t05-work-date ${props.language === "Ar" ? "ar" : ""}`}>
               <div
-                className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+                className={`t05-circle ${props.language === "Ar" ? "ar" : ""}`}
               ></div>
               <p>
-                <span className="start-date">{job.Start}</span> -
-                <span className="end-date">{job.End}</span>
+                <span className="t05-start-date">{job.Start}</span> -
+                <span className="t05-end-date">{job.End}</span>
               </p>
             </div>
           </div>
@@ -279,15 +307,15 @@ const Template05 = (props) => {
     crses = courses.map((crs) => {
       return (
         <div
-          className={`course ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t05-course ${props.language === "Ar" ? "ar" : ""}`}
           key={crs.id_}
         >
           <div
-            className={`course-circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t05-course-circle ${props.language === "Ar" ? "ar" : ""}`}
           >
-            <div className="circle"></div>
+            <div className="t05-circle"></div>
           </div>
-          <div className="course-name">
+          <div className="t05-course-name">
             <p>{crs.Name}</p>
           </div>
         </div>
@@ -300,18 +328,18 @@ const Template05 = (props) => {
     langs = languages.map((lang) => {
       let rate = [];
       for (let i = 0; i < lang.Rate; i++) {
-        rate.push(<div className="lang-deg" key={Math.random()}></div>);
+        rate.push(<div className="t05-lang-deg" key={Math.random()}></div>);
       }
       for (let i = 0; i < 10 - lang.Rate; i++) {
-        rate.push(<div className="lang-deg empty" key={Math.random()}></div>);
+        rate.push(<div className="t05-lang-deg t05-empty" key={Math.random()}></div>);
       }
 
       return (
-        <div className="lang" key={lang.id_}>
-          <div className="lang-name">
+        <div className="t05-lang" key={lang.id_}>
+          <div className="t05-lang-name">
             <p>{lang.Name}</p>
           </div>
-          <div className="lang-rate">{rate}</div>
+          <div className="t05-lang-rate">{rate}</div>
         </div>
       );
     });
@@ -322,13 +350,13 @@ const Template05 = (props) => {
     mems = memberships.map((member) => {
       return (
         <div
-          className={`part ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t05-part ${props.language === "Ar" ? "ar" : ""}`}
           key={member.id_}
         >
-          <div className="part-circle">
-            <div className="circle"></div>
+          <div className="t05-part-circle">
+            <div className="t05-circle"></div>
           </div>
-          <div className="part-text">
+          <div className="t05-part-text">
             <p>{member.Name}</p>
           </div>
         </div>
@@ -340,17 +368,17 @@ const Template05 = (props) => {
   if (references.length > 0) {
     refs = references.map((ref) => {
       return (
-        <div className="ref" key={ref.id_}>
-          <div className="ref-circle">
-            <div className="circle"></div>
+        <div className="t05-ref" key={ref.id_}>
+          <div className="t05-ref-circle">
+            <div className="t05-circle"></div>
           </div>
-          <div className="ref-name">
+          <div className="t05-ref-name">
             <p>{ref.Name}</p>
           </div>
-          <div className="ref-logo">
+          <div className="t05-ref-logo">
             <img src={img_25} alt="" />
           </div>
-          <div className="ref-num">
+          <div className="t05-ref-num">
             <p>{ref.Number}</p>
           </div>
         </div>
@@ -375,13 +403,13 @@ const Template05 = (props) => {
     skls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
-        <div className="skill" key={skill.id_}>
-          <div className="skill-logo">
-            <div className="skill-logo-bg">
+        <div className="t05-skill" key={skill.id_}>
+          <div className="t05-skill-logo">
+            <div className="t05-skill-logo-bg">
               <img src={skillLogo} alt="" />
             </div>
           </div>
-          <div className="skill-name">
+          <div className="t05-skill-name">
             <p>{skill.Name}</p>
           </div>
         </div>
@@ -391,17 +419,17 @@ const Template05 = (props) => {
 
   //#region - Education Section
   let eduSection = (
-    <div className={`sec edu-sec ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t05-sec t05-edu-sec ${props.language === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
-      <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
         <img src={img_08} alt="" />
       </div>
       {/* sec title */}
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
-        <p>{props.language === "Ar" ? "المؤهل التعليمي" : "Education"}</p>
+      <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <p>{props.language === "Ar" ? "المؤهل\xa0التعليمي" : "Education"}</p>
       </div>
       {/* sec body */}
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
         {edus}
       </div>
     </div>
@@ -409,17 +437,17 @@ const Template05 = (props) => {
   //#endregion
   //#region - Work Section
   let workSection = (
-    <div className={`sec work-sec ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t05-sec t05-work-sec ${props.language === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
-      <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
         <img src={img_09} alt="" />
       </div>
       {/* sec title */}
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
-        <p>{props.language === "Ar" ? "الخبرات العملية" : "Work Experience"}</p>
+      <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <p>{props.language === "Ar" ? "الخبرات\xa0العملية" : "Work Experience"}</p>
       </div>
       {/* sec body */}
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
         {jobs}
       </div>
     </div>
@@ -427,37 +455,37 @@ const Template05 = (props) => {
   //#endregion
   //#region - Courses Section
   let coursesSection = (
-    <div className={`sec courses-sec ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t05-sec t05-courses-sec ${props.language === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
-      <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
         <img src={img_10} alt="" />
       </div>
       {/* sec title */}
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
         <p>
-          {props.language === "Ar" ? "الدورات التدريبية" : "Training Courses"}
+          {props.language === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
         </p>
       </div>
       {/* sec body */}
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
-        <div className="sec-content">{crses}</div>
+      <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className="t05-sec-content">{crses}</div>
       </div>
     </div>
   );
   //#endregion
   //#region - Skills Section
   let skillsSection = (
-    <div className={`sec skills-sec ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t05-sec t05-skills-sec ${props.language === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
-      <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
         <img src={img_11} alt="" />
       </div>
       {/* sec title */}
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
         <p>{props.language === "Ar" ? "المهارات" : "Skills"}</p>
       </div>
       {/* sec body */}
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
         {skls}
       </div>
     </div>
@@ -465,53 +493,53 @@ const Template05 = (props) => {
   //#endregion
   //#region - Other Section
   let otherSection = (
-    <div className="other-sec">
+    <div className="t05-other-sec">
       {/* Memberships */}
-      <div className={`sec part-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec t05-part-sec ${props.language === "Ar" ? "ar" : ""}`}>
         {/* sec logo */}
-        <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
           <img src={img_12} alt="" />
         </div>
         {/* sec title */}
-        <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
           <p>{props.language === "Ar" ? "العضويات" : "Memberships"}</p>
         </div>
         {/* sec body */}
-        <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
-          <div className={`sec-content ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t05-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
             {mems}
           </div>
         </div>
       </div>
 
       {/* Languages */}
-      <div className={`sec lang-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec t05-lang-sec ${props.language === "Ar" ? "ar" : ""}`}>
         {/* sec logo */}
-        <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
           <img src={img_13} alt="" />
         </div>
         {/* sec title */}
-        <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
           <p>{props.language === "Ar" ? "اللغات" : "Languages"}</p>
         </div>
         {/* sec body */}
-        <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
           {langs}
         </div>
       </div>
 
       {/* References */}
-      <div className={`sec ref-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t05-sec t05-ref-sec ${props.language === "Ar" ? "ar" : ""}`}>
         {/* sec logo */}
-        <div className={`sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-logo ${props.language === "Ar" ? "ar" : ""}`}>
           <img src={img_14} alt="" />
         </div>
         {/* sec title */}
-        <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-title ${props.language === "Ar" ? "ar" : ""}`}>
           <p>{props.language === "Ar" ? "المراجع" : "References"}</p>
         </div>
         {/* sec body */}
-        <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+        <div className={`t05-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
           {refs}
         </div>
       </div>
@@ -542,91 +570,95 @@ const Template05 = (props) => {
 
   return (
     <>
-      <button onClick={print}>Export As pdf</button>
-      <div className="template05-page">
+      <div className="backgroundimg">
+        <div className='dl-ctrls'>
+          <button onClick={() => saveAs('PDF')}>Download as PDF</button>
+          <button onClick={() => saveAs('PNG')}>Download as PNG</button>
+          <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
+        </div>
         <div
           className={`template05-body ${props.language === "Ar" ? "ar" : ""}`}
           ref={ref}
           id="toPDF"
         >
           {/* Header Section */}
-          <div className="header-sec">
+          <div className="t05-header-sec">
             {/* Photo */}
-            <div className="photo">
-              <div className="photo-bg">
+            <div className="t05-photo">
+              <div className="t05-photo-bg">
                 <img src={img_00} alt="" />
               </div>
             </div>
 
             {/* Name */}
-            <div className="name">
+            <div className="t05-name">
               <p>
                 {PI.FirstName} {PI.LastName}
               </p>
             </div>
 
             {/* Details */}
-            <div className="details">
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""}`}>
-                <div className="detail-logo">
+            <div className="t05-details">
+              <div className={`t05-detail ${props.language === "Ar" ? "ar" : ""}`}>
+                <div className="t05-detail-logo">
                   <img src={img_01} alt="" />
                 </div>
-                <div className="detail-text">
+                <div className="t05-detail-text">
                   <p>{PI.Birth}</p>
                 </div>
               </div>
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""}`}>
-                <div className="detail-logo">
+              <div className={`t05-detail ${props.language === "Ar" ? "ar" : ""}`}>
+                <div className="t05-detail-logo">
                   <img src={img_02} alt="" />
                 </div>
-                <div className="detail-text">
+                <div className="t05-detail-text">
                   <p>{PI.Phone}</p>
                 </div>
               </div>
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""}`}>
-                <div className="detail-logo">
+              <div className={`t05-detail ${props.language === "Ar" ? "ar" : ""}`}>
+                <div className="t05-detail-logo">
                   <img src={img_03} alt="" />
                 </div>
-                <div className="detail-text">
+                <div className="t05-detail-text">
                   <p>{PI.Email}</p>
                 </div>
               </div>
             </div>
 
             {/* Location */}
-            <div className="location">
-              <div className="loc-data">
-                <div className={`loc ${props.language === "Ar" ? "ar" : ""}`}>
-                  <div className="loc-icon">
-                    <img className="flag" src={img_04} alt="" />
+            <div className="t05-location">
+              <div className="t05-loc-data">
+                <div className={`t05-loc ${props.language === "Ar" ? "ar" : ""}`}>
+                  <div className="t05-loc-icon">
+                    <img className="t05-flag" src={img_04} alt="" />
                   </div>
-                  <div className="loc-text">
-                    <p>{PI.Nationality}</p>
+                  <div className="t05-loc-text">
+                    <p>{props.language==='Ar'? PI.NationalityAr : PI.Nationality}</p>
                   </div>
                 </div>
-                <div className={`loc ${props.language === "Ar" ? "ar" : ""}`}>
-                  <div className="loc-icon">
+                <div className={`t05-loc ${props.language === "Ar" ? "ar" : ""}`}>
+                  <div className="t05-loc-icon">
                     <img src={img_05} alt="" />
                   </div>
-                  <div className="loc-text">
-                    <p>{PI.City}</p>
+                  <div className="t05-loc-text">
+                    <p>{props.language==='Ar' ? PI.CityAr : PI.City}</p>
                   </div>
                 </div>
               </div>
               {props.language === "Ar" ? (
-                <img className="world ar" src={img_26} alt="" />
+                <img className="t05-world ar" src={img_26} alt="" />
               ) : (
-                <img className="world" src={img_06} alt="" />
+                <img className="t05-world" src={img_06} alt="" />
               )}
             </div>
           </div>
 
           {/* Intro Section */}
-          <div className={`objective ${props.language === "Ar" ? "ar" : ""}`}>
-            <div className={`obj-logo ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t05-objective ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`t05-obj-logo ${props.language === "Ar" ? "ar" : ""}`}>
               <img src={img_07} alt="" />
             </div>
-            <div className={`obj-text ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`t05-obj-text ${props.language === "Ar" ? "ar" : ""}`}>
               <p className="bold">{CO.Text}</p>
             </div>
           </div>
@@ -636,7 +668,7 @@ const Template05 = (props) => {
             <Droppable droppableId="droppable-main" type="Main">
               {(provided) => (
                 <div
-                  className="main-sec"
+                  className="t05-main-sec"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >

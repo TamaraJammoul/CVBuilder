@@ -1,46 +1,48 @@
-var http = require("https");
+const router = require("express").Router();
+var request = require("request");
 
-var options = {
-    "method": "POST",
-    "hostname": "api.tap.company",
-    "port": null,
-    "path": "/v2/tokens",
-    "headers": {
-        "authorization": "Bearer " + process.env.Secret_API_Key,
-        "content-type": "application/json"
-    }
-};
+router.post("/", (req, res) => {
+    const { amount, currency, first_name, email, country_code, number, url } = req.body;
 
-var req = http.request(options, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-        chunks.push(chunk);
-    });
-
-    res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-    });
-});
-
-req.write(JSON.stringify({
-    card:
-    {
-        number: 5123450000000008,
-        exp_month: 12,
-        exp_year: 21,
-        cvc: 124,
-        name: 'test user',
-        address:
+    var options2 = {
+        method: 'POST',
+        url: 'https://api.tap.company/v2/charges',
+        headers:
         {
-            country: 'Kuwait',
-            line1: 'Salmiya, 21',
-            city: 'Kuwait city',
-            street: 'Salim',
-            avenue: 'Gulf'
-        }
-    },
-    client_ip: '192.168.1.20'
-}));
-req.end();
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + process.env.Secret_API_Key
+        },
+        body: {
+            amount,
+            currency,
+            customer: {
+                first_name,
+                email,
+                phone: {
+                    country_code,
+                    number
+                }
+            },
+            source: {
+                id: 'src_all'
+            },
+            redirect: {
+                url: url
+            }
+        },
+        json: true
+    };
+    request(options2, function (error, response, body) {
+        if (error) throw new Error(error);
+        else
+            return res.status(200).json({
+                body,
+                msg: "done"
+            })
+    });
+})
+
+module.exports = router
+
+
+

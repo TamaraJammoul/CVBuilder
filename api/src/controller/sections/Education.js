@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Education = require('../../models/sections/Education');
+const func = require("../func");
 
 exports.addEducation = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,11 +12,12 @@ exports.addEducation = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart,
                     YearEnd, DegreeFrom5, Grade, Degree, Order
                 } = req.body;
-
+                UniversityNameAr = func(UniversityNameAr);
+                FacultyAr = func(FacultyAr);
                 const DegreeFrom10 = DegreeFrom5 * 2;
                 const DegreeFrom100 = DegreeFrom5 * 20;
 
@@ -32,14 +34,27 @@ exports.addEducation = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Educations added successfuly",
-                                    data: edu
+                                    status: 1,
+                                    UniversityName,
+                                    UniversityNameAr,
+                                    Faculty,
+                                    FacultyAr,
+                                    YearStart,
+                                    YearEnd,
+                                    Grade,
+                                    Degree,
+                                    DegreeFrom5,
+                                    DegreeFrom10,
+                                    DegreeFrom100,
+                                    Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -76,7 +91,8 @@ exports.deleteEducation = (req, res) => {
                                     }))
                                     return res.status(200).json({
                                         msg: "education deleted",
-                                        data: tmpEducations
+                                        status: 1,
+                                        tmpEducations
                                     })
                                 })
                             })
@@ -87,7 +103,9 @@ exports.deleteEducation = (req, res) => {
 }
 
 exports.updateEducation = (req, res) => {
-    const { _id, UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart, YearEnd, Grade, Degree, DegreeFrom5, Order } = req.body;
+    var { _id, UniversityName, UniversityNameAr, Faculty, FacultyAr, YearStart, YearEnd, Grade, Degree, DegreeFrom5, Order } = req.body;
+    UniversityNameAr = func(UniversityNameAr);
+    FacultyAr = func(FacultyAr);
     Education.findById(_id).exec((error, education) => {
         if (error) {
             return res.status(400).json({
@@ -117,27 +135,27 @@ exports.updateEducation = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Education updated successfully",
-                        data: {
-                            _id,
-                            UniversityName,
-                            UniversityNameAr,
-                            Faculty,
-                            FacultyAr,
-                            YearStart,
-                            YearEnd,
-                            Grade,
-                            Degree,
-                            DegreeFrom5,
-                            DegreeFrom10,
-                            DegreeFrom100,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        UniversityName,
+                        UniversityNameAr,
+                        Faculty,
+                        FacultyAr,
+                        YearStart,
+                        YearEnd,
+                        Grade,
+                        Degree,
+                        DegreeFrom5,
+                        DegreeFrom10,
+                        DegreeFrom100,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "No Education found",
             })
         }
@@ -165,20 +183,23 @@ exports.getEducations = (req, res) => {
                         if (edu) {
                             return res.status(200).json({
                                 msg: "Educations returned successfully",
+                                status: 1,
                                 data: edu
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -204,17 +225,17 @@ exports.hideEducations = (req, res) => {
                         else msg = "Educations show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideEducations
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideEducations
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0,
                 })
             }
         })
@@ -261,20 +282,34 @@ exports.copyEducation = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Educations: educations } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Education Copied successfully",
-                                    data: neweducation
+                                    status: 1,
+                                    UniversityName: neweducation.UniversityName,
+                                    UniversityNameAr: neweducation.UniversityNameAr,
+                                    Faculty: neweducation.Faculty,
+                                    FacultyAr: neweducation.FacultyAr,
+                                    YearStart: neweducation.YearStart,
+                                    YearEnd: neweducation.YearEnd,
+                                    DegreeFrom5: neweducation.DegreeFrom5,
+                                    DegreeFrom10: neweducation.DegreeFrom10,
+                                    DegreeFrom100: neweducation.DegreeFrom100,
+                                    Grade: neweducation.Grade,
+                                    Degree: neweducation.Degree,
+                                    Order: neweducation.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
+                        return res.status(200).json({
+                            status: 0,
                             msg: "Education not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "CV not found"
                 })
             }
@@ -302,6 +337,7 @@ exports.orderEducations = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Education.find({ _id: { $in: cv.Educations } }).sort({ Order: 1 }).then((edu) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: edu
                                 })
                             })
@@ -318,6 +354,7 @@ exports.orderEducations = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Education.find({ _id: { $in: cv.Educations } }).sort({ Order: 1 }).then((edu) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: edu
                                 })
                             })
@@ -328,8 +365,9 @@ exports.orderEducations = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0,
             })
         }
     })

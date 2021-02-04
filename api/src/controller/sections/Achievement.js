@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Achievement = require('../../models/sections/Achievement');
+const func = require("../func");
 
 exports.addAchievement = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,9 +12,10 @@ exports.addAchievement = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     Name, NameAr, Order
                 } = req.body;
+                NameAr = func(NameAr);
                 let achievement = new Achievement({
                     Name, NameAr, Order
                 });
@@ -25,13 +27,15 @@ exports.addAchievement = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Achievement added successfuly",
-                                    data: ach
+                                    status: 1,
+                                    Name, NameAr, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "No CV found"
                 })
             }
@@ -69,7 +73,8 @@ exports.deleteAchievement = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "Achievement deleted",
-                                            data: tmpAchievements
+                                            status: 1,
+                                            tmpAchievements
                                         })
                                     })
                                 })
@@ -78,7 +83,8 @@ exports.deleteAchievement = (req, res) => {
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "No CV found"
                 })
             }
@@ -86,7 +92,8 @@ exports.deleteAchievement = (req, res) => {
 };
 
 exports.updateAchievement = (req, res) => {
-    const { _id, Name, NameAr, Order } = req.body;
+    var { _id, Name, NameAr, Order } = req.body;
+    NameAr = func(NameAr);
     Achievement.findById(_id).exec((error, achievement) => {
         if (error) {
             return res.status(400).json({
@@ -105,18 +112,18 @@ exports.updateAchievement = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Achievement updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "No Achievement found",
             })
         }
@@ -144,20 +151,23 @@ exports.getAchievements = (req, res) => {
                         if (ach) {
                             return res.status(200).json({
                                 msg: "Achievements returned successfully",
+                                status: 1,
                                 data: ach
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -183,16 +193,16 @@ exports.hideAchievements = (req, res) => {
                         else msg = "Achievements show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideAchievements
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideAchievements
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "CV Not Found"
                 })
             }
@@ -231,20 +241,25 @@ exports.copyAchievement = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Achievements: achievements } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Achievement Copied successfully",
-                                    data: newachievement
+                                    status: 1,
+                                    Name: newachievement.Name,
+                                    NameAr: newachievement.NameAr,
+                                    Order: newachievement.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
+                        return res.status(200).json({
+                            status: 0,
                             msg: "Achievement not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 1,
                     msg: "CV not found"
                 })
             }
@@ -272,6 +287,7 @@ exports.orderAchievements = (req, res) => {
                         Achievement.find({ _id: { $in: cv.Achievements } }).sort({ Order: 1 }).then((ach) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: ach
                                 })
                             })
@@ -288,6 +304,7 @@ exports.orderAchievements = (req, res) => {
                         Achievement.find({ _id: { $in: cv.Achievements } }).sort({ Order: 1 }).then((ach) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: ach
                                 })
                             })
@@ -298,7 +315,8 @@ exports.orderAchievements = (req, res) => {
 
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 1,
                 msg: "NO CV Found"
             })
         }

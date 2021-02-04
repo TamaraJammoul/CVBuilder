@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const OtherTraining = require('../../models/sections/OtherTraining');
+const func = require("../func");
 
 exports.addOtherTraining = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,9 +12,10 @@ exports.addOtherTraining = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     Name, NameAr, Order
                 } = req.body;
+                NameAr = func(NameAr);
                 let otherTraining = new OtherTraining({
                     Name, NameAr, Order
                 });
@@ -25,13 +27,15 @@ exports.addOtherTraining = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "OtherTraining added successfuly",
-                                    data: otr
+                                    status: 1,
+                                    Name, NameAr, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "No CV found"
                 })
             }
@@ -69,7 +73,8 @@ exports.deleteOtherTraining = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "otherTraining deleted",
-                                            data: tmpOtherTrainings
+                                            status: 1,
+                                            tmpOtherTrainings
                                         })
                                     })
                                 })
@@ -81,7 +86,8 @@ exports.deleteOtherTraining = (req, res) => {
 }
 
 exports.updateOtherTraining = (req, res) => {
-    const { _id, Name, NameAr, Order } = req.body;
+    var { _id, Name, NameAr, Order } = req.body;
+    NameAr = func(NameAr);
     OtherTraining.findById(_id).exec((error, otherTraining) => {
         if (error) {
             return res.status(400).json({
@@ -100,18 +106,18 @@ exports.updateOtherTraining = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "OtherTraining updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "No OtherTraining found",
             })
         }
@@ -139,20 +145,23 @@ exports.getOtherTrainings = (req, res) => {
                         if (otr) {
                             return res.status(200).json({
                                 msg: "Other Trainings returned successfully",
+                                status: 1,
                                 data: otr
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -178,17 +187,17 @@ exports.hideOtherTrainings = (req, res) => {
                         else msg = "OtherTrainings show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideOtherTrainings
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideOtherTrainings
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0
                 })
             }
         })
@@ -226,20 +235,25 @@ exports.copyOtherTraining = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { OtherTrainings: otherTrainings } }).then(() => {
                                 return res.status(200).json({
                                     msg: "OtherTraining Copied successfully",
-                                    data: newotherTraining
+                                    status: 1,
+                                    Name: newotherTraining.Name,
+                                    NameAr: newotherTraining.NameAr,
+                                    Order: newotherTraining.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
+                        return res.status(200).json({
+                            status: 1,
                             msg: "OtherTraining not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 1,
                     msg: "CV not found"
                 })
             }
@@ -267,6 +281,7 @@ exports.orderOtherTrainings = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         OtherTraining.find({ _id: { $in: cv.OtherTrainings } }).sort({ Order: 1 }).then((oth) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: oth
                                 })
                             })
@@ -283,6 +298,7 @@ exports.orderOtherTrainings = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         OtherTraining.find({ _id: { $in: cv.OtherTrainings } }).sort({ Order: 1 }).then((oth) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: oth
                                 })
                             })
@@ -293,8 +309,9 @@ exports.orderOtherTrainings = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0
             })
         }
     })

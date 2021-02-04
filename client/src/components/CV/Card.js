@@ -40,6 +40,7 @@ export default function Card({CardImage, template}) {
         languagelen: 3,
         othertraininglen: 5,
         technicalskilllen: 2,
+        color: 0,
       };
     else if (t == "cv2")
       return {
@@ -63,6 +64,7 @@ export default function Card({CardImage, template}) {
         languagelen: 2,
         membershiplen: 3,
         referenclen: 1,
+        color: 0,
       };
     else if (t == "cv3")
       return {
@@ -84,6 +86,7 @@ export default function Card({CardImage, template}) {
         educationlen: 1,
         experiencelen: 2,
         languagelen: 3,
+        color: 0,
       };
     else if (t == "cv4")
       return {
@@ -106,6 +109,7 @@ export default function Card({CardImage, template}) {
         languagelen: 2,
 
         technicalskilllen: 4,
+        color: 1,
       };
     else if (t == "cv5")
       return {
@@ -126,6 +130,7 @@ export default function Card({CardImage, template}) {
         courseslen: 7,
         educationlen: 1,
         experiencelen: 2,
+        color: 0,
       };
     else if (t == "cv6")
       return {
@@ -147,6 +152,7 @@ export default function Card({CardImage, template}) {
         educationlen: 2,
         experiencelen: 5,
         languagelen: 2,
+        color: 0,
       };
     else if (t == "cv7")
       return {
@@ -169,6 +175,7 @@ export default function Card({CardImage, template}) {
         experiencelen: 3,
         languagelen: 2,
         membershiplen: 5,
+        color: 0,
       };
     else if (t == "cv8")
       return {
@@ -190,6 +197,7 @@ export default function Card({CardImage, template}) {
         educationlen: 1,
         experiencelen: 2,
         languagelen: 1,
+        color: 1,
       };
     else if (t == "cv9")
       return {
@@ -213,6 +221,7 @@ export default function Card({CardImage, template}) {
         experiencelen: 1,
         languagelen: 2,
         achievementlen: 1,
+        color: 0,
       };
     else if (t == "cv10")
       return {
@@ -235,6 +244,7 @@ export default function Card({CardImage, template}) {
         educationlen: 1,
         experiencelen: 2,
         languagelen: 2,
+        color: 0,
       };
     else if (t == "cv11")
       return {
@@ -256,6 +266,7 @@ export default function Card({CardImage, template}) {
         educationlen: 1,
         experiencelen: 1,
         languagelen: 2,
+        color: 0,
       };
   };
   return (

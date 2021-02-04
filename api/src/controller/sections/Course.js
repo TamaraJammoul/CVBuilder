@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Course = require('../../models/sections/Course');
+const func = require("../func");
 
 exports.addCourse = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,9 +12,11 @@ exports.addCourse = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     Name, NameAr, Description, DescriptionAr, Year, Order
                 } = req.body;
+                NameAr = func(NameAr);
+                DescriptionAr = func(DescriptionAr);
                 let course = new Course({
                     Name, NameAr, Description, DescriptionAr, Year, Order
                 });
@@ -25,14 +28,16 @@ exports.addCourse = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Course added successfuly",
-                                    data: mem
+                                    status: 1,
+                                    Name, NameAr, Description, DescriptionAr, Year, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -69,7 +74,8 @@ exports.deleteCourse = (req, res) => {
                                     }))
                                     return res.status(200).json({
                                         msg: "Course deleted",
-                                        data: tmpCourses
+                                        status: 1,
+                                        tmpCourses
                                     })
                                 })
                             })
@@ -80,7 +86,9 @@ exports.deleteCourse = (req, res) => {
 }
 
 exports.updateCourse = (req, res) => {
-    const { _id, Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
+    var { _id, Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
+    NameAr = func(NameAr);
+    DescriptionAr = func(DescriptionAr);
     Course.findById(_id).exec((error, course) => {
         if (error) {
             return res.status(400).json({
@@ -102,21 +110,21 @@ exports.updateCourse = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Course updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Description,
-                            DescriptionAr,
-                            Year,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Description,
+                        DescriptionAr,
+                        Year,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "No Course found",
             })
         }
@@ -144,20 +152,23 @@ exports.getCourses = (req, res) => {
                         if (mem) {
                             return res.status(200).json({
                                 msg: "Courses returned successfully",
+                                status: 1,
                                 data: mem
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -183,17 +194,17 @@ exports.hideCourses = (req, res) => {
                         else msg = "Courses show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideCourses
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideCourses
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0,
                 })
             }
         })
@@ -229,21 +240,29 @@ exports.copyCourse = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Courses: courses } }).then(() => {
                                 return res.status(200).json({
                                     msg: "course Copied successfully",
-                                    data: newcourse
+                                    status: 1,
+                                    Name: newcourse.Name,
+                                    NameAr: newcourse.NameAr,
+                                    Description: newcourse.Description,
+                                    DescriptionAr: newcourse.DescriptionAr,
+                                    Year: newcourse.Year,
+                                    Order: newcourse.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
-                            msg: "Course not found"
+                        return res.status(200).json({
+                            msg: "Course not found",
+                            status: 0,
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV not found"
+                return res.status(200).json({
+                    msg: "CV not found",
+                    status: 0,
                 })
             }
         })
@@ -270,6 +289,7 @@ exports.orderCourses = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Course.find({ _id: { $in: cv.Courses } }).sort({ Order: 1 }).then((course) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: course
                                 })
                             })
@@ -286,6 +306,7 @@ exports.orderCourses = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Course.find({ _id: { $in: cv.Courses } }).sort({ Order: 1 }).then((course) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: course
                                 })
                             })
@@ -296,8 +317,9 @@ exports.orderCourses = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0,
             })
         }
     })

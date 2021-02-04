@@ -8,11 +8,15 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 function SignIn(props) {
     const [showPassword, setShowPassword] = useState(false);
     const { t } = useTranslation();
     const history = useHistory();
+    localStorage.setItem("logged", 0);
     return (
         <Grid
             container
@@ -47,17 +51,23 @@ function SignIn(props) {
                                     errors.password = t("password must be at least 8 character");
                                 return errors;
                             }}
-                            onSubmit={(values) => {
+                            onSubmit={(values, { resetForm }) => {
                                 let data = {
                                     Email: values.email,
                                     Password: values.password
                                 };
                                 axios.post("http://localhost:5000/api/auth/logInAdmin", data).then((res) => {
-                                    if (res.data.success === 1) {
-                                        console.log(res.data.token);
+                                    console.log(res.data);
+                                    if (res.data.status === 1) {
+                                        toast.success("Login Complete ,Welcome Sir");
+                                        localStorage.setItem("password", values.password);
                                         localStorage.setItem("logged", 1);
                                         history.push("/changePassword");
 
+                                    }
+                                    else {
+                                        toast.error("Sorry ,Wronge Email or Password");
+                                        resetForm({ values: { Email: "", Password: "" } })
                                     }
                                 }).catch((err) => {
                                     console.log(err);
@@ -122,9 +132,7 @@ function SignIn(props) {
                                         </Grid>{" "}
                                         <Grid item>
                                             {" "}
-                                            <Link to="/forgetpassword">
-                                                {t("forget your password?")}
-                                            </Link>
+
                                         </Grid>
                                     </Grid>{" "}
                                 </Form>

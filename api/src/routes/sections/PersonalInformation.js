@@ -24,7 +24,10 @@ const upload = multer({
 router.post('/updatePersonalInformation',
     upload.single('profile'),
     (req, res, next) => {
-        req.body.Image = req.file.path;
+        if (req.body.path)
+            req.body.Image = req.file.path;
+        else
+            req.body.Image = ""
         next();
     },
     validationRes, updatePersonalInformation);

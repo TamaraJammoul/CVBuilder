@@ -14,6 +14,9 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useState } from 'react';
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const useStyles = makeStyles({
     table: {
@@ -46,9 +49,13 @@ export default function BasicTable2() {
                                 onSubmit={(values) => {
                                     console.log("asd");
                                     axios.get("http://localhost:5000/api/cv/getCVsData").then((res) => {
-                                        if (res.data.success === 1) {
+                                        if (res.data.status === 1 && res.data.cv.length > 0) {
+                                            toast.success("CVs retrieved successfully");
                                             console.log(res.data);
                                             setRows(res.data.cv);
+                                        }
+                                        else {
+                                            toast.error("No CV Founded");
                                         }
                                     }).catch((err) => {
                                         console.log(err);

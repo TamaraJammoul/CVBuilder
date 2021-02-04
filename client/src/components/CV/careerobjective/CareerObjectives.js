@@ -1,5 +1,12 @@
 import React, {useState} from "react";
-import {Button, Paper, Grid, Container, ButtonGroup} from "@material-ui/core";
+import {
+  Button,
+  Paper,
+  Grid,
+  Container,
+  TextField,
+  ButtonGroup,
+} from "@material-ui/core";
 import {VisibilityOff, EditSharp, Visibility} from "@material-ui/icons";
 
 import {
@@ -9,11 +16,12 @@ import {
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import ReactHtmlParser from "react-html-parser";
+
 export default function CareerObjectives() {
+  const lan = useSelector((state) => state.sections.twolan);
+  const career = useSelector((state) => state.template.careerobjective);
   const [text, setText] = useState("");
   const [textAr, setTextAr] = useState("");
-  const lan = useSelector((state) => state.sections.twolan);
-
   const [hide, setHide] = useState(0);
 
   const dispatch = useDispatch();

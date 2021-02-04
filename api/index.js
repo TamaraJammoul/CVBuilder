@@ -18,8 +18,8 @@ const referenceRouter = require('./src/routes/sections/Reference');
 const courseRouter = require('./src/routes/sections/Course');
 const skillRouter = require('./src/routes/sections/Skill');
 const contactUsRouter = require('./src/routes/contactUs');
-const checkOutRouter = require('./src/routes/checkOut');
 const CVrouter = require('./src/routes/CV');
+const checkoutRouter = require('./payment');
 const app = express();
 
 app.use(function (req, res, next) {
@@ -67,8 +67,8 @@ app.use('/api/reference', referenceRouter);
 app.use('/api/course', courseRouter);
 app.use('/api/skills', skillRouter);
 app.use('/api/contactUs', contactUsRouter);
-app.use('/api/checkOut', checkOutRouter);
+app.use('/api/checkOut', checkoutRouter);
 
-app.listen(process.env.PORT || 5001, () => {
+app.listen(process.env.PORT || 5002, () => {
     console.log(`server running on port ${process.env.PORT}`);
 }); 

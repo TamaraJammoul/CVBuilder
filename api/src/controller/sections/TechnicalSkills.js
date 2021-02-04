@@ -1,6 +1,6 @@
 const CV = require('../../models/CV');
 const TechnicalSkills = require('../../models/sections/TechnicalSkills');
-
+const func = require("../func");
 
 exports.addTechnicalSkills = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -12,7 +12,8 @@ exports.addTechnicalSkills = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, NameAr, RateFrom5, Order } = req.body;
+                var { Name, NameAr, RateFrom5, Order } = req.body;
+                NameAr = func(NameAr);
                 const RateFrom100 = RateFrom5 * 20;
                 let technicalSkills = new TechnicalSkills({ Name, NameAr, RateFrom5, RateFrom100, Order });
                 technicalSkills.save()
@@ -23,14 +24,16 @@ exports.addTechnicalSkills = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "TechnicalSkills added successfuly",
-                                    data: psk
+                                    status: 1,
+                                    Name, NameAr, RateFrom5, RateFrom100, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -67,7 +70,8 @@ exports.deleteTechnicalSkills = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "TechnicalSlills deleted",
-                                            data: tmpTechnicalSkills
+                                            status: 1,
+                                            tmpTechnicalSkills
                                         })
                                     })
                                 })
@@ -79,7 +83,8 @@ exports.deleteTechnicalSkills = (req, res) => {
 }
 
 exports.updateTechnicalSkills = (req, res) => {
-    const { _id, Name, NameAr, RateFrom5, Order } = req.body;
+    var { _id, Name, NameAr, RateFrom5, Order } = req.body;
+    NameAr = func(NameAr);
     TechnicalSkills.findById(_id).exec((error, technicalSkills) => {
         if (error) {
             return res.status(400).json({
@@ -101,21 +106,21 @@ exports.updateTechnicalSkills = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "TechnicalSkills updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            RateFrom5,
-                            RateFrom100,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        RateFrom5,
+                        RateFrom100,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
                 msg: "No TechnicalSkills found",
+                status: 0,
             })
         }
     })
@@ -142,20 +147,23 @@ exports.getTechnicalSkills = (req, res) => {
                         if (psk) {
                             return res.status(200).json({
                                 msg: "Technical Skills returned successfully",
+                                status: 1,
                                 data: psk
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -181,16 +189,16 @@ exports.hideTechnicalSkills = (req, res) => {
                         else msg = "TechnicalSkills show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideTechnicalSkills
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideTechnicalSkills
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "CV Not Found"
                 })
             }
@@ -231,21 +239,28 @@ exports.copyTechnicalSkill = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { TechnicalSkills: technicalSkills } }).then(() => {
                                 return res.status(200).json({
                                     msg: "TechnicalSkill Copied successfully",
-                                    data: newtechnicalSkill
+                                    status: 1,
+                                    Name: newtechnicalSkill.Name,
+                                    NameAr: newtechnicalSkill.NameAr,
+                                    RateFrom5: newtechnicalSkill.RateFrom5,
+                                    RateFrom100: newtechnicalSkill.RateFrom100,
+                                    Order: newtechnicalSkill.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
+                        return res.status(200).json({
+                            status: 0,
                             msg: "TechnicalSkill not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV not found"
+                return res.status(200).json({
+                    msg: "CV not found",
+                    status: 0,
                 })
             }
         })
@@ -272,6 +287,7 @@ exports.orderTechnicalSkills = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } }).sort({ Order: 1 }).then((tsk) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: tsk
                                 })
                             })
@@ -288,6 +304,7 @@ exports.orderTechnicalSkills = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         TechnicalSkills.find({ _id: { $in: cv.TechnicalSkills } }).sort({ Order: 1 }).then((tsk) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: tsk
                                 })
                             })
@@ -298,8 +315,9 @@ exports.orderTechnicalSkills = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0,
             })
         }
     })

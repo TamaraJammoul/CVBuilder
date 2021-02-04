@@ -19,7 +19,6 @@ const initialState = {
     skills: 1,
     twolan: 1,
     achievement: 1,
-
     certificateslen: 1,
     courseslen: 1,
     educationlen: 1,
@@ -29,7 +28,7 @@ const initialState = {
     othertraininglen: 1,
     referenclen: 1,
     technicalskilllen: 1,
-
+    color: 1,
     achievementlen: 1,
   },
   template: {
@@ -45,7 +44,7 @@ const initialState = {
     skills: [],
     courses: [],
     personalInformation: {},
-    careerobjective: "",
+    careerobjective: {},
     careerObjectives_id: "",
     personalInformation_id: "",
   },

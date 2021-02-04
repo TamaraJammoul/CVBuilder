@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { jsPDF } from "jspdf";
+import { useSelector } from "react-redux";
+import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_02.css";
@@ -32,7 +33,15 @@ import img_23 from "../../assets/imgs/template_02/23.png";
 import img_24 from "../../assets/imgs/template_02/24.png";
 //#endregion
 
-function print() {
+function downloadImage(data, filename = 'untitled.jpeg') {
+  var a = document.createElement('a');
+  a.href = data;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+}
+
+function saveAs(type) {
   const pdf = document.getElementById("toPDF");
   const text = [...pdf.querySelectorAll("p")];
   text.map(
@@ -42,24 +51,34 @@ function print() {
   );
   text.map(
     (p) =>
-      p.classList.contains("title") && (p.style.transform = "translateY(-20%)")
+      p.classList.contains("title") && (p.style.transform = "translateY(-28%)")
   );
   text.map(
     (p) =>
       p.classList.contains("year") && (p.style.transform = "translateY(-35%)")
   );
 
-  const filename = "template-2.pdf";
   html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
   })
-    .then((canvas) => {
+  .then((canvas) => {
+    let filename = 'template_2';
+    if(type==='PDF'){
       var img = canvas.toDataURL("image/jpeg", 1);
       var doc = new jsPDF("p", "mm", "a4");
       doc.addImage(img, "JPEG", -4, 0, 215, 298);
       doc.save(filename);
-    })
+    }
+    else if(type==='PNG'){
+      let imageURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      downloadImage(imageURL, filename+'.png');
+    }
+    else {
+      let imageURL = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+      downloadImage(imageURL, filename+'.jpeg');
+    }
+  })
     .catch((err) => console.log(err));
   text.map((p) => (p.style.transform = "translateY(0%)"));
 }
@@ -73,7 +92,7 @@ const Template02 = (props) => {
     careerobjective,
     personalInformation,
     skills,
-  } = props.Data;
+  } = useSelector((state) => state.template);
 
   let edus = null;
   if (educations.length > 0) {
@@ -115,7 +134,7 @@ const Template02 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة الثانوية العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
         }
         return (
           <div
@@ -127,7 +146,7 @@ const Template02 = (props) => {
             ></div>
             <p className="edu-title bold">{degreeAr}</p>
             <p>{edu.UniversityName}</p>
-            <p>المعدل: {edu.DegreeFrom5} من 5</p>
+            <p>المعدل\xa0:\xa0{edu.DegreeFrom5}\xa0من\xa05</p>
             <div className={`edu-year ${props.language === "Ar" ? "ar" : ""}`}>
               <p className="year">{edu.YearEnd}</p>
             </div>
@@ -211,7 +230,7 @@ const Template02 = (props) => {
       </div>
       <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "المؤهلات العلمية" : "Education"}
+          {props.language === "Ar" ? "المؤهلات\xa0العلمية" : "Education"}
         </p>
       </div>
       <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
@@ -231,7 +250,7 @@ const Template02 = (props) => {
       </div>
       <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "الخبرات العملية" : "Work Experience"}
+          {props.language === "Ar" ? "الخبرات\xa0العملية" : "Work Experience"}
         </p>
       </div>
       <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
@@ -251,7 +270,7 @@ const Template02 = (props) => {
       </div>
       <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "الدورات التدريبية" : "Training Courses"}
+          {props.language === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
         </p>
       </div>
       <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
@@ -303,8 +322,12 @@ const Template02 = (props) => {
 
   return (
     <>
-      <button onClick={print}>Export As pdf</button>
-      <div className="template02-page">
+      <div className="backgroundimg">
+        <div className='dl-ctrls'>
+          <button onClick={() => saveAs('PDF')}>Download as PDF</button>
+          <button onClick={() => saveAs('PNG')}>Download as PNG</button>
+          <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
+        </div>
         <div
           className={`template02-body ${props.language === "Ar" ? "ar" : ""} `}
           ref={ref}
@@ -313,7 +336,7 @@ const Template02 = (props) => {
           {/* Name Section */}
           <div className="name-sec">
             <h1>
-              {PI.FirstName} {PI.LastName}
+              {`${PI.FirstName}\xa0${PI.LastName}`}
             </h1>
           </div>
 
@@ -385,7 +408,7 @@ const Template02 = (props) => {
           <div className="intro-sec">
             <div className="intro-body">
               <img src={img_08} alt="" />
-              <div className="intro-content">
+              <div className={`intro-content ${props.language==='Ar'?'ar':''}`}>
                 <p className="objective-text bold">{CO.Text}</p>
               </div>
             </div>

@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Admin = require('../models/Admin');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const func = require("./func");
 
 exports.signUp = (req, res) => {
 
@@ -13,8 +14,9 @@ exports.signUp = (req, res) => {
                 msg: "User already registered"
             })
         }
-        const { FirstName, LastName, FirstNameAr, LastNameAr, Email, Password } = req.body;
-
+        var { FirstName, LastName, FirstNameAr, LastNameAr, Email, Password } = req.body;
+        FirstNameAr = func(FirstNameAr);
+        LastNameAr = func(LastNameAr);
         let Hash_Password = bcrypt.hashSync(Password, 10);
 
         const _user = new User({
@@ -35,8 +37,9 @@ exports.signUp = (req, res) => {
             );
             if (data) {
                 return res.status(200).json({
+                    status: 1,
                     msg: "User has registered",
-                    data: data,
+                    data,
                     token: token
                 });
             }
@@ -64,19 +67,26 @@ exports.logIn = (req, res) => {
                     const { _id, FirstName, LastName, FirstNameAr, LastNameAr, Email } = user;
                     res.status(200).json({
                         token: token,
-                        user: {
-                            _id, FirstName, LastName, FirstNameAr, LastNameAr, Email
-                        }
+                        status: 1,
+                        _id,
+                        FirstName,
+                        LastName,
+                        FirstNameAr,
+                        LastNameAr,
+                        Email
+
                     });
                 }
                 else {
-                    res.status(100).json({
+                    return res.status(200).json({
+                        status: 0,
                         msg: "Wrong Password"
                     });
                 }
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "Something went Wrong, can't get any thing from DB"
                 });
             }
@@ -101,19 +111,21 @@ exports.logInAdmin = (req, res) => {
                         process.env.JWT_SECRET,
                         { expiresIn: '1h' })
                     return res.status(200).json({
-                        success: 1,
+                        status: 1,
                         token
                     })
                 }
                 else {
-                    return res.status(100).json({
-                        msg: "Wroge Password"
+                    return res.status(200).json({
+                        msg: "Wroge Password",
+                        status: 0,
                     })
                 }
             }
             else {
-                res.status(0).json({
-                    msg: "NO Admin Found"
+                return res.status(200).json({
+                    msg: "NO Admin Found",
+                    status: 0
                 })
             }
         })
@@ -140,6 +152,7 @@ exports.changePasswordAdmin = (req, res) => {
     const pass = bcrypt.hashSync(newPass, 10);
     Admin.findOneAndUpdate({ Email: Email }, { Password: pass }, { new: true, useFindAndModify: false }).then((newAdmin) => {
         return res.status(200).json({
+            status: 1,
             newAdmin
         })
     })
@@ -151,7 +164,8 @@ exports.changePasswordUser = (req, res) => {
     const pass = bcrypt.hashSync(newPass, 10);
     User.findOneAndUpdate({ Email: Email }, { Password: pass }, { new: true, useFindAndModify: false }).then((newUser) => {
         return res.status(200).json({
-            newUser
+            newUser,
+            status: 1
         })
     })
 }

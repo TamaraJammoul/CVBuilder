@@ -8,6 +8,10 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
 
 /**
 * @author
@@ -45,7 +49,7 @@ const ChangePassword = (props) => {
                                         errors.password = t("password must be at least 8 character");
                                     return errors;
                                 }}
-                                onSubmit={(values) => {
+                                onSubmit={(values, { resetForm }) => {
                                     let data = {
                                         Email: localStorage.getItem("email"),
                                         Password: values.password
@@ -53,13 +57,20 @@ const ChangePassword = (props) => {
                                     if (localStorage.getItem("password") === values.oldPassword && values.password === values.confirm) {
                                         console.log(data);
                                         axios.post("http://localhost:5000/api/auth/changePasswordAdmin", data).then((res) => {
-                                            console.log(res);
-                                            history.push("/");
+                                            if (res.data.status == 1) {
+                                                console.log(res);
+                                                toast.success("Change Password Complete successfully");
+                                                history.push("/");
+                                            } else {
+                                                toast.error("Sorry ,Wronge Password Check Your data");
+                                                resetForm({ values: { Email: "", Password: "" } })
+                                            }
                                         }).catch((err) => {
                                             console.log(err);
                                         })
                                     } else {
-                                        console.log("error in  password");
+                                        toast.error("Sorry ,Wronge Password Check Your data");
+                                        resetForm({ values: { Email: "", Password: "" } })
                                     }
                                 }}
                             >

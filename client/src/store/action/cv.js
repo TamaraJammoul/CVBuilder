@@ -6,6 +6,7 @@ import {
   CVLANGIAGE,
   CVTEMPLATE,
   EDITCV,
+  CVCOLOR,
 } from "./types";
 import axios from "axios";
 
@@ -122,5 +123,14 @@ export function CVTemplate1(payload) {
             type: ERROR,
           });
       });
+  };
+}
+
+export function cvColor(payload) {
+  return async (dispatch) => {
+    dispatch({
+      type: CVCOLOR,
+      payload,
+    });
   };
 }

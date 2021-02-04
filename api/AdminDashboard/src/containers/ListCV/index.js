@@ -13,7 +13,10 @@ import { TextField } from "formik-material-ui";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useState } from 'react';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+toast.configure();
 
 const useStyles = makeStyles({
     table: {
@@ -55,17 +58,20 @@ export default function BasicTable() {
                                     }
                                     return errors;
                                 }}
-                                onSubmit={(values) => {
+                                onSubmit={(values, { resetForm }) => {
                                     let data = {
                                         Email: values.email,
                                     };
                                     axios.post("http://localhost:5000/api/cv/getCVData", data).then((res) => {
                                         if (res.data.msg !== "USER NOT FOUND") {
                                             console.log(res.data);
+                                            toast.success("CVs retrieved successfully");
                                             setRows(res.data.cv);
                                         }
                                     }).catch((err) => {
                                         console.log(err);
+                                        toast.error("Sorry , Check Your data");
+                                        resetForm({ values: { Email: "", Password: "" } })
                                     })
                                 }}
                             >

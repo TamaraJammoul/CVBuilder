@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { jsPDF } from "jspdf";
+import { useSelector } from "react-redux";
+import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_04.css";
@@ -20,33 +21,14 @@ import img_11 from "../../assets/imgs/template_04/11.png";
 import img_12 from "../../assets/imgs/template_04/12.png";
 //#endregion
 
-function print() {
-  const pdf = document.getElementById("toPDF");
-  const titles = [...pdf.querySelectorAll("p")];
-
-  titles.forEach((p) => {
-    p.classList.contains("title") &&
-      (p.style.transform = "translate(-50%,-60%)");
-  });
-
-  const filename = "template-4.pdf";
-  html2canvas(pdf, {
-    dpi: 300, // Set to 300 DPI
-    scale: 2, // Adjusts your resolution
-  })
-    .then((canvas) => {
-      var img = canvas.toDataURL("image/jpeg", 1);
-      var doc = new jsPDF("p", "mm", "a4");
-      doc.addImage(img, "JPEG", -4, 0, 214, 298);
-      doc.save(filename);
-    })
-    .catch((err) => console.log(err));
-
-  titles.forEach((p) => {
-    p.classList.contains("title") &&
-      (p.style.transform = "translate(-50%,-50%)");
-  });
+function downloadImage(data, filename = 'untitled.jpeg') {
+  var a = document.createElement('a');
+  a.href = data;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
 }
+
 
 const ref = React.createRef();
 const Template04 = (props) => {
@@ -59,7 +41,7 @@ const Template04 = (props) => {
     personalInformation,
     memberships,
     skills,
-  } = props.Data;
+  } = useSelector((state) => state.template);
 
   let edus = null;
   if (educations.length > 0) {
@@ -76,24 +58,24 @@ const Template04 = (props) => {
       }
       return (
         <div
-          className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t04-edu ${props.language === "Ar" ? "ar" : ""}`}
           key={edu.id_}
         >
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t04-circle ${props.language === "Ar" ? "ar" : ""}`}
           ></div>
-          <p className="edu-title">
+          <p className="t04-edu-title">
             {degree} {edu.Faculty}
           </p>
-          <div className={`edu-content ${props.language === "Ar" ? "ar" : ""}`}>
-            <div className="edu-circle">
-              <div className="circle-dark"></div>
+          <div className={`t04-edu-content ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className="t04-edu-circle">
+              <div className="t04-circle-dark"></div>
             </div>
             <p>{edu.UniversityName}</p>
           </div>
-          <div className={`edu-content ${props.language === "Ar" ? "ar" : ""}`}>
-            <div className="edu-circle">
-              <div className="circle-dark"></div>
+          <div className={`t04-edu-content ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className="t04-edu-circle">
+              <div className="t04-circle-dark"></div>
             </div>
             <p>GPA: {edu.DegreeFrom5}</p>
           </div>
@@ -110,34 +92,34 @@ const Template04 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة الثانوية العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
         }
         return (
           <div
-            className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t04-edu ${props.language === "Ar" ? "ar" : ""}`}
             key={edu.id_}
           >
             <div
-              className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t04-circle ${props.language === "Ar" ? "ar" : ""}`}
             ></div>
-            <p className="edu-title">
-              {degreeAr} in {edu.Faculty}
+            <p className="t04-edu-title">
+              {`${degreeAr}\xa0في\xa0${edu.Faculty}`}
             </p>
             <div
-              className={`edu-content ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t04-edu-content ${props.language === "Ar" ? "ar" : ""}`}
             >
-              <div className="edu-circle">
-                <div className="circle-dark"></div>
+              <div className="t04-edu-circle">
+                <div className="t04-circle-dark"></div>
               </div>
-              <p>{edu.UniversityName}</p>
+              <p className='t04-edu-text'>{edu.UniversityName}</p>
             </div>
             <div
-              className={`edu-content ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t04-edu-content ${props.language === "Ar" ? "ar" : ""}`}
             >
-              <div className="edu-circle">
-                <div className="circle-dark"></div>
+              <div className="t04-edu-circle">
+                <div className="t04-circle-dark"></div>
               </div>
-              <p>المعدل التراكمي: {edu.DegreeFrom5}</p>
+              <p className='t04-edu-text'>{`المعدل\xa0التراكمي\xa0:\xa0${edu.DegreeFrom5}`}</p>
             </div>
           </div>
         );
@@ -150,14 +132,14 @@ const Template04 = (props) => {
     jobs = experiences.map((job) => {
       return (
         <div
-          className={`work ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t04-work ${props.language === "Ar" ? "ar" : ""}`}
           key={job.id_}
         >
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t04-circle ${props.language === "Ar" ? "ar" : ""}`}
           ></div>
-          <p>
-            {job.Name} - {job.Description} {job.Start}-{job.End}
+          <p className='t04-work-text'>
+            {`${job.Name}\xa0-\xa0${job.Description}\xa0${job.Start}-${job.End}`}
           </p>
         </div>
       );
@@ -179,13 +161,13 @@ const Template04 = (props) => {
     crses = courses.map((crs) => {
       return (
         <div
-          className={`course ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t04-course ${props.language === "Ar" ? "ar" : ""}`}
           key={crs.id_}
         >
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t04-circle ${props.language === "Ar" ? "ar" : ""}`}
           ></div>
-          <p>{crs.Name}</p>
+          <p className='t04-course-text'>{crs.Name}</p>
         </div>
       );
     });
@@ -196,20 +178,20 @@ const Template04 = (props) => {
     langs = languages.map((lang) => {
       let rate = [];
       for (let i = 0; i < lang.Rate; i++) {
-        rate.push(<div className="lang-circle" key={Math.random()}></div>);
+        rate.push(<div className="t04-lang-circle" key={Math.random()}></div>);
       }
       for (let i = 0; i < 6 - lang.Rate; i++) {
         rate.push(
-          <div className="lang-circle empty" key={Math.random()}></div>
+          <div className="t04-lang-circle t04-empty" key={Math.random()}></div>
         );
       }
 
       return (
-        <div className="lang" key={lang.id_}>
-          <div className="lang-name">
+        <div className="t04-lang" key={lang.id_}>
+          <div className="t04-lang-name">
             <p>{lang.Name}</p>
           </div>
-          <div className="lang-rate">{rate}</div>
+          <div className="t04-lang-rate">{rate}</div>
         </div>
       );
     });
@@ -220,13 +202,13 @@ const Template04 = (props) => {
     mems = memberships.map((member) => {
       return (
         <div
-          className={`part ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t04-part ${props.language === "Ar" ? "ar" : ""}`}
           key={member.id_}
         >
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t04-circle ${props.language === "Ar" ? "ar" : ""}`}
           ></div>
-          <p>{member.Name}</p>
+          <p className='t04-member-text'>{member.Name}</p>
         </div>
       );
     });
@@ -249,11 +231,11 @@ const Template04 = (props) => {
       let skillLogo = allSkills[skill.Name];
 
       return (
-        <div className="skill" key={skill.id_}>
-          <div className="skill-logo">
-            <img className={`skill-logo-${id + 1}`} src={skillLogo} alt="" />
+        <div className="t04-skill" key={skill.id_}>
+          <div className="t04-skill-logo">
+            <img className={`t04-skill-logo-${id + 1}`} src={skillLogo} alt="" />
           </div>
-          <div className="skill-name">
+          <div className="t04-skill-name">
             <p>{skill.Name}</p>
           </div>
         </div>
@@ -264,51 +246,51 @@ const Template04 = (props) => {
   // Left Section
   //#region - Career Objective Section
   let objectiveSection = (
-    <div className="sec objective-sec">
-      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
-        <p>{props.language === "Ar" ? "الهدف الوظيفي" : "Objective Career"}</p>
+    <div className={`t04-sec t04-objective-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t04-sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
+        <p>{props.language === "Ar" ? "الهدف\xa0الوظيفي" : "Objective Career"}</p>
       </div>
-      <div className="sec-body">
-        <p>{CO.Text}</p>
+      <div className="t04-sec-body">
+        <p className='t04-co-text'>{CO.Text}</p>
       </div>
     </div>
   );
   //#endregion
   //#region - Personal Info Section
   let commSection = (
-    <div className="sec comm-sec">
-      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t04-sec t04-comm-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t04-sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
         <p>{props.language === "Ar" ? "التواصل" : "Communication"}</p>
       </div>
-      <div className="sec-body">
-        <div className="comm">
-          <div className="comm-logo">
-            <div className="comm-logo-bg">
-              <img className="comm-logo-1" src={img_01} alt="" />
+      <div className="t04-sec-body">
+        <div className="t04-comm">
+          <div className="t04-comm-logo">
+            <div className="t04-comm-logo-bg">
+              <img className="t04-comm-logo-1" src={img_01} alt="" />
             </div>
           </div>
-          <div className={`comm-name ${props.language === "Ar" ? "ar" : ""}`}>
-            <p className="comm-name-1">{PI.Email}</p>
+          <div className={`t04-comm-name ${props.language === "Ar" ? "ar" : ""}`}>
+            <p className="t04-comm-name-1">{PI.Email}</p>
           </div>
         </div>
-        <div className="comm">
-          <div className="comm-logo">
-            <div className="comm-logo-bg">
-              <img className="comm-logo-2" src={img_02} alt="" />
+        <div className="t04-comm">
+          <div className="t04-comm-logo">
+            <div className="t04-comm-logo-bg">
+              <img className="t04-comm-logo-2" src={img_02} alt="" />
             </div>
           </div>
-          <div className={`comm-name ${props.language === "Ar" ? "ar" : ""}`}>
-            <p className="comm-name-2">{PI.Phone}</p>
+          <div className={`t04-comm-name ${props.language === "Ar" ? "ar" : ""}`}>
+            <p className="t04-comm-name-2">{PI.Phone}</p>
           </div>
         </div>
-        <div className="comm">
-          <div className="comm-logo">
-            <div className="comm-logo-bg">
-              <img className="comm-logo-3" src={img_03} alt="" />
+        <div className="t04-comm">
+          <div className="t04-comm-logo">
+            <div className="t04-comm-logo-bg">
+              <img className="t04-comm-logo-3" src={img_03} alt="" />
             </div>
           </div>
-          <div className={`comm-name ${props.language === "Ar" ? "ar" : ""}`}>
-            <p className="comm-name-3">
+          <div className={`t04-comm-name ${props.language === "Ar" ? "ar" : ""}`}>
+            <p className="t04-comm-name-3">
               {PI.Nationality} - {PI.City}
             </p>
           </div>
@@ -319,21 +301,21 @@ const Template04 = (props) => {
   //#endregion
   //#region - Personal Skills Section
   let skillsSection = (
-    <div className="sec skill-sec">
-      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t04-sec t04-skill-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t04-sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
         <p>{props.language === "Ar" ? "المهارات" : "Skills"}</p>
       </div>
-      <div className="sec-body">{skls}</div>
+      <div className="t04-sec-body">{skls}</div>
     </div>
   );
   //#endregion
   //#region - Languages Section
   let languagesSection = (
-    <div className="sec lang-sec">
-      <div className={`sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
+    <div className={`t04-sec t04-lang-sec ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`t04-sec-title bold ${props.language === "Ar" ? "ar" : ""}`}>
         <p>{props.language === "Ar" ? "اللغة" : "Languages"}</p>
       </div>
-      <div className="sec-body">{langs}</div>
+      <div className="t04-sec-body">{langs}</div>
     </div>
   );
   //#endregion
@@ -341,61 +323,61 @@ const Template04 = (props) => {
   // Right Section
   //#region - Education Section
   let eduSection = (
-    <div className="main-sec edu-sec">
-      <div className="main-sec-title">
-        <div className={`title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
-          <div className="title-front-bg"></div>
-          <p className="title bold">
-            {props.language === "Ar" ? "المؤهلات العلمية" : "Education"}
+    <div className={`t04-main-sec t04-edu-sec ${props.language==='Ar'?'ar':''}`}>
+      <div className="t04-main-sec-title">
+        <div className={`t04-title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className="t04-title-front-bg"></div>
+          <p className="t04-title bold">
+            {props.language === "Ar" ? "المؤهلات\xa0العلمية" : "Education"}
           </p>
         </div>
       </div>
-      <div className="main-sec-body edu-body">{edus}</div>
+      <div className="t04-main-sec-body t04-edu-body">{edus}</div>
     </div>
   );
   //#endregion
   //#region - Work Section
   let workSection = (
-    <div className="main-sec work-sec">
-      <div className="main-sec-title">
-        <div className={`title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
-          <div className="title-front-bg"></div>
-          <p className="title bold">
-            {props.language === "Ar" ? "الخبرات العملية" : "Work Experience"}
+    <div className={`t04-main-sec t04-work-sec ${props.language==='Ar'?'ar':''}`}>
+      <div className="t04-main-sec-title">
+        <div className={`t04-title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className="t04-title-front-bg"></div>
+          <p className="t04-title bold">
+            {props.language === "Ar" ? "الخبرات\xa0العملية" : "Work Experience"}
           </p>
         </div>
       </div>
-      <div className="main-sec-body">{jobs}</div>
+      <div className="t04-main-sec-body">{jobs}</div>
     </div>
   );
   //#endregion
   //#region - Courses Section
   let coursesSection = (
-    <div className="main-sec course-sec">
-      <div className="main-sec-title">
-        <div className={`title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
-          <div className="title-front-bg"></div>
-          <p className="title bold">
-            {props.language === "Ar" ? "الدورات التدريبية" : "Training Courses"}
+    <div className={`t04-main-sec t04-course-sec ${props.language==='Ar'?'ar':''}`}>
+      <div className="t04-main-sec-title">
+        <div className={`t04-title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className="t04-title-front-bg"></div>
+          <p className="t04-title bold">
+            {props.language === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
           </p>
         </div>
       </div>
-      <div className="main-sec-body">{crses}</div>
+      <div className="t04-main-sec-body">{crses}</div>
     </div>
   );
   //#endregion
   //#region - Memberships Section
   let membershipsSection = (
-    <div className="main-sec part-sec">
-      <div className="main-sec-title">
-        <div className="title-back-bg">
-          <div className="title-front-bg"></div>
-          <p className="title bold">
+    <div className={`t04-main-sec t04-part-sec ${props.language==='Ar'?'ar':''}`}>
+      <div className="t04-main-sec-title">
+        <div className={`t04-title-back-bg ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className="t04-title-front-bg"></div>
+          <p className="t04-title bold">
             {props.language === "Ar" ? "العضويات" : "Memberships"}
           </p>
         </div>
       </div>
-      <div className="main-sec-body">{mems}</div>
+      <div className="t04-main-sec-body">{mems}</div>
     </div>
   );
   //#endregion
@@ -431,10 +413,104 @@ const Template04 = (props) => {
     }
   }
 
+  function saveAs(type) {
+    const pdf = document.getElementById("toPDF");
+    const titles = [...pdf.querySelectorAll("p")];
+    const texts = [...pdf.querySelectorAll("p")];
+  
+    texts.forEach((p) => {
+      (!p.classList.contains("t04-co-text") &&  
+      !p.classList.contains("t04-edu-text"))  &&
+      (p.style.transform = "translateY(-40%)");
+    });
+    texts.forEach((p) => {
+      p.classList.contains("t04-edu-title") && 
+      (p.style.transform = "translateY(-80%)");
+    });
+    texts.forEach((p) => {
+      p.classList.contains("t04-edu-text") && 
+      (p.style.transform = "translateY(-30%)")
+    });
+    texts.forEach((p) => {
+      (
+      p.classList.contains("t04-work-text") || 
+      p.classList.contains("t04-course-text") || 
+      p.classList.contains("t04-member-text")) && 
+      (p.style.transform = "translateY(-80%)");
+  });
+
+    titles.forEach((p) => {
+      if(props.language==='Ar'){
+        p.classList.contains("t04-title") &&
+        (p.style.transform = "translate(50%,-80%)");
+      }else{
+        p.classList.contains("t04-title") &&
+        (p.style.transform = "translate(-50%,-80%)");
+      }
+    });
+  
+    html2canvas(pdf, {
+      dpi: 300, // Set to 300 DPI
+      scale: 2, // Adjusts your resolution
+    })
+      .then((canvas) => {
+        const filename = "template_4";
+        if(type==='PDF'){
+          var img = canvas.toDataURL("image/jpeg", 1);
+          var doc = new jsPDF("p", "mm", "a4");
+          doc.addImage(img, "JPEG", -4, 0, 214, 298);
+          doc.save(filename);
+        }
+        else if(type==='PNG'){
+          let imageURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+          downloadImage(imageURL, filename+'.png');
+        }
+        else {
+          let imageURL = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+          downloadImage(imageURL, filename+'.jpeg');
+        }
+      })
+      .catch((err) => console.log(err));
+  
+    texts.forEach((p) => {
+      !p.classList.contains("t04-co-text") && 
+      (p.style.transform = "translateY(0%)");
+    });
+    texts.forEach((p) => {
+      p.classList.contains("t04-edu-title") && 
+      (p.style.transform = "translateY(-50%)");
+    });
+    texts.forEach((p) => {
+      p.classList.contains("t04-edu-text") && 
+      (p.style.transform = "translateY(0%)");
+    });
+    texts.forEach((p) => {
+      (p.classList.contains("t04-work-text") || 
+      p.classList.contains("t04-course-text") || 
+      p.classList.contains("t04-member-text")) && 
+      (p.style.transform = "translateY(-50%)");
+    });
+
+    titles.forEach((p) => {
+      if(props.language==='Ar'){
+        p.classList.contains("t04-title") &&
+        (p.style.transform = "translate(50%,-50%)");
+      }
+      else{
+        p.classList.contains("t04-title") &&
+        (p.style.transform = "translate(-50%,-50%)");
+      }
+    });
+  }
+
   return (
     <>
-      <button onClick={print}>Export As pdf</button>
-      <div className="template04-page">
+      <div className="backgroundimg">
+        <div className='dl-ctrls'>
+          <button onClick={() => saveAs('PDF')}>Download as PDF</button>
+          <button onClick={() => saveAs('PNG')}>Download as PNG</button>
+          <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
+        </div>
         <div
           className={`template04-body ${props.language === "Ar" ? "ar" : ""}`}
           ref={ref}
@@ -442,64 +518,64 @@ const Template04 = (props) => {
         >
           {/*  Corners  */}
           <div
-            className={`top-right-back-corner ${
+            className={`t04-top-right-back-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`top-right-front-corner ${
+            className={`t04-top-right-front-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`top-left-back-corner ${
+            className={`t04-top-left-back-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`top-left-front-corner ${
+            className={`t04-top-left-front-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`bottom-right-back-corner ${
+            className={`t04-bottom-right-back-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`bottom-right-front-corner ${
+            className={`t04-bottom-right-front-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`bottom-left-back-corner ${
+            className={`t04-bottom-left-back-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
           <div
-            className={`bottom-left-front-corner ${
+            className={`t04-bottom-left-front-corner ${
               props.language === "Ar" ? "ar" : ""
             }`}
           ></div>
 
           {/* Personal Photo */}
-          <div className={`photo ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t04-photo ${props.language === "Ar" ? "ar" : ""}`}>
             <img src={img_00} alt="" />
           </div>
 
           {/* Name Section */}
-          <div className={`name-sec ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`t04-name-sec ${props.language === "Ar" ? "ar" : ""}`}>
             <h1>
-              {PI.FirstName} {PI.LastName}
+              {`${PI.FirstName}\xa0${PI.LastName}`}
             </h1>
             {/* <h2>Computer Science</h2> */}
           </div>
 
           {/* Main */}
-          <div className="main">
+          <div className="t04-main">
             <DragDropContext onDragEnd={handleOnDragEnd}>
               {/* Left */}
-              <div className={`left ${props.language === "Ar" ? "ar" : ""}`}>
+              <div className={`t04-left ${props.language === "Ar" ? "ar" : ""}`}>
                 <Droppable droppableId="droppable-left" type="Left">
                   {(provided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -529,7 +605,7 @@ const Template04 = (props) => {
               </div>
 
               {/* Right */}
-              <div className="right">
+              <div className="t04-right">
                 <Droppable droppableId="droppable-right" type="Right">
                   {(provided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>

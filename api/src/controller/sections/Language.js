@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Language = require('../../models/sections/Language');
+const func = require("../func");
 
 exports.addLanguage = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,10 +12,10 @@ exports.addLanguage = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     Name, NameAr, Rate, Order
                 } = req.body;
-
+                NameAr = func(NameAr);
                 const RateFrom10 = Rate * 2;
                 const RateFrom100 = Rate * 20;
 
@@ -29,14 +30,16 @@ exports.addLanguage = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Language added successfuly",
-                                    data: lan
+                                    status: 1,
+                                    Name, NameAr, Rate, RateFrom10, RateFrom100, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -74,7 +77,8 @@ exports.deleteLanguage = (req, res) => {
                                 }).then(() => {
                                     return res.status(200).json({
                                         msg: "language deleted",
-                                        data: tmpLanguages
+                                        status: 1,
+                                        tmpLanguages
                                     })
                                 })
                             })
@@ -85,7 +89,8 @@ exports.deleteLanguage = (req, res) => {
 }
 
 exports.updateLanguage = (req, res) => {
-    const { _id, Name, NameAr, Rate, Order } = req.body;
+    var { _id, Name, NameAr, Rate, Order } = req.body;
+    NameAr = func(NameAr);
     Language.findById(_id).exec((error, language) => {
         if (error) {
             return res.status(400).json({
@@ -109,21 +114,21 @@ exports.updateLanguage = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Language updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Rate,
-                            RateFrom10,
-                            RateFrom100,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Rate,
+                        RateFrom10,
+                        RateFrom100,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "No Language found",
             })
         }
@@ -151,20 +156,23 @@ exports.getLanguages = (req, res) => {
                         if (lan) {
                             return res.status(200).json({
                                 msg: "Langueges returned successfully",
+                                status: 1,
                                 data: lan
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -190,16 +198,16 @@ exports.hideLanguages = (req, res) => {
                         else msg = "Languages show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideLanguages
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideLanguages
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "CV Not Found"
                 })
             }
@@ -241,21 +249,29 @@ exports.copyLanguage = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Languages: languages } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Language Copied successfully",
-                                    data: newlanguage
+                                    status: 1,
+                                    Name: newlanguage.Name,
+                                    NameAr: newlanguage.NameAr,
+                                    Rate: newlanguage.Rate,
+                                    RateFrom10: newlanguage.RateFrom10,
+                                    RateFrom100: newlanguage.RateFrom100,
+                                    Order: newlanguage.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
-                            msg: "Language not found"
+                        return res.status(200).json({
+                            msg: "Language not found",
+                            status: 0,
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV not found"
+                return res.status(200).json({
+                    msg: "CV not found",
+                    status: 0,
                 })
             }
         })
@@ -282,6 +298,7 @@ exports.orderLanguages = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Language.find({ _id: { $in: cv.Languages } }).sort({ Order: 1 }).then((lan) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: lan
                                 })
                             })
@@ -298,6 +315,7 @@ exports.orderLanguages = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Language.find({ _id: { $in: cv.Languages } }).sort({ Order: 1 }).then((lan) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: lan
                                 })
                             })
@@ -308,8 +326,9 @@ exports.orderLanguages = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0,
             })
         }
     })

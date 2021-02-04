@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { jsPDF } from "jspdf";
+import { useSelector } from "react-redux";
+import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_07.css";
@@ -46,32 +47,50 @@ import img_38 from "../../assets/imgs/template_07/38.png";
 import img_39 from "../../assets/imgs/template_07/39.png";
 //#endregion
 
-function print() {
+function downloadImage(data, filename = 'untitled.jpeg') {
+  var a = document.createElement('a');
+  a.href = data;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+}
+
+function saveAs(type) {
   const pdf = document.getElementById("toPDF");
   const text = [...pdf.querySelectorAll("p")];
 
   text.map(
     (p) =>
-      !p.classList.contains("objective-text") &&
-      !p.classList.contains("info-text") &&
+      !p.classList.contains("t07-objective-text") &&
+      // !p.classList.contains("t07-info-text") &&
       (p.style.transform = "translateY(-30%)")
   );
   text.map(
     (p) =>
-      p.classList.contains("year-text") &&
+      p.classList.contains("t07-year-text") &&
       (p.style.transform = "translateY(-50%)")
   );
 
-  const filename = "template-7.pdf";
   html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
   })
     .then((canvas) => {
-      var img = canvas.toDataURL("image/jpeg", 1);
-      var doc = new jsPDF("p", "mm", "a4");
-      doc.addImage(img, "JPEG", -2, 0, 212, 298);
-      doc.save(filename);
+      const filename = "template_7";
+      if(type==='PDF'){
+        var img = canvas.toDataURL("image/jpeg", 1);
+        var doc = new jsPDF("p", "mm", "a4");
+        doc.addImage(img, "JPEG", -2, 0, 212, 298);
+        doc.save(filename);
+      }
+      else if(type==='PNG'){
+        let imageURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        downloadImage(imageURL, filename+'.png');
+      }
+      else {
+        let imageURL = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+        downloadImage(imageURL, filename+'.jpeg');
+      }
     })
     .catch((err) => console.log(err));
 
@@ -105,7 +124,7 @@ const Template07 = (props) => {
     careerobjective,
     personalInformation,
     skills,
-  } = props.Data;
+  } = useSelector((state) => state.template);
 
   let edus = null;
   if (educations.length > 0) {
@@ -131,24 +150,24 @@ const Template07 = (props) => {
 
       return (
         <div
-          className={`edu ${props.language === "Ar" ? "ar" : ""} `}
+          className={`t07-edu ${props.language === "Ar" ? "ar" : ""} `}
           key={edu.id_}
         >
-          <div className="edu-img">
+          <div className="t07-edu-img">
             <img src={img_17} alt="" />
           </div>
-          <div className="edu-circle">
-            <div className="circle"></div>
+          <div className="t07-edu-circle">
+            <div className="t07-circle"></div>
           </div>
-          <div className="edu-degree">
+          <div className="t07-edu-degree">
             <p>
               {degree} in {edu.Faculty}
             </p>
           </div>
-          <div className="edu-school">
+          <div className="t07-edu-school">
             <p>{edu.UniversityName}</p>
           </div>
-          <div className="edu-grade">
+          <div className="t07-edu-grade">
             <p>Grade: {grade}</p>
           </div>
         </div>
@@ -164,7 +183,7 @@ const Template07 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة الثانوية العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
         }
         let gradeAr = "";
         if (edu.Grade === 1) {
@@ -177,25 +196,25 @@ const Template07 = (props) => {
 
         return (
           <div
-            className={`edu ${props.language === "Ar" ? "ar" : ""} `}
+            className={`t07-edu ${props.language === "Ar" ? "ar" : ""} `}
             key={edu.id_}
           >
-            <div className="edu-img">
+            <div className="t07-edu-img">
               <img src={img_17} alt="" />
             </div>
-            <div className="edu-circle">
+            <div className="t07-edu-circle">
               <div className="circle"></div>
             </div>
-            <div className="edu-degree">
+            <div className="t07-edu-degree">
               <p>
-                {degreeAr} {edu.Faculty}
+                {`${degreeAr}\xa0${edu.Faculty}`}
               </p>
             </div>
-            <div className="edu-school">
+            <div className="t07-edu-school">
               <p>{edu.UniversityName}</p>
             </div>
-            <div className="edu-grade">
-              <p>التقدير: {gradeAr}</p>
+            <div className="t07-edu-grade">
+              <p>{`التقدير\xa0:\xa0${gradeAr}`}</p>
             </div>
           </div>
         );
@@ -210,14 +229,14 @@ const Template07 = (props) => {
     workRows = groupedArray.map((row, index) => {
       let works = row.map((job) => {
         return (
-          <div className="work" key={job.id_}>
-            <div className="work-year">
-              <p className="year-text">{`${job.Start} - ${job.End}`}</p>
+          <div className="t07-work" key={job.id_}>
+            <div className="t07-work-year">
+              <p className="t07-year-text">{`${job.Start} - ${job.End}`}</p>
             </div>
-            <div className="work-co">
+            <div className="t07-work-co">
               <p>{job.Description}</p>
             </div>
-            <div className="work-pos">
+            <div className="t07-work-pos">
               <p>{job.Name}</p>
             </div>
           </div>
@@ -225,7 +244,7 @@ const Template07 = (props) => {
       });
       // console.log("[works] ", works);
       return (
-        <div className="work-row" key={index}>
+        <div className="t07-work-row" key={index}>
           {works}
         </div>
       );
@@ -248,19 +267,19 @@ const Template07 = (props) => {
     crses = courses.map((crs) => {
       return (
         <div
-          className={`course ${props.language === "Ar" ? "ar" : ""} `}
+          className={`t07-course ${props.language === "Ar" ? "ar" : ""} `}
           key={crs.id_}
         >
-          <div className="course-bullet">
-            <div className="bullet">
-              <div className="dash"></div>
-              <div className="circle"></div>
+          <div className="t07-course-bullet">
+            <div className="t07-bullet">
+              <div className="t07-dash"></div>
+              <div className="t07-circle"></div>
             </div>
           </div>
-          <div className="course-name">
+          <div className="t07-course-name">
             <p>{crs.Name}</p>
           </div>
-          <div className="course-co">
+          <div className="t07-course-co">
             <p>{crs.Description}</p>
           </div>
         </div>
@@ -280,11 +299,11 @@ const Template07 = (props) => {
       }
 
       return (
-        <div className="lang" key={lang.id_}>
-          <div className="lang-name">
-            <p className="lang-text">{lang.Name}</p>
+        <div className="t07-lang" key={lang.id_}>
+          <div className="t07-lang-name">
+            <p className="t07-lang-text">{lang.Name}</p>
           </div>
-          <div className="lang-rate">{rate}</div>
+          <div className="t07-lang-rate">{rate}</div>
         </div>
       );
     });
@@ -306,13 +325,13 @@ const Template07 = (props) => {
     skls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
-        <div className="skill" key={skill.id_}>
-          <div className="skill-logo">
-            <div className="skill-logo-bg">
+        <div className="t07-skill" key={skill.id_}>
+          <div className="t07-skill-logo">
+            <div className="t07-skill-logo-bg">
               <img src={skillLogo} alt="" />
             </div>
           </div>
-          <div className="skill-name">
+          <div className="t07-skill-name">
             <p>{skill.Name}</p>
           </div>
         </div>
@@ -322,67 +341,67 @@ const Template07 = (props) => {
 
   //#region - Education + Work Section
   let expSection = (
-    <div className={`sec exp-sec ${props.language === "Ar" ? "ar" : ""} `}>
-      <div className="sec-logo edu-sec-logo">
+    <div className={`t07-sec t07-exp-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="t07-sec-logo t07-edu-sec-logo">
         <img src={img_09} alt="" />
       </div>
       <div
-        className={`sec-title edu-sec-title ${
+        className={`t07-sec-title t07-edu-sec-title ${
           props.language === "Ar" ? "ar" : ""
         } `}
       >
-        <div className="title">
-          <p>{props.language === "Ar" ? "المؤهلات العلمية" : "Education"}</p>
+        <div className="t07-title">
+          <p>{props.language === "Ar" ? "المؤهلات\xa0العلمية" : "Education"}</p>
         </div>
-        <div className="sec-arrow">
+        <div className="t07-sec-arrow">
           <img src={img_14} alt="arrow-down" />
         </div>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
-        <div className={`edu-body ${props.language === "Ar" ? "ar" : ""} `}>
-          <img className="edu-sec-img" src={img_16} alt="" />
+      <div className={`t07-sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className={`t07-edu-body ${props.language === "Ar" ? "ar" : ""} `}>
+          <img className="t07-edu-sec-img" src={img_16} alt="" />
           {edus}
         </div>
-        <div className="sec-half">
-          <div className="grey"></div>
-          <div className="dark-grey"></div>
-          <div className="grey"></div>
-          <div className="dark-grey"></div>
-          <div className="grey"></div>
-          <div className="dark-grey"></div>
-          <div className="grey"></div>
+        <div className="t07-sec-half">
+          <div className="t07-grey"></div>
+          <div className="t07-dark-grey"></div>
+          <div className="t07-grey"></div>
+          <div className="t07-dark-grey"></div>
+          <div className="t07-grey"></div>
+          <div className="t07-dark-grey"></div>
+          <div className="t07-grey"></div>
         </div>
         <div
-          className={`work-body ${props.language === "Ar" ? "ar" : ""} `}
+          className={`t07-work-body ${props.language === "Ar" ? "ar" : ""} `}
           id="workBody"
         >
           {experiences.length === 0 ? null : experiences.length === 1 ? (
-            <img className="work-sec-bg-img" src={img_35} alt="" />
+            <img className="t07-work-sec-bg-img" src={img_35} alt="" />
           ) : experiences.length === 2 ? (
-            <img className="work-sec-bg-img" src={img_36} alt="" />
+            <img className="t07-work-sec-bg-img" src={img_36} alt="" />
           ) : experiences.length === 3 ? (
-            <img className="work-sec-bg-img" src={img_37} alt="" />
+            <img className="t07-work-sec-bg-img" src={img_37} alt="" />
           ) : experiences.length === 4 ? (
-            <img className="work-sec-bg-img" src={img_38} alt="" />
+            <img className="t07-work-sec-bg-img" src={img_38} alt="" />
           ) : (
-            <img className="work-sec-bg-img" src={img_39} alt="" />
+            <img className="t07-work-sec-bg-img" src={img_39} alt="" />
           )}
-          <img className="work-sec-img" src={img_19} alt="" />
+          <img className="t07-work-sec-img" src={img_19} alt="" />
           {workRows}
         </div>
       </div>
-      <div className="sec-logo work-sec-logo">
+      <div className="t07-sec-logo t07-work-sec-logo">
         <img src={img_10} alt="" />
       </div>
       <div
-        className={`sec-title work-sec-title ${
+        className={`t07-sec-title t07-work-sec-title ${
           props.language === "Ar" ? "ar" : ""
         } `}
       >
-        <div className="title">
-          <p>{props.language === "Ar" ? "الخبرات العملية" : "Experience"}</p>
+        <div className="t07-title">
+          <p>{props.language === "Ar" ? "الخبرات\xa0العملية" : "Experience"}</p>
         </div>
-        <div className="sec-arrow">
+        <div className="t07-sec-arrow">
           <img src={img_15} alt="arrow-up" />
         </div>
       </div>
@@ -391,19 +410,19 @@ const Template07 = (props) => {
   //#endregion
   //#region - Languages Section
   let languagesSection = (
-    <div className={`sec lang-sec ${props.language === "Ar" ? "ar" : ""} `}>
-      <div className="sec-logo">
+    <div className={`t07-sec t07-lang-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="t07-sec-logo">
         <img src={img_13} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
-        <div className="title">
+      <div className={`t07-sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="t07-title">
           <p>{props.language === "Ar" ? "اللغات" : "Languages"}</p>
         </div>
-        <div className="sec-arrow">
+        <div className="t07-sec-arrow">
           <img src={img_14} alt="arrow-down" />
         </div>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className={`t07-sec-body ${props.language === "Ar" ? "ar" : ""} `}>
         {langs}
       </div>
     </div>
@@ -411,32 +430,32 @@ const Template07 = (props) => {
   //#endregion
   //#region - Courses Section
   let coursesSection = (
-    <div className={`sec course-sec ${props.language === "Ar" ? "ar" : ""} `}>
-      <div className="sec-logo">
+    <div className={`t07-sec t07-course-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="t07-sec-logo">
         <img src={img_11} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
-        <div className="title">
-          <p>{props.language === "Ar" ? "الدورات التدريبية" : "Courses"}</p>
+      <div className={`t07-sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="t07-title">
+          <p>{props.language === "Ar" ? "الدورات\xa0التدريبية" : "Courses"}</p>
         </div>
-        <div className="sec-arrow">
+        <div className="t07-sec-arrow">
           <img src={img_14} alt="arrow-down" />
         </div>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
-        <div className="sec-img">
+      <div className={`t07-sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="t07-sec-img">
           <img src={img_20} alt="" />
         </div>
-        <div className="sec-content">
+        <div className="t07-sec-content">
           {courses.length <= 5 ? (
             <img
-              className="course-sec-bg"
+              className="t07-course-sec-bg"
               src={img_33}
               alt=""
               style={{ width: "50%" }}
             />
           ) : (
-            <img className="course-sec-bg" src={img_32} alt="" />
+            <img className="t07-course-sec-bg" src={img_32} alt="" />
           )}
 
           {crses}
@@ -447,19 +466,19 @@ const Template07 = (props) => {
   //#endregion
   //#region - Skills Section
   let skillsSection = (
-    <div className={`sec skills-sec ${props.language === "Ar" ? "ar" : ""} `}>
-      <div className="sec-logo">
+    <div className={`t07-sec t07-skills-sec ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className="t07-sec-logo">
         <img src={img_12} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""} `}>
-        <div className="title">
+      <div className={`t07-sec-title ${props.language === "Ar" ? "ar" : ""} `}>
+        <div className="t07-title">
           <p>{props.language === "Ar" ? "المهارات" : "Skills"}</p>
         </div>
-        <div className="sec-arrow">
+        <div className="t07-sec-arrow">
           <img src={img_14} alt="arrow-down" />
         </div>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""} `}>
+      <div className={`t07-sec-body ${props.language === "Ar" ? "ar" : ""} `}>
         {skls}
       </div>
     </div>
@@ -488,101 +507,105 @@ const Template07 = (props) => {
 
   return (
     <>
-      <button onClick={print}>Export As pdf</button>
-      <div className="template07-page">
+      <div className="backgroundimg">
+        <div className='dl-ctrls'>
+          <button onClick={() => saveAs('PDF')}>Download as PDF</button>
+          <button onClick={() => saveAs('PNG')}>Download as PNG</button>
+          <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
+        </div>
         <div
           className={`template07-body ${props.language === "Ar" ? "ar" : ""} `}
           ref={ref}
           id="toPDF"
         >
           {/* Header Section */}
-          <div className={`header-sec ${props.language === "Ar" ? "ar" : ""} `}>
+          <div className={`t07-header-sec ${props.language === "Ar" ? "ar" : ""} `}>
             {/* Photo */}
-            <div className="photo">
-              <div className="photo-bg">
+            <div className="t07-photo">
+              <div className="t07-photo-bg">
                 <img src={img_00} alt="" />
               </div>
             </div>
 
             {/* Name */}
-            <div className="name">
+            <div className="t07-name">
               <p>
-                {PI.FirstName} {PI.LastName}
+                {`${PI.FirstName}\xa0${PI.LastName}`}
               </p>
             </div>
 
             {/* Details */}
-            <div className="details">
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
-                <div className="detail-logo">
-                  <img className="detail-logo-1" src={img_01} alt="" />
+            <div className="t07-details">
+              <div className={`t07-detail ${props.language === "Ar" ? "ar" : ""} `}>
+                <div className="t07-detail-logo">
+                  <img className="t07-detail-logo-1" src={img_01} alt="" />
                 </div>
-                <div className="detail-text">
-                  <p className="info-text">{PI.Email}</p>
-                </div>
-              </div>
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
-                <div className="detail-logo">
-                  <img className="detail-logo-2" src={img_02} alt="" />
-                </div>
-                <div className="detail-text">
-                  <p className="info-text">{PI.Birth}</p>
+                <div className="t07-detail-text">
+                  <p className="t07-info-text">{PI.Email}</p>
                 </div>
               </div>
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
-                <div className="detail-logo">
-                  <img className="detail-logo-3" src={img_03} alt="" />
+              <div className={`t07-detail ${props.language === "Ar" ? "ar" : ""} `}>
+                <div className="t07-detail-logo">
+                  <img className="t07-detail-logo-2" src={img_02} alt="" />
                 </div>
-                <div className="detail-text">
-                  <p className="info-text">{PI.Phone}</p>
-                </div>
-              </div>
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
-                <div className="detail-logo">
-                  <img className="detail-logo-4" src={img_04} alt="" />
-                </div>
-                <div className="detail-text">
-                  <p className="info-text">{PI.City}</p>
+                <div className="t07-detail-text">
+                  <p className="t07-info-text">{PI.Birth}</p>
                 </div>
               </div>
-              <div className={`detail ${props.language === "Ar" ? "ar" : ""} `}>
-                <div className="detail-logo">
-                  <img className="detail-logo-5" src={img_05} alt="" />
+              <div className={`t07-detail ${props.language === "Ar" ? "ar" : ""} `}>
+                <div className="t07-detail-logo">
+                  <img className="t07-detail-logo-3" src={img_03} alt="" />
                 </div>
-                <div className="detail-text">
-                  <p className="info-text">{PI.MaritalStatus}</p>
+                <div className="t07-detail-text">
+                  <p className="t07-info-text">{PI.Phone}</p>
+                </div>
+              </div>
+              <div className={`t07-detail ${props.language === "Ar" ? "ar" : ""} `}>
+                <div className="t07-detail-logo">
+                  <img className="t07-detail-logo-4" src={img_04} alt="" />
+                </div>
+                <div className="t07-detail-text">
+                  <p className="t07-info-text">{PI.City}</p>
+                </div>
+              </div>
+              <div className={`t07-detail ${props.language === "Ar" ? "ar" : ""} `}>
+                <div className="t07-detail-logo">
+                  <img className="t07-detail-logo-5" src={img_05} alt="" />
+                </div>
+                <div className="t07-detail-text">
+                  <p className="t07-info-text">{PI.MaritalStatus}</p>
                 </div>
               </div>
             </div>
 
             {/* Location */}
-            <div className="location">
-              <div className="loc-data">
-                <div className={`loc ${props.language === "Ar" ? "ar" : ""} `}>
-                  <div className="loc-icon">
-                    <img className="flag" src={img_06} alt="" />
+            <div className="t07-location">
+              <div className="t07-loc-data">
+                <div className={`t07-loc ${props.language === "Ar" ? "ar" : ""} `}>
+                  <div className="t07-loc-icon">
+                    <img className="t07-flag" src={img_06} alt="" />
                   </div>
-                  <div className="loc-text">
-                    <p className="info-text">{PI.Nationality}</p>
+                  <div className="t07-loc-text">
+                    <p className="t07-info-text">{PI.Nationality}</p>
                   </div>
                 </div>
               </div>
-              <img className="world" src={img_07} alt="" />
+              <img className="t07-world" src={img_07} alt="" />
             </div>
           </div>
 
           {/* Career Objective Section */}
-          <div className="objective-sec">
-            <div className="sec-logo">
+          <div className="t07-objective-sec">
+            <div className="t07-sec-logo">
               <img src={img_08} alt="" />
             </div>
-            <div className="sec-name">
+            <div className="t07-sec-name">
               <p className="bold">
-                {props.language === "Ar" ? "الهدف الوظيفي" : "Career Objective"}
+                {props.language === "Ar" ? "الهدف\xa0الوظيفي" : "Career Objective"}
               </p>
             </div>
-            <div className="sec-text">
-              <p className="objective-text bold">{CO.Text}</p>
+            <div className={`t07-sec-text ${props.language==='Ar'?'ar':''}`}>
+              <p className="t07-objective-text bold">{CO.Text}</p>
             </div>
           </div>
 
@@ -591,7 +614,7 @@ const Template07 = (props) => {
             <Droppable droppableId="droppable-main" type="Main">
               {(provided) => (
                 <div
-                  className="main-sec"
+                  className="t07-main-sec"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >

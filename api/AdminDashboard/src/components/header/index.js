@@ -39,6 +39,11 @@ const Header = () => {
                             <NavLink to='/listAllCVs' className='nav-link'>List All CVs</NavLink>
                         ) : <div></div>}
                     </li>
+                    <li className='nav-item'>
+                        {localStorage.getItem("logged") ? (
+                            <NavLink to='/signin' className='nav-link'>Log Out</NavLink>
+                        ) : <div></div>}
+                    </li>
                 </Nav >
             </Container>
         </Navbar >

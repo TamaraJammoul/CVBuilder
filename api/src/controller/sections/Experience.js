@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Experience = require('../../models/sections/Experience');
+const func = require("../func");
 
 exports.addExperience = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,9 +12,12 @@ exports.addExperience = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order
                 } = req.body;
+                NameAr = func(NameAr);
+                DescriptionAr = func(DescriptionAr);
+                ProjectAr = func(ProjectAr);
                 let experience = new Experience({
                     Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order
                 });
@@ -25,14 +29,17 @@ exports.addExperience = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Experience added successfuly",
-                                    data: exp
+                                    status: 1,
+                                    _id: exp._id,
+                                    Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -69,7 +76,8 @@ exports.deleteExperience = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "experience deleted",
-                                            data: tmpExperiences
+                                            status: 1,
+                                            tmpExperiences
                                         })
                                     })
                                 })
@@ -81,7 +89,10 @@ exports.deleteExperience = (req, res) => {
 }
 
 exports.updateExperience = (req, res) => {
-    const { _id, Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order } = req.body;
+    var { _id, Name, NameAr, Description, DescriptionAr, Start, End, Project, ProjectAr, Order } = req.body;
+    NameAr = func(NameAr);
+    DescriptionAr = func(DescriptionAr);
+    ProjectAr = func(ProjectAr);
     Experience.findById(_id).exec((error, experience) => {
         if (error) {
             return res.status(400).json({
@@ -106,25 +117,25 @@ exports.updateExperience = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Experience updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Description,
-                            DescriptionAr,
-                            Start,
-                            End,
-                            Project,
-                            ProjectAr,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Description,
+                        DescriptionAr,
+                        Start,
+                        End,
+                        Project,
+                        ProjectAr,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
                 msg: "No Experience found",
+                status: 0,
             })
         }
     })
@@ -151,20 +162,23 @@ exports.getExperiences = (req, res) => {
                         if (exp) {
                             return res.status(200).json({
                                 msg: "Experiences returned successfully",
+                                status: 1,
                                 data: exp
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -190,17 +204,17 @@ exports.hideExperiences = (req, res) => {
                         else msg = "Experiences show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideExperiences
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideExperiences
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0,
                 })
             }
         })
@@ -244,21 +258,32 @@ exports.copyExperience = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Experiences: experiences } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Experience Copied successfully",
-                                    data: newexperience
+                                    status: 1,
+                                    Name: newexperience.Name,
+                                    NameAr: newexperience.NameAr,
+                                    Description: newexperience.Description,
+                                    DescriptionAr: newexperience.DescriptionAr,
+                                    Start: newexperience.Start,
+                                    End: newexperience.End,
+                                    Project: newexperience.Project,
+                                    ProjectAr: newexperience.ProjectAr,
+                                    Orde: newexperience.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
-                            msg: "Expereince not found"
+                        return res.status(200).json({
+                            msg: "Expereince not found",
+                            status: 0,
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV not found"
+                return res.status(200).json({
+                    msg: "CV not found",
+                    status: 0,
                 })
             }
         })
@@ -285,6 +310,7 @@ exports.orderExperiences = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Experience.find({ _id: { $in: cv.Experiences } }).sort({ Order: 1 }).then((exp) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: exp
                                 })
                             })
@@ -301,6 +327,7 @@ exports.orderExperiences = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Experience.find({ _id: { $in: cv.Experiences } }).sort({ Order: 1 }).then((exp) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: exp
                                 })
                             })
@@ -312,7 +339,8 @@ exports.orderExperiences = (req, res) => {   ////  cv_id, oldOrder,newOrder
         }
         else {
             return res.status(200).json({
-                msg: "NO CV Found"
+                msg: "NO CV Found",
+                status: 0,
             })
         }
     })

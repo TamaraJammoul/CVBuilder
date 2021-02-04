@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Reference = require('../../models/sections/Reference');
+const func = require("../func");
 
 exports.addReference = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,7 +12,8 @@ exports.addReference = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, NameAr, Number, Order } = req.body;
+                var { Name, NameAr, Number, Order } = req.body;
+                NameAr = func(NameAr);
                 let reference = new Reference({ Name, NameAr, Number, Order });
                 reference.save()
                     .then((ref) => {
@@ -21,14 +23,16 @@ exports.addReference = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Reference added successfuly",
-                                    data: ref
+                                    status: 1,
+                                    Name, NameAr, Number, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -65,7 +69,8 @@ exports.deleteReference = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "Reference deleted",
-                                            data: tmpReference
+                                            status: 1,
+                                            tmpReference
                                         })
                                     })
                                 })
@@ -77,7 +82,8 @@ exports.deleteReference = (req, res) => {
 }
 
 exports.updateReference = (req, res) => {
-    const { _id, Name, NameAr, Number, Order } = req.body;
+    var { _id, Name, NameAr, Number, Order } = req.body;
+    NameAr = func(NameAr);
     Reference.findById(_id).exec((error, reference) => {
         if (error) {
             return res.status(400).json({
@@ -97,20 +103,20 @@ exports.updateReference = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Reference updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Number,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Number,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
                 msg: "No Reference found",
+                status: 0,
             })
         }
     })
@@ -137,19 +143,21 @@ exports.getReferences = (req, res) => {
                         if (ref) {
                             return res.status(200).json({
                                 msg: "References returned successfully",
+                                status: 1,
                                 data: ref
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
                     err
                 })
@@ -176,17 +184,17 @@ exports.hideReferences = (req, res) => {
                         else msg = "References show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideReferences
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideReferences
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0,
                 })
             }
         })
@@ -218,27 +226,32 @@ exports.copyReference = (req, res) => {
                             Name: reference.Name,
                             NameAr: reference.NameAr,
                             Number: reference.Number,
-                            Order: references.length + 1
+                            Order: reference.length + 1
                         })
                         references.push(newReference);
                         newReference.save().then((newreference) => {
                             CV.updateOne({ _id: _id }, { $set: { References: references } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Reference Copied successfully",
-                                    data: newreference
+                                    status: 1,
+                                    Name: newreference.Name,
+                                    NameAr: newreference.NameAr,
+                                    Number: newreference.Number,
+                                    Order: newreference.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
+                        return res.status(200).json({
+                            status: 0,
                             msg: "Reference not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "CV not found"
                 })
             }
@@ -266,6 +279,7 @@ exports.orderReferences = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Reference.find({ _id: { $in: cv.References } }).sort({ Order: 1 }).then((ref) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: ref
                                 })
                             })
@@ -282,6 +296,7 @@ exports.orderReferences = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Reference.find({ _id: { $in: cv.References } }).sort({ Order: 1 }).then((ref) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: ref
                                 })
                             })
@@ -292,8 +307,9 @@ exports.orderReferences = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0
             })
         }
     })

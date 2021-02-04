@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Certificate = require('../../models/sections/Certificate');
+const func = require("../func");
 
 exports.addCertificate = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,7 +12,9 @@ exports.addCertificate = (req, res) => {
                 })
             }
             if (cv) {
-                const { Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
+                var { Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
+                NameAr = func(NameAr);
+                DescriptionAr = func(DescriptionAr);
                 let certificate = new Certificate({
                     Name, NameAr, Description, DescriptionAr, Year, Order
                 });
@@ -22,14 +25,16 @@ exports.addCertificate = (req, res) => {
                         .then(() => {
                             return res.status(200).json({
                                 msg: "Certificates added successfuly",
-                                data: cert
+                                status: 1,
+                                Name, NameAr, Description, DescriptionAr, Year, Order
                             })
                         })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "No CV found"
+                return res.status(200).json({
+                    msg: "No CV found",
+                    status: 0,
                 })
             }
         })
@@ -67,7 +72,8 @@ exports.deleteCertificate = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "certificate deleted",
-                                            data: tmpCertificate
+                                            status: 1,
+                                            tmpCertificate
                                         })
                                     })
                                 })
@@ -79,8 +85,9 @@ exports.deleteCertificate = (req, res) => {
 }
 
 exports.updateCertificate = (req, res) => {
-    const { _id, Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
-
+    var { _id, Name, NameAr, Description, DescriptionAr, Year, Order } = req.body;
+    NameAr = func(NameAr);
+    DescriptionAr = func(DescriptionAr);
     Certificate.findById(_id).exec((error, certificate) => {
         if (error) {
             return res.status(400).json({
@@ -102,22 +109,22 @@ exports.updateCertificate = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Certificate updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Description,
-                            DescriptionAr,
-                            Year,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Description,
+                        DescriptionAr,
+                        Year,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
                 msg: "No Certificate found",
+                status: 0,
             })
         }
     })
@@ -144,20 +151,23 @@ exports.getCertificates = (req, res) => {
                         if (cert) {
                             return res.status(200).json({
                                 msg: "Certificates returned successfully",
+                                status: 1,
                                 data: cert
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -183,17 +193,17 @@ exports.hideCertificates = (req, res) => {
                         else msg = "Certificates show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideCertificates
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideCertificates
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0,
                 })
             }
         })
@@ -230,21 +240,29 @@ exports.copyCertificate = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Certificates: certificates } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Certificate Copied successfully",
-                                    data: newcertificate
+                                    status: 1,
+                                    Name: certificate.Name,
+                                    NameAr: certificate.NameAr,
+                                    Description: certificate.Description,
+                                    DescriptionAr: certificate.DescriptionAr,
+                                    Year: certificate.Year,
+                                    Order: certificate.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
-                            msg: "Certificate not found"
+                        return res.status(200).json({
+                            msg: "Certificate not found",
+                            status: 0,
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV not found"
+                return res.status(200).json({
+                    msg: "CV not found",
+                    status: 0,
                 })
             }
         })
@@ -271,6 +289,7 @@ exports.orderCertifcates = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Certificate.find({ _id: { $in: cv.Certificates } }).sort({ Order: 1 }).then((cert) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: cert
                                 })
                             })
@@ -287,6 +306,7 @@ exports.orderCertifcates = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Certificate.find({ _id: { $in: cv.Certificates } }).sort({ Order: 1 }).then((cert) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: cert
                                 })
                             })
@@ -297,7 +317,8 @@ exports.orderCertifcates = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "NO CV Found"
             })
         }

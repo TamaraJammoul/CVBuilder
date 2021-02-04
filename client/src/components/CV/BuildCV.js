@@ -33,6 +33,7 @@ import Certificates from "./certificate/Certificates";
 import AddCertificates from "./certificate/AddCertificate";
 import EditCertificates from "./certificate/EditCertificate";
 import Courses from "./courses/Courses";
+import Color from "./Color";
 import AddCourses from "./courses/AddCourses";
 import EditCourses from "./courses/EditCourses";
 import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
@@ -98,6 +99,19 @@ export default function BuildCV(props) {
                 </Link>
               </h4>
             </Grid>
+            {sections.color == 1 ? (
+              <Grid item className="nav">
+                <h4>
+                  {" "}
+                  <span style={{marginRight: "10px"}}>
+                    <Work />
+                  </span>
+                  <Link to={`${url}/color`}>{t("Resume Color")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+              ""
+            )}
             {sections.careerobjective == 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -290,6 +304,10 @@ export default function BuildCV(props) {
                     <Route
                       path={`${path}/edittechnicalskills`}
                       render={(props) => <EditTechnicalSkills />}
+                    />
+                    <Route
+                      path={`${path}/color`}
+                      render={(props) => <Color />}
                     />
                     <Route
                       path={`${path}/achievement`}

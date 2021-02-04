@@ -45,6 +45,14 @@ export default function reducer(state, action) {
         ...state,
         MyTemplates: action.payload,
       };
+    case "CVCOLOR":
+      return {
+        ...state,
+        sections: {
+          ...state.sections,
+          color: action.payload.color,
+        },
+      };
     case "AUTH":
       return {
         ...state,

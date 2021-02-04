@@ -1,5 +1,6 @@
 const CV = require('../../models/CV');
 const Memberships = require('../../models/sections/Memberships');
+const func = require("../func");
 
 exports.addMembership = (req, res) => {
     CV.findOne({ _id: req.body._id })
@@ -11,9 +12,10 @@ exports.addMembership = (req, res) => {
                 })
             }
             if (cv) {
-                const {
+                var {
                     Name, NameAr, Order
                 } = req.body;
+                NameAr = func(NameAr);
                 let membership = new Memberships({
                     Name, NameAr, Order
                 });
@@ -25,13 +27,15 @@ exports.addMembership = (req, res) => {
                             .then(() => {
                                 return res.status(200).json({
                                     msg: "Membership added successfuly",
-                                    data: mem
+                                    status: 1,
+                                    Name, NameAr, Order
                                 })
                             })
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "No CV found"
                 })
             }
@@ -69,7 +73,8 @@ exports.deleteMembership = (req, res) => {
                                     })).then(() => {
                                         return res.status(200).json({
                                             msg: "membership deleted",
-                                            data: tmpMemberships
+                                            status: 1,
+                                            tmpMemberships
                                         })
                                     })
                                 })
@@ -81,7 +86,8 @@ exports.deleteMembership = (req, res) => {
 }
 
 exports.updateMembership = (req, res) => {
-    const { _id, Name, NameAr, Order } = req.body;
+    var { _id, Name, NameAr, Order } = req.body;
+    NameAr = func(NameAr);
     Memberships.findById(_id).exec((error, membership) => {
         if (error) {
             return res.status(400).json({
@@ -100,18 +106,18 @@ exports.updateMembership = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Membership updated successfully",
-                        data: {
-                            _id,
-                            Name,
-                            NameAr,
-                            Order
-                        }
+                        status: 1,
+                        _id,
+                        Name,
+                        NameAr,
+                        Order
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
+                status: 0,
                 msg: "No Membership found",
             })
         }
@@ -139,20 +145,23 @@ exports.getMemberships = (req, res) => {
                         if (mem) {
                             return res.status(200).json({
                                 msg: "Memberships returned successfully",
+                                status: 1,
                                 data: mem
                             })
                         }
                         else {
-                            return res.status(0).json({
+                            return res.status(200).json({
                                 msg: "No CV Found",
+                                status: 0,
                                 err
                             })
                         }
                     })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No CV Found",
+                    status: 0,
                     err
                 })
             }
@@ -178,16 +187,16 @@ exports.hideMemberships = (req, res) => {
                         else msg = "Memberships show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideMemberships
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideMemberships
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
+                    status: 0,
                     msg: "CV Not Found"
                 })
             }
@@ -226,20 +235,24 @@ exports.copyMembership = (req, res) => {
                             CV.updateOne({ _id: _id }, { $set: { Memberships: memberships } }).then(() => {
                                 return res.status(200).json({
                                     msg: "Membership Copied successfully",
-                                    data: newmembership
+                                    status: 1,
+                                    Name: newmembership.Name,
+                                    NameAr: newmembership.NameAr,
+                                    Order: newmembership.Order
                                 })
                             })
                         })
                     }
                     else {
-                        return res.status(0).json({
+                        return res.status(200).json({
+                            status: 0,
                             msg: "Membership not found"
                         })
                     }
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "CV not found"
                 })
             }
@@ -267,6 +280,7 @@ exports.orderMemberships = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Memberships.find({ _id: { $in: cv.Memberships } }).sort({ Order: 1 }).then((mem) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: mem
                                 })
                             })
@@ -283,6 +297,7 @@ exports.orderMemberships = (req, res) => {   ////  cv_id, oldOrder,newOrder
                         Memberships.find({ _id: { $in: cv.Memberships } }).sort({ Order: 1 }).then((mem) => {
                             CV.updateOne({ _id: req.body._id }, { $set: { EditedDate: Date.now() } }).then(() => {
                                 return res.status(200).json({
+                                    status: 1,
                                     data: mem
                                 })
                             })
@@ -293,8 +308,9 @@ exports.orderMemberships = (req, res) => {   ////  cv_id, oldOrder,newOrder
 
         }
         else {
-            return res.status(0).json({
-                msg: "NO CV Found"
+            return res.status(200).json({
+                msg: "NO CV Found",
+                status: 0
             })
         }
     })

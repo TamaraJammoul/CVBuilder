@@ -33,6 +33,7 @@ exports.contactUs = (req, res) => {
         }
         console.log("Message sent: %s", info.messageId);
         return res.status(200).json({
+            status: 1,
             msg: "Email has been sent"
         });
     });

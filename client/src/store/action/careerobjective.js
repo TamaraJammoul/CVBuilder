@@ -15,7 +15,7 @@ export function EditCareerObjectiveAction(payload) {
         if (res.status == 200 && res.data.status != 0)
           dispatch({
             type: EDITCAREEROBJECTIVE,
-            payload: res.data.data,
+            payload,
           });
         else
           dispatch({

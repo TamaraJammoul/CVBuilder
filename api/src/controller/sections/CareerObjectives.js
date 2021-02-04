@@ -1,8 +1,10 @@
 const CV = require('../../models/CV');
 const CareerObjectives = require('../../models/sections/CareerObjectives');
+const func = require("../func");
 
 exports.updateCareer = (req, res) => {
-    const { _id, Text, TextAr } = req.body;
+    var { _id, Text, TextAr } = req.body;
+    TextAr = func(TextAr);
     CareerObjectives.findById(_id).exec((error, careerObjectives) => {
         if (error) {
             return res.status(400).json({
@@ -20,18 +22,18 @@ exports.updateCareer = (req, res) => {
                 CV.updateOne({ _id: req.body.cvID }, { $set: { EditedDate: Date.now() } }).then(() => {
                     return res.status(200).json({
                         msg: "Career Objectives updated successfully",
-                        data: {
-                            _id,
-                            Text,
-                            TextAr
-                        }
+                        status: 1,
+                        _id,
+                        Text,
+                        TextAr
                     })
                 })
             })
         }
         else {
-            return res.status(0).json({
+            return res.status(200).json({
                 msg: "No Career Objectives found",
+                status: 0,
             })
         }
     })
@@ -49,12 +51,14 @@ exports.getCareer = (req, res) => {
             if (career) {
                 return res.status(200).json({
                     msg: "Career Objectives returned successfully",
+                    status: 1,
                     career
                 })
             }
             else {
-                return res.status(0).json({
+                return res.status(200).json({
                     msg: "No Career Objectives Found",
+                    status: 0,
                 })
             }
         })
@@ -79,17 +83,17 @@ exports.hideCareer = (req, res) => {
                         else msg = "Career show successfully";
                         return res.status(200).json({
                             msg,
-                            data: {
-                                cv_id: req.body._id,
-                                hidden: hidden.HideCareerObjectives
-                            }
+                            status: 1,
+                            cv_id: req.body._id,
+                            hidden: hidden.HideCareerObjectives
                         })
                     })
                 })
             }
             else {
-                return res.status(0).json({
-                    msg: "CV Not Found"
+                return res.status(200).json({
+                    msg: "CV Not Found",
+                    status: 0,
                 })
             }
         })
