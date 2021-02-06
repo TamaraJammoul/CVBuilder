@@ -167,7 +167,7 @@ export default function Membership() {
               )}
             </Droppable>
           </DragDropContext>
-          {memberships < membershiplen ? (
+          {/* {memberships < membershiplen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addmembership">
@@ -181,9 +181,9 @@ export default function Membership() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

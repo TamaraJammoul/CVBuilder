@@ -15,7 +15,6 @@ import {
 } from "./../../../store/action/careerobjective";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
-import ReactHtmlParser from "react-html-parser";
 
 export default function CareerObjectives() {
   const lan = useSelector((state) => state.sections.twolan);
@@ -74,7 +73,7 @@ export default function CareerObjectives() {
             </Grid>{" "}
           </Grid>
           <Grid item xs={12}>
-            <h5>{ReactHtmlParser(text)}</h5>
+            <h5>{text}</h5>
           </Grid>
           <Grid item xs={12} style={{width: "100%"}}>
             {" "}
@@ -84,7 +83,7 @@ export default function CareerObjectives() {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
-              onChange={(e) => setTextAr(e.target.value)}
+              onChange={(e) => setText(e.target.value)}
             />
           </Grid>
           <Grid
@@ -99,7 +98,7 @@ export default function CareerObjectives() {
               variant="filled"
               color="primary"
               style={{width: "100%"}}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => setTextAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

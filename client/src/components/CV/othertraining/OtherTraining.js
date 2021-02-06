@@ -177,7 +177,7 @@ export default function OtherTraining(props) {
               )}
             </Droppable>
           </DragDropContext>
-          {othertraining < othertraininglen ? (
+          {/* {othertraining < othertraininglen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="addothertraining">
@@ -191,9 +191,9 @@ export default function OtherTraining(props) {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

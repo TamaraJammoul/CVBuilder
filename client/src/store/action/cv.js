@@ -127,7 +127,7 @@ export function CVTemplate1(payload) {
 }
 
 export function cvColor(payload) {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch({
       type: CVCOLOR,
       payload,

@@ -195,7 +195,7 @@ export default function Education() {
               )}
             </Droppable>
           </DragDropContext>
-          {educations.length < educationlen ? (
+          {/* {educations.length < educationlen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addeducation">
@@ -209,9 +209,9 @@ export default function Education() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

@@ -141,7 +141,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.certificares == 1 ? (
+            {sections.certificates == 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}

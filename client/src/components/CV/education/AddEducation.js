@@ -161,9 +161,9 @@ export default function AddEducation(props) {
               >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={2}>3</MenuItem>
-                <MenuItem value={2}>4</MenuItem>
-                <MenuItem value={2}>5</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -199,8 +199,8 @@ export default function AddEducation(props) {
               >
                 <MenuItem value={1}>{t("Bachelor")}</MenuItem>
                 <MenuItem value={2}>{t("Master")}</MenuItem>
-                <MenuItem value={2}>{t("PhD")}</MenuItem>
-                <MenuItem value={2}>{t("High school")}</MenuItem>
+                <MenuItem value={3}>{t("PhD")}</MenuItem>
+                <MenuItem value={4}>{t("High school")}</MenuItem>
               </Select>
             </FormControl>
           </Grid>

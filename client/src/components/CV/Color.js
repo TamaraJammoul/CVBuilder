@@ -27,23 +27,22 @@ export default function CVColor() {
           <h2 className="fontlan">{t("Resume Color")}</h2>
         </Grid>
         <Grid item>
-          <Grid container alignItems="Center" spacing={8}>
+          <Paper>
+          <Grid container alignItems="center" spacing={8}>
             <Grid item xs={6}>
               <Paper
                 elevation={3}
                 onClick={() => {
                   dispatch(cvColor({color: 1}));
                 }}
+                style={{ borderRadius:'50%', width: '100px', height: '100px', margin: '30px'}}
               >
                 <Grid
                   container
                   alignItems="center"
                   direction="column"
-                  style={{padding: "20px"}}
+                  style={{padding: "20px", borderRadius:'50%', backgroundColor: '#893a4c', width: '100px', height: '100px'}}
                 >
-                  <Grid item>
-                    <h4>English</h4>
-                  </Grid>
                 </Grid>
               </Paper>
             </Grid>
@@ -53,20 +52,19 @@ export default function CVColor() {
                 onClick={() => {
                   dispatch(cvColor({color: 0}));
                 }}
+                style={{borderRadius:'50%', width: '100px', height: '100px', margin: '30px'}}
               >
                 <Grid
                   container
                   alignItems="center"
                   direction="column"
-                  style={{padding: "20px"}}
+                  style={{padding: "20px", borderRadius:'50%', backgroundColor: '#669696', width: '100px', height: '100px'}}
                 >
-                  <Grid item>
-                    <h4>العربية</h4>
-                  </Grid>
                 </Grid>
               </Paper>
             </Grid>
           </Grid>
+          </Paper>
         </Grid>
       </Grid>
     </Container>

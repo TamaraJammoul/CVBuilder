@@ -217,7 +217,7 @@ export default function TechnicalSkills() {
               )}
             </Droppable>
           </DragDropContext>
-          {technicalskills < technicalskilllen ? (
+          {/* {technicalskills < technicalskilllen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addtechnicalskills">
@@ -231,9 +231,9 @@ export default function TechnicalSkills() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

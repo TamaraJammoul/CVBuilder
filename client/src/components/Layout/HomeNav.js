@@ -70,7 +70,9 @@ function HomeNav(props) {
               aria-expanded="false"
             >
               <img
-                src={i18n.language == "en" ? us : ar}
+                src={
+                  i18n.language == "en" || i18n.language == "en-US" ? us : ar
+                }
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>

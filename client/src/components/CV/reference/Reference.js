@@ -114,7 +114,7 @@ export default function Refernce() {
               </Paper>
             </Grid>
           ))}
-          {references < referenclen ? (
+          {/* {references < referenclen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addreference">
@@ -128,9 +128,9 @@ export default function Refernce() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

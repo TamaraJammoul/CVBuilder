@@ -178,7 +178,7 @@ export default function Certificates() {
               )}
             </Droppable>
           </DragDropContext>
-          {certificates.length < certificateslen ? (
+          {/* {certificates.length < certificateslen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addcertificate">
@@ -191,9 +191,9 @@ export default function Certificates() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

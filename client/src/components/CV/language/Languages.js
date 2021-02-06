@@ -202,7 +202,7 @@ export default function Languages() {
               )}
             </Droppable>
           </DragDropContext>
-          {languages < languagelen ? (
+          {/* {languages < languagelen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="addlanguage">
@@ -216,9 +216,9 @@ export default function Languages() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

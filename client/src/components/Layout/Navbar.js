@@ -29,17 +29,17 @@ function Navbar(props) {
   const cvTemplate = useSelector((state) => state.cvTemplate);
 
   const preview = () => {
-    if (cvTemplate === "cv1") history.push("/template03");
-    if (cvTemplate === "cv2") history.push("/template03");
-    if (cvTemplate === "cv3") history.push("/template03");
+    if (cvTemplate === "cv1") history.push("/template06");
+    if (cvTemplate === "cv2") history.push("/template05");
+    if (cvTemplate === "cv3") history.push("/template01");
     if (cvTemplate === "cv4") history.push("/template03");
-    if (cvTemplate === "cv5") history.push("/template03");
-    if (cvTemplate === "cv6") history.push("/template03");
-    if (cvTemplate === "cv7") history.push("/template03");
-    if (cvTemplate === "cv8") history.push("/template03");
-    if (cvTemplate === "cv9") history.push("/template03");
-    if (cvTemplate === "cv10") history.push("/template03");
-    if (cvTemplate === "cv11") history.push("/template03");
+    if (cvTemplate === "cv5") history.push("/template02");
+    if (cvTemplate === "cv6") history.push("/template07");
+    if (cvTemplate === "cv7") history.push("/template04");
+    if (cvTemplate === "cv8") history.push("/template09");
+    if (cvTemplate === "cv9") history.push("/template11");
+    if (cvTemplate === "cv10") history.push("/template08");
+    if (cvTemplate === "cv11") history.push("/template10");
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
@@ -86,7 +86,7 @@ function Navbar(props) {
               aria-expanded="false"
             >
               <img
-                src={i18n.language == "en" ? us : ar}
+                src={i18n.language == "en" ||i18n.language=="en-US"? us : ar}
                 style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
               />
             </a>

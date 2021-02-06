@@ -160,7 +160,7 @@ export default function Courses() {
               )}
             </Droppable>
           </DragDropContext>
-          {courses.length < courseslen ? (
+          {/* {courses.length < courseslen ? ( */}
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addcourses">
@@ -174,9 +174,9 @@ export default function Courses() {
                 </Button>
               </Link>
             </Grid>
-          ) : (
+          {/* ) : (
             ""
-          )}
+          )} */}
         </Grid>
       </Container>
     </Paper>

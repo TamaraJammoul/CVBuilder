@@ -38,11 +38,13 @@ export default function Skills() {
   const addSkill = (t) => {
     var b = true;
     skills.map((e) => (e == t ? (b = false) : ""));
+    setname(t);
     if (b == true) {
       skills.push(t);
-    } else skills = skills.filter((e) => e != t);
-    setname(t);
-    console.log(skills);
+    } else {
+      skills = skills.filter((e) => e != t);
+      console.log("lm;", skills);
+    }
   };
   const setname = (t) => {
     if (t == "ComputerProficiency")
