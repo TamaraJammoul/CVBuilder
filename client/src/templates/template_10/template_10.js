@@ -252,11 +252,11 @@ const Template10 = (props) => {
   }
 
   const allSkills = {
-    MS1: img_12,
-    MS2: img_13,
-    MS3: img_14,
-    MS4: img_15,
-    MS5: img_16,
+    'Computer Proficiency': img_12,
+    'Office Programs': img_13,
+    'TeamWork': img_14,
+    'Problem solving': img_15,
+    'Self Development': img_16,
   };
   let skls = null;
   let arSkls = null;

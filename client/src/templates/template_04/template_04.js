@@ -215,15 +215,15 @@ const Template04 = (props) => {
   }
 
   const allSkills = {
-    MS1: img_04,
-    MS2: img_05,
-    MS3: img_06,
-    MS4: img_07,
-    MS5: img_08,
-    MS6: img_09,
-    MS7: img_10,
-    MS8: img_11,
-    MS9: img_12,
+    'Time Managment': img_04,
+    'Computer Proficiency': img_05,
+    'Leadership and Organisation': img_06,
+    'Work under pressure': img_07,
+    'MS5': img_08,
+    'Problem solving': img_09,
+    'Self Development': img_10,
+    'Office Programs': img_11,
+    'TeamWork': img_12,
   };
   let skls = null;
   if (skills.length > 0) {
