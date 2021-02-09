@@ -17,7 +17,7 @@ import ic8 from "./../../img/ic8.png";
 import ic9 from "./../../img/ic9.png";
 
 export default function Skills() {
-  var skills = useSelector((state) => state.template.skills);
+  let skills = useSelector((state) => state.template.skills);
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
@@ -41,22 +41,25 @@ export default function Skills() {
     setname(t);
     if (b == true) {
       skills.push(t);
+      console.log(skills);
     } else {
-      skills = skills.filter((e) => e != t);
+      var j = 0;
+      skills.map((e, i) => (e == t ? (j = i) : ""));
+      skills.splice(j, 1);
       console.log("lm;", skills);
     }
   };
   const setname = (t) => {
-    if (t == "ComputerProficiency")
+    if (t == "Computer Proficiency")
       setComputerProficiency(!ComputerProficiency);
-    if (t == "LeadershipandOrganisation")
+    if (t == "Leadership and Organisation")
       setLeadershipandOrganisation(!LeadershipandOrganisation);
     if (t == "TeamWork") setTeamWork(!TeamWork);
-    if (t == "SelfDevelopment") setSelfDevelopment(!SelfDevelopment);
-    if (t == "Problemsolving") setProblemsolving1(!Problemsolving);
-    if (t == "Workunderpressure") setWorkunderpressure(!Workunderpressure);
-    if (t == "TimeManagment") setTimeManagment(!TimeManagment);
-    if (t == "OfficePrograms") setOfficePrograms(!OfficePrograms);
+    if (t == "Self Development") setSelfDevelopment(!SelfDevelopment);
+    if (t == "Problem solving") setProblemsolving1(!Problemsolving);
+    if (t == "Work under pressure") setWorkunderpressure(!Workunderpressure);
+    if (t == "Time Managment") setTimeManagment(!TimeManagment);
+    if (t == "Office Programs") setOfficePrograms(!OfficePrograms);
   };
   return (
     <Paper>
@@ -85,7 +88,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("OfficePrograms")}
+              onClick={() => addSkill("Office Programs")}
             >
               <img src={ic6} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
@@ -101,7 +104,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("TimeManagment")}
+              onClick={() => addSkill("Time Managment")}
             >
               <img src={ic1} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
@@ -117,7 +120,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Workunderpressure")}
+              onClick={() => addSkill("Work under pressure")}
             >
               <img src={icon} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
@@ -133,7 +136,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("Problemsolving")}
+              onClick={() => addSkill("Problem solving")}
             >
               <img src={ic7} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
@@ -149,7 +152,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("SelfDevelopment")}
+              onClick={() => addSkill("Self Development")}
             >
               <img src={ic4} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
@@ -176,7 +179,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("LeadershipandOrganisation")}
+              onClick={() => addSkill("Leadership and Organisation")}
             >
               <img src={ic3} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>
@@ -192,7 +195,7 @@ export default function Skills() {
               color="primary"
               aria-label="upload picture"
               component="span"
-              onClick={() => addSkill("ComputerProficiency")}
+              onClick={() => addSkill("Computer Proficiency")}
             >
               <img src={ic8} className="imgskill" style={{width: "80px"}} />{" "}
             </IconButton>

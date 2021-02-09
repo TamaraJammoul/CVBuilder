@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, Avatar, TextField} from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import {useTranslation} from "react-i18next";
@@ -12,7 +12,7 @@ import {PeraonalInfoAction} from "./../../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 export default function PersonalInfo() {
   const {t, i18n} = useTranslation();
-  let formData = new FormData();
+  var formData = new FormData();
   const dispatch = useDispatch();
   const id = useSelector((state) => state.personalInformation_id);
 
@@ -26,10 +26,8 @@ export default function PersonalInfo() {
   const [nationality, setNationality] = useState("");
   const [maritalStatus, setMaritalStatus] = useState(1);
   const [phone, setPhone] = useState(0);
-
   const send = () => {
     formData.append("_id", id);
-
     formData.append("FirstName", firstName);
     formData.append("LastName", lastName);
     formData.append("LinkedIn", linkedIn);
@@ -40,7 +38,6 @@ export default function PersonalInfo() {
     formData.append("Country", country);
     formData.append("Nationality", nationality);
     formData.append("MaritalStatus", maritalStatus);
-
     dispatch(PeraonalInfoAction({formData}));
   };
   return (
