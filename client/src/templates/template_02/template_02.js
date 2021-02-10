@@ -93,6 +93,7 @@ const Template02 = (props) => {
     personalInformation,
     skills,
   } = useSelector((state) => state.template);
+  const cvLanguage = useSelector((state) => state.cvLanguage);
 
   let edus = null;
   if (educations.length > 0) {
@@ -109,22 +110,22 @@ const Template02 = (props) => {
       }
       return (
         <div
-          className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+          className={`edu ${cvLanguage === "Ar" ? "ar" : ""}`}
           key={edu.id_}
         >
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
           <p className="edu-title bold">{degree}</p>
           <p>{edu.UniversityName}</p>
           <p>GPA: {edu.DegreeFrom5} out of 5</p>
-          <div className={`edu-year ${props.language === "Ar" ? "ar" : ""}`}>
+          <div className={`edu-year ${cvLanguage === "Ar" ? "ar" : ""}`}>
             <p className="year">{edu.YearEnd}</p>
           </div>
         </div>
       );
     });
-    if (props.language === "Ar") {
+    if (cvLanguage === "Ar") {
       edus = educations.map((edu) => {
         let degreeAr = "";
         if (edu.Degree === 1) {
@@ -138,16 +139,16 @@ const Template02 = (props) => {
         }
         return (
           <div
-            className={`edu ${props.language === "Ar" ? "ar" : ""}`}
+            className={`edu ${cvLanguage === "Ar" ? "ar" : ""}`}
             key={edu.id_}
           >
             <div
-              className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+              className={`circle ${cvLanguage === "Ar" ? "ar" : ""}`}
             ></div>
             <p className="edu-title bold">{degreeAr}</p>
             <p>{edu.UniversityName}</p>
             <p>المعدل\xa0:\xa0{edu.DegreeFrom5}\xa0من\xa05</p>
-            <div className={`edu-year ${props.language === "Ar" ? "ar" : ""}`}>
+            <div className={`edu-year ${cvLanguage === "Ar" ? "ar" : ""}`}>
               <p className="year">{edu.YearEnd}</p>
             </div>
           </div>
@@ -167,7 +168,7 @@ const Template02 = (props) => {
       return (
         <div className="work" key={job.id_}>
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
           <p>{job.Description}</p>
         </div>
@@ -186,7 +187,7 @@ const Template02 = (props) => {
       return (
         <div className="course" key={crs.id_}>
           <div
-            className={`circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
           <p>{crs.Name}</p>
         </div>
@@ -225,15 +226,15 @@ const Template02 = (props) => {
   //#region - Education Section
   let eduSection = (
     <div className="sec edu-sec">
-      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-1" src={img_09} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "المؤهلات\xa0العلمية" : "Education"}
+          {cvLanguage === "Ar" ? "المؤهلات\xa0العلمية" : "Education"}
         </p>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-body ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <div className="sec-body-content">{edus}</div>
         <div className="sec-body-img">
           <img src={img_13} alt="" />
@@ -245,15 +246,15 @@ const Template02 = (props) => {
   //#region - Work Section
   let workSection = (
     <div className="sec work-sec">
-      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-2" src={img_10} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "الخبرات\xa0العملية" : "Work Experience"}
+          {cvLanguage === "Ar" ? "الخبرات\xa0العملية" : "Work Experience"}
         </p>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-body ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <div className="sec-body-content">{jobs}</div>
         <div className="sec-body-img">
           <img src={img_14} alt="" />
@@ -265,15 +266,15 @@ const Template02 = (props) => {
   //#region - Courses Section
   let coursesSection = (
     <div className="sec course-sec">
-      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-3" src={img_11} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
+          {cvLanguage === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
         </p>
       </div>
-      <div className={`sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-body ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <div className="sec-body-content">{crses}</div>
         <div className="sec-body-img">
           <img src={img_15} alt="" />
@@ -285,15 +286,15 @@ const Template02 = (props) => {
   //#region - Skills Section
   let skillsSection = (
     <div className="sec skills-sec">
-      <div className={`sec-icon-bg ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-4" src={img_12} alt="" />
       </div>
-      <div className={`sec-title ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className="title bold">
-          {props.language === "Ar" ? "المهارات" : "Skills"}
+          {cvLanguage === "Ar" ? "المهارات" : "Skills"}
         </p>
       </div>
-      <div className={`skill-sec-body ${props.language === "Ar" ? "ar" : ""}`}>
+      <div className={`skill-sec-body ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <div className="flex-container">{skls}</div>
       </div>
     </div>
@@ -329,7 +330,7 @@ const Template02 = (props) => {
           <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
         </div>
         <div
-          className={`template02-body ${props.language === "Ar" ? "ar" : ""} `}
+          className={`template02-body ${cvLanguage === "Ar" ? "ar" : ""} `}
           ref={ref}
           id="toPDF"
         >
@@ -344,7 +345,7 @@ const Template02 = (props) => {
           <div className="info-sec">
             <div className="main-photo">
               <img
-                className={`photo ${props.language === "Ar" ? "ar" : ""} `}
+                className={`photo ${cvLanguage === "Ar" ? "ar" : ""} `}
                 src={photo}
                 alt=""
               />
@@ -408,7 +409,7 @@ const Template02 = (props) => {
           <div className="intro-sec">
             <div className="intro-body">
               <img src={img_08} alt="" />
-              <div className={`intro-content ${props.language==='Ar'?'ar':''}`}>
+              <div className={`intro-content ${cvLanguage==='Ar'?'ar':''}`}>
                 <p className="objective-text bold">{CO.Text}</p>
               </div>
             </div>

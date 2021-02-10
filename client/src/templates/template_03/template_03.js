@@ -48,6 +48,7 @@ const Template03 = (props) => {
     skills,
     technicalskills,
   } = useSelector((state) => state.template);
+  const cvColor = useSelector((state) => state.sections.color);
 
   const colorStyle ={
     darkRed: "#893a4c",
@@ -81,10 +82,10 @@ const Template03 = (props) => {
         <div className="t03-edu" key={edu.id_}>
           <div
             className={`t03-circle ${props.language === "Ar" ? "ar" : ""}`}
-            style={{backgroundColor: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
+            style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
           ></div>
           <p className="t03-edu-title"
-             style={{color: props.Color===1 ? `${colorStyle.lightRed}` : `${colorStyle.lightGreen}`}}>
+             style={{color: cvColor===1 ? `${colorStyle.lightRed}` : `${colorStyle.lightGreen}`}}>
                {degree}
           </p>
           <div className="t03-edu-text">
@@ -124,10 +125,10 @@ const Template03 = (props) => {
           <div className="t03-edu" key={edu.id_}>
             <div
               className={`t03-circle ${props.language === "Ar" ? "ar" : ""}`}
-              style={{backgroundColor: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
+              style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
             ></div>
             <p className="t03-edu-title"
-               style={{color: props.Color===1 ? `${colorStyle.lightRed}` : `${colorStyle.lightGreen}`}}>
+               style={{color: cvColor===1 ? `${colorStyle.lightRed}` : `${colorStyle.lightGreen}`}}>
               {degreeAr}
             </p>
             <div className="t03-edu-text">
@@ -151,7 +152,7 @@ const Template03 = (props) => {
         <div className="t03-work" key={job.id_}>
           <div
             className={`t03-circle ${props.language === "Ar" ? "ar" : ""}`}
-            style={{backgroundColor: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
+            style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
           ></div>
           <p className="t03-work-title">{job.Name}</p>
           <div className="t03-work-text">
@@ -193,7 +194,7 @@ const Template03 = (props) => {
         >
           <div className="t03-circle-container">
             <div className="t03-circle"
-            style={{backgroundColor: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
+            style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t03-course-text">
             <p>{crs.Name}</p>
@@ -218,7 +219,7 @@ const Template03 = (props) => {
             <div className="t03-bar-container">
               <div
                 className={`t03-bar bar-${id + 1}`}
-                style={{ width: `${tskill.Rate}%`, backgroundColor: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}` }}
+                style={{ width: `${tskill.Rate}%`, backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}` }}
               ></div>
             </div>
           </div>
@@ -245,7 +246,7 @@ const Template03 = (props) => {
           >
             <div
               className={`t03-full-lang-${id + 1}`}
-              style={{ width: `${lang.RateFrom100}%`, backgroundColor: props.Color===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}` }}
+              style={{ width: `${lang.RateFrom100}%`, backgroundColor: cvColor===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}` }}
               
             ></div>
           </div>
@@ -264,7 +265,7 @@ const Template03 = (props) => {
         >
           <div className="t03-circle-container">
             <div className="t03-circle"
-            style={{backgroundColor: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
+            style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t03-p-skill-text">
             <p>{skill.Name}</p>
@@ -278,13 +279,13 @@ const Template03 = (props) => {
   //#region - Education Section
   let eduSection = (
     <div className="t03-sec t03-edu-sec">
-      {props.Color===1
+      {cvColor===1
       ?(<img src={img_05_red} alt="" />)
       :(<img src={img_05} alt="" />)
       }
       <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
-           style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+           style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
           {props.language === "Ar" ? "التعليم" : "Education"}
         </h2>
         {edus}
@@ -295,13 +296,13 @@ const Template03 = (props) => {
   //#region - Work Section
   let workSection = (
     <div className="t03-sec t03-work-sec">
-      {props.Color===1
+      {cvColor===1
       ?(<img src={img_06_red} alt="" />)
       :(<img src={img_06} alt="" />)
       }
       <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
-            style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+            style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
           {props.language === "Ar" ? "الخبرات" : "Work Experience"}
         </h2>
         {jobs}
@@ -312,7 +313,7 @@ const Template03 = (props) => {
   //#region - Courses Section
   let coursesSection = (
     <div className="t03-sec t03-courses-sec">
-      {props.Color===1
+      {cvColor===1
       ?(<img 
         className={`${props.language === "Ar" ? "ar" : ""}`}
         src={img_07_red} 
@@ -326,7 +327,7 @@ const Template03 = (props) => {
       }
       <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
-            style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+            style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
           {props.language === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
         </h2>
         {crses}
@@ -339,13 +340,13 @@ const Template03 = (props) => {
   //#region - Personal Skills Section
   let personalSkillsSection = (
     <div className="t03-sec t03-personal-skills-sec">
-      {props.Color===1
+      {cvColor===1
         ?(<img src={img_08_red} alt="" />)
         :(<img src={img_08} alt="" />)
       }
       <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
-            style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+            style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
           {props.language === "Ar" ? "المهارات\xa0الشخصية" : "Personal Skills"}
         </h2>
         {skls}
@@ -356,13 +357,13 @@ const Template03 = (props) => {
   //#region - Technical Skills Section
   let technicalSkillsSection = (
     <div className="t03-sec t03-tech-skills-sec">
-      {props.Color===1
+      {cvColor===1
         ?(<img src={img_09_red} alt="" />)
         :(<img src={img_09} alt="" />)
       }
       <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
-            style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+            style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
           {props.language === "Ar" ? "المهارات\xa0التقنية" : "Technical Skills"}
         </h2>
         {tSkills}
@@ -374,7 +375,7 @@ const Template03 = (props) => {
   let languagesSection = (
     <div className="t03-languages-sec t03-sec">
       <div className="t03-languages-title">
-        <h2 className='bold' style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+        <h2 className='bold' style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
           {props.language === "Ar" ? "اللغات" : "Languages"}
         </h2>
       </div>
@@ -517,7 +518,7 @@ const Template03 = (props) => {
           id="toPDF"
         >
           <div className={`t03-cv-tag ${props.language === "Ar" ? "ar" : ""}`}
-              style={{backgroundColor: props.Color===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}`}}>
+              style={{backgroundColor: cvColor===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}`}}>
             <p className="bold">
               {props.language === "Ar" ? "السيرة\xa0 الذاتية" : "CV"}
             </p>
@@ -525,13 +526,13 @@ const Template03 = (props) => {
 
           {/* Photo Section */}
           <div className={`t03-photo ${props.language === "Ar" ? "ar" : ""}`}
-              style={{borderColor: props.Color===1 ? '#893a4c': '#356767'}}>
+              style={{borderColor: cvColor===1 ? '#893a4c': '#356767'}}>
             <img src={photo} alt="" />
           </div>
 
           {/* Name Section */}
           <div className="t03-name-sec">
-            <h1 style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+            <h1 style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
               {`${PI.FirstName}\xa0 ${PI.LastName}`}
             </h1>
           </div>
@@ -540,7 +541,7 @@ const Template03 = (props) => {
           <div className="t03-info-sec">
             <div className="t03-info-details">
               <div className="t03-detail">
-                {props.Color===1 ? (<img
+                {cvColor===1 ? (<img
                   className={`t03-detail-img-1 ${props.language === "Ar" ? "ar" : ""}`}
                   src={img_01_red}
                   alt=""
@@ -550,12 +551,12 @@ const Template03 = (props) => {
                   alt=""
                 />)}
                 <div className="t03-detail-p-1"
-                      style={{backgroundColor: props.Color===1 ? '#2d2d49' : '#7d9d97' }}>
+                      style={{backgroundColor: cvColor===1 ? '#2d2d49' : '#7d9d97' }}>
                   <p className="t03-detail-text">{PI.Phone} </p>
                 </div>
               </div>
               <div className="t03-detail">
-              {props.Color===1?
+              {cvColor===1?
                 (<img
                   className={`t03-detail-img-2 ${
                     props.language === "Ar" ? "ar" : ""
@@ -571,12 +572,12 @@ const Template03 = (props) => {
                   alt=""
                 />)}
                 <div className="t03-detail-p-2"
-                    style={{backgroundColor: props.Color===1 ? '#4d364a' : '#7d929d' }}>
+                    style={{backgroundColor: cvColor===1 ? '#4d364a' : '#7d929d' }}>
                   <p className="t03-detail-text">{PI.Email}</p>
                 </div>
               </div>
               <div className="t03-detail">
-              {props.Color===1?
+              {cvColor===1?
                 (<img
                   className={`t03-detail-img-3 ${
                     props.language === "Ar" ? "ar" : ""
@@ -592,7 +593,7 @@ const Template03 = (props) => {
                   alt=""
                 />)}
                 <div className="t03-detail-p-3"
-                    style={{backgroundColor: props.Color===1 ? '#843d4b' : '#518699' }}>
+                    style={{backgroundColor: cvColor===1 ? '#843d4b' : '#518699' }}>
                   {props.language==='Ar' ?
                     (<p className="t03-detail-text">
                       {`${PI.NationalityAr}\xa0/\xa0${PI.CityAr}`}
@@ -605,7 +606,7 @@ const Template03 = (props) => {
                 </div>
               </div>
               <div className="t03-detail">
-              {props.Color===1?
+              {cvColor===1?
                 (<img
                   className={`t03-detail-img-4 ${
                     props.language === "Ar" ? "ar" : ""
@@ -621,14 +622,14 @@ const Template03 = (props) => {
                   alt=""
                 />)}
                 <div className="t03-detail-p-4"
-                style={{backgroundColor: props.Color===1 ? '#4d364a' : '#7d9d97' }}>
+                style={{backgroundColor: cvColor===1 ? '#4d364a' : '#7d9d97' }}>
                   <p className="t03-detail-text">{PI.Birth}</p>
                 </div>
               </div>
             </div>
             <div className="t03-info-desc">
               <p className="t03-info-desc-title"
-                  style={{color: props.Color===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
+                  style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
                 {props.language === "Ar" ? "الهدف\xa0الوظيفي" : "Career Objective"}
               </p>
               <p className="t03-info-desc-text">{CO.Text}</p>

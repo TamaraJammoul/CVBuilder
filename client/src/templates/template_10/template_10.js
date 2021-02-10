@@ -576,7 +576,6 @@ const Template10 = (props) => {
             <Droppable droppableId="droppable-main" type="Main">
               {(provided) => (
                 <div
-                  className={`t10-main ${props.language === "Ar" ? "ar" : ""} `}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >

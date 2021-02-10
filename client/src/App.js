@@ -39,11 +39,9 @@ import Template09 from "./templates/template_09/template_09";
 import Template10 from "./templates/template_10/template_10";
 import Template11 from "./templates/template_11/template_11";
 
-const Data = {};
 function App(props) {
   const [loading, setLoading] = useState(true);
   const {t, i18n} = useTranslation();
-  const language = "Ar";
 
   useEffect(() => {
     AOS.init();
@@ -77,67 +75,67 @@ function App(props) {
               <Route
                 path="/template01"
                 render={(props) => (
-                  <Template01 Data={Data} language={language} />
+                  <Template01 />
                 )}
               />
               <Route
                 path="/template02"
                 render={(props) => (
-                  <Template02 Data={Data} language={language} />
+                  <Template02 />
                 )}
               />
               <Route
                 path="/template03"
                 render={(props) => (
-                  <Template03 Data={Data} language={language} />
+                  <Template03 />
                 )}
               />
               <Route
                 path="/template04"
                 render={(props) => (
-                  <Template04 Data={Data} language={language} />
+                  <Template04 />
                 )}
               />
               <Route
                 path="/template05"
                 render={(props) => (
-                  <Template05 Data={Data} language={language} />
+                  <Template05 />
                 )}
               />
               <Route
                 path="/template06"
                 render={(props) => (
-                  <Template06 Data={Data} language={language} />
+                  <Template06 />
                 )}
               />
               <Route
                 path="/template07"
                 render={(props) => (
-                  <Template07 Data={Data} language={language} />
+                  <Template07 />
                 )}
               />
               <Route
                 path="/template08"
                 render={(props) => (
-                  <Template08 Data={Data} language={language} />
+                  <Template08 />
                 )}
               />
               <Route
                 path="/template09"
                 render={(props) => (
-                  <Template09 Data={Data} language={language} />
+                  <Template09 />
                 )}
               />
               <Route
                 path="/template10"
                 render={(props) => (
-                  <Template10 Data={Data} language={language} />
+                  <Template10 />
                 )}
               />
               <Route
                 path="/template11"
                 render={(props) => (
-                  <Template11 Data={Data} language={language} />
+                  <Template11 />
                 )}
               />
 
