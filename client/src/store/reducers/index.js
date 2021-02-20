@@ -7,6 +7,7 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           careerObjectives_id: action.payload.careerObjectives_id,
+          personalInformation_id:action.payload.personalInformation_id
         },
       };
     case "DELETECV":

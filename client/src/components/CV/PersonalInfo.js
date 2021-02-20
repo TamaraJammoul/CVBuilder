@@ -40,7 +40,7 @@ export default function PersonalInfo() {
     formData.append("Country", country);
     formData.append("Nationality", nationality);
     formData.append("MaritalStatus", maritalStatus);
-    dispatch(PeraonalInfoAction({formData}));
+    dispatch(PeraonalInfoAction(formData));
   };
   return (
     <Paper

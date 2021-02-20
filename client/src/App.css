@@ -172,6 +172,10 @@ a:active {
     .fontlan{
       font-size: large;
     }
+    .templateImg{
+      width:100px;
+      height: 100px;
+    }
 }
 @media only screen and (max-width: 370px) {
   

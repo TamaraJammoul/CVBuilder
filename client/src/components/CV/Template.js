@@ -24,10 +24,11 @@ export default function Template(props) {
           direction="column"
           spacing={3}
         >
-          <Grid item>
+          <Grid item xs={12}>
             <Avatar
               alt="Remy Sharp"
               src={image}
+              className="avatar"
               style={{ width: "200px", height: "200px" }}
             />
           </Grid>
