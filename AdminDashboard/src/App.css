@@ -1,0 +1,102 @@
+:root {
+    --maincolor: #2E0E33;
+    --thirdcolor:#543059;
+    --fourthcolor:#543059;
+    --fifthcolor:#5B2338 ;
+   --background: #f6f6f8;
+}
+
+
+body {
+font-family: 'Rubik', sans-serif;
+scroll-behavior: smooth;
+}
+
+h1,h2,h3,h4,h5,h6{color: var(--maincolor);}
+.gridwidth{
+  max-width: 100% !important;
+}
+
+.save{
+  background-color: #5B2338 !important;
+}
+.save:hover{
+  background-color: white !important;
+  border-color: #5B2338  !important;
+}
+.cancel{
+  background-color: white !important;
+  border-color: #5B2338  !important;
+}
+.cancel:hover{
+  background-color: #5B2338  !important;
+  border-color: white !important;
+}
+
+a:link {
+  color:var(--maincolor);
+}
+
+a:visited {
+  color:var(--maincolor);
+}
+a:hover {
+  color:var(--seccolor);
+}
+
+a:active {
+  color:var(--seccolor);
+}
+.nav1{
+  float: right !important;
+}
+.icon{
+  color: var(--fifthcolor);
+}
+.background{
+    background-color: rgba(91, 35, 56, 0.7);
+}
+.textField{
+    width:270px !important
+  }
+  .login{
+    width:100%;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+@media only screen and (max-width: 600px) {
+   .textField{
+      width: 200px !important;
+   }  
+  .signupImage{
+      width: 350px !important;
+  }
+    .login{
+    height: 500px;
+
+    }
+    .login h1,.signup h1{
+      font-size: large;
+    }
+   .button{
+     width:80px !important
+   }
+   
+  h3{
+      font-size: 30px !important;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    h1,h2,h4,h5{
+      font-size: small;
+    }
+    h3{
+      font-size: 40px;
+    }
+   .avatar{
+  width: 100px !important;
+  height: 100px !important;
+  }
+}
