@@ -40,7 +40,7 @@ export default function Dashboard() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Button
-                  className="save"
+                  className="save shadow"
                   onClick={() => {
                     dispatch(AddCVAction({email}));
                     setTimeout(() => {

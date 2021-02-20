@@ -149,7 +149,12 @@ a:active {
       width:20px!important
     }
 }
-
+.skillsBackground{
+  background-color: #342e35;
+}
+.MuiGrid-spacing-xs-6{
+  margin: 0% !important;
+}
 @media only screen and (max-width: 700px) {
     h1,h2,h4,h5{
       font-size: small;

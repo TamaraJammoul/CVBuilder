@@ -82,7 +82,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={OfficePrograms == true ? "bg-light" : ""}
+            className={OfficePrograms == true ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -98,7 +98,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={TimeManagment == 1 ? "bg-light" : ""}
+            className={TimeManagment == 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -114,7 +114,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={Workunderpressure == 1 ? "bg-light" : ""}
+            className={Workunderpressure == 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -130,7 +130,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={Problemsolving == 1 ? "bg-light" : ""}
+            className={Problemsolving == 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -146,7 +146,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={SelfDevelopment == 1 ? "bg-light" : ""}
+            className={SelfDevelopment == 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -158,7 +158,7 @@ export default function Skills() {
             </IconButton>
             <h6>{t("Self Development")}</h6>
           </Grid>
-          <Grid item xs={6} sm={3} className={TeamWork == 1 ? "bg-light" : ""}>
+          <Grid item xs={6} sm={3} className={TeamWork == 1 ? "skillsBackground" : ""}>
             <IconButton
               color="primary"
               aria-label="upload picture"
@@ -173,7 +173,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={LeadershipandOrganisation == 1 ? "bg-light" : ""}
+            className={LeadershipandOrganisation == 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -189,7 +189,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={ComputerProficiency == 1 ? "bg-light" : ""}
+            className={ComputerProficiency == 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -206,7 +206,6 @@ export default function Skills() {
             <Button
               variant="contained"
               className="save"
-              startIcon={<DeleteIcon />}
               onClick={() => dispatch(AddSkillAction({ skills, cvID }))}
             >
               {t("AddSkill")}

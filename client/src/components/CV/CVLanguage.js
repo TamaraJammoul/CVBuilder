@@ -31,7 +31,7 @@ export default function CVLanguage() {
           <Grid item>
             <h2 className="fontlan">{t("Resume language")}</h2>
           </Grid>
-          <Grid item style={{width: "600px"}}>
+          <Grid item style={{width: "600px"}} >
             <Grid container alignItems="Center" spacing={8}>
               <Grid item xs={6}>
                 <Paper

@@ -1,20 +1,21 @@
-import React ,{useEffect}from "react";
-import {Container, Paper, Grid, IconButton, Avatar} from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Container, Paper, Grid, IconButton, Avatar } from "@material-ui/core";
 import image from "./../../img/cv1.jpg";
-import {Delete, Edit} from "@material-ui/icons";
-import {Link} from "react-router-dom";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {DeleteCVAction, EditCVAction} from "./../../store/action/cv";
+import { Delete, Edit } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { DeleteCVAction, EditCVAction } from "./../../store/action/cv";
 export default function Template(props) {
   const dispatch = useDispatch();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const email = useSelector((state) => state.email);
   useEffect(() => {
     console.log(props)
   }, [])
   return (
-    <Paper>
+    <Paper className="shadow"
+    >
       <Container>
         <Grid
           container
@@ -27,7 +28,7 @@ export default function Template(props) {
             <Avatar
               alt="Remy Sharp"
               src={image}
-              style={{width: "150px", height: "150px"}}
+              style={{ width: "200px", height: "200px" }}
             />
           </Grid>
           <Grid item>
@@ -56,24 +57,24 @@ export default function Template(props) {
                 <Link
                   to="/buildcv/peronalinfo"
                   onClick={() =>
-                    dispatch(EditCVAction({cvID: props.template._id}))
+                    dispatch(EditCVAction({ cvID: props.template._id }))
                   }
                 >
                   {" "}
                   <IconButton aria-label="delete">
-                    <Edit style={{color: "rgba(69, 35, 73, 0.9)"}} />
+                    <Edit style={{ color: "rgba(69, 35, 73, 0.9)" }} />
                   </IconButton>
                 </Link>
               </Grid>
               <Grid item xs={1}>
                 <IconButton
                   aria-label="delete"
-                  onClick={() =>{
-                    console.log(props.template._id,email)
-                    dispatch(DeleteCVAction({cvID: props.template._id, email}))
+                  onClick={() => {
+                    console.log(props.template._id, email)
+                    dispatch(DeleteCVAction({ cvID: props.template._id, email }))
                   }}
                 >
-                  <Delete style={{color: "#606060"}} />
+                  <Delete style={{ color: "#606060" }} />
                 </IconButton>
               </Grid>
             </Grid>{" "}
@@ -83,4 +84,3 @@ export default function Template(props) {
     </Paper>
   );
 }
- 
