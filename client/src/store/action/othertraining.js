@@ -11,7 +11,7 @@ import axios from "axios";
 export function AddOtherTrainingAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/othertraining/addOtherTraining`, {
+      .post(`http://we4cv.com/api/othertraining/addOtherTraining`, {
         Name: payload.otherTraining,
         Order: payload.order,
         _id: payload.cvID,
@@ -38,7 +38,7 @@ export function CopyOtherTrainingAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/otherTraining/copyOtherTraining`, {
+      .post(`http://we4cv.com/api/otherTraining/copyOtherTraining`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -63,7 +63,7 @@ export function DeleteOtherTrainingAction(payload) {
   console.log(payload, "ooo");
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/otherTraining/deleteOtherTraining`, {
+      .post(`http://we4cv.com/api/otherTraining/deleteOtherTraining`, {
         otherTraining_id: payload.otherTraining_id,
         _id: payload.cvID,
       })
@@ -87,7 +87,7 @@ export function DeleteOtherTrainingAction(payload) {
 export function EditOtherTrainingAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/otherTraining/updateOtherTraining`, {
+      .post(`http://we4cv.com/api/otherTraining/updateOtherTraining`, {
         Name: payload.otherTraining,
         Order: payload.order,
         _id: payload.id,
@@ -113,7 +113,7 @@ export function EditOtherTrainingAction(payload) {
 export function HideOtherTrainingAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/otherTraining/hideOtherTrainings`, {
+      .post(`http://we4cv.com/api/otherTraining/hideOtherTrainings`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -137,7 +137,7 @@ export function HideOtherTrainingAction(payload) {
 export function OrderOtherTrainingAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/OtherTraining/orderOtherTrainings`, {
+      .post(`http://we4cv.com/api/OtherTraining/orderOtherTrainings`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

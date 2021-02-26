@@ -1,5 +1,15 @@
 export default function reducer(state, action) {
   switch (action.type) {
+    case "FETCHCVID":
+      return {
+        ...state,
+        cvID: localStorage.getItem('cv_id'),
+        template:{
+          ...state.template,
+          careerObjectives_id:localStorage.getItem('careerObjectives_id'),
+          personalInformation_id:localStorage.getItem('personalInformation_id')
+        }
+      };
     case "ADDCV":
       return {
         ...state,

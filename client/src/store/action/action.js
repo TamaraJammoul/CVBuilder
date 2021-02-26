@@ -11,7 +11,7 @@ import axios from "axios";
 export function ContactusAction(payload) {
   return async (dispatch) => {
     await axios
-      .post(` http://localhost:5000/api/contactUs`, {
+      .post(`http://we4cv.com/api/contactUs`, {
         Email: payload.email,
         Number: payload.number,
         Message: payload.message,
@@ -42,7 +42,7 @@ export function ChangeLanguge(payload) {
 export function GetAllCVAction(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/CV/getAllCV`, {Email: payload.email})
+      .post(`http://we4cv.com/api/CV/getAllCV`, {Email: payload.email})
       .then((res) => {
         console.log(res);
         if (res.status == 200 && res.data.status != 0)
@@ -68,7 +68,7 @@ export function PeraonalInfoAction(payload) {
   return async (dispatch) => {
     await axios({
       method: "post",
-      url: `http://localhost:5000/api/personalInformation/updatePersonalInformation`,
+      url: `http://we4cv.com/api/personalInformation/updatePersonalInformation`,
       data: payload,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -94,7 +94,7 @@ export function PeraonalInfoAction(payload) {
 export function ResetPasswordLink(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/auth/resetPasswordLink`, {Email: payload.email})
+      .post(`http://we4cv.com/api/auth/resetPasswordLink`, {Email: payload.email})
       .then((res) => {
         console.log(res);
         if (res.status == 200 && res.data.status != 0)
@@ -112,7 +112,7 @@ export function ResetPasswordLink(payload) {
 export function ResetPassword(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/auth/resetPassword`, {Email: payload.email,Password:payload.password})
+      .post(`http://we4cv.com/api/auth/resetPassword`, {Email: payload.email,Password:payload.password})
       .then((res) => {
         console.log(res);
         if (res.status == 200 && res.data.status != 0)

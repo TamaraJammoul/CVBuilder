@@ -12,7 +12,7 @@ export function AddEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/addEducation`, {
+      .post(`http://we4cv.com/api/education/addEducation`, {
         UniversityName: payload.universityName,
         Faculty: payload.faculty,
         YearStart: payload.startDate,
@@ -46,7 +46,7 @@ export function CopyEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/copyEducation`, {
+      .post(`http://we4cv.com/api/education/copyEducation`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -71,7 +71,7 @@ export function DeleteEducationAction(payload) {
   console.log(payload);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/education/deleteEducation`, {
+      .post(`http://we4cv.com/api/education/deleteEducation`, {
         education_id: payload.education_id,
         _id: payload.cvID,
       })
@@ -96,7 +96,7 @@ export function EditEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/updateEducation`, {
+      .post(`http://we4cv.com/api/education/updateEducation`, {
         UniversityName: payload.universityName,
         Faculty: payload.faculty,
         YearStart: payload.startDate,
@@ -129,7 +129,7 @@ export function HideEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/hideEducations`, {
+      .post(`http://we4cv.com/api/education/hideEducations`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -154,7 +154,7 @@ export function OrderEducationAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/education/orderEducations`, {
+      .post(`http://we4cv.com/api/education/orderEducations`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

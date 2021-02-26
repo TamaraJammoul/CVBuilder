@@ -5,7 +5,7 @@ export function EditCareerObjectiveAction(payload) {
   console.log(payload, "kjl");
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/career/updateCareer`, {
+      .post(`http://we4cv.com/api/career/updateCareer`, {
         Text: payload.text,
         TextAr: payload.textAr,
         _id: payload.careerObjectives_id,
@@ -31,7 +31,7 @@ export function HideCareerObjectiveAction(payload) {
   console.log(payload);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/career/hideCareer`, {
+      .post(`http://we4cv.com/api/career/hideCareer`, {
         hide: payload.hide,
         _id: payload.cvID,
       })

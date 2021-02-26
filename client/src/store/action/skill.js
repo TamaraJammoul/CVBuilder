@@ -4,7 +4,7 @@ export function AddSkillAction(payload) {
   return (dispatch) => {
     console.log(payload)
     axios
-      .post(`http://localhost:5000/api/skills/addSkill`, {
+      .post(`http://we4cv.com/api/skills/addSkill`, {
         skills: payload.skills,
         _id: payload.cvID,
       })
@@ -28,7 +28,7 @@ export function AddSkillAction(payload) {
 export function HideSkillAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/skills/hideSkills`, {
+      .post(`http://we4cv.com/api/skills/hideSkills`, {
         _id: payload.cvID,
         hide: payload.hide,
       })

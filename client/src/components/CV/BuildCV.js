@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Container, Grid, Drawer} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Container, Grid, Drawer } from "@material-ui/core";
 import PersonalInfo from "./PersonalInfo";
 import CareerObjectives from "./careerobjective/CareerObjectives";
 import Experience from "./experience/Experience";
@@ -36,9 +36,9 @@ import Courses from "./courses/Courses";
 import Color from "./Color";
 import AddCourses from "./courses/AddCourses";
 import EditCourses from "./courses/EditCourses";
-import {Route, Switch, Link, useRouteMatch} from "react-router-dom";
-import {useTranslation} from "react-i18next";
-import {useSelector, useDispatch} from "react-redux";
+import { Route, Switch, Link, useRouteMatch } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Work,
@@ -50,13 +50,21 @@ import {
   Group,
   AccountBox,
 } from "@material-ui/icons";
+import {fetchCVId} from "../../store/action/cv";
+
 
 export default function BuildCV(props) {
-  const {t} = useTranslation();
-  let {path, url} = useRouteMatch();
+  const { t } = useTranslation();
+  let { path, url } = useRouteMatch();
   const [drawerState, setDrawerState] = useState(false);
   const sections = useSelector((state) => state.sections);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(
+      fetchCVId()
+    );
+  }, [])
   return (
     <div className="buildcv">
       <Drawer
@@ -91,7 +99,7 @@ export default function BuildCV(props) {
             <Grid item className="nav">
               <h4>
                 {" "}
-                <span style={{marginRight: "10px"}}>
+                <span style={{ marginRight: "10px" }}>
                   <Work />
                 </span>
                 <Link to={`${url}/peronalinfo`}>
@@ -103,7 +111,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px"}}>
+                  <span style={{ marginRight: "10px" }}>
                     <Work />
                   </span>
                   <Link to={`${url}/color`}>{t("Resume Color")}</Link>
@@ -116,7 +124,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px"}}>
+                  <span style={{ marginRight: "10px" }}>
                     <Work />
                   </span>
                   <Link to={`${url}/careerobjectives`}>
@@ -132,7 +140,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px"}}>
+                  <span style={{ marginRight: "10px" }}>
                     <Work />
                   </span>
                   <Link to={`${url}/courses`}>{t("Courses")}</Link>
@@ -145,7 +153,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <School />
                   </span>
                   <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
@@ -158,7 +166,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <LocationCity />
                   </span>
                   <Link to={`${url}/skills`}>{t("Skills")}</Link>
@@ -171,7 +179,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <Language />
                   </span>
                   <Link to={`${url}/languages`}>{t("Language")}</Link>
@@ -184,7 +192,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <Laptop />
                   </span>
                   <Link to={`${url}/othertraining`}>{t("OtherTraining")}</Link>
@@ -197,7 +205,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <EmojiPeople />
                   </span>
                   <Link to={`${url}/technicalskills`}>
@@ -212,7 +220,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <School />
                   </span>
                   <Link to={`${url}/education`}>{t("Education")}</Link>
@@ -225,7 +233,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <School />
                   </span>
                   <Link to={`${url}/achievement`}>{t("Achievement")}</Link>
@@ -238,7 +246,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <Work />
                   </span>
                   <Link to={`${url}/experience`}>{t("Experience")} </Link>
@@ -251,7 +259,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <Group />
                   </span>
                   <Link to={`${url}/membership`}>{t("Memberships")}</Link>
@@ -264,7 +272,7 @@ export default function BuildCV(props) {
               <Grid item className="nav">
                 <h4>
                   {" "}
-                  <span style={{marginRight: "10px", marginLeft: "10px"}}>
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
                     <AccountBox />
                   </span>
                   <Link to={`${url}/reference`}>{t("References")}</Link>
@@ -277,11 +285,11 @@ export default function BuildCV(props) {
         </Grid>
         <Grid item xs={8} sm={9} className="bd buildcvNav">
           <Grid container direction="column" spacing={4}>
-            <Grid item xs={2} style={{width: "100%", height: "100%"}}>
+            <Grid item xs={2} style={{ width: "100%", height: "100%" }}>
               <Navbar setDrawerState={setDrawerState} />
             </Grid>
             <Grid item xs={10} className="gridwidth">
-              <div style={{width: "100%"}}>
+              <div style={{ width: "100%" }}>
                 <Container>
                   <Switch>
                     <Route

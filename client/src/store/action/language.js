@@ -13,7 +13,7 @@ export function AddLanguageAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/language/addLanguage`, {
+      .post(`http://we4cv.com/api/language/addLanguage`, {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
@@ -41,7 +41,7 @@ export function CopyLanguageAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/language/copyLanguage`, {
+      .post(`http://we4cv.com/api/language/copyLanguage`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -66,7 +66,7 @@ export function DeleteLanguageAction(payload) {
   console.log(payload);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/language/deleteLanguage`, {
+      .post(`http://we4cv.com/api/language/deleteLanguage`, {
         language_id: payload.language_id,
         _id: payload.cvID,
       })
@@ -91,7 +91,7 @@ export function EditLanguageAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/language/updateLanguage`, {
+      .post(`http://we4cv.com/api/language/updateLanguage`, {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
@@ -119,7 +119,7 @@ export function HideLanguageAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/Language/hideLanguages`, {
+      .post(`http://we4cv.com/api/Language/hideLanguages`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -144,7 +144,7 @@ export function OrderLanguageAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/languages/orderLanguages`, {
+      .post(`http://we4cv.com/api/languages/orderLanguages`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

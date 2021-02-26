@@ -11,7 +11,7 @@ import axios from "axios";
 export function AddReferenceAction(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/reference/addReference`, {
+      .post(`http://we4cv.com/api/reference/addReference`, {
         Name: payload.name,
         NameAr: payload.nameAr,
         Number: payload.phone,
@@ -39,7 +39,7 @@ export function CopyReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/referance/copyReferance`, {
+      .post(`http://we4cv.com/api/referance/copyReferance`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -64,7 +64,7 @@ export function DeleteReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/reference/deleteReference`, {
+      .post(`http://we4cv.com/api/reference/deleteReference`, {
         reference_id: payload.reference_id,
         _id: payload.cvID,
       })
@@ -89,7 +89,7 @@ export function EditReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/reference/updateReference`, {
+      .post(`http://we4cv.com/api/reference/updateReference`, {
         Name: payload.reference,
         Order: payload.order,
         _id: payload.id,
@@ -117,7 +117,7 @@ export function HideReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/reference/hideReferences`, {
+      .post(`http://we4cv.com/api/reference/hideReferences`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -142,7 +142,7 @@ export function OrderReferenceAction(payload) {
   return async (dispatch) => {
     console.log(payload);
     await axios
-      .post(`http://localhost:5000/api/references/orderReferences`, {
+      .post(`http://we4cv.com/api/references/orderReferences`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

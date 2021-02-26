@@ -13,7 +13,7 @@ export function AddAchievementAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/achievement/addAchievement`, {
+      .post(`http://we4cv.com/api/achievement/addAchievement`, {
         Name: payload.achievementName,
         Order: payload.order,
         _id: payload.cvID,
@@ -40,7 +40,7 @@ export function AddAchievementAction(payload) {
 export function CopyAchievementAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/achievement/copyAchievement`, {
+      .post(`http://we4cv.com/api/achievement/copyAchievement`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -66,7 +66,7 @@ export function DeleteAchievementAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/achievement/deleteAchievement`, {
+      .post(`http://we4cv.com/api/achievement/deleteAchievement`, {
         achievement_id: payload.achievement_id,
         _id: payload.cvID,
       })
@@ -90,7 +90,7 @@ export function DeleteAchievementAction(payload) {
 export function EditAchievementAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/achievement/updateAchievement`, {
+      .post(`http://we4cv.com/api/achievement/updateAchievement`, {
         Name: payload.achievementName,
         Order: payload.order,
         _id: payload.id,
@@ -117,7 +117,7 @@ export function HideAchievementAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/achievement/hideAchievements`, {
+      .post(`http://we4cv.com/api/achievement/hideAchievements`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -142,7 +142,7 @@ export function OrderAchievementAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/achievement/orderAchievements`, {
+      .post(`http://we4cv.com/api/achievement/orderAchievements`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

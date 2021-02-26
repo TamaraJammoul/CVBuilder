@@ -11,7 +11,7 @@ import axios from "axios";
 export function AddMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membership/addMembership`, {
+      .post(`http://we4cv.com/api/membership/addMembership`, {
         Name: payload.membershipName,
         Order: payload.order,
         _id: payload.cvID,
@@ -37,7 +37,7 @@ export function AddMembershipAction(payload) {
 export function CopyMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membership/copyMembership`, {
+      .post(`http://we4cv.com/api/membership/copyMembership`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -63,7 +63,7 @@ export function DeleteMembershipAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/membership/deleteMembership`, {
+      .post(`http://we4cv.com/api/membership/deleteMembership`, {
         membership_id: payload.membership_id,
         _id: payload.cvID,
       })
@@ -87,7 +87,7 @@ export function DeleteMembershipAction(payload) {
 export function EditMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membership/updateMembership`, {
+      .post(`http://we4cv.com/api/membership/updateMembership`, {
         Name: payload.membershipName,
         Order: payload.order,
         _id: payload.id,
@@ -113,7 +113,7 @@ export function EditMembershipAction(payload) {
 export function HideMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membership/hideMemberships`, {
+      .post(`http://we4cv.com/api/membership/hideMemberships`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -137,7 +137,7 @@ export function HideMembershipAction(payload) {
 export function OrderMembershipAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/membership/orderMemberships`, {
+      .post(`http://we4cv.com/api/membership/orderMemberships`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

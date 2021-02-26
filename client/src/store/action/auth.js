@@ -4,7 +4,7 @@ import axios from "axios";
 export function LoginAction(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/auth/logIn`, {
+      .post(`http://we4cv.com/api/auth/logIn`, {
         Email: payload.email,
         Password: payload.password,
       })
@@ -30,7 +30,7 @@ export function LoginAction(payload) {
 export function SignupAction(payload) {
   return async (dispatch) => {
     await axios
-      .post(`http://localhost:5000/api/auth/signUp`, {
+      .post(`http://we4cv.com/api/auth/signUp`, {
         Email: payload.email,
         FirstName: payload.firstName,
         LastName: payload.lastName,

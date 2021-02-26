@@ -81,3 +81,4 @@ export const CVCOLOR = "CVCOLOR";
 export const SUCCESS = "SUCCESS";
 export const RESETPASSWORDLINK = "RESETPASSWORDLINK";
 export const RESETPASSWORD = "RESETPASSWORD";
+export const FETCHCVID = "FETCHCVID";

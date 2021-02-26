@@ -11,7 +11,7 @@ import axios from "axios";
 export function AddCoursesAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/course/addCourse`, {
+      .post(`http://we4cv.com/api/course/addCourse`, {
         Name: payload.courses,
         Order: payload.order,
         Description: payload.description,
@@ -41,7 +41,7 @@ export function CopyCoursesAction(payload) {
   return (dispatch) => {
     console.log(payload, "oo");
     axios
-      .post(`http://localhost:5000/api/course/copyCourse`, {
+      .post(`http://we4cv.com/api/course/copyCourse`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -67,7 +67,7 @@ export function DeleteCoursesAction(payload) {
   console.log(payload);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/course/deleteCourse`, {
+      .post(`http://we4cv.com/api/course/deleteCourse`, {
         course_id: payload.courses_id,
         _id: payload.cvID,
       })
@@ -91,7 +91,7 @@ export function DeleteCoursesAction(payload) {
 export function EditCoursesAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/course/updateCourse`, {
+      .post(`http://we4cv.com/api/course/updateCourse`, {
         Name: payload.coursesName,
         Order: payload.order,
         Description: payload.description,
@@ -121,7 +121,7 @@ export function HideCoursesAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/course/hideCourses`, {
+      .post(`http://we4cv.com/api/course/hideCourses`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -146,7 +146,7 @@ export function OrderCoursesAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/course/orderCourses`, {
+      .post(`http://we4cv.com/api/course/orderCourses`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

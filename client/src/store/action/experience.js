@@ -11,7 +11,7 @@ import axios from "axios";
 export function AddExperienceAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/experience/addExperience`, {
+      .post(`http://we4cv.com/api/experience/addExperience`, {
         Start: payload.startDate,
         End: payload.endDate,
         Name: payload.experienceName,
@@ -42,7 +42,7 @@ export function AddExperienceAction(payload) {
 export function CopyExperienceAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/experience/copyExperience`, {
+      .post(`http://we4cv.com/api/experience/copyExperience`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -67,7 +67,7 @@ export function DeleteExperienceAction(payload) {
   console.log(payload);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/experience/deleteExperience`, {
+      .post(`http://we4cv.com/api/experience/deleteExperience`, {
         experience_id: payload.experience_id,
         _id: payload.cvID,
       })
@@ -91,7 +91,7 @@ export function DeleteExperienceAction(payload) {
 export function EditExperienceAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/experience/updateExperience`, {
+      .post(`http://we4cv.com/api/experience/updateExperience`, {
         Start: payload.startDate,
         End: payload.endDate,
         Name: payload.experienceName,
@@ -122,7 +122,7 @@ export function EditExperienceAction(payload) {
 export function HideExperienceAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/experience/hideExperiences `, {
+      .post(`http://we4cv.com/api/experience/hideExperiences `, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -147,7 +147,7 @@ export function OrderExperienceAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/experience/orderExperiences`, {
+      .post(`http://we4cv.com/api/experience/orderExperiences`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,

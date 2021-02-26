@@ -12,7 +12,7 @@ export function AddCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificate/addCertificate`, {
+      .post(`http://we4cv.com/api/certificate/addCertificate`, {
         Name: payload.name,
         Year: payload.date,
         Description: payload.description,
@@ -43,7 +43,7 @@ export function CopyCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificate/copyCertificate`, {
+      .post(`http://we4cv.com/api/certificate/copyCertificate`, {
         _id: payload.id,
         cvID: payload.cvID,
       })
@@ -68,7 +68,7 @@ export function CopyCertificateAction(payload) {
 export function DeleteCertificateAction(payload) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/certificate/deleteCertificate`, {
+      .post(`http://we4cv.com/api/certificate/deleteCertificate`, {
         certificate_id: payload.certificate_id,
         _id: payload.cvID,
       })
@@ -96,7 +96,7 @@ export function EditCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificate/updateCertificate`, {
+      .post(`http://we4cv.com/api/certificate/updateCertificate`, {
         Name: payload.name,
         Year: payload.date,
         Description: payload.description,
@@ -128,7 +128,7 @@ export function HideCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificate/hideCertificates`, {
+      .post(`http://we4cv.com/api/certificate/hideCertificates`, {
         _id: payload.cvID,
         hide: payload.hide,
       })
@@ -153,7 +153,7 @@ export function OrderCertificateAction(payload) {
   return (dispatch) => {
     console.log(payload);
     axios
-      .post(`http://localhost:5000/api/certificate/orderCertifcates`, {
+      .post(`http://we4cv.com/api/certificate/orderCertifcates`, {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,
