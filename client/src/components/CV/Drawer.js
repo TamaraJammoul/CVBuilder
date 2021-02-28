@@ -46,42 +46,42 @@ export default function Drawer() {
         </Grid>
         <Grid item>
           <h5>
-            {i18n.language == "en" ? <AccountBox /> : ""}
+            {i18n.language === "en" ? <AccountBox /> : ""}
 
             <span style={{margin: "10px"}}>{t("Name")}</span>
-            {i18n.language == "ar" ? <AccountBox /> : ""}
+            {i18n.language === "ar" ? <AccountBox /> : ""}
           </h5>
 
           <hr />
         </Grid>
         <Grid item>
           <h5>
-            {i18n.language == "en" ? <Dashboard /> : ""}
+            {i18n.language === "en" ? <Dashboard /> : ""}
 
             <span style={{margin: "10px"}}>
               <Link to="dashboard">{t("Dashboard")} </Link>
             </span>
-            {i18n.language == "ar" ? <Dashboard /> : ""}
+            {i18n.language === "ar" ? <Dashboard /> : ""}
           </h5>
         </Grid>
 
         <Grid item>
           <h5>
             {" "}
-            {i18n.language == "en" ? <Email /> : ""}
+            {i18n.language === "en" ? <Email /> : ""}
             <span style={{margin: "10px"}}>
               <Link to="contactus">{t("ContactUs")}</Link>
             </span>
-            {i18n.language == "ar" ? <Email /> : ""}
+            {i18n.language === "ar" ? <Email /> : ""}
           </h5>
           <hr />
         </Grid>
         <Grid item>
           <h5 onClick={() => logout()}>
-            {i18n.language == "en" ? <PowerSettingsNew /> : ""}
+            {i18n.language === "en" ? <PowerSettingsNew /> : ""}
 
             <span style={{margin: "10px"}}>{t("Logout")}</span>
-            {i18n.language == "ar" ? <PowerSettingsNew /> : ""}
+            {i18n.language === "ar" ? <PowerSettingsNew /> : ""}
           </h5>
         </Grid>
       </Grid>

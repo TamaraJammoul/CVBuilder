@@ -5,9 +5,8 @@ import {
   Grid,
   Container,
   TextField,
-  ButtonGroup,
 } from "@material-ui/core";
-import {VisibilityOff, EditSharp, Visibility} from "@material-ui/icons";
+import {VisibilityOff, Visibility} from "@material-ui/icons";
 
 import {
   EditCareerObjectiveAction,
@@ -23,13 +22,13 @@ export default function CareerObjectives() {
   const [hide, setHide] = useState(0);
 
   const dispatch = useDispatch();
-  const careerobjective = useSelector(
+  /*const careerobjective = useSelector(
     (state) => state.template.careerobjective
-  );
+  );*/
   const careerObjectives_id = useSelector(
     (state) => state.template.careerObjectives_id
   );
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
 
   return (
@@ -59,14 +58,14 @@ export default function CareerObjectives() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);
                     dispatch(HideCareerObjectiveAction({cvID, hide}));
                   }}
                 >
-                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                  {hide === 1 ? t("HideSection") : t("ShowSection")}
                 </Button>{" "}
               </Grid>
             </Grid>{" "}
@@ -89,7 +88,7 @@ export default function CareerObjectives() {
             item
             xs={12}
             style={{width: "100%"}}
-            className={lan == 0 ? "arhide" : ""}
+            className={lan === 0 ? "arhide" : ""}
           >
             <TextField
               id="filled-primary"

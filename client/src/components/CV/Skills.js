@@ -37,29 +37,29 @@ export default function Skills() {
   }, []);
   const addSkill = (t, ar) => {
     var b = true;
-    skills.map((e) => (e.Name == t ? (b = false) : ""));
+    skills.map((e) => (e.Name === t ? (b = false) : ""));
     setname(t);
-    if (b == true) {
+    if (b === true) {
       skills.push({ Name: t, NameAr: ar });
       console.log(skills);
     } else {
       var j = 0;
-      skills.map((e, i) => (e.Name == t ? (j = i) : ""));
+      skills.map((e, i) => (e.Name === t ? (j = i) : ""));
       skills.splice(j, 1);
       console.log("lm;", skills);
     }
   };
   const setname = (t) => {
-    if (t == "Computer Proficiency")
+    if (t === "Computer Proficiency")
       setComputerProficiency(!ComputerProficiency);
-    if (t == "Leadership and Organisation")
+    if (t === "Leadership and Organisation")
       setLeadershipandOrganisation(!LeadershipandOrganisation);
-    if (t == "TeamWork") setTeamWork(!TeamWork);
-    if (t == "Self Development") setSelfDevelopment(!SelfDevelopment);
-    if (t == "Problem solving") setProblemsolving1(!Problemsolving);
-    if (t == "Work under pressure") setWorkunderpressure(!Workunderpressure);
-    if (t == "Time Managment") setTimeManagment(!TimeManagment);
-    if (t == "Office Programs") setOfficePrograms(!OfficePrograms);
+    if (t === "TeamWork") setTeamWork(!TeamWork);
+    if (t === "Self Development") setSelfDevelopment(!SelfDevelopment);
+    if (t === "Problem solving") setProblemsolving1(!Problemsolving);
+    if (t === "Work under pressure") setWorkunderpressure(!Workunderpressure);
+    if (t === "Time Managment") setTimeManagment(!TimeManagment);
+    if (t === "Office Programs") setOfficePrograms(!OfficePrograms);
   };
   return (
     <Paper>
@@ -82,7 +82,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={OfficePrograms == true ? "skillsBackground" : ""}
+            className={OfficePrograms === true ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -98,7 +98,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={TimeManagment == 1 ? "skillsBackground" : ""}
+            className={TimeManagment === 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -114,7 +114,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={Workunderpressure == 1 ? "skillsBackground" : ""}
+            className={Workunderpressure === 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -130,7 +130,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={Problemsolving == 1 ? "skillsBackground" : ""}
+            className={Problemsolving === 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -146,7 +146,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={SelfDevelopment == 1 ? "skillsBackground" : ""}
+            className={SelfDevelopment === 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -158,7 +158,7 @@ export default function Skills() {
             </IconButton>
             <h6>{t("Self Development")}</h6>
           </Grid>
-          <Grid item xs={6} sm={3} className={TeamWork == 1 ? "skillsBackground" : ""}>
+          <Grid item xs={6} sm={3} className={TeamWork === 1 ? "skillsBackground" : ""}>
             <IconButton
               color="primary"
               aria-label="upload picture"
@@ -173,7 +173,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={LeadershipandOrganisation == 1 ? "skillsBackground" : ""}
+            className={LeadershipandOrganisation === 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"
@@ -189,7 +189,7 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={ComputerProficiency == 1 ? "skillsBackground" : ""}
+            className={ComputerProficiency === 1 ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"

@@ -23,7 +23,7 @@ export function AddCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
+        if (res.status === 200 && res.data.status !== 0)
          { dispatch({
             type: ADDCERTIFICATE,
             payload: res.data.data,
@@ -49,7 +49,7 @@ export function CopyCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
+        if (res.status === 200 && res.data.status !== 0)
           {dispatch({
             type: COPYCERTIFICATE,
             payload: res.data.data,
@@ -74,7 +74,7 @@ export function DeleteCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
+        if (res.status === 200 && res.data.status !== 0)
           {dispatch({
             type: DELETECERTIFICATE,
             payload: {
@@ -108,7 +108,7 @@ export function EditCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res);
-        if (res.status == 200 && res.data.status != 0)
+        if (res.status === 200 && res.data.status !== 0)
           {dispatch({
             type: EDITCERTIFICATE,
             payload: res.data.data,
@@ -134,7 +134,7 @@ export function HideCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
+        if (res.status === 200 && res.data.status !== 0)
          { dispatch({
             type: HIDECERTIFICATE,
             payload: res.data.data,
@@ -160,7 +160,7 @@ export function OrderCertificateAction(payload) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
+        if (res.status === 200 && res.data.status !== 0)
           {dispatch({
             type: ORDERCERTIFICATE,
             payload,

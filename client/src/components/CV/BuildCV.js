@@ -107,7 +107,7 @@ export default function BuildCV(props) {
                 </Link>
               </h4>
             </Grid>
-            {sections.color == 1 ? (
+            {sections.color === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -120,7 +120,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.careerobjective == 1 ? (
+            {sections.careerobjective === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -136,7 +136,7 @@ export default function BuildCV(props) {
               ""
             )}
 
-            {sections.courses == 1 ? (
+            {sections.courses === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -149,7 +149,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.certificates == 1 ? (
+            {sections.certificates === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -162,7 +162,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.skills == 1 ? (
+            {sections.skills === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -175,7 +175,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.language == 1 ? (
+            {sections.language === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -188,7 +188,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.othertraining == 1 ? (
+            {sections.othertraining === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -201,7 +201,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.technicalskill == 1 ? (
+            {sections.technicalskill === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -216,7 +216,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.education == 1 ? (
+            {sections.education === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -229,7 +229,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.achievement == 1 ? (
+            {sections.achievement === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -242,7 +242,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.experience == 1 ? (
+            {sections.experience === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -255,7 +255,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.membership == 1 ? (
+            {sections.membership === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}
@@ -268,7 +268,7 @@ export default function BuildCV(props) {
             ) : (
               ""
             )}
-            {sections.referenc == 1 ? (
+            {sections.referenc === 1 ? (
               <Grid item className="nav">
                 <h4>
                   {" "}

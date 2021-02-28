@@ -17,7 +17,7 @@ export default function Card({CardImage, template}) {
     history.push("/buildcv/peronalinfo");
   };
   const fun = (t) => {
-    if (t == "cv1")
+    if (t === "cv1")
       return {
         careerobjective: 1,
         certificares: 1,
@@ -42,7 +42,7 @@ export default function Card({CardImage, template}) {
         technicalskilllen: 2,
         color: 0,
       };
-    else if (t == "cv2")
+    else if (t === "cv2")
       return {
         careerobjective: 1,
         certificares: 0,
@@ -66,7 +66,7 @@ export default function Card({CardImage, template}) {
         referenclen: 1,
         color: 0,
       };
-    else if (t == "cv3")
+    else if (t === "cv3")
       return {
         careerobjective: 1,
         certificares: 0,
@@ -88,7 +88,7 @@ export default function Card({CardImage, template}) {
         languagelen: 3,
         color: 0,
       };
-    else if (t == "cv4")
+    else if (t === "cv4")
       return {
         careerobjective: 1,
         certificares: 0,
@@ -111,7 +111,7 @@ export default function Card({CardImage, template}) {
         technicalskilllen: 4,
         color: 1,
       };
-    else if (t == "cv5")
+    else if (t === "cv5")
       return {
         careerobjective: 1,
         certificares: 0,
@@ -132,7 +132,7 @@ export default function Card({CardImage, template}) {
         experiencelen: 2,
         color: 0,
       };
-    else if (t == "cv6")
+    else if (t === "cv6")
       return {
         careerobjective: 1,
         certificares: 0,
@@ -154,7 +154,7 @@ export default function Card({CardImage, template}) {
         languagelen: 2,
         color: 0,
       };
-    else if (t == "cv7")
+    else if (t === "cv7")
       return {
         careerobjective: 1,
         certificares: 0,
@@ -177,7 +177,7 @@ export default function Card({CardImage, template}) {
         membershiplen: 5,
         color: 0,
       };
-    else if (t == "cv8")
+    else if (t === "cv8")
       return {
         careerobjective: 0,
         certificares: 0,
@@ -199,7 +199,7 @@ export default function Card({CardImage, template}) {
         languagelen: 1,
         color: 1,
       };
-    else if (t == "cv9")
+    else if (t === "cv9")
       return {
         careerobjective: 1,
         certificares: 1,
@@ -223,7 +223,7 @@ export default function Card({CardImage, template}) {
         achievementlen: 1,
         color: 0,
       };
-    else if (t == "cv10")
+    else if (t === "cv10")
       return {
         careerobjective: 1,
         certificares: 1,
@@ -246,7 +246,7 @@ export default function Card({CardImage, template}) {
         languagelen: 2,
         color: 0,
       };
-    else if (t == "cv11")
+    else if (t === "cv11")
       return {
         careerobjective: 0,
         certificares: 0,

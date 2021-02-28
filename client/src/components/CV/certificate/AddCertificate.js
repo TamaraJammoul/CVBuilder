@@ -4,7 +4,6 @@ import {AddCertificateAction} from "./../../../store/action/certificate";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
-import {DatePicker} from "@material-ui/pickers";
 import YearPicker from "react-year-picker";
 
 export default function AddCertificate(props) {
@@ -26,7 +25,7 @@ export default function AddCertificate(props) {
     cvID,
     order: "1",
   };
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   let history = useHistory();
 
   const handelCancel = () => {
@@ -79,7 +78,7 @@ export default function AddCertificate(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"
@@ -89,7 +88,7 @@ export default function AddCertificate(props) {
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid> 
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
               id="filled-basic"

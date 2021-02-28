@@ -6,7 +6,6 @@ import {useTranslation} from "react-i18next";
 import { ERROR} from "./../store/action/types";
  
 export default function Toast() {
-  const [tyrtyr, setToast] = useState(true);
   //handel me
   const toast = useSelector((state) => state.toast);
   const toastMessageEN = useSelector((state) => state.toastMessageEN);
@@ -32,7 +31,7 @@ export default function Toast() {
       <Alert onClose={() => dispatch({
             type: ERROR,
           })} severity={toastType}>
-        {i18n.language == "en" ? toastMessageEN : toastMessageAR}
+        {i18n.language === "en" ? toastMessageEN : toastMessageAR}
       </Alert>
     </Snackbar>
   );
