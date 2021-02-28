@@ -5,157 +5,198 @@ import {
   COPYMEMBERSHIP,
   HIDEMEMBERSHIP,
   ORDERMEMBERSHIP,
-  ERROR,SUCCESS
+  ERROR, SUCCESS
 } from "./types";
 import axios from "axios";
 export function AddMembershipAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/membership/addMembership`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/membership/addMembership`,
+      data: {
         Name: payload.membershipName,
         Order: payload.order,
         _id: payload.cvID,
         NameAr: payload.nameAr,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: ADDMEMBERSHIP,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ADDMEMBERSHIP,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function CopyMembershipAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/membership/copyMembership`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/membership/copyMembership`,
+      data: {
         _id: payload.id,
         cvID: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-         { dispatch({
-            type: COPYMEMBERSHIP,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: COPYMEMBERSHIP,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function DeleteMembershipAction(payload) {
   console.log(payload);
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/membership/deleteMembership`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/membership/deleteMembership`,
+      data: {
         membership_id: payload.membership_id,
         _id: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-        {  dispatch({
-            type: DELETEMEMBERSHIP,
-            payload,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: DELETEMEMBERSHIP,
+          payload,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function EditMembershipAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/membership/updateMembership`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/membership/updateMembership`,
+      data: {
         Name: payload.membershipName,
         Order: payload.order,
         _id: payload.id,
         NameAr: payload.nameAr,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: EDITMEMBERSHIP,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: EDITMEMBERSHIP,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function HideMembershipAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/membership/hideMemberships`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/membership/hideMemberships`,
+      data: {
         _id: payload.cvID,
         hide: payload.hide,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-         { dispatch({
-            type: HIDEMEMBERSHIP,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: HIDEMEMBERSHIP,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function OrderMembershipAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/membership/orderMemberships`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/membership/orderMemberships`,
+      data: {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: ORDERMEMBERSHIP,
-            payload,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ORDERMEMBERSHIP,
+          payload,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }

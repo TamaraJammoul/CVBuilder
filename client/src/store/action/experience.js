@@ -5,13 +5,15 @@ import {
   COPYEXPERIENCE,
   HIDEEXPERIENCE,
   ORDEREXPERIENCE,
-  ERROR,SUCCESS
+  ERROR, SUCCESS
 } from "./types";
 import axios from "axios";
 export function AddExperienceAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/experience/addExperience`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/experience/addExperience`,
+      data: {
         Start: payload.startDate,
         End: payload.endDate,
         Name: payload.experienceName,
@@ -21,41 +23,53 @@ export function AddExperienceAction(payload) {
         _id: payload.cvID,
         NameAr: payload.experienceNameAr,
         DescriptionAr: payload.descriptionAr,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-        {  dispatch({
-            type: ADDEXPERIENCE,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ADDEXPERIENCE,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function CopyExperienceAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/experience/copyExperience`, {
-        _id: payload.id,
-        cvID: payload.cvID,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url:`https://we4cv.com/api/experience/copyExperience`,
+        data: {
+          _id: payload.id,
+          cvID: payload.cvID,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
+        if (res.status == 200 && res.data.status != 0) {
+          dispatch({
             type: COPYEXPERIENCE,
             payload: res.data.data,
           });
           dispatch({
             type: SUCCESS,
-          });}
+          });
+        }
         else
           dispatch({
             type: ERROR,
@@ -65,22 +79,29 @@ export function CopyExperienceAction(payload) {
 }
 export function DeleteExperienceAction(payload) {
   console.log(payload);
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/experience/deleteExperience`, {
-        experience_id: payload.experience_id,
-        _id: payload.cvID,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url:`https://we4cv.com/api/experience/deleteExperience`,
+        data: {
+          experience_id: payload.experience_id,
+          _id: payload.cvID,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
+        if (res.status == 200 && res.data.status != 0) {
+          dispatch({
             type: DELETEEXPERIENCE,
             payload,
           });
           dispatch({
             type: SUCCESS,
-          });}
+          });
+        }
         else
           dispatch({
             type: ERROR,
@@ -89,29 +110,36 @@ export function DeleteExperienceAction(payload) {
   };
 }
 export function EditExperienceAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/experience/updateExperience`, {
-        Start: payload.startDate,
-        End: payload.endDate,
-        Name: payload.experienceName,
-        Project: payload.project,
-        Description: payload.description,
-        Order: 1,
-        _id: payload.id,
-        DescriptionAr: payload.descriptionAr,
-        NameAr: payload.experienceNameAr,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url:`https://we4cv.com/api/experience/updateExperience`,
+        data: {
+          Start: payload.startDate,
+          End: payload.endDate,
+          Name: payload.experienceName,
+          Project: payload.project,
+          Description: payload.description,
+          Order: 1,
+          _id: payload.id,
+          DescriptionAr: payload.descriptionAr,
+          NameAr: payload.experienceNameAr,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
+        if (res.status == 200 && res.data.status != 0) {
+          dispatch({
             type: EDITEXPERIENCE,
             payload: res.data.data,
           });
           dispatch({
             type: SUCCESS,
-          });}
+          });
+        }
         else
           dispatch({
             type: ERROR,
@@ -120,22 +148,29 @@ export function EditExperienceAction(payload) {
   };
 }
 export function HideExperienceAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/experience/hideExperiences `, {
-        _id: payload.cvID,
-        hide: payload.hide,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url:`https://we4cv.com/api/experience/hideExperiences`,
+        data: {
+          _id: payload.cvID,
+          hide: payload.hide,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
+        if (res.status == 200 && res.data.status != 0) {
+          dispatch({
             type: HIDEEXPERIENCE,
             payload: res.data.data,
           });
           dispatch({
             type: SUCCESS,
-          });}
+          });
+        }
         else
           dispatch({
             type: ERROR,
@@ -144,24 +179,30 @@ export function HideExperienceAction(payload) {
   };
 }
 export function OrderExperienceAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/experience/orderExperiences`, {
-        _id: payload.cvID,
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url:`https://we4cv.com/api/experience/orderExperiences`,
+        data: {
+          _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,
-      })
-      .then((res) => {
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-         { dispatch({
+        if (res.status == 200 && res.data.status != 0) {
+          dispatch({
             type: ORDEREXPERIENCE,
             payload,
           });
           dispatch({
             type: SUCCESS,
-          });}
+          });
+        }
         else
           dispatch({
             type: ERROR,

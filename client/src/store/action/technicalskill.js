@@ -9,17 +9,22 @@ import {
 } from "./types";
 import axios from "axios";
 export function AddTechnicalSkillsAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(` http://we4cv.com/api/technicalSkills/addTechnicalSkills`, {
-        Name: payload.skill,
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/technicalSkills/addTechnicalSkills`,
+        data: {
+          Name: payload.skill,
         Order: payload.order,
         _id: payload.cvID,
         RateFrom5: payload.rate,
         NameAr: payload.nameAr,
-      })
-      .then((res) => {
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -37,14 +42,19 @@ export function AddTechnicalSkillsAction(payload) {
   };
 }
 export function CopyTechnicalSkillsAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/technicalSkills/copyTechnicalSkill`, {
-        _id: payload.id,
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/technicalSkills/copyTechnicalSkill`,
+        data: {
+          _id: payload.id,
         cvID: payload.cvID,
-      })
-      .then((res) => {
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -62,15 +72,20 @@ export function CopyTechnicalSkillsAction(payload) {
   };
 }
 export function DeleteTechnicalSkillAction(payload) {
-  console.log(payload);
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/technicalSkills/deleteTechnicalSkills`, {
-        technicalSkill_id: payload.technicalSkill_id,
-        Order: 1,
-        _id: payload.cvID,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/technicalSkills/deleteTechnicalSkills`,
+        data: {
+          technicalSkill_id: payload.technicalSkill_id,
+          Order: 1,
+          _id: payload.cvID,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -88,18 +103,23 @@ export function DeleteTechnicalSkillAction(payload) {
   };
 }
 export function EditTechnicalSkillAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/technicalSkills/updateTechnicalSkills`, {
-        Name: payload.skill,
-        Order: payload.order,
-        _id: payload.id,
-        RateFrom5: payload.rate,
-        cvID: payload.cvID,
-        NameAr: payload.nameAr,
-      })
-      .then((res) => {
+  return async (dispatch) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/technicalSkills/updateTechnicalSkills`,
+        data: {
+          Name: payload.skill,
+          Order: payload.order,
+          _id: payload.id,
+          RateFrom5: payload.rate,
+          cvID: payload.cvID,
+          NameAr: payload.nameAr,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -117,14 +137,19 @@ export function EditTechnicalSkillAction(payload) {
   };
 }
 export function HideTechnicalSkillAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/technicalSkills/hideTechnicalSkills`, {
-        _id: payload.cvID,
-        hide: payload.hide,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/technicalSkills/hideTechnicalSkills`,
+        data: {
+          _id: payload.cvID,
+          hide: payload.hide,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
          { dispatch({
@@ -142,15 +167,20 @@ export function HideTechnicalSkillAction(payload) {
   };
 }
 export function OrderTechnicalSkillAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/technicalSkills/orderTechnicalSkills`, {
-        _id: payload.cvID,
-        oldID: payload.source.index,
-        newID: payload.destination.index,
-      })
-      .then((res) => {
+  return async(dispatch) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/technicalSkills/orderTechnicalSkills`,
+        data: {
+          _id: payload.cvID,
+          oldID: payload.source.index,
+          newID: payload.destination.index,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({

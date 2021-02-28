@@ -4,31 +4,37 @@ import {
   GETALLCV,
   AUTH,
   ERROR,
-  PERSONALINFO,SUCCESS,RESETPASSWORD,RESETPASSWORDLINK
+  PERSONALINFO, SUCCESS, RESETPASSWORD, RESETPASSWORDLINK
 } from "./types";
 import axios from "axios";
 
 export function ContactusAction(payload) {
   return async (dispatch) => {
-    await axios
-      .post(`http://we4cv.com/api/contactUs`, {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/contactUs`,
+      data: {
         Email: payload.email,
         Number: payload.number,
         Message: payload.message,
         Name: payload.name,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          dispatch({
-            type: CONTACTUS,
-            payload: res.data,
-          });
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0)
+        dispatch({
+          type: CONTACTUS,
+          payload: res.data,
+        });
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function ChangeLanguge(payload) {
@@ -41,20 +47,26 @@ export function ChangeLanguge(payload) {
 }
 export function GetAllCVAction(payload) {
   return async (dispatch) => {
-    await axios
-      .post(`http://we4cv.com/api/CV/getAllCV`, {Email: payload.email})
-      .then((res) => {
-        console.log(res);
-        if (res.status == 200 && res.data.status != 0)
-          dispatch({
-            type: GETALLCV,
-            payload: res.data.data,
-          });
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/CV/getAllCV`,
+      data: { Email: payload.email },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res);
+      if (res.status == 200 && res.data.status != 0)
+        dispatch({
+          type: GETALLCV,
+          payload: res.data.data,
+        });
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function Auth(payload) {
@@ -68,62 +80,75 @@ export function PeraonalInfoAction(payload) {
   return async (dispatch) => {
     await axios({
       method: "post",
-      url: `http://we4cv.com/api/personalInformation/updatePersonalInformation`,
+      url: `https://we4cv.com/api/personalInformation/updatePersonalInformation`,
       data: payload,
       headers: {
         "Content-Type": "multipart/form-data",
-       // Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-         { dispatch({
-            type: PERSONALINFO,
-            payload: res.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          }); 
-      });
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: PERSONALINFO,
+          payload: res.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function ResetPasswordLink(payload) {
   return async (dispatch) => {
-    await axios
-      .post(`http://we4cv.com/api/auth/resetPasswordLink`, {Email: payload.email})
-      .then((res) => {
-        console.log(res);
-        if (res.status == 200 && res.data.status != 0)
-          dispatch({
-            type: RESETPASSWORDLINK,
-            payload,
-          });
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/auth/resetPasswordLink`,
+      data: { Email: payload.email },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res);
+      if (res.status == 200 && res.data.status != 0)
+        dispatch({
+          type: RESETPASSWORDLINK,
+          payload,
+        });
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function ResetPassword(payload) {
   return async (dispatch) => {
-    await axios
-      .post(`http://we4cv.com/api/auth/resetPassword`, {Email: payload.email,Password:payload.password})
-      .then((res) => {
-        console.log(res);
-        if (res.status == 200 && res.data.status != 0)
-          dispatch({
-            type: RESETPASSWORD,
-            payload,
-          });
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/auth/resetPassword`,
+      data: { Email: payload.email, Password: payload.password },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res);
+      if (res.status == 200 && res.data.status != 0)
+        dispatch({
+          type: RESETPASSWORD,
+          payload,
+        });
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }

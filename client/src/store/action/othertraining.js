@@ -5,157 +5,198 @@ import {
   COPYOTHERTRAINING,
   HIDEOTHERTRAINING,
   ORDEROTHERTRAINING,
-  ERROR,SUCCESS
+  ERROR, SUCCESS
 } from "./types";
 import axios from "axios";
 export function AddOtherTrainingAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/othertraining/addOtherTraining`, {
+  return async(dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/othertraining/addOtherTraining`,
+      data: {
         Name: payload.otherTraining,
         Order: payload.order,
         _id: payload.cvID,
         NameAr: payload.nameAr,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: ADDOTHERTRAINING,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ADDOTHERTRAINING,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function CopyOtherTrainingAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/otherTraining/copyOtherTraining`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/otherTraining/copyOtherTraining`,
+      data: {
         _id: payload.id,
         cvID: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: COPYOTHERTRAINING,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: COPYOTHERTRAINING,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function DeleteOtherTrainingAction(payload) {
   console.log(payload, "ooo");
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/otherTraining/deleteOtherTraining`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/otherTraining/deleteOtherTraining`,
+      data: {
         otherTraining_id: payload.otherTraining_id,
         _id: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: DELETEOTHERTRAINING,
-            payload,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: DELETEOTHERTRAINING,
+          payload,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function EditOtherTrainingAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/otherTraining/updateOtherTraining`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/otherTraining/updateOtherTraining`,
+      data: {
         Name: payload.otherTraining,
         Order: payload.order,
         _id: payload.id,
         NameAr: payload.nameAr,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: EDITOTHERTRAINING,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: EDITOTHERTRAINING,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function HideOtherTrainingAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/otherTraining/hideOtherTrainings`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/otherTraining/hideOtherTrainings`,
+      data: {
         _id: payload.cvID,
         hide: payload.hide,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: HIDEOTHERTRAINING,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: HIDEOTHERTRAINING,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function OrderOtherTrainingAction(payload) {
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/OtherTraining/orderOtherTrainings`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/OtherTraining/orderOtherTrainings`,
+      data: {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: ORDEROTHERTRAINING,
-            payload,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ORDEROTHERTRAINING,
+          payload,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }

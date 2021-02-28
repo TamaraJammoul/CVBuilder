@@ -10,15 +10,21 @@ import {
 import axios from "axios";
 export function AddReferenceAction(payload) {
   return async (dispatch) => {
-    await axios
-      .post(`http://we4cv.com/api/reference/addReference`, {
-        Name: payload.name,
-        NameAr: payload.nameAr,
-        Number: payload.phone,
-        Order: payload.order,
-        _id: payload.cvID,
-      })
-      .then((res) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/reference/addReference`,
+        data: {
+          Name: payload.name,
+          NameAr: payload.nameAr,
+          Number: payload.phone,
+          Order: payload.order,
+          _id: payload.cvID,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -37,13 +43,18 @@ export function AddReferenceAction(payload) {
 }
 export function CopyReferenceAction(payload) {
   return async (dispatch) => {
-    console.log(payload);
-    await axios
-      .post(`http://we4cv.com/api/referance/copyReferance`, {
-        _id: payload.id,
-        cvID: payload.cvID,
-      })
-      .then((res) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/referance/copyReferance`,
+        data: {
+          _id: payload.id,
+          cvID: payload.cvID,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res);
         if (res.status == 200 && res.data.status != 0)
          { dispatch({
@@ -62,13 +73,18 @@ export function CopyReferenceAction(payload) {
 }
 export function DeleteReferenceAction(payload) {
   return async (dispatch) => {
-    console.log(payload);
-    await axios
-      .post(`http://we4cv.com/api/reference/deleteReference`, {
-        reference_id: payload.reference_id,
-        _id: payload.cvID,
-      })
-      .then((res) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/reference/deleteReference`,
+        data: {
+          reference_id: payload.reference_id,
+          _id: payload.cvID,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res);
         if (res.status == 200 && res.data.status != 0)
          { dispatch({
@@ -87,16 +103,21 @@ export function DeleteReferenceAction(payload) {
 }
 export function EditReferenceAction(payload) {
   return async (dispatch) => {
-    console.log(payload);
-    await axios
-      .post(`http://we4cv.com/api/reference/updateReference`, {
-        Name: payload.reference,
-        Order: payload.order,
-        _id: payload.id,
-        Number: payload.phone,
-        NameAr: payload.nameAr,
-      })
-      .then((res) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/reference/updateReference`,
+        data: {
+          Name: payload.reference,
+          Order: payload.order,
+          _id: payload.id,
+          Number: payload.phone,
+          NameAr: payload.nameAr,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -115,13 +136,18 @@ export function EditReferenceAction(payload) {
 }
 export function HideReferenceAction(payload) {
   return async (dispatch) => {
-    console.log(payload);
-    await axios
-      .post(`http://we4cv.com/api/reference/hideReferences`, {
-        _id: payload.cvID,
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/reference/hideReferences`,
+        data: {
+          _id: payload.cvID,
         hide: payload.hide,
-      })
-      .then((res) => {
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
@@ -140,14 +166,19 @@ export function HideReferenceAction(payload) {
 }
 export function OrderReferenceAction(payload) {
   return async (dispatch) => {
-    console.log(payload);
-    await axios
-      .post(`http://we4cv.com/api/references/orderReferences`, {
-        _id: payload.cvID,
-        oldID: payload.source.index,
-        newID: payload.destination.index,
-      })
-      .then((res) => {
+      await axios({
+        method: "post",
+        url: `https://we4cv.com/api/references/orderReferences`,
+        data: {
+          _id: payload.cvID,
+          oldID: payload.source.index,
+          newID: payload.destination.index,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
         console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({

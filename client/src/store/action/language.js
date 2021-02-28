@@ -5,164 +5,201 @@ import {
   COPYLANGUAGE,
   HIDELANGUAGE,
   ORDERLANGUAGE,
-  ERROR,SUCCESS
+  ERROR, SUCCESS
 } from "./types";
 import axios from "axios";
 
 export function AddLanguageAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/language/addLanguage`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/language/addLanguage`,
+      data: {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
         NameAr: payload.nameAr,
         _id: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: ADDLANGUAGE,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ADDLANGUAGE,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function CopyLanguageAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/language/copyLanguage`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/language/copyLanguage`,
+      data: {
         _id: payload.id,
         cvID: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: COPYLANGUAGE,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: COPYLANGUAGE,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function DeleteLanguageAction(payload) {
   console.log(payload);
-  return (dispatch) => {
-    axios
-      .post(`http://we4cv.com/api/language/deleteLanguage`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/language/deleteLanguage`,
+      data: {
         language_id: payload.language_id,
         _id: payload.cvID,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: DELETELANGUAGE,
-            payload,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: DELETELANGUAGE,
+          payload,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function EditLanguageAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/language/updateLanguage`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/language/updateLanguage`,
+      data: {
         Name: payload.language,
         Order: payload.order,
         Rate: payload.rate,
         NameAr: payload.nameAr,
         _id: payload.id,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: EDITLANGUAGE,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: EDITLANGUAGE,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function HideLanguageAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/Language/hideLanguages`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/Language/hideLanguages`,
+      data: {
         _id: payload.cvID,
         hide: payload.hide,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-         { dispatch({
-            type: HIDELANGUAGE,
-            payload: res.data.data,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: HIDELANGUAGE,
+          payload: res.data.data,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
 export function OrderLanguageAction(payload) {
-  return (dispatch) => {
-    console.log(payload);
-    axios
-      .post(`http://we4cv.com/api/languages/orderLanguages`, {
+  return async (dispatch) => {
+    await axios({
+      method: "post",
+      url: `https://we4cv.com/api/languages/orderLanguages`,
+      data: {
         _id: payload.cvID,
         oldID: payload.source.index,
         newID: payload.destination.index,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.status == 200 && res.data.status != 0)
-          {dispatch({
-            type: ORDERLANGUAGE,
-            payload,
-          });
-          dispatch({
-            type: SUCCESS,
-          });}
-        else
-          dispatch({
-            type: ERROR,
-          });
-      });
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      if (res.status == 200 && res.data.status != 0) {
+        dispatch({
+          type: ORDERLANGUAGE,
+          payload,
+        });
+        dispatch({
+          type: SUCCESS,
+        });
+      }
+      else
+        dispatch({
+          type: ERROR,
+        });
+    });
   };
 }
