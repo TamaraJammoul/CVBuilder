@@ -1,8 +1,8 @@
-import React, {useContext, useState} from "react";
-import {Link, useHistory} from "react-router-dom";
-import {Formik, Form, Field} from "formik";
-import {Button, Box, Paper, Grid, Container, Hidden} from "@material-ui/core";
-import {TextField} from "formik-material-ui";
+import React, { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+import { Button, Box, Paper, Grid, Container, Hidden } from "@material-ui/core";
+import { TextField } from "formik-material-ui";
 import {
   VisibilityOff,
   Visibility,
@@ -11,15 +11,15 @@ import {
   Backup,
 } from "@material-ui/icons";
 import image from "./../img/login-img-eng.png";
-import {SignupAction} from "./../store/action/auth";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
+import { SignupAction } from "./../store/action/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Signup() {
   //const state = useSelector((state) => state.template[0]);
   const dispatch = useDispatch();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
 
@@ -29,11 +29,11 @@ function Signup() {
       justify="space-evenly"
       alignItems="center"
       xs={12}
-      style={{minHeight: "100vh", backgroundColor: "#f6f6f8"}}
+      style={{ minHeight: "100vh", backgroundColor: "#f6f6f8" }}
     >
       <Grid item sm={6}>
         <Hidden smDown>
-          <Box p={10} style={{width: "100%"}}>
+          <Box p={10} style={{ width: "100%" }}>
             <Grid container spacing={8} justify="center">
               <Grid item>
                 {" "}
@@ -66,7 +66,7 @@ function Signup() {
         </Hidden>
       </Grid>
       <Grid item xs={10} sm={6}>
-        <Paper elevation={3} style={{width: "90%"}}>
+        <Paper elevation={3} style={{ width: "90%" }}>
           <Container>
             <Formik
               initialValues={{
@@ -79,9 +79,6 @@ function Signup() {
                 const errors = {};
                 if (!values.email) {
                   errors.email = t("Required");
-                }
-                if (!values.password) {
-                  errors.password = t("Required");
                 }
                 if (!values.firstName) {
                   errors.firstName = t("Required");
@@ -96,16 +93,19 @@ function Signup() {
                 ) {
                   errors.email = t("Invalid email address");
                 }
-                if (!values.password)
+                if (values.password.length<8)
                   errors.password = t("password must be at least 8 character");
                 return errors;
               }}
-              onSubmit={(values, {setSubmitting}) => {
+              onSubmit={(values, { setSubmitting }) => {
                 dispatch(SignupAction(values));
-                history.push("/dashboard");
+                setTimeout(() => {
+                  if (localStorage.getItem("token"))
+                    history.push("/dashboard");
+                }, 2000);
               }}
             >
-              {({submitForm, isSubmitting}) => (
+              {({ submitForm, isSubmitting }) => (
                 <Form className="signup">
                   {" "}
                   <Grid
@@ -116,7 +116,7 @@ function Signup() {
                     spacing={4}
                   >
                     <Grid item xs={12}>
-                      <h1 style={{marginTop: "30px"}}>
+                      <h1 style={{ marginTop: "30px" }}>
                         {t("Signup for free now")}
                       </h1>
                     </Grid>
@@ -183,7 +183,7 @@ function Signup() {
                       >
                         {t("Submit")}
                       </Button>
-                      <Link to="/login" style={{marginLeft: "10px"}}>
+                      <Link to="/login" style={{ marginLeft: "10px" }}>
                         {t("Login")}
                       </Link>
                     </Grid>{" "}

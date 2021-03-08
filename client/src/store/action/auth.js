@@ -26,6 +26,7 @@ export function LoginAction(payload) {
           type: LOGIN,
           payload: res.data,
         });
+
       } else
         dispatch({
           type: ERROR,
@@ -33,6 +34,7 @@ export function LoginAction(payload) {
     });
   };
 }
+
 export function SignupAction(payload) {
   return async (dispatch) => {
     await axios({
