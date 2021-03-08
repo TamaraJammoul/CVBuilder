@@ -18,9 +18,9 @@ export function LoginAction(payload) {
       console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("FirstName", res.data.user.FirstName);
-        localStorage.setItem("LastName", res.data.user.LastName);
-        localStorage.setItem("Email", res.data.user.Email);
+        localStorage.setItem("FirstName", res.data.data.FirstName);
+        localStorage.setItem("LastName", res.data.data.LastName);
+        localStorage.setItem("Email", res.data.data.Email);
 
         dispatch({
           type: LOGIN,
@@ -52,9 +52,9 @@ export function SignupAction(payload) {
       console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("FirstName", res.data.user.FirstName);
-        localStorage.setItem("LastName", res.data.user.LastName);
-        localStorage.setItem("Email", res.data.user.Email);
+        localStorage.setItem("FirstName", res.data.data.FirstName);
+        localStorage.setItem("LastName", res.data.data.LastName);
+        localStorage.setItem("Email", res.data.data.Email);
         dispatch({
           type: SIGNUP,
           payload: res.data,

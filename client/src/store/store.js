@@ -50,7 +50,7 @@ const initialState = {
   MyTemplates: [],
   firstName: "",
   lastName: "",
-  email: "user2@gmail.com",
+  email: "",
   id: "",
   token: "",
   cvID: "",

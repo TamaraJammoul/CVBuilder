@@ -21,7 +21,7 @@ export default function Home() {
         <Drawertemp />
       </Drawer>
       <section className="section1home pt-4">
-        <div class="container">
+        <div className="container">
           <Nav setDrawerState={setDrawerState} />
           <div className="row section1">
             <div
