@@ -330,6 +330,8 @@
 }
 .template08-body .t08-skill-sec .t08-sec-body {
   flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   padding-top: calc(50px * var(--t08-scale-rate));
@@ -373,7 +375,7 @@
 }
 .template08-body .t08-skill-sec .t08-skill .t08-skill-name p {
   font-size: calc(12px * var(--t08-p-scale-rate));
-  line-height: 1.5;
+  line-height: 1;
 }
 /* #endregion */
 

@@ -600,9 +600,6 @@
   flex-direction: row;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   padding: calc(30px * var(--t10-scale-rate)) 0;
 }
 .template10-body .t10-skills-sec .t10-sec-body.ar {

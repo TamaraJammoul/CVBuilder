@@ -411,7 +411,7 @@ const Template05 = (props) => {
             </div>
           </div>
           <div className="t05-skill-name">
-            <p>{skill.Name}</p>
+          <p>{cvLanguage==='Ar' ? skill.NameAr : skill.Name}</p>
           </div>
         </div>
       );
@@ -660,7 +660,7 @@ const Template05 = (props) => {
               <img src={img_07} alt="" />
             </div>
             <div className={`t05-obj-text ${cvLanguage === "Ar" ? "ar" : ""}`}>
-              <p className="bold">{CO.Text}</p>
+              <p className="bold">{CO.text}</p>
             </div>
           </div>
 

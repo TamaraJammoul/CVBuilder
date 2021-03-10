@@ -396,7 +396,7 @@
   text-align: center;
   font-size: calc(15px * var(--t11-p-scale-rate));
   /* font-weight: bold; */
-  width: calc(1550px * var(--t11-scale-rate));
+  width: calc(350px * var(--t11-scale-rate));
 }
 .template11-body .t11-intro .t11-intro-sec .t11-intro-logo img {
   width: calc(138px * var(--t11-scale-rate));
@@ -407,7 +407,7 @@
   font-size: calc(14px * var(--t11-p-scale-rate));
 }
 .template11-body .t11-intro .t11-vl {
-  width: calc(18px * var(--t11-scale-rate));
+  width: calc(4px * var(--t11-scale-rate));
   height: 80%;
   background-color: var(--t11-square-color);
   border-radius: 18%;

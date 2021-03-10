@@ -697,9 +697,7 @@
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  justify-content: space-evenly;
 }
 .template05-body .t05-skills-sec .t05-skill {
   width: calc(200px * var(--t05-scale-rate));

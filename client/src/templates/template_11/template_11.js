@@ -29,6 +29,7 @@ import img_20 from "../../assets/imgs/template_11/20.png";
 import img_21 from "../../assets/imgs/template_11/21.png";
 import img_22 from "../../assets/imgs/template_11/22.png";
 import img_23 from "../../assets/imgs/template_11/23.png";
+import img_24 from "../../assets/imgs/template_11/24.png";
 //#endregion
 
 function downloadImage(data, filename = 'untitled.jpeg') {
@@ -310,6 +311,7 @@ const Template11 = (props) => {
     'Self Development': img_17,
     'TeamWork': img_18,
     'Leadership and Organisation': img_19,
+    'Computer Proficiency': img_24,
   };
   let skls = null;
   if (skills.length > 0) {
@@ -734,7 +736,7 @@ const Template11 = (props) => {
               </div>
               <div className="t11-vl"></div>
               <div className="t11-intro-text">
-                <p className="t11-intro-text-p">{CO.Text}</p>
+                <p className="t11-intro-text-p">{CO.text}</p>
               </div>
             </div>
             <div className="t11-vl-center"></div>
@@ -745,7 +747,7 @@ const Template11 = (props) => {
               </div>
               <div className="t11-vl"></div>
               <div className="t11-intro-text">
-                <p className="t11-intro-text-p">{CO.TextAr}</p>
+                <p className="t11-intro-text-p">{CO.textAr}</p>
               </div>
             </div>
           </div>

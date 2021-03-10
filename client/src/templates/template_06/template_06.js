@@ -307,7 +307,7 @@ const Template06 = (props) => {
             </div>
           </div>
           <div className="t06-skill-name">
-            <p>{skill.Name}</p>
+            <p>{cvLanguage==='Ar' ? skill.NameAr : skill.Name}</p>
           </div>
         </div>
       );
@@ -412,7 +412,7 @@ const Template06 = (props) => {
       </div>
       <div className="t06-sec-body">
         <div className="t06-objective-text">
-          <p>{CO.Text}</p>
+          <p>{CO.text}</p>
         </div>
       </div>
     </div>

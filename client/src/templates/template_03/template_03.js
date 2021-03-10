@@ -49,6 +49,7 @@ const Template03 = (props) => {
     technicalskills,
   } = useSelector((state) => state.template);
   const cvColor = useSelector((state) => state.sections.color);
+  const cvLanguage = useSelector((state) => state.cvLanguage);
 
   const colorStyle ={
     darkRed: "#893a4c",
@@ -56,7 +57,7 @@ const Template03 = (props) => {
     darkGreen: "#386464",
     lightGreen: "#669696",
   }
-
+console.log(props)
   let edus = null;
   if (educations.length > 0) {
     edus = educations.map((edu) => {
@@ -81,7 +82,7 @@ const Template03 = (props) => {
       return (
         <div className="t03-edu" key={edu.id_}>
           <div
-            className={`t03-circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t03-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
           ></div>
           <p className="t03-edu-title"
@@ -101,7 +102,7 @@ const Template03 = (props) => {
         </div>
       );
     });
-    if (props.language === "Ar") {
+    if (cvLanguage === "Ar") {
       edus = educations.map((edu) => {
         let degreeAr = "";
         if (edu.Degree === 1) {
@@ -124,7 +125,7 @@ const Template03 = (props) => {
         return (
           <div className="t03-edu" key={edu.id_}>
             <div
-              className={`t03-circle ${props.language === "Ar" ? "ar" : ""}`}
+              className={`t03-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
               style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
             ></div>
             <p className="t03-edu-title"
@@ -151,13 +152,13 @@ const Template03 = (props) => {
       return (
         <div className="t03-work" key={job.id_}>
           <div
-            className={`t03-circle ${props.language === "Ar" ? "ar" : ""}`}
+            className={`t03-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
           ></div>
           <p className="t03-work-title">{job.Name}</p>
           <div className="t03-work-text">
             <p>{job.Description}</p>
-            {props.language === "Ar" ? (
+            {cvLanguage === "Ar" ? (
               <p>
                 {`لمدة\xa0${job.End - job.Start}\xa0 
               ${job.End - job.Start > 1 ? "سنوات" : "سنة"}`}
@@ -189,7 +190,7 @@ const Template03 = (props) => {
     crses = courses.map((crs) => {
       return (
         <div
-          className={`t03-course ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t03-course ${cvLanguage === "Ar" ? "ar" : ""}`}
           key={crs.id_}
         >
           <div className="t03-circle-container">
@@ -233,15 +234,15 @@ const Template03 = (props) => {
     langs = languages.map((lang, id) => {
       return (
         <div className="t03-lang" key={lang.id_}>
-          <p className={`t03-lang-rate ${props.language === "Ar" ? "ar" : ""}`}>
+          <p className={`t03-lang-rate ${cvLanguage === "Ar" ? "ar" : ""}`}>
             {lang.RateFrom100}%
           </p>
-          <p className={`t03-lang-name ${props.language === "Ar" ? "ar" : ""}`}>
+          <p className={`t03-lang-name ${cvLanguage === "Ar" ? "ar" : ""}`}>
             {lang.Name}
           </p>
           <div
             className={`t03-lang-circle-wrapper ${
-              props.language === "Ar" ? "ar" : ""
+              cvLanguage === "Ar" ? "ar" : ""
             }`}
           >
             <div
@@ -260,7 +261,7 @@ const Template03 = (props) => {
     skls = skills.map((skill) => {
       return (
         <div
-          className={`t03-p-skill ${props.language === "Ar" ? "ar" : ""}`}
+          className={`t03-p-skill ${cvLanguage === "Ar" ? "ar" : ""}`}
           key={skill.id_}
         >
           <div className="t03-circle-container">
@@ -268,7 +269,7 @@ const Template03 = (props) => {
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t03-p-skill-text">
-            <p>{skill.Name}</p>
+            <p>{cvLanguage==='Ar' ? skill.NameAr : skill.Name}</p>
           </div>
         </div>
       );
@@ -283,10 +284,10 @@ const Template03 = (props) => {
       ?(<img src={img_05_red} alt="" />)
       :(<img src={img_05} alt="" />)
       }
-      <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
-        <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
+      <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
+        <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
            style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {props.language === "Ar" ? "التعليم" : "Education"}
+          {cvLanguage === "Ar" ? "التعليم" : "Education"}
         </h2>
         {edus}
       </div>
@@ -300,10 +301,10 @@ const Template03 = (props) => {
       ?(<img src={img_06_red} alt="" />)
       :(<img src={img_06} alt="" />)
       }
-      <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
-        <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
+      <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
+        <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {props.language === "Ar" ? "الخبرات" : "Work Experience"}
+          {cvLanguage === "Ar" ? "الخبرات" : "Work Experience"}
         </h2>
         {jobs}
       </div>
@@ -315,20 +316,20 @@ const Template03 = (props) => {
     <div className="t03-sec t03-courses-sec">
       {cvColor===1
       ?(<img 
-        className={`${props.language === "Ar" ? "ar" : ""}`}
+        className={`${cvLanguage === "Ar" ? "ar" : ""}`}
         src={img_07_red} 
         alt="" 
         />)
       :(<img 
-        className={`${props.language === "Ar" ? "ar" : ""}`}
+        className={`${cvLanguage === "Ar" ? "ar" : ""}`}
         src={img_07}
         alt="" 
         />)
       }
-      <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
-        <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
+      <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
+        <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {props.language === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
+          {cvLanguage === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
         </h2>
         {crses}
       </div>
@@ -344,10 +345,10 @@ const Template03 = (props) => {
         ?(<img src={img_08_red} alt="" />)
         :(<img src={img_08} alt="" />)
       }
-      <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
-        <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
+      <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
+        <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {props.language === "Ar" ? "المهارات\xa0الشخصية" : "Personal Skills"}
+          {cvLanguage === "Ar" ? "المهارات\xa0الشخصية" : "Personal Skills"}
         </h2>
         {skls}
       </div>
@@ -361,10 +362,10 @@ const Template03 = (props) => {
         ?(<img src={img_09_red} alt="" />)
         :(<img src={img_09} alt="" />)
       }
-      <div className={`t03-sec-content ${props.language === "Ar" ? "ar" : ""}`}>
-        <h2 className={`t03-sec-title ${props.language === "Ar" ? "ar" : ""}`}
+      <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
+        <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {props.language === "Ar" ? "المهارات\xa0التقنية" : "Technical Skills"}
+          {cvLanguage === "Ar" ? "المهارات\xa0التقنية" : "Technical Skills"}
         </h2>
         {tSkills}
       </div>
@@ -376,7 +377,7 @@ const Template03 = (props) => {
     <div className="t03-languages-sec t03-sec">
       <div className="t03-languages-title">
         <h2 className='bold' style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {props.language === "Ar" ? "اللغات" : "Languages"}
+          {cvLanguage === "Ar" ? "اللغات" : "Languages"}
         </h2>
       </div>
       <div className="t03-langs">{langs}</div>
@@ -426,7 +427,7 @@ const Template03 = (props) => {
     );
     text.map(
       (p) =>{
-        if(props.language==='Ar'){
+        if(cvLanguage==='Ar'){
           (p.classList.contains("t03-lang-rate") ||
           p.classList.contains("t03-lang-name")) &&
           (p.style.transform = "translate(50%,-7%)")
@@ -486,7 +487,7 @@ const Template03 = (props) => {
     );
     text.map(
       (p) =>{
-        if(props.language==='Ar'){
+        if(cvLanguage==='Ar'){
           (p.classList.contains("t03-lang-rate") ||
           p.classList.contains("t03-lang-name")) && 
           (p.style.transform = "translate(50%,0%)")
@@ -513,19 +514,19 @@ const Template03 = (props) => {
           <button onClick={() => saveAs('JPEG')}>Download as JPEG</button>
         </div>
         <div
-          className={`template03-body ${props.language === "Ar" ? "ar" : ""}`}
+          className={`template03-body ${cvLanguage === "Ar" ? "ar" : ""}`}
           ref={ref}
           id="toPDF"
         >
-          <div className={`t03-cv-tag ${props.language === "Ar" ? "ar" : ""}`}
+          <div className={`t03-cv-tag ${cvLanguage === "Ar" ? "ar" : ""}`}
               style={{backgroundColor: cvColor===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}`}}>
             <p className="bold">
-              {props.language === "Ar" ? "السيرة\xa0 الذاتية" : "CV"}
+              {cvLanguage === "Ar" ? "السيرة\xa0 الذاتية" : "CV"}
             </p>
           </div>
 
           {/* Photo Section */}
-          <div className={`t03-photo ${props.language === "Ar" ? "ar" : ""}`}
+          <div className={`t03-photo ${cvLanguage === "Ar" ? "ar" : ""}`}
               style={{borderColor: cvColor===1 ? '#893a4c': '#356767'}}>
             <img src={photo} alt="" />
           </div>
@@ -542,11 +543,11 @@ const Template03 = (props) => {
             <div className="t03-info-details">
               <div className="t03-detail">
                 {cvColor===1 ? (<img
-                  className={`t03-detail-img-1 ${props.language === "Ar" ? "ar" : ""}`}
+                  className={`t03-detail-img-1 ${cvLanguage === "Ar" ? "ar" : ""}`}
                   src={img_01_red}
                   alt=""
                 />):(<img
-                  className={`t03-detail-img-1 ${props.language === "Ar" ? "ar" : ""}`}
+                  className={`t03-detail-img-1 ${cvLanguage === "Ar" ? "ar" : ""}`}
                   src={img_01}
                   alt=""
                 />)}
@@ -559,14 +560,14 @@ const Template03 = (props) => {
               {cvColor===1?
                 (<img
                   className={`t03-detail-img-2 ${
-                    props.language === "Ar" ? "ar" : ""
+                    cvLanguage === "Ar" ? "ar" : ""
                   }`}
                   src={img_02_red}
                   alt=""
                 />):
                 (<img
                   className={`t03-detail-img-2 ${
-                    props.language === "Ar" ? "ar" : ""
+                    cvLanguage === "Ar" ? "ar" : ""
                   }`}
                   src={img_02}
                   alt=""
@@ -580,21 +581,21 @@ const Template03 = (props) => {
               {cvColor===1?
                 (<img
                   className={`t03-detail-img-3 ${
-                    props.language === "Ar" ? "ar" : ""
+                    cvLanguage === "Ar" ? "ar" : ""
                   }`}
                   src={img_03_red}
                   alt=""
                 />):
                 (<img
                   className={`t03-detail-img-3 ${
-                    props.language === "Ar" ? "ar" : ""
+                    cvLanguage === "Ar" ? "ar" : ""
                   }`}
                   src={img_03}
                   alt=""
                 />)}
                 <div className="t03-detail-p-3"
                     style={{backgroundColor: cvColor===1 ? '#843d4b' : '#518699' }}>
-                  {props.language==='Ar' ?
+                  {cvLanguage==='Ar' ?
                     (<p className="t03-detail-text">
                       {`${PI.NationalityAr}\xa0/\xa0${PI.CityAr}`}
                     </p>)
@@ -609,14 +610,14 @@ const Template03 = (props) => {
               {cvColor===1?
                 (<img
                   className={`t03-detail-img-4 ${
-                    props.language === "Ar" ? "ar" : ""
+                    cvLanguage === "Ar" ? "ar" : ""
                   }`}
                   src={img_04_red}
                   alt=""
                 />):
                 (<img
                   className={`t03-detail-img-4 ${
-                    props.language === "Ar" ? "ar" : ""
+                    cvLanguage === "Ar" ? "ar" : ""
                   }`}
                   src={img_04}
                   alt=""
@@ -630,9 +631,9 @@ const Template03 = (props) => {
             <div className="t03-info-desc">
               <p className="t03-info-desc-title"
                   style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-                {props.language === "Ar" ? "الهدف\xa0الوظيفي" : "Career Objective"}
+                {cvLanguage === "Ar" ? "الهدف\xa0الوظيفي" : "Career Objective"}
               </p>
-              <p className="t03-info-desc-text">{CO.Text}</p>
+              <p className="t03-info-desc-text">{CO.text}</p>
             </div>
           </div>
 

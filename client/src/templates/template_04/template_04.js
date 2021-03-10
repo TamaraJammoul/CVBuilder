@@ -237,7 +237,7 @@ const Template04 = (props) => {
             <img className={`t04-skill-logo-${id + 1}`} src={skillLogo} alt="" />
           </div>
           <div className="t04-skill-name">
-            <p>{skill.Name}</p>
+            <p>{cvLanguage==='Ar' ? skill.NameAr : skill.Name}</p>
           </div>
         </div>
       );
@@ -252,7 +252,7 @@ const Template04 = (props) => {
         <p>{cvLanguage === "Ar" ? "الهدف\xa0الوظيفي" : "Objective Career"}</p>
       </div>
       <div className="t04-sec-body">
-        <p className='t04-co-text'>{CO.Text}</p>
+        <p className='t04-co-text'>{CO.text}</p>
       </div>
     </div>
   );

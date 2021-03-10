@@ -23,6 +23,9 @@ import img_13 from "../../assets/imgs/template_10/13.png";
 import img_14 from "../../assets/imgs/template_10/14.png";
 import img_15 from "../../assets/imgs/template_10/15.png";
 import img_16 from "../../assets/imgs/template_10/16.png";
+import img_17 from "../../assets/imgs/template_10/17.png";
+import img_18 from "../../assets/imgs/template_10/18.png";
+import img_19 from "../../assets/imgs/template_10/19.png";
 //#endregion
 
 function downloadImage(data, filename = 'untitled.jpeg') {
@@ -257,6 +260,9 @@ const Template10 = (props) => {
     'TeamWork': img_14,
     'Problem solving': img_15,
     'Self Development': img_16,
+    'Leadership and Organisation': img_17,
+    'Work under pressure': img_18,
+    'Time Managment': img_19,
   };
   let skls = null;
   let arSkls = null;
