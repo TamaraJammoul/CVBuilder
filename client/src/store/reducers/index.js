@@ -3,11 +3,11 @@ export default function reducer(state, action) {
     case "FETCHCVID":
       return {
         ...state,
-        cvID: localStorage.getItem('cv_id'),
-        template:{
+        cvID: localStorage.getItem('cv_id') ? localStorage.getItem('cv_id') : state.cvID,
+        template: {
           ...state.template,
-          careerObjectives_id:localStorage.getItem('careerObjectives_id'),
-          personalInformation_id:localStorage.getItem('personalInformation_id')
+          careerObjectives_id: localStorage.getItem('careerObjectives_id') ? localStorage.getItem('careerObjectives_id') : state.template.careerObjectives_id,
+          personalInformation_id: localStorage.getItem('personalInformation_id') ? localStorage.getItem('personalInformation_id') : state.template.personalInformation_id
         }
       };
     case "ADDCV":
@@ -17,7 +17,7 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           careerObjectives_id: action.payload.careerObjectives_id,
-          personalInformation_id:action.payload.personalInformation_id
+          personalInformation_id: action.payload.personalInformation_id
         },
       };
     case "DELETECV":
@@ -33,29 +33,29 @@ export default function reducer(state, action) {
         cvName: action.payload.name,
       };
     case "EDITCV":
-      return { 
-        ...state,  
+      return {
+        ...state,
         cvName: action.payload.name,
-        cvID:action.payload._id,
-        cvTemplate:action.payload.Template,
-        cvLanguage:action.payload.Language,
-  template: {
-    educations: action.payload.Educations,
-    certificates:action.payload.Certificates,
-    experiences:action.payload.Experiences,
-    languages:action.payload.Languages,
-    memberships:action.payload.Memberships,
-    othertraining:action.payload.OtherTrainings,
-    technicalskills:action.payload.TechnicalSkills,
-    achievements:action.payload.Achievements,
-    references:action.payload.References,
-    skills:action.payload.Skill,
-    courses:action.payload.Courses,
-    personalInformation:action.payload.PersonalInformation,
-    careerobjective:action.payload.CareerObjectives,
-    careerObjectives_id:action.payload.careerObjectives_id,
-    personalInformation_id:action.payload.personalInformation_id
-  }
+        cvID: action.payload._id,
+        cvTemplate: action.payload.Template,
+        cvLanguage: action.payload.Language,
+        template: {
+          educations: action.payload.Educations,
+          certificates: action.payload.Certificates,
+          experiences: action.payload.Experiences,
+          languages: action.payload.Languages,
+          memberships: action.payload.Memberships,
+          othertraining: action.payload.OtherTrainings,
+          technicalskills: action.payload.TechnicalSkills,
+          achievements: action.payload.Achievements,
+          references: action.payload.References,
+          skills: action.payload.Skill,
+          courses: action.payload.Courses,
+          personalInformation: action.payload.PersonalInformation,
+          careerobjective: action.payload.CareerObjectives,
+          careerObjectives_id: action.payload.careerObjectives_id,
+          personalInformation_id: action.payload.personalInformation_id
+        }
       };
     case "CVTEMPLATE":
       return {
@@ -311,7 +311,7 @@ export default function reducer(state, action) {
       };
     case "DELETECERTIFICATE":
       var temp = state.template.certificates;
-      console.log(action.payload,temp);
+      console.log(action.payload, temp);
       temp = temp.filter((e) => e._id != action.payload.certificate_id);
       console.log("lj", temp);
       return {
@@ -444,7 +444,7 @@ export default function reducer(state, action) {
       temp = temp.filter((e) => e._id != action.payload.language_id);
       console.log("iiiiiiiiii", temp);
       return {
-        ...state, 
+        ...state,
         template: {
           ...state.template,
           languages: temp,
@@ -643,9 +643,9 @@ export default function reducer(state, action) {
         email: action.payload.user.Email,
         id: action.payload.user._id,
         toast: !state.toast,
-          toastMessageEN: "login success",
-          toastMessageAR: "تم تسجيل الدخول بنجاح",
-          toastType: "success",
+        toastMessageEN: "login success",
+        toastMessageAR: "تم تسجيل الدخول بنجاح",
+        toastType: "success",
       };
     case "SIGNUP":
       return {
@@ -656,27 +656,27 @@ export default function reducer(state, action) {
         email: action.payload.data.Email,
         id: action.payload.data._id,
         toast: !state.toast,
-            toastMessageEN: "signup success",
-            toastMessageAR: "تم إنشاء الحساب بنجاح",
-            toastType: "success",
+        toastMessageEN: "signup success",
+        toastMessageAR: "تم إنشاء الحساب بنجاح",
+        toastType: "success",
       };
     case "ERROR":
-      return { 
+      return {
         ...state,
         toast: !state.toast,
         toastMessageEN: "sorry something went wrong",
         toastMessageAR: "عذراً حدث خطأ ما أعد المحاولة",
         toastType: "error",
       };
-      case "SUCCESS":
-      return { 
+    case "SUCCESS":
+      return {
         ...state,
         toast: !state.toast,
         toastMessageEN: "save success",
         toastMessageAR: "تم الحفظ بنجاح",
         toastType: "success",
       };
-     
+
     default:
       return state;
   }

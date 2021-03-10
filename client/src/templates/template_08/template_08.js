@@ -24,6 +24,10 @@ import img_16 from "../../assets/imgs/template_08/16.png";
 import img_17 from "../../assets/imgs/template_08/17.png";
 import img_18 from "../../assets/imgs/template_08/18.png";
 import img_19 from "../../assets/imgs/template_08/19.png";
+import img_20 from "../../assets/imgs/template_08/20.png";
+import img_21 from "../../assets/imgs/template_08/21.png";
+import img_22 from "../../assets/imgs/template_08/22.png";
+import img_23 from "../../assets/imgs/template_08/23.png";
 //#endregion
 
 function downloadImage(data, filename = 'untitled.jpeg') {
@@ -275,6 +279,10 @@ const Template08 = (props) => {
     'Time Managment': img_14,
     'TeamWork': img_15,
     'Problem solving': img_16,
+    'Self Development': img_20,
+    'Leadership and Organisation': img_21,
+    'Work under pressure': img_22,
+    'Office Programs': img_23,
   };
   let skls = null;
   let arSkls = null;
@@ -369,7 +377,7 @@ const Template08 = (props) => {
               <div className="t08-circle"></div>
             </div>
             <div className="t08-content-text">
-              <p className='t08-co-text'>{CO.Text}</p>
+              <p className='t08-co-text'>{CO.text}</p>
             </div>
           </div>
         </div>
@@ -388,7 +396,7 @@ const Template08 = (props) => {
               <div className="t08-circle"></div>
             </div>
             <div className="t08-content-text">
-              <p className='t08-co-text'>{CO.TextAr}</p>
+              <p className='t08-co-text'>{CO.textAr}</p>
             </div>
           </div>
         </div>

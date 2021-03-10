@@ -546,11 +546,11 @@
   flex-wrap: wrap;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
 }
 .template04-body .t04-skill-sec .t04-skill {
   width: 30%;
   margin-bottom: calc(40px * var(--t04-scale-rate));
+  margin-right: calc(20px * var(--t04-scale-rate));
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: calc(100px * var(--t04-scale-rate)) -webkit-fit-content;

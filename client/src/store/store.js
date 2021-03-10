@@ -44,16 +44,16 @@ const initialState = {
     courses: [],
     personalInformation: {},
     careerobjective: {},
-    careerObjectives_id: "",
-    personalInformation_id: "",
+    careerObjectives_id: "60494ddf18c26cf506022010",
+    personalInformation_id: "60494ddf18c26cf506022011",
   },
   MyTemplates: [],
   firstName: "",
   lastName: "",
-  email: "",
+  email: "user3@gmail.com",
   id: "",
   token: "",
-  cvID: "",
+  cvID: "60494ddf18c26cf506022012",
   toast: false,
   toastMessageEN: "",
   toastMessageAR: "",
@@ -68,7 +68,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk)
-    ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    //,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 export default store;

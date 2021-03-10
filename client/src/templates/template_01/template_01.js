@@ -212,7 +212,9 @@ const Template01 = (props) => {
   let skls = null;
   if (skills.length > 0) {
     skls = skills.map((skill) => {
-      return <p className='t01-skill' key={skill.id_}>{skill.NameAr}</p>;
+      return <p className='t01-skill' key={skill.id_}>
+                {cvLanguage==='Ar' ? skill.NameAr : skill.Name}
+              </p>;
     });
   }
 
@@ -308,7 +310,7 @@ const Template01 = (props) => {
         </h3>
       </div>
       <div className="t01-sec-body">
-        <p>{CO.Text}</p>
+        <p>{CO.text}</p>
       </div>
     </div>
   );

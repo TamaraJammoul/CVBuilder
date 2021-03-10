@@ -41,6 +41,7 @@ export function AddCVAction(payload) {
   };
 }
 export function DeleteCVAction(payload) {
+  console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -54,6 +55,7 @@ export function DeleteCVAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
+      console.log(res)
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: DELETECV,

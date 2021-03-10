@@ -681,6 +681,7 @@
 }
 .template06-body .t06-skill-sec .t06-skill .t06-skill-name p {
   font-size: calc(13px * var(--t06-p-scale-rate));
+  line-height: 1;
 }
 /* #endregion */
 
