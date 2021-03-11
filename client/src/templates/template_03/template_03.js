@@ -214,13 +214,13 @@ console.log(props)
             <p>{tskill.Name}</p>
           </div>
           <div className="t03-t-skill-value">
-            <p>{tskill.Rate}%</p>
+            <p>{tskill.RateFrom100}%</p>
           </div>
           <div className="t03-t-skill-bar">
             <div className="t03-bar-container">
               <div
                 className={`t03-bar bar-${id + 1}`}
-                style={{ width: `${tskill.Rate}%`, backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}` }}
+                style={{ width: `${tskill.RateFrom100}%`, backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}` }}
               ></div>
             </div>
           </div>

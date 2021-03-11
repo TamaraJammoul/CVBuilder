@@ -577,9 +577,9 @@ const Template04 = (props) => {
             <DragDropContext onDragEnd={handleOnDragEnd}>
               {/* Left */}
               <div className={`t04-left ${cvLanguage === "Ar" ? "ar" : ""}`}>
-                <Droppable droppableId="droppable-left" type="Left">
+                <Droppable droppableId="droppable-left" type="Left" >
                   {(provided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                    <div ref={provided.innerRef} {...provided.droppableProps} style={{width: '100%'}}>
                       {leftSectionList.map((sec, index) => {
                         return (
                           <Draggable

@@ -328,10 +328,10 @@ const Template05 = (props) => {
   if (languages.length > 0) {
     langs = languages.map((lang) => {
       let rate = [];
-      for (let i = 0; i < lang.Rate; i++) {
+      for (let i = 0; i < lang.RateFrom10; i++) {
         rate.push(<div className="t05-lang-deg" key={Math.random()}></div>);
       }
-      for (let i = 0; i < 10 - lang.Rate; i++) {
+      for (let i = 0; i < 10 - lang.RateFrom10; i++) {
         rate.push(<div className="t05-lang-deg t05-empty" key={Math.random()}></div>);
       }
 

@@ -928,6 +928,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-wrap: wrap;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -943,6 +944,7 @@
     "ref-circle ref-name"
     "ref-logo ref-num";
   margin-bottom: calc(30px * var(--t05-scale-rate));
+  margin-right: calc(10px * var(--t05-scale-rate));
   line-height: calc(12px * 1.6 * var(--t05-p-scale-rate));
 }
 .template05-body .t05-other-sec .t05-ref-sec .t05-ref .t05-ref-circle {

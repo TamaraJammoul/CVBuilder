@@ -788,16 +788,12 @@
   flex-direction: row;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
 }
 .template11-body .t11-skill-sec .t11-skill {
   width: calc(230px * var(--t11-scale-rate));
-  height: calc(300px * var(--t11-scale-rate));
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: calc(190px * var(--t11-scale-rate)) 1fr;
@@ -852,6 +848,6 @@
 }
 .template11-body .t11-skill-sec .t11-skill .t11-skill-name p {
   font-size: calc(14px * var(--t11-p-scale-rate));
-  line-height: 1.5;
+  line-height: 1.2;
 }
 /* #endregion */

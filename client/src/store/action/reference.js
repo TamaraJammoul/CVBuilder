@@ -14,7 +14,7 @@ export function AddReferenceAction(payload) {
         method: "post",
         url: `https://we4cv.com/api/reference/addReference`,
         data: {
-          Name: payload.name,
+          Name: payload.reference,
           NameAr: payload.nameAr,
           Number: payload.phone,
           Order: payload.order,
