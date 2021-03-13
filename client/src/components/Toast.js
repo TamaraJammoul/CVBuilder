@@ -31,7 +31,7 @@ export default function Toast() {
       <Alert onClose={() => dispatch({
             type: ERROR,
           })} severity={toastType}>
-        {i18n.language === "en" ? toastMessageEN : toastMessageAR}
+        {i18n.language === "en-US"? toastMessageEN : toastMessageAR}
       </Alert>
     </Snackbar>
   );
