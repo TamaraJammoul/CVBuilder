@@ -20,7 +20,7 @@ export default function Card({CardImage, template}) {
     if (t === "cv1")
       return {
         careerobjective: 1,
-        certificares: 1,
+        certificates: 1,
         courses: 1,
         education: 1,
         experience: 1,
@@ -33,7 +33,7 @@ export default function Card({CardImage, template}) {
         twolan: 0,
         achievement: 0,
 
-        certificareslen: 2,
+        certificateslen: 2,
         courseslen: 6,
         educationlen: 2,
         experiencelen: 3,
@@ -45,7 +45,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv2")
       return {
         careerobjective: 1,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
@@ -69,7 +69,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv3")
       return {
         careerobjective: 1,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
@@ -91,7 +91,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv4")
       return {
         careerobjective: 1,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
@@ -114,7 +114,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv5")
       return {
         careerobjective: 1,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
@@ -135,7 +135,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv6")
       return {
         careerobjective: 1,
-        certificares: 1,
+        certificates: 1,
         courses: 1,
         education: 1,
         experience: 1,
@@ -157,7 +157,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv7")
       return {
         careerobjective: 1,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
@@ -180,7 +180,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv8")
       return {
         careerobjective: 0,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
@@ -202,7 +202,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv9")
       return {
         careerobjective: 1,
-        certificares: 1,
+        certificates: 1,
         courses: 1,
         education: 1,
         experience: 1,
@@ -215,7 +215,7 @@ export default function Card({CardImage, template}) {
         twolan: 1,
         achievement: 1,
 
-        certificareslen: 1,
+        certificateslen: 1,
         courseslen: 9,
         educationlen: 1,
         experiencelen: 1,
@@ -226,7 +226,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv10")
       return {
         careerobjective: 1,
-        certificares: 1,
+        certificates: 1,
         courses: 1,
         education: 1,
         experience: 1,
@@ -239,7 +239,7 @@ export default function Card({CardImage, template}) {
         twolan: 1,
         achievement: 0,
 
-        certificareslen: 1,
+        certificateslen: 1,
         courseslen: 1,
         educationlen: 1,
         experiencelen: 2,
@@ -249,7 +249,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv11")
       return {
         careerobjective: 0,
-        certificares: 0,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,
