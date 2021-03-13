@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddCoursesAction} from "../../../store/action/courses";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
-import YearPicker from "react-year-picker";
-
+import React, { useState } from "react";
+import { Button, Paper, Grid, TextField, Container } from "@material-ui/core";
+import { AddCoursesAction } from "../../../store/action/courses";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
 export default function AddCourses(props) {
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
@@ -13,10 +13,10 @@ export default function AddCourses(props) {
   const [description, setDescription] = useState("");
   const [descriptionAr, setDescriptionAr] = useState("");
   const [coursesAr, setCoursesAr] = useState("");
-  const [year, setYear] = useState(0);
+  const [year, setYear] = useState(new Date());
 
   let history = useHistory();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const lan = useSelector((state) => state.sections.twolan);
 
   const handelCancel = () => {
@@ -46,65 +46,64 @@ export default function AddCourses(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              
+
               label={t("CourseName")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setCourses(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
-              
+
               label={t("Description")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              
+
               label={t("CoursesNameAr")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setCoursesAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              
+
               label={t("DescriptionAr")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
             {" "}
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("Year")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setYear(e)} />
-              </Grid>
-            </Grid>
+
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="Year"
+                value={year}
+                onChange={(e) => setYear(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12}>
             <Button
               variant="outlined"
               className="cancel"
-              style={{marginLeft: "10px", float: "right"}}
+              style={{ marginLeft: "10px", float: "right" }}
               onClick={handelCancel}
             >
               {t("cancel")}
@@ -112,7 +111,7 @@ export default function AddCourses(props) {
             <Button
               variant="contained"
               className="save"
-              style={{float: "right"}}
+              style={{ float: "right" }}
               onClick={() => {
                 dispatch(
                   AddCoursesAction({

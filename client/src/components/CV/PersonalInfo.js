@@ -109,7 +109,7 @@ export default function PersonalInfo() {
         >
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("FirstName")}
               variant="filled"
               color="primary"
@@ -120,7 +120,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("LastName")}
               variant="filled"
               color="primary"
@@ -129,7 +129,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("LinkedInAccount")}
               variant="filled"
               color="primary"
@@ -138,7 +138,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("Email")}
               variant="filled"
               color="primary"
@@ -148,7 +148,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("PhoneNumber")}
               variant="filled"
               color="primary"
@@ -158,7 +158,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("Date Of Birth")}
               variant="filled"
               color="primary"
@@ -168,7 +168,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("City")}
               variant="filled"
               color="primary"
@@ -177,7 +177,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("Country")}
               variant="filled"
               color="primary"
@@ -186,7 +186,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="filled-primary"
+             
               label={t("Nationality")}
               variant="filled"
               color="primary"

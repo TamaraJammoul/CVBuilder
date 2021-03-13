@@ -1,30 +1,30 @@
-import React, {useState} from "react";
-import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddEducationAction} from "./../../../store/action/education";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Paper, Grid, TextField, Container } from "@material-ui/core";
+import { AddEducationAction } from "./../../../store/action/education";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import YearPicker from "react-year-picker";
-
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
 export default function AddEducation(props) {
   const dispatch = useDispatch();
 
   const [faculty, setFaculty] = useState("");
   const [universityName, setUniversityName] = useState("");
   const [city, setCity] = useState("");
-  const [startDate, setStartDate] = useState(0);
-  const [endDate, setEndDate] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [grade, setGrade] = useState(1);
   const [degree, setDegree] = useState(1);
   const [facultyAr, setFacultyAr] = useState("");
   const [universityNameAr, setUniversityNameAr] = useState("");
   const [cityAr, setCityAr] = useState("");
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
   const lan = useSelector((state) => state.sections.twolan);
@@ -68,7 +68,7 @@ export default function AddEducation(props) {
           spacing={4}
           alignItems="center"
           justify="center"
-          style={{textAlign: "center"}}
+          style={{ textAlign: "center" }}
         >
           <Grid item xs={12} sm={12}>
             {" "}
@@ -77,77 +77,71 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-             
+
               label={t("faculty")}
               variant="filled"
               placeholder="eg.Engineering"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setFaculty(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-             
+
               label={t("SchoolNameorUniversity")}
               variant="filled"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setUniversityName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-             
+
               label={t("facultyAr")}
               variant="filled"
               placeholder={t("eg.Engineering")}
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setFacultyAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-             
+
               label={t("SchoolNameorUniversityAr")}
               variant="filled"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setUniversityNameAr(e.target.value)}
             />
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            {" "}
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("StartDate")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setStartDate(e)} />
-              </Grid>
-            </Grid>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="Start Date"
+                value={startDate}
+                onChange={(e) => setStartDate(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12} sm={6}>
-            {" "}
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("EndDate")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setEndDate(e)} />
-              </Grid>
-            </Grid>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="End Date"
+                value={endDate}
+                onChange={(e) => setEndDate(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
 
-          
+
           <Grid item xs={12} sm={6}>
             {" "}
-            <FormControl style={{width: "100%"}}>
+            <FormControl style={{ width: "100%" }}>
               <InputLabel id="demo-simple-select-label">
                 {t("grade")}
               </InputLabel>
@@ -165,7 +159,7 @@ export default function AddEducation(props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <FormControl style={{width: "100%"}}>
+            <FormControl style={{ width: "100%" }}>
               <InputLabel id="demo-simple-select-label">
                 {t("Degree")}
               </InputLabel>
@@ -186,7 +180,7 @@ export default function AddEducation(props) {
             <Button
               variant="outlined"
               className="cancel"
-              style={{marginLeft: "10px", float: "right"}}
+              style={{ marginLeft: "10px", float: "right" }}
               onClick={handelCancel}
             >
               {t("cancel")}
@@ -194,7 +188,7 @@ export default function AddEducation(props) {
             <Button
               variant="contained"
               className="save"
-              style={{float: "right"}}
+              style={{ float: "right" }}
               onClick={() => {
                 dispatch(AddEducationAction(data));
                 history.push("/buildcv/education");

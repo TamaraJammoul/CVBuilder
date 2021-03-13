@@ -4,15 +4,15 @@ import {AddCertificateAction} from "./../../../store/action/certificate";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
-import YearPicker from "react-year-picker";
-
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
 export default function AddCertificate(props) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [nameAr, setNameAr] = useState("");
   const [descriptionAr, setDescriptionAr] = useState("");
-  const [date, setDate] = useState(0);
+  const [date, setDate] = useState(new Date());
   const cvID = useSelector((state) => state.cvID);
   const lan = useSelector((state) => state.sections.twolan);
 
@@ -100,16 +100,15 @@ export default function AddCertificate(props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-            <Grid container direction="row" style={{width:"100%"}}>
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("Date")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setDate(e)} />
-              </Grid>
-            </Grid>
+           
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="Date"
+                value={date}
+                onChange={(e) => setDate(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12} sm={6}>  
             <Button

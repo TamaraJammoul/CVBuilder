@@ -9,8 +9,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import YearPicker from "react-year-picker";
-
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
 export default function AddEducation(props) {
   const dispatch = useDispatch();
   let history = useHistory();
@@ -127,29 +127,25 @@ export default function AddEducation(props) {
 
           <Grid item xs={12} sm={6}>
             {" "}
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("StartDate")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setStartDate(e)} />
-              </Grid>
-            </Grid>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="Start Date"
+                value={startDate}
+                onChange={(e) => setStartDate(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12} sm={6}>
-            {" "}
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("EndDate")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setEndDate(e)} />
-              </Grid>
-            </Grid>
+
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="End Date"
+                value={endDate}
+                onChange={(e) => setEndDate(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
   
           <Grid item xs={12} sm={6}>

@@ -4,8 +4,8 @@ import {EditCoursesAction} from "../../../store/action/courses";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useHistory, useLocation} from "react-router-dom";
-import YearPicker from "react-year-picker";
-
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
 export default function EditCourse(props) {
   const dispatch = useDispatch();
   let history = useHistory();
@@ -102,16 +102,14 @@ export default function EditCourse(props) {
             />
           </Grid>
           <Grid item xs={12}>
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                {" "}
-                <h5>{t("Year")}</h5>
-              </Grid>
-              <Grid item xs={6}>
-                {" "}
-                <YearPicker onChange={(e) => setYear(e)} />
-              </Grid>
-            </Grid>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="Year"
+                value={year}
+                onChange={(e) => setYear(e)}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12}>
             <Button
