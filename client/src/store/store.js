@@ -59,7 +59,7 @@ const initialState = {
   toastMessageAR: "",
   toastType: "success",
   cvName: "",
-  cvTemplate: "",
+  cvTemplate: "cv1",
   cvLanguage: "",
 };
 
@@ -68,7 +68,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk)
-    //,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 export default store;

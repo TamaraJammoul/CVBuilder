@@ -46,7 +46,7 @@ export default function AddOtherTraining(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("OtherTraining")}
               variant="filled"
               color="primary"

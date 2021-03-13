@@ -91,7 +91,7 @@ export function PeraonalInfoAction(payload) {
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: PERSONALINFO,
-          payload: res.data,
+          payload: res.data.data,
         });
         dispatch({
           type: SUCCESS,

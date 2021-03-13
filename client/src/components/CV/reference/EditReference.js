@@ -15,7 +15,7 @@ export default function EditReference(props) {
   let query = useQuery();
   const id = query.get("referenceID");
   const referenc = useSelector((state) => state.template.referenc);
-  const old = referenc.find((e) => e._id == id);
+  const old = referenc.find((e) => e._id === id);
   const [reference, setReference] = useState(old ? old.Name : "");
   const data = {id, reference, phone, order: "1"};
   const lan = useSelector((state) => state.sections.twolan);
@@ -47,7 +47,7 @@ export default function EditReference(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("Reference Name")}
               variant="filled"
               color="primary"
@@ -60,7 +60,7 @@ export default function EditReference(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("Phone")}
               variant="filled"
               color="primary"

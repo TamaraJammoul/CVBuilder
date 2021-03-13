@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {Button, Paper, Grid, Container, TextField} from "@material-ui/core";
 
 import {AddExperienceAction} from "./../../../store/action/experience";
@@ -29,9 +29,13 @@ export default function Experience(props) {
     experienceNameAr,
   };
   const dispatch = useDispatch();
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   let history = useHistory();
-
+  useEffect(() => {
+    return () => {
+      console.log("cleaned up");
+    };
+  }, []);
   const handelCancel = () => {
     setExperienceName("");
     setStartDate(0);
@@ -64,7 +68,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="filled-primary"
               label={t("ExperienceName")}
               variant="filled"
               color="primary"
@@ -74,7 +77,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="filled-primary"
               label={t("Description")}
               variant="filled"
               color="primary"
@@ -84,7 +86,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
-              id="filled-primary"
               label={t("ExperienceNameAr")}
               variant="filled"
               color="primary"
@@ -94,7 +95,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
-              id="filled-primary"
               label={t("DescriptionAr")}
               variant="filled"
               color="primary"
@@ -129,7 +129,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="filled-primary"
               label={t("Project")}
               variant="filled"
               color="primary"
@@ -151,7 +150,10 @@ export default function Experience(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
+                console.log("ooooooooo")
                 dispatch(AddExperienceAction(data));
+                console.log("pppppppppppp")
+
                 history.push("/buildcv/experience");
               }}
             >

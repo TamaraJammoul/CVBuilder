@@ -66,7 +66,7 @@ export default function EditCertificate(props) {
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-              id="filled-basic"
+              
               label={t("Certificate Name")}
               variant="filled"
               style={{width: "100%"}}
@@ -77,7 +77,7 @@ export default function EditCertificate(props) {
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-              id="filled-basic"
+              
               label={t("Description")}
               variant="filled"
               style={{width: "100%"}}
@@ -88,7 +88,7 @@ export default function EditCertificate(props) {
           <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-basic"
+              
               label={t("Certificate NameAr")}
               variant="filled"
               style={{width: "100%"}}
@@ -99,7 +99,7 @@ export default function EditCertificate(props) {
           <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-basic"
+              
               label={t("DescriptionAr")}
               variant="filled"
               style={{width: "100%"}}

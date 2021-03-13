@@ -55,7 +55,7 @@ export default function AddLanguage(props) {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="filled-basic"
+             
               label={t("Language")}
               variant="filled"
               placeholder={t("eg.English")}
@@ -66,7 +66,7 @@ export default function AddLanguage(props) {
           </Grid>
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             <TextField
-              id="filled-basic"
+             
               label={t("LanguageAr")}
               variant="filled"
               placeholder="مثال:اللغة الانكليزية"

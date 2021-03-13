@@ -16,7 +16,7 @@ export default function EditCourse(props) {
   let query = useQuery();
   const id = query.get("course_id");
   const courses = useSelector((state) => state.template.courses);
-  const old = courses.find((e) => e._id == id);
+  const old = courses.find((e) => e._id === id);
   const [coursesName, setCoursesName] = useState(old ? old.Name : "");
   const [description, setDescription] = useState(old ? old.Description : "");
   const [coursesNameAr, setCoursesNameAr] = useState(old ? old.NameAr : "");
@@ -56,7 +56,7 @@ export default function EditCourse(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+             
               label={t("CoursesName")}
               variant="filled"
               color="primary"
@@ -68,7 +68,7 @@ export default function EditCourse(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+             
               label={t("Description")}
               variant="filled"
               color="primary"
@@ -77,10 +77,10 @@ export default function EditCourse(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-primary"
+             
               label={t("CoursesNameAr")}
               variant="filled"
               color="primary"
@@ -89,10 +89,10 @@ export default function EditCourse(props) {
               onChange={(e) => setCoursesNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-primary"
+             
               label={t("DescriptionAr")}
               variant="filled"
               color="primary"

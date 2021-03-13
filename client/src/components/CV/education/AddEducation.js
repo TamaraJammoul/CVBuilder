@@ -77,7 +77,7 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-              id="filled-basic"
+             
               label={t("faculty")}
               variant="filled"
               placeholder="eg.Engineering"
@@ -88,7 +88,7 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-              id="filled-basic"
+             
               label={t("SchoolNameorUniversity")}
               variant="filled"
               style={{width: "100%"}}
@@ -98,7 +98,7 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-basic"
+             
               label={t("facultyAr")}
               variant="filled"
               placeholder={t("eg.Engineering")}
@@ -109,7 +109,7 @@ export default function AddEducation(props) {
           <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-basic"
+             
               label={t("SchoolNameorUniversityAr")}
               variant="filled"
               style={{width: "100%"}}

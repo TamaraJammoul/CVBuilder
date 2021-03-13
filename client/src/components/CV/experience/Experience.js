@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Button, Paper, Grid, IconButton, Container } from "@material-ui/core";
 import {
   Delete,
   OpenWith,
@@ -15,25 +15,30 @@ import {
   HideExperienceAction,
   OrderExperienceAction,
 } from "./../../../store/action/experience";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
-import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function Education() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.experiences);
   const experiencelen = useSelector((state) => state.template.experiencelen);
 
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [experiences, setExperiences] = useState([]);
+
   useEffect(() => {
-    setExperiences(temp);
+    let isMounted = true;
+    if (isMounted) 
+      setExperiences(temp);
+    return () => { isMounted = false };
   }, [temp]);
+
   const onDragEnd = (result) => {
-    const {destination, source, reason} = result;
+    const { destination, source, reason } = result;
     console.log("kljj", source, destination, reason);
     if (!destination || reason === "CANCEL") {
       return;
@@ -51,7 +56,7 @@ export default function Education() {
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
     setExperiences(users);
-    dispatch(OrderExperienceAction({source, destination, cvID, experiences}));
+    dispatch(OrderExperienceAction({ source, destination, cvID, experiences }));
   };
   const renderUsers = (exp, index) => {
     return (
@@ -70,7 +75,7 @@ export default function Education() {
                     alignItems="center"
                     justify="center"
                     spacing={4}
-                    style={{width: "100%"}}
+                    style={{ width: "100%" }}
                   >
                     <Grid item xs={1}>
                       <h4>{index + 1}</h4>
@@ -149,7 +154,7 @@ export default function Education() {
     >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item style={{width: "100%"}} sx={12}>
+          <Grid item style={{ width: "100%" }} sx={12}>
             <Grid container alignItems="center" direction="row" spacing={6}>
               <Grid item sm={6} xs={12}>
                 <h2>{t("Experience")}</h2>
@@ -162,7 +167,7 @@ export default function Education() {
                   className="button"
                   onClick={() => {
                     setHide(!hide);
-                    dispatch(HideExperienceAction({cvID, hide}));
+                    dispatch(HideExperienceAction({ cvID, hide }));
                   }}
                 >
                   {hide == 1 ? t("HideSection") : t("ShowSection")}
@@ -184,19 +189,19 @@ export default function Education() {
             </Droppable>
           </DragDropContext>
           {/* {experiences.length < experiencelen ? ( */}
-            <Grid item xs={12}>
+          <Grid item xs={12}>
+            {" "}
+            <Link to="/buildcv/addexperience">
               {" "}
-              <Link to="/buildcv/addexperience">
-                {" "}
-                <Button
-                  variant="contained"
-                  //startIcon={<DeleteIcon />}
-                  className="save"
-                >
-                  {t("AddExperience")}
-                </Button>
-              </Link>
-            </Grid>
+              <Button
+                variant="contained"
+                //startIcon={<DeleteIcon />}
+                className="save"
+              >
+                {t("AddExperience")}
+              </Button>
+            </Link>
+          </Grid>
           {/* ) : (
             ""
           )} */}

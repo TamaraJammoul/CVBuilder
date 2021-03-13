@@ -17,7 +17,7 @@ export default function EditMembership(props) {
   let query = useQuery();
   const id = query.get("membershipID");
   const membership = useSelector((state) => state.template.memberships);
-  const old = membership.find((e) => e._id == id);
+  const old = membership.find((e) => e._id === id);
   const [membershipName, setMembershipName] = useState(old ? old.Name : "");
   const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
   const handelCancel = () => {
@@ -47,7 +47,7 @@ export default function EditMembership(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+             
               label={t("Membership Name")}
               variant="filled"
               color="primary"
@@ -56,10 +56,10 @@ export default function EditMembership(props) {
               onChange={(e) => setMembershipName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-primary"
+             
               label={t("MembershipAr")}
               variant="filled"
               color="primary"

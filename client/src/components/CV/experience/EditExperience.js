@@ -64,7 +64,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="filled-primary"
               label={t("Experience Name")}
               variant="filled"
               color="primary"
@@ -75,7 +74,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id="filled-primary"
               label={t("Description")}
               variant="filled"
               color="primary"
@@ -86,7 +84,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
-              id="filled-primary"
               label={t("ExperienceNameAr")}
               variant="filled"
               color="primary"
@@ -97,7 +94,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
             <TextField
-              id="filled-primary"
               label={t("DescriptionAr")}
               variant="filled"
               color="primary"
@@ -133,7 +129,6 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="filled-primary"
               label={t("Project")}
               variant="filled"
               color="primary"

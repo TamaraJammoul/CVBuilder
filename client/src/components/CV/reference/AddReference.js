@@ -45,7 +45,7 @@ export default function Reference(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("AddReference")}
               variant="filled"
               color="primary"
@@ -56,7 +56,7 @@ export default function Reference(props) {
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("AddReference")}
               variant="filled"
               color="primary"
@@ -67,7 +67,7 @@ export default function Reference(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("Phone")}
               variant="filled"
               color="primary"

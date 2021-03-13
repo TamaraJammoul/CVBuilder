@@ -132,6 +132,7 @@ export default function Membership() {
       data-aos-offset="200"
       data-aos-delay="50" 
       data-aos-duration="1000"
+      style={{minHeight:"350px"}}
     >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
@@ -167,23 +168,18 @@ export default function Membership() {
               )}
             </Droppable>
           </DragDropContext>
-          {achievement.length < achievementlen ? (
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addachievement">
                 {" "}
                 <Button
                   variant="contained"
-                 // startIcon={<DeleteIcon />}
                   className="save"
                 >
                   {t("AddAchievement")}
                 </Button>
               </Link>
             </Grid>
-          ) : (
-            ""
-          )}
         </Grid>
       </Container>
     </Paper>

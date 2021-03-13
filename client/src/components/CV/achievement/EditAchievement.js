@@ -17,7 +17,7 @@ export default function EditAchievement(props) {
   let query = useQuery();
   const id = query.get("achievementID");
   const achievements = useSelector((state) => state.template.achievements);
-  const old = achievements.find((e) => e._id == id);
+  const old = achievements.find((e) => e._id === id);
   console.log(old, "pppp");
   const [achievementName, setAchievementName] = useState(old ? old.Name : "");
   const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
@@ -49,7 +49,7 @@ export default function EditAchievement(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+          
               label={t("Achievement Name")}
               variant="filled"
               color="primary"
@@ -58,10 +58,10 @@ export default function EditAchievement(props) {
               onChange={(e) => setAchievementName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-primary"
+          
               label={t("Achievement NameAR")}
               variant="filled"
               color="primary"

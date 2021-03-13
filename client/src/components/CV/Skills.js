@@ -54,7 +54,8 @@ export default function Skills() {
       setComputerProficiency(!ComputerProficiency);
     if (t === "Leadership and Organisation")
       setLeadershipandOrganisation(!LeadershipandOrganisation);
-    if (t === "TeamWork") setTeamWork(!TeamWork);
+    if (t === "TeamWork")
+      setTeamWork(!TeamWork);
     if (t === "Self Development") setSelfDevelopment(!SelfDevelopment);
     if (t === "Problem solving") setProblemsolving1(!Problemsolving);
     if (t === "Work under pressure") setWorkunderpressure(!Workunderpressure);
@@ -83,6 +84,7 @@ export default function Skills() {
             xs={6}
             sm={3}
             className={OfficePrograms === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -90,7 +92,7 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Office Programs", "برامج أوفيس")}
             >
-              <img src={ic6} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic6} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Office Programs")}</h6>
           </Grid>
@@ -99,6 +101,7 @@ export default function Skills() {
             xs={6}
             sm={3}
             className={TimeManagment === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -106,7 +109,7 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Time Managment", "تنظيم الوقت")}
             >
-              <img src={ic1} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic1} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Time Managment")}</h6>
           </Grid>
@@ -114,7 +117,8 @@ export default function Skills() {
             item
             xs={6}
             sm={3}
-            className={Workunderpressure === true? "skillsBackground" : ""}
+            className={Workunderpressure === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -122,7 +126,7 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Work under pressure", "العمل تحت الضغط")}
             >
-              <img src={icon} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={icon} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Work under pressure")}</h6>
           </Grid>
@@ -131,6 +135,7 @@ export default function Skills() {
             xs={6}
             sm={3}
             className={Problemsolving === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -138,7 +143,7 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Problem solving", "حل المشاكل")}
             >
-              <img src={ic7} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic7} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Problem solving")}</h6>
           </Grid>
@@ -147,6 +152,7 @@ export default function Skills() {
             xs={6}
             sm={3}
             className={SelfDevelopment === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -154,18 +160,19 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Self Development", "تطوير الذات")}
             >
-              <img src={ic4} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic4} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Self Development")}</h6>
           </Grid>
-          <Grid item xs={6} sm={3} className={TeamWork === 1 ? "skillsBackground" : ""}>
+          <Grid item xs={6} sm={3} className={TeamWork === 1 ? "skillsBackground" : ""}
+          >
             <IconButton
               color="primary"
               aria-label="upload picture"
               component="span"
               onClick={() => addSkill("TeamWork", "العمل ضمن فريق")}
             >
-              <img src={ic2} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic2} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Team Work")}</h6>
           </Grid>
@@ -174,6 +181,7 @@ export default function Skills() {
             xs={6}
             sm={3}
             className={LeadershipandOrganisation === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -181,7 +189,7 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Leadership and Organisation", "القيادة والتنظيم")}
             >
-              <img src={ic3} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic3} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Leadership and Organisation")}</h6>
           </Grid>
@@ -190,6 +198,7 @@ export default function Skills() {
             xs={6}
             sm={3}
             className={ComputerProficiency === true ? "skillsBackground" : ""}
+
           >
             <IconButton
               color="primary"
@@ -197,7 +206,7 @@ export default function Skills() {
               component="span"
               onClick={() => addSkill("Computer Proficiency", "إجادة استخدام الحاسوب")}
             >
-              <img src={ic8} className="imgskill" style={{ width: "80px" }} />{" "}
+              <img src={ic8} className="imgskill" />{" "}
             </IconButton>
             <h6>{t("Computer Proficiency")}</h6>
           </Grid>

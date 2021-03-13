@@ -1,32 +1,36 @@
-import React, {useState, useEffect} from "react";
-import {Button, Paper, Grid, Avatar, TextField} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Button, Paper, Grid, Avatar, TextField } from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import defaultimg from "./../../img/stylingcv-default.jpg";
-import {PeraonalInfoAction} from "./../../store/action/action";
-import {useSelector, useDispatch} from "react-redux";
+import defaultImg from "./../../img/stylingcv-default.jpg";
+import { PeraonalInfoAction } from "./../../store/action/action";
+import { useSelector, useDispatch } from "react-redux";
 export default function PersonalInfo() {
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   var formData = new FormData();
   const dispatch = useDispatch();
   const id = useSelector((state) => state.template.personalInformation_id);
+  const personalData = useSelector((state) => state.template.personalInformation);
+
   const cvID = useSelector((state) => state.cvID);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [linkedIn, setLinkedIn] = useState("");
-  const [birth, setBirth] = useState(new Date());
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [nationality, setNationality] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState(1);
-  const [phone, setPhone] = useState(0);
+  const [firstName, setFirstName] = useState(personalData ? personalData.FirstName : '');
+  const [lastName, setLastName] = useState(personalData ? personalData.LastName : '');
+  const [email, setEmail] = useState(personalData ? personalData.Email : '');
+  const [linkedIn, setLinkedIn] = useState(personalData ? personalData.LinkedIn : '');
+  const [birth, setBirth] = useState(personalData ? personalData.Birth : '');
+  const [city, setCity] = useState(personalData ? personalData.City : '');
+  const [country, setCountry] = useState(personalData ? personalData.Country : '');
+  const [nationality, setNationality] = useState(personalData ? personalData.Nationality : '');
+  const [maritalStatus, setMaritalStatus] = useState(personalData ? personalData.MaritalStatus : '');
+  const [phone, setPhone] = useState(personalData ? personalData.Phone : '');
+  const [image, setImage] = useState(personalData ? personalData.Image : defaultImg);
+
   const send = () => {
     formData.append("cvID", cvID);
     formData.append("_id", id);
@@ -46,7 +50,7 @@ export default function PersonalInfo() {
     <Paper
       elevation={3}
       className="buildcvbar"
-      style={{width: "100%"}}
+      style={{ width: "100%" }}
       data-aos="fade-up-left"
       data-aos-offset="200"
       data-aos-delay="50"
@@ -70,7 +74,7 @@ export default function PersonalInfo() {
             direction="column"
           >
             <Grid item xs={12}>
-              <Avatar alt="Remy Sharp" src={defaultimg} className="avatar" />
+              <Avatar alt="Remy Sharp" src={defaultImg} className="avatar" />
             </Grid>
             <Grid item xs={12}>
               <Button
@@ -101,7 +105,7 @@ export default function PersonalInfo() {
           spacing={3}
           alignItems="center"
           justify="center"
-          style={{textAlign: "center"}}
+          style={{ textAlign: "center" }}
         >
           <Grid item xs={12} sm={6}>
             <TextField
@@ -190,7 +194,7 @@ export default function PersonalInfo() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl style={{width: "50%"}}>
+            <FormControl style={{ width: "50%" }}>
               <InputLabel id="demo-simple-select-label">
                 {t("Marital Status")}
               </InputLabel>
@@ -210,14 +214,14 @@ export default function PersonalInfo() {
             <Button
               variant="outlined"
               className="cancel mt-3"
-              style={{marginLeft: "10px", float: "right"}}
+              style={{ marginLeft: "10px", float: "right" }}
             >
               {t("cancel")}
             </Button>
             <Button
               variant="contained"
               className="save mt-3"
-              style={{float: "right"}}
+              style={{ float: "right" }}
               onClick={() => send()}
             >
               {t("save")}

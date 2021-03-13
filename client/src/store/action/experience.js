@@ -9,6 +9,7 @@ import {
 } from "./types";
 import axios from "axios";
 export function AddExperienceAction(payload) {
+  console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",

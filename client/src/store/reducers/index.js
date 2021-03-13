@@ -1,5 +1,13 @@
 export default function reducer(state, action) {
   switch (action.type) {
+    case "PERSONALINFO":
+      return {
+        ...state,
+        template: {
+          ...state.template,
+          personalInformation: action.payload
+        }
+      };
     case "FETCHCVID":
       return {
         ...state,
@@ -122,6 +130,7 @@ export default function reducer(state, action) {
         },
       };
     case "ADDEXPERIENCE":
+      console.log("ihyho")
       return {
         ...state,
         template: {

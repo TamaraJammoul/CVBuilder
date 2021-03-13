@@ -76,7 +76,7 @@ export default function CareerObjectives() {
           <Grid item xs={12} style={{width: "100%"}}>
             {" "}
             <TextField
-              id="filled-primary"
+              
               label={t("Enter CareerObjective")}
               variant="filled"
               color="primary"
@@ -91,7 +91,7 @@ export default function CareerObjectives() {
             className={lan === 0 ? "arhide" : ""}
           >
             <TextField
-              id="filled-primary"
+              
               label={t("Enter CareerObjective in Arabic")}
               variant="filled"
               color="primary"

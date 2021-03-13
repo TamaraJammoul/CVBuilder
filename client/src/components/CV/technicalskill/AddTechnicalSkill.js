@@ -52,7 +52,7 @@ export default function AddTechnicalSkill(props) {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="filled-basic"
+              
               label={t("Skill")}
               variant="filled"
               placeholder="eg.Microsoft Word"

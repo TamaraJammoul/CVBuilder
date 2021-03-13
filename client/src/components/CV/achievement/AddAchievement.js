@@ -42,7 +42,7 @@ export default function AddAchievement(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              id="filled-primary"
+            
               label={t("Achievement Name")}
               variant="filled"
               color="primary"
@@ -53,7 +53,7 @@ export default function AddAchievement(props) {
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              id="filled-primary"
+            
               label={t("Achievement NameAR")}
               variant="filled"
               color="primary"
