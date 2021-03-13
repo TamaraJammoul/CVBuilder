@@ -16,14 +16,12 @@ export default function AddEducation(props) {
 
   const [faculty, setFaculty] = useState("");
   const [universityName, setUniversityName] = useState("");
-  const [city, setCity] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [grade, setGrade] = useState(1);
   const [degree, setDegree] = useState(1);
   const [facultyAr, setFacultyAr] = useState("");
   const [universityNameAr, setUniversityNameAr] = useState("");
-  const [cityAr, setCityAr] = useState("");
   const { t, i18n } = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
@@ -32,14 +30,12 @@ export default function AddEducation(props) {
   const data = {
     faculty,
     universityName,
-    city,
     startDate,
     endDate,
     grade,
     cvID,
     degree,
     universityNameAr,
-    cityAr,
     facultyAr,
   };
 
@@ -51,7 +47,6 @@ export default function AddEducation(props) {
     setUniversityName("");
     setUniversityNameAr("");
     setFacultyAr("");
-    setCityAr("");
     history.push("/buildcv/education");
   };
   return (

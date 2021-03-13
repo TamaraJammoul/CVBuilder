@@ -13,12 +13,12 @@ export function AddEducationAction(payload) {
     await axios({
       method: "post",
       url: `https://we4cv.com/api/education/addEducation`,
-      data: {
+      data: { 
         UniversityName: payload.universityName,
         Faculty: payload.faculty,
-        YearStart: payload.startDate,
-        YearEnd: payload.endDate,
-        DegreeFrom5: payload.rate5,
+        YearStart: payload.startDate.getFullYear(),
+        YearEnd: payload.endDate.getFullYear(),
+        DegreeFrom5: 5,
         Order: 1,
         Grade: payload.grade,
         Degree: payload.degree,
@@ -119,9 +119,9 @@ export function EditEducationAction(payload) {
       data: {
         UniversityName: payload.universityName,
         Faculty: payload.faculty,
-        YearStart: payload.startDate,
-        YearEnd: payload.endDate,
-        DegreeFrom5: payload.rate5,
+        YearStart: payload.startDate.getFullYear(),
+        YearEnd: payload.endDate.getFullYear(),
+        DegreeFrom5: 5,
         Order: 1,
         Grade: payload.grade,
         _id: payload.id,

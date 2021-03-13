@@ -15,7 +15,7 @@ export function AddCertificateAction(payload) {
       url: `https://we4cv.com/api/certificate/addCertificate`,
       data: {
         Name: payload.name,
-        Year: payload.date,
+        Year: payload.date.getFullYear(),
         Description: payload.description,
         Order: 1,
         _id: payload.cvID,
@@ -118,7 +118,7 @@ export function EditCertificateAction(payload) {
       url: `https://we4cv.com/api/certificate/updateCertificate`,
       data: {
         Name: payload.name,
-        Year: payload.date,
+        Year: payload.date.getFullYear(),
         Description: payload.description,
         Order: 1,
         _id: payload.id,

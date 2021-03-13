@@ -15,8 +15,8 @@ export function AddExperienceAction(payload) {
       method: "post",
       url: `https://we4cv.com/api/experience/addExperience`,
       data: {
-        Start: payload.startDate,
-        End: payload.endDate,
+        Start: payload.startDate.getFullYear(),
+        End: payload.endDate.getFullYear(),
         Name: payload.experienceName,
         Project: payload.project,
         Description: payload.description,
@@ -116,8 +116,8 @@ export function EditExperienceAction(payload) {
         method: "post",
         url:`https://we4cv.com/api/experience/updateExperience`,
         data: {
-          Start: payload.startDate,
-          End: payload.endDate,
+          Start: payload.startDate.getFullYear(),
+          End: payload.endDate.getFullYear(),
           Name: payload.experienceName,
           Project: payload.project,
           Description: payload.description,
