@@ -23,8 +23,8 @@ export default function AddEducation(props) {
   const [universityName, setUniversityName] = useState( 
     old ? old.UniversityName : ""
   );
-  const [startDate, setStartDate] = useState(old ? old.YearStart : 0);
-  const [endDate, setEndDate] = useState(old ? old.YearEnd : 0);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [grade, setGrade] = useState(old ? old.Grade : 0);
   const [degree, setDegree] = useState(old ? old.RateFrom5 : 0);
   const [facultyAr, setFacultyAr] = useState(old ? old.FacultyAr : "");

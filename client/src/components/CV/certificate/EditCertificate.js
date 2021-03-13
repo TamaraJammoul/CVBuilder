@@ -19,7 +19,7 @@ export default function EditCertificate(props) {
   const [descriptionAr, setDescriptionAr] = useState(
     old ? old.DescriptionAr : ""
   );
-  const [date, setDate] = useState(old ? old.Year : new Date());
+  const [date, setDate] = useState(new Date());
   const cvID = useSelector((state) => state.cvID);
   let history = useHistory();
   const { t, i18n } = useTranslation();

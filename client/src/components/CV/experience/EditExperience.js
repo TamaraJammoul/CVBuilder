@@ -15,8 +15,8 @@ export default function Experience(props) {
   const old = experience.find((e) => e._id == id);
   const [experienceName, setExperienceName] = useState(old ? old.Name : "");
   const [description, setDescription] = useState(old ? old.Description : "");
-  const [startDate, setStartDate] = useState(old ? old.Start : new Date());
-  const [endDate, setEndDate] = useState(old ? old.End : new Date());
+  const [startDate, setStartDate] = useState( new Date());
+  const [endDate, setEndDate] = useState( new Date());
   const [project, setProject] = useState(old ? old.Project : "");
   const [experienceNameAr, setExperienceNameAr] = useState(
     old ? old.NameAr : ""
