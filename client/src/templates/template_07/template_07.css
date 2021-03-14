@@ -776,8 +776,10 @@
 }
 
 .template07-body .t07-exp-sec .t07-work-body .t07-work {
-  width: calc(380px * var(--t07-scale-rate));
-  margin: auto calc(100px * var(--t07-scale-rate));
+  width: calc(430px * var(--t07-scale-rate));
+  height: calc(220px * var(--t07-scale-rate));
+  margin: 0 calc(100px * var(--t07-scale-rate))
+    calc(30px * var(--t07-scale-rate));
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

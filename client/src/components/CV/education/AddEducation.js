@@ -118,7 +118,7 @@ export default function AddEducation(props) {
                 views={["year"]}
                 label="Start Date"
                 value={startDate}
-                onChange={(e) => setStartDate(e)}
+                onChange={(e) => setStartDate(new Date(e))}
               />
             </MuiPickersUtilsProvider>
           </Grid>
@@ -128,7 +128,7 @@ export default function AddEducation(props) {
                 views={["year"]}
                 label="End Date"
                 value={endDate}
-                onChange={(e) => setEndDate(e)}
+                onChange={(e) => setEndDate(new Date(e))}
               />
             </MuiPickersUtilsProvider>
           </Grid>

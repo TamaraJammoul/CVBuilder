@@ -145,8 +145,8 @@ const Template01 = (props) => {
               {degreeAr} {edu.Faculty}
             </p>
             <p>{edu.Universityname}</p>
-            <p>التقدير\xa0:\xa0{gradeAr}</p>
-            <p>سنة\xa0التخرج\xa0:\xa0{edu.YearEnd}</p>
+            <p>{`التقدير\xa0:\xa0${gradeAr}`}</p>
+            <p>{`سنة\xa0التخرج\xa0:\xa0${edu.YearEnd}`}</p>
           </div>
         );
       });

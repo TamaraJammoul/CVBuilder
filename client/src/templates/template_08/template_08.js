@@ -248,7 +248,7 @@ const Template08 = (props) => {
               <p>
                 {crs.Name} at {crs.Description}
               </p>
-              <p>From the period {crs.Year} - (EndDate)</p>
+              <p>From the period {crs.Year}</p>
             </div>
           </div>
         </div>
@@ -266,7 +266,7 @@ const Template08 = (props) => {
               <p>
                 {`${crs.NameAr}\xa0في\xa0${crs.DescriptionAr}`}
               </p>
-              <p>{`من\xa0الفترة\xa0${crs.Year}\xa0-\xa0(تاريخ الانتهاء)\xa0م`}</p>
+              <p>{`من\xa0الفترة\xa0${crs.Year}`}</p>
             </div>
           </div>
         </div>

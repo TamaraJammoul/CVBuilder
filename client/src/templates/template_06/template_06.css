@@ -223,10 +223,13 @@
   display: grid;
   grid-template-columns: calc(90px * var(--t06-scale-rate)) 1fr;
   grid-template-areas: "info-logo info-text";
-  padding: 0 calc(20px * var(--t06-scale-rate));
+  /* padding: 0 calc(20px * var(--t06-scale-rate)); */
   width: 50%;
   font-size: calc(14px * var(--t06-p-scale-rate));
   margin-bottom: calc(20px * var(--t06-scale-rate));
+}
+.template06-body .t06-info-sec .t06-sec-body .t06-info:nth-child(2n) {
+  padding-right: calc(20px * var(--t06-scale-rate));
 }
 
 .template06-body .t06-info-sec .t06-sec-body .t06-info .t06-info-logo {

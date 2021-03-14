@@ -147,7 +147,7 @@ const Template02 = (props) => {
             ></div>
             <p className="edu-title bold">{degreeAr}</p>
             <p>{edu.UniversityName}</p>
-            <p>المعدل\xa0:\xa0{edu.DegreeFrom5}\xa0من\xa05</p>
+            <p>{`المعدل\xa0:\xa0${edu.DegreeFrom5}\xa0من\xa05`}</p>
             <div className={`edu-year ${cvLanguage === "Ar" ? "ar" : ""}`}>
               <p className="year">{edu.YearEnd}</p>
             </div>

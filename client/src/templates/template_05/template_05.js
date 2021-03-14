@@ -173,7 +173,7 @@ const Template05 = (props) => {
                   cvLanguage === "Ar" ? "ar" : ""
                 }`}
               >
-                <p>{edu.UniversityNameAr}</p>
+                <p>{edu.UniversityName}</p>
               </div>
               <div
                 className={`t05-edu-content ${cvLanguage === "Ar" ? "ar" : ""}`}
@@ -184,7 +184,7 @@ const Template05 = (props) => {
                 </p>
                 <p>
                   <span className="t05-content-name">{`التخصص\xa0:\xa0`}</span>
-                  <span>{edu.FacultyAr}</span>
+                  <span>{edu.Faculty}</span>
                 </p>
                 <p>
                   <span className="t05-content-name">{`المعدل\xa0:\xa0`}</span>

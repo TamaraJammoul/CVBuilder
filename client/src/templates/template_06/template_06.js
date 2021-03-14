@@ -130,7 +130,7 @@ const Template06 = (props) => {
           <div className="t06-edu-content">
             <div className="t06-edu-major">
               <p>
-                {degree} in {edu.Field}
+                {degree} in {edu.Faculty}
               </p>
             </div>
             <div className="t06-edu-year">
@@ -160,7 +160,7 @@ const Template06 = (props) => {
             <div className="t06-edu-content">
               <div className="t06-edu-major">
                 <p>
-                  {`${degreeAr}\xa0${edu.Field}`}
+                  {`${degreeAr}\xa0${edu.Faculty}`}
                 </p>
               </div>
               <div className="t06-edu-year">

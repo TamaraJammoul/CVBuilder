@@ -106,7 +106,7 @@ export default function AddCertificate(props) {
                 views={["year"]}
                 label="Date"
                 value={date}
-                onChange={(e) => setDate(e)}
+                onChange={(e) => setDate(new Date(e))}
               />
             </MuiPickersUtilsProvider>
           </Grid>

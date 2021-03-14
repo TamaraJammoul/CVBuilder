@@ -95,7 +95,7 @@ export default function AddCourses(props) {
                 views={["year"]}
                 label="Year"
                 value={year}
-                onChange={(e) => setYear(e)}
+                onChange={(e) => setYear(new Date(e))}
               />
             </MuiPickersUtilsProvider>
           </Grid>
