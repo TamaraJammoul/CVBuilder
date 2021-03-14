@@ -67,7 +67,7 @@ export function GetAllCVAction(payload) {
     });
   };
 }
-export function Auth(payload) {
+export function Auth() {
   return async (dispatch) => {
     dispatch({
       type: AUTH,
@@ -75,16 +75,19 @@ export function Auth(payload) {
   };
 }
 export function PeraonalInfoAction(payload) {
+  console.log(payload.get("profile"))
   return async (dispatch) => {
     await axios({
       method: "post",
-      url: `https://cvbuilder2020.herokuapp.com/api/personalInformation/updatePersonalInformation`,
+      url: `https://we4cv.com/api/personalInformation/updatePersonalInformation`,
       data: payload,
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': `multipart/form-data; boundary=${payload._boundary}`,
         Authorization: `Bearer ${localStorage.getItem("token")}`,
+
       },
     }).then((res) => {
+      console.log(res)
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: PERSONALINFO,

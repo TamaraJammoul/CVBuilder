@@ -17,7 +17,6 @@ export default function PersonalInfo() {
   const id = useSelector((state) => state.template.personalInformation_id);
   const personalData = useSelector((state) => state.template.personalInformation);
 
-  const cvID = useSelector((state) => state.cvID);
 
   const [firstName, setFirstName] = useState(personalData ? personalData.FirstName : '');
   const [lastName, setLastName] = useState(personalData ? personalData.LastName : '');
@@ -27,7 +26,7 @@ export default function PersonalInfo() {
   const [city, setCity] = useState(personalData ? personalData.City : '');
   const [country, setCountry] = useState(personalData ? personalData.Country : '');
   const [nationality, setNationality] = useState(personalData ? personalData.Nationality : '');
-  const [maritalStatus, setMaritalStatus] = useState(personalData ? personalData.MaritalStatus : '');
+  const [maritalStatus, setMaritalStatus] = useState(personalData ? personalData.MaritalStatus : 1);
   const [phone, setPhone] = useState(personalData ? personalData.Phone : '');
   const [image, setImage] = useState(personalData ? personalData.Image : defaultImg);
 
@@ -35,7 +34,6 @@ export default function PersonalInfo() {
     if (email == undefined || lastName == undefined || firstName == undefined || phone == undefined){
       alert("please fill all fields")}
     else {
-      formData.append("cvID", cvID);
       formData.append("_id", id);
       formData.append("FirstName", firstName);
       formData.append("LastName", lastName);
@@ -112,7 +110,6 @@ export default function PersonalInfo() {
         >
           <Grid item xs={12} sm={6}>
             <TextField
-
               label={t("FirstName")}
               variant="filled"
               color="primary"
