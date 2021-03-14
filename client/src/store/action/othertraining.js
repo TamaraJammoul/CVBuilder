@@ -24,7 +24,6 @@ export function AddOtherTrainingAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDOTHERTRAINING,
@@ -55,7 +54,6 @@ export function CopyOtherTrainingAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: COPYOTHERTRAINING,
@@ -73,7 +71,6 @@ export function CopyOtherTrainingAction(payload) {
   };
 }
 export function DeleteOtherTrainingAction(payload) {
-  console.log(payload, "ooo");
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -87,7 +84,6 @@ export function DeleteOtherTrainingAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: DELETEOTHERTRAINING,
@@ -120,7 +116,6 @@ export function EditOtherTrainingAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: EDITOTHERTRAINING,
@@ -151,7 +146,6 @@ export function HideOtherTrainingAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: HIDEOTHERTRAINING,
@@ -183,7 +177,6 @@ export function OrderOtherTrainingAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ORDEROTHERTRAINING,

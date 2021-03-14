@@ -32,11 +32,7 @@ export default function Experience(props) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   let history = useHistory();
-  useEffect(() => {
-    return () => {
-      console.log("cleaned up");
-    };
-  }, []);
+ 
   const handelCancel = () => {
     setExperienceName("");
     setStartDate(0);

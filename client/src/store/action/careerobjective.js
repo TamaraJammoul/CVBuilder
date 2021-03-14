@@ -2,7 +2,6 @@ import { EDITCAREEROBJECTIVE, HIDECAREEROBJECTIVE, ERROR, SUCCESS } from "./type
 import axios from "axios";
 
 export function EditCareerObjectiveAction(payload) {
-  console.log(payload, "kjl");
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -17,7 +16,6 @@ export function EditCareerObjectiveAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: EDITCAREEROBJECTIVE,
@@ -35,7 +33,6 @@ export function EditCareerObjectiveAction(payload) {
   };
 }
 export function HideCareerObjectiveAction(payload) {
-  console.log(payload);
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -49,7 +46,6 @@ export function HideCareerObjectiveAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: HIDECAREEROBJECTIVE,

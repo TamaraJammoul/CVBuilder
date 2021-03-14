@@ -678,7 +678,6 @@ const Template06 = (props) => {
     if (result.destination.index === result.source.index) return;
 
     if (result.type === "Main") {
-      // console.log(result);
       const items = Array.from(mainSectionList);
       const [reorderedItem] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reorderedItem);

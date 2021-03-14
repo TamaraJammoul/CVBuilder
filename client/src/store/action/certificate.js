@@ -27,7 +27,6 @@ export function AddCertificateAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ADDCERTIFICATE,
@@ -59,7 +58,6 @@ export function CopyCertificateAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: COPYCERTIFICATE,
@@ -91,7 +89,6 @@ export function DeleteCertificateAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: DELETECERTIFICATE,
@@ -131,7 +128,6 @@ export function EditCertificateAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: EDITCERTIFICATE,
@@ -163,7 +159,6 @@ export function HideCertificateAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: HIDECERTIFICATE,
@@ -195,7 +190,6 @@ export function OrderCertificateAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ORDERCERTIFICATE,

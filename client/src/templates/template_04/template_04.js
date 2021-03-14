@@ -399,7 +399,6 @@ const Template04 = (props) => {
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    // console.log(result);
 
     if (result.type === "Right") {
       const items = Array.from(rightSectionList);

@@ -13,7 +13,6 @@ export default function Reference(props) {
   const dispatch = useDispatch();
   let history = useHistory();
   const lan = useSelector((state) => state.sections.twolan);
-  console.log(lan, "yyyyyyyyyyyyyyyyyy");
   const handelCancel = () => {
     setReference("");
     setPhone("");
@@ -89,7 +88,7 @@ export default function Reference(props) {
               className="save"
               style={{ float: "right" }}
               onClick={() => {
-                if (reference === '' || phone == '')
+                if (reference === '' )
                   alert("please fill all fields")
                 else {
                   dispatch(

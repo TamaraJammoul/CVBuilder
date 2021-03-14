@@ -15,7 +15,6 @@ function Navbar(props) {
   let history = useHistory();
   const theme = useTheme();
   const {t, i18n} = useTranslation();
-  console.log(i18n.language);
   document.body.dir = i18n.dir();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);

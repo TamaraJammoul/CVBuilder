@@ -18,7 +18,6 @@ import {Link} from "react-router-dom";
 export default function Refernce() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.references);
-  const referenclen = useSelector((state) => state.template.referenclen);
 
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
@@ -97,7 +96,6 @@ export default function Refernce() {
                       <IconButton
                         aria-label="delete"
                         onClick={() => {
-                          console.log("kljklj");
                           dispatch(
                             DeleteReferenceAction({cvID, reference_id: ref._id})
                           );
@@ -111,7 +109,7 @@ export default function Refernce() {
               </Paper>
             </Grid>
           ))}
-          {/* {references < referenclen ? ( */}
+          {references < 1 ? ( 
             <Grid item xs={12}>
               {" "}
               <Link to="/buildcv/addreference">
@@ -119,15 +117,14 @@ export default function Refernce() {
                 <Button
                   variant="contained"
                   className="save"
-                  //startIcon={<DeleteIcon />}
                 >
                   {t("AddReference")}
                 </Button>
               </Link>
             </Grid>
-          {/* ) : (
+          ) : (
             ""
-          )} */}
+          )} 
         </Grid>
       </Container>
     </Paper>

@@ -27,7 +27,6 @@ export function AddCoursesAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDCOURSES,
@@ -58,9 +57,7 @@ export function CopyCoursesAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
-        console.log("tamara");
         {
           dispatch({
             type: COPYCOURSES,
@@ -78,7 +75,6 @@ export function CopyCoursesAction(payload) {
   };
 }
 export function DeleteCoursesAction(payload) {
-  console.log(payload);
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -92,7 +88,6 @@ export function DeleteCoursesAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: DELETECOURSES,
@@ -128,7 +123,6 @@ export function EditCoursesAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: EDITCOURSES,
@@ -159,7 +153,6 @@ export function HideCoursesAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: HIDECOURSES,
@@ -191,7 +184,6 @@ export function OrderCoursesAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ORDERCOURSES,

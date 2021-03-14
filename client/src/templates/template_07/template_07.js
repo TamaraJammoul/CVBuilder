@@ -243,14 +243,13 @@ const Template07 = (props) => {
           </div>
         );
       });
-      // console.log("[works] ", works);
       return (
         <div className="t07-work-row" key={index}>
           {works}
         </div>
       );
     });
-    // console.log("[workRows] ", workRows);
+
   }
 
   let CO = null;
@@ -496,7 +495,6 @@ const Template07 = (props) => {
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    // console.log(result);
 
     if (result.type === "Main") {
       const items = Array.from(mainSectionList);

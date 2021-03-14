@@ -26,7 +26,6 @@ export function AddLanguageAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDLANGUAGE,
@@ -57,7 +56,6 @@ export function CopyLanguageAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: COPYLANGUAGE,
@@ -75,7 +73,6 @@ export function CopyLanguageAction(payload) {
   };
 }
 export function DeleteLanguageAction(payload) {
-  console.log(payload);
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -89,7 +86,6 @@ export function DeleteLanguageAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: DELETELANGUAGE,
@@ -123,7 +119,6 @@ export function EditLanguageAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: EDITLANGUAGE,
@@ -154,7 +149,6 @@ export function HideLanguageAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: HIDELANGUAGE,
@@ -186,7 +180,6 @@ export function OrderLanguageAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ORDERLANGUAGE,

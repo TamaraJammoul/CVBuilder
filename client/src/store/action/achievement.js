@@ -25,7 +25,6 @@ export function AddAchievementAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDACHIEVEMENT,
@@ -56,7 +55,6 @@ export function CopyAchievementAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: COPYACHIEVEMENT,
@@ -87,7 +85,6 @@ export function DeleteAchievementAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: DELETEACHIEVEMENT,
@@ -120,7 +117,6 @@ export function EditAchievementAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: EDITACHIEVEMENT,
@@ -151,7 +147,6 @@ export function HideAchievementAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: HIDEACHIEVEMENT,
@@ -183,8 +178,7 @@ export function OrderAchievementAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data && res.data.status != 0);
-      if (res.status == 200) {
+      if (res.status == 200&& res.data.status != 0) {
         dispatch({
           type: ORDERACHIEVEMENT,
           payload,

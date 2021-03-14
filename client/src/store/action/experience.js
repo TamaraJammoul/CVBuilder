@@ -9,7 +9,6 @@ import {
 } from "./types";
 import axios from "axios";
 export function AddExperienceAction(payload) {
-  console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -30,7 +29,6 @@ export function AddExperienceAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ADDEXPERIENCE,
@@ -61,7 +59,6 @@ export function CopyExperienceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: COPYEXPERIENCE,
@@ -79,7 +76,6 @@ export function CopyExperienceAction(payload) {
   };
 }
 export function DeleteExperienceAction(payload) {
-  console.log(payload);
   return async(dispatch) => {
       await axios({
         method: "post",
@@ -93,7 +89,6 @@ export function DeleteExperienceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res);
         if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: DELETEEXPERIENCE,
@@ -131,7 +126,6 @@ export function EditExperienceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: EDITEXPERIENCE,
@@ -162,7 +156,6 @@ export function HideExperienceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: HIDEEXPERIENCE,
@@ -194,7 +187,6 @@ export function OrderExperienceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: ORDEREXPERIENCE,

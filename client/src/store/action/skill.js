@@ -14,7 +14,6 @@ export function AddSkillAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDSKILL,
@@ -45,7 +44,6 @@ export function HideSkillAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: HIDESKILL,

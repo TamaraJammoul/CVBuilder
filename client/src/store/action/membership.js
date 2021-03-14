@@ -24,7 +24,6 @@ export function AddMembershipAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDMEMBERSHIP,
@@ -55,7 +54,6 @@ export function CopyMembershipAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: COPYMEMBERSHIP,
@@ -73,7 +71,6 @@ export function CopyMembershipAction(payload) {
   };
 }
 export function DeleteMembershipAction(payload) {
-  console.log(payload);
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -87,7 +84,6 @@ export function DeleteMembershipAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: DELETEMEMBERSHIP,
@@ -120,7 +116,6 @@ export function EditMembershipAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: EDITMEMBERSHIP,
@@ -151,7 +146,6 @@ export function HideMembershipAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: HIDEMEMBERSHIP,
@@ -183,7 +177,6 @@ export function OrderMembershipAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ORDERMEMBERSHIP,

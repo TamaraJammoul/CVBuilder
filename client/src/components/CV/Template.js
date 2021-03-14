@@ -11,7 +11,6 @@ export default function Template(props) {
   const { t } = useTranslation();
   const email = useSelector((state) => state.email);
   useEffect(() => {
-    console.log(props)
   }, [])
   return (
     <Paper className="shadow"
@@ -71,7 +70,6 @@ export default function Template(props) {
                 <IconButton
                   aria-label="delete"
                   onClick={() => {
-                    console.log(props.template._id, email)
                     dispatch(DeleteCVAction({ cvID: props.template._id, email }))
                   }}
                 >

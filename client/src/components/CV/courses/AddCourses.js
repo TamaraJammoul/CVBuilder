@@ -76,7 +76,7 @@ export default function AddCourses(props) {
               onChange={(e) => setCoursesAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan = 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
 

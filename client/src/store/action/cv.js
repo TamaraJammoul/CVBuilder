@@ -23,7 +23,6 @@ export function AddCVAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: ADDCV,
@@ -41,7 +40,6 @@ export function AddCVAction(payload) {
   };
 }
 export function DeleteCVAction(payload) {
-  console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -55,7 +53,6 @@ export function DeleteCVAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res)
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: DELETECV,
@@ -97,7 +94,6 @@ export function CVLanguage1(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: CVLANGIAGE,
@@ -128,7 +124,6 @@ export function CVName1(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data, payload);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: CVNAME,
@@ -160,9 +155,8 @@ export function CVTemplate1(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data, payload);
       if (res.status == 200 && res.data.status != 0) {
-        localStorage.setItem("cvTemplate",payload.template);
+        localStorage.setItem("cvTemplate",payload.template)
         dispatch({
           type: CVTEMPLATE,
           payload,

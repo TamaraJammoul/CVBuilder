@@ -11,7 +11,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const email = useSelector((state) => state.email);
-  const name = useSelector((state) => state.name);
+  const name = useSelector((state) => state.firstName);
   const myTemplate = useSelector((state) => state.MyTemplates);
   const history = useHistory();
   useEffect(() => {

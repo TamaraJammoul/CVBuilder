@@ -31,7 +31,6 @@ export function AddEducationAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ADDEDUCATION,
@@ -62,7 +61,6 @@ export function CopyEducationAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: COPYEDUCATION,
@@ -80,7 +78,6 @@ export function CopyEducationAction(payload) {
   };
 }
 export function DeleteEducationAction(payload) {
-  console.log(payload);
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -94,7 +91,6 @@ export function DeleteEducationAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: DELETEEDUCATION,
@@ -133,7 +129,6 @@ export function EditEducationAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: EDITEDUCATION,
@@ -164,7 +159,6 @@ export function HideEducationAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: HIDEEDUCATION,
@@ -196,7 +190,6 @@ export function OrderEducationAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ORDEREDUCATION,

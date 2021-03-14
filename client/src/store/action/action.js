@@ -24,7 +24,6 @@ export function ContactusAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: CONTACTUS,
@@ -56,7 +55,6 @@ export function GetAllCVAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: GETALLCV,
@@ -87,7 +85,6 @@ export function PeraonalInfoAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: PERSONALINFO,
@@ -115,7 +112,6 @@ export function ResetPasswordLink(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: RESETPASSWORDLINK,
@@ -139,7 +135,6 @@ export function ResetPassword(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.status == 200 && res.data.status != 0)
         dispatch({
           type: RESETPASSWORD,

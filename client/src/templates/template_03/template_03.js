@@ -57,7 +57,6 @@ const Template03 = (props) => {
     darkGreen: "#386464",
     lightGreen: "#669696",
   }
-console.log(props)
   let edus = null;
   if (educations.length > 0) {
     edus = educations.map((edu) => {
@@ -399,7 +398,6 @@ console.log(props)
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    // console.log(result);
 
     if (result.type === "Right") {
       const items = Array.from(rightSectionList);

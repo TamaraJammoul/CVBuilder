@@ -25,7 +25,6 @@ export function AddReferenceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: ADDREFERENCE,
@@ -55,7 +54,6 @@ export function CopyReferenceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res);
         if (res.status == 200 && res.data.status != 0)
          { dispatch({
             type: COPYREFERENCE,
@@ -85,7 +83,6 @@ export function DeleteReferenceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res);
         if (res.status == 200 && res.data.status != 0)
          { dispatch({
             type: DELETEREFERENCE,
@@ -118,7 +115,6 @@ export function EditReferenceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: EDITREFERENCE,
@@ -148,7 +144,6 @@ export function HideReferenceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: HIDEREFERENCE,
@@ -179,7 +174,6 @@ export function OrderReferenceAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: ORDERREFERENCE,

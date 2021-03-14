@@ -487,7 +487,6 @@ const Template10 = (props) => {
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    // console.log(result);
 
     if (result.type === "Main") {
       const items = Array.from(mainSectionList);

@@ -45,28 +45,30 @@ export default function reducer(state, action) {
         cvName: action.payload.name,
       };
     case "EDITCV":
+      let cv={}
+      state.MyTemplates.map(e=>e._id===action.payload.cvID?cv=e:'')
       return {
         ...state,
-        cvName: action.payload.name,
-        cvID: action.payload._id,
-        cvTemplate: action.payload.Template,
-        cvLanguage: action.payload.Language,
+        cvName: cv.Name,
+        cvID: cv._id,
+        cvTemplate: cv.Template,
+        cvLanguage: cv.Language,
         template: {
-          educations: action.payload.Educations,
-          certificates: action.payload.Certificates,
-          experiences: action.payload.Experiences,
-          languages: action.payload.Languages,
-          memberships: action.payload.Memberships,
-          othertraining: action.payload.OtherTrainings,
-          technicalskills: action.payload.TechnicalSkills,
-          achievements: action.payload.Achievements,
-          references: action.payload.References,
-          skills: action.payload.Skill,
-          courses: action.payload.Courses,
-          personalInformation: action.payload.PersonalInformation,
-          careerobjective: action.payload.CareerObjectives,
-          careerObjectives_id: action.payload.careerObjectives_id,
-          personalInformation_id: action.payload.personalInformation_id
+          educations: cv.Educations,
+          certificates: cv.Certificates,
+          experiences: cv.Experiences,
+          languages: cv.Languages,
+          memberships: cv.Memberships,
+          othertraining: cv.OtherTrainings,
+          technicalskills: cv.TechnicalSkills,
+          achievements: cv.Achievements,
+          references: cv.References,
+          skills: cv.Skill,
+          courses: cv.Courses,
+          personalInformation: cv.PersonalInformation,
+          careerobjective: cv.CareerObjectives,
+          careerObjectives_id: cv.careerObjectives_id,
+          personalInformation_id: cv.personalInformation_id
         }
       };
     case "CVTEMPLATE":
@@ -134,7 +136,6 @@ export default function reducer(state, action) {
         },
       };
     case "ADDEXPERIENCE":
-      console.log("ihyho")
       return {
         ...state,
         template: {
@@ -167,7 +168,6 @@ export default function reducer(state, action) {
         },
       };
     case "ADDLANGUAGE":
-      console.log(action.payload);
       return {
         ...state,
         template: {
@@ -176,7 +176,6 @@ export default function reducer(state, action) {
         },
       };
     case "ORDERLANGUAGE":
-      console.log(action.payload);
       return {
         ...state,
         template: {
@@ -217,7 +216,6 @@ export default function reducer(state, action) {
         },
       };
     case "ADDTECHNICALSKILL":
-      console.log(action.payload);
       return {
         ...state,
         template: {
@@ -226,7 +224,6 @@ export default function reducer(state, action) {
         },
       };
     case "ORDERTECHNICALSKILL":
-      console.log(action.payload);
       return {
         ...state,
         template: {
@@ -324,9 +321,7 @@ export default function reducer(state, action) {
       };
     case "DELETECERTIFICATE":
       var temp = state.template.certificates;
-      console.log(action.payload, temp);
       temp = temp.filter((e) => e._id != action.payload.certificate_id);
-      console.log("lj", temp);
       return {
         ...state,
         template: {
@@ -360,11 +355,9 @@ export default function reducer(state, action) {
           certificates: [...state.template.certificates, action.payload],
         },
       };
-      // console.log(state);
     case "DELETEEDUCATION":
       var temp = state.template.educations;
       temp = temp.filter((e) => e._id != action.payload.education_id);
-      console.log("iiiiiiiiii", temp);
       return {
         ...state,
         template: {
@@ -374,7 +367,6 @@ export default function reducer(state, action) {
       };
     case "EDITEDUCATION":
       var temp = state.template.educations;
-      console.log(action.payload);
       temp.map((e, i) => {
         if (e._id == action.payload._id) {
           e.Faculty = action.payload.Faculty;
@@ -387,7 +379,6 @@ export default function reducer(state, action) {
           e.Grade = action.payload.Grade;
         }
       });
-      console.log(temp);
       return {
         ...state,
         template: {
@@ -406,7 +397,6 @@ export default function reducer(state, action) {
     case "DELETEOTHERTRAINING":
       var temp = state.template.othertraining;
       temp = temp.filter((e) => e._id != action.payload.otherTraining_id);
-      console.log("iiiiiiiiii", temp, action.payload);
       return {
         ...state,
         template: {
@@ -455,7 +445,6 @@ export default function reducer(state, action) {
     case "DELETELANGUAGE":
       var temp = state.template.languages;
       temp = temp.filter((e) => e._id != action.payload.language_id);
-      console.log("iiiiiiiiii", temp);
       return {
         ...state,
         template: {
@@ -490,7 +479,6 @@ export default function reducer(state, action) {
     case "DELETEMEMBERSHIP":
       var temp = state.template.memberships;
       temp = temp.filter((e) => e._id != action.payload.membership_id);
-      console.log("iiiiiiiiii", temp);
       return {
         ...state,
         template: {
@@ -499,14 +487,12 @@ export default function reducer(state, action) {
         },
       };
     case "EDITMEMBERSHIP":
-      console.log(action.payload);
       var temp = state.template.memberships;
       temp.map((e, i) => {
         if (e._id == action.payload._id) {
           e.Name = action.payload.Name;
         }
       });
-      console.log(temp);
       return {
         ...state,
         template: {
@@ -522,11 +508,9 @@ export default function reducer(state, action) {
           memberships: [...state.template.memberships, action.payload],
         },
       };
-      // console.log(state);
     case "DELETEEXPERIENCE":
       var temp = state.template.experiences;
       temp = temp.filter((e) => e._id != action.payload.experience_id);
-      console.log("iiiiiiiiii", temp);
       return {
         ...state,
         template: {
@@ -536,7 +520,6 @@ export default function reducer(state, action) {
       };
     case "EDITEXPERIENCE":
       var temp = state.template.experiences;
-      console.log(action.payload, "ooooooo");
       temp.map((e, i) => {
         if (e._id == action.payload._id) {
           e.Name = action.payload.Name;
@@ -546,7 +529,6 @@ export default function reducer(state, action) {
           e.Project = action.payload.Project;
         }
       });
-      console.log(temp);
       return {
         ...state,
         template: {
@@ -565,7 +547,6 @@ export default function reducer(state, action) {
     case "DELETETECHNICALSKILL":
       var temp = state.template.technicalskills;
       temp = temp.filter((e) => e._id != action.payload.technicalSkill_id);
-      console.log("iiiiiiiiii", temp);
       return {
         ...state,
         template: {
@@ -581,7 +562,6 @@ export default function reducer(state, action) {
           e.RateFrom5 = action.payload.RateFrom5;
         }
       });
-      console.log(temp, "kjjk");
       return {
         ...state,
         template: {
@@ -621,7 +601,6 @@ export default function reducer(state, action) {
           e.NameAr = action.payload.NameAr;
         }
       });
-      console.log(temp, "kjjk");
       return {
         ...state,
         template: {
@@ -632,7 +611,6 @@ export default function reducer(state, action) {
     case "DELETEACHIEVEMENT":
       var temp = state.template.achievements;
       temp = temp.filter((e) => e._id != action.payload.achievement_id);
-      console.log("iiiiiiiiii", temp, action.payload.achievement_id);
       return {
         ...state,
         template: {

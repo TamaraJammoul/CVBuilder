@@ -25,10 +25,8 @@ const CheckoutForm = ({success}) => {
 
       try {
         const {data} = await axios.post("/api/charge", {id, amount: 1099});
-        console.log(data);
         success();
       } catch (error) {
-        console.log(error);
       }
     }
   };

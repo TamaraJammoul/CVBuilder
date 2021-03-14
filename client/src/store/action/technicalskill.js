@@ -25,7 +25,6 @@ export function AddTechnicalSkillsAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: ADDTECHNICALSKILL,
@@ -55,7 +54,6 @@ export function CopyTechnicalSkillsAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: COPYTECHNICALSKILL,
@@ -86,7 +84,6 @@ export function DeleteTechnicalSkillAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: DELETETECHNICALSKILL,
@@ -120,7 +117,6 @@ export function EditTechnicalSkillAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: EDITTECHNICALSKILL,
@@ -150,7 +146,6 @@ export function HideTechnicalSkillAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
          { dispatch({
             type: HIDETECHNICALSKILL,
@@ -181,7 +176,6 @@ export function OrderTechnicalSkillAction(payload) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }).then((res) => {
-        console.log(res.data);
         if (res.status == 200 && res.data.status != 0)
           {dispatch({
             type: ORDERTECHNICALSKILL,

@@ -39,7 +39,6 @@ export default function Education() {
 
   const onDragEnd = (result) => {
     const { destination, source, reason } = result;
-    console.log("kljj", source, destination, reason);
     if (!destination || reason === "CANCEL") {
       return;
     }

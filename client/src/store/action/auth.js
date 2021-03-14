@@ -15,7 +15,6 @@ export function LoginAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("FirstName", res.data.data.FirstName);
@@ -51,7 +50,6 @@ export function SignupAction(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
-      console.log(res.data);
       if (res.status == 200 && res.data.status != 0) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("FirstName", res.data.data.FirstName);

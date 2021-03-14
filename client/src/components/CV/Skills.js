@@ -41,12 +41,10 @@ export default function Skills() {
     setname(t);
     if (b === true) {
       skills.push({ Name: t, NameAr: ar });
-      console.log(skills);
     } else {
       var j = 0;
       skills.map((e, i) => (e.Name === t ? (j = i) : ""));
       skills.splice(j, 1);
-      console.log("lm;", skills);
     }
   };
   const setname = (t) => {

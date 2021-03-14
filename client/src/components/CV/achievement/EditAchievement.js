@@ -18,7 +18,6 @@ export default function EditAchievement(props) {
   const id = query.get("achievementID");
   const achievements = useSelector((state) => state.template.achievements);
   const old = achievements.find((e) => e._id === id);
-  console.log(old, "pppp");
   const [achievementName, setAchievementName] = useState(old ? old.Name : "");
   const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
 

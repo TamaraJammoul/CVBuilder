@@ -21,7 +21,6 @@ export default function Getintouch() {
   }, []);
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     if (name === "" || email === "" || message === "" || number === "")
       alert("تأكد من ملأ جميع الحقول قبل الإرسال");
     else {

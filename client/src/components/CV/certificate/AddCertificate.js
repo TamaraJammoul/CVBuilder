@@ -36,7 +36,6 @@ export default function AddCertificate(props) {
     setNameAr("");
     setDescription("");
     setDescriptionAr("");
-    console.log(data, "kj");
     history.push("/buildcv/certificates");
   };
   return (

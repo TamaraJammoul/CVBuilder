@@ -69,76 +69,54 @@ function App(props) {
                 render={(props) => <ForgetPassword />}
               />
               <Route path="/resetpassword" render={(props) => <ResetPaeeword />} />
-              <Route path="/cvtemplates" render={(props) => <CVTemplates />} />
-              <Route path="/dashboard" render={(props) => <Dashboard />} />
-              <Route path="/cvname" render={(props) => <CVName />} />
-              <Route path="/cvlanguage" render={(props) => <CVLanguage />} />
-              <Route path="/buildcv" render={(props) => <BuildCV />} />
-              <Route
+              <PrivateRoute path="/cvtemplates" render={(props) => <CVTemplates />} />
+              <PrivateRoute path="/dashboard"  component={Dashboard}/>
+              <PrivateRoute path="/cvname" component={CVName}/>
+              <PrivateRoute path="/cvlanguage"  component={CVLanguage}/>
+              <PrivateRoute path="/buildcv" component={BuildCV} />
+              <PrivateRoute
                 path="/template01"
-                render={(props) => (
-                  <Template01 />
-                )}
+                component={Template01} 
               />
-              <Route
+              <PrivateRoute
                 path="/template02"
-                render={(props) => (
-                  <Template02 />
-                )}
+                component={Template02} 
               />
-              <Route
+              <PrivateRoute
                 path="/template03"
-                render={(props) => (
-                  <Template03 />
-                )}
+                component={Template03} 
               />
-              <Route
+              <PrivateRoute
                 path="/template04"
-                render={(props) => (
-                  <Template04 />
-                )}
+                component={Template04} 
               />
-              <Route
+              <PrivateRoute
                 path="/template05"
-                render={(props) => (
-                  <Template05 />
-                )}
+                component={Template05} 
               />
-              <Route
+              <PrivateRoute
                 path="/template06"
-                render={(props) => (
-                  <Template06 />
-                )}
+                component={Template06} 
               />
-              <Route
+              <PrivateRoute
                 path="/template07"
-                render={(props) => (
-                  <Template07 />
-                )}
+                component={Template07} 
               />
-              <Route
+              <PrivateRoute
                 path="/template08"
-                render={(props) => (
-                  <Template08 />
-                )}
+                component={Template08} 
               />
-              <Route
+              <PrivateRoute
                 path="/template09"
-                render={(props) => (
-                  <Template09 />
-                )}
+                component={Template09} 
               />
-              <Route
+              <PrivateRoute
                 path="/template10"
-                render={(props) => (
-                  <Template10 />
-                )}
+                component={Template10} 
               />
-              <Route
+              <PrivateRoute
                 path="/template11"
-                render={(props) => (
-                  <Template11 />
-                )}
+                component={Template11} 
               />
 
               <Route render={(props) => <Default />} />
@@ -155,6 +133,7 @@ function App(props) {
 }
 
 function PrivateRoute({ component: Component, ...rest }) {
+  console.log(localStorage.getItem("token"))
   return (
     <Route
       {...rest}

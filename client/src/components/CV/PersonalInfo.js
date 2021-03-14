@@ -32,8 +32,8 @@ export default function PersonalInfo() {
   const [image, setImage] = useState(personalData ? personalData.Image : defaultImg);
 
   const send = () => {
-    if (email === '' || lastName == '' || firstName === '' || phone === '' || birth === '')
-      alert("please fill all fields")
+    if (email == undefined || lastName == undefined || firstName == undefined || phone == undefined){
+      alert("please fill all fields")}
     else {
       formData.append("cvID", cvID);
       formData.append("_id", id);
@@ -95,7 +95,6 @@ export default function PersonalInfo() {
                   onChange={(e) => {
                     const files = e.target.files;
                     formData.append("profile", files[0]);
-                    console.log(formData);
                   }}
                 />
               </Button>

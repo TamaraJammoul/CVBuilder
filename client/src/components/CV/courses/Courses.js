@@ -36,7 +36,6 @@ export default function Courses() {
   const [hide, setHide] = useState(0);
   const onDragEnd = (result) => {
     const {destination, source, reason} = result;
-    console.log("kljj", source, destination, reason);
     if (!destination || reason === "CANCEL") {
       return;
     }
