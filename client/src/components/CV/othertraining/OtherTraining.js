@@ -2,13 +2,11 @@ import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
-  OpenWith,
   Edit,
   FileCopy,
   Visibility,
   VisibilityOff,
 } from "@material-ui/icons";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {
   DeleteOtherTrainingAction,
   OrderOtherTrainingAction,
@@ -27,11 +25,10 @@ export default function OtherTraining(props) {
     (state) => state.template.othertraininglen
   );
 
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const useQuery = () => new URLSearchParams(useLocation().search);
   let query = useQuery();
-  const id = query.get("othertrainingID");
   const [hide, setHide] = useState(0);
   const [othertraining, setOthertraining] = useState([]);
   useEffect(() => {
@@ -152,14 +149,14 @@ export default function OtherTraining(props) {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);
                     dispatch(HideOtherTrainingAction({cvID, hide}));
                   }}
                 >
-                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                  {hide === 1 ? t("HideSection") : t("ShowSection")}
                 </Button>{" "}
               </Grid>
             </Grid>

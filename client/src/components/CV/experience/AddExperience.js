@@ -85,7 +85,7 @@ export default function Experience(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={6} className={lan === 0 ? "arhide" : ""}>
             <TextField
               label={t("ExperienceNameAr")}
               variant="filled"
@@ -94,7 +94,7 @@ export default function Experience(props) {
               onChange={(e) => setExperienceNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={6} className={lan === 0 ? "arhide" : ""}>
             <TextField
               label={t("DescriptionAr")}
               variant="filled"
@@ -147,11 +147,11 @@ export default function Experience(props) {
               className="save"
               style={{ float: "right" }}
               onClick={() => {
-                console.log("ooooooooo")
+                if (description===''||experienceName === '')
+                alert("please fill all fields")
+                else{
                 dispatch(AddExperienceAction(data));
-                console.log("pppppppppppp")
-
-                history.push("/buildcv/experience");
+                history.push("/buildcv/experience");}
               }}
             >
               {t("save")}

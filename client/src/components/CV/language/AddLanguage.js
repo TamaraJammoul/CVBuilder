@@ -60,7 +60,7 @@ export default function AddLanguage(props) {
               onChange={(e) => setLanguage(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             <TextField
          
               label={t("LanguageAr")}
@@ -94,8 +94,11 @@ export default function AddLanguage(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
+                if (language === '')
+                  alert("please fill all fields")
+                  else{
                 dispatch(AddLanguageAction(data));
-                history.push("/buildcv/languages");
+                history.push("/buildcv/languages");}
               }}
             >
               {t("save")}

@@ -12,7 +12,7 @@ export default function Experience(props) {
   let query = useQuery();
   const id = query.get("experienceID");
   const experience = useSelector((state) => state.template.experiences);
-  const old = experience.find((e) => e._id == id);
+  const old = experience.find((e) => e._id === id);
   const [experienceName, setExperienceName] = useState(old ? old.Name : "");
   const [description, setDescription] = useState(old ? old.Description : "");
   const [startDate, setStartDate] = useState( new Date());
@@ -82,7 +82,7 @@ export default function Experience(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={6} className={lan === 0 ? "arhide" : ""}>
             <TextField
               label={t("ExperienceNameAr")}
               variant="filled"
@@ -92,7 +92,7 @@ export default function Experience(props) {
               onChange={(e) => setExperienceNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={6} className={lan === 0 ? "arhide" : ""}>
             <TextField
               label={t("DescriptionAr")}
               variant="filled"

@@ -23,7 +23,7 @@ export default function PersonalInfo() {
   const [lastName, setLastName] = useState(personalData ? personalData.LastName : '');
   const [email, setEmail] = useState(personalData ? personalData.Email : '');
   const [linkedIn, setLinkedIn] = useState(personalData ? personalData.LinkedIn : '');
-  const [birth, setBirth] = useState(personalData ? personalData.Birth : '');
+  const [birth, setBirth] = useState(personalData ? personalData.Birth : new Date());
   const [city, setCity] = useState(personalData ? personalData.City : '');
   const [country, setCountry] = useState(personalData ? personalData.Country : '');
   const [nationality, setNationality] = useState(personalData ? personalData.Nationality : '');
@@ -32,19 +32,23 @@ export default function PersonalInfo() {
   const [image, setImage] = useState(personalData ? personalData.Image : defaultImg);
 
   const send = () => {
-    formData.append("cvID", cvID);
-    formData.append("_id", id);
-    formData.append("FirstName", firstName);
-    formData.append("LastName", lastName);
-    formData.append("LinkedIn", linkedIn);
-    formData.append("Email", email);
-    formData.append("Phone", phone);
-    formData.append("Birth", birth);
-    formData.append("City", city);
-    formData.append("Country", country);
-    formData.append("Nationality", nationality);
-    formData.append("MaritalStatus", maritalStatus);
-    dispatch(PeraonalInfoAction(formData));
+    if (email === '' || lastName == '' || firstName === '' || phone === '' || birth === '')
+      alert("please fill all fields")
+    else {
+      formData.append("cvID", cvID);
+      formData.append("_id", id);
+      formData.append("FirstName", firstName);
+      formData.append("LastName", lastName);
+      formData.append("LinkedIn", linkedIn);
+      formData.append("Email", email);
+      formData.append("Phone", phone);
+      formData.append("Birth", birth);
+      formData.append("City", city);
+      formData.append("Country", country);
+      formData.append("Nationality", nationality);
+      formData.append("MaritalStatus", maritalStatus);
+      dispatch(PeraonalInfoAction(formData));
+    }
   };
   return (
     <Paper
@@ -109,7 +113,7 @@ export default function PersonalInfo() {
         >
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("FirstName")}
               variant="filled"
               color="primary"
@@ -120,7 +124,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("LastName")}
               variant="filled"
               color="primary"
@@ -129,7 +133,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("LinkedInAccount")}
               variant="filled"
               color="primary"
@@ -138,7 +142,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("Email")}
               variant="filled"
               color="primary"
@@ -148,7 +152,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("PhoneNumber")}
               variant="filled"
               color="primary"
@@ -158,7 +162,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("Date Of Birth")}
               variant="filled"
               color="primary"
@@ -168,7 +172,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("City")}
               variant="filled"
               color="primary"
@@ -177,7 +181,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("Country")}
               variant="filled"
               color="primary"
@@ -186,7 +190,7 @@ export default function PersonalInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-             
+
               label={t("Nationality")}
               variant="filled"
               color="primary"

@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddCertificateAction} from "./../../../store/action/certificate";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Paper, Grid, TextField, Container } from "@material-ui/core";
+import { AddCertificateAction } from "./../../../store/action/certificate";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from '@date-io/moment';
 export default function AddCertificate(props) {
@@ -25,7 +25,7 @@ export default function AddCertificate(props) {
     cvID,
     order: "1",
   };
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   let history = useHistory();
 
   const handelCancel = () => {
@@ -61,46 +61,46 @@ export default function AddCertificate(props) {
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-            
+
               label={t("Certificate Name")}
               variant="filled"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
             <TextField
-            
+
               label={t("Description")}
               variant="filled"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-            
+
               label={t("Certificate NameAr")}
               variant="filled"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setNameAr(e.target.value)}
             />
-          </Grid> 
+          </Grid>
           <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-            
+
               label={t("DescriptionAr")}
               variant="filled"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             {" "}
-           
+
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DatePicker
                 views={["year"]}
@@ -110,11 +110,11 @@ export default function AddCertificate(props) {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={12} sm={6}>  
+          <Grid item xs={12} sm={6}>
             <Button
               variant="outlined"
               className="cancel"
-              style={{marginLeft: "10px", float: "right"}}
+              style={{ marginLeft: "10px", float: "right" }}
               onClick={handelCancel}
             >
               {t("cancel")}
@@ -122,10 +122,14 @@ export default function AddCertificate(props) {
             <Button
               variant="contained"
               className="save"
-              style={{float: "right"}}
+              style={{ float: "right" }}
               onClick={() => {
-                dispatch(AddCertificateAction(data));
-                history.push("/buildcv/certificates");
+                if (description === '' || name === '')
+                  alert("please fill all fields")
+                else {
+                  dispatch(AddCertificateAction(data));
+                  history.push("/buildcv/certificates");
+                }
               }}
             >
               {t("save")}

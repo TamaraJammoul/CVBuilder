@@ -64,6 +64,9 @@ export default function AddOtherTraining(props) {
               className="save"
               style={{float: "right"}}
               onClick={() => {
+                if (otherTraining === '')
+                alert("please fill all fields")
+                else{
                 dispatch(
                   AddOtherTrainingAction({
                     otherTraining,
@@ -72,7 +75,7 @@ export default function AddOtherTraining(props) {
                   })
                 );
                 history.push("/buildcv/othertraining");
-              }}
+              }}}
             >
               {t("save")}
             </Button>

@@ -44,22 +44,22 @@ const initialState = {
     courses: [],
     personalInformation: {},
     careerobjective: {},
-    careerObjectives_id: "60494ddf18c26cf506022010",
-    personalInformation_id: "60494ddf18c26cf506022011",
+    careerObjectives_id: "",
+    personalInformation_id: "",
   },
   MyTemplates: [],
   firstName: "",
   lastName: "",
-  email: "user3@gmail.com",
+  email: "",
   id: "",
   token: "",
-  cvID: "60494ddf18c26cf506022012",
+  cvID: "",
   toast: false,
   toastMessageEN: "",
   toastMessageAR: "",
   toastType: "success",
   cvName: "",
-  cvTemplate: "cv1",
+  cvTemplate: "",
   cvLanguage: "",
 };
 
@@ -68,7 +68,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk)
-    //,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   // ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 export default store;

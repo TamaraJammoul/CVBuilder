@@ -2,14 +2,11 @@ import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
-  OpenWith,
   Edit,
   FileCopy,
   VisibilityOff,
   Visibility,
 } from "@material-ui/icons";
-import AddEducation from "./AddEducation";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {
   EditEducationAction,
   DeleteEducationAction,
@@ -30,7 +27,7 @@ export default function Education() {
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [educations, setEducations] = useState([]);
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   useEffect(() => {
     setEducations(temp);
   }, [temp]);
@@ -170,14 +167,14 @@ export default function Education() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);
                     dispatch(HideEducationAction({cvID, hide}));
                   }}
                 >
-                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                  {hide === 1 ? t("HideSection") : t("ShowSection")}
                 </Button>{" "}
               </Grid>
             </Grid>

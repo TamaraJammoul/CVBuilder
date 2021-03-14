@@ -19,7 +19,7 @@ export default function AddLanguage(props) {
   let query = useQuery();
   const id = query.get("language_id");
   const languagetemp = useSelector((state) => state.template.languages);
-  const old = languagetemp.find((e) => e._id == id);
+  const old = languagetemp.find((e) => e._id === id);
   const [language, setLanguage] = useState(old ? old.Name : "");
   const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
   const [rate, setRate] = useState(old ? old.Rate : 0);
@@ -64,7 +64,7 @@ export default function AddLanguage(props) {
               onChange={(e) => setLanguage(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             <TextField
              
               label={t("LanguageAr")}

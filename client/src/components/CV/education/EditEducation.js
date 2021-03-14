@@ -18,7 +18,7 @@ export default function AddEducation(props) {
   let query = useQuery();
   const id = query.get("educationID");
   const education = useSelector((state) => state.template.educations);
-  const old = education.find((e) => e._id == id);
+  const old = education.find((e) => e._id === id);
   const [faculty, setFaculty] = useState(old ? old.Faculty : "");
   const [universityName, setUniversityName] = useState( 
     old ? old.UniversityName : ""
@@ -101,7 +101,7 @@ export default function AddEducation(props) {
               onChange={(e) => setUniversityName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
               
@@ -113,7 +113,7 @@ export default function AddEducation(props) {
               onChange={(e) => setFacultyAr(e.target.value)}
             /> 
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
               

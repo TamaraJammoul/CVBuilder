@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddAchievementAction} from "../../../store/action/achievement";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Paper, Grid, TextField, Container } from "@material-ui/core";
+import { AddAchievementAction } from "../../../store/action/achievement";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 export default function AddAchievement(props) {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function AddAchievement(props) {
   const lan = useSelector((state) => state.sections.twolan);
 
   let history = useHistory();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handelCancel = () => {
     setAchievementName("");
@@ -42,22 +42,22 @@ export default function AddAchievement(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-            
+
               label={t("Achievement Name")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setAchievementName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-            
+
               label={t("Achievement NameAR")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
@@ -65,7 +65,7 @@ export default function AddAchievement(props) {
             <Button
               variant="outlined"
               className="cancel"
-              style={{marginLeft: "10px", float: "right"}}
+              style={{ marginLeft: "10px", float: "right" }}
               onClick={handelCancel}
             >
               {t("cancel")}
@@ -73,17 +73,21 @@ export default function AddAchievement(props) {
             <Button
               variant="contained"
               className="save"
-              style={{float: "right"}}
+              style={{ float: "right" }}
               onClick={() => {
-                dispatch(
-                  AddAchievementAction({
-                    achievementName,
-                    nameAr,
-                    cvID,
-                    order: "1",
-                  })
-                );
-                history.push("/buildcv/achievement");
+                if (achievementName === '')
+                  alert("please fill all fields")
+                else {
+                  dispatch(
+                    AddAchievementAction({
+                      achievementName,
+                      nameAr,
+                      cvID,
+                      order: "1",
+                    })
+                  );
+                  history.push("/buildcv/achievement");
+                }
               }}
             >
               {t("save")}

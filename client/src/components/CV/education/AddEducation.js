@@ -90,7 +90,7 @@ export default function AddEducation(props) {
               onChange={(e) => setUniversityName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
 
@@ -101,7 +101,7 @@ export default function AddEducation(props) {
               onChange={(e) => setFacultyAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
 
@@ -185,9 +185,12 @@ export default function AddEducation(props) {
               className="save"
               style={{ float: "right" }}
               onClick={() => {
+                if ( universityName===''||faculty === '')
+                alert("please fill all fields")
+                else{
                 dispatch(AddEducationAction(data));
                 history.push("/buildcv/education");
-              }}
+              }}}
             >
               {t("save")}
             </Button>

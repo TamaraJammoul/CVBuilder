@@ -2,13 +2,10 @@ import React, {useState, useEffect} from "react";
 import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
 import {
   Delete,
-  OpenWith,
   Edit,
-  FileCopy,
   VisibilityOff,
   Visibility,
 } from "@material-ui/icons";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {useSelector, useDispatch} from "react-redux";
 import {
   DeleteReferenceAction,
@@ -23,7 +20,7 @@ export default function Refernce() {
   const temp = useSelector((state) => state.template.references);
   const referenclen = useSelector((state) => state.template.referenclen);
 
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [references, setReferences] = useState([]);
@@ -50,14 +47,14 @@ export default function Refernce() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);
                     dispatch(HideReferenceAction({cvID, hide}));
                   }}
                 >
-                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                  {hide === 1 ? t("HideSection") : t("ShowSection")}
                 </Button>{" "}
               </Grid>
             </Grid>

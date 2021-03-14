@@ -12,6 +12,10 @@ export default function reducer(state, action) {
       return {
         ...state,
         cvID: localStorage.getItem('cv_id') ? localStorage.getItem('cv_id') : state.cvID,
+        email:localStorage.getItem('Email') ? localStorage.getItem('Email') : state.email,
+        token:localStorage.getItem('token') ? localStorage.getItem('token') : state.token,
+        firstName:localStorage.getItem('FirstName') ? localStorage.getItem('FirstName') : state.firstName,
+        cvTemplate:localStorage.getItem('cvTemplate') ? localStorage.getItem('cvTemplate') : state.cvTemplate,
         template: {
           ...state.template,
           careerObjectives_id: localStorage.getItem('careerObjectives_id') ? localStorage.getItem('careerObjectives_id') : state.template.careerObjectives_id,

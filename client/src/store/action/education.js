@@ -32,7 +32,7 @@ export function AddEducationAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ADDEDUCATION,
           payload: res.data.data,
@@ -63,7 +63,7 @@ export function CopyEducationAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: COPYEDUCATION,
           payload: res.data.data,
@@ -95,7 +95,7 @@ export function DeleteEducationAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: DELETEEDUCATION,
           payload,
@@ -134,7 +134,7 @@ export function EditEducationAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: EDITEDUCATION,
           payload: res.data.data,
@@ -165,7 +165,7 @@ export function HideEducationAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: HIDEEDUCATION,
           payload: res.data.data,
@@ -197,7 +197,7 @@ export function OrderEducationAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ORDEREDUCATION,
           payload,

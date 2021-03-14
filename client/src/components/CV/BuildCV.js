@@ -38,7 +38,7 @@ import AddCourses from "./courses/AddCourses";
 import EditCourses from "./courses/EditCourses";
 import { Route, Switch, Link, useRouteMatch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   Work,
@@ -50,21 +50,14 @@ import {
   Group,
   AccountBox,
 } from "@material-ui/icons";
-import {fetchCVId} from "../../store/action/cv";
-
 
 export default function BuildCV(props) {
   const { t } = useTranslation();
   let { path, url } = useRouteMatch();
   const [drawerState, setDrawerState] = useState(false);
   const sections = useSelector((state) => state.sections);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      fetchCVId()
-    );
-  }, [])
+
   return (
     <div className="buildcv">
       <Drawer

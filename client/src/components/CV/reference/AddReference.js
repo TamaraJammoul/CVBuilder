@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Button, Paper, Grid, TextField, Container} from "@material-ui/core";
-import {AddReferenceAction} from "./../../../store/action/reference";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Paper, Grid, TextField, Container } from "@material-ui/core";
+import { AddReferenceAction } from "./../../../store/action/reference";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 export default function Reference(props) {
   const [reference, setReference] = useState("");
@@ -20,7 +20,7 @@ export default function Reference(props) {
     setNameAr("");
     history.push("/buildcv/reference");
   };
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const cvID = useSelector((state) => state.cvID);
 
   return (
@@ -45,33 +45,33 @@ export default function Reference(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-              
+
               label={t("AddReference")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setReference(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
             {" "}
             <TextField
-              
+
               label={t("AddReference")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
             {" "}
             <TextField
-              
+
               label={t("Phone")}
               variant="filled"
               color="primary"
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
@@ -79,7 +79,7 @@ export default function Reference(props) {
             <Button
               variant="outlined"
               className="cancel"
-              style={{marginLeft: "10px", float: "right"}}
+              style={{ marginLeft: "10px", float: "right" }}
               onClick={handelCancel}
             >
               {t("cancel")}
@@ -87,9 +87,11 @@ export default function Reference(props) {
             <Button
               variant="contained"
               className="save"
-              style={{float: "right"}}
+              style={{ float: "right" }}
               onClick={() => {
-                {
+                if (reference === '' || phone == '')
+                  alert("please fill all fields")
+                else {
                   dispatch(
                     AddReferenceAction({
                       reference,

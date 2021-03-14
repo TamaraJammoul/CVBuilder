@@ -12,7 +12,7 @@ export default function EditCertificate(props) {
   let query = useQuery();
   const id = query.get("certificateID");
   const certificates = useSelector((state) => state.template.certificates);
-  const old = certificates.find((e) => e._id == id);
+  const old = certificates.find((e) => e._id === id);
   const [name, setName] = useState(old ? old.Name : "");
   const [description, setDescription] = useState(old ? old.Description : "");
   const [nameAr, setNameAr] = useState(old ? old.NameAr : "");
@@ -85,7 +85,7 @@ export default function EditCertificate(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
 
@@ -96,7 +96,7 @@ export default function EditCertificate(props) {
               onChange={(e) => setNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
 

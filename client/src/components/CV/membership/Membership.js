@@ -142,7 +142,7 @@ export default function Membership() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

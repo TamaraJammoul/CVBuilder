@@ -138,14 +138,14 @@ export default function Courses() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);
                     dispatch(HideCoursesAction({cvID, hide}));
                   }}
                 >
-                  {hide == 1 ? t("HideSection") : t("ShowSection")}
+                  {hide === 1 ? t("HideSection") : t("ShowSection")}
                 </Button>{" "}
               </Grid>
             </Grid>{" "}

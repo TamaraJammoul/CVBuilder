@@ -31,7 +31,7 @@ export function AddExperienceAction(payload) {
       },
     }).then((res) => {
       console.log(res.data);
-      if (res.status == 200 && res.data.status != 0) {
+      if (res.status === 200 && res.data.status !== 0) {
         dispatch({
           type: ADDEXPERIENCE,
           payload: res.data.data,
@@ -62,7 +62,7 @@ export function CopyExperienceAction(payload) {
         },
       }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0) {
+        if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: COPYEXPERIENCE,
             payload: res.data.data,
@@ -94,7 +94,7 @@ export function DeleteExperienceAction(payload) {
         },
       }).then((res) => {
         console.log(res);
-        if (res.status == 200 && res.data.status != 0) {
+        if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: DELETEEXPERIENCE,
             payload,
@@ -132,7 +132,7 @@ export function EditExperienceAction(payload) {
         },
       }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0) {
+        if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: EDITEXPERIENCE,
             payload: res.data.data,
@@ -163,7 +163,7 @@ export function HideExperienceAction(payload) {
         },
       }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0) {
+        if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: HIDEEXPERIENCE,
             payload: res.data.data,
@@ -195,7 +195,7 @@ export function OrderExperienceAction(payload) {
         },
       }).then((res) => {
         console.log(res.data);
-        if (res.status == 200 && res.data.status != 0) {
+        if (res.status === 200 && res.data.status !== 0) {
           dispatch({
             type: ORDEREXPERIENCE,
             payload,

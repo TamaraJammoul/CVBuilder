@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {VerticleButton as ScrollUpButton} from "react-scroll-up-button";
-import {useSelector, useDispatch} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { VerticleButton as ScrollUpButton } from "react-scroll-up-button";
+import { useDispatch } from "react-redux";
 import "./App.css";
-import store from "./store/store";
-import {Provider} from "react-redux";
+
 import withRoot from "./i18n/WithRoot";
-import {Route, Switch, Redirect} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Footer from "./components/Layout/Footer";
 import Default from "./components/Layout/Default";
 import Home from "./components/Home";
@@ -21,7 +20,7 @@ import BuildCV from "./components/CV/BuildCV";
 import Dashboard from "./components/Dashboard";
 import ResetPaeeword from "./components/ResetPassword";
 
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Toast from "./components/Toast";
 
 import AOS from "aos";
@@ -38,20 +37,22 @@ import Template08 from "./templates/template_08/template_08";
 import Template09 from "./templates/template_09/template_09";
 import Template10 from "./templates/template_10/template_10";
 import Template11 from "./templates/template_11/template_11";
+import {fetchCVId} from "./store/action/cv";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     AOS.init();
+    dispatch(fetchCVId());
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   });
 
   return (
-    <Provider store={store}>
       <div>
         {loading ? (
           <Loading />
@@ -67,7 +68,7 @@ function App(props) {
                 path="/forgetpassword"
                 render={(props) => <ForgetPassword />}
               />
-               <Route path="/resetpassword" render={(props) => <ResetPaeeword />} />
+              <Route path="/resetpassword" render={(props) => <ResetPaeeword />} />
               <Route path="/cvtemplates" render={(props) => <CVTemplates />} />
               <Route path="/dashboard" render={(props) => <Dashboard />} />
               <Route path="/cvname" render={(props) => <CVName />} />
@@ -145,16 +146,15 @@ function App(props) {
             <ScrollUpButton
               AnimationDuration={500}
               EasingType="easeOutCubic"
-              style={{backgroundColor: "rgba(69, 35, 73, 0.9)"}}
+              style={{ backgroundColor: "rgba(69, 35, 73, 0.9)" }}
             />
           </>
         )}
       </div>
-    </Provider>
   );
 }
 
-function PrivateRoute({component: Component, ...rest}) {
+function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
@@ -162,7 +162,7 @@ function PrivateRoute({component: Component, ...rest}) {
         localStorage.getItem("token") ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{pathname: "/login"}} />
+          <Redirect to={{ pathname: "/login" }} />
         )
       }
     />

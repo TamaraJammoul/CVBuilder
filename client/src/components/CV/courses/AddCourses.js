@@ -65,7 +65,7 @@ export default function AddCourses(props) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
 
@@ -76,7 +76,7 @@ export default function AddCourses(props) {
               onChange={(e) => setCoursesAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} className={lan == 0 ? "arhide" : ""}>
+          <Grid item xs={12} className={lan = 0 ? "arhide" : ""}>
             {" "}
             <TextField
 
@@ -113,18 +113,22 @@ export default function AddCourses(props) {
               className="save"
               style={{ float: "right" }}
               onClick={() => {
-                dispatch(
-                  AddCoursesAction({
-                    courses,
-                    cvID,
-                    order: "1",
-                    year,
-                    description,
-                    coursesAr,
-                    descriptionAr,
-                  })
-                );
-                history.push("/buildcv/courses");
+                if (courses === '' || description === '')
+                  alert("please fill all fields")
+                else {
+                  dispatch(
+                    AddCoursesAction({
+                      courses,
+                      cvID,
+                      order: "1",
+                      year,
+                      description,
+                      coursesAr,
+                      descriptionAr,
+                    })
+                  );
+                  history.push("/buildcv/courses");
+                }
               }}
             >
               {t("save")}
