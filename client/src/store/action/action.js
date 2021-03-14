@@ -78,7 +78,7 @@ export function PeraonalInfoAction(payload) {
   return async (dispatch) => {
     await axios({
       method: "post",
-      url: `https://we4cv.com/api/personalInformation/updatePersonalInformation`,
+      url: `https://cvbuilder2020.herokuapp.com/api/personalInformation/updatePersonalInformation`,
       data: payload,
       headers: {
         "Content-Type": "multipart/form-data",
