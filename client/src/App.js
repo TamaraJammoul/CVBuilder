@@ -37,7 +37,7 @@ import Template08 from "./templates/template_08/template_08";
 import Template09 from "./templates/template_09/template_09";
 import Template10 from "./templates/template_10/template_10";
 import Template11 from "./templates/template_11/template_11";
-import {fetchCVId} from "./store/action/cv";
+import { fetchCVId } from "./store/action/cv";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
@@ -53,82 +53,84 @@ function App(props) {
   });
 
   return (
-      <div>
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            <Toast />
-            <Switch>
-              <Route exact path="/" render={(props) => <Home />} />
-              <Route path="/login" render={(props) => <Login />} />
-              <Route path="/signup" render={(props) => <Signup />} />
-              <Route path="/contactus" render={(props) => <Contactus />} />
-              <Route
-                path="/forgetpassword"
-                render={(props) => <ForgetPassword />}
-              />
-              <Route path="/resetpassword" render={(props) => <ResetPaeeword />} />
-              <PrivateRoute path="/cvtemplates" render={(props) => <CVTemplates />} />
-              <PrivateRoute path="/dashboard"  component={Dashboard}/>
-              <PrivateRoute path="/cvname" component={CVName}/>
-              <PrivateRoute path="/cvlanguage"  component={CVLanguage}/>
-              <PrivateRoute path="/buildcv" component={BuildCV} />
-              <PrivateRoute
-                path="/template01"
-                component={Template01} 
-              />
-              <PrivateRoute
-                path="/template02"
-                component={Template02} 
-              />
-              <PrivateRoute
-                path="/template03"
-                component={Template03} 
-              />
-              <PrivateRoute
-                path="/template04"
-                component={Template04} 
-              />
-              <PrivateRoute
-                path="/template05"
-                component={Template05} 
-              />
-              <PrivateRoute
-                path="/template06"
-                component={Template06} 
-              />
-              <PrivateRoute
-                path="/template07"
-                component={Template07} 
-              />
-              <PrivateRoute
-                path="/template08"
-                component={Template08} 
-              />
-              <PrivateRoute
-                path="/template09"
-                component={Template09} 
-              />
-              <PrivateRoute
-                path="/template10"
-                component={Template10} 
-              />
-              <PrivateRoute
-                path="/template11"
-                component={Template11} 
-              />
-
-              <Route render={(props) => <Default />} />
-            </Switch>
-            <ScrollUpButton
-              AnimationDuration={500}
-              EasingType="easeOutCubic"
-              style={{ backgroundColor: "rgba(69, 35, 73, 0.9)" }}
+    <div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Toast />
+          <Switch>
+            <Route exact path="/" render={(props) => <Home />} />
+            <Route path="/login" render={(props) => <Login />} />
+            <Route path="/signup" render={(props) => <Signup />} />
+            <Route path="/contactus" render={(props) => <Contactus />} />
+            <Route
+              path="/forgetpassword"
+              render={(props) => <ForgetPassword />}
             />
-          </>
-        )}
-      </div>
+            <Route path="/resetpassword" render={(props) => <ResetPaeeword />} />
+            <PrivateRoute path="/cvtemplates"
+              component={CVTemplates}
+            />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/cvname" component={CVName} />
+            <PrivateRoute path="/cvlanguage" component={CVLanguage} />
+            <PrivateRoute path="/buildcv" component={BuildCV} />
+            <PrivateRoute
+              path="/template01"
+              component={Template01}
+            />
+            <PrivateRoute
+              path="/template02"
+              component={Template02}
+            />
+            <PrivateRoute
+              path="/template03"
+              component={Template03}
+            />
+            <PrivateRoute
+              path="/template04"
+              component={Template04}
+            />
+            <PrivateRoute
+              path="/template05"
+              component={Template05}
+            />
+            <PrivateRoute
+              path="/template06"
+              component={Template06}
+            />
+            <PrivateRoute
+              path="/template07"
+              component={Template07}
+            />
+            <PrivateRoute
+              path="/template08"
+              component={Template08}
+            />
+            <PrivateRoute
+              path="/template09"
+              component={Template09}
+            />
+            <PrivateRoute
+              path="/template10"
+              component={Template10}
+            />
+            <PrivateRoute
+              path="/template11"
+              component={Template11}
+            />
+
+            <Route render={(props) => <Default />} />
+          </Switch>
+          <ScrollUpButton
+            AnimationDuration={500}
+            EasingType="easeOutCubic"
+            style={{ backgroundColor: "rgba(69, 35, 73, 0.9)" }}
+          />
+        </>
+      )}
+    </div>
   );
 }
 

@@ -1,8 +1,6 @@
-import React,{useState} from "react";
-import {TextField, Paper, Grid, Button, Box} from "@material-ui/core";
-import {ResetPasswordLink} from "./../store/action/action";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
+import React, { useState } from "react";
+import { Paper, Grid, Button, Box } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
 import emailjs from 'emailjs-com';
 import axios from "axios";
 
@@ -13,45 +11,44 @@ const USER_ID = 'user_qCv6fHInwGWyS1oSahpy9';
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState("");
-  const [_id, setId] = useState("000");
-  const dispatch = useDispatch();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
-  // const sendEmail = (e) => {
-    
-  // }
 
+  var _id = 'ooo';
   const handleSubmit = (e) => {
+    let form=e.target;
+    console.log(form)
     e.preventDefault();
-    
-    if (email === "")
-      alert("تأكد من ملأ جميع الحقول قبل الإرسال");
-    else {
-      axios.post('https://we4cv.com/api/auth/getID', {
-        Email: email
-      })
+    axios.post('https://we4cv.com/api/auth/getID', {
+      Email: email
+    })
       .then(res => {
-        // console.log(res)
-        setId(res._id)        
-      })
-      .catch(err => console.log(err));  
+        console.log(res)
+        _id = res.data._id;
+        localStorage.setItem('reset-id', _id);
+        document.getElementById("_id").value = _id;
+        console.log(document.getElementById("_id").value)
+      }).then(result => {
+        console.log(form)
 
-        console.log(_id)
-        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, USER_ID)
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, USER_ID)
           .then((result) => {
-            console.log(result.text);
+            console.log(result);
           }, (error) => {
             console.log(error.text);
           });
-    }
+      })
+      .catch(err => console.log(err));
+
+
+
   }
 
 
-
   return (
-    <Grid container justify="center" direction="column" alignItems="center" style={{marginTop:"50px"}}> 
+    <Grid container justify="center" direction="column" alignItems="center" style={{ marginTop: "50px" }}>
       <Grid item xs={12}>
-        <Paper elevation={3} style={{width: "600px", padding: "30px"}}>
+        <Paper elevation={3} style={{ width: "600px", padding: "30px" }}>
           <Grid
             container
             justify="center"
@@ -60,16 +57,15 @@ export default function ForgetPassword() {
             spacing={8}
           >
             <Grid item xs={12}>
-              <h3 style={{paddingTop: "30px"}}>Forget your password?</h3>{" "}
+              <h3 style={{ paddingTop: "30px" }}>Forget your password?</h3>{" "}
             </Grid>
             <Grid item xs={12}>
-            <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <div className="form-row">
                   <input
                     id="_id"
                     name="_id"
                     hidden
-                    value={`${_id}`}
                   />
                 </div>
                 <div className="form-row">
@@ -90,7 +86,7 @@ export default function ForgetPassword() {
                   <Button
                     variant="contained"
                     className="save"
-                    style={{float: "right"}}
+                    style={{ float: "right" }}
                     type='submit'
                   >
                     {t("Send")}
