@@ -132,7 +132,7 @@ export function ResetPassword(payload) {
     await axios({
       method: "post",
       url: `https://we4cv.com/api/auth/resetPassword`,
-      data: { Email: payload.email, Password: payload.password, _id: localStorage.getItem("reset-id") },
+      data: { Email: payload.email, Password: payload.password, _id: payload._id },
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -68,7 +68,7 @@ function App(props) {
               path="/forgetpassword"
               render={(props) => <ForgetPassword />}
             />
-            <Route path="/resetpassword" render={(props) => <ResetPaeeword />} />
+            <Route path="/resetpassword/:id" render={(props) => <ResetPaeeword />} />
             <PrivateRoute path="/cvtemplates"
               component={CVTemplates}
             />

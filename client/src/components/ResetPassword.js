@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Paper, Grid, Button, Box } from "@material-ui/core";
 import { ResetPassword } from "./../store/action/action";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 
 export default function ResetPasswordC() {
   const email = useSelector((state) => state.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
-  const params = useParams();
-  
-  console.log(params);
 
-  useEffect(() => {
-    // const email1 = localStorage.getItem("email");
-    // setEmail(email1);
-  }, []);
+  const _id = window.location.href.split('/').reverse()[0];
+
   return (
     <Grid
       container
@@ -64,7 +58,7 @@ export default function ResetPasswordC() {
                 color="primary"
                 onClick={() => {
                   if (password === confirmPassword)
-                    dispatch(ResetPassword({ email, password }));
+                    dispatch(ResetPassword({ _id, email, password }));
                   else alert("كلمتي المرور غير متطابقتان");
                 }}
               >
