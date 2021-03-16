@@ -10,9 +10,12 @@ import Select from "@material-ui/core/Select";
 import defaultImg from "./../../img/stylingcv-default.jpg";
 import { PeraonalInfoAction } from "./../../store/action/action";
 import { useSelector, useDispatch } from "react-redux";
+
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/cvbuilder/image/upload';
+const CLOUDINARY_UPLOAD_PRESET = 'm8k5pnic';
+
 export default function PersonalInfo() {
   const { t, i18n } = useTranslation();
-  var formData = new FormData();
   const dispatch = useDispatch();
   const id = useSelector((state) => state.template.personalInformation_id);
   const personalData = useSelector((state) => state.template.personalInformation);
@@ -28,26 +31,63 @@ export default function PersonalInfo() {
   const [nationality, setNationality] = useState(personalData ? personalData.Nationality : '');
   const [maritalStatus, setMaritalStatus] = useState(personalData ? personalData.MaritalStatus : 1);
   const [phone, setPhone] = useState(personalData ? personalData.Phone : '');
-  const [image, setImage] = useState(personalData ? personalData.Image : defaultImg);
+  const [imageURL, setImageURL] = useState(personalData ? personalData.Image : defaultImg);
 
   const send = () => {
     if (email == undefined || lastName == undefined || firstName == undefined || phone == undefined){
       alert("please fill all fields")}
     else {
-      formData.append("_id", id);
-      formData.append("FirstName", firstName);
-      formData.append("LastName", lastName);
-      formData.append("LinkedIn", linkedIn);
-      formData.append("Email", email);
-      formData.append("Phone", phone);
-      formData.append("Birth", birth);
-      formData.append("City", city);
-      formData.append("Country", country);
-      formData.append("Nationality", nationality);
-      formData.append("MaritalStatus", maritalStatus);
-      dispatch(PeraonalInfoAction(formData));
+      const data = {
+        _id: id,
+        FirstName: firstName,
+        LastName: lastName,
+        LinkedIn: linkedIn,
+        Email: email,
+        Phone: phone,
+        Birth: birth,
+        City: city,
+        Country: country,
+        Nationality: nationality,
+        MaritalStatus: maritalStatus,
+        Image: imageURL,
+      };
+      dispatch(PeraonalInfoAction(data));
     }
   };
+
+
+const encodeImageFileAsURL = (file) => {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      const imgData = reader.result;
+      // console.log('RESULT', imgData);
+      uploadToCloudinary(imgData)
+    }
+    reader.readAsDataURL(file);
+}
+
+const uploadToCloudinary = (imgData) => {
+    if (imgData) {
+        const formImageData = new FormData();
+        formImageData.append('file', imgData);
+        formImageData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        
+        fetch(CLOUDINARY_URL, {
+            method: 'POST',
+            body: formImageData,
+        })
+          .then(response => response.json())
+          .then((data) => {
+              if (data.secure_url !== '') {
+                  const uploadedFileUrl = data.secure_url;
+                  // console.log(uploadedFileUrl);
+                  setImageURL(uploadedFileUrl)
+              }
+          })
+          .catch(err => console.error(err));
+    }
+}
+
   return (
     <Paper
       elevation={3}
@@ -92,7 +132,7 @@ export default function PersonalInfo() {
                   className="input1"
                   onChange={(e) => {
                     const files = e.target.files;
-                    formData.append("profile", files[0]);
+                    encodeImageFileAsURL(files[0]);
                   }}
                 />
               </Button>

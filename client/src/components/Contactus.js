@@ -106,7 +106,7 @@ export default function Getintouch() {
                     variant="contained"
                     className="save"
                     style={{float: "right"}}
-                    onClick={() => onSubmit()}
+                    onClick={(e) => onSubmit(e)}
                   >
                     {t("Send")}
                   </Button>

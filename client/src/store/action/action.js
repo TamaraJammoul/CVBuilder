@@ -75,14 +75,14 @@ export function Auth() {
   };
 }
 export function PeraonalInfoAction(payload) {
-  console.log(payload.get("profile"))
+  // console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",
       url: `https://we4cv.com/api/personalInformation/updatePersonalInformation`,
       data: payload,
       headers: {
-        'Content-Type': `multipart/form-data; boundary=${payload._boundary}`,
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem("token")}`,
 
       },
