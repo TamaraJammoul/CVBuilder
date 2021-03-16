@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import { TextField, Paper, Grid, Button, Box } from "@material-ui/core";
 import { ResetPassword } from "./../store/action/action";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export default function ResetPasswordC() {
-  const [email, setEmail] = useState("");
+  const email = useSelector((state) => state.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const dispatch = useDispatch();
+  const params = useParams();
+  
+  console.log(params);
+
   useEffect(() => {
-    const email1 = localStorage.getItem("email");
-    setEmail(email1);
+    // const email1 = localStorage.getItem("email");
+    // setEmail(email1);
   }, []);
   return (
     <Grid

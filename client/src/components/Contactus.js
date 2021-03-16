@@ -6,12 +6,18 @@ import {ContactusAction} from "./../store/action/action";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Button} from "@material-ui/core";
+import emailjs from 'emailjs-com';
+
+const SERVICE_ID = 'service_3hmskrp';
+const TEMPLATE_ID = 'template_p2ssu4q';
+const USER_ID = 'user_qCv6fHInwGWyS1oSahpy9';
+
 export default function Getintouch() {
   const [name, setName] = useState("");
   const [email, setemail] = useState("");
   const [message, setmessage] = useState("");
   const [number, setnumber] = useState("");
-  const data = {name, email, number, message};
+  // const data = {name, email, number, message};
   //const state = useSelector((state) => state.template[0]);
   const {t} = useTranslation();
 
@@ -19,14 +25,23 @@ export default function Getintouch() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const onSubmit = (e) => {
+
+  const sendEmail = (e) => {
     e.preventDefault();
+
     if (name === "" || email === "" || message === "" || number === "")
       alert("تأكد من ملأ جميع الحقول قبل الإرسال");
     else {
-      dispatch(ContactusAction(data));
+      // dispatch(ContactusAction(data));
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, USER_ID)
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });  
     }
-  };
+  }
+
   return (
     <div className="container shadow-lg rounded contact py-5 mb-5">
       <div className="row">
@@ -51,12 +66,12 @@ export default function Getintouch() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <form>
+              <form onSubmit={sendEmail}>
                 <div className="form-row">
                   <div className="form-group col-md-12">
                     <input
                       id="Full Name"
-                      name="Full Name"
+                      name="Name"
                       placeholder={t("FullName")}
                       className="form-control text-right"
                       type="text"
@@ -67,6 +82,7 @@ export default function Getintouch() {
                   <div className="form-group col-md-12">
                     <input
                       type="email"
+                      name="Email"
                       className="form-control text-right"
                       id="inputEmail4"
                       placeholder={t("Email")}
@@ -77,7 +93,7 @@ export default function Getintouch() {
                   <div className="form-group col-md-12">
                     <input
                       id="Mobile No."
-                      name="Mobile No."
+                      name="Number"
                       placeholder={t("Phone")}
                       className="form-control text-right"
                       required="required"
@@ -90,7 +106,7 @@ export default function Getintouch() {
                   <div className="form-group col-md-12">
                     <textarea
                       id="comment"
-                      name="comment"
+                      name="Message"
                       cols="40"
                       rows="5"
                       placeholder={t("Message")}
@@ -106,7 +122,7 @@ export default function Getintouch() {
                     variant="contained"
                     className="save"
                     style={{float: "right"}}
-                    onClick={(e) => onSubmit(e)}
+                    type='submit'
                   >
                     {t("Send")}
                   </Button>
