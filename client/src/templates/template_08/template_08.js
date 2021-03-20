@@ -53,15 +53,16 @@ function saveAs(type) {
       p.classList.contains('t08-co-text') &&
       (p.style.transform = "translateY(-10%)")
   );
-  infos.forEach(
-    (info) =>
-    !info.classList.contains('t08-detail-3') &&
-      (info.style.top = "12%")
-  );
+  // infos.forEach(
+  //   (info) =>
+  //   !info.classList.contains('t08-detail-3') &&
+  //     (info.style.top = "12%")
+  // );
 
   html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
+    useCORS: true
   })
     .then((canvas) => {
       const filename = "template_8";
@@ -86,11 +87,11 @@ function saveAs(type) {
       (p) =>
         (p.style.transform = "translateY(0%)")
     );
-    infos.forEach(
-      (info) =>
-      !info.classList.contains('t08-detail-3') &&
-        (info.style.top = "12.5%")
-    );
+    // infos.forEach(
+    //   (info) =>
+    //   !info.classList.contains('t08-detail-3') &&
+    //     (info.style.top = "12.5%")
+    // );
 }
 
 const ref = React.createRef();
@@ -104,6 +105,7 @@ const Template08 = (props) => {
     personalInformation,
     skills,
   } = useSelector((state) => state.template);
+  const hidden = useSelector((state) => state.isHide);
 
   let CO = null;
   if (careerobjective) {
@@ -138,7 +140,7 @@ const Template08 = (props) => {
         grade = "Excellent";
       }
       return (
-        <div className="t08-edu t08-sec-content" key={edu.id_}>
+        <div className="t08-edu t08-sec-content" key={edu._id}>
           <div className="t08-content-circle">
             <div className="t08-circle"></div>
           </div>
@@ -165,7 +167,7 @@ const Template08 = (props) => {
       } else if (edu.Degree === 3) {
         degreeAr = "دكتوراه";
       } else if (edu.Degree === 4) {
-        degreeAr = "شهادة\xa0الثانوية\xa0العامة";
+        degreeAr = "شهادة\xa0الثانوية\xa0العامة\xa0";
       }
       let gradeAr = "";
       if (edu.Grade === 1) {
@@ -176,19 +178,19 @@ const Template08 = (props) => {
         gradeAr = "ممتاز";
       }
       return (
-        <div className="t08-edu t08-sec-content" key={edu.id_}>
+        <div className="t08-edu t08-sec-content" key={edu._id}>
           <div className="t08-content-circle">
             <div className="t08-circle"></div>
           </div>
           <div className="t08-content-text">
-            <p className="t08-edu-title bold">{degreeAr}</p>
+            <p className={`t08-edu-title bold ar`}>{degreeAr}</p>
             <div className="t08-edu-text">
-              <p>{`التخصص\xa0:\xa0${edu.FacultyAr}`}</p>
-              <p>
-                {`${edu.UniversityNameAr}\xa0-\xa0${edu.YearEnd}`}
+               <p className={`ar`}>{`التخصص\xa0`}{`${edu.FacultyAr}\xa0`}</p>
+               <p className={`ar`}>
+                {`${edu.UniversityNameAr}\xa0`}- {`${edu.YearEnd}\xa0`}
               </p>
-              <p>
-                {`المعدل\xa0:\xa0${edu.DegreeFrom5}\xa0من\xa05\xa0وبتقدير\xa0${gradeAr}`}
+               <p className={`ar`}>
+                {`المعدل\xa0`}{`${edu.DegreeFrom5}\xa0`}{`من\xa05\xa0وبتقدير\xa0`}{`${gradeAr}\xa0`}
               </p>
             </div>
           </div>
@@ -202,7 +204,7 @@ const Template08 = (props) => {
   if (experiences.length > 0) {
     jobs = experiences.map((job) => {
       return (
-        <div className="t08-work t08-sec-content" key={job.id_}>
+        <div className="t08-work t08-sec-content" key={job._id}>
           <div className="t08-content-circle">
             <div className="t08-circle"></div>
           </div>
@@ -218,14 +220,14 @@ const Template08 = (props) => {
     });
     arJobs = experiences.map((job) => {
       return (
-        <div className="t08-work t08-sec-content" key={job.id_}>
+        <div className="t08-work t08-sec-content" key={job._id}>
           <div className="t08-content-circle">
             <div className="t08-circle"></div>
           </div>
           <div className="t08-content-text">
             <div className="t08-work-text">
-              <p>
-                {`${job.DescriptionAr}\xa0بوظيفة\xa0${job.NameAr}\xa0من\xa0${job.Start}\xa0-\xa0${job.End}`}
+               <p className={`ar`}>
+                {`${job.DescriptionAr}\xa0`}{`بوظيفة\xa0`}{`${job.NameAr}\xa0`}{`من\xa0`}{`${job.Start}\xa0`}- {`${job.End}\xa0`}
               </p>
             </div>
           </div>
@@ -239,7 +241,7 @@ const Template08 = (props) => {
   if (courses.length > 0) {
     crses = courses.map((crs) => {
       return (
-        <div className="t08-course t08-sec-content" key={crs.id_}>
+        <div className="t08-course t08-sec-content" key={crs._id}>
           <div className="t08-content-circle">
             <div className="t08-circle"></div>
           </div>
@@ -257,16 +259,16 @@ const Template08 = (props) => {
 
     arCrses = courses.map((crs) => {
       return (
-        <div className="t08-course t08-sec-content" key={crs.id_}>
+        <div className="t08-course t08-sec-content" key={crs._id}>
           <div className="t08-content-circle">
             <div className="t08-circle"></div>
           </div>
           <div className="t08-content-text">
             <div className="t08-course-text">
-              <p>
-                {`${crs.NameAr}\xa0في\xa0${crs.DescriptionAr}`}
+               <p className={`ar`}>
+                {`${crs.NameAr}\xa0`}{`في\xa0`}{`${crs.DescriptionAr}\xa0`}
               </p>
-              <p>{`من\xa0الفترة\xa0${crs.Year}`}</p>
+               <p className={`ar`}>{`من\xa0الفترة\xa0`}{`${crs.Year}\xa0`}</p>
             </div>
           </div>
         </div>
@@ -290,7 +292,7 @@ const Template08 = (props) => {
     skls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
-        <div className="t08-skill" key={skill.id_}>
+        <div className="t08-skill" key={skill._id}>
           <div className="t08-skill-logo">
             <div className="t08-skill-logo-bg">
               <img src={skillLogo} alt="" />
@@ -305,14 +307,14 @@ const Template08 = (props) => {
     arSkls = skills.map((skill) => {
       let skillLogo = allSkills[skill.Name];
       return (
-        <div className="t08-skill" key={skill.id_}>
+        <div className="t08-skill" key={skill._id}>
           <div className="t08-skill-logo">
             <div className="t08-skill-logo-bg">
               <img src={skillLogo} alt="" />
             </div>
           </div>
           <div className="t08-skill-name">
-            <p>{skill.NameAr}</p>
+             <p className={`ar`}>{`${skill.NameAr}\xa0`}</p>
           </div>
         </div>
       );
@@ -332,7 +334,7 @@ const Template08 = (props) => {
       }
 
       return (
-        <div className="t08-lang" key={lang.id_}>
+        <div className="t08-lang" key={lang._id}>
           <div className="t08-lang-name">
             <p>{lang.Name}</p>
           </div>
@@ -350,9 +352,9 @@ const Template08 = (props) => {
       }
 
       return (
-        <div className="t08-lang" key={lang.id_}>
+        <div className="t08-lang" key={lang._id}>
           <div className="t08-lang-name">
-            <p>{lang.NameAr}</p>
+             <p className={`ar`}>{`${lang.NameAr}\xa0`}</p>
           </div>
           <div className="t08-lang-rate">{rate}</div>
         </div>
@@ -377,7 +379,7 @@ const Template08 = (props) => {
               <div className="t08-circle"></div>
             </div>
             <div className="t08-content-text">
-              <p className='t08-co-text'>{CO.text}</p>
+              <p className={`t08-co-text`}>{CO.text}</p>
             </div>
           </div>
         </div>
@@ -388,7 +390,7 @@ const Template08 = (props) => {
           <img src={img_07} alt="" />
         </div>
         <div className="t08-sec-title ar">
-          <p>{`الهدف\xa0الوظيفي`}</p>
+           <p className={`ar`}>{`الهدف\xa0الوظيفي`}</p>
         </div>
         <div className="t08-sec-body ar">
           <div className="t08-sec-content">
@@ -396,7 +398,7 @@ const Template08 = (props) => {
               <div className="t08-circle"></div>
             </div>
             <div className="t08-content-text">
-              <p className='t08-co-text'>{CO.textAr}</p>
+              <p className={`t08-co-text ar`}>{`${CO.textAr}\xa0`}</p>
             </div>
           </div>
         </div>
@@ -405,7 +407,7 @@ const Template08 = (props) => {
   );
   //#endregion
   //#region - Education Section
-  let educationSection = (
+  let educationSection = !hidden.isEducationsHidden && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-edu-sec">
@@ -432,7 +434,7 @@ const Template08 = (props) => {
 
   //#endregion
   //#region - Work Section
-  let workSection = (
+  let workSection = !hidden.isExperiencesHidden && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-work-sec">
@@ -459,7 +461,7 @@ const Template08 = (props) => {
 
   //#endregion
   //#region - Courses Section
-  let coursesSection = (
+  let coursesSection = !hidden.isCoursesHidden && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-course-sec">
@@ -511,7 +513,7 @@ const Template08 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = (
+  let languagesSection = !hidden.isLanguagesHidden && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-lang-sec">
@@ -627,7 +629,7 @@ const Template08 = (props) => {
                 </div>
                 <div className="t08-info-text ar">
                   <p>
-                    {`${PI.MaritalStatusAr}\xa0-\xa0${PI.MaritalStatus}`}
+                    {`${PI.MaritalStatusAr == 1 ? 'متزوج' : 'أعزب'}\xa0`}- {`${PI.MaritalStatus == 1 ? 'Married' : 'Single'}\xa0`}
                   </p>
                 </div>
               </div>

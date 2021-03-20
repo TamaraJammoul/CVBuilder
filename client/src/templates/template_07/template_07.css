@@ -93,6 +93,7 @@
     calc(24px * var(--t07-scale-rate)) calc(86px * var(--t07-scale-rate))
     calc(54px * var(--t07-scale-rate));
   direction: rtl;
+  margin: 0 auto;
 }
 
 .template07-body p,
@@ -106,6 +107,10 @@
 .template07-body .bold p,
 .template07-body.ar .bold p {
   font-family: "beIN";
+}
+
+.template07-body.ar p.ar {
+  word-spacing: 2px;
 }
 
 /* #region - Header Section*/
@@ -159,10 +164,12 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  overflow: hidden;
 }
 .template07-body .t07-header-sec .t07-photo img {
-  width: calc(368px * var(--t07-scale-rate));
-  height: calc(321px * var(--t07-scale-rate));
+  /* width: calc(368px * var(--t07-scale-rate)); */
+  /* height: calc(321px * var(--t07-scale-rate)); */
+  max-width: 100%;
 }
 
 /* header > name */
@@ -182,7 +189,7 @@
 }
 .template07-body .t07-header-sec .t07-name p {
   color: var(--t07-name-color);
-  font-size: calc(32px * var(--t07-p-scale-rate));
+  font-size: calc(38px * var(--t07-p-scale-rate));
   font-family: "Ara Assaf";
   line-height: 1;
 }
@@ -269,7 +276,7 @@
   align-items: center;
 }
 .template07-body .t07-header-sec .t07-detail-text p {
-  font-size: calc(13px * var(--t07-p-scale-rate));
+  font-size: calc(15px * var(--t07-p-scale-rate));
 }
 
 .template07-body .t07-header-sec .t07-detail:first-child .t07-detail-text {
@@ -793,6 +800,11 @@
   position: relative;
   z-index: 10;
 }
+.template07-body .t07-exp-sec .t07-work-body .t07-work p,
+.template07-body .t07-exp-sec .t07-work-body.ar .t07-work p {
+  line-height: 1;
+}
+
 .template07-body .t07-exp-sec .t07-work-body .t07-work-row {
   display: -webkit-box;
   display: -ms-flexbox;

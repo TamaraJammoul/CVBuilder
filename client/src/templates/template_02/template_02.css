@@ -74,6 +74,7 @@
     calc(122px * var(--t02-scale-rate)) calc(94px * var(--t02-scale-rate))
     calc(166px * var(--t02-scale-rate));
   direction: rtl;
+  margin: 0 auto;
 }
 .template02-body p,
 .template02-body.ar p {
@@ -89,6 +90,10 @@
 .template02-body.ar .bold,
 .template02-body.ar .bold p {
   font-family: "beIN";
+}
+
+.template02-body.ar p.ar {
+  word-spacing: 2px;
 }
 
 /* #region - Name Section */
@@ -134,10 +139,12 @@
   height: calc(370px * var(--t02-scale-rate));
   position: relative;
   text-align: center;
+  overflow: hidden;
 }
 .template02-body .info-sec .main-photo .photo {
-  width: calc(340px * var(--t02-scale-rate));
-  height: calc(310px * var(--t02-scale-rate));
+  /* width: calc(340px * var(--t02-scale-rate)); */
+  /* height: calc(310px * var(--t02-scale-rate)); */
+  max-width: 100%;
   position: absolute;
   bottom: 0;
   -webkit-transform: translateX(-50%);

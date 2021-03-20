@@ -63,6 +63,7 @@
 }
 .template01-body.ar {
   direction: rtl;
+  margin: 0 auto;
   padding: calc(76px * var(--t01-scale-rate)) calc(92px * var(--t01-scale-rate))
     calc(92px * var(--t01-scale-rate)) calc(72px * var(--t01-scale-rate));
 }
@@ -80,6 +81,10 @@
 .template01-body .bold p,
 .template01-body.ar .bold p {
   font-family: "beIN";
+}
+
+.template01-body.ar p.ar {
+  word-spacing: 2px;
 }
 
 /* #region - Left Section */
@@ -111,13 +116,15 @@
   background-color: var(--t01-text-main-color);
   position: relative;
   text-align: center;
+  overflow: hidden;
 }
 .template01-body .t01-left .t01-photo .t01-personal-info-icon {
   position: absolute;
   bottom: 0;
   transform: translateX(-50%);
-  width: calc(432px * var(--t01-scale-rate));
-  height: calc(376px * var(--t01-scale-rate));
+  max-width: 100%;
+  /* width: calc(432px * var(--t01-scale-rate)); */
+  /* height: calc(376px * var(--t01-scale-rate)); */
 }
 .template01-body .t01-left .t01-photo .t01-personal-info-icon.ar {
   transform: translateX(50%);

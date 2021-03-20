@@ -66,6 +66,7 @@
   width: calc(2480px * var(--t10-scale-rate));
   height: calc(3508px * var(--t10-scale-rate));
   position: relative;
+  margin: 0 auto;
 }
 .template10-body p {
   margin-bottom: 0;
@@ -74,6 +75,9 @@
 .template10-body .bold,
 .template10-body .bold p {
   font-family: "beIN";
+}
+.template10-body p.ar {
+  word-spacing: 2px;
 }
 
 /* #region - Header Section */
@@ -107,10 +111,12 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  overflow: hidden;
 }
 .template10-body .t10-header-sec .t10-photo img {
-  width: calc(422px * var(--t10-scale-rate));
-  height: calc(392px * var(--t10-scale-rate));
+  /* width: calc(422px * var(--t10-scale-rate)); */
+  /* height: calc(392px * var(--t10-scale-rate)); */
+  max-width: 100%;
 }
 
 /* header > name */

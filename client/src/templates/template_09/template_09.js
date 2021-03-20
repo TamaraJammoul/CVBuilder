@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_09.css";
 
 //#region Import Images
-import img_00 from "../../assets/imgs/template_09/00.png";
+import photo from "../../assets/imgs/template_09/00.png";
 import img_01 from "../../assets/imgs/template_09/01.png";
 import img_02 from "../../assets/imgs/template_09/02.png";
 import img_03 from "../../assets/imgs/template_09/03.png";
@@ -52,6 +52,7 @@ function saveAs(type) {
   html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
+    useCORS: true
   })
     .then((canvas) => {
       const filename = "template_9";
@@ -90,6 +91,7 @@ const Template09 = (props) => {
     personalInformation,
     skills,
   } = useSelector((state) => state.template);
+  const hidden = useSelector((state) => state.isHide);
   const cvColor = useSelector((state) => state.sections.color);
 
   const colorStyle ={
@@ -119,7 +121,7 @@ const Template09 = (props) => {
         degree = "High School Certificate";
       }
       return (
-        <div className="t09-edu" key={edu.id_}>
+        <div className="t09-edu" key={edu._id}>
           <div className="t09-circle"
               style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           <p className="t09-edu-title"
@@ -145,21 +147,21 @@ const Template09 = (props) => {
       } else if (edu.Degree === 3) {
         degreeAr = "دكتوراه";
       } else if (edu.Degree === 4) {
-        degreeAr = "شهادة\xa0الثانوية\xa0العامة";
+        degreeAr = "شهادة\xa0الثانوية\xa0العامة\xa0";
       }
       return (
-        <div className="t09-edu" key={edu.id_}>
+        <div className="t09-edu" key={edu._id}>
           <div className="t09-circle ar"
               style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
-          <p className="t09-edu-title"
+          <p className={`t09-edu-title ar`}
               style={{color: cvColor===1 ? `${colorStyle.lightRed}` : `${colorStyle.lightGreen}`}}>
             {degreeAr}
           </p>
           <div className="t09-edu-text">
-            <p>{`تخصص\xa0:\xa0 ${edu.FacultyAr}`}</p>
-            <p>{edu.UniversityNameAr}</p>
-            <p>{`المعدل\xa0:\xa0 ${edu.DegreeFrom5} من 5`}</p>
-            <p>{`سنة\xa0التخرج\xa0:\xa0 ${edu.YearEnd}`}</p>
+             <p className={`ar`}>{`تخصص\xa0`} :{`${edu.FacultyAr}\xa0`}</p>
+             <p className={`ar`}>{`${edu.UniversityNameAr}\xa0`}</p>
+             <p className={`ar`}>{`المعدل\xa0`} :{`${edu.DegreeFrom5}\xa0`}{`من\xa05\xa0`}</p>
+             <p className={`ar`}>{`سنة\xa0التخرج\xa0`} :{`${edu.YearEnd}\xa0`}</p>
           </div>
         </div>
       );
@@ -171,7 +173,7 @@ const Template09 = (props) => {
   if (experiences.length > 0) {
     jobs = experiences.map((job) => {
       return (
-        <div className="t09-work" key={job.id_}>
+        <div className="t09-work" key={job._id}>
           <div className="t09-circle"
               style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           <p className="t09-work-title">{job.Name}</p>
@@ -186,14 +188,14 @@ const Template09 = (props) => {
     });
     arJobs = experiences.map((job) => {
       return (
-        <div className="t09-work" key={job.id_}>
+        <div className="t09-work" key={job._id}>
           <div className="t09-circle ar"
               style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
-          <p className="t09-work-title">{job.NameAr}</p>
+          <p className={`t09-work-title ar`}>{`${job.NameAr}\xa0`}</p>
           <div className="t09-work-text">
-            <p>{`بوظيفة:\xa0 ${job.Description}`}</p>
-            <p>
-              {`${job.Start}\xa0 -\xa0 ${job.End}`}
+             <p className={`ar`}>{`بوظيفة:\xa0`}{`${job.Description}\xa0`}</p>
+             <p className={`ar`}>
+              {`${job.Start}\xa0`}- {`${job.End}\xa0`}
             </p>
           </div>
         </div>
@@ -206,7 +208,7 @@ const Template09 = (props) => {
   if (courses.length > 0) {
     crses = courses.map((crs) => {
       return (
-        <div className="t09-course" key={crs.id_}>
+        <div className="t09-course" key={crs._id}>
           <div className="t09-circle-container">
             <div className="t09-circle"
                 style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
@@ -219,13 +221,13 @@ const Template09 = (props) => {
     });
     arCrses = courses.map((crs) => {
       return (
-        <div className="t09-course ar" key={crs.id_}>
+        <div className="t09-course ar" key={crs._id}>
           <div className="t09-circle-container">
             <div className="t09-circle ar"
                 style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t09-course-text">
-            <p>{crs.NameAr}</p>
+             <p className={`ar`}>{`${crs.NameAr}\xa0`}</p>
           </div>
         </div>
       );
@@ -237,7 +239,7 @@ const Template09 = (props) => {
   if (skills.length > 0) {
     skls = skills.map((skill) => {
       return (
-        <div className="t09-p-skill" key={skill.id_}>
+        <div className="t09-p-skill" key={skill._id}>
           <div className="t09-circle-container">
             <div className="t09-circle"
                 style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
@@ -250,13 +252,13 @@ const Template09 = (props) => {
     });
     arSkls = skills.map((skill) => {
       return (
-        <div className="t09-p-skill ar" key={skill.id_}>
+        <div className="t09-p-skill ar" key={skill._id}>
           <div className="t09-circle-container">
             <div className="t09-circle"
                 style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t09-p-skill-text">
-            <p>{skill.NameAr}</p>
+             <p className={`ar`}>{`${skill.NameAr}\xa0`}</p>
           </div>
         </div>
       );
@@ -278,7 +280,7 @@ const Template09 = (props) => {
       }
 
       return (
-        <div className="t09-lang" key={lang.id_}>
+        <div className="t09-lang" key={lang._id}>
           <div className="t09-lang-name">
             <p>{lang.Name}</p>
           </div>
@@ -298,9 +300,9 @@ const Template09 = (props) => {
       }
 
       return (
-        <div className="t09-lang" key={lang.id_}>
+        <div className="t09-lang" key={lang._id}>
           <div className="t09-lang-name">
-            <p>{lang.NameAr}</p>
+             <p className={`ar`}>{`${lang.NameAr}\xa0`}</p>
           </div>
           <div className="t09-lang-rate">{rate}</div>
         </div>
@@ -309,7 +311,7 @@ const Template09 = (props) => {
   }
 
   //#region - Education Section
-  let educationSection = (
+  let educationSection = !hidden.isEducationsHidden && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-edu-sec">
@@ -340,7 +342,7 @@ const Template09 = (props) => {
 
   //#endregion
   //#region - Work Section
-  let workSection = (
+  let workSection = !hidden.isExperiencesHidden && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-work-sec">
@@ -369,7 +371,7 @@ const Template09 = (props) => {
 
   //#endregion
   //#region - Courses Section
-  let coursesSection = (
+  let coursesSection = !hidden.isCoursesHidden && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-courses-sec">
@@ -390,7 +392,7 @@ const Template09 = (props) => {
         </div>
         <div className="t09-sec-content ar">
           <h2 className="t09-sec-title ar"
-              style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>{`الدورات\xa0التدريبية`}</h2>
+              style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>{`الدورات\xa0التدريبية\xa0`}</h2>
           {arCrses}
         </div>
       </div>
@@ -426,7 +428,7 @@ const Template09 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = (
+  let languagesSection = !hidden.isLanguagesHidden && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-lang-sec">
@@ -494,13 +496,13 @@ const Template09 = (props) => {
           {/* Photo Section */}
           <div className="t09-photo"
               style={{borderColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-            <img src={img_00} alt="" />
+            <img src={PI.Image ? PI.Image : photo} alt="" />
           </div>
 
           {/* Name Section */}
           <div className="t09-name-sec">
-            <p style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}} >
-              {`${PI.FirstNameAr}\xa0${PI.LastNameAr}`}
+            <p className={`ar`} style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}} >
+              {`${PI.FirstNameAr}\xa0${PI.LastNameAr}\xa0`}
             </p>
             <p style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}} >
               {PI.FirstName} {PI.LastName}
@@ -537,7 +539,7 @@ const Template09 = (props) => {
                 </div>
                 <div className="t09-detail-p-2"
                     style={{backgroundColor: cvColor===1 ? '#2d2d49' : '#537b7b' }}>
-                  <p className="t09-detail-text">{`${PI.City}\xa0-\xa0${PI.CityAr}`}</p>
+                  <p className="t09-detail-text">{`${PI.City}\xa0`}- {`${PI.CityAr}\xa0`}</p>
                 </div>
               </div>
               <div className="t09-detail">
@@ -547,7 +549,7 @@ const Template09 = (props) => {
                 </div>
                 <div className="t09-detail-p-2"
                     style={{backgroundColor: cvColor===1 ? '#2d2d49' : '#537b7b' }}>
-                  <p className="t09-detail-text">{`${PI.Nationality}\xa0-\xa0${PI.NationalityAr}`}</p>
+                  <p className="t09-detail-text">{`${PI.Nationality}\xa0`}- {`${PI.NationalityAr}\xa0`}</p>
                 </div>
               </div>
               <div className="t09-detail">
@@ -557,7 +559,7 @@ const Template09 = (props) => {
                 </div>
                 <div className="t09-detail-p-3"
                     style={{backgroundColor: cvColor===1 ? '#4d364a' : '#7b9d9d' }}>
-                  <p className="t09-detail-text">{`${PI.MaritalStatus}\xa0-\xa0${PI.MaritalStatusAr}`}</p>
+                  <p className="t09-detail-text">{`${PI.MaritalStatus == 1 ? 'Married' : 'Single'}\xa0`}- {`${PI.MaritalStatusAr == 1 ? 'متزوج' : 'أعزب'}\xa0`}</p>
                 </div>
               </div>
               <div className="t09-detail">

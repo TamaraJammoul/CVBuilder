@@ -48,6 +48,7 @@ const Template03 = (props) => {
     skills,
     technicalskills,
   } = useSelector((state) => state.template);
+  const hidden = useSelector((state) => state.isHide);
   const cvColor = useSelector((state) => state.sections.color);
   const cvLanguage = useSelector((state) => state.cvLanguage);
 
@@ -79,7 +80,7 @@ const Template03 = (props) => {
         grade = "Excellent";
       }
       return (
-        <div className="t03-edu" key={edu.id_}>
+        <div className="t03-edu" key={edu._id}>
           <div
             className={`t03-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
@@ -111,7 +112,7 @@ const Template03 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة\xa0";
         }
         let gradeAr = "";
         if (edu.Grade === 1) {
@@ -122,22 +123,22 @@ const Template03 = (props) => {
           gradeAr = "ممتاز";
         }
         return (
-          <div className="t03-edu" key={edu.id_}>
+          <div className="t03-edu" key={edu._id}>
             <div
               className={`t03-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
               style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
             ></div>
-            <p className="t03-edu-title"
+            <p className={`t03-edu-title ${cvLanguage === "Ar" ? "ar" : ""}`}
                style={{color: cvColor===1 ? `${colorStyle.lightRed}` : `${colorStyle.lightGreen}`}}>
               {degreeAr}
             </p>
             <div className="t03-edu-text">
-              <p>{edu.Faculty}</p>
-              <p>{edu.UniversityName}</p>
-              <p>
-                {`بمعدل\xa0:\xa0${edu.DegreeFrom100}%\xa0بتقدير\xa0${gradeAr}`}
+              <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${edu.Faculty}\xa0`}</p>
+              <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${edu.UniversityName}\xa0`}</p>
+              <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
+                {`بمعدل\xa0`} :{`${edu.DegreeFrom100}%\xa0`}{`بتقدير\xa0`}{`${gradeAr}\xa0`}
               </p>
-              <p>{`تاريخ\xa0التخرج\xa0:\xa0${edu.YearEnd}`}</p>
+              <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`تاريخ\xa0التخرج\xa0`} :{`${edu.YearEnd}\xa0`}</p>
             </div>
           </div>
         );
@@ -149,21 +150,21 @@ const Template03 = (props) => {
   if (experiences.length > 0) {
     jobs = experiences.map((job) => {
       return (
-        <div className="t03-work" key={job.id_}>
+        <div className="t03-work" key={job._id}>
           <div
             className={`t03-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}
           ></div>
-          <p className="t03-work-title">{job.Name}</p>
+          <p className={`t03-work-title ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${job.Name}\xa0`}</p>
           <div className="t03-work-text">
-            <p>{job.Description}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${job.Description}\xa0`}</p>
             {cvLanguage === "Ar" ? (
-              <p>
-                {`لمدة\xa0${job.End - job.Start}\xa0 
-              ${job.End - job.Start > 1 ? "سنوات" : "سنة"}`}
+              <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
+                {`لمدة\xa0`}{`${job.End - job.Start}\xa0`}
+                {`${job.End - job.Start > 1 ? "سنوات" : "سنة"}\xa0`}
               </p>
             ) : (
-              <p>
+              <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
                 {`for ${job.End - job.Start} 
               ${job.End - job.Start === 1 ? "year" : "years"}`}
               </p>
@@ -190,14 +191,14 @@ const Template03 = (props) => {
       return (
         <div
           className={`t03-course ${cvLanguage === "Ar" ? "ar" : ""}`}
-          key={crs.id_}
+          key={crs._id}
         >
           <div className="t03-circle-container">
             <div className="t03-circle"
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t03-course-text">
-            <p>{crs.Name}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${crs.Name}\xa0`}</p>
           </div>
         </div>
       );
@@ -208,12 +209,12 @@ const Template03 = (props) => {
   if (technicalskills.length > 0) {
     tSkills = technicalskills.map((tskill, id) => {
       return (
-        <div className="t03-t-skill" key={tskill.id_}>
+        <div className="t03-t-skill" key={tskill._id}>
           <div className="t03-t-skill-name">
-            <p>{tskill.Name}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${tskill.Name}\xa0`}</p>
           </div>
           <div className="t03-t-skill-value">
-            <p>{tskill.RateFrom100}%</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{tskill.RateFrom100}%</p>
           </div>
           <div className="t03-t-skill-bar">
             <div className="t03-bar-container">
@@ -231,13 +232,15 @@ const Template03 = (props) => {
   let langs = null;
   if (languages.length > 0) {
     langs = languages.map((lang, id) => {
+      let langColor = cvColor===1 ? `${colorStyle.darkRed}`: `${colorStyle.darkGreen}`;
       return (
-        <div className="t03-lang" key={lang.id_}>
+        <div className="t03-lang" key={lang._id}>
           <p className={`t03-lang-rate ${cvLanguage === "Ar" ? "ar" : ""}`}>
             {lang.RateFrom100}%
           </p>
-          <p className={`t03-lang-name ${cvLanguage === "Ar" ? "ar" : ""}`}>
-            {lang.Name}
+          <p className={`t03-lang-name ${cvLanguage === "Ar" ? "ar" : ""}`}
+              style={{color: lang.RateFrom100 < 40 ? langColor : 'fff'}}>
+            {`${lang.Name}\xa0`}
           </p>
           <div
             className={`t03-lang-circle-wrapper ${
@@ -246,7 +249,8 @@ const Template03 = (props) => {
           >
             <div
               className={`t03-full-lang-${id + 1}`}
-              style={{ width: `${lang.RateFrom100}%`, backgroundColor: cvColor===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}` }}
+              style={{ width: `${lang.RateFrom100}%`,
+                       backgroundColor: cvColor===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}` }}
               
             ></div>
           </div>
@@ -261,14 +265,14 @@ const Template03 = (props) => {
       return (
         <div
           className={`t03-p-skill ${cvLanguage === "Ar" ? "ar" : ""}`}
-          key={skill.id_}
+          key={skill._id}
         >
           <div className="t03-circle-container">
             <div className="t03-circle"
             style={{backgroundColor: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}></div>
           </div>
           <div className="t03-p-skill-text">
-            <p>{cvLanguage==='Ar' ? skill.NameAr : skill.Name}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage==='Ar' ? `${skill.NameAr}\xa0` : skill.Name}</p>
           </div>
         </div>
       );
@@ -277,7 +281,7 @@ const Template03 = (props) => {
 
   // Left Section
   //#region - Education Section
-  let eduSection = (
+  let eduSection = !hidden.isEducationsHidden && (
     <div className="t03-sec t03-edu-sec">
       {cvColor===1
       ?(<img src={img_05_red} alt="" />)
@@ -294,7 +298,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = (
+  let workSection = !hidden.isExperiencesHidden && (
     <div className="t03-sec t03-work-sec">
       {cvColor===1
       ?(<img src={img_06_red} alt="" />)
@@ -311,7 +315,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = (
+  let coursesSection = !hidden.isCoursesHidden && (
     <div className="t03-sec t03-courses-sec">
       {cvColor===1
       ?(<img 
@@ -328,7 +332,7 @@ const Template03 = (props) => {
       <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {cvLanguage === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
+          {cvLanguage === "Ar" ? "الدورات\xa0التدريبية\xa0" : "Training Courses"}
         </h2>
         {crses}
       </div>
@@ -347,7 +351,7 @@ const Template03 = (props) => {
       <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {cvLanguage === "Ar" ? "المهارات\xa0الشخصية" : "Personal Skills"}
+          {cvLanguage === "Ar" ? "المهارات\xa0الشخصية\xa0" : "Personal Skills"}
         </h2>
         {skls}
       </div>
@@ -355,7 +359,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Technical Skills Section
-  let technicalSkillsSection = (
+  let technicalSkillsSection = !hidden.isTechnicalSkillsHidden && (
     <div className="t03-sec t03-tech-skills-sec">
       {cvColor===1
         ?(<img src={img_09_red} alt="" />)
@@ -364,7 +368,7 @@ const Template03 = (props) => {
       <div className={`t03-sec-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <h2 className={`t03-sec-title ${cvLanguage === "Ar" ? "ar" : ""}`}
             style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-          {cvLanguage === "Ar" ? "المهارات\xa0التقنية" : "Technical Skills"}
+          {cvLanguage === "Ar" ? "المهارات\xa0التقنية\xa0" : "Technical Skills"}
         </h2>
         {tSkills}
       </div>
@@ -372,7 +376,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = (
+  let languagesSection = !hidden.isLanguagesHidden && (
     <div className="t03-languages-sec t03-sec">
       <div className="t03-languages-title">
         <h2 className='bold' style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
@@ -456,6 +460,7 @@ const Template03 = (props) => {
     html2canvas(pdf, {
       dpi: 300, // Set to 300 DPI
       scale: 2, // Adjusts your resolution
+      useCORS: true
     })
     .then((canvas) => {
         const filename = "template_3";
@@ -518,7 +523,7 @@ const Template03 = (props) => {
         >
           <div className={`t03-cv-tag ${cvLanguage === "Ar" ? "ar" : ""}`}
               style={{backgroundColor: cvColor===1 ? `${colorStyle.lightRed}`: `${colorStyle.lightGreen}`}}>
-            <p className="bold">
+            <p className={`bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
               {cvLanguage === "Ar" ? "السيرة\xa0 الذاتية" : "CV"}
             </p>
           </div>
@@ -526,7 +531,7 @@ const Template03 = (props) => {
           {/* Photo Section */}
           <div className={`t03-photo ${cvLanguage === "Ar" ? "ar" : ""}`}
               style={{borderColor: cvColor===1 ? '#893a4c': '#356767'}}>
-            <img src={photo} alt="" />
+            <img src={PI.Image ? PI.Image : photo} alt="" />
           </div>
 
           {/* Name Section */}
@@ -595,11 +600,11 @@ const Template03 = (props) => {
                     style={{backgroundColor: cvColor===1 ? '#843d4b' : '#518699' }}>
                   {cvLanguage==='Ar' ?
                     (<p className="t03-detail-text">
-                      {`${PI.NationalityAr}\xa0/\xa0${PI.CityAr}`}
+                      {`${PI.NationalityAr}\xa0`} / {`${PI.CityAr}\xa0`}
                     </p>)
                     :
                     (<p className="t03-detail-text">
-                    {PI.Nationality} / {PI.City}
+                    {`${PI.Nationality}\xa0`} / {`${PI.City}\xa0`}
                     </p>)
                   }
                 </div>
@@ -629,9 +634,9 @@ const Template03 = (props) => {
             <div className="t03-info-desc">
               <p className="t03-info-desc-title"
                   style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-                {cvLanguage === "Ar" ? "الهدف\xa0الوظيفي" : "Career Objective"}
+                {cvLanguage === "Ar" ? "الهدف\xa0الوظيفي\xa0" : "Career Objective"}
               </p>
-              <p className="t03-info-desc-text">{CO.text}</p>
+              <p className={`t03-info-desc-text ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${CO.text}\xa0`}</p>
             </div>
           </div>
 

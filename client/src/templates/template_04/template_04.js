@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_04.css";
 
 //#region Import Images
-import img_00 from "../../assets/imgs/template_04/00.png";
+import photo from "../../assets/imgs/template_04/00.png";
 import img_01 from "../../assets/imgs/template_04/01.png";
 import img_02 from "../../assets/imgs/template_04/02.png";
 import img_03 from "../../assets/imgs/template_04/03.png";
@@ -42,6 +42,7 @@ const Template04 = (props) => {
     memberships,
     skills,
   } = useSelector((state) => state.template);
+  const hidden = useSelector((state) => state.isHide);
   const cvLanguage = useSelector((state) => state.cvLanguage);
 
   let edus = null;
@@ -60,25 +61,25 @@ const Template04 = (props) => {
       return (
         <div
           className={`t04-edu ${cvLanguage === "Ar" ? "ar" : ""}`}
-          key={edu.id_}
+          key={edu._id}
         >
           <div
             className={`t04-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
-          <p className="t04-edu-title">
+          <p className={`t04-edu-title ${cvLanguage === "Ar" ? "ar" : ""}`}>
             {degree} {edu.Faculty}
           </p>
           <div className={`t04-edu-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
             <div className="t04-edu-circle">
               <div className="t04-circle-dark"></div>
             </div>
-            <p>{edu.UniversityName}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{edu.UniversityName}</p>
           </div>
           <div className={`t04-edu-content ${cvLanguage === "Ar" ? "ar" : ""}`}>
             <div className="t04-edu-circle">
               <div className="t04-circle-dark"></div>
             </div>
-            <p>GPA: {edu.DegreeFrom5}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>GPA: {edu.DegreeFrom5}</p>
           </div>
         </div>
       );
@@ -93,18 +94,18 @@ const Template04 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة\xa0";
         }
         return (
           <div
             className={`t04-edu ${cvLanguage === "Ar" ? "ar" : ""}`}
-            key={edu.id_}
+            key={edu._id}
           >
             <div
               className={`t04-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
             ></div>
-            <p className="t04-edu-title">
-              {`${degreeAr}\xa0في\xa0${edu.Faculty}`}
+            <p className={`t04-edu-title ${cvLanguage === "Ar" ? "ar" : ""}`}>
+              {`${degreeAr}\xa0`}{`في\xa0`}{`${edu.Faculty}\xa0`}
             </p>
             <div
               className={`t04-edu-content ${cvLanguage === "Ar" ? "ar" : ""}`}
@@ -112,7 +113,7 @@ const Template04 = (props) => {
               <div className="t04-edu-circle">
                 <div className="t04-circle-dark"></div>
               </div>
-              <p className='t04-edu-text'>{edu.UniversityName}</p>
+              <p className={`t04-edu-text ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${edu.UniversityName}\xa0`}</p>
             </div>
             <div
               className={`t04-edu-content ${cvLanguage === "Ar" ? "ar" : ""}`}
@@ -120,7 +121,7 @@ const Template04 = (props) => {
               <div className="t04-edu-circle">
                 <div className="t04-circle-dark"></div>
               </div>
-              <p className='t04-edu-text'>{`المعدل\xa0التراكمي\xa0:\xa0${edu.DegreeFrom5}`}</p>
+              <p className={`t04-edu-text ${cvLanguage === "Ar" ? "ar" : ""}`}>{`المعدل\xa0التراكمي\xa0`} :{`${edu.DegreeFrom5}\xa0`}</p>
             </div>
           </div>
         );
@@ -134,13 +135,13 @@ const Template04 = (props) => {
       return (
         <div
           className={`t04-work ${cvLanguage === "Ar" ? "ar" : ""}`}
-          key={job.id_}
+          key={job._id}
         >
           <div
             className={`t04-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
-          <p className='t04-work-text'>
-            {`${job.Name}\xa0-\xa0${job.Description}\xa0${job.Start}-${job.End}`}
+          <p className={`t04-work-text ${cvLanguage === "Ar" ? "ar" : ""}`}>
+            {`${job.Name}\xa0`}- {`${job.Description}\xa0`}{`${job.Start}\xa0`}- {`${job.End}\xa0`}
           </p>
         </div>
       );
@@ -163,12 +164,12 @@ const Template04 = (props) => {
       return (
         <div
           className={`t04-course ${cvLanguage === "Ar" ? "ar" : ""}`}
-          key={crs.id_}
+          key={crs._id}
         >
           <div
             className={`t04-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
-          <p className='t04-course-text'>{crs.Name}</p>
+          <p className='' className={`t04-course-text ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${crs.Name}\xa0`}</p>
         </div>
       );
     });
@@ -188,9 +189,9 @@ const Template04 = (props) => {
       }
 
       return (
-        <div className="t04-lang" key={lang.id_}>
+        <div className="t04-lang" key={lang._id}>
           <div className="t04-lang-name">
-            <p>{lang.Name}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${lang.Name}\xa0`}</p>
           </div>
           <div className="t04-lang-rate">{rate}</div>
         </div>
@@ -204,12 +205,12 @@ const Template04 = (props) => {
       return (
         <div
           className={`t04-part ${cvLanguage === "Ar" ? "ar" : ""}`}
-          key={member.id_}
+          key={member._id}
         >
           <div
             className={`t04-circle ${cvLanguage === "Ar" ? "ar" : ""}`}
           ></div>
-          <p className='t04-member-text'>{member.Name}</p>
+          <p className={`t04-member-text ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${member.Name}\xa0`}</p>
         </div>
       );
     });
@@ -232,12 +233,12 @@ const Template04 = (props) => {
       let skillLogo = allSkills[skill.Name];
 
       return (
-        <div className="t04-skill" key={skill.id_}>
+        <div className="t04-skill" key={skill._id}>
           <div className="t04-skill-logo">
             <img className={`t04-skill-logo-${id + 1}`} src={skillLogo} alt="" />
           </div>
           <div className="t04-skill-name">
-            <p>{cvLanguage==='Ar' ? skill.NameAr : skill.Name}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage==='Ar' ? `${skill.NameAr}\xa0` : skill.Name}</p>
           </div>
         </div>
       );
@@ -249,10 +250,10 @@ const Template04 = (props) => {
   let objectiveSection = (
     <div className={`t04-sec t04-objective-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
-        <p>{cvLanguage === "Ar" ? "الهدف\xa0الوظيفي" : "Objective Career"}</p>
+        <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "الهدف\xa0الوظيفي\xa0" : "Objective Career"}</p>
       </div>
       <div className="t04-sec-body">
-        <p className='t04-co-text'>{CO.text}</p>
+        <p className='' className={`t04-co-text ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${CO.text}\xa0`}</p>
       </div>
     </div>
   );
@@ -261,7 +262,7 @@ const Template04 = (props) => {
   let commSection = (
     <div className={`t04-sec t04-comm-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
-        <p>{cvLanguage === "Ar" ? "التواصل" : "Communication"}</p>
+        <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "التواصل" : "Communication"}</p>
       </div>
       <div className="t04-sec-body">
         <div className="t04-comm">
@@ -271,7 +272,7 @@ const Template04 = (props) => {
             </div>
           </div>
           <div className={`t04-comm-name ${cvLanguage === "Ar" ? "ar" : ""}`}>
-            <p className="t04-comm-name-1">{PI.Email}</p>
+            <p className={`t04-comm-name-1 ${cvLanguage === "Ar" ? "ar" : ""}`}>{PI.Email}</p>
           </div>
         </div>
         <div className="t04-comm">
@@ -281,7 +282,7 @@ const Template04 = (props) => {
             </div>
           </div>
           <div className={`t04-comm-name ${cvLanguage === "Ar" ? "ar" : ""}`}>
-            <p className="t04-comm-name-2">{PI.Phone}</p>
+            <p className={`t04-comm-name-2 ${cvLanguage === "Ar" ? "ar" : ""}`}>{PI.Phone}</p>
           </div>
         </div>
         <div className="t04-comm">
@@ -291,8 +292,8 @@ const Template04 = (props) => {
             </div>
           </div>
           <div className={`t04-comm-name ${cvLanguage === "Ar" ? "ar" : ""}`}>
-            <p className="t04-comm-name-3">
-              {PI.Nationality} - {PI.City}
+            <p className={`t04-comm-name-3 ${cvLanguage === "Ar" ? "ar" : ""}`}>
+              {`${PI.Nationality}\xa0`}- {`${PI.City}\xa0`}
             </p>
           </div>
         </div>
@@ -304,17 +305,17 @@ const Template04 = (props) => {
   let skillsSection = (
     <div className={`t04-sec t04-skill-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
-        <p>{cvLanguage === "Ar" ? "المهارات" : "Skills"}</p>
+        <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "المهارات" : "Skills"}</p>
       </div>
       <div className="t04-sec-body">{skls}</div>
     </div>
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = (
+  let languagesSection = !hidden.isLanguagesHidden && (
     <div className={`t04-sec t04-lang-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
-        <p>{cvLanguage === "Ar" ? "اللغة" : "Languages"}</p>
+        <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "اللغة" : "Languages"}</p>
       </div>
       <div className="t04-sec-body">{langs}</div>
     </div>
@@ -323,13 +324,13 @@ const Template04 = (props) => {
 
   // Right Section
   //#region - Education Section
-  let eduSection = (
+  let eduSection = !hidden.isEducationsHidden && (
     <div className={`t04-main-sec t04-edu-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
           <div className="t04-title-front-bg"></div>
-          <p className="t04-title bold">
-            {cvLanguage === "Ar" ? "المؤهلات\xa0العلمية" : "Education"}
+          <p className={`t04-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
+            {cvLanguage === "Ar" ? "المؤهلات\xa0العلمية\xa0" : "Education"}
           </p>
         </div>
       </div>
@@ -338,13 +339,13 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = (
+  let workSection = !hidden.isExperiencesHidden && (
     <div className={`t04-main-sec t04-work-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
           <div className="t04-title-front-bg"></div>
-          <p className="t04-title bold">
-            {cvLanguage === "Ar" ? "الخبرات\xa0العملية" : "Work Experience"}
+          <p className={`t04-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
+            {cvLanguage === "Ar" ? "الخبرات\xa0العملية\xa0" : "Work Experience"}
           </p>
         </div>
       </div>
@@ -353,13 +354,13 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = (
+  let coursesSection = !hidden.isCoursesHidden && (
     <div className={`t04-main-sec t04-course-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
           <div className="t04-title-front-bg"></div>
-          <p className="t04-title bold">
-            {cvLanguage === "Ar" ? "الدورات\xa0التدريبية" : "Training Courses"}
+          <p className={`t04-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
+            {cvLanguage === "Ar" ? "الدورات\xa0التدريبية\xa0" : "Training Courses"}
           </p>
         </div>
       </div>
@@ -368,12 +369,12 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Memberships Section
-  let membershipsSection = (
+  let membershipsSection = !hidden.isMembershipsHidden && (
     <div className={`t04-main-sec t04-part-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
           <div className="t04-title-front-bg"></div>
-          <p className="t04-title bold">
+          <p className={`t04-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
             {cvLanguage === "Ar" ? "العضويات" : "Memberships"}
           </p>
         </div>
@@ -452,6 +453,7 @@ const Template04 = (props) => {
     html2canvas(pdf, {
       dpi: 300, // Set to 300 DPI
       scale: 2, // Adjusts your resolution
+      useCORS: true
     })
       .then((canvas) => {
         const filename = "template_4";
@@ -560,7 +562,7 @@ const Template04 = (props) => {
 
           {/* Personal Photo */}
           <div className={`t04-photo ${cvLanguage === "Ar" ? "ar" : ""}`}>
-            <img src={img_00} alt="" />
+            <img src={PI.Image ? PI.Image : photo} alt="" />
           </div>
 
           {/* Name Section */}

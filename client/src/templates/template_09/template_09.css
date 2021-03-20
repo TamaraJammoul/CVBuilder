@@ -74,6 +74,7 @@
   align-items: center;
   position: relative;
   direction: ltr;
+  margin: 0 auto;
 }
 .template09-body p {
   margin-bottom: 0;
@@ -83,6 +84,9 @@
 .template09-body .bold,
 .template09-body .bold p {
   font-family: "beIN";
+}
+.template09-body p.ar {
+  word-spacing: 2px;
 }
 
 /* CV Tag */
@@ -112,12 +116,13 @@
 /* #region - Photo */
 .template09-body .t09-photo {
   border: calc(8px * var(--t09-scale-rate)) solid;
-  width: -webkit-fit-content;
+  /* width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: -webkit-fit-content;
   height: -moz-fit-content;
-  height: fit-content;
+  height: fit-content; */
+  width: calc(420px * var(--t03-scale-rate));
   padding: calc(10px * var(--t09-scale-rate));
   position: absolute;
   top: calc(100px * var(--t09-scale-rate));
@@ -130,14 +135,16 @@
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  width: calc(308px * var(--t09-scale-rate));
-  height: calc(308px * var(--t09-scale-rate));
+  max-width: 100%;
+  border-radius: 50%;
+  /* width: calc(308px * var(--t09-scale-rate)); */
+  /* height: calc(308px * var(--t09-scale-rate)); */
 }
 /* #endregion */
 
 /* #region - Name Section */
 .template09-body .t09-name-sec {
-  margin-bottom: calc(60px * var(--t09-scale-rate));
+  margin-bottom: calc(160px * var(--t09-scale-rate));
   font-size: calc(40px * var(--t09-p-scale-rate));
   line-height: 1.2;
   font-style: italic;

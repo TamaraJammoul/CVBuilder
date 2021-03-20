@@ -70,6 +70,7 @@
 }
 .template05-body.ar {
   direction: rtl;
+  margin: 0 auto;
 }
 .template05-body p,
 .template05-body.ar p {
@@ -82,6 +83,10 @@
 .template05-body.ar .bold,
 .template05-body.ar .bold p {
   font-family: "beIN";
+}
+
+.template05-body.ar p.ar {
+  word-spacing: 2px;
 }
 
 /* #region - Header Section */
@@ -134,10 +139,12 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  overflow: hidden;
 }
 .template05-body .t05-header-sec .t05-photo img {
-  width: calc(422px * var(--t05-scale-rate));
-  height: calc(392px * var(--t05-scale-rate));
+  /* width: calc(422px * var(--t05-scale-rate)); */
+  /* height: calc(392px * var(--t05-scale-rate)); */
+  max-width: 100%;
 }
 
 /* header > name */
@@ -156,11 +163,14 @@
   align-items: flex-start;
   line-height: 1;
   margin-bottom: calc(40px * var(--t05-scale-rate));
+  overflow: hidden;
+  padding: 0 10px;
 }
 .template05-body .t05-header-sec .t05-name p {
-  font-size: calc(32px * var(--t05-p-scale-rate));
+  font-size: calc(40px * var(--t05-p-scale-rate));
   font-family: "Ara Assaf";
   color: var(--t05-name-color);
+  line-height: 1.2;
 }
 
 /* header -> details */
@@ -222,7 +232,7 @@
   align-items: center;
 }
 .template05-body .t05-header-sec .t05-detail-text p {
-  font-size: calc(13px * var(--t05-p-scale-rate));
+  font-size: calc(16px * var(--t05-p-scale-rate));
 }
 
 /* header -> location */
@@ -644,9 +654,9 @@
   .t05-sec-body
   .t05-course:last-child
   .t05-circle {
-  -webkit-transform: translateY(105%);
-  -ms-transform: translateY(105%);
-  transform: translateY(105%);
+  -webkit-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
 }
 .template05-body .t05-courses-sec .t05-sec-body .t05-course .t05-course-circle {
   -ms-grid-row: 1;
@@ -742,7 +752,7 @@
 }
 .template05-body .t05-skills-sec .t05-skill .t05-skill-logo-bg img {
   width: calc(95px * var(--t05-scale-rate));
-  height: calc(94px * var(--t05-scale-rate));
+  height: calc(100px * var(--t05-scale-rate));
 }
 /* skill -> name */
 .template05-body .t05-skills-sec .t05-skill .t05-skill-name {
@@ -752,6 +762,7 @@
   grid-column: 1;
   grid-area: skill-name;
   text-align: center;
+  padding: calc(15px * var(--t05-scale-rate));
 }
 .template05-body .t05-skills-sec .t05-skill .t05-skill-name p {
   font-size: calc(11px * var(--t05-p-scale-rate));
@@ -840,6 +851,15 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  transform: translateX(15%);
+}
+.template05-body
+  .t05-other-sec
+  .t05-part-sec
+  .t05-sec-body
+  .t05-part
+  .t05-part-circle.ar {
+  transform: translateX(0%);
 }
 .template05-body
   .t05-other-sec

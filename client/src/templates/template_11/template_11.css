@@ -60,6 +60,7 @@
   width: calc(2480px * var(--t11-scale-rate));
   height: calc(3508px * var(--t11-scale-rate));
   position: relative;
+  margin: 0 auto;
 }
 
 /* #region - General styles for all sections */
@@ -218,6 +219,9 @@
 .template11-body .bold,
 .template11-body .bold p {
   font-family: "beIN";
+}
+.template01-body p.ar {
+  word-spacing: 2px;
 }
 /* #endregion */
 

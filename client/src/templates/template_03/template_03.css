@@ -72,6 +72,7 @@
 }
 .template03-body.ar {
   direction: rtl;
+  margin: 0 auto;
   text-align: right;
 }
 .template03-body p,
@@ -85,6 +86,10 @@
 .template03-body.ar .bold,
 .template03-body.ar .bold p {
   font-family: "beIN";
+}
+
+.template03-body.ar p.ar {
+  word-spacing: 2px;
 }
 
 /* #region - CV Tag */
@@ -117,12 +122,13 @@
 /* #region - Photo */
 .template03-body .t03-photo {
   border: calc(8px * var(--t03-scale-rate)) solid;
-  width: -webkit-fit-content;
+  /* width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: -webkit-fit-content;
   height: -moz-fit-content;
-  height: fit-content;
+  height: fit-content; */
+  width: calc(420px * var(--t03-scale-rate));
   padding: calc(10px * var(--t03-scale-rate));
   position: absolute;
   top: calc(230px * var(--t03-scale-rate));
@@ -131,6 +137,7 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+  overflow: hidden;
 }
 .template03-body .t03-photo.ar {
   left: 0;
@@ -140,8 +147,10 @@
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  width: calc(308px * var(--t03-scale-rate));
-  height: calc(308px * var(--t03-scale-rate));
+  border-radius: 50%;
+  /* width: calc(308px * var(--t03-scale-rate)); */
+  /* height: calc(308px * var(--t03-scale-rate)); */
+  max-width: 100%;
 }
 /* #endregion */
 
@@ -242,6 +251,7 @@
 .template03-body .t03-info-sec .t03-detail > div {
   color: #fff;
   margin-bottom: calc(26px * var(--t03-scale-rate));
+  padding-left: calc(60px * var(--t03-scale-rate));
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -700,7 +710,7 @@
 }
 .template03-body .t03-languages-sec .t03-languages-title {
   text-align: center;
-  margin-bottom: calc(100px * var(--t03-scale-rate));
+  margin-bottom: calc(30px * var(--t03-scale-rate));
 }
 .template03-body .t03-languages-sec .t03-languages-title h2 {
   font-size: calc(26px * var(--t03-p-scale-rate));
@@ -716,13 +726,14 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 .template03-body .t03-languages-sec .t03-lang {
   background-image: var(--t03-lang-bg-img);
   background-size: cover;
   width: calc(333px * var(--t03-scale-rate));
   height: calc(330px * var(--t03-scale-rate));
-  margin: 0 calc(30px * var(--t03-scale-rate));
+  margin: calc(50px * var(--t03-scale-rate)) calc(30px * var(--t03-scale-rate));
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

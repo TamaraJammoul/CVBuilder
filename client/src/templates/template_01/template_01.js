@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_01.css";
 
 //#region Import Images
-import photo from "../../assets/imgs/template_01/Layer_13.png";
+import img_00 from "../../assets/imgs/template_01/Layer_13.png";
 import img_01 from "../../assets/imgs/template_01/01.png";
 import img_02 from "../../assets/imgs/template_01/02.png";
 import img_03 from "../../assets/imgs/template_01/03.png";
@@ -43,6 +43,8 @@ function saveAs(type) {
   html2canvas(pdf, {
     dpi: 300, // Set to 300 DPI
     scale: 2, // Adjusts your resolution
+    letterRendering: 1,
+    useCORS: true
   })
     .then((canvas) => {
       if(type==='PDF'){
@@ -82,7 +84,10 @@ const Template01 = (props) => {
     personalInformation,
     skills,
   } = useSelector((state) => state.template);
+  const hidden = useSelector((state) => state.isHide);
   const cvLanguage = useSelector((state) => state.cvLanguage);
+
+  // console.log(hid)
 
   let edus = null;
   if (educations.length > 0) {
@@ -106,11 +111,11 @@ const Template01 = (props) => {
         grade = "Excellent";
       }
       return (
-        <div className="t01-edu" key={edu.id_}>
+        <div className="t01-edu" key={edu._id}>
           <p>
             {degree} in {edu.Faculty}
           </p>
-          <p>{edu.Universityname}</p>
+          <p>{edu.UniversityName}</p>
           <p>University Grade: {grade}</p>
           <p>Graduate year: {edu.YearEnd}</p>
         </div>
@@ -126,7 +131,7 @@ const Template01 = (props) => {
         } else if (edu.Degree === 3) {
           degreeAr = "دكتوراه";
         } else if (edu.Degree === 4) {
-          degreeAr = "شهادة\xa0الثانوية\xa0العامة";
+          degreeAr = "شهادة\xa0الثانوية\xa0العامة\xa0";
         }
         let gradeAr = "";
         if (edu.Grade === 1) {
@@ -139,14 +144,14 @@ const Template01 = (props) => {
         return (
           <div
             className={`t01-edu ${cvLanguage === "Ar" ? "ar" : ""}`}
-            key={edu.id_}
+            key={edu._id}
           >
-            <p>
-              {degreeAr} {edu.Faculty}
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
+              {`${degreeAr}\xa0`} {`${edu.Faculty}\xa0`}
             </p>
-            <p>{edu.Universityname}</p>
-            <p>{`التقدير\xa0:\xa0${gradeAr}`}</p>
-            <p>{`سنة\xa0التخرج\xa0:\xa0${edu.YearEnd}`}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${edu.UniversityName}\xa0`}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`التقدير\xa0`} :{`${gradeAr}\xa0`}</p>
+            <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`سنة\xa0التخرج\xa0`} :{`${edu.YearEnd}\xa0`}</p>
           </div>
         );
       });
@@ -157,12 +162,12 @@ const Template01 = (props) => {
   if (experiences.length > 0) {
     jobs = experiences.map((job) => {
       return (
-        <div className="t01-work" key={job.id_}>
-          <p>
-            {`${job.Start}\xa0-\xa0${job.End}`}
+        <div className="t01-work" key={job._id}>
+          <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
+            {`${job.Start}\xa0`}- {`${job.End}\xa0`}
           </p>
-          <p>
-            {`${job.Name}\xa0-\xa0${job.Description}`}
+          <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
+            {`${job.Name}\xa0`}- {`${job.Description}\xa0`}
           </p>
         </div>
       );
@@ -178,13 +183,14 @@ const Template01 = (props) => {
   if (personalInformation) {
     PI = personalInformation;
   }
+  let photo = PI.Image ? PI.Image : img_00
 
   let crses = null;
   if (courses.length > 0) {
     crses = courses.map((crs) => {
       return (
-        <div className="t01-course" key={crs.id_}>
-          <p>{crs.NameAr}</p>
+        <div className="t01-course" key={crs._id}>
+          <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${crs.Name}\xa0`}</p>
         </div>
       );
     });
@@ -201,8 +207,8 @@ const Template01 = (props) => {
         rate.push(<div className="t01-circle t01-empty" key={Math.random()}></div>);
       }
       return (
-        <div className="t01-lang" key={lang.id_}>
-          <p className="t01-lang-name">{lang.Name}</p>
+        <div className="t01-lang" key={lang._id}>
+          <p className={`t01-lang-name ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${lang.Name}\xa0`}</p>
           <div className="t01-lang-rate">{rate}</div>
         </div>
       );
@@ -212,8 +218,8 @@ const Template01 = (props) => {
   let skls = null;
   if (skills.length > 0) {
     skls = skills.map((skill) => {
-      return <p className='t01-skill' key={skill.id_}>
-                {cvLanguage==='Ar' ? skill.NameAr : skill.Name}
+      return <p className='t01-skill' key={skill._id}>
+                {cvLanguage==='Ar' ? `${skill.NameAr}\xa0` : skill.Name}
               </p>;
     });
   }
@@ -231,7 +237,7 @@ const Template01 = (props) => {
             <img className="t01-info-icon-1" src={img_01} alt="home_icon" />
           </div>
         </div>
-        <p className="t01-info-status">{PI.City}</p>
+        <p className="t01-info-status">{`${PI.City}\xa0`}</p>
       </div>
       <div className="t01-info-details">
         <div className="t01-info-logo">
@@ -263,7 +269,7 @@ const Template01 = (props) => {
             <img className="t01-info-icon-5" src={img_05} alt="globe_icon" />
           </div>
         </div>
-        <p className="t01-info-status">{PI.Nationality}</p>
+        <p className="t01-info-status">{`${PI.Nationality}\xa0`}</p>
       </div>
       <div className="t01-info-details">
         <div className="t01-info-logo">
@@ -271,7 +277,11 @@ const Template01 = (props) => {
             <img className="t01-info-icon-6" src={img_06} alt="couple_icon" />
           </div>
         </div>
-        <p className="t01-info-status">{PI.MaritalStatus}</p>
+        {cvLanguage === 'Ar' ? 
+          (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'متزوج' : 'أعزب'}</p>)
+          :
+          (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'Married' : 'Single'}</p>)
+        }
       </div>
     </div>
   );
@@ -287,7 +297,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languageSection = (
+  let languageSection = !hidden.isLanguagesHidden && (
     <div className="t01-languages t01-sec">
       <h3 className={`t01-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""} `}>
         {cvLanguage === "Ar" ? "اللغات" : "Languages"}
@@ -310,13 +320,13 @@ const Template01 = (props) => {
         </h3>
       </div>
       <div className="t01-sec-body">
-        <p>{CO.text}</p>
+        <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{`${CO.text}\xa0`}</p>
       </div>
     </div>
   );
   //#endregion
   //#region - Education Section
-  let eduSection = (
+  let eduSection = !hidden.isEducationsHidden && (
     <div
       className={`t01-education t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}
     >
@@ -331,7 +341,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = (
+  let workSection = !hidden.isExperiencesHidden && (
     <div className={`t01-works t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className={`t01-icon ${cvLanguage === "Ar" ? "ar" : ""} `}>
         <img className="t01-briefcase" src={img_09} alt="briefcase_img" />
@@ -346,7 +356,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = (
+  let coursesSection = !hidden.isCoursesHidden && (
     <div className={`t01-courses t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className={`t01-icon ${cvLanguage === "Ar" ? "ar" : ""} `}>
         <img className="t01-cert" src={img_10} alt="certificate_img" />
@@ -413,6 +423,7 @@ const Template01 = (props) => {
                   } `}
                   src={photo}
                   alt="personal_photo"
+                  crossOrigin="anonymous"
                 />
               </div>
               <Droppable droppableId="droppable-leftSection" type="Left">
