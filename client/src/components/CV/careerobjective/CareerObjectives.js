@@ -55,18 +55,6 @@ export default function CareerObjectives() {
                 <h2>{t("CareerObjectives")}</h2>
               </Grid>
               <Grid item sm={6} xs={12}>
-                {" "}
-                <Button
-                  color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
-                  className="button"
-                  onClick={() => {
-                    setHide(!hide);
-                    dispatch(HideCareerObjectiveAction({cvID, hide}));
-                  }}
-                >
-                  {hide === 1 ? t("HideSection") : t("ShowSection")}
-                </Button>{" "}
               </Grid>
             </Grid>{" "}
           </Grid>

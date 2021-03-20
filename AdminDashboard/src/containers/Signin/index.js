@@ -56,7 +56,7 @@ function SignIn(props) {
                                     Email: values.email,
                                     Password: values.password
                                 };
-                                axios.post("http://localhost:5000/api/auth/logInAdmin", data).then((res) => {
+                                axios.post("https://we4cv.com/api/auth/logInAdmin", data).then((res) => {
                                     console.log(res.data);
                                     if (res.data.status === 1) {
                                         toast.success("Login Complete ,Welcome Sir");

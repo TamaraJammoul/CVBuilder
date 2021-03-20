@@ -26,6 +26,7 @@ export default function Courses() {
 
   const temp = useSelector((state) => state.template.courses);
   const courseslen = useSelector((state) => state.template.courseslen);
+  const isHidden = useSelector((state) => state.isHide.isCoursesHidden);
 
   useEffect(() => {
     setCourses(temp);
@@ -137,7 +138,7 @@ export default function Courses() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

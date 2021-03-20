@@ -49,8 +49,7 @@ const initialState = {
   },
   isHide: {
     isAchievementsHidden: false,
-    isCareerObjectivesHidden: false,
-    isCertificatesHidden: false,
+    isCertificatesHidden: false, 
     isCoursesHidden: false,
     isEducationsHidden: false,
     isExperiencesHidden: false,
@@ -81,7 +80,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk)
-    , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   // , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 export default store;

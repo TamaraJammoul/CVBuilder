@@ -31,6 +31,8 @@ export default function OtherTraining(props) {
   let query = useQuery();
   const [hide, setHide] = useState(0);
   const [othertraining, setOthertraining] = useState([]);
+  const isHidden = useSelector((state) => state.isHide.isOtherTrainingsHidden);
+
   useEffect(() => {
     setOthertraining(temp);
   }, [temp]);
@@ -148,7 +150,7 @@ export default function OtherTraining(props) {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

@@ -72,7 +72,6 @@ export default function reducer(state, action) {
         },
         isHide:{
           isAchievementsHidden: cv.Hidden.HideAchievements,
-          isCareerObjectivesHidden: cv.Hidden.HideCareerObjectives,
           isCertificatesHidden: cv.Hidden.HideCertificates,
           isCoursesHidden: cv.Hidden.HideCourses,
           isEducationsHidden: cv.Hidden.HideEducations,
@@ -721,11 +720,11 @@ export default function reducer(state, action) {
         ...state,
         isHide: { ...state.isHide, isReferencesHidden: !state.isHide.isReferencesHidden },
       };
-    case "HIDECAREEROBJECTIVE":
-      return {
-        ...state,
-        isHide: { ...state.isHide, isCareerObjectivesHidden: !state.isHide.isCareerObjectivesHidden },
-      };
+      case "HIDECOURSES":
+        return {
+          ...state,
+          isHide: { ...state.isHide, isCoursesHidden: !state.isHide.isCoursesHidden },
+        };
     default:
       return state;
   }

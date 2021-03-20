@@ -23,6 +23,7 @@ export default function Education() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.educations);
   const educationlen = useSelector((state) => state.template.educationlen);
+  const isHidden = useSelector((state) => state.isHide.isEducationsHidden);
 
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
@@ -166,7 +167,7 @@ export default function Education() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

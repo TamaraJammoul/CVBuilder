@@ -29,6 +29,7 @@ export default function Education() {
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [experiences, setExperiences] = useState([]);
+  const isHidden = useSelector((state) => state.isHide.isExperiencesHidden);
 
   useEffect(() => {
     let isMounted = true;
@@ -162,7 +163,7 @@ export default function Education() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

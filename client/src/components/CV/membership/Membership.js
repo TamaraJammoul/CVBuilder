@@ -25,6 +25,7 @@ export default function Membership() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.memberships);
   const membershiplen = useSelector((state) => state.template.membershiplen);
+  const isHidden = useSelector((state) => state.isHide.isMembershipsHidden);
 
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
@@ -141,7 +142,7 @@ export default function Membership() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

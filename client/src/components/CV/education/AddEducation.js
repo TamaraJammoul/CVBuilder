@@ -22,6 +22,7 @@ export default function AddEducation(props) {
   const [degree, setDegree] = useState(1);
   const [facultyAr, setFacultyAr] = useState("");
   const [universityNameAr, setUniversityNameAr] = useState("");
+  const [degreeFrom100, setDegreeFrom100] = useState(0);
   const { t, i18n } = useTranslation();
   let history = useHistory();
   const cvID = useSelector((state) => state.cvID);
@@ -37,6 +38,7 @@ export default function AddEducation(props) {
     degree,
     universityNameAr,
     facultyAr,
+    degreeFrom100
   };
 
   const handelCancel = () => {
@@ -47,6 +49,7 @@ export default function AddEducation(props) {
     setUniversityName("");
     setUniversityNameAr("");
     setFacultyAr("");
+    setDegreeFrom100(0);
     history.push("/buildcv/education");
   };
   return (
@@ -118,6 +121,8 @@ export default function AddEducation(props) {
                 views={["year"]}
                 label="Start Date"
                 value={startDate}
+                variant="filled"
+                style={{ width: "100%" }}
                 onChange={(e) => setStartDate(new Date(e))}
               />
             </MuiPickersUtilsProvider>
@@ -128,12 +133,12 @@ export default function AddEducation(props) {
                 views={["year"]}
                 label="End Date"
                 value={endDate}
+                variant="filled"
+                style={{ width: "100%" }}
                 onChange={(e) => setEndDate(new Date(e))}
               />
             </MuiPickersUtilsProvider>
           </Grid>
-
-
           <Grid item xs={12} sm={6}>
             {" "}
             <FormControl style={{ width: "100%" }}>
@@ -144,6 +149,7 @@ export default function AddEducation(props) {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={grade}
+                variant="filled"
                 onChange={(e) => setGrade(e.target.value)}
               >
                 <MenuItem value={1}>{t("good")}</MenuItem>
@@ -162,6 +168,7 @@ export default function AddEducation(props) {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={degree}
+                variant="filled"
                 onChange={(e) => setDegree(e.target.value)}
               >
                 <MenuItem value={1}>{t("Bachelor")}</MenuItem>
@@ -170,6 +177,17 @@ export default function AddEducation(props) {
                 <MenuItem value={4}>{t("High school")}</MenuItem>
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {" "}
+            <TextField
+              label={t("degreeFrom100")}
+              variant="filled"
+              placeholder={t("ex:75%")}
+              style={{ width: "100%" }}
+              type="number"
+              onChange={(e) => setDegreeFrom100(e.target.value)}
+            />
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -185,12 +203,13 @@ export default function AddEducation(props) {
               className="save"
               style={{ float: "right" }}
               onClick={() => {
-                if ( universityName===''||faculty === '')
-                alert("please fill all fields")
-                else{
-                dispatch(AddEducationAction(data));
-                history.push("/buildcv/education");
-              }}}
+                if (universityName === '' || faculty === '')
+                  alert("please fill all fields")
+                else {
+                  dispatch(AddEducationAction(data));
+                  history.push("/buildcv/education");
+                }
+              }}
             >
               {t("save")}
             </Button>

@@ -23,6 +23,8 @@ export default function Refernce() {
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [references, setReferences] = useState([]);
+  const isHidden = useSelector((state) => state.isHide.isReferencesHidden);
+
   useEffect(() => {
     setReferences(temp);
   }, [temp]);
@@ -46,7 +48,7 @@ export default function Refernce() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

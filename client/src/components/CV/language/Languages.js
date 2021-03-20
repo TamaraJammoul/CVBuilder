@@ -38,6 +38,8 @@ export default function Languages() {
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [languages, setLanguages] = useState([]);
+  const isHidden = useSelector((state) => state.isHide.isLanguagesHidden);
+
   useEffect(() => {
     setLanguages(temp);
   }, [temp]);
@@ -176,7 +178,7 @@ export default function Languages() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

@@ -9,6 +9,7 @@ import {
 } from "./types";
 import axios from "axios";
 export function AddEducationAction(payload) {
+  console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -18,7 +19,7 @@ export function AddEducationAction(payload) {
         Faculty: payload.faculty,
         YearStart: payload.startDate.getFullYear(),
         YearEnd: payload.endDate.getFullYear(),
-        DegreeFrom5: 5,
+        DegreeFrom100: payload.degreeFrom100,
         Order: 1,
         Grade: payload.grade,
         Degree: payload.degree,
@@ -118,7 +119,7 @@ export function EditEducationAction(payload) {
         Faculty: payload.faculty,
         YearStart: payload.startDate.getFullYear(),
         YearEnd: payload.endDate.getFullYear(),
-        DegreeFrom5: 5,
+        DegreeFrom100: payload.degreeFrom100,
         Order: 1,
         Grade: payload.grade,
         _id: payload.id,

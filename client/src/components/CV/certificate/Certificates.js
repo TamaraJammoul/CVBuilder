@@ -23,6 +23,7 @@ export default function Certificates() {
 
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
+  const isHidden = useSelector((state) => state.isHide.isCertificatesHidden);
   const [hide, setHide] = useState(0);
   const [certificates, setCertificates] = useState([]);
   useEffect(() => {
@@ -152,7 +153,7 @@ export default function Certificates() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

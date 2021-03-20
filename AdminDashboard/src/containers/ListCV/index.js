@@ -62,7 +62,7 @@ export default function BasicTable() {
                                     let data = {
                                         Email: values.email,
                                     };
-                                    axios.post("http://localhost:5000/api/cv/getCVData", data).then((res) => {
+                                    axios.post("https://we4cv.com/api/cv/getCVData", data).then((res) => {
                                         if (res.data.msg !== "USER NOT FOUND") {
                                             console.log(res.data);
                                             toast.success("CVs retrieved successfully");

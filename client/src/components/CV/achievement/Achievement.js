@@ -29,6 +29,7 @@ export default function Membership() {
   const cvID = useSelector((state) => state.cvID);
   const lan = useSelector((state) => state.sections.twolan);
   const achievementlen = useSelector((state) => state.sections.achievementlen);
+  const isHidden = useSelector((state) => state.isHide.isAchievementsHidden);
 
   const [hide, setHide] = useState(0);
   const [achievement, setachievement] = useState([]);
@@ -144,7 +145,7 @@ export default function Membership() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide === 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);

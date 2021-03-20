@@ -39,6 +39,8 @@ export default function TechnicalSkills() {
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [technicalskills, setTechnicalskills] = useState([]);
+  const isHidden = useSelector((state) => state.isHide.isTechnicalSkillsHidden);
+
   useEffect(() => {
     setTechnicalskills(temp);
   }, [temp]);
@@ -191,7 +193,7 @@ export default function TechnicalSkills() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={hide == 0 ? <Visibility /> : <VisibilityOff />}
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
                   className="button"
                   onClick={() => {
                     setHide(!hide);
