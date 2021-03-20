@@ -172,6 +172,11 @@
         "Hey":"Hey",
         "ContactUS":"ContactUS",
         "degreeFrom100":"degree From100",
-        "ex:75%":"ex: 75%"
+        "ex:75%":"ex: 75%",
+        "FirstNameAr":"First Name In Arabic",
+        "LastNameAr":"Last Name In Arabic",
+        "CityAr":"City In Arabic",
+        "CountryAr":"Country In Arabic",
+        "NationalityAr":"Nationality In Arabic"
         
 } 

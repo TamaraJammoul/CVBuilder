@@ -32,10 +32,17 @@ export default function PersonalInfo() {
   const [maritalStatus, setMaritalStatus] = useState(personalData ? personalData.MaritalStatus : 1);
   const [phone, setPhone] = useState(personalData ? personalData.Phone : '');
   const [imageURL, setImageURL] = useState(personalData ? personalData.Image : defaultImg);
+  const [firstNameAr, setFirstNameAr] = useState(personalData ? personalData.FirstNameAr : '');
+  const [lastNameAr, setLastNameAr] = useState(personalData ? personalData.LastNameAr : '');
+  const [cityAr, setCityAr] = useState(personalData ? personalData.CityAr : '');
+  const [countryAr, setCountryAr] = useState(personalData ? personalData.CountryAr : '');
+  const [nationalityAr, setNationalityAr] = useState(personalData ? personalData.nationalityAr : '');
+  const lan = useSelector((state) => state.sections.twolan);
 
   const send = () => {
-    if (email == undefined || lastName == undefined || firstName == undefined || phone == undefined){
-      alert("please fill all fields")}
+    if (email == undefined || lastName == undefined || firstName == undefined || phone == undefined) {
+      alert("please fill all fields")
+    }
     else {
       const data = {
         _id: id,
@@ -50,43 +57,48 @@ export default function PersonalInfo() {
         Nationality: nationality,
         MaritalStatus: maritalStatus,
         Image: imageURL,
+        FirstNameAr: firstNameAr,
+        LastNameAr: lastNameAr,
+        CityAr: cityAr,
+        CountryAr: countryAr,
+        NationalityAr: nationalityAr,
       };
       dispatch(PeraonalInfoAction(data));
     }
   };
 
 
-const encodeImageFileAsURL = (file) => {
+  const encodeImageFileAsURL = (file) => {
     var reader = new FileReader();
-    reader.onloadend = function() {
+    reader.onloadend = function () {
       const imgData = reader.result;
       // console.log('RESULT', imgData);
       uploadToCloudinary(imgData)
     }
     reader.readAsDataURL(file);
-}
+  }
 
-const uploadToCloudinary = (imgData) => {
+  const uploadToCloudinary = (imgData) => {
     if (imgData) {
-        const formImageData = new FormData();
-        formImageData.append('file', imgData);
-        formImageData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        
-        fetch(CLOUDINARY_URL, {
-            method: 'POST',
-            body: formImageData,
+      const formImageData = new FormData();
+      formImageData.append('file', imgData);
+      formImageData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      fetch(CLOUDINARY_URL, {
+        method: 'POST',
+        body: formImageData,
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data.secure_url !== '') {
+            const uploadedFileUrl = data.secure_url;
+            // console.log(uploadedFileUrl);
+            setImageURL(uploadedFileUrl)
+          }
         })
-          .then(response => response.json())
-          .then((data) => {
-              if (data.secure_url !== '') {
-                  const uploadedFileUrl = data.secure_url;
-                  // console.log(uploadedFileUrl);
-                  setImageURL(uploadedFileUrl)
-              }
-          })
-          .catch(err => console.error(err));
+        .catch(err => console.error(err));
     }
-}
+  }
 
   return (
     <Paper
@@ -167,6 +179,25 @@ const uploadToCloudinary = (imgData) => {
               onChange={(e) => setLastName(e.target.value)}
             />
           </Grid>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+            <TextField
+              label={t("FirstNameAr")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => {
+                setFirstNameAr(e.target.value);
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+            <TextField
+
+              label={t("LastNameAr")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => setLastNameAr(e.target.value)}
+            />
+          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
 
@@ -208,7 +239,6 @@ const uploadToCloudinary = (imgData) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-
               label={t("City")}
               variant="filled"
               color="primary"
@@ -224,13 +254,37 @@ const uploadToCloudinary = (imgData) => {
               onChange={(e) => setCountry(e.target.value)}
             />
           </Grid>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+            <TextField
+              label={t("CityAr")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => setCityAr(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+            <TextField
+              label={t("CountryAr")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => setCountryAr(e.target.value)}
+            />
+          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-
               label={t("Nationality")}
               variant="filled"
               color="primary"
               onChange={(e) => setNationality(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+            <TextField
+
+              label={t("NationalityAr")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => setNationalityAr(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
