@@ -34,7 +34,7 @@ export default function reducer(state, action) {
       };
     case "DELETECV":
       var temp = state.MyTemplates;
-      temp = temp.filter((e) => e._id != action.payload.template._id);
+      temp = temp.filter((e) => e._id != action.payload.cvID);
       return {
         ...state,
         MyTemplates: temp,
