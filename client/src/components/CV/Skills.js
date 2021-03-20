@@ -33,12 +33,12 @@ export default function Skills() {
   );
   const [ComputerProficiency, setComputerProficiency] = useState(false);
   useEffect(() => {
-    skills.map((e) => setname(e.Name));
+    skills.map((e) => setName(e.Name));
   }, []);
   const addSkill = (t, ar) => {
     var b = true;
     skills.map((e) => (e.Name === t ? (b = false) : ""));
-    setname(t);
+    setName(t);
     if (b === true) {
       skills.push({ Name: t, NameAr: ar });
     } else {
@@ -47,13 +47,13 @@ export default function Skills() {
       skills.splice(j, 1);
     }
   };
-  const setname = (t) => {
+  const setName = (t) => {
     if (t === "Computer Proficiency")
       setComputerProficiency(!ComputerProficiency);
     if (t === "Leadership and Organisation")
       setLeadershipandOrganisation(!LeadershipandOrganisation);
-    if (t === "TeamWork")
-      setTeamWork(!TeamWork);
+    if (t === "TeamWork"){
+       setTeamWork(!TeamWork);      }
     if (t === "Self Development") setSelfDevelopment(!SelfDevelopment);
     if (t === "Problem solving") setProblemsolving1(!Problemsolving);
     if (t === "Work under pressure") setWorkunderpressure(!Workunderpressure);
@@ -162,7 +162,7 @@ export default function Skills() {
             </IconButton>
             <h6>{t("Self Development")}</h6>
           </Grid>
-          <Grid item xs={6} sm={3} className={TeamWork === 1 ? "skillsBackground" : ""}
+          <Grid item xs={6} sm={3} className={TeamWork === true ? "skillsBackground" : ""}
           >
             <IconButton
               color="primary"

@@ -1,17 +1,51 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Paper, Grid, IconButton, Avatar } from "@material-ui/core";
-import image from "./../../img/cv1.jpg";
 import { Delete, Edit } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { DeleteCVAction, EditCVAction } from "./../../store/action/cv";
+import cv1 from "./../../img/cv1.jpg";
+import cv2 from "./../../img/cv2.jpg";
+import cv3 from "./../../img/cv3.jpg";
+import cv4 from "./../../img/cv4.jpg";
+import cv5 from "./../../img/cv5.jpg";
+import cv6 from "./../../img/cv6.jpg";
+import cv7 from "./../../img/cv7.jpg";
+import cv8 from "./../../img/cv8.jpg";
+import cv9 from "./../../img/cv9.jpg";
+import cv10 from "./../../img/cv10.jpg";
+import cv11 from "./../../img/cv11.jpg";
 export default function Template(props) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const email = useSelector((state) => state.email);
-  useEffect(() => {
-  }, [])
+
+ const getTemplatesImage = (template) => {
+    if (template === 'cv1')
+      return cv1;
+    else if (template === 'cv2')
+      return cv2;
+    else if (template === 'cv3')
+      return cv3;
+    else if (template === 'cv4')
+      return cv4;
+    else if (template === 'cv5')
+      return cv5;
+    else if (template === 'cv6')
+      return cv6;
+    else if (template === 'cv7')
+      return cv7;
+    else if (template === 'cv8')
+      return cv8;
+    else if (template === 'cv9')
+      return cv9;
+    else if (template === 'cv10')
+      return cv10;
+    else if (template === 'cv11')
+      return cv11;
+  }
+  
   return (
     <Paper className="shadow"
     >
@@ -26,7 +60,7 @@ export default function Template(props) {
           <Grid item xs={12}>
             <Avatar
               alt="Remy Sharp"
-              src={image}
+              src={getTemplatesImage(props.template.Template)}
               className="avatar"
               style={{ width: "200px", height: "200px" }}
             />

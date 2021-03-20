@@ -1,4 +1,4 @@
-import {createStore, compose, applyMiddleware} from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import reducer from "./reducers";
 
 import thunk from "redux-thunk";
@@ -47,6 +47,19 @@ const initialState = {
     careerObjectives_id: "",
     personalInformation_id: "",
   },
+  isHide: {
+    isAchievementsHidden: false,
+    isCareerObjectivesHidden: false,
+    isCertificatesHidden: false,
+    isCoursesHidden: false,
+    isEducationsHidden: false,
+    isExperiencesHidden: false,
+    isLanguagesHidden: false,
+    isMembershipsHidden: false,
+    isOtherTrainingsHidden: false,
+    isReferencesHidden: false,
+    isTechnicalSkillsHidden: false,
+  },
   MyTemplates: [],
   firstName: "",
   lastName: "",
@@ -68,7 +81,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk)
-    //,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 export default store;

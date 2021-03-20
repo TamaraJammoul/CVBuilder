@@ -64,7 +64,7 @@ export default function Footer() {
                   <li className="list-inline-item">
                     <a
                       target="_blank"
-                      classname="text-decoration-none btn-floating btn-sm rgba-white-slight mx-1"
+                      className="text-decoration-none btn-floating btn-sm rgba-white-slight mx-1"
                       href="https://www.linkedin.com/in/feras-taieb-798563197/"
                     >
                       <i className="fab fa-linkedin-in"></i>

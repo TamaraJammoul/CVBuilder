@@ -155,6 +155,7 @@ export function CVTemplate1(payload) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
+      console.log(res.data)
       if (res.status == 200 && res.data.status != 0) {
         localStorage.setItem("cvTemplate",payload.template)
         dispatch({

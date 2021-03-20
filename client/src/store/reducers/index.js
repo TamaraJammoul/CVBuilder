@@ -12,10 +12,10 @@ export default function reducer(state, action) {
       return {
         ...state,
         cvID: localStorage.getItem('cv_id') ? localStorage.getItem('cv_id') : state.cvID,
-        email:localStorage.getItem('Email') ? localStorage.getItem('Email') : state.email,
-        token:localStorage.getItem('token') ? localStorage.getItem('token') : state.token,
-        firstName:localStorage.getItem('FirstName') ? localStorage.getItem('FirstName') : state.firstName,
-        cvTemplate:localStorage.getItem('cvTemplate') ? localStorage.getItem('cvTemplate') : state.cvTemplate,
+        email: localStorage.getItem('Email') ? localStorage.getItem('Email') : state.email,
+        token: localStorage.getItem('token') ? localStorage.getItem('token') : state.token,
+        firstName: localStorage.getItem('FirstName') ? localStorage.getItem('FirstName') : state.firstName,
+        cvTemplate: localStorage.getItem('cvTemplate') ? localStorage.getItem('cvTemplate') : state.cvTemplate,
         template: {
           ...state.template,
           careerObjectives_id: localStorage.getItem('careerObjectives_id') ? localStorage.getItem('careerObjectives_id') : state.template.careerObjectives_id,
@@ -45,8 +45,8 @@ export default function reducer(state, action) {
         cvName: action.payload.name,
       };
     case "EDITCV":
-      let cv={}
-      state.MyTemplates.map(e=>e._id===action.payload.cvID?cv=e:'')
+      let cv = {}
+      state.MyTemplates.map(e => e._id === action.payload.cvID ? cv = e : '')
       return {
         ...state,
         cvName: cv.Name,
@@ -69,6 +69,19 @@ export default function reducer(state, action) {
           careerobjective: cv.CareerObjectives,
           careerObjectives_id: cv.careerObjectives_id,
           personalInformation_id: cv.personalInformation_id
+        },
+        isHide:{
+          isAchievementsHidden: cv.Hidden.HideAchievements,
+          isCareerObjectivesHidden: cv.Hidden.HideCareerObjectives,
+          isCertificatesHidden: cv.Hidden.HideCertificates,
+          isCoursesHidden: cv.Hidden.HideCourses,
+          isEducationsHidden: cv.Hidden.HideEducations,
+          isExperiencesHidden: cv.Hidden.HideExperiences,
+          isLanguagesHidden: cv.Hidden.HideLanguages,
+          isMembershipsHidden: cv.Hidden.HideMemberships,
+          isOtherTrainingsHidden: cv.Hidden.HideOtherTrainings,
+          isReferencesHidden: cv.Hidden.HideReferences,
+          isTechnicalSkillsHidden: cv.Hidden.HideTechnicalSkills,
         }
       };
     case "CVTEMPLATE":
@@ -668,7 +681,51 @@ export default function reducer(state, action) {
         toastMessageAR: "تم الحفظ بنجاح",
         toastType: "success",
       };
-
+    case "HIDECERTIFICATE":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isCertificatesHidden: !state.isHide.isCertificatesHidden },
+      };
+    case "HIDEEDUCATION":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isEducationsHidden: !state.isHide.isEducationsHidden },
+      };
+    case "HIDEEXPERIENCE":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isExperiencesHidden: !state.isHide.isExperiencesHidden },
+      };
+    case "HIDELANGUAGE":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isLanguagesHidden: !state.isHide.isLanguagesHidden },
+      };
+    case "HIDEMEMBERSHIP":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isMembershipsHidden: !state.isHide.isMembershipsHidden },
+      };
+    case "HIDEOTHERTRAINING":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isOtherTrainingsHidden: !state.isHide.isOtherTrainingsHidden },
+      };
+    case "HIDETECHNICALSKILL":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isTechnicalSkillsHidden: !state.isHide.isTechnicalSkillsHidden },
+      };
+    case "HIDEREFERENCE":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isReferencesHidden: !state.isHide.isReferencesHidden },
+      };
+    case "HIDECAREEROBJECTIVE":
+      return {
+        ...state,
+        isHide: { ...state.isHide, isCareerObjectivesHidden: !state.isHide.isCareerObjectivesHidden },
+      };
     default:
       return state;
   }
