@@ -226,7 +226,7 @@ const Template02 = (props) => {
   }
 
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div className="sec edu-sec">
       <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-1" src={img_09} alt="" />
@@ -246,7 +246,7 @@ const Template02 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className="sec work-sec">
       <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-2" src={img_10} alt="" />
@@ -266,7 +266,7 @@ const Template02 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className="sec course-sec">
       <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-3" src={img_11} alt="" />
@@ -286,7 +286,7 @@ const Template02 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className="sec skills-sec">
       <div className={`sec-icon-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <img className="sec-icon-4" src={img_12} alt="" />
@@ -339,7 +339,7 @@ const Template02 = (props) => {
           {/* Name Section */}
           <div className="name-sec">
             <h1>
-              {`${PI.FirstName}\xa0${PI.LastName}`}
+              {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
             </h1>
           </div>
 

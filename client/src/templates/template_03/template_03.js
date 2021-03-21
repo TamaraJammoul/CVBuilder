@@ -281,7 +281,7 @@ const Template03 = (props) => {
 
   // Left Section
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div className="t03-sec t03-edu-sec">
       {cvColor===1
       ?(<img src={img_05_red} alt="" />)
@@ -298,7 +298,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className="t03-sec t03-work-sec">
       {cvColor===1
       ?(<img src={img_06_red} alt="" />)
@@ -315,7 +315,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className="t03-sec t03-courses-sec">
       {cvColor===1
       ?(<img 
@@ -342,7 +342,7 @@ const Template03 = (props) => {
 
   // Right Section
   //#region - Personal Skills Section
-  let personalSkillsSection = (
+  let personalSkillsSection = skls && (
     <div className="t03-sec t03-personal-skills-sec">
       {cvColor===1
         ?(<img src={img_08_red} alt="" />)
@@ -359,7 +359,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Technical Skills Section
-  let technicalSkillsSection = !hidden.isTechnicalSkillsHidden && (
+  let technicalSkillsSection = !hidden.isTechnicalSkillsHidden && tSkills &&(
     <div className="t03-sec t03-tech-skills-sec">
       {cvColor===1
         ?(<img src={img_09_red} alt="" />)
@@ -376,7 +376,7 @@ const Template03 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className="t03-languages-sec t03-sec">
       <div className="t03-languages-title">
         <h2 className='bold' style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
@@ -530,14 +530,14 @@ const Template03 = (props) => {
 
           {/* Photo Section */}
           <div className={`t03-photo ${cvLanguage === "Ar" ? "ar" : ""}`}
-              style={{borderColor: cvColor===1 ? '#893a4c': '#356767'}}>
+              style={{borderColor: cvColor===1 ? `${colorStyle.darkRed}`: `${colorStyle.darkGreen}`}}> {/* '#356767' */}
             <img src={PI.Image ? PI.Image : photo} alt="" />
           </div>
 
           {/* Name Section */}
           <div className="t03-name-sec">
             <h1 style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}}>
-              {`${PI.FirstName}\xa0 ${PI.LastName}`}
+              {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
             </h1>
           </div>
 

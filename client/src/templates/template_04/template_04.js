@@ -247,7 +247,7 @@ const Template04 = (props) => {
 
   // Left Section
   //#region - Career Objective Section
-  let objectiveSection = (
+  let objectiveSection = CO.text && (
     <div className={`t04-sec t04-objective-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "الهدف\xa0الوظيفي\xa0" : "Objective Career"}</p>
@@ -302,7 +302,7 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Personal Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className={`t04-sec t04-skill-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "المهارات" : "Skills"}</p>
@@ -312,7 +312,7 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className={`t04-sec t04-lang-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       <div className={`t04-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""}`}>
         <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>{cvLanguage === "Ar" ? "اللغة" : "Languages"}</p>
@@ -324,7 +324,7 @@ const Template04 = (props) => {
 
   // Right Section
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div className={`t04-main-sec t04-edu-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -339,7 +339,7 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className={`t04-main-sec t04-work-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -354,7 +354,7 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className={`t04-main-sec t04-course-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -369,7 +369,7 @@ const Template04 = (props) => {
   );
   //#endregion
   //#region - Memberships Section
-  let membershipsSection = !hidden.isMembershipsHidden && (
+  let membershipsSection = !hidden.isMembershipsHidden && mems && (
     <div className={`t04-main-sec t04-part-sec ${cvLanguage==='Ar'?'ar':''}`}>
       <div className="t04-main-sec-title">
         <div className={`t04-title-back-bg ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -568,7 +568,7 @@ const Template04 = (props) => {
           {/* Name Section */}
           <div className={`t04-name-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
             <h1>
-              {`${PI.FirstName}\xa0${PI.LastName}`}
+              {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
             </h1>
             {/* <h2>Computer Science</h2> */}
           </div>

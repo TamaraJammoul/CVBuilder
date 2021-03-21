@@ -68,13 +68,13 @@
   -ms-flex-direction: column;
   flex-direction: column;
   direction: ltr;
+  margin: 0 auto;
 }
 .template02-body.ar {
   padding: calc(100px * var(--t02-scale-rate))
     calc(122px * var(--t02-scale-rate)) calc(94px * var(--t02-scale-rate))
     calc(166px * var(--t02-scale-rate));
   direction: rtl;
-  margin: 0 auto;
 }
 .template02-body p,
 .template02-body.ar p {

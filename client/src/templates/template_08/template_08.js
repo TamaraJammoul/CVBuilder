@@ -363,7 +363,7 @@ const Template08 = (props) => {
   }
 
   //#region - Career Objective Section
-  let objectiveSection = (
+  let objectiveSection = CO.text && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-objective-sec">
@@ -407,7 +407,7 @@ const Template08 = (props) => {
   );
   //#endregion
   //#region - Education Section
-  let educationSection = !hidden.isEducationsHidden && (
+  let educationSection = !hidden.isEducationsHidden && edus && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-edu-sec">
@@ -434,7 +434,7 @@ const Template08 = (props) => {
 
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-work-sec">
@@ -461,7 +461,7 @@ const Template08 = (props) => {
 
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-course-sec">
@@ -487,7 +487,7 @@ const Template08 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-skill-sec">
@@ -513,7 +513,7 @@ const Template08 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className="t08-row-section">
       {/* English */}
       <div className="t08-sec t08-lang-sec">
@@ -571,10 +571,10 @@ const Template08 = (props) => {
           {/* Name Section */}
           <div className="t08-name-sec">
             <h1>
-              {PI.FirstNameAr} {PI.LastNameAr}
+              {`${PI.FirstNameAr}\xa0 ${PI.SecondNameAr}\xa0 ${PI.LastNameAr}\xa0`}
             </h1>
             <h1>
-              {PI.FirstName} {PI.LastName}
+              {PI.FirstName} {PI.SecondName} {PI.LastName}
             </h1>
           </div>
 

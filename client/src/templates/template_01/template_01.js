@@ -87,8 +87,6 @@ const Template01 = (props) => {
   const hidden = useSelector((state) => state.isHide);
   const cvLanguage = useSelector((state) => state.cvLanguage);
 
-  // console.log(hid)
-
   let edus = null;
   if (educations.length > 0) {
     edus = educations.map((edu) => {
@@ -287,7 +285,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillSection = (
+  let skillSection = skls && (
     <div className="t01-skills t01-sec">
       <h3 className={`t01-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""} `}>
         {cvLanguage === "Ar" ? "المهارات" : "Skills"}
@@ -297,7 +295,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languageSection = !hidden.isLanguagesHidden && (
+  let languageSection = !hidden.isLanguagesHidden && langs && (
     <div className="t01-languages t01-sec">
       <h3 className={`t01-sec-title bold ${cvLanguage === "Ar" ? "ar" : ""} `}>
         {cvLanguage === "Ar" ? "اللغات" : "Languages"}
@@ -309,7 +307,7 @@ const Template01 = (props) => {
 
   // Main Section
   //#region - Objective Career Section
-  let objectiveSection = (
+  let objectiveSection = CO.text && (
     <div className={`t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className={`t01-icon ${cvLanguage === "Ar" ? "ar" : ""} `}>
         <img className="t01-target" src={img_07} alt="hat_img" />
@@ -326,7 +324,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div
       className={`t01-education t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}
     >
@@ -341,7 +339,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className={`t01-works t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className={`t01-icon ${cvLanguage === "Ar" ? "ar" : ""} `}>
         <img className="t01-briefcase" src={img_09} alt="briefcase_img" />
@@ -356,7 +354,7 @@ const Template01 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className={`t01-courses t01-main-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className={`t01-icon ${cvLanguage === "Ar" ? "ar" : ""} `}>
         <img className="t01-cert" src={img_10} alt="certificate_img" />
@@ -458,7 +456,7 @@ const Template01 = (props) => {
               {/* Header */}
               <div className="t01-header">
                 <h1>
-                  {`${PI.FirstName}\xa0${PI.LastName}`}
+                  {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
                 </h1>
               </div>
 

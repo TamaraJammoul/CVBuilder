@@ -377,7 +377,7 @@ const Template11 = (props) => {
   }
 
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div className="t11-row-section">
       {/* English */}
       <div className="t11-sec t11-edu-sec">
@@ -418,7 +418,7 @@ const Template11 = (props) => {
 
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className="t11-row-section">
       {/* English */}
       <div className="t11-sec t11-work-sec">
@@ -460,7 +460,7 @@ const Template11 = (props) => {
 
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className="t11-row-section">
       {/* English */}
       <div className="t11-sec t11-course-sec">
@@ -500,7 +500,7 @@ const Template11 = (props) => {
   );
   //#endregion
   //#region - Achievements Section
-  let achievsSection = !hidden.isAchievementsHidden && (
+  let achievsSection = !hidden.isAchievementsHidden && achievs && (
     <div className="t11-row-section">
       {/* English */}
       <div className="t11-sec t11-achiev-sec">
@@ -540,7 +540,7 @@ const Template11 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className="t11-row-section">
       {/* English */}
       <div className="t11-sec t11-lang-sec">
@@ -576,7 +576,7 @@ const Template11 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className="t11-row-section">
       <div className="t11-sec t11-skill-sec">
         <div className="t11-sec-logo">
@@ -702,10 +702,10 @@ const Template11 = (props) => {
           <div className="t11-header-sec">
             <div className="t11-name-sec">
               <h2>
-                {`${PI.FirstNameAr}\xa0${PI.LastNameAr}\xa0`}
+                {`${PI.FirstNameAr}\xa0 ${PI.SecondName}\xa0 ${PI.LastNameAr}\xa0`}
               </h2>
               <h2>
-                {PI.FirstName} {PI.LastName}
+                {PI.FirstName} {PI.SecondName} {PI.LastName}
               </h2>
             </div>
             <div className="t11-contact-info">

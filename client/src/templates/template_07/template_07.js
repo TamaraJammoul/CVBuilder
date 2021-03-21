@@ -342,7 +342,7 @@ const Template07 = (props) => {
   }
 
   //#region - Education + Work Section
-  const eduTitle = !hidden.isEducationsHidden && (
+  const eduTitle = !hidden.isEducationsHidden && edus && (
     <>
       <div className="t07-sec-logo t07-edu-sec-logo">
         <img src={img_09} alt="" />
@@ -362,7 +362,7 @@ const Template07 = (props) => {
     </>
   );
 
-  const workTitle = !hidden.isExperiencesHidden && (
+  const workTitle = !hidden.isExperiencesHidden && workRows && (
     <>
       <div className="t07-sec-logo t07-work-sec-logo">
         <img src={img_10} alt="" />
@@ -388,7 +388,7 @@ const Template07 = (props) => {
 
       {/* Body */}
       <div className={`t07-sec-body ${cvLanguage === "Ar" ? "ar" : ""} `}>
-        {!hidden.isEducationsHidden && (
+        {!hidden.isEducationsHidden && edus && (
           <div className={`t07-edu-body ${cvLanguage === "Ar" ? "ar" : ""} `}>
             <img className="t07-edu-sec-img" src={img_16} alt="" />
             {edus}
@@ -403,7 +403,7 @@ const Template07 = (props) => {
           <div className="t07-dark-grey"></div>
           <div className="t07-grey"></div>
         </div>
-        {!hidden.isExperiencesHidden && (
+        {!hidden.isExperiencesHidden && workRows && (
           <div
             className={`t07-work-body ${cvLanguage === "Ar" ? "ar" : ""} `}
             id="workBody"
@@ -430,7 +430,7 @@ const Template07 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className={`t07-sec t07-lang-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className="t07-sec-logo">
         <img src={img_13} alt="" />
@@ -450,7 +450,7 @@ const Template07 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className={`t07-sec t07-course-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className="t07-sec-logo">
         <img src={img_11} alt="" />
@@ -486,7 +486,7 @@ const Template07 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className={`t07-sec t07-skills-sec ${cvLanguage === "Ar" ? "ar" : ""} `}>
       <div className="t07-sec-logo">
         <img src={img_12} alt="" />
@@ -550,7 +550,7 @@ const Template07 = (props) => {
             {/* Name */}
             <div className="t07-name">
                <p  className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
-                {`${PI.FirstName}\xa0${PI.LastName}\xa0`}
+                {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
               </p>
             </div>
 

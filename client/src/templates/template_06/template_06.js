@@ -706,7 +706,7 @@ const Template06 = (props) => {
           {/* Name Section */}
           <div className="t06-name-sec">
             <h1>
-              {`${PI.FirstName}\xa0${PI.LastName}\xa0`}
+              {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
             </h1>
           </div>
 

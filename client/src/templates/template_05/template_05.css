@@ -67,10 +67,10 @@
   min-height: calc(3508px * var(--t05-scale-rate));
   position: relative;
   direction: ltr;
+  margin: 0 auto;
 }
 .template05-body.ar {
   direction: rtl;
-  margin: 0 auto;
 }
 .template05-body p,
 .template05-body.ar p {

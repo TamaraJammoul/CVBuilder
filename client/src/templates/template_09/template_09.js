@@ -311,7 +311,7 @@ const Template09 = (props) => {
   }
 
   //#region - Education Section
-  let educationSection = !hidden.isEducationsHidden && (
+  let educationSection = !hidden.isEducationsHidden && edus && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-edu-sec">
@@ -342,7 +342,7 @@ const Template09 = (props) => {
 
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-work-sec">
@@ -371,7 +371,7 @@ const Template09 = (props) => {
 
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-courses-sec">
@@ -400,7 +400,7 @@ const Template09 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-personal-skills-sec">
@@ -428,7 +428,7 @@ const Template09 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className="t09-row-section">
       {/* English */}
       <div className="t09-sec t09-lang-sec">
@@ -502,10 +502,10 @@ const Template09 = (props) => {
           {/* Name Section */}
           <div className="t09-name-sec">
             <p className={`ar`} style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}} >
-              {`${PI.FirstNameAr}\xa0${PI.LastNameAr}\xa0`}
+              {`${PI.FirstNameAr}\xa0 ${PI.SecondNameAr}\xa0 ${PI.LastNameAr}\xa0`}
             </p>
             <p style={{color: cvColor===1 ? `${colorStyle.darkRed}` : `${colorStyle.darkGreen}`}} >
-              {PI.FirstName} {PI.LastName}
+              {PI.FirstName} {PI.SecondName} {PI.LastName}
             </p>
           </div>
 

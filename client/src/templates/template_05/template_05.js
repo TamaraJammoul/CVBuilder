@@ -424,7 +424,7 @@ const Template05 = (props) => {
   }
 
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div className={`t05-sec t05-edu-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
       <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -442,7 +442,7 @@ const Template05 = (props) => {
   );
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className={`t05-sec t05-work-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
       <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -460,7 +460,7 @@ const Template05 = (props) => {
   );
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className={`t05-sec t05-courses-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
       <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -480,7 +480,7 @@ const Template05 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className={`t05-sec t05-skills-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
       {/* sec logo */}
       <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -501,7 +501,7 @@ const Template05 = (props) => {
   let otherSection = (
     <div className="t05-other-sec">
       {/* Memberships */}
-      {!hidden.isMembershipsHidden && (
+      {!hidden.isMembershipsHidden && mems && (
         <div className={`t05-sec t05-part-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
           {/* sec logo */}
           <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -521,7 +521,7 @@ const Template05 = (props) => {
       )}
 
       {/* Languages */}
-      {!hidden.isLanguagesHidden && (
+      {!hidden.isLanguagesHidden && langs && (
         <div className={`t05-sec t05-lang-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
           {/* sec logo */}
           <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -539,7 +539,7 @@ const Template05 = (props) => {
       )}
 
       {/* References */}
-      {!hidden.isReferencesHidden && (
+      {!hidden.isReferencesHidden && refs && (
         <div className={`t05-sec t05-ref-sec ${cvLanguage === "Ar" ? "ar" : ""}`}>
           {/* sec logo */}
           <div className={`t05-sec-logo ${cvLanguage === "Ar" ? "ar" : ""}`}>
@@ -604,7 +604,7 @@ const Template05 = (props) => {
             {/* Name */}
             <div className="t05-name">
               <p className={` ${cvLanguage === "Ar" ? "ar" : ""}`}>
-                {PI.FirstName} {PI.LastName}
+                {`${PI.FirstName}\xa0 ${PI.SecondName}\xa0 ${PI.LastName}\xa0`}
               </p>
             </div>
 

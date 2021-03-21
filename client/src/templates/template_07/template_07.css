@@ -87,13 +87,13 @@
   -ms-flex-align: center;
   align-items: center;
   direction: ltr;
+  margin: 0 auto;
 }
 .template07-body.ar {
   padding: calc(100px * var(--t07-scale-rate))
     calc(24px * var(--t07-scale-rate)) calc(86px * var(--t07-scale-rate))
     calc(54px * var(--t07-scale-rate));
   direction: rtl;
-  margin: 0 auto;
 }
 
 .template07-body p,

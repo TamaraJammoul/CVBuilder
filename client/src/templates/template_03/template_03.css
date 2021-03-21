@@ -69,10 +69,10 @@
   position: relative;
   direction: ltr;
   text-align: left;
+  margin: 0 auto;
 }
 .template03-body.ar {
   direction: rtl;
-  margin: 0 auto;
   text-align: right;
 }
 .template03-body p,

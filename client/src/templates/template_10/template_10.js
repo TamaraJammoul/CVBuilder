@@ -342,7 +342,7 @@ const Template10 = (props) => {
   }
 
   //#region - Education Section
-  let eduSection = !hidden.isEducationsHidden && (
+  let eduSection = !hidden.isEducationsHidden && edus && (
     <div className="t10-row-section">
       {/* English */}
       <div className="t10-sec t10-edu-sec">
@@ -369,7 +369,7 @@ const Template10 = (props) => {
 
   //#endregion
   //#region - Work Section
-  let workSection = !hidden.isExperiencesHidden && (
+  let workSection = !hidden.isExperiencesHidden && jobs && (
     <div className="t10-row-section">
       {/* English */}
       <div className="t10-sec t10-work-sec">
@@ -396,7 +396,7 @@ const Template10 = (props) => {
 
   //#endregion
   //#region - Courses Section
-  let coursesSection = !hidden.isCoursesHidden && (
+  let coursesSection = !hidden.isCoursesHidden && crses && (
     <div className="t10-row-section">
       {/* English */}
       <div className="t10-sec t10-courses-sec">
@@ -426,7 +426,7 @@ const Template10 = (props) => {
   );
   //#endregion
   //#region - Skills Section
-  let skillsSection = (
+  let skillsSection = skls && (
     <div className="t10-row-section">
       {/* English */}
       <div className="t10-sec t10-skills-sec">
@@ -452,7 +452,7 @@ const Template10 = (props) => {
   );
   //#endregion
   //#region - Languages Section
-  let languagesSection = !hidden.isLanguagesHidden && (
+  let languagesSection = !hidden.isLanguagesHidden && langs && (
     <div className="t10-row-section">
       {/* English */}
       <div className="t10-sec t10-lang-sec">
@@ -518,10 +518,10 @@ const Template10 = (props) => {
             {/* Name */}
             <div className="t10-name">
                <p className={`ar`}>
-                {`${PI.FirstNameAr}\xa0${PI.LastNameAr}\xa0`}
+                {`${PI.FirstNameAr}\xa0 ${PI.SecondNameAr}\xa0 ${PI.LastNameAr}\xa0`}
               </p>
                <p>
-                {PI.FirstName} {PI.LastName}
+                {PI.FirstName} {PI.SecondName} {PI.LastName}
               </p>
             </div>
 
