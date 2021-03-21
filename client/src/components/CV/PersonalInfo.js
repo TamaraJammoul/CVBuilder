@@ -38,9 +38,11 @@ export default function PersonalInfo() {
   const [countryAr, setCountryAr] = useState(personalData ? personalData.CountryAr : '');
   const [nationalityAr, setNationalityAr] = useState(personalData ? personalData.nationalityAr : '');
   const lan = useSelector((state) => state.sections.twolan);
+  const [secondName, setSecondName] = useState(personalData ? personalData.SecondName : '');
+  const [secondNameAr, setSecondNameAr] = useState(personalData ? personalData.SecondNameAr : '');
 
   const send = () => {
-    if (email == undefined || lastName == undefined || firstName == undefined || phone == undefined) {
+    if (email == undefined || lastName == undefined || firstName == undefined) {
       alert("please fill all fields")
     }
     else {
@@ -48,6 +50,7 @@ export default function PersonalInfo() {
         _id: id,
         FirstName: firstName,
         LastName: lastName,
+        SecondName: secondName,
         LinkedIn: linkedIn,
         Email: email,
         Phone: phone,
@@ -59,6 +62,7 @@ export default function PersonalInfo() {
         Image: imageURL,
         FirstNameAr: firstNameAr,
         LastNameAr: lastNameAr,
+        SecondNameAr: secondNameAr,
         CityAr: cityAr,
         CountryAr: countryAr,
         NationalityAr: nationalityAr,
@@ -160,8 +164,9 @@ export default function PersonalInfo() {
           justify="center"
           style={{ textAlign: "center" }}
         >
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
+              style={{ width: '100%' }}
               label={t("FirstName")}
               variant="filled"
               color="primary"
@@ -170,17 +175,29 @@ export default function PersonalInfo() {
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-
+              style={{ width: '100%' }}
+              label={t("SecondName")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => {
+                setSecondName(e.target.value);
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              style={{ width: '100%' }}
               label={t("LastName")}
               variant="filled"
               color="primary"
               onChange={(e) => setLastName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={4} className={lan === 0 ? "arhide" : ""}>
             <TextField
+              style={{ width: '100%' }}
               label={t("FirstNameAr")}
               variant="filled"
               color="primary"
@@ -189,27 +206,38 @@ export default function PersonalInfo() {
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={4} className={lan === 0 ? "arhide" : ""}>
             <TextField
-
+              style={{ width: '100%' }}
+              label={t("SecondNameAr")}
+              variant="filled"
+              color="primary"
+              onChange={(e) => {
+                setSecondNameAr(e.target.value);
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} className={lan === 0 ? "arhide" : ""}>
+            <TextField
+              style={{ width: '100%' }}
               label={t("LastNameAr")}
               variant="filled"
               color="primary"
               onChange={(e) => setLastNameAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-
+              style={{ width: '100%' }}
               label={t("LinkedInAccount")}
               variant="filled"
               color="primary"
               onChange={(e) => setLinkedIn(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-
+              style={{ width: '100%' }}
               label={t("Email")}
               variant="filled"
               color="primary"
@@ -217,9 +245,9 @@ export default function PersonalInfo() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-
+              style={{ width: '100%' }}
               label={t("PhoneNumber")}
               variant="filled"
               color="primary"
@@ -227,9 +255,9 @@ export default function PersonalInfo() {
               onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-
+              style={{ width: '100%' }}
               label={t("Date Of Birth")}
               variant="filled"
               color="primary"
@@ -237,58 +265,63 @@ export default function PersonalInfo() {
               onChange={(e) => setBirth(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
+              style={{ width: '100%' }}
               label={t("City")}
               variant="filled"
               color="primary"
               onChange={(e) => setCity(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-
+              style={{ width: '100%' }}
               label={t("Country")}
               variant="filled"
               color="primary"
               onChange={(e) => setCountry(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={4} className={lan === 0 ? "arhide" : ""}>
             <TextField
+              style={{ width: '100%' }}
               label={t("CityAr")}
               variant="filled"
               color="primary"
               onChange={(e) => setCityAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={4} className={lan === 0 ? "arhide" : ""}>
             <TextField
+              style={{ width: '100%' }}
               label={t("CountryAr")}
               variant="filled"
               color="primary"
               onChange={(e) => setCountryAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
+              style={{ width: '100%' }}
               label={t("Nationality")}
               variant="filled"
               color="primary"
               onChange={(e) => setNationality(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6} className={lan === 0 ? "arhide" : ""}>
+          <Grid item xs={12} sm={4} className={lan === 0 ? "arhide" : ""}>
             <TextField
-
+              style={{ width: '100%' }}
               label={t("NationalityAr")}
               variant="filled"
               color="primary"
               onChange={(e) => setNationalityAr(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl style={{ width: "50%" }}>
+          <Grid item xs={12} sm={4}>
+            <FormControl
+              style={{ width: '100%' }}>
               <InputLabel id="demo-simple-select-label">
                 {t("Marital Status")}
               </InputLabel>
@@ -303,7 +336,7 @@ export default function PersonalInfo() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={4}></Grid>
           <Grid item xs={12}>
             <Button
               variant="outlined"

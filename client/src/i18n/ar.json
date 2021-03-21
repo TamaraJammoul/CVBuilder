@@ -142,7 +142,7 @@
         "very good": "جيد جداً",
         "excellent": "ممتاز",
         "Degree": "التقدير",
-        "Bachelor": "بكالريوس",
+        "Bachelor": "بكالوريوس",
         "Master": "ماجستير",
         "PhD": "دكتوراه",
         "High school": "شهادة ثانوية",
@@ -178,5 +178,11 @@
         "LastNameAr": "الاسم الثاني بالعربية",
         "CityAr": "المدينة بالعربية",
         "CountryAr": "المنطقة بالعربية",
-        "NationalityAr": "الجنسية بالعربية"
+        "NationalityAr": "الجنسية بالعربية",
+        "Specialization": "التخصص",
+        "University": "الجامعة",
+        "Rate": "المعدل",
+        "Grade": "التقدير",
+        "SecondName":"الاصم الثاني",
+        "SecondNameAr":"الاسم الثاني بالعربية"
 }

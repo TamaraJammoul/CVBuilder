@@ -46,7 +46,6 @@ export default function AddCourses(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-
               label={t("CourseName")}
               variant="filled"
               color="primary"
@@ -57,7 +56,6 @@ export default function AddCourses(props) {
           <Grid item xs={12}>
             {" "}
             <TextField
-
               label={t("Description")}
               variant="filled"
               color="primary"
@@ -68,7 +66,6 @@ export default function AddCourses(props) {
           <Grid item xs={12} className={lan === 0 ? "arhide" : ""}>
             {" "}
             <TextField
-
               label={t("CoursesNameAr")}
               variant="filled"
               color="primary"

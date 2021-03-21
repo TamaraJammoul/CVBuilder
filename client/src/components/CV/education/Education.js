@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Button, Paper, Grid, IconButton, Container } from "@material-ui/core";
 import {
   Delete,
   Edit,
@@ -14,10 +14,10 @@ import {
   OrderEducationAction,
   HideEducationAction,
 } from "./../../../store/action/education";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
-import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 export default function Education() {
   const dispatch = useDispatch();
@@ -28,12 +28,31 @@ export default function Education() {
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [educations, setEducations] = useState([]);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   useEffect(() => {
     setEducations(temp);
   }, [temp]);
+
+  const getDegree = (degree) => {
+    if (degree === 1)
+      return t('Bachelor');
+    else if (degree === 2)
+      return t('Master');
+    if (degree === 3)
+      return t('PhD');
+    if (degree === 4)
+      return t('High school');
+  }
+  const getGrade = (grade) => {
+    if (grade === 1)
+      return t('good');
+    else if (grade === 2)
+      return t('very good');
+    if (grade === 3)
+      return t('excellent');
+  }
   const onDragEnd = (result) => {
-    const {destination, source, reason} = result;
+    const { destination, source, reason } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
@@ -50,7 +69,7 @@ export default function Education() {
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
     setEducations(users);
-    dispatch(OrderEducationAction({source, destination, cvID, educations}));
+    dispatch(OrderEducationAction({ source, destination, cvID, educations }));
   };
   const renderUsers = (edu, index) => {
     return (
@@ -69,32 +88,46 @@ export default function Education() {
                     alignItems="center"
                     justify="center"
                     spacing={4}
-                    style={{width: "100%"}}
+                    style={{ width: "100%" }}
                   >
                     <Grid item xs={1}>
                       <h4>{index + 1}</h4>
                     </Grid>
+
                     <Grid item xs={6}>
                       <Grid container direction="column">
+                        <Grid item >
+                          <h6>
+                            <b>{getDegree(edu.Degree)}</b>
+                          </h6>{" "}
+                        </Grid>
                         <Grid item>
                           <h6>
-                            {edu.Faculty}
+                            {t('University')}: {edu.UniversityName}
+                          </h6>
+                        </Grid>
+                        <Grid item>
+                          <Grid item >
+                            <h6>
+                              {t('Specialization')}: {edu.Faculty}
+                            </h6>
+                          </Grid>
+                          ({edu.YearStart}-{edu.YearEnd})
+                        </Grid>
+                        <Grid item>
+                          <h6>
+                            {t("Rate")} :
                             <span
                               style={{
                                 backgroundColor: "yellow",
                                 marginLeft: "10px",
                               }}
-                            >
-                              ({edu.DegreeFrom100}%)
-                            </span>
-                          </h6>{" "}
+                            >  ({edu.DegreeFrom100}%)
+                            </span></h6>
                         </Grid>
                         <Grid item>
-                          <h6>
-                            {edu.UniversityName}{" "}
-                            <span>
-                              ({edu.YearStart}-{edu.YearEnd})
-                            </span>
+                          <h6>{t("Grade")}:
+                            {getGrade(edu.Grade)}
                           </h6>
                         </Grid>
                       </Grid>
@@ -158,8 +191,8 @@ export default function Education() {
     >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item style={{width: "100%"}} sx={12}>
-            <Grid container alignItems="center" direction="row" spacing={6}>
+          <Grid item style={{ width: "100%" }} sx={12}>
+            <Grid container alignItems="center" direction="row"  justify="center" spacing={6}>
               <Grid item sm={6} xs={12}>
                 <h2>{t("Education")}</h2>
               </Grid>
@@ -167,11 +200,11 @@ export default function Education() {
                 {" "}
                 <Button
                   color="secondary"
-                  startIcon={isHidden === false? <Visibility /> : <VisibilityOff />}
-                  className="button"
+                  startIcon={isHidden === false ? <Visibility /> : <VisibilityOff />}
+                  className="button "
                   onClick={() => {
                     setHide(!hide);
-                    dispatch(HideEducationAction({cvID, hide}));
+                    dispatch(HideEducationAction({ cvID, hide }));
                   }}
                 >
                   {hide === 1 ? t("HideSection") : t("ShowSection")}
@@ -193,19 +226,19 @@ export default function Education() {
             </Droppable>
           </DragDropContext>
           {/* {educations.length < educationlen ? ( */}
-            <Grid item xs={12}>
+          <Grid item xs={12}>
+            {" "}
+            <Link to="/buildcv/addeducation">
               {" "}
-              <Link to="/buildcv/addeducation">
-                {" "}
-                <Button
-                  variant="contained"
-                  //startIcon={<DeleteIcon />}
-                  className="save"
-                >
-                  {t("AddEducation")}
-                </Button>
-              </Link>
-            </Grid>
+              <Button
+                variant="contained"
+                //startIcon={<DeleteIcon />}
+                className="save"
+              >
+                {t("AddEducation")}
+              </Button>
+            </Link>
+          </Grid>
           {/* ) : (
             ""
           )} */}

@@ -29,7 +29,8 @@ export default function reducer(state, action) {
         template: {
           ...state.template,
           careerObjectives_id: action.payload.careerObjectives_id,
-          personalInformation_id: action.payload.personalInformation_id
+          personalInformation_id: action.payload.personalInformation_id,
+          languages:[...state.template.languages,action.payload.ArabicLanguage,action.payload.EnglishLanguage]
         },
       };
     case "DELETECV":
