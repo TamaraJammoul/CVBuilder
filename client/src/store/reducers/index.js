@@ -30,7 +30,19 @@ export default function reducer(state, action) {
           ...state.template,
           careerObjectives_id: action.payload.careerObjectives_id,
           personalInformation_id: action.payload.personalInformation_id,
-          languages:[...state.template.languages,action.payload.ArabicLanguage,action.payload.EnglishLanguage]
+          languages: [action.payload.ArabicLanguage, action.payload.EnglishLanguage],
+          references: [],
+          skills: [],
+          courses: [],
+          technicalskills: [],
+          achievements: [],
+          certificates: [],
+          educations: [],
+          experiences: [],
+          memberships: [],
+          othertraining: [],
+          careerobjective: {},
+          personalInformation: {},
         },
       };
     case "DELETECV":

@@ -684,18 +684,20 @@ const Template11 = (props) => {
                   <p>{PI.Birth}</p>
                 </div>
               </div>
-              <div className="t11-info">
-                <div className="t11-info-logo t11-info-logo-2">
-                  <img
-                    src={img_02}
-                    alt=""
-                    style={{ transform: "scaleX(-1)" }}
-                  />
+              {maritalStatus &&
+                <div className="t11-info">
+                  <div className="t11-info-logo t11-info-logo-2">
+                    <img
+                      src={img_02}
+                      alt=""
+                      style={{ transform: "scaleX(-1)" }}
+                    />
+                  </div>
+                  <div className="t11-info-text ar">
+                    <p>{`${maritalStatusAr}\xa0`}</p>
+                  </div>
                 </div>
-                <div className="t11-info-text ar">
-                  <p>{`${maritalStatusAr}\xa0`}</p>
-                </div>
-              </div>
+              }
               <div className="t11-info">
                 <div className="t11-info-logo t11-info-logo-3">
                   <img src={img_03} alt="" />

@@ -561,16 +561,18 @@ const Template09 = (props) => {
                   <p className="t09-detail-text">{`${PI.Nationality}\xa0`}- {`${PI.NationalityAr}\xa0`}</p>
                 </div>
               </div>
-              <div className="t09-detail">
-                <div className="t09-detail-img-bg t09-detail-img-bg-1"
-                    style={{backgroundColor: cvColor===1 ? '#4d364a' : '#485e5e' }}>
-                  <img className="t09-detail-img-5" src={img_05} alt="" />
+              {maritalStatus &&
+                <div className="t09-detail">
+                  <div className="t09-detail-img-bg t09-detail-img-bg-1"
+                      style={{backgroundColor: cvColor===1 ? '#4d364a' : '#485e5e' }}>
+                    <img className="t09-detail-img-5" src={img_05} alt="" />
+                  </div>
+                  <div className="t09-detail-p-3"
+                      style={{backgroundColor: cvColor===1 ? '#4d364a' : '#7b9d9d' }}>
+                    <p className="t09-detail-text">{`${maritalStatus}\xa0`}- {`${maritalStatusAr}\xa0`}</p>
+                  </div>
                 </div>
-                <div className="t09-detail-p-3"
-                    style={{backgroundColor: cvColor===1 ? '#4d364a' : '#7b9d9d' }}>
-                  <p className="t09-detail-text">{`${maritalStatus}\xa0`}- {`${maritalStatusAr}\xa0`}</p>
-                </div>
-              </div>
+              }
               <div className="t09-detail">
                 <div className="t09-detail-img-bg t09-detail-img-bg-3"
                     style={{backgroundColor: cvColor===1 ? '#843d4b' : '#7b9d9d' }}>

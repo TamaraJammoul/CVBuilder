@@ -276,14 +276,16 @@ const Template01 = (props) => {
         </div>
         <p className="t01-info-status">{`${PI.Nationality}\xa0`}</p>
       </div>
-      <div className="t01-info-details">
-        <div className="t01-info-logo">
-          <div className="t01-info-icon-bg">
-            <img className="t01-info-icon-6" src={img_06} alt="couple_icon" />
+      {maritalStatus && 
+        <div className="t01-info-details">
+          <div className="t01-info-logo">
+            <div className="t01-info-icon-bg">
+              <img className="t01-info-icon-6" src={img_06} alt="couple_icon" />
+            </div>
           </div>
-        </div>
           <p className="t01-info-status">{maritalStatus}</p>
-      </div>
+        </div>
+      }
     </div>
   );
   //#endregion

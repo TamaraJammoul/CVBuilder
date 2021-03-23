@@ -632,16 +632,18 @@ const Template08 = (props) => {
                   <p>{PI.Birth}</p>
                 </div>
               </div>
-              <div className="t08-info">
-                <div className="t08-info-logo t08-info-logo-4">
-                  <img src={img_04} alt="" />
+              {maritalStatus &&
+                <div className="t08-info">
+                  <div className="t08-info-logo t08-info-logo-4">
+                    <img src={img_04} alt="" />
+                  </div>
+                  <div className="t08-info-text ar">
+                    <p>
+                      {`${maritalStatusAr}\xa0`}- {`${maritalStatus}\xa0`}
+                    </p>
+                  </div>
                 </div>
-                <div className="t08-info-text ar">
-                  <p>
-                    {`${maritalStatusAr}\xa0`}- {`${maritalStatus}\xa0`}
-                  </p>
-                </div>
-              </div>
+              }
             </div>
           </div>
 

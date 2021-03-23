@@ -596,14 +596,16 @@ const Template07 = (props) => {
                   <p className="t07-info-text">{`${PI.City}\xa0`}</p>
                 </div>
               </div>
-              <div className={`t07-detail ${cvLanguage === "Ar" ? "ar" : ""} `}>
-                <div className="t07-detail-logo">
-                  <img className="t07-detail-logo-5" src={img_05} alt="" />
+              {maritalStatus && 
+                <div className={`t07-detail ${cvLanguage === "Ar" ? "ar" : ""} `}>
+                  <div className="t07-detail-logo">
+                    <img className="t07-detail-logo-5" src={img_05} alt="" />
+                  </div>
+                  <div className="t07-detail-text">
+                    <p className="t07-info-text">{maritalStatus}</p>
+                  </div>
                 </div>
-                <div className="t07-detail-text">
-                  <p className="t07-info-text">{maritalStatus}</p>
-                </div>
-              </div>
+              }
             </div>
 
             {/* Location */}

@@ -397,12 +397,14 @@ const Template02 = (props) => {
                 </div>
                 <p>{PI.Phone}</p>
               </div>
-              <div className="info-content">
-                <div className="content-img">
-                  <img className="man" src={img_03} alt="man-icon" />
+              {maritalStatus &&
+                <div className="info-content">
+                  <div className="content-img">
+                    <img className="man" src={img_03} alt="man-icon" />
+                  </div>
+                  <p>{maritalStatus}</p>
                 </div>
-                <p>{maritalStatus}</p>
-              </div>
+              }
               <div className="info-content">
                 <div className="content-img">
                   <img className="envelope" src={img_06} alt="envelope-icon" />

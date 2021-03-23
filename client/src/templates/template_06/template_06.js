@@ -378,14 +378,16 @@ const Template06 = (props) => {
             <p>{PI.Email}</p>
           </div>
         </div>
-        <div className="t06-info">
-          <div className="t06-info-logo">
-            <img src={img_06} alt="" />
+        {maritalStatus &&
+          <div className="t06-info">
+            <div className="t06-info-logo">
+              <img src={img_06} alt="" />
+            </div>
+            <div className="t06-info-text">
+              <p>{maritalStatus}</p>
+            </div>
           </div>
-          <div className="t06-info-text">
-            <p>{maritalStatus}</p>
-          </div>
-        </div>
+        }
         <div className="t06-info">
           <div className="t06-info-logo">
             <img src={img_07} alt="" />

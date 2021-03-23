@@ -335,10 +335,10 @@ export default function PersonalInfo() {
                 onChange={(e) => setMaritalStatus(e.target.value)}
               >
                 <MenuItem value={0}>{t("NoMaritalStatus")}</MenuItem>
-                <MenuItem value={1}>{t("Married")}</MenuItem>
-                <MenuItem value={2}>{t("Single")}</MenuItem>
-                {cvLanguage == 'ar' && <MenuItem value={3}>{t("SingleFemale")}</MenuItem>}
-                {cvLanguage == 'ar' && <MenuItem value={4}>{t("MarriedFemale")}</MenuItem>}
+                <MenuItem value={1}>{t("Single")}</MenuItem>
+                <MenuItem value={2}>{t("Married")}</MenuItem>
+                {cvLanguage == 'Ar' && <MenuItem value={3}>{t("SingleFemale")}</MenuItem>}
+                {cvLanguage == 'Ar' && <MenuItem value={4}>{t("MarriedFemale")}</MenuItem>}
               </Select>
             </FormControl>
           </Grid>
