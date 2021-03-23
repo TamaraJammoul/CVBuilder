@@ -15,12 +15,14 @@ import ic6 from "./../../img/ic6.png";
 import ic7 from "./../../img/ic7.png";
 import ic8 from "./../../img/ic8.png";
 import ic9 from "./../../img/ic9.png";
+import { useHistory } from "react-router-dom";
 
 export default function Skills() {
   let skills = useSelector((state) => state.template.skills);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const cvID = useSelector((state) => state.cvID);
+  const history = useHistory();
 
   const [OfficePrograms, setOfficePrograms] = useState(false);
   const [TimeManagment, setTimeManagment] = useState(false);
@@ -52,8 +54,9 @@ export default function Skills() {
       setComputerProficiency(!ComputerProficiency);
     if (t === "Leadership and Organisation")
       setLeadershipandOrganisation(!LeadershipandOrganisation);
-    if (t === "TeamWork"){
-       setTeamWork(!TeamWork);      }
+    if (t === "TeamWork") {
+      setTeamWork(!TeamWork);
+    }
     if (t === "Self Development") setSelfDevelopment(!SelfDevelopment);
     if (t === "Problem solving") setProblemsolving1(!Problemsolving);
     if (t === "Work under pressure") setWorkunderpressure(!Workunderpressure);
@@ -213,9 +216,13 @@ export default function Skills() {
             <Button
               variant="contained"
               className="save"
-              onClick={() => dispatch(AddSkillAction({ skills, cvID }))}
+              onClick={() => {
+                dispatch(AddSkillAction({ skills, cvID }))
+                history.push("/buildcv/certificates");
+
+              }}
             >
-              {t("AddSkill")}
+              {t("next")}
             </Button>
           </Grid>
         </Grid>

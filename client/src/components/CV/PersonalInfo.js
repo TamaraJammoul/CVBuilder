@@ -6,7 +6,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
+import { useHistory } from "react-router-dom";
 import defaultImg from "./../../img/stylingcv-default.jpg";
 import { PeraonalInfoAction } from "./../../store/action/action";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,10 +17,9 @@ const CLOUDINARY_UPLOAD_PRESET = 'm8k5pnic';
 export default function PersonalInfo() {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  let history = useHistory();
   const id = useSelector((state) => state.template.personalInformation_id);
   const personalData = useSelector((state) => state.template.personalInformation);
-
-
   const [firstName, setFirstName] = useState(personalData ? personalData.FirstName : '');
   const [lastName, setLastName] = useState(personalData ? personalData.LastName : '');
   const [email, setEmail] = useState(personalData ? personalData.Email : '');
@@ -68,6 +67,7 @@ export default function PersonalInfo() {
         NationalityAr: nationalityAr,
       };
       dispatch(PeraonalInfoAction(data));
+      history.push("/buildcv/careerobjectives");
     }
   };
 
@@ -339,19 +339,12 @@ export default function PersonalInfo() {
           <Grid item xs={12} sm={4}></Grid>
           <Grid item xs={12}>
             <Button
-              variant="outlined"
-              className="cancel mt-3"
-              style={{ marginLeft: "10px", float: "right" }}
-            >
-              {t("cancel")}
-            </Button>
-            <Button
               variant="contained"
               className="save mt-3"
               style={{ float: "right" }}
               onClick={() => send()}
             >
-              {t("save")}
+              {t("next")}
             </Button>
           </Grid>
         </Grid>

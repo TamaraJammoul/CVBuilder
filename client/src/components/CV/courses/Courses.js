@@ -19,6 +19,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { useHistory } from "react-router-dom";
 
 export default function Courses() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function Courses() {
   const temp = useSelector((state) => state.template.courses);
   const courseslen = useSelector((state) => state.template.courseslen);
   const isHidden = useSelector((state) => state.isHide.isCoursesHidden);
+  let history = useHistory();
 
   useEffect(() => {
     setCourses(temp);
@@ -161,19 +163,28 @@ export default function Courses() {
             </Droppable>
           </DragDropContext>
           {/* {courses.length < courseslen ? ( */}
-            <Grid item xs={12}>
+            <Grid item sm={6} xs={12}>
               {" "}
               <Link to="/buildcv/addcourses">
                 {" "}
                 <Button
                   variant="contained"
                   className="save"
-                  //startIcon={<DeleteIcon />}
                 >
                   {t("AddCourse")}
                 </Button>
               </Link>
+              <Link to="/buildcv/languages">
+                {" "}
+                <Button
+                  variant="contained"
+                  className="save"
+                >
+                  {t("next")}
+                </Button>
+              </Link>
             </Grid>
+
           {/* ) : (
             ""
           )} */}

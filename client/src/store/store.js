@@ -42,14 +42,26 @@ const initialState = {
     references: [],
     skills: [],
     courses: [],
-    personalInformation: {},
+    personalInformation: {
+      CityAr: "",
+      CountryAr: "",
+      Email: "",
+      FirstName: "",
+      FirstNameAr: "",
+      LastName: "",
+      LastNameAr: "",
+      NationalityAr: "",
+      Phone: "",
+      SecondName: "",
+      SecondNameAr: ""
+    },
     careerobjective: {},
     careerObjectives_id: "",
     personalInformation_id: "",
   },
   isHide: {
     isAchievementsHidden: false,
-    isCertificatesHidden: false, 
+    isCertificatesHidden: false,
     isCoursesHidden: false,
     isEducationsHidden: false,
     isExperiencesHidden: false,
@@ -80,7 +92,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk)
-   // , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+     //, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 export default store;

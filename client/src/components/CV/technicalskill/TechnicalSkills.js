@@ -27,15 +27,17 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { getNext } from "./../../../helpers/get-next";
 
-export default function TechnicalSkills() {
+export default function TechnicalSkills() { 
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.technicalskills);
   const technicalskilllen = useSelector(
     (state) => state.template.technicalskilllen
   );
+  const template = useSelector((state) => state.cvTemplate);
 
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [technicalskills, setTechnicalskills] = useState([]);
@@ -230,7 +232,16 @@ export default function TechnicalSkills() {
                 >
                   {t("AddTechnicalSkill")}
                 </Button>
-              </Link>
+              </Link> 
+              <Link to={() => getNext('technicalskills', template)}>
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
+              </Button>
+            </Link>
             </Grid>
           {/* ) : (
             ""

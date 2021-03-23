@@ -21,6 +21,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { getNext } from "./../../../helpers/get-next";
 
 export default function Membership() {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ export default function Membership() {
 
   const [hide, setHide] = useState(0);
   const [achievement, setachievement] = useState([]);
+  const template = useSelector((state) => state.cvTemplate);
+
   useEffect(() => {
     setachievement(temp);
   }, [temp]);
@@ -179,6 +182,15 @@ export default function Membership() {
                   {t("AddAchievement")}
                 </Button>
               </Link>
+              <Link to={() => getNext('achievement', template)}>
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
+              </Button>
+            </Link>
             </Grid>
         </Grid>
       </Container>

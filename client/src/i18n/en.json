@@ -182,6 +182,7 @@
     "University": "university",
     "Rate": "rate",
     "Grade": "grade",
-    "SecondName":"Second Name",
-    "SecondNameAr":"Second Name In Arabic"
+    "SecondName": "Second Name",
+    "SecondNameAr": "Second Name In Arabic",
+    "next": "next"
 }

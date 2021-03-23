@@ -4,7 +4,6 @@ import { AddEducationAction } from "./../../../store/action/education";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
-
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -50,7 +49,6 @@ export default function AddEducation(props) {
     setUniversityNameAr("");
     setFacultyAr("");
     setDegreeFrom100(0);
-    history.push("/buildcv/education");
   };
   return (
     <Paper

@@ -183,6 +183,7 @@
         "University": "الجامعة",
         "Rate": "المعدل",
         "Grade": "التقدير",
-        "SecondName":"الاصم الثاني",
-        "SecondNameAr":"الاسم الثاني بالعربية"
+        "SecondName": "الاصم الثاني",
+        "SecondNameAr": "الاسم الثاني بالعربية",
+        "next": "التالي"
 }

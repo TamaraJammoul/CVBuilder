@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Box,
@@ -16,35 +16,35 @@ import {
   Visibility,
 } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
-import AddLanguage from "./AddLanguage";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {
   DeleteLanguageAction,
   CopyLanguageAction,
   HideLanguageAction,
   OrderLanguageAction,
 } from "./../../../store/action/language";
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
-import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useHistory } from "react-router-dom";
 
 export default function Languages() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.languages);
   const languagelen = useSelector((state) => state.template.languagelen);
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
   const [languages, setLanguages] = useState([]);
   const isHidden = useSelector((state) => state.isHide.isLanguagesHidden);
+  let history = useHistory();
 
   useEffect(() => {
     setLanguages(temp);
   }, [temp]);
   const onDragEnd = (result) => {
-    const {destination, source, reason} = result;
+    const { destination, source, reason } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
@@ -61,7 +61,7 @@ export default function Languages() {
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
     setLanguages(users);
-    dispatch(OrderLanguageAction({source, destination, cvID, languages}));
+    dispatch(OrderLanguageAction({ source, destination, cvID, languages }));
   };
   const renderUsers = (lan, index) => {
     return (
@@ -80,7 +80,7 @@ export default function Languages() {
                     alignItems="center"
                     justify="center"
                     spacing={4}
-                    style={{width: "100%"}}
+                    style={{ width: "100%" }}
                   >
                     <Grid item xs={1}>
                       <h4>{index + 1}</h4>
@@ -143,7 +143,7 @@ export default function Languages() {
                         aria-label="delete"
                         onClick={() =>
                           dispatch(
-                            DeleteLanguageAction({cvID, language_id: lan._id})
+                            DeleteLanguageAction({ cvID, language_id: lan._id })
                           )
                         }
                       >
@@ -169,7 +169,7 @@ export default function Languages() {
     >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item style={{width: "100%"}} sx={12}>
+          <Grid item style={{ width: "100%" }} sx={12}>
             <Grid container alignItems="center" direction="row" spacing={6}>
               <Grid item sm={6} xs={12}>
                 <h2>{t("Languages")}</h2>
@@ -182,7 +182,7 @@ export default function Languages() {
                   className="button"
                   onClick={() => {
                     setHide(!hide);
-                    dispatch(HideLanguageAction({cvID, hide}));
+                    dispatch(HideLanguageAction({ cvID, hide }));
                   }}
                 >
                   {hide === 1 ? t("HideSection") : t("ShowSection")}
@@ -204,19 +204,27 @@ export default function Languages() {
             </Droppable>
           </DragDropContext>
           {/* {languages < languagelen ? ( */}
-            <Grid item xs={12}>
+          <Grid item xs={12}>
+            {" "}
+            <Link to="addlanguage">
               {" "}
-              <Link to="addlanguage">
-                {" "}
-                <Button
-                  variant="contained"
-                 // startIcon={<DeleteIcon />}
-                  className="save"
-                >
-                  {t("AddLanguage")}
-                </Button>
-              </Link>
-            </Grid>
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("AddLanguage")}
+              </Button>
+            </Link>
+            <Link to="/buildcv/experience">
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
+              </Button>
+            </Link>
+          </Grid>
           {/* ) : (
             ""
           )} */}

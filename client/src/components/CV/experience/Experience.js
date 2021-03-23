@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useHistory } from "react-router-dom";
 
 export default function Education() {
   const dispatch = useDispatch();
@@ -30,10 +31,11 @@ export default function Education() {
   const [hide, setHide] = useState(0);
   const [experiences, setExperiences] = useState([]);
   const isHidden = useSelector((state) => state.isHide.isExperiencesHidden);
+  let history = useHistory();
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted) 
+    if (isMounted)
       setExperiences(temp);
     return () => { isMounted = false };
   }, [temp]);
@@ -199,6 +201,15 @@ export default function Education() {
                 className="save"
               >
                 {t("AddExperience")}
+              </Button>
+            </Link>
+            <Link to="/buildcv/skills">
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
               </Button>
             </Link>
           </Grid>

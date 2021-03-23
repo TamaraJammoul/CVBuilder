@@ -75,7 +75,6 @@ export function Auth() {
   };
 }
 export function PeraonalInfoAction(payload) {
-  // console.log(payload)
   return async (dispatch) => {
     await axios({
       method: "post",
@@ -87,7 +86,6 @@ export function PeraonalInfoAction(payload) {
 
       },
     }).then((res) => {
-      console.log(res)
       if (res.status == 200 && res.data.status != 0) {
         dispatch({
           type: PERSONALINFO,

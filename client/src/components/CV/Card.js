@@ -135,7 +135,7 @@ export default function Card({CardImage, template}) {
     else if (t === "cv6")
       return {
         careerobjective: 1,
-        certificates: 1,
+        certificates: 0,
         courses: 1,
         education: 1,
         experience: 1,

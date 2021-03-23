@@ -20,12 +20,14 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { getNext } from "./../../../helpers/get-next";
 
 export default function Membership() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.memberships);
   const membershiplen = useSelector((state) => state.template.membershiplen);
   const isHidden = useSelector((state) => state.isHide.isMembershipsHidden);
+  const template = useSelector((state) => state.cvTemplate);
 
   const {t, i18n} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
@@ -180,6 +182,15 @@ export default function Membership() {
                   {t("AddMembership")}
                 </Button>
               </Link>
+              <Link to={() => getNext('membership', template)}>
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
+              </Button>
+            </Link>
             </Grid>
           {/* ) : (
             ""

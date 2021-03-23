@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {Button, Paper, Grid, IconButton, Container} from "@material-ui/core";
-import {Delete, OpenWith, Edit, FileCopy} from "@material-ui/icons";
+import React, { useState, useEffect } from "react";
+import { Button, Paper, Grid, IconButton, Container } from "@material-ui/core";
+import { Delete, OpenWith, Edit, FileCopy } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {
   DeleteCertificateAction,
@@ -8,12 +8,14 @@ import {
   OrderCertificateAction,
   HideCertificateAction,
 } from "./../../../store/action/certificate";
-import {VisibilityOff, EditSharp, Visibility} from "@material-ui/icons";
-import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { VisibilityOff, EditSharp, Visibility } from "@material-ui/icons";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-import {useSelector, useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { getNext } from "./../../../helpers/get-next";
+
 export default function Certificates() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.certificates);
@@ -21,16 +23,18 @@ export default function Certificates() {
     (state) => state.template.certificateslen
   );
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const isHidden = useSelector((state) => state.isHide.isCertificatesHidden);
   const [hide, setHide] = useState(0);
   const [certificates, setCertificates] = useState([]);
+  const template = useSelector((state) => state.cvTemplate);
+
   useEffect(() => {
     setCertificates(temp);
   }, [temp]);
   const onDragEnd = (result) => {
-    const {destination, source, reason} = result;
+    const { destination, source, reason } = result;
     if (!destination || reason === "CANCEL") {
       return;
     }
@@ -47,7 +51,7 @@ export default function Certificates() {
     users.splice(source.index, 1);
     users.splice(destination.index, 0, droppedUser);
     setCertificates(users);
-    dispatch(OrderCertificateAction({source, destination, cvID, certificates}));
+    dispatch(OrderCertificateAction({ source, destination, cvID, certificates }));
   };
   const renderUsers = (cer, index) => {
     return (
@@ -66,7 +70,7 @@ export default function Certificates() {
                     alignItems="center"
                     justify="center"
                     spacing={4}
-                    style={{width: "100%"}}
+                    style={{ width: "100%" }}
                   >
                     <Grid item xs={1}>
                       <h4>{index + 1}</h4>
@@ -115,7 +119,7 @@ export default function Certificates() {
                         onClick={() =>
                           dispatch(
                             DeleteCertificateAction({
-                              cvID, 
+                              cvID,
                               certificate_id: cer._id,
                             })
                           )
@@ -143,7 +147,7 @@ export default function Certificates() {
     >
       <Container>
         <Grid container alignItems="center" direction="column" spacing={6}>
-          <Grid item style={{width: "100%"}} sx={12}>
+          <Grid item style={{ width: "100%" }} sx={12}>
             <Grid container alignItems="center" direction="row" spacing={6}>
               <Grid item sm={6} xs={12}>
                 <h2>{t("YourCertificates")}</h2>
@@ -157,7 +161,7 @@ export default function Certificates() {
                   className="button"
                   onClick={() => {
                     setHide(!hide);
-                    dispatch(HideCertificateAction({cvID, hide}));
+                    dispatch(HideCertificateAction({ cvID, hide }));
                   }}
                 >
                   {hide === 1 ? t("HideSection") : t("ShowSection")}
@@ -179,18 +183,27 @@ export default function Certificates() {
             </Droppable>
           </DragDropContext>
           {/* {certificates.length < certificateslen ? ( */}
-            <Grid item xs={12}>
+          <Grid item xs={12}>
+            {" "}
+            <Link to="/buildcv/addcertificate">
+              <Button
+                variant="contained"
+                // startIcon={<DeleteIcon />}
+                className="save"
+              >
+                {t("AddCertificate")}
+              </Button>
+            </Link>
+            <Link to={() => getNext('certificates', template)}>
               {" "}
-              <Link to="/buildcv/addcertificate">
-                <Button
-                  variant="contained"
-                 // startIcon={<DeleteIcon />}
-                  className="save"
-                >
-                  {t("AddCertificate")}
-                </Button>
-              </Link>
-            </Grid>
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
+              </Button>
+            </Link>
+          </Grid>
           {/* ) : (
             ""
           )} */}

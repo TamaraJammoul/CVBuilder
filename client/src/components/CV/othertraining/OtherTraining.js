@@ -17,6 +17,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Link, useLocation} from "react-router-dom";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import { getNext } from "./../../../helpers/get-next";
 
 export default function OtherTraining(props) {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export default function OtherTraining(props) {
   const othertraininglen = useSelector(
     (state) => state.template.othertraininglen
   );
+  const template = useSelector((state) => state.cvTemplate);
 
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
@@ -188,6 +190,15 @@ export default function OtherTraining(props) {
                   {t("AddOtherTraining")}
                 </Button>
               </Link>
+              <Link to={() => getNext('othertraining', template)}>
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              > 
+                {t("next")}
+              </Button>
+            </Link>
             </Grid>
           {/* ) : (
             ""

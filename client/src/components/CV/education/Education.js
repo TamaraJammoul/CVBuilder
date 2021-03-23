@@ -232,13 +232,22 @@ export default function Education() {
               {" "}
               <Button
                 variant="contained"
-                //startIcon={<DeleteIcon />}
                 className="save"
               >
                 {t("AddEducation")}
               </Button>
             </Link>
+            <Link to="/buildcv/courses">
+              {" "}
+              <Button
+                variant="contained"
+                className="save ml5"
+              >
+                {t("next")}
+              </Button>
+            </Link>
           </Grid>
+
           {/* ) : (
             ""
           )} */}

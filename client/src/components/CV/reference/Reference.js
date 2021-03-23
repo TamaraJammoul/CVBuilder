@@ -14,11 +14,12 @@ import {
 } from "./../../../store/action/reference";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
+import { getNext } from "./../../../helpers/get-next";
 
 export default function Refernce() {
   const dispatch = useDispatch();
   const temp = useSelector((state) => state.template.references);
-
+  const template = useSelector((state) => state.cvTemplate);
   const {t} = useTranslation();
   const cvID = useSelector((state) => state.cvID);
   const [hide, setHide] = useState(0);
@@ -123,6 +124,15 @@ export default function Refernce() {
                   {t("AddReference")}
                 </Button>
               </Link>
+              <Link to={() => getNext('reference', template)}>
+              {" "}
+              <Button
+                variant="contained"
+                className="save"
+              >
+                {t("next")}
+              </Button>
+            </Link>
             </Grid>
           ) : (
             ""
