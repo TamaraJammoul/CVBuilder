@@ -186,3 +186,6 @@ a:active {
     font-size: medium;
   }
 }
+.selectedCareerObjective{
+  background-color: #4d3c50 !important;
+}

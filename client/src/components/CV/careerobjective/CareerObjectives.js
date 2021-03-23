@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Paper,
@@ -18,18 +18,35 @@ export default function CareerObjectives() {
   const lan = useSelector((state) => state.sections.twolan);
   const [text, setText] = useState("");
   const [textAr, setTextAr] = useState("");
-  const [hide, setHide] = useState(0);
+  const [isFirstSelected, setIsFirstSelected] = useState(false);
+  const [isSecondSelected, setIsSecondSelected] = useState(false);
+
 
   const dispatch = useDispatch();
-  /*const careerobjective = useSelector(
-    (state) => state.template.careerobjective 
-  );*/
+  const careerobjective = useSelector(
+    (state) => state.template.careerobjective
+  );
   const careerObjectives_id = useSelector(
     (state) => state.template.careerObjectives_id
   );
   const { t } = useTranslation();
   let history = useHistory();
+  useEffect(() => {
 
+  }, [isFirstSelected, isSecondSelected])
+  const chooseFirstCareer = () => {
+    setIsFirstSelected(!isFirstSelected);
+    setIsSecondSelected(false);
+    setText("Getting a job opportunity through which I can gain experience, develop oneself, gain skills,benefit society, and help in the success and development of the field in which I work");
+    setTextAr('الحصول على فرصة عمل استطيع من خلاله اكتساب الخبرة وتطوير الذات وإكتساب المهارات وإفادة المجتمع والمساعدة في نجاح وتطوير المجال الذي اعمل به');
+  }
+  const chooseSecondCareer = () => {
+    setIsFirstSelected(false);
+    setIsSecondSelected(!isSecondSelected);
+    setText("Work in an innovative environment to add creativity in the organization that will achieve the desired goals using my professional skills acquired through practical experiences ");
+    setTextAr('‏السعي لتطوير مهاراتي العملية و المساهمة في خدمة المجتمع و بذل أفضل النتائج للتقدم و الارتقاء بالمكان الذي أعمل به لأصل لأقصى درجات التميز و التطوير');
+    console.log(isSecondSelected)
+  }
   return (
     <Paper
       elevation={3}
@@ -57,14 +74,29 @@ export default function CareerObjectives() {
               </Grid>
             </Grid>{" "}
           </Grid>
-          <Grid item xs={12}>
-            <h5>{text}</h5>
+          <Grid item row xs={12}>
+            <Grid item xs={12} onClick={() => chooseFirstCareer()}>
+              <Paper
+                elevation={3}
+                className={isFirstSelected === true ? 'selectedCareerObjective' : ''}
+              >
+                <h6 style={{ padding: '1rem' }}>{t('firstCareerObjective')}</h6>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} onClick={() => chooseSecondCareer()}>
+              <Paper
+                elevation={3}
+                className={isSecondSelected === true ? "selectedCareerObjective" : ""}
+              >
+                <h6 style={{ padding: '1rem' }}>{t('secondCareerObjective')}</h6>
+              </Paper>
+            </Grid>
           </Grid>
           <Grid item xs={12} style={{ width: "100%" }}>
             {" "}
             <TextField
-
-              label={t("Enter CareerObjective")}
+              required
+              label={t("Add CareerObjective")}
               variant="filled"
               color="primary"
               style={{ width: "100%" }}
@@ -78,10 +110,10 @@ export default function CareerObjectives() {
             className={lan === 0 ? "arhide" : ""}
           >
             <TextField
-
-              label={t("Enter CareerObjective in Arabic")}
+              label={t("Add CareerObjective in Arabic")}
               variant="filled"
               color="primary"
+              required
               style={{ width: "100%" }}
               onChange={(e) => setTextAr(e.target.value)}
             />
@@ -94,6 +126,7 @@ export default function CareerObjectives() {
                   className="save"
                   style={{ float: "right" }}
                   onClick={() => {
+                    console.log(text, textAr)
                     dispatch(
                       EditCareerObjectiveAction({
                         text,
@@ -111,6 +144,6 @@ export default function CareerObjectives() {
           </Grid>
         </Grid>
       </Container>{" "}
-    </Paper>
+    </Paper >
   );
 }
