@@ -196,7 +196,7 @@ export default function AddEducation(props) {
             <TextField
               label={t("degreeFrom100")}
               variant="filled"
-              placeholder={t("ex:75%")}
+              placeholder={t("ex:3.5%")}
               style={{ width: "100%" }}
               type="number"
               onChange={(e) => setDegreeFrom100(e.target.value)}

@@ -39,7 +39,10 @@ export default function PersonalInfo() {
   const lan = useSelector((state) => state.sections.twolan);
   const [secondName, setSecondName] = useState(personalData ? personalData.SecondName : '');
   const [secondNameAr, setSecondNameAr] = useState(personalData ? personalData.SecondNameAr : '');
-
+  const cvLanguage = useSelector((state) => state.cvLanguage);
+  useEffect(() => {
+    console.log(cvLanguage)
+  }, [])
   const send = () => {
     if (email == undefined || lastName == undefined || firstName == undefined) {
       alert("please fill all fields")
@@ -331,8 +334,11 @@ export default function PersonalInfo() {
                 value={maritalStatus}
                 onChange={(e) => setMaritalStatus(e.target.value)}
               >
+                <MenuItem value={0}>{t("NoMaritalStatus")}</MenuItem>
                 <MenuItem value={1}>{t("Married")}</MenuItem>
                 <MenuItem value={2}>{t("Single")}</MenuItem>
+                {cvLanguage == 'ar' && <MenuItem value={3}>{t("SingleFemale")}</MenuItem>}
+                {cvLanguage == 'ar' && <MenuItem value={4}>{t("MarriedFemale")}</MenuItem>}
               </Select>
             </FormControl>
           </Grid>

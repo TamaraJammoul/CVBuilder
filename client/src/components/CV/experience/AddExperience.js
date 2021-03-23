@@ -32,7 +32,7 @@ export default function Experience(props) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   let history = useHistory();
- 
+
   const handelCancel = () => {
     setExperienceName("");
     setStartDate(0);
@@ -74,7 +74,7 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              label={t("Description")}
+              label={t("DescriptionExperince")}
               variant="filled"
               color="primary"
               style={{ width: "100%" }}
@@ -92,7 +92,7 @@ export default function Experience(props) {
           </Grid>
           <Grid item xs={6} className={lan === 0 ? "arhide" : ""}>
             <TextField
-              label={t("DescriptionAr")}
+              label={t("DescriptionExperienceAr")}
               variant="filled"
               color="primary"
               style={{ width: "100%" }}
@@ -104,21 +104,21 @@ export default function Experience(props) {
               <DatePicker
                 views={["year"]}
                 label="Start Date"
-                value={startDate} 
+                value={startDate}
                 onChange={(e) => setStartDate(new Date(e))}
               />
             </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={6}>
             {" "}
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
-                  views={["year"]}
-                  label="End Date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(new Date(e))}
-                />
-              </MuiPickersUtilsProvider>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                views={["year"]}
+                label="End Date"
+                value={endDate}
+                onChange={(e) => setEndDate(new Date(e))}
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -143,11 +143,12 @@ export default function Experience(props) {
               className="save"
               style={{ float: "right" }}
               onClick={() => {
-                if (description===''||experienceName === '')
-                alert("please fill all fields")
-                else{
-                dispatch(AddExperienceAction(data));
-                history.push("/buildcv/experience");}
+                if (description === '' || experienceName === '')
+                  alert("please fill all fields")
+                else {
+                  dispatch(AddExperienceAction(data));
+                  history.push("/buildcv/experience");
+                }
               }}
             >
               {t("save")}

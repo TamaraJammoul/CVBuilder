@@ -50,6 +50,7 @@ export default function AddCourses(props) {
               variant="filled"
               color="primary"
               style={{ width: "100%" }}
+              required
               onChange={(e) => setCourses(e.target.value)}
             />
           </Grid>
@@ -70,6 +71,7 @@ export default function AddCourses(props) {
               variant="filled"
               color="primary"
               style={{ width: "100%" }}
+              required
               onChange={(e) => setCoursesAr(e.target.value)}
             />
           </Grid>
@@ -81,6 +83,7 @@ export default function AddCourses(props) {
               variant="filled"
               color="primary"
               style={{ width: "100%" }}
+              required
               onChange={(e) => setDescriptionAr(e.target.value)}
             />
           </Grid>

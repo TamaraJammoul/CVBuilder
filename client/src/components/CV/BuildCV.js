@@ -100,19 +100,7 @@ export default function BuildCV(props) {
                 </Link>
               </h4>
             </Grid>
-            {sections.color === 1 ? (
-              <Grid item className="nav">
-                <h4>
-                  {" "}
-                  <span style={{ marginRight: "10px" }}>
-                    <Work />
-                  </span>
-                  <Link to={`${url}/color`}>{t("Resume Color")}</Link>
-                </h4>
-              </Grid>
-            ) : (
-              ""
-            )}
+
             {sections.careerobjective === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -126,8 +114,36 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
+                ""
+              )}
+
+            {sections.education === 1 ? (
+              <Grid item className="nav">
+                <h4>
+                  {" "}
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
+                    <School />
+                  </span>
+                  <Link to={`${url}/education`}>{t("Education")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+                ""
+              )}
+
+            {sections.experience === 1 ? (
+              <Grid item className="nav">
+                <h4>
+                  {" "}
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
+                    <Work />
+                  </span>
+                  <Link to={`${url}/experience`}>{t("Experience")} </Link>
+                </h4>
+              </Grid>
+            ) : (
+                ""
+              )}
 
             {sections.courses === 1 ? (
               <Grid item className="nav">
@@ -140,21 +156,9 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
-            {sections.certificates === 1 ? (
-              <Grid item className="nav">
-                <h4>
-                  {" "}
-                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
-                    <School />
-                  </span>
-                  <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
-                </h4>
-              </Grid>
-            ) : (
-              ""
-            )}
+                ""
+              )}
+
             {sections.skills === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -166,8 +170,9 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
+                ""
+              )}
+
             {sections.language === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -179,8 +184,37 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
+                ""
+              )}
+
+            {sections.color === 1 ? (
+              <Grid item className="nav">
+                <h4>
+                  {" "}
+                  <span style={{ marginRight: "10px" }}>
+                    <Work />
+                  </span>
+                  <Link to={`${url}/color`}>{t("Resume Color")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+                ""
+              )}
+
+            {sections.certificates === 1 ? (
+              <Grid item className="nav">
+                <h4>
+                  {" "}
+                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
+                    <School />
+                  </span>
+                  <Link to={`${url}/certificates`}>{t("Certificates")}</Link>
+                </h4>
+              </Grid>
+            ) : (
+                ""
+              )}
+
             {sections.othertraining === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -192,8 +226,8 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
+                ""
+              )}
             {sections.technicalskill === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -207,21 +241,9 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
-            {sections.education === 1 ? (
-              <Grid item className="nav">
-                <h4>
-                  {" "}
-                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
-                    <School />
-                  </span>
-                  <Link to={`${url}/education`}>{t("Education")}</Link>
-                </h4>
-              </Grid>
-            ) : (
-              ""
-            )}
+                ""
+              )}
+
             {sections.achievement === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -233,21 +255,9 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
-            {sections.experience === 1 ? (
-              <Grid item className="nav">
-                <h4>
-                  {" "}
-                  <span style={{ marginRight: "10px", marginLeft: "10px" }}>
-                    <Work />
-                  </span>
-                  <Link to={`${url}/experience`}>{t("Experience")} </Link>
-                </h4>
-              </Grid>
-            ) : (
-              ""
-            )}
+                ""
+              )}
+
             {sections.membership === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -259,8 +269,8 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
+                ""
+              )}
             {sections.referenc === 1 ? (
               <Grid item className="nav">
                 <h4>
@@ -272,8 +282,8 @@ export default function BuildCV(props) {
                 </h4>
               </Grid>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </Grid>
         </Grid>
         <Grid item xs={8} sm={9} className="bd buildcvNav">
