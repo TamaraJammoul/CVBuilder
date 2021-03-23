@@ -59,7 +59,8 @@
   position: relative;
   overflow: hidden;
   direction: ltr;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  transform: translateX(40%);
 }
 .template04-body.ar {
   direction: rtl;

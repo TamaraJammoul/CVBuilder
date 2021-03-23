@@ -69,7 +69,8 @@
   position: relative;
   direction: ltr;
   text-align: left;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  transform: translateX(40%);
 }
 .template03-body.ar {
   direction: rtl;

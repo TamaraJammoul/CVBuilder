@@ -60,7 +60,8 @@
   padding: calc(76px * var(--t01-scale-rate)) calc(72px * var(--t01-scale-rate))
     calc(92px * var(--t01-scale-rate)) calc(92px * var(--t01-scale-rate));
   direction: ltr;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  transform: translateX(40%);
 }
 .template01-body.ar {
   direction: rtl;

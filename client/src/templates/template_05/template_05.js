@@ -48,7 +48,7 @@ function saveAs(type) {
   const text = [...pdf.querySelectorAll("p")];
   text.forEach(
     (p) =>
-      (p.style.transform = "translateY(-30%)")
+      (p.style.transform = "translateY(-20%)")
   );
 
   html2canvas(pdf, {

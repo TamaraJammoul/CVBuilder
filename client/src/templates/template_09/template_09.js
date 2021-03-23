@@ -102,8 +102,17 @@ const Template09 = (props) => {
   }
 
   let PI = null;
+  let maritalStatus = '';
+  let maritalStatusAr = '';
   if (personalInformation) {
     PI = personalInformation;
+    switch (PI.MaritalStatus) {
+      case 1:  maritalStatusAr = 'أعزب';   maritalStatus = 'Single';    break;
+      case 2:  maritalStatusAr = 'متزوج';  maritalStatus = 'Married';   break;
+      case 3:  maritalStatusAr = 'عزباء';  maritalStatus = 'Single';    break;
+      case 4:  maritalStatusAr = 'متزوجة'; maritalStatus = 'Married';   break;
+      default: maritalStatus = '';                                       break;
+    }
   }
 
   let edus = null;
@@ -559,7 +568,7 @@ const Template09 = (props) => {
                 </div>
                 <div className="t09-detail-p-3"
                     style={{backgroundColor: cvColor===1 ? '#4d364a' : '#7b9d9d' }}>
-                  <p className="t09-detail-text">{`${PI.MaritalStatus == 1 ? 'Married' : 'Single'}\xa0`}- {`${PI.MaritalStatusAr == 1 ? 'متزوج' : 'أعزب'}\xa0`}</p>
+                  <p className="t09-detail-text">{`${maritalStatus}\xa0`}- {`${maritalStatusAr}\xa0`}</p>
                 </div>
               </div>
               <div className="t09-detail">

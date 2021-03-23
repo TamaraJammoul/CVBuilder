@@ -94,8 +94,17 @@ const Template11 = (props) => {
   const hidden = useSelector((state) => state.isHide);
 
   let PI = null;
+  let maritalStatus = '';
+  let maritalStatusAr = '';
   if (personalInformation) {
     PI = personalInformation;
+    switch (PI.MaritalStatus) {
+      case 1:  maritalStatusAr = 'أعزب';   maritalStatus = 'Single';    break;
+      case 2:  maritalStatusAr = 'متزوج';  maritalStatus = 'Married';   break;
+      case 3:  maritalStatusAr = 'عزباء';  maritalStatus = 'Single';    break;
+      case 4:  maritalStatusAr = 'متزوجة'; maritalStatus = 'Married';   break;
+      default: maritalStatus = '';                                       break;
+    }
   }
 
   let CO = null;
@@ -654,7 +663,7 @@ const Template11 = (props) => {
                   <img src={img_02} alt="" />
                 </div>
                 <div className="t11-info-text">
-                  <p>{PI.MaritalStatus == 1 ? 'Married' : 'Single'}</p>
+                  <p>{maritalStatus}</p>
                 </div>
               </div>
               <div className="t11-info">
@@ -684,7 +693,7 @@ const Template11 = (props) => {
                   />
                 </div>
                 <div className="t11-info-text ar">
-                  <p>{`${PI.MaritalStatusAr == 1 ? 'متزوج' : 'أعزب'}\xa0`}</p>
+                  <p>{`${maritalStatusAr}\xa0`}</p>
                 </div>
               </div>
               <div className="t11-info">

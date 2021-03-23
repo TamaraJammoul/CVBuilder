@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./template_01.css";
 
 //#region Import Images
-import img_00 from "../../assets/imgs/template_01/Layer_13.png";
+import photo from "../../assets/imgs/template_01/Layer_13.png";
 import img_01 from "../../assets/imgs/template_01/01.png";
 import img_02 from "../../assets/imgs/template_01/02.png";
 import img_03 from "../../assets/imgs/template_01/03.png";
@@ -178,10 +178,17 @@ const Template01 = (props) => {
   }
 
   let PI = null;
+  let maritalStatus = '';
   if (personalInformation) {
     PI = personalInformation;
+    switch (PI.MaritalStatus) {
+      case 1: maritalStatus = cvLanguage==='Ar'? 'أعزب' : 'Single';    break;
+      case 2: maritalStatus = cvLanguage==='Ar'? 'متزوج' : 'Married';  break;
+      case 3: maritalStatus = 'عزباء';                                 break;
+      case 4: maritalStatus = 'متزوجة';                                break;
+      default: maritalStatus = '';                                      break;
+    }
   }
-  let photo = PI.Image ? PI.Image : img_00
 
   let crses = null;
   if (courses.length > 0) {
@@ -275,11 +282,7 @@ const Template01 = (props) => {
             <img className="t01-info-icon-6" src={img_06} alt="couple_icon" />
           </div>
         </div>
-        {cvLanguage === 'Ar' ? 
-          (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'متزوج' : 'أعزب'}</p>)
-          :
-          (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'Married' : 'Single'}</p>)
-        }
+          <p className="t01-info-status">{maritalStatus}</p>
       </div>
     </div>
   );
@@ -419,7 +422,7 @@ const Template01 = (props) => {
                   className={`t01-personal-info-icon ${
                     cvLanguage === "Ar" ? "ar" : ""
                   } `}
-                  src={photo}
+                  src={PI.Image ? PI.Image : photo}
                   alt="personal_photo"
                   crossOrigin="anonymous"
                 />

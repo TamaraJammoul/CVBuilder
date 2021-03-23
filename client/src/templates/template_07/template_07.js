@@ -81,7 +81,7 @@ function saveAs(type) {
       if(type==='PDF'){
         var img = canvas.toDataURL("image/jpeg", 1);
         var doc = new jsPDF("p", "mm", "a4");
-        doc.addImage(img, "JPEG", -2, 0, 212, 298);
+        doc.addImage(img, "JPEG", -2, 0, 210, 298);
         doc.save(filename);
       }
       else if(type==='PNG'){
@@ -260,8 +260,16 @@ const Template07 = (props) => {
   }
 
   let PI = null;
+  let maritalStatus = '';
   if (personalInformation) {
     PI = personalInformation;
+    switch (PI.MaritalStatus) {
+      case 1: maritalStatus = cvLanguage==='Ar'? 'أعزب' : 'Single';    break;
+      case 2: maritalStatus = cvLanguage==='Ar'? 'متزوج' : 'Married';  break;
+      case 3: maritalStatus = 'عزباء';                                 break;
+      case 4: maritalStatus = 'متزوجة';                                break;
+      default: maritalStatus = '';                                      break;
+    }
   }
 
   let crses = null;
@@ -593,11 +601,7 @@ const Template07 = (props) => {
                   <img className="t07-detail-logo-5" src={img_05} alt="" />
                 </div>
                 <div className="t07-detail-text">
-                {cvLanguage === 'Ar' ? 
-                  (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'متزوج' : 'أعزب'}</p>)
-                  :
-                  (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'Married' : 'Single'}</p>)
-                }
+                  <p className="t07-info-text">{maritalStatus}</p>
                 </div>
               </div>
             </div>

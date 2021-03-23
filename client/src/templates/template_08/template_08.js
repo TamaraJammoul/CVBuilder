@@ -113,8 +113,17 @@ const Template08 = (props) => {
   }
 
   let PI = null;
+  let maritalStatus = '';
+  let maritalStatusAr = '';
   if (personalInformation) {
     PI = personalInformation;
+    switch (PI.MaritalStatus) {
+      case 1:  maritalStatusAr = 'أعزب';   maritalStatus = 'Single';    break;
+      case 2:  maritalStatusAr = 'متزوج';  maritalStatus = 'Married';   break;
+      case 3:  maritalStatusAr = 'عزباء';  maritalStatus = 'Single';    break;
+      case 4:  maritalStatusAr = 'متزوجة'; maritalStatus = 'Married';   break;
+      default: maritalStatus = '';                                       break;
+    }
   }
 
   let edus = null;
@@ -629,7 +638,7 @@ const Template08 = (props) => {
                 </div>
                 <div className="t08-info-text ar">
                   <p>
-                    {`${PI.MaritalStatusAr == 1 ? 'متزوج' : 'أعزب'}\xa0`}- {`${PI.MaritalStatus == 1 ? 'Married' : 'Single'}\xa0`}
+                    {`${maritalStatusAr}\xa0`}- {`${maritalStatus}\xa0`}
                   </p>
                 </div>
               </div>

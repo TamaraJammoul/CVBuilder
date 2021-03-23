@@ -179,8 +179,16 @@ const Template02 = (props) => {
   }
 
   let PI = null;
+  let maritalStatus = '';
   if (personalInformation) {
     PI = personalInformation;
+    switch (PI.MaritalStatus) {
+      case 1: maritalStatus = cvLanguage==='Ar'? 'أعزب' : 'Single';    break;
+      case 2: maritalStatus = cvLanguage==='Ar'? 'متزوج' : 'Married';  break;
+      case 3: maritalStatus = 'عزباء';                                 break;
+      case 4: maritalStatus = 'متزوجة';                                break;
+      default: maritalStatus = '';                                      break;
+    }
   }
 
   let crses = null;
@@ -393,11 +401,7 @@ const Template02 = (props) => {
                 <div className="content-img">
                   <img className="man" src={img_03} alt="man-icon" />
                 </div>
-                {cvLanguage === 'Ar' ? 
-                  (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'متزوج' : 'أعزب'}</p>)
-                  :
-                  (<p className="t01-info-status">{PI.MaritalStatus == 1 ? 'Married' : 'Single'}</p>)
-                }
+                <p>{maritalStatus}</p>
               </div>
               <div className="info-content">
                 <div className="content-img">

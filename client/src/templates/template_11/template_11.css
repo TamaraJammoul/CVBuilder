@@ -60,7 +60,8 @@
   width: calc(2480px * var(--t11-scale-rate));
   height: calc(3508px * var(--t11-scale-rate));
   position: relative;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  transform: translateX(40%);
 }
 
 /* #region - General styles for all sections */

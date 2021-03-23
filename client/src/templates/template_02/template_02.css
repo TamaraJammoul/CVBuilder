@@ -68,7 +68,8 @@
   -ms-flex-direction: column;
   flex-direction: column;
   direction: ltr;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  transform: translateX(40%);
 }
 .template02-body.ar {
   padding: calc(100px * var(--t02-scale-rate))

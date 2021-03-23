@@ -71,8 +71,8 @@
 .template07-body {
   background-color: var(--t07-bg-color);
   padding: calc(100px * var(--t07-scale-rate))
-    calc(54px * var(--t07-scale-rate)) calc(86px * var(--t07-scale-rate))
-    calc(24px * var(--t07-scale-rate));
+    calc(86px * var(--t07-scale-rate)) calc(86px * var(--t07-scale-rate))
+    calc(80px * var(--t07-scale-rate));
   width: calc(2500px * var(--t07-scale-rate));
   min-height: calc(3500px * var(--t07-scale-rate));
   position: relative;
@@ -87,7 +87,8 @@
   -ms-flex-align: center;
   align-items: center;
   direction: ltr;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  transform: translateX(40%);
 }
 .template07-body.ar {
   padding: calc(100px * var(--t07-scale-rate))
@@ -115,14 +116,14 @@
 
 /* #region - Header Section*/
 .template07-body .t07-header-sec {
-  width: 90%;
+  width: 95%;
   height: calc(400px * var(--t07-scale-rate));
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: calc(400px * var(--t07-scale-rate)) 1fr
-    calc(470px * var(--t07-scale-rate));
+    calc(420px * var(--t07-scale-rate));
   grid-template-columns: calc(400px * var(--t07-scale-rate)) 1fr calc(
-      470px * var(--t07-scale-rate)
+      420px * var(--t07-scale-rate)
     );
   -ms-grid-rows: calc(100px * var(--t07-scale-rate)) 1fr;
   grid-template-rows: calc(100px * var(--t07-scale-rate)) 1fr;
@@ -356,7 +357,7 @@
   transform: scale(1.1, 1.1);
   position: absolute;
   top: calc(136px * var(--t07-scale-rate));
-  right: calc(314px * var(--t07-scale-rate));
+  right: calc(371px * var(--t07-scale-rate));
 }
 .template07-body .t07-header-sec.ar .t07-location img.t07-world {
   right: calc(1997px * var(--t07-scale-rate));
@@ -439,7 +440,7 @@
 .template07-body .t07-sec {
   width: 100%;
   padding-right: 0;
-  padding-left: calc(100px * var(--t07-scale-rate));
+  /* padding-left: calc(100px * var(--t07-scale-rate)); */
   margin-bottom: calc(30px * var(--t07-scale-rate));
   position: relative;
   text-align: left;
@@ -515,8 +516,8 @@
   height: calc(120px * var(--t07-scale-rate));
   position: absolute;
   top: calc(-15px * var(--t07-scale-rate));
-  right: none;
-  left: calc(35px * var(--t07-scale-rate));
+  right: unset;
+  left: calc(-58px * var(--t07-scale-rate));
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -528,8 +529,8 @@
   justify-content: center;
 }
 .template07-body .t07-sec.ar .t07-sec-logo {
-  left: none;
-  right: calc(35px * var(--t07-scale-rate));
+  left: unset;
+  right: calc(-58px * var(--t07-scale-rate));
 }
 .template07-body .t07-sec .t07-sec-logo img {
   width: calc(80px * var(--t07-scale-rate));
