@@ -43,12 +43,12 @@ export default function Getintouch() {
   }
 
   return (
-    <div className="container shadow-lg rounded contact py-5 mb-5">
+    <div className="container shadow-lg rounded contact py-5 mb-2" style={{marginTop:"20px"}}>
       <div className="row">
         {" "}
         <div className="div col-md-2">
           {" "}
-          <img src={logo} className="mr-auto  " />
+          <img src={logo} className="mr-auto" />
         </div>
         <div className="div col-md-10">
           {" "}

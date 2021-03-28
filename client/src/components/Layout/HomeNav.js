@@ -1,19 +1,19 @@
-import React, {useContext, useEffect, useState} from "react";
-import {useHistory, withRouter, Link} from "react-router-dom";
-import {ButtonContainer} from "./Button";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, withRouter, Link } from "react-router-dom";
+import { ButtonContainer } from "./Button";
 import us from "./../../img/us.svg";
 import ar from "./../../img/sa.svg";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
-import {useTheme} from "@material-ui/core/styles";
-import {useTranslation} from "react-i18next";
+import { useTheme } from "@material-ui/core/styles";
+import { useTranslation } from "react-i18next";
 function HomeNav(props) {
   const [isst, setisst] = useState(false);
 
   let history = useHistory();
   const theme = useTheme();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   document.body.dir = i18n.dir();
 
   const changeLanguage = (lng) => {
@@ -78,7 +78,7 @@ function HomeNav(props) {
                 src={
                   i18n.language == "en" || i18n.language == "en-US" ? us : ar
                 }
-                style={{width: "30px", marginLeft: "10px", marginRight: "10px"}}
+                style={{ width: "30px", marginLeft: "10px", marginRight: "10px" }}
               />
             </a>
             <div
@@ -107,12 +107,13 @@ function HomeNav(props) {
             </div>
           </li>
         </ul>
-        <h5 onClick={props.setDrawerState}>
-          <AccountCircle style={{width: "90px", color: "#2E0E33"}} />{" "}
-        </h5>
-        <Link 
+        {localStorage.getItem("token") ?
+          <h5 onClick={props.setDrawerState}>
+            <AccountCircle style={{ width: "90px", color: "#2E0E33" }} />
+          </h5> : ''}
+        <Link
           className="navbar-brand"
-          to={localStorage.getItem("token")?"":"/login"}
+          to={localStorage.getItem("token") ? "" : "/login"}
           onClick={() => (localStorage.getItem("token") ? logout() : "")}
         >
           <h5>{localStorage.getItem("token") ? t("Logout") : t("Login")}</h5>
