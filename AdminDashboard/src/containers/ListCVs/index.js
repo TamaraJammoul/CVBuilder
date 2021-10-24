@@ -48,7 +48,7 @@ export default function BasicTable2() {
                                 }}
                                 onSubmit={(values) => {
                                     console.log("asd");
-                                    axios.get("https://we4cv.com/api/cv/getCVsData").then((res) => {
+                                    axios.get("https://we4cv.com/old/api/cv/getCVsData").then((res) => {
                                         if (res.data.status === 1 && res.data.cv.length > 0) {
                                             toast.success("CVs retrieved successfully");
                                             console.log(res.data);

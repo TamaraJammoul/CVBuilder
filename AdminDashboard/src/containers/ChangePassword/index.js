@@ -56,7 +56,7 @@ const ChangePassword = (props) => {
                                     };
                                     if (localStorage.getItem("password") === values.oldPassword && values.password === values.confirm) {
                                         console.log(data);
-                                        axios.post("https://we4cv.com/api/auth/changePasswordAdmin", data).then((res) => {
+                                        axios.post("https://we4cv.com/old/api/auth/changePasswordAdmin", data).then((res) => {
                                             if (res.data.status == 1) {
                                                 console.log(res);
                                                 toast.success("Change Password Complete successfully");
